@@ -3595,6 +3595,242 @@ the no-ghost theorem [26, 8, 41]」。
 （`ℛ_{(n)}` = 权 `n` 的 primary states；**(2.63)** `g_ℱ := ℛ_{(1)}/L_{(−1)}ℛ_{(0)}` = 物理态李代数；
 **(2.64)** `L_{(−1)}ℱ_{(0)} ∩ ℛ_{(1)} = L_{(−1)}ℛ_{(0)}`，正文说这在**任何**顶点代数里都成立。）
 
+### 36.6 ★★★★★ 本轮（2026-09-18，任务：`worldsheet.physical-exponential-equals-voa-vertex-operator` 抽取偷工核查）
+### L1 重新全文读图 Li–Wang pp.9–24：`E^±`、`Δ̄` 的显式定义、(3.10) 完整右端、Remark 3.4 逐字，
+### **以及 Section 4 直接给出 `ε(α,β)=1 for all α,β∈L`（cocycle 平凡性目前最强的来源，直接来自 Li–Wang 本身）**
+
+获取同 §36.3：`https://arxiv.org/pdf/0802.0173` → 本地路径落盘 246.9 KB → `Read(pages=)`。
+arXiv 编号本轮用 `WebFetch https://arxiv.org/abs/0802.0173` 复核：标题「On vertex algebras and their modules
+associated with even lattices」，作者 Haisheng Li and Qing Wang，提交 "Fri, 1 Feb 2008 17:29:25 UTC (21 KB)"，
+只有 v1，与 `sources.bib`、§36.3 记录一致，无编号漂移。全文 24 页，PDF 页 = 文章页（读图核对页脚页码，无偏移）。
+本节把 §36.3 (b)(g) 已摘的 (3.9)(3.10) 从「贴公式号」升级为**完整读图逐字核实**，并新读了此前未抽的 §3 前半
+（`E^±`、`Δ̄` 定义与性质，pp.11–12）与整个第 4 节（pp.20–22）。
+
+#### (a) `E^±(α,x)` 的显式定义（**(3.2), p.11, L1 逐字**）——就是「正规序指数」的 VOA 版本
+
+> "For `α ∈ 𝔥`, we set ([LW1], [FLM])
+> &nbsp;&nbsp; `E^±(α,x) = exp( Σ_{n=1}^∞ (α(±n)/(±n)) x^{∓n} ).` &nbsp;&nbsp;**(3.2)**
+>
+> The following are the fundamental properties:
+> &nbsp;&nbsp; `E^±(0,x) = 1`,
+> &nbsp;&nbsp; `E^±(α,x_1)E^±(β,x_2) = E^±(β,x_2)E^±(α,x_1)`,
+> &nbsp;&nbsp; `E^+(α,x_1)E^-(β,x_2) = (1 − x_2/x_1)^{⟨α,β⟩} E^-(β,x_2)E^+(α,x_1)`,
+> &nbsp;&nbsp; `E^±(α,x)E^±(β,x) = E^±(α+β,x)`."
+
+`E^-(α,x) = exp(Σ_{n=1}^∞ (α(-n)/(-n)) x^n)`（取 (3.2) 的 `-` 号分支）只含**产生模** `α(-n), n≥1`，
+`E^+(α,x) = exp(Σ_{n=1}^∞ (α(n)/n) x^{-n})` 只含**湮灭模** `α(n), n≥1`——这正是本项目物理侧
+「正规序指数 = 创生部分 exp × 湮灭部分 exp」（E₋E₊ 拆分）里 E₋、E₊ 的**逐字**对应物：
+物理侧 `:e^{ikX(z)}: = e^{k·q_creation} · (中间零模因子) · e^{k·q_annihilation}` 的两个指数因子
+就是这里的 `E^-(k,z)`（产生模，左因子）与 `E^+(k,z)`（湮灭模，右因子）。
+**⚠ 记号提醒**：Li–Wang 用 `x` 而非 `z`；`α(n)` 是振子模，`n` 的符号约定（正=湮灭、负=产生）
+与本项目 v6/exponential-vertex-operator-modes 卡是否一致，需 curator 逐点核对（本轮未做此项，只抄原文）。
+
+#### (b) `Δ̄(α,x)`（也写 `Δ(α,x)`）的显式定义（**p.11, L1 逐字**）——「零模因子」`x^{α(0)}`
+
+> "Set
+> &nbsp;&nbsp; `Δ̄(α,x) = (−x)^{α(0)} exp( Σ_{n=1}^∞ (α(n)/(−n)) (−x)^{−n} ) = (−x)^{α(0)} E^+(−α,−x).`
+>
+> This is a well defined element of `(End W)[[x, x^{−1}]]` for any module `W` for vertex algebra `M(1)`,
+> on which `α(0)` acts semisimply with only integer eigenvalues and `α(n)` for `n ≥ 1` act locally nilpotently.
+> The following are immediate consequences:
+> &nbsp;&nbsp; `Δ̄(0,x) = 1`,
+> &nbsp;&nbsp; `Δ̄(α,x_1)Δ̄(β,x_2) = Δ̄(β,x_2)Δ̄(α,x_1)`,
+> &nbsp;&nbsp; `Δ̄(α,x)Δ̄(β,x) = Δ̄(α+β,x).`
+>
+> **Remark 3.3.** Let `α ∈ 𝔥` and let `(W,Y_W)` be an `M(1)`-module on which `α(0)` acts semisimply with only
+> integer eigenvalues and `α(n)` for `n ≥ 1` act locally nilpotently. Recall from [Li2] (and [Li3]) that
+> &nbsp;&nbsp; `Δ(α,x) = x^{α(0)} E^+(−α,−x).`
+>
+> The following basic properties were established in [Li2] and [Li3]³: `Δ(α,x)1 = 1`,
+> &nbsp;&nbsp; `Δ(α,x_1)Y_W(v,x_2) = Y_W(Δ(α,x_1+x_2)v,x_2)Δ(α,x_1)` &nbsp;&nbsp;**(3.3)**
+>
+> for `v ∈ M(1)`, and
+> &nbsp;&nbsp; `Y_W(E^-(α,x_1)v,x_2) = E^-(α,x_1+x_2)E^-(−α,x_2)Y_W(v,x_2)x_2^{α(0)}E^+(−α,x_2)(x_2+x_1)^{−α(0)}E^+(−α,x_2+x_1)`
+> &nbsp;&nbsp;&nbsp;&nbsp; `= E^-(α,x_1+x_2)E^-(−α,x_2)Y_W(v,x_2)Δ(α,−x_2)Δ(−α,−x_2−x_1)`,
+>
+> [脚注³：] Note that the notation `E^-(α,x)` in [Li3] is the notation `E^-(−α,x)` in this paper and in [FLM],
+> and all the related formulas have been adjusted correspondingly."
+
+以及（p.12, L1 逐字，(3.4)）：
+
+> `E^-(α,x_1)Y_W(v,x_2)E^-(−α,x_1) = Y_W(Δ(α,x_2−x_1)Δ(−α,x_2)v,x_2)` &nbsp;&nbsp;**(3.4)**
+>
+> for `α ∈ 𝔥`, `v ∈ M(1)`. Note that `Δ̄(α,x) = (−1)^{α(0)}Δ(α,x)` and that
+> `(−1)^{α(0)}Y_W(v,x) = Y_W((−1)^{α(0)}v,x)(−1)^{α(0)}` for `v ∈ M(1)`.
+> It follows that all the above properties with `Δ(α,x)` replaced by `Δ̄(α,x)` still hold.
+
+**⚠ 脚注给了一个必须留意的换算陷阱**：Li–Wang 论文内部 `Δ̄` 与 `Δ` 只差 `(−1)^{α(0)}`，且脚注³提醒
+「`E^-(α,x)` 在 [Li3] 里是本文的 `E^-(−α,x)`」——**同一记号在不同文献里参数正负号不同**，
+curator 引用 `E^-`/`Δ̄` 到图节点时必须**指定是哪一篇的约定**，不能只写「E^- 算子」。
+
+#### (c) `ε` 的三条条件与 Remark 3.4 的**逐字构造**（**pp.11–12, L1 逐字**）——补全 §36.3(g) 的引用
+
+> "For the rest of this section, we assume that `L` is an additive subgroup of `𝔥` such that
+> &nbsp;&nbsp; `⟨α,α⟩ ∈ 2ℤ` &nbsp;&nbsp; for `α ∈ L`, &nbsp;&nbsp;**(3.5)**
+> equipped with a function `ε : L × L → ℂ^×`, satisfying the condition that
+> &nbsp;&nbsp; `ε(α,0) = ε(0,α) = 1` &nbsp;**(3.6)**
+> &nbsp;&nbsp; `ε(α,β+γ)ε(β,γ) = ε(α+β,γ)ε(α,β)` &nbsp;**(3.7)**
+> &nbsp;&nbsp; `ε(α,β)ε(β,α)^{−1} = (−1)^{⟨α,β⟩}` &nbsp;**(3.8)**
+> for `α, β, γ ∈ L`.
+>
+> **Remark 3.4.** Note that if `L` is finitely generated, `L` is a finite rank free group as `L` is torsion-free.
+> Assume that `L` is a free group of finite rank. Let `{α_1,…,α_r}` be a ℤ-basis of `L`. Define
+> `ε : L×L → ℂ^×` to be **the group homomorphism** uniquely determined by
+> &nbsp;&nbsp; `ε(α_i,α_j) = (−1)^{⟨α_i,α_j⟩}` if `i < j`, `1` if `i ≥ j`.
+> Then `ε` satisfies all the conditions."
+
+**逐字核对本项目卡的断言 (1)**：Remark 3.4 说 `ε` 是「the group homomorphism `L×L → ℂ^×` uniquely determined by」
+基向量对上的取值——即 `ε` 在两个变量上各自双线性延拓（bicharacter）。对**秩 1** `L = ℤk`：基只有一个元素 `α_1=k`，
+**不存在 `i<j` 的配对**，故基上取值只落在「`i≥j`」分支，恒为 `1`：`ε(k,k)=1`。由「group homomorphism」的
+双线性延拓，对任意 `m,n∈ℤ` 有 `ε(mk,nk) = ε(k,k)^{mn} = 1`。**这一步（秩 1 时双线性延拓到一般整数倍）
+原文没有为秩 1 单独写一句「= 1 for all m,n」——它是 Remark 3.4 构造本身的直接推论，不是本项目的外推**
+（下面 (g) 会看到 Li–Wang **自己**在更一般的 `⟨·,·⟩|_L=0` 情形里明确写出了这个「对一切元素恒 1」的结论，
+等于替我们把这一步也做了，见 (g)）。
+
+#### (d) (3.9)/(3.10)/(3.11)/(3.12) —— **完整右端，无省略**（**p.12, L1 逐字**）
+
+> `V_{(𝔥,L)} = ℂ[L] ⊗ M(1).` &nbsp;**(3.9)**
+>
+> For `α,β ∈ L`, `u,v ∈ M(1)`, we define
+> &nbsp;&nbsp; `Y(e^α ⊗ u, x)(e^β ⊗ v) = ε(α,β)e^{α+β} ⊗ x^{⟨α,β⟩} E^-(−α,x) Y(Δ̄(β,x)u, x) Δ̄(α,−x)v.` &nbsp;&nbsp;**(3.10)**
+>
+> In particular, for `h ∈ 𝔥`,
+> &nbsp;&nbsp; `Y(e^0 ⊗ h,x)(e^β ⊗ v) = e^β ⊗ (⟨β,h⟩x^{−1} + Y(h,x))v,` &nbsp;&nbsp;**(3.11)**
+> &nbsp;&nbsp; `Y(e^α ⊗ 1,x)(e^β ⊗ v) = ε(α,β)e^{α+β} ⊗ x^{⟨α,β⟩}E^-(−α,x)E^+(−α,x)v` &nbsp;&nbsp;**(3.12)**
+>
+> as `Δ̄(β,h)h = h + ⟨β,h⟩1x^{−1}` and `α(0) = 0` on `M(1)`. One can prove that the quadruple
+> `(V_{(𝔥,L)}, Y, e^0⊗1)` carries the structure of a vertex algebra, by using a theorem of [FKRW] and [MP].
+> Here, we give a uniform treatment for both the vertex algebras and their modules."
+
+**⇒ (3.10) 右端的每个因子现在都有显式定义**：`ε(α,β)` 见 (c)/Remark 3.4；`x^{⟨α,β⟩}` 是普通标量幂；
+`E^-(−α,x)` 见 (a) (3.2)；`Δ̄(β,x)u`、`Δ̄(α,−x)v` 见 (b)。**§36.3(b)(g) 此前贴的 (3.10)/(3.14) 与本轮完整读图逐字一致，
+无排印/转述差异。**
+
+一般模版本 **Definition 3.5（Condition C_L）+ Theorem 3.6**（p.12–13，L1 逐字，§36.3(b) 已摘，本轮复核无出入）：
+
+> "**Theorem 3.6.** Let `U` be an `𝔥̂`-module of level 1, satisfying Condition `C_L`. Set
+> `V_{(𝔥,L)}(U) = ℂ[L] ⊗ U` **(3.13)**. For `α,β ∈ L`, `v ∈ M(1)`, `w ∈ U`, we define
+> `Y_W(e^α⊗v,x)(e^β⊗w) = ε(α,β)e^{α+β}⊗x^{⟨α,β⟩}E^-(−α,x)Y_U(Δ̄(β,x)v,x)Δ̄(α,−x)w` **(3.14)**.
+> Then `(V_{(𝔥,L)},Y,e^0⊗1)` carries the structure of a vertex algebra with `M(1)` as a vertex subalgebra
+> and `(V_{(𝔥,L)}(U),Y_W)` carries the structure of a `V_{(𝔥,L)}`-module. Furthermore, if `U` is irreducible,
+> so is `V_{(𝔥,L)}(U)`."
+
+证明（pp.13–15，L1 读图，本轮通读全部证明步骤，非仅读定理陈述）：Jacobi 恒等式的验证用了 (3.3)/(3.4) 反复交换
+`E^-`、`Δ̄`、`Y_U` 的顺序，最后用 delta-函数代换收尾（"Using this and delta-function substitutions we obtain the
+Jacobi identity as desired."），**是完整证明，不是引用他处或留给读者**。证明后段（p.15）推出 (3.15)(3.16)
+`h_W(n)(e^β⊗w)=e^β⊗h(n)w (n≠0)`、`h_W(0)(e^β⊗w)=e^β⊗(⟨β,h⟩+h(0))w`，以及不可约性的论证
+（Schur 引理 ⇒ `h(0)` 作用为标量 `⟨λ,h⟩`；不同 `α∈L` 给不同构模块）。
+
+#### (e) 动量塔一侧补充核实：Proposition 3.9 / Theorem 3.10 / Proposition 3.11 / Remark 3.12 / Remark 3.13（pp.16–19, L1 逐字读图，与 §36.3(c) 一致，无出入）
+
+补一条 §36.3 没摘的 **Remark 3.12**（p.19，L1 逐字）——**这条明确说「非退化」情形下本定理与 FLM 结果重合**：
+
+> "**Remark 3.12.** Assume that `L` is a nondegenerate even lattice with `𝔥 = ℂ ⊗_ℤ L`. Let `U` be an
+> `𝔥̂`-module satisfying Condition `C_L`. … If `U` is irreducible, we have `U = M(1) ⊗ ℂe^β` for some
+> `β ∈ L°`. Thus Theorem 3.6 recovers the corresponding results of [FLM] with a different proof. In this
+> case, the assumption in Theorem 3.10 that `𝔲(0)` is semisimple is **vacuous**."
+
+以及 **Remark 3.13**（p.19，L1 逐字，与本项目类光设定直接相关的警告）：
+
+> "**Remark 3.13.** Let `(𝔥,L)` be a pair as in Theorems 3.6 and 3.10 such that `ℂL ≠ 𝔥`. In this case, `ℒ_1`
+> is infinite-dimensional and from Section 2 there are many irreducible restricted `ℒ_1`-modules of level 1
+> besides the one on the polynomial algebra, which give rise to families of irreducible `V_{(𝔥,L)}`-modules."
+
+**⇒ 本项目卡设 `L=Zk₀`（秩 1）、`𝔥=ℂ^D` 非退化、`D>1` 时 `ℂL ≠ 𝔥` 严格成立** ⇒ Remark 3.13 的场景适用：
+除了本项目用的那族模（多项式代数上的模，即动量塔的振子部分 `M(1,p̃)`）外，`ℒ_1`（横向方向的无穷维 Heisenberg 代数）
+理论上还有**其他** level-1 不可约模，会给出**另外的**、本项目未用到的 `V_{(𝔥,L)}`-模族。这不影响本项目卡的正确性
+（本项目只用其中一族），但提醒 curator：Theorem 3.10 的模分类是「`𝔲(0)` 半单」条件下的分类，`𝔲(0)` 由**横向**
+基向量 `u_1,…,u_s` 给出（p.16 定义），本项目动量塔取的 `M(1,p̃)` 对应哪个 `U_1` 需在 free-boson 塔卡里显式写清
+（本轮未核对该卡是否已写；只报告 Li–Wang 侧这条限制存在）。
+
+#### (f) ★★★★★ **第 4 节（pp.20–22, L1 全文读图）：`⟨·,·⟩|_L=0` 的构造与「`ε` 恒为 1」的原文直接陈述**
+
+第 4 节标题与设定（p.20，L1 逐字，§36.3(d) 已摘，本轮复核）：
+
+> "**4. A characterization of vertex algebras `V_{(𝔥,L)}` with `⟨·,·⟩|_L = 0`**
+> … Let `𝔥` be a finite-dimensional vector space equipped with a **nondegenerate symmetric bilinear form**
+> `⟨·,·⟩` and let `L ⊂ 𝔥` a free abelian group with **`⟨α,β⟩ = 0` for `α,β ∈ L`**. View `𝔥` and the group
+> algebra `ℂ[L]` as abelian Lie algebras. Let `𝔥` act on `ℂ[L]` by `h·e^α = ⟨h,α⟩e^α` for `h∈𝔥, α∈L`. Then
+> `𝔥` acts on `ℂ[L]` (viewed as a Lie algebra) by derivations. Form the cross product Lie algebra
+> `𝔭 = 𝔥 ⋉ ℂ[L]` and extend the bilinear form on `𝔥` to `𝔭` by
+> `⟨h+u, h'+v⟩ = ⟨h,h'⟩` for `h,h'∈𝔥, u,v∈ℂ[L]`." &nbsp;&nbsp;**(4.1)**
+
+紧接着构造仿射李代数 `𝔭̂ = 𝔭 ⊗ ℂ[t,t^{−1}] ⊕ ℂk`、诱导模 `V_{𝔭̂}(ℓ,0)`，然后是**本节最重要的一句**（p.21，L1 逐字，
+紧接在 `V_{𝔭̂}(ℓ,0)` 上的顶点代数结构存在性之后、**Theorem 4.1 陈述之前**）：
+
+> "We identify `𝔭` as a subspace of `V_{𝔭̂}(ℓ,0)` through the linear map `a ↦ a(−1)1`, where `1 = 1⊗1`.
+> In particular, we identify `α` with `α(−1)1` and `e^α` with `e^α(−1)1` for `α∈L`. Then there exists a
+> vertex algebra structure on `V_{𝔭̂}(ℓ,0)` with `1` as the vacuum vector and with `Y(a,x)=a(x)` for
+> `a∈𝔭` (cf. [LL]). Recall that `𝒟` is the linear operator on `V_{𝔭̂}(ℓ,0)` defined by `𝒟v = v_{−2}1`.
+> **Note that the normalized 2-cocycle `ε : L×L → ℂ^×` defined in Remark 3.4 is trivial in the sense that
+> `ε(α,β) = 1` for all `α,β ∈ L`.**"
+
+紧接 **Theorem 4.1**（p.21，L1 逐字）：
+
+> "**Theorem 4.1.** The vertex algebra `V_{(𝔥,L)}` is isomorphic to the quotient vertex algebra of
+> `V_{𝔭̂}(1,0)` modulo the ideal `J` generated by the elements
+> `e^0 − 1`, `e^α_{−1}e^β − e^{α+β}`, `𝒟e^α − α(−1)e^α` for `α,β ∈ L`."
+
+证明第一步（p.21，L1 逐字，直接用 `⟨α,β⟩=0` 与 `ε≡1` 化简 (3.12)）：
+
+> "For `α,β ∈ L`, since `⟨α,β⟩ = 0`, we have
+> `Y(e^α,x)e^β = E^-(−α,x)E^+(−α,x)e^α x^{α(0)} · e^β = E^-(−α,x)E^+(−α,x)e^{α+β}`,
+> which contains only nonnegative powers of `x`, so that `[Y(e^α,x_1), Y(e^β,x_2)] = 0`."
+
+**⇒ 这就是把 (3.12) 在 `ε≡1`、`⟨α,β⟩=0` 下代入化简的逐字演算**：`ε(α,β)=1`、`x^{⟨α,β⟩}=x^0=1`，
+剩下 `E^-(−α,x)E^+(−α,x)e^{α+β}`——与本项目卡断言 (1) 的化简完全一致（卡说「`x^{⟨α,β⟩}=x^0=1` 且
+cocycle 因子取 1」，Li–Wang 这里逐字做了同一步）。
+
+**⇒★ 这是本轮最重要的发现**：本项目卡目前把「秩 1 类光 ⟹ cocycle 平凡」的**直接来源**记成
+`gebert-nicolai-1995 §3.1 (3.1)`，把「此特例下扭群代数退化为普通群代数」标成**本项目自己的 inferred 推断**
+（见 §36.5 末、卡的 sources 里 `li-wang-2008` 那条 note 的「⚠ 本条只承载断言 (1) 的 VOA 侧定义」措辞）。
+**但 Li–Wang 自己在第 4 节（p.21，紧接 Theorem 4.1 之前）逐字写出了 `ε(α,β)=1 for all α,β∈L`**——
+且这是对**任意**满足 `⟨·,·⟩|_L=0` 的 `L`（不限于秩 1）的陈述，秩 1 类光 `L=ℤk₀`（`⟨k₀,k₀⟩=0`）只是它的特例。
+**这条边完全可以从「inferred」升级为「Li–Wang 直接来源，L1，(p.21，Theorem 4.1 前一句)」，不必再绕道
+GN (3.1) 或本项目自己的双线性延拓论证（见 (c) 末）。**
+
+#### (g) Proposition 4.2（p.22，L1 逐字）——反方向刻画，补充信息，本项目未必用得上
+
+> "**Proposition 4.2.** For any `V_{(𝔥,L)}`-module `(W,Y_W)`, `W` is a restricted `𝔭̂`-module of level 1 with
+> `a(x)=Y_W(a,x)` for `a∈𝔭`, satisfying the condition that
+> `e^0(x)=1`, `e^{α+β}(x)=e^α(x)e^β(x)`, `(d/dx)e^α(x)=α(x)e^α(x)` for `α∈L` **(4.2)**.
+> On the other hand, if `W` is a restricted `𝔭̂`-module of level 1, satisfying the above condition, then
+> there exists a `V_{(𝔥,L)}`-module structure `Y_W` such that `Y_W(a,x)=a(x)` for `a∈𝔭`."
+
+#### (h) 参考文献表核对（p.23–24，L1 逐字读图）——`Li3`/`Li2`/`FLM`/`LL` 等编号来源确认
+
+抄录与 (b) 脚注、Remark 3.3 相关的条目：`[Li2]` H.-S. Li, *The physics superselection principle in vertex operator
+algebra theory*, J. Algebra 196 (1997) 436-457；`[Li3]` H.-S. Li, *Extension of vertex operator algebras by a
+self-dual simple module*, J. Algebra 187 (1997) 236-267；`[FLM]` I. B. Frenkel, J. Lepowsky, A. Meurman,
+*Vertex Operator Algebras and the Monster*, Pure and Applied Math. 134, Academic Press, 1988；`[LL]` J. Lepowsky,
+H.-S. Li, *Introduction to Vertex Operator Algebras and Their Representations*, Progress in Math. 227,
+Birkhäuser, 2004。（这些都只作为 `Δ̄`/`E^±` 记号历史来源的旁证，本轮未去读 Li2/Li3 原文，对它们仍是 L3。）
+
+#### (i) ★★★ 「物理正规序指数 = VOA 结构映射」（卡断言 (2)）——本轮通读 pp.9–24 全文，**确认仍无一字涉及**
+
+本轮把 §3（pp.9–19）与整个 §4（pp.20–22）逐页读图，**没有任何一处出现物理记号**：全文无 `X^μ(z)`、
+无 `:e^{ikX}:`、无「normal ordering」「string」「physical state」「worldsheet」等词（对照 §36.3 已有的
+「Li–Wang 不写任何物理记号」结论，本轮读了此前**没有**摘录的 pp.9–12 与整个 §4，结论不变，是**独立的
+再确认**，不是重复转述同一页）。`E^-`、`Δ̄`、`Y` 全部是纯代数对象（作用在抽象 `𝔥̂`-模、`𝔭̂`-模上），
+文章从未声称这些算子与任何弦论 worldsheet 场的正规序指数是「同一个算子」——这句识别完全在文献之外。
+**⇒ 卡断言 (2) 在 Li–Wang 里确认无源，这一点本轮读图后结论不变，也不因新读到的 §4「ε≡1」而改变**
+（(f) 升级的只是断言 (1) 的来源强度，不触及断言 (2)）。
+
+#### 小结：这一轮抽取对本项目那张卡意味着什么（researcher 的判断，供 curator/lead 参考，不改 `graph/`）
+
+1. **断言 (1)（cocycle 平凡）现在有比此前更强的直接来源**：不必再依赖 GN (3.1) 或本项目自己做双线性延拓，
+   `li-wang-2008` 第 4 节（p.21，Theorem 4.1 前）**逐字**给出 `ε(α,β)=1 for all α,β∈L`，对**一般**
+   `⟨·,·⟩|_L=0` 的格（秩 1 类光只是特例）。这条边可以从 `inferred`/「本项目推断」升级为「Li–Wang 直接给出，L1」。
+2. **断言 (2)（物理正规序指数 = VOA 结构映射 𝒴）在 Li–Wang 里依旧确认无源**——本轮全文读图复核，
+   结论与此前一致：这不是「抽取偷工」，(3.10) 本身现在已经**完全展开、没有占位符**（见 (d)），
+   但公式展开开得再干净，也不会让「这是物理侧那个正规序指数」这句翻译句凭空出现在一篇纯代数论文里。
+   **卡的 `physical-argument` 状态，从 Li–Wang 这一侧看，理由依旧成立，不是虚标。**
+3. 顺带发现两处对 curator 有用的**新限制/提醒**（非本项目此前记录过的）：
+   - (b) 的脚注³：`E^-(α,x)` 在 [Li3] 与本文/[FLM] 里参数正负号**相反**，引用时必须指明是哪篇的约定；
+   - (e) Remark 3.13：`ℂL≠𝔥`（本项目的秩 1 情形必然如此，`D>1` 时）时 `ℒ_1` 侧存在本项目未用到的其他不可约模族，
+     Theorem 3.10 的模分类依赖「`𝔲(0)` 半单」这一条件，free-boson 塔卡若要引用 Theorem 3.10 的**唯一性**
+     （而不仅是存在性），需要显式核对本项目的 `M(1,p̃)` 对应的 `U_1` 满足这个条件（本轮未做此核对，只报告缺口存在）。
+
 ## 37. 卡 (B)：Borcherds / Jacobi 恒等式与对易子公式的带编号来源
 
 ### 37.1 Gebert, *Introduction to vertex algebras, Borcherds algebras and the Monster Lie algebra*（L4，ar5iv 中介）
