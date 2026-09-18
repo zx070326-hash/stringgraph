@@ -1050,3 +1050,87 @@ A/B 的地基性依赖（紧化 + 任意穿孔数超模叠的存在性，即 The
      没有像 Example 8.9 对 $\Psi_i$ 那样给出"偶基上退化到经典自旋曲线数据"的显式识别**。
      ⚠ **本抽取不判定**这是否构成一个真实的数学缺口——那是推断，留给 curator（若做，须标
      `inferred: true`）。
+
+### E15 ★ §9.3 Ramond 边界分量：**逐字是猜想（"We conjecture that…"），不是定理** —— 承重复核
+- 位置：§9.3 "**Ramond boundary components**" 全节 = **p.70 下半页**（起于 "Combining the above
+  Corollary with Theorem 9.2, we get the statement of Theorem C." 之后），**到 p.70 末尾结束**；
+  **p.71 即是 "Appendix A. Relative ampleness criterion"**。即 §9.3 只有**不到一页**，是正文最后
+  一节。L1（页图逐字；"We conjecture" 一句与 "(7.9)" 引用另用 `pdftoppm -r 500` 放大复核）。
+- 类型：**conjecture**
+- 原文陈述（**逐字抄出全节**，p.70）：
+  > **9.3. Ramond boundary components.** Now let $\iota : B \to \overline{\mathcal{S}}$ be a gluing
+  > map for the Ramond boundary component, i.e., one of the maps (7.9), restricted to the locus of
+  > smooth supercurves. Recall that we have a smooth map of relative dimension $0|1$,
+  > $$p : B \to \overline{B}$$
+  > to a moduli space $\overline{B}$ of smooth supercurves of smaller genus, where the universal
+  > smooth supercurve over $\overline{B}$ is equipped with a pair of Ramond punctures $R_1, R_2$.
+  > Furthermore, $p$ has a structure of the principal bundle over the group scheme
+  > $\mathrm{Aut}(\mathcal{P}_{R_1})$ which is an extension of $\mathbb{Z}/2$ by $\Phi_1^{-1}$. Thus,
+  > we have a natural isomorphism
+  > $$K_B \simeq p^*(K_{\overline{B}} \otimes \Phi_1).$$
+  > On the other hand, we have an exact sequence on the universal stable supercurve $X_B$ over $B$,
+  > $$0 \to \mathcal{O}_{X_B} \to \mathcal{O}_{\widetilde{X}} \to \mathcal{O}_{R_1} \to 0,$$
+  > where $\widetilde{X}$ is induced by the universal curve $\overline{X}$ over $\overline{B}$. Taking
+  > push-forwards to $B$ and considering the Berezinians, we get
+  > $$\iota^*\mathrm{Ber}_1 \simeq p^*(\mathrm{Ber}_1^{\overline{B}} \otimes \Phi_1).$$
+  > Note that since $\Phi_1^2$ is canonically trivial, this leads to an isomorphism
+  > $$\iota^*\mathrm{Ber}_1^5 \simeq p^*((\mathrm{Ber}_1^{\overline{B}})^5 \otimes \Phi_1).$$
+  > We can rewrite (8.11) near $B$ as an isomorphism
+  > $$K_{\overline{\mathcal{S}}}(\Delta) \simeq \mathrm{Ber}_1^5.$$
+  > Thus, the restriction to $B$ gives an isomorphism
+  > $$K_B \simeq \iota^*\mathrm{Ber}_1^5.$$
+  > **We conjecture that the following diagram is commutative (up to a sign)**
+  > $$\begin{array}{ccc}
+  >   \iota^*(K_{\overline{\mathcal{S}}}(\Delta)) & \longrightarrow & \iota^*\mathrm{Ber}_1^5 \\
+  >   \big\downarrow & & \big\downarrow \\
+  >   K_B & \longrightarrow & p^*((\mathrm{Ber}_1^{\overline{B}})^5 \otimes \Phi_1)
+  >   \end{array}$$
+
+  （全节到此结束，**其后没有任何证明、没有 "Proof"、没有进一步讨论**，下一页即 Appendix A。）
+- 文献自称的严格程度：**猜想（conjecture）**。
+- 文献列出的依赖：Lemma 7.12/7.13 与 (7.10)（$\Phi_R$、$\mathcal{P}_R$、
+  $\mathrm{Aut}(\mathcal{P}_R)$ 的构造，§7.6，p.49–51）；(8.11)（E11）；Remark 8.10 尾段的 $\Phi_j$
+  定义与"$\Phi_j^2$ 典范平凡"（E14）。
+- 备注（★★ **本轮第三个承重复核，裁定如下**）：
+
+  **裁定：SUPPORT（支持本项目既有判定）。§9.3 的核心结论逐字确实以 "We conjecture that…" 引入，
+  是猜想而非定理。500 dpi 放大复核确认该句逐字为 "We conjecture that the following diagram is
+  commutative (up to a sign)"。全节没有任何证明。**
+
+  **逐字证据（支持一侧）：**
+  1. **§9.3 正文**：*"**We conjecture that** the following diagram is commutative (up to a sign)"*
+     （p.70，500 dpi 复核）。
+  2. **§9 开篇的路线图**（p.58，E7 已抄录）：*"Then we give a proof of Theorem C concerning the NS
+     boundary component. **We also give a conjectural statement for the Ramond boundary
+     component.**"*——作者在节首就自陈 Ramond 侧只是"conjectural statement"。
+  3. **§1 引言**（p.3，本轮 L1 复核）：*"The components of the Ramond boundary divisor $\Delta_R$
+     have a more complicated relation to lower genus moduli spaces (see Sec. 7.6), and in this case
+     **we formulate a conjectural analog of Theorem C** in Sec. 9.3."*
+  4. **结构性证据**：§9.3 全节**不含任何编号定理/引理**，也**不含 "Proof" 环境**，末尾即是论文正文
+     的结束（p.71 起为 Appendix A）。这与 §9.1（Lemma 9.1、Theorem 9.2 + 完整证明）形成鲜明对比。
+  5. **Ramond 侧的另一处不对称**（E13 已记）：Lemma 7.14 对 (7.12)（分离型 Ramond）**没有**给出
+     "概形像 = $\Delta_R$" 的断言，只对 (7.11)（非分离型）给了。
+
+  **反面 / 需要如实并列的一侧：**
+  1. §9.3 里通向该猜想的**准备性同构（三条）是作者当作已建立的事实写的**（"we have a natural
+     isomorphism $K_B \simeq p^*(K_{\overline{B}} \otimes \Phi_1)$"、"we get
+     $\iota^*\mathrm{Ber}_1 \simeq p^*(\mathrm{Ber}_1^{\overline{B}} \otimes \Phi_1)$"、"the
+     restriction to $B$ gives an isomorphism $K_B \simeq \iota^*\mathrm{Ber}_1^5$"），**没有**冠以
+     conjecture。**只有"这个图交换"这一条是猜想。** curator 若要引用 §9.3 的中间同构，可以按
+     "正文推导"处理；但**整个 Ramond 类比 Theorem C 的结论只能标 `conjecture`**。
+  2. 作者**没有**说这个猜想难、也**没有**说它可能为假；只是没有证。
+
+  **⚠ 原文疑点（本轮发现，L1 500 dpi 复核）：**
+  - **编号错误**：§9.3 首句逐字写 *"a gluing map for the **Ramond** boundary component, i.e., one of
+    the maps **(7.9)**"*。但 **(7.9) 是 NS 的非分离粘接映射
+    $\overline{\mathcal{S}}_{g;m+2,n} \to \overline{\mathcal{S}}_{g+1;m,n}$**（E12），Ramond 的
+    粘接映射是 **(7.11)/(7.12)**（E12 备注，p.51）。**疑为排印/交叉引用笔误**（PDF 里该处的
+    超链接框也确实圈在 "7.9" 上，说明 LaTeX 源里引用的就是 (7.9) 的 label）。如实记录，不替作者改。
+  - **$K_{\overline{\mathcal{S}}}(\Delta) \simeq \mathrm{Ber}_1^5$ 与 §9.1 的对应式不一致**：
+    §9.1（E7）把 (8.11) "rewrite near $B$" 成 $K_{\overline{\mathcal{S}}}(2\Delta_{NS}) \simeq
+    \mathcal{B}(\mathcal{O}_X)^5$，而 §9.3 这里写成 $K_{\overline{\mathcal{S}}}(\Delta) \simeq
+    \mathrm{Ber}_1^5$——**一处用 $2\Delta_{NS}$、另一处用 $\Delta$（单重）**。按 (8.11) 的
+    $(-2\Delta_{NS}-\Delta_R)$，NS 侧配 $2\Delta_{NS}$、Ramond 侧配 $\Delta_R$（单重）是自洽的，
+    此处的 $\Delta$ 疑为 $\Delta_R$ 的简写或笔误。如实记录，**不替作者判定**。
+  - 两处**同样都丢掉了 (8.11) 里的 $\bigotimes_{i=1}^{m}\Psi_i$ 因子**（即同样是 $m=0$ 写法），
+    与 E7/E10/E11 的记录一致。
