@@ -7,12 +7,21 @@ from pathlib import Path
 
 from .axioms import check_axioms, format_axioms_report
 from .loader import find_project_root, load_graph
+from .propagate import compute_all
 from .report import (
+    all_bottleneck_roots,
+    bottleneck_roots,
     captain_queue,
+    counterfactual_report,
     format_captain_queue,
+    format_counterfactual,
+    format_hitting_set,
     format_report,
     format_why,
     full_report,
+    greedy_root_cover,
+    hitting_set_report,
+    roots_needed_for_target,
     search,
     status_report,
     to_dot,
@@ -77,6 +86,38 @@ def main(argv: list[str] | None = None) -> int:
     )
     p_cq.add_argument("--json", action="store_true")
     sub.add_parser("dot", help="print Graphviz dot to stdout")
+
+    p_roots = sub.add_parser(
+        "roots",
+        help="bottleneck-root set of one statement: the leaf cards it ultimately cannot "
+             "outrank (see docs/LEVERAGE-ANALYSIS.md)",
+    )
+    p_roots.add_argument("id")
+    p_roots.add_argument("--json", action="store_true")
+
+    p_hs = sub.add_parser(
+        "hitting-set",
+        help="graph-wide bottleneck-root leverage analysis: root-set size stats, self-capping "
+             "ratio, and the greedy root-cover curve (docs/LEVERAGE-ANALYSIS.md)",
+    )
+    p_hs.add_argument(
+        "--target",
+        type=float,
+        default=None,
+        metavar="FRACTION",
+        help="instead of the full report, print the smallest greedy root set that fully frees "
+             "at least this fraction (0-1) of weak cards from their bottleneck roots",
+    )
+    p_hs.add_argument("--json", action="store_true")
+
+    p_cf = sub.add_parser(
+        "counterfactual",
+        help="force one or more statements to `rigorous` (definitions: status; propositions: "
+             "replace derivations with a dependency-free rigorous proof) and report which other "
+             "active cards' effective status moves",
+    )
+    p_cf.add_argument("ids", nargs="+", metavar="ID")
+    p_cf.add_argument("--json", action="store_true")
 
     args = ap.parse_args(argv)
     root = args.root or find_project_root()
@@ -156,6 +197,47 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.cmd == "dot":
         print(to_dot(g))
+        return 0
+
+    if args.cmd == "roots":
+        if args.id not in g.statements:
+            print(f"unknown statement id: {args.id}", file=sys.stderr)
+            return 2
+        effs = compute_all(g)
+        rs = sorted(bottleneck_roots(g, args.id, effs))
+        if args.json:
+            print(to_json({"id": args.id, "roots": rs, "count": len(rs)}))
+        else:
+            print(f"{args.id}: {len(rs)} bottleneck root(s)")
+            for r in rs:
+                print(f"  {r}")
+        return 0
+
+    if args.cmd == "hitting-set":
+        effs = compute_all(g)
+        if args.target is None:
+            rep = hitting_set_report(g, effs)
+            print(to_json(rep) if args.json else format_hitting_set(rep))
+        else:
+            root_sets = all_bottleneck_roots(g, effs)
+            order = greedy_root_cover(root_sets)
+            k, roots = roots_needed_for_target(order, len(root_sets), args.target)
+            if args.json:
+                print(to_json({"target": args.target, "roots_needed": k, "roots": roots}))
+            else:
+                print(f"target {args.target*100:.0f}% of {len(root_sets)} weak cards -> "
+                      f"{k} roots:")
+                for r in roots:
+                    print(f"  {r}")
+        return 0
+
+    if args.cmd == "counterfactual":
+        unknown = [i for i in args.ids if i not in g.statements]
+        if unknown:
+            print(f"unknown statement id(s): {', '.join(unknown)}", file=sys.stderr)
+            return 2
+        rep = counterfactual_report(g, args.ids)
+        print(to_json(rep) if args.json else format_counterfactual(rep))
         return 0
 
     return 2
