@@ -1,0 +1,102 @@
+id: math.supermoduli-witten-genus-3-hyperelliptic-pole
+kind: proposition
+title: >-
+  Witten 2015：亏格三偶自旋结构模空间的超椭圆轨迹分裂为 D、D′ 两支，推前测度 π_*(Υ) 沿 D′ 有极点
+  （阶 1/ε⁴=1/q²），沿 D 作者"预期"（未证明）为零点（阶 ε⁴=q²）
+statement: |
+  **对象**（Witten, "The Super Period Matrix With Ramond Punctures", arXiv:1501.02499, Appendix C）：
+  ε 为超椭圆轨迹附近的横向奇模数；q := ε² 是 (C.5) 定义的偶函数，沿超椭圆子空间简单零点；h⁰(L) 为
+  约化曲面上某丛 L 的全纯截面空间维数；Υ 为本文 (C.19) 定义的、超模空间 M_{3,+} 上的弦论测度；
+  π: M_{3,+} → M_{3,spin+} 为把超黎曼面映到同（普通）周期矩阵的偶自旋结构黎曼面的（亚纯）投影；
+  π_*(Υ) 是 Υ 沿该投影纤维方向的推前测度。
+
+  **第一部分——超椭圆轨迹在偶自旋结构模空间中分裂为两支（Appendix C.2, (C.6)–(C.11), pp.51–52，
+  逐字节选）**：
+  亏格 3 有 28 个奇自旋结构、36 个偶自旋结构（"1/2(2^{2g}−2^g)=28 odd spin structures and
+  1/2(2^{2g}+2^g)=36 even ones"）。在超椭圆约化曲面 Σ_red 上，偶自旋结构按某丛 L 满足 h⁰(L)=0 或
+  h⁰(L)=2 分两类：
+  "There is only 1 spin structure with h⁰(L)=2 ... genus 3 surfaces with such a spin structure are
+  parametrized by an **irreducible divisor D ⊂ M_{3,spin+}**."
+  对 {e_1,…,e_8} 的 35 种四四分拆（每个分拆对应一个不同的 L）：
+  "there are 35 even spin structures with h⁰(L)=0 ... genus 3 surfaces with an even spin structure of
+  this type are parametrized by an **irreducible divisor D′ ⊂ M_{3,spin+}**."
+  **即：M_{3,spin+} 中的"超椭圆轨迹"不是单一不可约除子，而是两支——D（h⁰(L)=2，恰 1 个自旋结构）
+  与 D′（h⁰(L)=0，35 个自旋结构）。**
+
+  **第二部分——测度沿两支的解析行为相反（Appendix C.4, (C.19)–(C.25), pp.55–56，逐字节选）**：
+  1. （p.55，(C.19) 定义 Υ 之后）"It is crucial that, despite being τ-invariant, Υ **cannot** be
+     written in terms of ε̂² and d(ε̂²); as we will see momentarily, this fact leads to a pole in
+     π_*(Υ) along D′."
+  2. （p.56，(C.22) 之后，**肯定语气**）"Thus π_*(Υ) is of order 1/ε⁴ or 1/q² along D′."
+  3. （p.56，紧接上句）"The literature actually contains a proposal [24] for a holomorphic measure on
+     M_{3,spin+} that is supposed to arise by integrating over the odd variables in some fashion that
+     has not been specified. This formula is holomorphic along D′, so it does not coincide with
+     π_*(Υ)." （[24] = Cacciatori–Della Piazza–van Geemen, "Modular Forms And Three Loop Superstring
+     Amplitudes," arXiv:0801.2543——本文自己的参考文献表逐字条目，见 sources。）
+  4. （p.56，C.4 末段，(C.23)–(C.25) 之后，**"we expect"，非"we show"/"we prove"**）"Combining this
+     factor of ε^{−6} with the ε^{10} in eqn. (C.23), and integrating over the odd variables, **we
+     expect π_*(Υ) to vanish as ε⁴=q² along D.**"
+
+  **本卡断言的精确范围**：D′ 支上的极点（阶 1/q²）是本文给出显式推导（超 Mumford 同构 (C.19)，引
+  [19]–[22] + D'Hoker–Phong 对超周期矩阵关于奇模数依赖的展开）后得到的**肯定**陈述；D 支上的零点
+  （阶 q²）是同一套计算推到最后一步时作者本人**明确降格为"expect"** 的陈述。**两支解析行为相反
+  （一支有极点、一支是零点），且论证的确定程度不同（D′：肯定 "thus"；D：expect）**——这是本卡要
+  精确记录的核心事实，不得合并简化为"沿超椭圆轨迹有极点"这一笼统单数表述。
+
+  **本卡明确不断言**：
+  (a) **不断言 D 支上零点这一结论已被证明。** 原文用"we expect"，本卡照实保留这一限定，不加强为
+      "we show"/"we prove"。
+  (b) **不断言 genericity 假设在 D′ 上处处成立。** 支撑 D′ 计算的 (C.14) 前一句原文限定
+      "Generically along D′, this matrix is nondegenerate"；本卡不断言该非退化性对 D′ 上所有点
+      成立，只断言"generically"（一般点上）成立。
+  (c) **不断言这是数学意义上的定理级证毕。** 全文（含 Appendix C 全节）无编号 Theorem/Proposition
+      标签，是一段有显式公式支撑（(C.19)–(C.25)）的正文计算与叙述，不是形式化定理陈述。
+  (d) **不断言 D′ 上（投影 π 的）极点这一支撑步骤是作者独立完成的证明。** Appendix C.3（p.52）
+      原文自陈"It is fairly obvious that π has a pole along D, since the super period matrix has a
+      pole there. It is less obvious that π has a pole along D′; **this was essentially explained to
+      the author by P. Deligne.**" ——即 D′ 支的方法论基础部分归功于与 Deligne 的私人交流，不是
+      Witten 独立发现；本文自身给出的 (C.19)–(C.22) 测度极点阶数计算建立在这一基础之上。
+  (e) **不断言本卡记号 π_*(Υ) 与本项目既有节点 `math.supermoduli-genus-3-measure-linear-
+      combination` / `math.supermoduli-genus-3-cdvg-ansatz-excluded-by-pole` 所用记号 π_*ψ_3/φ_3
+      逐字是同一对象。** 两套记号出自不同论文（Witten 2015 vs. Dunin-Barkowski–Fedorov–Sleptsov
+      2025），本卡只记录 Witten 原文自己的记号与结论；两者的对应关系（若被下游推导使用）应由那条
+      依赖边自行标注 `inferred`/`convention_map`，本卡不代为断言。
+uses_conventions: []
+sources:
+  - ref: witten-2015-ramond-period-matrix
+    loc: >-
+      arXiv:1501.02499, Appendix C.2 (C.6)–(C.11), pp.51–52（超椭圆轨迹分裂为 D/D′）；Appendix C.3,
+      p.52（D′ 上投影 π 有极点这一支撑步骤，部分归功于 P. Deligne 的私人交流）；Appendix C.4
+      (C.19)–(C.25), pp.55–56（测度 π_*(Υ) 沿 D′ 有极点、沿 D 作者"预期"为零点，并在 (C.22) 之后
+      逐字点名参考文献 [24] = Cacciatori–Della Piazza–van Geemen）；References [24], p.59。
+    note: |
+      L1（researcher 2026-09-18，literature/extractions/witten-2015-super-period-matrix-ramond.md
+      E3/E5/E6/E7/E8；全篇覆盖 pp.1–5、32–39、47–59）。**未读**：§2–§8 正文主体（pp.5–32）与
+      Appendix A 主体（pp.40–46，仅读末段）——不影响本卡断言范围，本卡只依赖 Appendix C 全节
+      （C.1–C.4，已全部读到）。
+tags: [supermoduli, superstring-measure, genus-3, hyperelliptic-locus, spin-structure, math-input, witten]
+notes: |
+  **查重**（2026-09-18）：`uv run stringgraph search hyperelliptic`（命中的都是紧化/投影系列节点，
+  如 `math.supermoduli-compactified-genus-2-canonical-projection-fails`，均非本卡内容）；
+  `search "genus three"`（no matches）；`search Deligne`（no matches）；`search "spin structure"`
+  （命中 `math.supermoduli-space-not-projected` 与 genus-4 系列，均处理"投影/分裂"而非本卡的"轨迹
+  分裂 + 测度极点阶数"）；`search witten`（命中多张 Witten 相关卡，均非同一命题）。确认本卡为新增，
+  无重复。
+
+  **本卡是什么、为什么现在才立**：`math.supermoduli-genus-3-cdvg-ansatz-excluded-by-pole`
+  （Dunin-Barkowski–Fedorov–Sleptsov 2025 的条件性排除论证）在逻辑上依赖"真实测度在超椭圆轨迹处
+  必须有极点"这一前提，并将其归于 Witten 2015，但该文献此前未被本项目读取、未登记 bib、未立卡——
+  这条前提因此只以文字记录的形式挂在那张卡的 statement 正文与 notes 里，未接成图边。本卡是补上的
+  那个节点。
+
+  **承重的只是 D′ 那一半**：DBFS 的排除论证逻辑是——若 CDvG 的 Ansatz 在整个 Siegel 上半空间 H_3
+  上处处全纯，则它也在 D′ ⊂ M_{3,spin+} 上全纯；而本卡断言 π_*(Υ) 沿 D′ 有极点（(C.22) 之后的肯定
+  陈述），两者矛盾，故 Ansatz ≠ π_*(Υ)。D 支上的（预期、未证）零点对 DBFS 的排除论证不构成必要
+  前提——即使把 D 支的结论整个去掉，排除论证依然成立。
+
+  DBFS 摘要与引言笼统称"our formula has a polar singularity along the hyperelliptic locus; the
+  existence of this singularity was established by Witten in 2015"（单数、不区分 D/D′）——这是对
+  Witten 原文不对称结构的简化转述，见 `math.supermoduli-genus-3-cdvg-ansatz-excluded-by-pole` 的
+  notes 与本任务报告。
+author: curator-witten2015-genus3-pole
+created: "2026-09-18"
