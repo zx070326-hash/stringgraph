@@ -119,3 +119,96 @@ Li–Wang 的公式与本项目物理侧公式**不是**逐项对应（例如零
 级别），但即便如此，那条推导的**输入**（Li–Wang 的显式公式）仍然是文献已有的，不构成
 "原创数学"意义上的 `research/` 轨道对象——最多是一条需要小心记账的、`rigorous` 的"记号字典"
 推导，性质与图内已有的许多"两套记号的字典"推导（如 `ddf-contour-equals-mode-sum` 本身）相同。
+
+---
+
+## 3. Frenkel 1985 的独立一手阅读（本轮新获得的能力：`Read` 工具可解析扫描版 PDF）
+
+### 3.1 为什么读这篇：图内瓶颈节点笔记明文建议的路径 (i)
+
+`worldsheet.physical-exponential-equals-voa-vertex-operator` 卡的笔记【怎么把本卡升上去】
+第 (i) 条：「读 Frenkel 1985……若能 L1 读到它把物理正规序指数与顶点算子对应起来的段落，
+本卡可直接升级」。该文献此前在项目登记里状态是**内容 L0**——
+`literature/extractions/voa-residue-mode-sum-2026-09-15.md` 记录 researcher 当时用 `WebFetch`
+抓取该文 PDF，"落盘 1.1 MB 但正文 OCR 极差，未能读图，无法逐字引任何公式号"。
+
+### 3.2 本轮的技术突破：`Read` 工具直接解析 PDF 页面图像
+
+本轮用 `curl -sL` 重新下载同一份 PDF（`cpb-us-w2.wpmucdn.com/campuspress.yale.edu/dist/2/3739/
+files/2021/06/frenkel_representations_kac_moody.pdf`，`I.B. Frenkel, "Representations of
+Kac–Moody Algebras and Dual Resonance Models", in Applications of Group Theory in Physics and
+Mathematical Physics (Chicago, 1982), Lectures in Applied Mathematics vol. 21, AMS, 1985,
+pp. 325–353`），确认为合法 15 页 PDF v1.4（1,185,011 字节），随后用本项目的 `Read` 工具
+（`pages: "1-15"`）**直接读取 PDF 页面图像**——这与此前 researcher 使用的 `WebFetch`
+（走 HTML/文本抽取管道，对扫描版 CCITT 传真编码 PDF 的 OCR 很差）是**完全不同的技术路径**，
+本轮**成功获得全文 15 页的清晰内容**（原文 pp.325–353）。**评级为 `⟨lit, L1, Read-PDF⟩`**——
+一手直接阅读，不是转述、不是摘要拼接。这是本轮任务对项目文献抽取能力的一个**可复用的
+方法论发现**：以后遇到"WebFetch OCR 失败⟹L0"标记的扫描版 PDF，应先尝试
+`curl` 下载 + `cygpath -w` 转 Windows 路径 + `Read(pages=...)`，而不是直接判定"无法获取"。
+
+### 3.3 内容摘要（逐节，`⟨lit, L1, Read-PDF⟩`）
+
+- **引言 (p.325–326)**：给出"顶点算子" `X(p,z)` 的雏形——对**连续**动量算符 `𝐩`
+  的本征态 `|p⟩`（`[x^μ,p^ν]=iη^{μν}`，`𝐩^ν|p⟩=p^ν|p⟩`），定义
+  ```
+  X(p,z) = exp(p·Σ_{n≥1} (α(-n)/n) z^n) · exp(p·(p log z − ix)) · exp(−p·Σ_{n≥1}(α(n)/n) z^{-n})
+  ```
+  （原文 eq. (3)）。这**正是**本项目物理侧 `E₋(b;z)·（零模）·E₊(b;z)` 的**逐项同构**写法
+  （创生指数、零模移位、湮灭指数三段结构完全一致，`α(-n)/n` 与 `α_{-l}/l` 记号仅字母不同）。
+- **§1 Kac–Moody 代数与标准表示 (p.326–332)**：标准的仿射李代数最高权表示理论回顾。
+- **§2 "Vertex representations of Kac–Moody algebras" (p.332–338)**：引言处的连续动量
+  `p` **限制到根格 `Q`**（更一般地任何满足 `Q⊂Γ⊂P` 的格 `Γ`）时，同一个 `V`（此处记号复用，
+  指 `S(𝔥^-)⊗ℂ[Γ]`）给出仿射李代数的标准表示；顶点算子写成
+  `X(α,z) = exp(Σ_{n≥1}(z^n/n)α(-n)) exp(log z·α(0)+α) exp(−Σ_{n≥1}(z^{-n}/n)α(n))`
+  （eq. (2.3)，`α∈Γ`）——**与引言 eq.(3) 是同一个构造，仅把连续 `p` 换成格点 `α`**。
+  这一点原文**没有另外写一条"两者相等"的定理**去桥接——因为在 Frenkel 的叙述里它们从
+  一开始就是同一个构造在不同的动量取值域上的实例，不存在需要架桥的两个独立对象。
+  这与图内瓶颈节点面对的情况（"物理侧"与"VOA 侧"被**分别**构造，需要一条桥）**不同**：
+  Frenkel 1985 因为写作时间早于 Borcherds/FLM 把"顶点算子公理化"，所以从未产生过这个
+  裂缝——他的处理方式是"公式本来就只有一个"，而不是"证明两个公式相等"。
+- **§3 标准表示的分解 (p.338–346)**：Kac–Moody 表示论的分支法则、Weyl–Kac 公式应用等。
+- **§4 "The dual model in the critical dimension and hyperbolic algebras of rank 26"
+  (p.346–350)**：这是与本项目无鬼定理链**最直接相关**的一节。
+  - **Theorem 4.1（无鬼定理）**（原文逐字，`⟨lit, L1, Read-PDF⟩`）："Let `V` be a vertex
+    representation of a hyperbolic Lie algebra `g`, then `V₁°` is a positive semidefinite
+    space if and only if `rank g ≤ 26`"，附多步证明纲要：横向空间 `T(α,c)`；
+    Lemma 4.2（正定性/交零/直和分解）；算子 `E`（由 `D(n)` 与 `L(n)` 构造，eq (4.7)）；
+    Lemma 4.3（`E` 的特征向量张成 `S(α)`，特征值为非正整数，零特征空间恰在 `rank=26` 时
+    等于 `T(α,c)`）；临界维数经对易子 `[L(n),E] = -nL(n) + (dim h - 26)/12·(n³-n)D(n)` 进入。
+  - 应用于 Monster Lie 代数/Griess 代数（维数 196884）/McKay 观察/Conway–Norton 猜想/
+    Garland–Kac 的部分构造；文末"Added in proof"提到 Lepowsky–Meurman–Frenkel **刚刚**
+    构造出 `F₁` 表示（特征标 `j(q)-24`），"与偶模型在 D=26 的联系仍等待其解释"。
+  - **DDF 型算子**：`A^i(n) = ∫_C α^i(z) X(nk,z) dz/z`（eq. (4)），其中 `X(nk,z)` 是
+    eq.(2.3) 在**类光**格点 `nk` 处的取值——与图内 `worldsheet.ddf-contour-equals-mode-sum`
+    卡引用的 `goddard-2008 (5.1)` 记号结构几乎相同（`A^μ_n = (1/2πi)∮P^μ(z)V(nk,z)dz`）。
+
+### 3.4 `⟨analysis 2026-09-18⟩` 判定：Frenkel 1985 是否关闭瓶颈节点？
+
+**不直接关闭，但提供了强历史/结构性佐证，且指出了图内瓶颈节点的一个"人为"性质。**
+
+- Frenkel 1985 的构造方式说明：在**这篇历史源头论文**里，"物理正规序指数"与"格点顶点算子"
+  从来就是**同一个公式**（eq (3) 与 eq (2.3)），从未被当作两个需要独立证明相等的对象。
+  图内瓶颈节点存在的原因，是本项目**分两步**构造了这两个对象——先用
+  `worldsheet.exponential-vertex-operator-modes`（纯物理侧记账，E₋E₊ 拆分）构造一个，
+  再用 `math.lattice-vertex-algebra`/Li–Wang 的公理化 VOA 构造另一个——这在方法论上更严格
+  （每一步都要有自己的编号来源），但**副作用**是产生了一条"两个独立构造的对象是否相同"的
+  桥接命题，而这条桥接命题在 Frenkel 原始写法里根本不存在（因为他只写了一个公式）。
+- 但 Frenkel 1985 **不能直接**作为"断言 (2)"的引用来源，原因有三：
+  1. 他的 `V`（§2）建在**格点**动量 `α∈Γ` 上，而本项目的动量塔以**连续** `p` 为基点、
+     只沿**一个**类光方向 `k_0` 离散移动（`p+Nk_0`）——这个"连续基点 + 单方向离散移位"的
+     具体取法，Frenkel 原文没有单独处理（他考虑的是"全部动量都限制到格"或"完全连续"两种
+     情形，没有"部分方向格化、部分方向连续"的中间情形）；这个中间情形恰恰是 Li–Wang (3.17)
+     处理的（`L°` 只要求 `⟨k,λ⟩∈Z`，`λ` 不必落在格里）——**这再次指向 Li–Wang 而不是
+     Frenkel 是补瓶颈节点的正确来源**（呼应 §2 的结论）。
+  2. Frenkel 1985 全文没有出现"顶点代数"这个公理化概念（该概念 1986 年由 Borcherds 提出，
+     晚于本文），故它不可能"逐字断言" `𝒴(e^{nk},z)`（一个公理化 VOA 结构映射的记号）
+     等于任何东西——这个记号在 1985 年还不存在。
+  3. δ-归一化、模的良定义性等本项目关心的细节，Frenkel 1985 全文没有触及（他工作在
+     物理学家的"形式操作"层面，不做这类严格性记账）。
+
+**结论**：Frenkel 1985 **不满足**瓶颈节点笔记路径 (i) 设想的"直接读到能让本卡升级的段落"——
+它提供的是**为什么这条桥接在历史上从未被当作独立问题**的解释（因为原始构造是一体的），
+但**不提供**本项目需要的、按现代 VOA 公理化记账方式写出的桥接证明。它作为**背景/历史动机**
+很有价值（建议 researcher 后续把这次 L1 阅读正式登记进
+`literature/extractions/`，把 `frenkel-1985` 的内容状态从 L0 升到 L1），但**不改变** §2 的
+主判定：真正能关闭瓶颈节点的路径是**继续抽取 Li–Wang 2008**，不是 Frenkel 1985。
