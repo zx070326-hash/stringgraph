@@ -4050,6 +4050,52 @@
             判断继续成立（见上）。本文完全不涉及 Deligne-Mumford 紧化（红线(4)问题不适用/不受影响）。}
 }
 
+@misc{felder-kazhdan-polishchuk-2020,
+  author        = {Felder, Giovanni and Kazhdan, David and Polishchuk, Alexander},
+  title         = {The Moduli Space of Stable Supercurves and Its Canonical Line Bundle},
+  year          = {2020},
+  eprint        = {2006.13271},
+  archivePrefix = {arXiv},
+  primaryClass  = {math.AG},
+  note   = {⚠ **不要与 `felder-kazhdan-polishchuk-2024`（arXiv:2408.11136, "Superperiods and
+            Superstring Measure Near the Boundary of the Moduli Space of Supercurves"）混淆——
+            两篇是不同的论文，同三位作者。** 2408.11136 只处理**亏格 2**的 superperiod/supermeasure
+            边界行为；**本条（2006.13271）是紧化 + 任意穿孔数超模叠的存在性构造**，发表于
+            Amer. J. Math. **145** (2023) no.6, 1777--1886（v1 提交 2020-06-23，v2 2020-07-15，
+            v3 2023-03-06；本条抽取自 v3）。由 researcher 于 2026-09-18 登记（任务书指出本文
+            是 `research/attempts/supermoduli-compactified-punctured/` 原创轨道推论 A/B 的地基性
+            依赖，此前只被该轨道的 prover 读过 pp.1--6 做 prior-art 核查，未登记入本 bib，
+            未有独立 literature/ 抽取记录）。**全文（74 页 PDF，pdftotext -layout 落盘）L1**，
+            重点通读 §1 引言（Theorem A/B/C 陈述）、§2.2 Definition 2.1/2.4（穿孔与稳定性的精确
+            定义）、§2.6（与经典自旋曲线模叠的关系，含 "nR is necessarily even" 一句的准确归属）、
+            §5.1/§5.4（Theorem A 证明骨架：光滑性 = Corollary 3.20，固有性归约到偶部分 = 已知
+            Cornalba [11]/Jarvis [22] 结果）。详见 extractions/felder-kazhdan-polishchuk-2020.md。
+            **记号**：紧化叠写作 $\overline{S}_{g,n_{NS},n_R}$（PDF 第 1 页图像逐字核实带上划线，
+            `pdftotext` 纯文本抽取会丢失上划线，渲染为 "Sg,nNS,nR"——引用时务必用图像核实过的
+            带 bar 记号，不要照抄 pdftotext 输出）。
+            **Theorem A 逐字**："There exists a smooth and proper DM-stack
+            $\overline{S}_{g,n_{NS},n_R}$ over $\mathbb{C}$ representing the functor of families
+            of stable supercurves of genus $g$ with $n_{NS}$ NS punctures and $n_R$ Ramond
+            punctures."（p.1）。**量词**：$g, n_{NS}, n_R$ 均为非负整数，定理陈述本身**未写出**
+            显式数值约束；稳定性（从而隐含 $2g-2+n_{NS}+n_R>0$）由 Definition 2.4(ii) 定义
+            （逐字："stable...if X is proper over S and for every geometric fiber $X_s$, passing
+            to the bosonic truncation $(X_s)_{bos}$ with the marked points induced by $(P_i)$ and
+            $(R_i)$ one gets a usual stable...pointed curve."）——即通常的 $2g-2+n>0$ 型稳定性，
+            但本文正文**没有把它单独写成一条不等式**，是从"陈述句点定义中的稳定判据"间接得到的。
+            ⚠ **$n_R$ 奇偶性的归属易错**："$n_R$ is necessarily even" 这句（§2.6, 逐字）**只附着于
+            [22]/[23] 此前研究的经典"稳定自旋曲线模叠"** $S_{g,n_{NS},n_R}$（本文说这是限制到偶
+            基后与本文构造重合的对象），**不是本文 Theorem A 自身对 $\overline{S}_{g,n_{NS},n_R}$
+            明文重申的假设**——本文正文没有另外一处对自己的 Theorem A 重申 $n_R$ 须为偶数。
+            这一点是本条目抽取中发现的、容易被后续引用者读错的细节，已在抽取记录里单独立一条
+            "未解决的疑问"标注，不代自行判定 Theorem A 是否隐含同一约束。
+            **严格程度自称**：正文以 Theorem/Proof 形式给出完整证明（§3 变形理论、§4 相对丰满线丛、
+            §5 完成 Theorem A 的存在性论证），§5.4 显式承认固有性部分"归约到已知结果"
+            （Cornalba [11]、Jarvis [22]），非本文自证。**引言明确记录 Theorem A 的独立平行证明**：
+            "After we finished this work we learned about the work of Moosavian and Zhou [27], where
+            Theorem A is also proved."（p.1）——本文与 Moosavian--Zhou 互相独立地证明了同一条
+            Theorem A，本 bib 条目不涉及 Moosavian--Zhou 是否已登记。}
+}
+
 @misc{felder-kazhdan-polishchuk-2024,
   author        = {Felder, Giovanni and Kazhdan, David and Polishchuk, Alexander},
   title         = {Superperiods and Superstring Measure Near the Boundary of the Moduli Space of Supercurves},

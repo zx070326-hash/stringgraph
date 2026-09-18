@@ -104,6 +104,7 @@
 | P1 | dunin-barkowski-fedorov-sleptsov-2025 | pp.1–10（含 CDvG 批评段落）+ pp.42–52（参考文献表）；pp.11–41 未读 | math | researcher | **extracted（部分 L1，2026-09-18）** → `extractions/dunin-barkowski-fedorov-sleptsov-2025.md`（E0–E3）。arXiv:2505.02950v2，正确标题 "RNS superstring measure for genus 3"（**修正此前误记标题/作者中间名**）。CDvG 批评是条件性排除论证，非"计算有误" |
 | P1 | donagi-ott-2023 | pp.1–6（Theorem 1 逐字 + Lemma 2/Corollary 4） | math | researcher | **extracted（部分 L1，2026-09-18）** → `extractions/donagi-ott-2023.md`（E1–E3）。arXiv:2308.07957。Theorem 1：纯 Ramond 穿孔 𝔐_{g,0,2r} 非投影 for g≥5r+1≥6 |
 | P1 | wang-2025 | pp.1–3（摘要+§1+§2 至 Lemma 2.7） | math | researcher | **extracted（部分 L1，2026-09-18）** → `extractions/wang-2025.md`（E1–E3）。arXiv:2512.15727，**arXiv comment 自陈 "preliminary draft"**。推广 Donagi-Ott 至 NS+Ramond 混合穿孔，g≥n+5r+3；n=0 特例下比 Donagi-Ott 更苛刻，"improve" 应理解为覆盖范围推广而非同设置下的数值加强（inferred） |
+| P0 | felder-kazhdan-polishchuk-2020 | 全文（74 页，Theorem A/B/C + §2.2/§2.6/§5.1/§5.4） | math | researcher | **extracted（L1 全文，2026-09-18）** → `extractions/felder-kazhdan-polishchuk-2020.md`（E1–E6）。arXiv:2006.13271v3，Amer. J. Math. 145 (2023) 1777–1886。⚠ **不是** `felder-kazhdan-polishchuk-2024`（arXiv:2408.11136，只处理亏格 2）——本条是紧化+任意穿孔数超模叠存在性（Theorem A），`research/attempts/supermoduli-compactified-punctured/` 推论 A/B 的地基依赖。Theorem A 记号带上划线 $\overline{S}_{g,n_{NS},n_R}$（pdftotext 会丢失上划线）；"$n_R$ necessarily even" 只附着于 §2.6 引用的经典自旋曲线模叠 [22]/[23]，不是本文 Theorem A 自身重申的假设 |
 
 ## 已知获取路线备忘
 
