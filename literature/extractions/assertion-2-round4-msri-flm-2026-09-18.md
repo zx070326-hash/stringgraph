@@ -510,3 +510,84 @@ Theory in Monstrous Moonshine*, Leiden 大学**本科（BSc）**毕业论文，2
   这两者对是否开原创轨道的含义不同，**必须由 lead 而非 researcher 裁决**。
 
 ---
+
+## 候选 3（任务书标为低优先，本轮为**浅触并如实标注**）：Kac–Raina, *Bombay Lectures on
+Highest Weight Representations of Infinite Dimensional Lie Algebras*
+
+bib 中已有两条：`kac-raina-1987`（第 1 版，Adv. Ser. Math. Phys. **2**，World Scientific 1987）
+与 `kac-raina-rozhkovskaya-2013`（第 2 版，Adv. Ser. Math. Phys. **29**，2013，新增 Part II
+"Vertex algebras"）。**本轮不新登记 bib 条目，只在本抽取记录留档。**
+
+### E3.1 访问渠道逐条实测：正文维持完全 L0
+- 位置：N/A（方法论记录）
+- 类型：（方法论记录）
+- 逐条渠道与结果：
+  1. **World Scientific 官方页** `worldscientific.com/worldscibooks/10.1142/8882`（第 2 版）：
+     本轮**首次对本候选实测**，返回 **HTTP 403 + Cloudflare 质询页**
+     （`<title>Just a moment...</title>`，5513 字节）。
+     ⭐ 这把第二轮 E6 的「基于同域名的合理外推」升级为**实测确认**
+     （第二轮残余风险第 3 条里明确说这条 L0 结论「比候选 1/2 弱一档」，现已补齐）。
+  2. **Kac 本人 MIT 主页** `math.mit.edu/~kac/`：L1 读取。页面只有 CV、出版物列表、
+     "Not Easily Available Papers"、Quantum Calculus 勘误表、Google Scholar 五个链接，
+     **没有** Bombay Lectures 的任何 PDF。
+  3. **Kac 的 "Not Easily Available Papers" 页** `math.mit.edu/~kac/not-easily-available.html`：
+     L1 读取并逐条列出全部 6 个 PDF 链接——
+     `An algebraic definition of compact Lie groups`、
+     `On the question of describing the space of orbits of linear algebraic groups`、
+     `Branching functions for winding subalgebras and tensor products`（Kac–Wakimoto 1990）、
+     `Representations of quantum groups at roots of 1` I/II、
+     `Modular invariance in mathematics and physics`。
+     **没有 Bombay Lectures，也没有 2003 年 TIFR 顶点代数讲义**（即第 2 版 Part II 的来源）。
+  4. **archive.org**：按 `title:("Bombay Lectures on Highest Weight Representations")`
+     advancedsearch → **numFound: 0**。
+  5. **非官方整本扫描**（Scribd 上流传的 1988 年印次扫描，文件名带 "18.747"）：
+     按 `literature/CLAUDE.md` 规则 1（非官方整本教材扫描不用）**不采信，未下载**。
+  6. **MIT OCW**：`ocw.mit.edu/search/?q=18.747` 返回 200（9790 字节搜索页），
+     **未见 18.747 课程页或讲义**（该研究生课程未在 OCW 上架）。
+- 备注：**正文完全 L0**。这是「没拿到」，不是「读了没有」。
+  ⚠ 需要注意的是：即便拿到，判据 1 的前景也不乐观——按出版社与多方书目描述，
+  第 1 版的四条主线是 Heisenberg 振子代数 / `gl_∞` 与孤子方程 / 仿射 Kac–Moody / Virasoro
+  （Kac 行列式），**第 2 版 Part II 才讲顶点代数**，且两部分都是数学侧语言。
+  **但这只是基于书目描述的预期，不是核实结论，不能据此下裁定。**
+
+### E3.2 顺带取得的 Kac 一手材料（与断言 (2) 无关，仅登记发现）
+- 位置：Victor G. Kac, *Modular Invariance in Mathematics and Physics*,
+  **Proceedings of the AMS Centennial Symposium, August 8–12, 1988**, p. 337 起，AMS 1992
+  （14 页，扫描件，`math.mit.edu/~kac/not-easily-available/modular_invariance_in_mathematics_and_physics.pdf`，
+  HTTP 200，1 260 292 字节）。
+- 类型：（元信息；**浅触，未通读**）
+- 备注：**该 PDF 无文字层**（`pdftotext` 输出 0 行），只用 `Read` 渲染了第 1 页确认书目信息。
+  第 1 页内容是模函数、Dedekind `η`、配分函数渐近——主题是**特征标的模不变性**，
+  **不是**顶点算子记号对照。**本轮未通读，不作任何判据裁定**，仅登记「Kac 主页上有这份公开一手
+  材料」这一事实，供日后模不变性相关卡片使用。**这是浅触，如实标注为未读完。**
+
+---
+
+## 旁支情报（不承载断言 (2)，但本轮顺手核实，供 lead 排期）
+
+### E5.1 Thomas Driscoll-Spittler, *Vertex operator expressions for Lie algebras of physical
+states*, arXiv:2408.07597v1 [math.QA]（L1 全文，1229 行）
+- 摘要逐字：
+  > We study the Lie algebra of physical states associated with certain vertex operator algebras of
+  > central charge 24. **By applying the no-ghost theorem from string theory** we express the
+  > corresponding Lie brackets in terms of vertex algebra operations. In the special case of the
+  > Moonshine module this result **answers a question of Borcherds**, posed in his paper on the
+  > Monstrous moonshine conjecture.
+- 为什么记在这里：该文正文大量使用 `V ⊗ V_{II_{1,1}}`（中心荷 24 + 2 = 26）、
+  primitive isotropic element `f ∈ II_{1,1}`、`P_n(α)` 物理态空间、以及无鬼定理——
+  **与本图 `worldsheet.no-ghost-theorem-v4` 一线、以及本卡所在的「类光格 / 物理态」语境高度同源，
+  且是 2024 年的新文献**，本图此前未登记。
+- **对断言 (2) 不承载**：全文是纯 VOA 语言，`: :` 只表示抽象正规序乘积，
+  **无 `X^μ(z)`、无冒号指数、无弦论场记号**（判据 1 不满足）。
+- **建议（只提建议，不动手）**：lead 可考虑派 curator 把这篇挂到无鬼定理 / Borcherds 代数一线。
+
+### E5.2 Christoph A. Keller, *Vertex Operator Algebras*（课程讲义，
+`archive.math.arizona.edu/cakeller/VertexOperatorAlgebras.pdf`，L1 全文 1930 行）
+- 第 8 章 "Lattice VOAs"（§8.1 Lattices 起，Theorem 8.6 给出 `(V_L, Y, |0⟩, ω)` 是 VOA）。
+- **对断言 (2) 不承载**：全文关键词扫描 `string` / `world-sheet` / `X(z)` / `:e^` **零命中**，
+  正规序只以抽象 `:a(z)b(z):` 出现（§ "the notion of normal ordering"）。
+  **判据 1 不满足**——作者虽是弦论背景，但这份讲义完全在数学侧写。
+- 记录价值：又一个「物理学家写 VOA 讲义时也不写物理侧记号」的实例，
+  与第三轮 Gaberdiel hep-th/9910156 的失败模式同型。
+
+---
