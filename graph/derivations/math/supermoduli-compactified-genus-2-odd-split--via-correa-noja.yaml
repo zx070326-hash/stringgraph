@@ -1,0 +1,18 @@
+id: math.supermoduli-compactified-genus-2-odd-split--via-correa-noja
+target: math.supermoduli-compactified-genus-2-odd-split
+kind: proof
+status: rigorous
+depends_on: []
+sources:
+  - ref: correa-noja-2026
+    loc: "arXiv:2606.06733v1 §2（惯性特征标判据的一般引理）、§3（Theorem 3.5 证明）、§8 p.21（'The first assertion is precisely Theorem 3.5'）"
+    note: L1 全文逐页读取。
+summary: |
+  记账已发表数学论证。§8 组装证明明确写"The first assertion is precisely Theorem 3.5"，把 item(1) 的
+  证明完全归约到 §3 的惯性特征标论证，不引用 FKP 或本文其他部分。
+gaps:
+  - |
+    本项目未逐行复核 §2 惯性特征标一般引理与 §3 Theorem 3.5 的证明细节本身，只确认了证明骨架
+    （对合特征标 ⇒ 有限 étale 覆盖后障碍消失 ⇒ split）与逐字组装陈述，无跳步痕迹。
+author: curator-supermoduli-post-2024
+created: "2026-09-18"
