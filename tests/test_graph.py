@@ -15,7 +15,19 @@ from stringgraph.axioms import (
 )
 from stringgraph.loader import find_project_root, load_graph
 from stringgraph.propagate import compute_all
-from stringgraph.report import format_why, full_report, search, why_report
+from stringgraph.report import (
+    bottleneck_roots,
+    counterfactual_report,
+    force_rigorous,
+    format_why,
+    full_report,
+    greedy_root_cover,
+    hitting_set_report,
+    is_self_capped,
+    search,
+    weak_active_ids,
+    why_report,
+)
 from stringgraph.validate import validate
 
 ROOT = find_project_root(Path(__file__).parent)
@@ -945,6 +957,219 @@ def test_why_seed_critical_dimension_names_three_routes() -> None:
     # after the independent recomputation of {Q_B, Q_B}, so it is no longer a bottleneck
     # and correctly drops out of the why-tree (docs/ROADMAP.md R3 "(III) drops out").
     assert "worldsheet.critical-dimension-brst-v2" not in children
+
+
+# ---------------------------------------------------------------- leverage analysis
+# (bottleneck roots, self-capping, counterfactual forcing, greedy hitting set --
+#  tools/stringgraph/report.py, docs/LEVERAGE-ANALYSIS.md)
+
+
+def test_bottleneck_roots_and_self_capped_on_mini(mini: Path) -> None:
+    """duality.prop-d rests entirely on duality.conj-c (its rigorous derivation's only
+    dependency), so prop-d's single bottleneck root is conj-c itself, and conj-d is
+    pure-upstream (not self-capped) while conj-c -- whose own conjecture-support status ties
+    its effective level -- is self-capped."""
+    g = load_graph(mini)
+    effs = compute_all(g)
+    assert weak_active_ids(g, effs) == ["duality.conj-c", "duality.prop-d"]
+    assert bottleneck_roots(g, "duality.prop-d", effs) == {"duality.conj-c"}
+    assert bottleneck_roots(g, "duality.conj-c", effs) == {"duality.conj-c"}
+    assert is_self_capped(g, "duality.prop-d", effs) is False
+    assert is_self_capped(g, "duality.conj-c", effs) is True
+
+
+def test_greedy_root_cover_resolves_shared_root_once(mini: Path) -> None:
+    """Both weak cards in `mini` share the same single root, so one pick resolves both."""
+    g = load_graph(mini)
+    effs = compute_all(g)
+    root_sets = {sid: bottleneck_roots(g, sid, effs) for sid in weak_active_ids(g, effs)}
+    order = greedy_root_cover(root_sets)
+    assert order == [("duality.conj-c", 2, 2)]
+
+    rep = hitting_set_report(g, effs)
+    assert rep["counts"] == {"active": 4, "weak": 2, "distinct_roots": 1}
+    assert rep["root_set_size"]["median"] == 1
+    assert rep["root_set_size"]["max"] == 1
+    assert rep["greedy_cover"]["checkpoints"] == {0.25: 1, 0.5: 1, 0.75: 1, 0.9: 1, 1.0: 1}
+
+
+@pytest.fixture
+def leverage(tmp_path: Path) -> Path:
+    """A chain def-x --[physical-argument]--> prop-y --[rigorous proof]--> prop-z, an
+    unrelated already-rigorous def-w --> prop-v pair (for the no-op case), and a milestone on
+    prop-z (for the "milestone hit" case)."""
+    schema_src = ROOT / "graph" / "schema"
+    for f in schema_src.iterdir():
+        _write(tmp_path, f"graph/schema/{f.name}", f.read_text(encoding="utf-8"))
+    _write(tmp_path, "literature/sources.bib", "@book{ref-a,\n title={A}\n}\n")
+    _write(
+        tmp_path,
+        "graph/statements/worldsheet/def-x.yaml",
+        """
+        id: worldsheet.def-x
+        kind: definition
+        status: physical-argument
+        title: X
+        statement: a physically-argued definition
+        sources: [{ref: ref-a, loc: "1"}]
+        """,
+    )
+    _write(
+        tmp_path,
+        "graph/statements/worldsheet/prop-y.yaml",
+        """
+        id: worldsheet.prop-y
+        kind: proposition
+        title: Y
+        statement: y follows from x
+        sources: [{ref: ref-a, loc: "2"}]
+        """,
+    )
+    _write(
+        tmp_path,
+        "graph/derivations/worldsheet/prop-y--via-x.yaml",
+        """
+        id: worldsheet.prop-y--via-x
+        target: worldsheet.prop-y
+        kind: proof
+        status: rigorous
+        depends_on: [{id: worldsheet.def-x}]
+        sources: [{ref: ref-a, loc: "2"}]
+        summary: direct
+        """,
+    )
+    _write(
+        tmp_path,
+        "graph/statements/worldsheet/prop-z.yaml",
+        """
+        id: worldsheet.prop-z
+        kind: proposition
+        title: Z
+        statement: z follows from y
+        sources: [{ref: ref-a, loc: "3"}]
+        """,
+    )
+    _write(
+        tmp_path,
+        "graph/derivations/worldsheet/prop-z--via-y.yaml",
+        """
+        id: worldsheet.prop-z--via-y
+        target: worldsheet.prop-z
+        kind: proof
+        status: rigorous
+        depends_on: [{id: worldsheet.prop-y}]
+        sources: [{ref: ref-a, loc: "3"}]
+        summary: direct
+        """,
+    )
+    _write(
+        tmp_path,
+        "graph/statements/worldsheet/def-w.yaml",
+        """
+        id: worldsheet.def-w
+        kind: definition
+        status: rigorous
+        title: W
+        statement: an already-rigorous definition
+        sources: [{ref: ref-a, loc: "4"}]
+        """,
+    )
+    _write(
+        tmp_path,
+        "graph/statements/worldsheet/prop-v.yaml",
+        """
+        id: worldsheet.prop-v
+        kind: proposition
+        title: V
+        statement: v follows from w
+        sources: [{ref: ref-a, loc: "5"}]
+        """,
+    )
+    _write(
+        tmp_path,
+        "graph/derivations/worldsheet/prop-v--via-w.yaml",
+        """
+        id: worldsheet.prop-v--via-w
+        target: worldsheet.prop-v
+        kind: proof
+        status: rigorous
+        depends_on: [{id: worldsheet.def-w}]
+        sources: [{ref: ref-a, loc: "5"}]
+        summary: direct
+        """,
+    )
+    _write(
+        tmp_path,
+        "graph/milestones/prop-z.yaml",
+        """
+        id: ms.prop-z
+        statement_id: worldsheet.prop-z
+        canonical_text: Z
+        audit: {status: draft}
+        """,
+    )
+    return tmp_path
+
+
+def test_counterfactual_force_definition_unlocks_downstream_chain(leverage: Path) -> None:
+    g = load_graph(leverage)
+    rep = counterfactual_report(g, ["worldsheet.def-x"])
+    assert rep["forced"] == ["worldsheet.def-x"]
+    assert rep["unknown_ids"] == []
+    moved = {m["id"]: m for m in rep["moved"]}
+    assert set(moved) == {"worldsheet.prop-y", "worldsheet.prop-z"}
+    assert moved["worldsheet.prop-y"] == {
+        "id": "worldsheet.prop-y", "before": "physical-argument", "after": "rigorous",
+    }
+    assert moved["worldsheet.prop-z"] == {
+        "id": "worldsheet.prop-z", "before": "physical-argument", "after": "rigorous",
+    }
+    assert rep["moved_count"] == 2
+    assert rep["milestones_hit"] == [{
+        "milestone": "ms.prop-z", "statement_id": "worldsheet.prop-z",
+        "before": "physical-argument", "after": "rigorous",
+    }]
+
+
+def test_counterfactual_force_proposition_only_moves_downstream(leverage: Path) -> None:
+    """Forcing prop-y (not def-x) must not retroactively change def-x -- an upstream
+    dependency is never affected by forcing something that depends on it."""
+    g = load_graph(leverage)
+    rep = counterfactual_report(g, ["worldsheet.prop-y"])
+    moved_ids = {m["id"] for m in rep["moved"]}
+    assert moved_ids == {"worldsheet.prop-z"}
+    assert "worldsheet.def-x" not in moved_ids
+    assert rep["moved_count"] == 1
+
+
+def test_counterfactual_force_already_rigorous_node_is_noop(leverage: Path) -> None:
+    g = load_graph(leverage)
+    rep = counterfactual_report(g, ["worldsheet.def-w"])
+    assert rep["moved"] == []
+    assert rep["moved_count"] == 0
+    assert rep["milestones_hit"] == []
+
+
+def test_counterfactual_excludes_forced_node_from_its_own_delta(leverage: Path) -> None:
+    """The forced node's own status trivially changes (that is the premise being tested), but
+    `counterfactual_report` must not count that as part of the "unlocked" delta -- only report
+    *other* cards moving. Cross-checked against a direct force_rigorous + compute_all diff."""
+    g = load_graph(leverage)
+    baseline = compute_all(g)
+    assert baseline["worldsheet.def-x"].name == "physical-argument"
+    g2 = force_rigorous(g, ["worldsheet.def-x"])
+    after = compute_all(g2)
+    assert after["worldsheet.def-x"].name == "rigorous"  # it really did move...
+
+    rep = counterfactual_report(g, ["worldsheet.def-x"])
+    assert all(m["id"] != "worldsheet.def-x" for m in rep["moved"])  # ...but is excluded here
+
+
+def test_counterfactual_reports_unknown_ids_without_forcing_them(leverage: Path) -> None:
+    g = load_graph(leverage)
+    rep = counterfactual_report(g, ["worldsheet.def-x", "nope.does-not-exist"])
+    assert rep["forced"] == ["worldsheet.def-x"]
+    assert rep["unknown_ids"] == ["nope.does-not-exist"]
 
 
 # ---------------------------------------------------------------- bib
