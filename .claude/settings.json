@@ -22,15 +22,7 @@
       "Bash(grep *)",
       "Bash(rg *)",
       "Bash(find *)",
-      "Bash(wc *)",
-      "mcp__agora__agora_join",
-      "mcp__agora__agora_board",
-      "mcp__agora__agora_claim",
-      "mcp__agora__agora_release",
-      "mcp__agora__agora_inbox",
-      "mcp__agora__agora_send",
-      "mcp__agora__agora_leave",
-      "mcp__agora__agora_concede"
+      "Bash(wc *)"
     ],
     "deny": [
       "Bash(git push --force*)",

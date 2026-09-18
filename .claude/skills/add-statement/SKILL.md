@@ -13,7 +13,7 @@ description: 向图中新增一条陈述及其推导的标准流程：查重、�
 uv run stringgraph search <两三个关键词>
 ```
 
-有相近节点：优先给它加一条新的 derivation，而不是新建 statement。表述不兼容：不要新建，`agora_send` 给 auditor 提规范化。
+有相近节点：优先给它加一条新的 derivation，而不是新建 statement。表述不兼容：不要新建，在报告里向 lead 提规范化请求（由 auditor 处理）。
 
 ## 2. 登记文献
 

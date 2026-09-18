@@ -28,4 +28,4 @@ description: 对一篇已登记文献做陈述级抽取，产出 literature/extr
 
 ## 产出交接
 
-`agora_send` 给 lead 或 curator，`ref` 指向抽取文件路径。
+在最终报告里列出抽取文件路径，交给 lead 转派 curator。

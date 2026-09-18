@@ -40,28 +40,23 @@
 
 本项目会并行运行多个 agent。规则：
 
-### Agora 协调总线
-- 会话开始时调用 `agora_join`，`role` 与 `priority` 按下表，不得临时改动：
+### 角色与写入范围
 
-| role | priority | 谁 | 职责 |
+| 角色 | 谁 | 职责 | 允许写入的路径 |
 |---|---|---|---|
-| `lead` | 80 | 主会话 | 分派任务、合并分支、维护里程碑 |
-| `auditor` | 60 | physics-auditor agent | 回译审计、里程碑确认；可抢占 curator 对 milestones 的写入 |
-| `curator` | 50 | graph-curator agent | 从文献抽取陈述与推导 |
-| `formalizer` | 50 | lean-formalizer agent | Lean 形式化 |
-| `prover` | 50 | theorem-prover agent | 原创证明尝试，只写 `research/**` |
-| `reviewer` | 40 | graph-reviewer agent | 对抗性审查，只读 |
-| `researcher` | 30 | researcher agent | 文献检索，只写 `literature/` |
+| lead | 主会话 | 分派任务、合并分支、维护里程碑 | 全部（但尽量只做合并与收尾） |
+| auditor | physics-auditor agent | 回译审计、里程碑确认 | `graph/milestones/**`、`docs/reviews/**` |
+| curator | graph-curator agent | 从文献抽取陈述与推导 | `graph/statements/**`、`graph/derivations/**`、`graph/conventions/**` |
+| formalizer | lean-formalizer agent | Lean 形式化 | `formal/**`，以及图节点的 `formal:` 字段 |
+| prover | theorem-prover agent | 原创证明尝试 | `research/**` |
+| reviewer | graph-reviewer agent | 对抗性审查 | 只读，不写 |
+| researcher | researcher agent | 文献检索与逐字抽取 | `literature/**` |
 
-- 动手改文件前 `agora_claim`，路径粒度是子目录或单文件，例如 `graph/statements/worldsheet/**`、`formal/StringFormal/Virasoro/**`。
-- 长任务中定期 `agora_inbox`。结束时 `agora_release` 并 `agora_leave`。
-- **已知缺陷：同一会话派生的所有子 agent 在总线上共享一个身份**（2026-09-10 两次实测）。后果：`agora_release` 不带 `claim_id` 会释放别人的 claim；`agora_leave` 没有 claim_id 参数，**必然**释放该身份的全部 claim 并把别人标为 left。因此：
-  - `agora_release` 必须带 `claim_id`。
-  - 子 agent **不要调用 `agora_leave`**，只 release 自己的 claim；`agora_leave` 由 lead 在整批任务结束时调用一次。
-  - 被连带释放后不要慌：文件没被动，重新 `agora_claim` 即可。
-  - **2026-09-11 实测更严重的表现**：claim 常被记到别的角色名下（甚至自己刚 claim 的 #134 也释放不了）。处理：`agora_release` 报 "No matching held claim" 时先重新 `agora_join(role=...)` 再试一次；仍失败就在报告里写明，由 lead 收尾时统一清理。**不要**因此重复 claim 或调用 `agora_leave`。
-  - 真正的隔离（每个 worktree 独立 bus id）待总线支持后再启用。
-- 冲突优先 `agora_send` 沟通，`agora_preempt` 只用于 auditor 阻止错误进入里程碑。
+**协调方式：无协调总线，靠分工不重叠 + worktree 隔离。**
+- lead 派工时必须在任务书里**逐字写明该 agent 允许写入的路径**，粒度到子目录或单文件（例如 `research/attempts/bkm-shift-explanation/**`）。任务书没写的路径一律不许动。
+- 两个并行 agent 的写入路径**不得相交**。有交集就串行派，或者把交集部分留给 lead 自己收尾。
+- agent 之间不直接通信；有跨任务的发现写进自己的 `status.yaml` / 报告，由 lead 转达。
+- 里程碑（`graph/milestones/**`）只有 auditor 和 lead 能写；curator 发现里程碑需要改动时只提建议，不动手。
 
 ### Git 纪律
 - **API 故障韧性**（2026-09-10/11 两次证书错误各杀死 6–10 个 agent）：所有子 agent **每完成一张卡/一个声明立刻 validate+commit**，不攒；worktree 上无提交会被自动删除，未提交的工作全部丢失。lead 在 agent 死亡后先查 `.claude/worktrees/<id>` 是否仍在、`git status` 是否有可 validate 的残留，能过校验就代为提交（提交信息注明「lead committed on behalf of … after API outage」），再重新派工。
