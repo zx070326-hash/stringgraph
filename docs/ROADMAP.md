@@ -1,14 +1,22 @@
 # 路线图
 
-## 当前活跃（2026-09-15）
+## 当前活跃（2026-09-18）
 
 两条线并行推进（本节是给新 agent 的入口地图；权威进度在各 Phase 小节与各 `status.yaml`）：
 
 1. **世界面形式化线**（Phase 1 + `formal/`）：Goddard–Thorn 无鬼定理的 Lean 形式化。条件版已机检（`no_ghost_of_spans`，任意 D、任意有序域），全部猜想负担集中在一张 `worldsheet.ddf-spanning-hypothesis`（= Lean `DDFSpans`，open）；一般 N 张成 (B-26) 分 N≤4 / 5–11 / ≥12 三段，**N≤5 已闭**（N=5 于 main：`DescendantKernel.lean` PR9a + `LevelFiveCount.lean` PR9b，`b26_five_of_D26` / `ddfSpans_bigrade_neg_five_five`，无 sorry）；**N=6 为当前前沿**（§B⁗.7：最便宜，p_D(−1)=0 故只需 B⁗.2 的 s=5 syzygy 对 (x₄,y₃)，要证 level-1 seed-membership τ₆=25）。**2026-09-17：level-1 转移引理（判定层面）已关闭**——见 `formal/BLUEPRINT-noghost.md` §B⁗.9 [GAP-N6-seed]：判据为真，且**恰在 D=26** 解空间 = `Q_{-6,1}`（D≠26 时塌成 0），`formal/scripts/verify_n6_seed_criterion.py` 精确有理数验证；结构论证 = 横向 c⊥p 给出 `V(26,−4)` 的两个奇异矢量、纵向 c∥p 由 `L_1(y₃L_{−1}v) = 2h·y₃v ≠ 0` 排除。**尚未 Lean 形式化**，PR-D `SeedTransferSix.lean` 仍待写。详见下方 Phase 1 进度日志。
 2. **黑洞 / 原创证明线**（Phase 3 + `research/`）：N=4（type II on K3×T²）1/4-BPS 挠 dyon 免死指标。
    - **缝 A** `research/attempts/torsion-immortal-positivity-hecke`：state=**verified**（两条独立审查腿），`captain_confirmed=false`。Thm 6.1（挠 I>1 免死指标正性除子和，物理依赖压到单条前提 P′=DGM eq(52)）、Thm 4.1（吸引子围道协变性）、Prop 4.4（d_* 的 GL(2,ℤ) 不变性）已按 **physical-argument** 毕业进 `graph/statements/holography/`（commit 132120e）。**副产品**：DGM 0803.2692 eq(51)/(52) 互不相容（显式整数见证 I=2,(4,1,2)）——**这是对外声明，船长确认前不得公开宣称**（暂缓，等第三方交叉核）。
-   - **缝 B** `research/attempts/bkm-shift-explanation`：state=draft。Prop B 从 Alexandrov–Nampuri eq(2.11)+(2.13) 初等推出半整平移 (d−1)/2（Lemmas B.1–B.3）。
+   - **缝 B** `research/attempts/bkm-shift-explanation`：state=**verified**，`captain_confirmed=true`（2026-09-15 船长拍板，范围严格限定为「给定 A-N eq(2.11)+(2.13) ⇒ 半整平移闭式」这一纯代数步）。**2026-09-18 新增 §9：命题 B 的第二条独立证明**（Weyl 向量路线——把 A-N 符号惯例 (−1)^ℓ 识别为椭圆方向的 ½ 平移，用 𝒱_d 的伸缩共轭该平移得 d·½−½=(d−1)/2），由 `weyl-shift-diagnostic` 并入，已过 graph-reviewer 六攻击面对抗审查（攻击面 4/5 两处措辞已订正：ε=−i 的"交叉验证"降格为"一致性复核"、§9.9 末段改为显式**猜测 9.5（未证）**）。§9 **未纳入** captain_confirmed 范围。GAP-BKM（半整平移 ↔ BKM 根空间 Z/2Z 自同构）仍开放。
+   - ⚠ **ρ/σ/v 变量字典是本项目的常设陷阱**：被 s² 缩放的是 **ρ ↔ σ_AN**、被 s 缩放并带平移的是 **v ↔ z_AN**、旁观者是 **σ ↔ τ_AN**。判据是**谁带 s² 因子**，不是书写顺序左右对齐。同一类槽位错位 bug 2026-09-18 一天内查出三处（缝 B 推论 B1 散文、`research/papers/torsion-dyon-shift-positivity/paper.md` §4 散文、`weyl-shift-diagnostic` Lemma D.1 的 A_d=diag(d,1) 套错排列），均已订正且数学结论未变。新开任何涉及 Φ₁₀ 变量的工作前先读这一条。
+   - **已裁定关闭的支线**（负面结果照 `research/CLAUDE.md` 生命周期第 5 条保留目录，不删）：`genus-five-supermeasure`（state=**abandoned**，scoping 判定此路不通，非被证伪）、`weyl-shift-diagnostic`（state=**abandoned**，内容已并入缝 B §9，非死路）、`monstrous-conway-noghost`（state=**abandoned**，monstrous/Conway moonshine 未开成新线：rank1→rank2 翻译代价过高、Conway moonshine 不满足本项目的砖块合规要求）。
    - **下一个真空缺 scoping**：`research/open-gaps-survey.md`（DVV 生成函数 / DMZ 有限部 / CHL 推广三候选）；DMZ 一支已 scoping 完（`research/attempts/dmz-finite-part-scoping`，裁定并入缝 A 的 [GAP 10.2b]，因 BSS 2311.16252 已给全电荷版反例）。
+
+### 本轮在途（2026-09-18，lead 派工中）
+
+- **无鬼定理瓶颈已定位到单点**（lead 2026-09-18 用 `why`/`status` 逐级查出）：`worldsheet.no-ghost-theorem-v4` → `ddf-spanning-hypothesis` → `ddf-contour-equals-mode-sum` 这条链上**没有一个节点自身是 `physical-argument`**（三者 own 全是 `rigorous`），整条链被**唯一一个**节点 `worldsheet.physical-exponential-equals-voa-vertex-operator` 压成 `physical-argument`。而该节点弱在**抽取偷工**而非开放数学——现有 Li–Wang 抽取记录把公式 (3.10) 写成"含 ε(α,β) 因子与 x^{⟨α,β⟩}、E^-、Δ̄ 各项"，**算子名列了出来、公式本身没展开**。已派 researcher 重开 Li–Wang 2008（arXiv:0802.0173）§2–§3 抽 `E^-`/`Δ̄` 显式定义、(3.10) 完整右端与扭转模版本（分支 `agent/researcher/li-wang-vertex-operator`，只写 `literature/**`）。**反面结论同样是成功交付**：若 (3.10) 在本项目的秩 1 类光塔情形下确实需要额外条件，该节点就该老实留在 `physical-argument`，"抽取偷工"这一判断即不成立。同时要核实卡面"秩 1 类光 ⟹ cocycle 平凡"这一步是 Li–Wang 给的还是本项目自己补的。
+- **超模空间可投影性 post-2024 入图**：六篇 post-2024 文献已登记（commit 303d6d5），curator 正把 Donagi–Noja 2608.24996 / Corrêa–Noja 2606.06733 / FKP 2408.11136 / Donagi–Ott / Wang / DBFS 转成图节点（分支 `agent/curator/supermoduli-post-2024`，只写 `graph/statements/math/**` 与 `graph/derivations/math/**`）。**五条红线**（researcher 逐字核出，写进了派工书）：(1) Donagi–Noja 只覆盖 **𝔐₄^+（偶自旋）**，ω₂(𝔐₄^+)≠0，整个 𝔐₄ 是平凡的无交并推论；(2) Corrêa–Noja 三项拆三张卡，**FKP 边只挂在第 (2) 项、绝不挂第 (3) 项**；(3) FKP Thm 6.3 只到亏格 2，与他们的任意亏格**正则性**结果是两回事；(4) 不得写"Wang 严格改进 Donagi–Ott"（n=0 处 Wang 的界更严），且 Wang 自标"preliminary draft"；(5) DBFS 对 CDvG 的批评是**条件排除论证**，不是断言 CDvG 错，其 `[20]` 的 arXiv 编号仍待核。既有卡 `math.supermoduli-space-not-projected` 的五条红线里，**红线 (4)「不考虑 DM 紧化」仍然成立**（Corrêa–Noja 是紧化空间上的正交补充，不是对该卡的更正），红线 (1)「只到 g≥5」仅**部分**被超越（g=4 只有偶自旋半边，**g=3 未紧化情形至今开放**——Donagi–Noja 自述"work in progress"）；故该卡只准改 `notes:` 加交叉引用，不准动 `statement:`/`sources:`/`status`。
+- **协调总线已拆除**（2026-09-18，船长指令"走 2"）：`CLAUDE.md` 的 Agora 小节、`.claude/settings.json` 的 8 条 `mcp__agora__*` 权限、六个 agent 定义里的 agora 工具与散文全部移除，改为「无协调总线，靠分工不重叠 + worktree 隔离」——派工书必须逐字写明允许写入的路径，并行 agent 路径不得相交。图节点 `notes` 与 agent `status.yaml` 里"已 agora_send 通报 lead"之类的**历史审计记录按不可变卡纪律原样保留**，只有 `formal/BLUEPRINT-noghost.md:383` 那一条**活的**指令改成了"必须先停下来问 lead"。
 
 ## Phase 0：骨架与种子数据（已完成）
 
