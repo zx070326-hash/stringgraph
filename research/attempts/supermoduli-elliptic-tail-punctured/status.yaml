@@ -73,13 +73,34 @@ notes: |
     （Windows GBK 控制台需用 `python -X utf8` 运行。）
 
   === 仍然开放的 [GAP] 清单（完整版见 proof.md §7）===
-  1. [GAP-LIT]（程序性，**毕业阻塞**，2026-09-18 **部分关闭**）：FKP arXiv:2006.13271 =
-     Amer. J. Math. 145 (2023) 1777–1886 **现已登记 literature/sources.bib**，且
-     literature/extractions/felder-kazhdan-polishchuk-2020.md 已存在（并行任务补上）。
-     ⚠ 但该抽取覆盖 Theorem A / Def 2.1,2.4 / §2.6 / §5.4——**一条承重依赖都不覆盖**，
-     其 E6 条目自陈「不建议 curator 直接引用本条目的 Theorem B 公式作为图节点来源」。
-     **剩余阻塞**：把抽取追加扩展到 §7.5 (7.8)/(7.9)、Lemma 7.9、Lemma 7.10、
-     §8.4 Example 8.9、§9.1 / Lemma 9.1 / (9.6)。lead 已派 researcher。
+  1. [GAP-LIT]（程序性，**毕业阻塞**，2026-09-18 ✅ **已关闭**）：FKP arXiv:2006.13271 =
+     Amer. J. Math. 145 (2023) 1777–1886 已登记 literature/sources.bib，
+     literature/extractions/felder-kazhdan-polishchuk-2020.md 现已**三轮**抽取完毕。
+     第一轮覆盖 Theorem A / Def 2.1,2.4 / §2.6 / §5.4（一条承重依赖都不覆盖）；
+     第二轮 E7–E9 补 §9.1 setup / Lemma 9.1(i)–(iv) / 式 (9.6)；
+     第三轮 E10–E15 补 Theorem 9.2 / Theorem C 与 (8.11) / (7.8)(7.9)（并补录 Ramond 侧
+     (7.11)(7.12)）/ Lemma 7.9 / Lemma 7.10 / §8.4 全节 / §9.3。
+     **本 GAP 原文列出的剩余阻塞五项（§7.5 (7.8)/(7.9)、Lemma 7.9、Lemma 7.10、
+     §8.4 Example 8.9、§9.1 / Lemma 9.1 / (9.6)）现已逐条覆盖，全部 L1 页图逐字。**
+     三条独立复核结论与本尝试的既有判断一致：Theorem C 的靶逐字是无穿孔的 S̄_g（500 dpi
+     逐字符确认）、Example 8.9 只对 NS 穿孔陈述、§9.3 逐字 "We conjecture that"。
+     ⚠ **仍未覆盖（不阻塞本尝试，但不得声称已读完 FKP §9）**：Lemma 9.3/9.4/9.5 的证明
+     正文（p.63–68，只读了陈述与证明首句），故**仍不能回答「Theorem 9.2 的相容性证明
+     是否与穿孔数无关」**。本尝试的承重链条走的是 (7.6)+Lemma 9.1+Lemma 8.7 ⟹ (9.6)，
+     不经过 Theorem 9.2，故不受影响。
+  1b. ⭐ **第三轮新增的一条负面情报（lead 记，须写进 proof.md 的来源注）**：
+     Lemma 8.7 与 Corollary 8.8 **也只对 NS 穿孔陈述**，而 Lemma 9.1(i) 的证明正是引用
+     Cor 8.8（"we use the canonical trivializations … see Corollary 8.8"）。
+     即：(9.6) 的推导链条**整条都走在只对 NS 陈述的引理上**。这与本尝试的设计一致
+     （只在 NS 节点处粘接，Ramond 复杂性被隔离进常值因子），**不构成新缺口**，
+     但它把 [GAP-FKP-RAMOND] 的足迹从「Lemma 7.9 证明的一处省略」扩大到
+     「§8.4–§9.1 的整条 NS-only 链」。任何日后把本方法推广到 Ramond 节点粘接的尝试
+     必须先补齐这整条链，而不只是补 Lemma 7.9。
+     另记两个原文记号陷阱（引用任何 FKP 公式前必读）：(i) 同一篇论文里 `m` 有**三重含义**
+     （(8.11)/§8.4 = NS 穿孔数；Lemma 9.1/9.3 = ω 的幂次；Lemma 7.10 证明 = 除 q 外的
+     节点个数）；(ii) §7.5 起用分号记号 S̄_{g;m,n}、§1/§5 用逗号记号 S̄_{g,n_NS,n_R}，
+     原文**从未写下二者相等的声明**。
+     ⚠ 另：(8.11) 逐字的乘积上限是 `m`，而引言 Theorem B 写 `n_NS`，**原文未声明 m = n_NS**。
   2. [GAP-FKP-RAMOND]（低）：FKP Lemma 7.9 的**证明正文**把广义自旋结构写成 L ≅ Hom(L,ω_C)，
      漏掉 Ramond 扭转 ω_C(R)，尽管其陈述 (7.8) 允许 Ramond 穿孔。判断为无害省略（粘接是 NS
      节点处的局部操作），但未独立重写该局部计算。影响推论 B。
