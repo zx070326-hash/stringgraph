@@ -26,13 +26,36 @@ statement: |
 uses_conventions: []
 sources:
   - ref: dunin-barkowski-fedorov-sleptsov-2025
-    loc: "arXiv:2505.02950v2, p.5（§1 引言，条件性排除论证逐字）；摘要（对应表述，逐字，经 export.arxiv.org API 核验）；References [20]（arXiv 号未在条目原文核对到）、[27]（Witten 极点结果，arXiv:1501.02499，pp.48–52）"
+    loc: >-
+      arXiv:2505.02950v2, p.5（§1 引言，条件性排除论证逐字）；摘要（对应表述，逐字，经
+      export.arxiv.org API 核验）；References [20]（arXiv 号未在条目原文核对到）、[27]（本文
+      References 列表 pp.48–52 区间内引用 Witten 极点结果，arXiv:1501.02499——**注意这里的
+      "pp.48–52" 是 DBFS 论文自己 References 列表所在的页码范围，不是 Witten 论文里该结果所在的
+      页码**，见下方 2026-09-18 note 更正）。
     note: |
       **部分 L1**：摘要 + pp.1–10（Introduction，含本节点引用的 p.5 批评段落）+ pp.42–52（参考文献
       列表）已读（researcher 2026-09-18，抽取记录 dunin-barkowski-fedorov-sleptsov-2025.md E1, E3）。
       [20] 条目本身在参考文献表原文中未见明确 arXiv 号字符串，候选范围见 statement"未决事项"；
       Witten 2015（[27] = arXiv:1501.02499）本身未被本项目独立读取或立卡，只作为本文引用的既有
       结果记录在案。
+
+      **2026-09-18 更正（researcher 重读 Witten 2015 后核实）**：loc 字段里原写的"[27]（Witten 极点
+      结果引用），pp.48–52"，经核对，"pp.48–52"实际是**本条 sources 引用的 DBFS 论文自己 References
+      列表所在的页码范围**（抽取记录 dunin-barkowski-fedorov-sleptsov-2025.md E3："位置：References，
+      pp.48–52"），并非 Witten arXiv:1501.02499 论文内部该结果所在的页码——用它标注"Witten 极点结果"
+      的位置会造成误导。Witten 论文里给出这条结果的真正位置是 **Appendix C.4（pp.55–56）**：
+      Appendix B.2（Witten 论文 pp.48–49）讲的是亏格二的 D'Hoker–Phong 程序修正（不同机制）；
+      Appendix C.1–C.2（Witten 论文 pp.50–52）只是超椭圆轨迹与自旋结构的定义（见新节点
+      `math.supermoduli-witten-genus-3-hyperelliptic-pole` 第一部分）；真正给出"测度 π_*(Υ) 有极点"
+      并点名 CDvG 论文（[24]）的是 Witten 论文 **Appendix C.4，pp.55–56**。
+  - ref: witten-2015-ramond-period-matrix
+    loc: "Appendix C.4 (C.19)–(C.25), pp.55–56（前提 A 的来源，见下方 note）"
+    note: |
+      **本条不承载本卡任何断言**，只承载本卡逻辑上依赖的"前提 A"——即"真实测度在亏格三超椭圆轨迹
+      的 D′ 支上有极点"，该前提已独立立卡为 `math.supermoduli-witten-genus-3-hyperelliptic-pole`
+      （status: physical-argument，见该卡推导 `--via-witten-2015` 的判据），本节点的推导
+      （`--via-dunin-barkowski-fedorov-sleptsov`）已接上这条 depends_on 边。本卡的 statement 正文
+      （措辞、逻辑结构、"未决事项"）不因此改动——根 CLAUDE.md 原则 1，改陈述文本等于新建节点。
 tags: [supermoduli, superstring-measure, genus-3, math-input, dunin-barkowski-fedorov-sleptsov, exclusion-argument]
 notes: |
   **措辞纪律**：本节点严格保留原文限定性措辞"cannot be a formula for"，不强化为"is wrong"、"the
@@ -42,10 +65,42 @@ notes: |
   独立命题（一个节点一个命题）——该节点是本文自己的正面结果（线性组合形式），本节点是本文对既有
   文献 [20] 的条件性排除论证，不应合并。
 
+  **2026-09-18 更新：前提 A 已接图，Witten 2015 已登记立卡**（researcher + curator）。本节点的排除
+  论证在逻辑上以 Witten 2015（arXiv:1501.02499，"The super period matrix with Ramond punctures"）的
+  极点存在性结果为前提；该文献现已登记 `literature/sources.bib`（key
+  `witten-2015-ramond-period-matrix`）并立卡为 `math.supermoduli-witten-genus-3-hyperelliptic-pole`，
+  推导 `math.supermoduli-genus-3-cdvg-ansatz-excluded-by-pole--via-dunin-barkowski-fedorov-sleptsov`
+  已补上 depends_on 该新卡的边（`inferred: true`，因为 Υ 与本节点记号 π_*ψ_3/φ_3 的对应关系本项目
+  未见任何文献逐字确认，只是同一物理对象在两套记号下的自然识别）。此前"未独立立卡"的缺口已关闭。
+
+  **优先权发现（2026-09-18，本轮最重要的一条）**：Witten 2015 本人已在其论文 p.56，(C.22) 之后逐字
+  写道——
+  > "The literature actually contains a proposal [24] for a holomorphic measure on M_{3,spin+} that is
+  > supposed to arise by integrating over the odd variables in some fashion that has not been
+  > specified. This formula is holomorphic along D′, so it does not coincide with π_*(Υ)."
+  即：**Witten 本人早在 2015 年就已经针对同一篇被批评的论文（[24] = Cacciatori–Della Piazza–van
+  Geemen, arXiv:0801.2543，与本节点 [20] 极可能是同一篇，见新卡与其推导的 gaps）做出与 DBFS 2025
+  几乎相同的排除结论**——"CDvG 的全纯 Ansatz 因全纯而不能是真实（沿超椭圆轨迹有极点的）测度"这一
+  排除并非 DBFS 首创。DBFS 2025（本节点唯一来源）是把 Witten 2015 已经指出的这一点重新表述、纳入
+  自己的引言论证；本节点的 title/statement 措辞把这一排除论证独占地归于"Dunin-Barkowski–Fedorov–
+  Sleptsov"，这一 provenance 问题本节点不代为改动 title/statement（根 CLAUDE.md 原则 1），留待 lead
+  判断是否需要走里程碑规范化流程调整措辞或补充"Witten 2015 已给出同一结论"的 provenance 说明。
+
+  **DBFS 转述不精确，但排除论证的结论仍然成立**：DBFS 摘要与引言把 Witten 2015 的结果笼统转述为
+  "our formula has a polar singularity along the hyperelliptic locus; the existence of this
+  singularity was established by Witten in 2015"（单数、笼统，不区分 D/D′）。Witten 原文的实际结构
+  是**不对称**的：偶自旋结构模空间 M_{3,spin+} 里的"超椭圆轨迹"分裂为 D（h⁰(L)=2，1 个自旋结构，
+  测度处**预期为零点**，作者用"we expect"）与 D′（h⁰(L)=0，35 个自旋结构，测度**确实有极点**，
+  作者用肯定语气"thus"）两支——见 `math.supermoduli-witten-genus-3-hyperelliptic-pole`。DBFS 的
+  排除论证逻辑（若 CDvG Ansatz 在整个 H_3 全纯，则也在 D′ 上全纯，与 D′ 上应有极点矛盾）**只需要
+  D′ 那一支**，故排除论证的最终结论不受这一简化转述影响——但转述本身把 D/D′ 的不对称结构抹平了，
+  不精确，供 lead 与后续 auditor 参考。
+
   **Witten 2015（arXiv:1501.02499，"The super period matrix with Ramond punctures"）未独立立卡**：
   本节点的排除论证在逻辑上以该文献的极点存在性结果为前提，但该文献本身未被本项目读取、也未登记到
   `literature/sources.bib`（登记 `literature/**` 不在本任务允许写入范围内）。这是一个应报告给 lead
   的缺口：若后续要把"前提 A"接上真正的 depends_on 边（而不是留在本节点正文的文字记录里），需要先
   由 researcher 补做该文献的抽取记录、curator 或 lead 再登记 bib 条目并立卡。
+  **（2026-09-18：此缺口已按上方"前提 A 已接图"一条关闭，本段保留作历史记录，不删除。）**
 author: curator-supermoduli-post-2024
 created: "2026-09-18"
