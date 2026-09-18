@@ -549,3 +549,43 @@
   但与同节 (13.3.11) + 次页 (13.3.13) 复算不自洽，且 **hep-th/9510017 的 (12)–(15) 独立给出 `Φ = μ_p/α_p = 2κ₁₀²μ_p`**
   ⇒ **判为原书排印错误（Core 2005 "with corrections" 版仍错）**。见 `extractions/polchinski-1998-v2-ch13.md` **§6**。
   **教训升级：页图与复算冲突时，不要默认"我读错了"——先找一条书外的独立来源，两条独立证据同向才能判书错。**
+
+- **★★ 修正 2026-09-11 的「Springer 一切路径都撞登录墙」那条（2026-09-18，researcher 断言 (2) 第四轮实测）。**
+  对 **MSRI Publications vol. 3**（`10.1007/978-1-4613-9550-8`，1985）本轮实测：
+  · 卷页 `link.springer.com/book/10.1007/<DOI>` → **200**，两页 TOC 可完整抓取（23 篇篇名 + 页范围）；
+  · 前置内容 `link.springer.com/content/pdf/bfm:<ISBN>/1` → **200, application/pdf, 628 KB**
+    ⚠ **注意末尾没有 `.pdf` 后缀**——9-11 那条记的是 `bfm:<ISBN>/1.pdf`，带后缀才跳登录墙；
+  · 第 1 章 `link.springer.com/content/pdf/10.1007/<DOI>_1.pdf` → **200, application/pdf, 1.19 MB**；
+  · 但 `_2`/`_5`/`_6`/`_12`/`_20` 全部 **200 但 `content_type: text/html`**（付费墙落地页）。
+  ⇒ **Springer 并非全封**：**front matter 与第 1 章常常免费**，其余章付费。
+  **判断是否真拿到正文，必须看 `content_type` 而不是 HTTP 码**（curl `-w "%{content_type}"`）。
+- **★ SLMath（前 MSRI）电子图书馆的覆盖面（2026-09-18 实测，证伪了一条常见假设）。**
+  `library.slmath.org/books/` **只托管 Book28–Book72**（CUP 时期）；`/books/Book3/` → 404。
+  早期卷总表 `library.slmath.org/books/masterlist.html` 列出 Springer 时期 vol.1–27 全部书名，
+  但**整页只有一个 PDF 链接**（`Book18/MSRI-v18-Bryant-Chern-et-al.pdf`，实测 200 可下）。
+  ⇒ 「早期 MSRI 卷常有免费 PDF」**只对 vol. 18 成立**，别再按这条假设排期。
+- **★ AMS 的 Bulletin (N.S.) 全刊免费 PDF 可用，但对请求方式敏感（2026-09-18）。**
+  路径 `www.ams.org/journals/bull/<年>-<卷>-<期>/S<PII>/S<PII>.pdf`。
+  本轮以浏览器 UA `curl -L` **GET 成功**取得 Ogg 1991 对 FLM 的书评（8 页，697 KB）；
+  但 **HEAD 请求返回 403**，且**同一 URL 稍后复测 GET 也返回 403**（疑速率限制）。
+  ⇒ **一次拿到就立刻落盘**，别指望能复取；PII 可从 DOI `10.1090/S<PII>` 直接读出。
+- **★ 新来源类别：大学学位论文库 + 个人主页镜像（2026-09-18 首次用上）。**
+  `studenttheses.universiteitleiden.nl` 等学位论文库是**公开可获取**的，合规；
+  本轮断言 (2) 四轮检索里**唯一**三条判据全中的文献就是一份 Leiden **本科**毕业论文
+  （`grotenhuis-2020`，经 `stat.ucla.edu/~ywu/moonshineString.pdf` 镜像取得）。
+  ⚠ **但必须在 bib note 里逐字写明「学位论文 / 非同行评议 / 本科级」**——
+  它的证据分量低于任何已发表论文，curator 不得把它当同级来源用。
+  ⇒ 检索「物理记号 ↔ 数学记号」这类**跨学科对照**时，**学位论文往往比专著更可能把对照写出来**
+  （专著只写自己那一侧；学位论文要给答辩委员会里的另一侧读者交代）。这条值得作为常规检索方向。
+- **★★ 页图核对纪律的一次硬证据（2026-09-18）。**
+  `grotenhuis-2020` 的 (3.15) 原文是 `Y(|α⟩,z) = e^α c_α z^{α_0} ···`，
+  **`pdftotext -layout` 把最左边的平移算符 `e^α` 整个吞掉**，只剩 `c_α z^{α_0} ···`。
+  若只信文本抽取，就会得出「物理侧 (6.6) 与数学侧 (3.15) 逐项严丝合缝」的**错误**结论——
+  而实际上正是这个被吞掉的因子暴露了该文识别句里的 cocycle 缺口。
+  ⇒ **凡要逐字引用公式、尤其要据此下"相等/不相等"判断的，必须 `Read(pages=)` 渲染页图。**
+- **⚠ 新增失败模式：WebSearch 摘要器会改写句子主语（2026-09-18 实测一例）。**
+  Dong–Mason–Nagatomo math/0004132 §4.1 原文是「For the purposes of **this paper** we do not make
+  explicit the expression for vertex operators `Y(v,z)`…」（主语是**该文自己**），
+  检索摘要把它转述成「该文指出 **FLM** 那里没写明」。**主语被换掉，意思完全反转。**
+  ⇒ 凡检索摘要里出现「某文指出另一文没有/缺少 X」这种**转述式否定证据**，
+  **一律先下载原文逐字核对主语再引用**，否则会造出伪证据。
