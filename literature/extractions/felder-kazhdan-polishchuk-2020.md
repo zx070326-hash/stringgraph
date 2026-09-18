@@ -452,3 +452,720 @@ A/B 的地基性依赖（紧化 + 任意穿孔数超模叠的存在性，即 The
     $\overline{\mathcal{S}}$**。400 dpi 放大复核确认 (9.6) 里确实**无上划线**。按上下文这应指同一个
     $\overline{\mathcal{S}}$（(9.6) 就是 (7.6) 的限制），判为**排印上的上划线遗漏**，但本条如实记录
     原文形态，不替作者改。
+
+---
+
+# 第三轮抽取（2026-09-18）：补齐 E10–E15
+
+- 抽取者：researcher（agent/researcher/fkp-gluing-round3）
+- 日期：2026-09-18
+- 版本：arXiv:2006.13271**v3**（74 页，2023-03-07 编译，与第二轮同一份 PDF）
+- 页码约定与方法等级：**沿用第二轮小节的约定**（PDF 页码 = 页眉印刷页码；L0–L4 制）。本轮已在
+  pp.2、47、48、49、56、57、58、61、62、63、68、70、71 逐页核对页眉数字。
+- ⚠ **关于第二轮小节的覆盖范围声明**：第二轮开头自称覆盖 "E7–E15"，但实际只落地了 **E7、E8、E9**
+  三条（上一轮 agent 中途因 API 中断死亡）。**本轮不修改第二轮的任何既有文字**，只在此处如实说明：
+  **E10–E15 由本轮补齐**，编号接续。
+- 本轮所有逐字引文与公式均为 **L1**：用 `Read` 工具直接渲染 PDF 页图像逐字核对；关键公式
+  （(8.11)、Theorem C 的靶、Example 8.9 的量词、§9.3 的 "conjecture" 措辞）另用
+  `pdftoppm -r 400~500` 局部放大二次核对。`pdftotext -layout` **只用于定位行号与 ASCII 交叉校验**。
+- ⚠ **本轮未做**：Lemma 9.3 / 9.4 / 9.5 的**证明**逐行核对（只核对陈述与证明首句的局部性自陈）；
+  §9.2 里 Lemma 9.6 之后到 Theorem C 收尾的完整推导；§3/§6 变形理论；参考文献表书目核实。
+
+## 陈述（第三轮）
+
+### E10 Theorem 9.2：(9.6) 与两个超 Mumford 同构的**相容性**（已证，非猜想）
+- 位置：**p.61**（陈述与图表）；证明分散在 Lemma 9.3（p.61–62）、Lemma 9.4（p.62–63）、
+  Lemma 9.5（p.63–68）；"Proof of Theorem 9.2" 在 **p.68 上半页**。L1（页图逐字；Theorem 9.2 的
+  图表另用 400 dpi 局部放大复核）。
+- ⚠ **节号更正（与派工描述不符，如实记录）**：Theorem 9.2 **位于 §9.1 "NS boundary components"
+  之内**（§9.1 起于 p.58，一直延伸到 p.68 上半页），**不在 §9.2**。§9.2 的标题是
+  "**Splitting of the Kodaira-Spencer map at an NS boundary component**"，起于 **p.68 下半页**，
+  其首条结果是 Lemma 9.6（编号式 (9.27)）。§9.3 "Ramond boundary components" 起于 p.70。
+- 类型：proposition
+- 原文陈述（逐字，含紧邻其前定义两个 Mumford 同构的段落）：
+  > Now we can state a compatibility result between the super Mumford isomorphisms over
+  > $\overline{\mathcal{S}}$ and over the NS boundary component $B$. Recall that we have the super
+  > Mumford isomorphism
+  > $$\mu_{\overline{\mathcal{S}}} : \mathcal{B}(\omega^{-2}_{X/\overline{\mathcal{S}}})
+  >   \longrightarrow \mathcal{B}(\mathcal{O}_X)^5(-\Delta)$$
+  > near $B$ (see Prop. 8.5). We also have the super Mumford isomorphism for the family
+  > $\widetilde{X}/B$, over the smooth locus:
+  > $$\mu_B : \mathcal{B}(\omega^{-2}_{\widetilde{X}/B}(-D_1-D_2)) \xrightarrow{\ \sim\ }
+  >   \mathcal{B}(\mathcal{O}_{\widetilde{X}})^5 \otimes \Psi_1 \otimes \Psi_2$$
+  > (see Lemma 8.11).
+  >
+  > **Theorem 9.2.** *The following diagram of isomorphisms of line bundles on $B$ is commutative up
+  > to a sign*
+  > $$\begin{array}{ccc}
+  >   \mathcal{B}(\omega^{-2}_{X/\overline{\mathcal{S}}})|_B &
+  >     \xrightarrow{\ \mu_{\overline{\mathcal{S}}}|_B\ } &
+  >     \mathcal{B}(\mathcal{O}_X)^5(-\Delta)|_B \\
+  >   \big\downarrow{\scriptstyle (9.2)} & & \big\downarrow{\scriptstyle (9.6)} \\
+  >   \mathcal{B}(\omega^{-2}_{\widetilde{X}/B}(-D_1-D_2)) & \xrightarrow{\ \mu_B\ } &
+  >     \mathcal{B}(\mathcal{O}_{\widetilde{X}})^5 \otimes \Psi_1 \otimes \Psi_2
+  >   \end{array}$$
+  紧随其后（p.61）作者说明证明的拆分方式，逐字：
+  > Recall that to get $\mu_{\overline{\mathcal{S}}}$ we used three isomorphisms: the
+  > Grothendieck-Serre duality isomorphism
+  > $$SD_{X/\overline{\mathcal{S}}} : \mathcal{B}(\omega^{-2}_{X/\overline{\mathcal{S}}})
+  >   \xrightarrow{\ \sim\ } \mathcal{B}(\omega^3_{X/\overline{\mathcal{S}}}),$$
+  > the isomorphism
+  > $$\mathcal{B}(\omega^3_{X/\overline{\mathcal{S}}}) \simeq
+  >   \mathcal{B}(\omega^2_{X/\overline{\mathcal{S}}})^{-1} \otimes \mathcal{B}(\mathcal{O}_X)^2,$$
+  > and the isomorphism
+  > $$\mathcal{B}(\omega^2_{X/\overline{\mathcal{S}}}) \simeq
+  >   \mathcal{B}(\omega_{X/\overline{\mathcal{S}}})^{-2} \otimes
+  >   \mathcal{B}(\mathcal{O}_X)^{-1}(\Delta)$$
+  > (see Sec. 8.3). Similarly, $\mu_B$ is a composition of similar three isomorphisms. So we can
+  > reduce the proof of Theorem 9.2 to separate compatibilities involving each of these three
+  > isomorphisms. We deal with this compatibilities in the next three lemmas.
+- 文献自称的严格程度：**编号定理，给出完整证明**（p.68 "Proof of Theorem 9.2 … $\square$"），
+  **无任何 "conjecture" / "one expects" 弱化措辞**。但注意结论本身只断言**相差一个符号**的交换性
+  （逐字 "commutative **up to a sign**"），不是无条件严格交换。
+- 文献列出的依赖（作者自列，逐字）：Prop. 8.5（$\mu_{\overline{\mathcal{S}}}$ 的存在，p.57–58）；
+  Lemma 8.11（$\mu_B$ 的存在，p.57）；(9.2)（= Lemma 9.1(i)，见 E8）；(9.6)（见 E9）；
+  Sec. 8.3（$\mu$ 的三段分解）；Lemma 9.3、Lemma 9.4、Lemma 9.5；(8.5)。
+
+- **Lemma 9.3 陈述（逐字，p.61）**——⚠ **本轮只核对陈述，未追进证明**（证明跨 p.61–62，用
+  Grothendieck–Serre 对偶的函子性 + 正合三角同构 (9.7)）：
+  > **Lemma 9.3.** *For any $m \in \mathbb{Z}$, the following diagram of isomorphisms between line
+  > bundles on $B$ is commutative:*
+  > $$\begin{array}{ccc}
+  >   \mathcal{B}(\omega^{-2m}_{X/\overline{\mathcal{S}}})|_B &
+  >     \xrightarrow{\ SD_{X/\overline{\mathcal{S}}}|_B\ } &
+  >     \mathcal{B}(\omega^{2m+1}_{X/\overline{\mathcal{S}}})|_B \\
+  >   \big\downarrow{\scriptstyle (9.2)} & & \big\downarrow{\scriptstyle (9.4)} \\
+  >   \mathcal{B}(\omega^{-2m}_{\widetilde{X}/B}(-mD_1-mD_2)) &
+  >     \xrightarrow{\ SD_{\widetilde{X}/B}\ } &
+  >     \mathcal{B}(\omega^{2m+1}_{\widetilde{X}/B}(mD_1+mD_2))
+  >   \end{array}$$
+  > *where the horizontal arrows are given by Grothendieck-Serre duality.*
+
+  （与 Theorem 9.2 不同，本条逐字是**无条件交换**，没有 "up to a sign"。）
+
+- **Lemma 9.4 陈述（逐字，p.62）**——⚠ 本轮只核对陈述与证明首句，未追进证明全文：
+  > **Lemma 9.4.** *Let $\rho : Y \to X$ be a morphism of families of stable supercurves over $B$,
+  > which is a fiberwise resolution of the node $Q : B \to X$ (so it is an isomorphism away from
+  > $X \setminus Q(B)$). For any coherent sheaf $\mathcal{F}$ on $Y$ which is locally free of rank
+  > $1|0$ over the smooth locus, and any line bundle $L$ on $X$ with a trivialization of $Q^*L$, we
+  > have a commutative diagram of isomorphisms of line bundles on $B$,*
+  > $$\begin{array}{ccc}
+  >   \mathcal{B}(\rho_*\mathcal{F} \otimes L) & \xrightarrow{\ (8.5)\ } &
+  >     \mathcal{B}(\rho_*\mathcal{F}) \otimes \mathcal{B}(L) \otimes
+  >     \mathcal{B}(\mathcal{O}_X)^{-1} \\
+  >   \big\downarrow & & \big\downarrow \\
+  >   \mathcal{B}(\mathcal{F} \otimes \rho^*L) & \xrightarrow{\ (8.5)\ } &
+  >     \mathcal{B}(\mathcal{F}) \otimes \mathcal{B}(\rho^*L) \otimes
+  >     \mathcal{B}(\mathcal{O}_Y)^{-1}
+  >   \end{array}$$
+  > *where in the right vertical arrow we use isomorphisms
+  > $\mathcal{B}(\mathcal{O}_X) \simeq \mathcal{B}(\mathcal{O}_Y)$ and
+  > $\mathcal{B}(L) \simeq \mathcal{B}(\rho^*L)$ coming from the exact sequences*
+  > $$0 \to \mathcal{O}_X \to \rho_*\mathcal{O}_Y \to \mathcal{O}_Q \to 0$$
+  > $$0 \to L \to L \otimes \rho_*\mathcal{O}_Y \to L \otimes \mathcal{O}_Q \to 0$$
+  > *and the trivialization of $Q^*L$.*
+
+  证明首句（逐字，p.62，**局部性自陈**）：*"The question is local in the base, so we can assume
+  that we can choose a relative divisor $D \subset X$ supported in the smooth locus of
+  $\pi : X \to B$, and a global section $s$ of $L(D)$ such that the $E = \mathrm{div}(s)$ is also
+  supported in the smooth locus."* ⚠ 注意这句说的是"**在基底上局部**（local **in the base**）"，
+  **不是**"在节点的邻域里局部"——与 E8/E9 记录的那几处 "étale / formal neighborhood of the node"
+  是**不同类型**的局部性断言，引用时不可混为一谈。
+
+- **Lemma 9.5 陈述（逐字，p.63，图表编号 (9.8)）**——⚠ 证明跨 p.63–68（分 Step 1 起若干步），
+  本轮只核对陈述与证明首句：
+  > **Lemma 9.5.** *The following diagram is commutative up to a sign*
+  > $$\begin{array}{ccc}
+  >   \mathcal{B}(\omega^2_{X/\overline{\mathcal{S}}})|_B & \xrightarrow{\ \sim\ } &
+  >     \mathcal{B}(\omega_{X/\overline{\mathcal{S}}})^{-2}|_B \otimes
+  >     \mathcal{B}(\mathcal{O}_X)^{-1}(\Delta)|_B \\
+  >   \big\downarrow{\scriptstyle \sim} & & \big\downarrow{\scriptstyle \sim} \\
+  >   \mathcal{B}(\omega^2_{\widetilde{X}/B}(D_1+D_2)) & \xrightarrow{\ \sim\ } &
+  >     \mathcal{B}(\omega_{\widetilde{X}/B})^{-2} \otimes
+  >     \mathcal{B}(\mathcal{O}_{\widetilde{X}})^{-1} \otimes \Psi_1^{-1}\Psi_2^{-1}
+  >   \end{array} \qquad (9.8)$$
+  > *Proof.* Note that it is enough to prove the commutativity of this diagram working in an étale
+  > neighborhood $S$ of a stable supercurve $X_s$ with **one NS node**. We also choose standard
+  > presentation of the node on $X_s$, and use constructions of Sec. 8.3.
+
+- **Proof of Theorem 9.2 的骨架（逐字，p.68）**：
+  > *Proof of Theorem 9.2.* Let us consider the diagram
+  > $$\begin{array}{ccccccc}
+  >   \mathcal{B}(\omega^{-2}_X)|_B & \to & \mathcal{B}(\omega^3_X)|_B & \to &
+  >     \mathcal{B}(\omega^2_X)^{-1}\mathcal{B}(\mathcal{O}_X)^2|_B & \to &
+  >     \mathcal{B}(\omega_X)^2\mathcal{B}(\mathcal{O}_X)^3(-B)|_B \\
+  >   \mathcal{B}(\omega^{-2}_{\widetilde{X}}(-D_1-D_2)) & \to &
+  >     \mathcal{B}(\omega^3_{\widetilde{X}}(D_1+D_2)) & \to &
+  >     \mathcal{B}(\omega^2_{\widetilde{X}}(D_1+D_2))^{-1}
+  >     \mathcal{B}(\mathcal{O}_{\widetilde{X}})^2 & \to &
+  >     \mathcal{B}(\omega_{\widetilde{X}})^2\mathcal{B}(\mathcal{O}_{\widetilde{X}})^3\Psi_1\Psi_2
+  >   \end{array}$$
+  > We claim that each square in this diagram is commutative. Indeed, the left square is commutative
+  > by Lemma 9.3, while the right square is commutative by Lemma 9.5. The commutativity of the
+  > middle square follows from the commutative diagram […]
+  > Here the lower square is commutative by Lemma 9.4 applied to the morphism
+  > $\rho : \widetilde{X} \to X_B$, the line bundle $\omega^2_{X_B/B}$ and the coherent sheaf
+  > $\omega_{\widetilde{X}/B}$. The commutativity of the upper square can be checked using the
+  > compatibility of the isomorphism (8.5) with the resolution
+  > $[\omega_{X_B/B} \to \mathcal{O}_Q]$ for $\rho_*\omega_{\widetilde{X}/B}$. $\square$
+
+  ⚠ **原文疑点（L1，500 dpi 复核）**：上面这个大图表的**右上角项**原文印作
+  $\mathcal{B}(\omega_X)^2\mathcal{B}(\mathcal{O}_X)^3(-B)|_B$，**括号里是 $-B$**。按上下文
+  （Sec. 8.3 的第三个同构里出现的是 $(\Delta)$，且 $B$ 在本节一直用作**边界分量/基底**的记号）
+  这疑为 $(-\Delta)$ 的**排印错误**。本条如实记录原文形态，**不替作者改**，留给 curator。
+- 备注（**穿孔判定，正反两侧逐字证据**）：
+  - **反面（限制条件）一侧的逐字证据**：Theorem 9.2 的图表**四个角全部是"只有两个 $\Psi$"的
+    形式**——$\mu_B$ 的靶逐字是 $\mathcal{B}(\mathcal{O}_{\widetilde{X}})^5 \otimes \Psi_1
+    \otimes \Psi_2$，**没有 $\bigotimes_{i=1}^{m}\Psi_i$ 因子**；$\mu_{\overline{\mathcal{S}}}$ 的
+    靶是 $\mathcal{B}(\mathcal{O}_X)^5(-\Delta)$，**也不带任何 $\Psi_i$ 因子，也不带 $\Delta_R$**。
+    即：**Theorem 9.2 逐字写的同样是 $m=0$（靶无额外穿孔）的情形**，与 E7 的比较论证完全一致。
+  - **支持"局部 / 与穿孔数无关"一侧的逐字证据**：
+    1. Lemma 9.3 的量词逐字是 "*For any $m \in \mathbb{Z}$*"——⚠ 这里的 $m$ 是 $\omega$ 的**幂次**，
+       **不是**穿孔数目，**切勿与 (8.11) 里的 $m$ 混淆**（同一篇论文里 $m$ 被复用于两个不同含义，
+       这是本轮发现的一个真实的记号陷阱）。
+    2. Lemma 9.5 的证明首句逐字自陈只需在"带**一个 NS 节点**的稳定超曲线的平展邻域"里做。
+    3. Lemma 9.4 的陈述对**任意**相干层 $\mathcal{F}$ 与**任意**线丛 $L$ 成立，没有任何与穿孔
+       数目相关的限制。
+  - ⚠ 本抽取**不判定**"把 $m$ 个额外 $\Psi_i$ 加到 Theorem 9.2 图表两侧后是否仍交换"。
+    **本轮没有追进 Lemma 9.3 / 9.4 / 9.5 的证明全文**（只读了陈述与证明首句），因此**不能**断言
+    "Theorem 9.2 的证明与穿孔数无关"。需要该断言者留给 curator，并须标 `inferred: true`。
+
+### E11 ★ Theorem C（§1 引言）与 (8.11)：**靶空间逐字是无穿孔的 $\overline{\mathcal{S}}_g$** —— 承重复核
+- 位置：**Theorem C** 陈述在 **p.2 末（"Theorem C. Let $B \to \overline{\mathcal{S}}_g$ …"）**，
+  交换图在 **p.3 顶**；**(8.11)** 在 **p.58 上半页**（Proof of Theorem B 的收尾式）。
+  **Theorem B** 在 **p.2 中**。L1（三处都用 `pdftoppm -r 500` 局部放大逐符号复核下标）。
+- 类型：proposition
+- 原文陈述（Theorem C，逐字，跨 p.2–3）：
+  > **Theorem C**. *Let $B \to \overline{\mathcal{S}}_g$ be the gluing map to one of the components
+  > of $\Delta_{NS}$ from a lower genus (uncompactified) moduli space $B$. There exists a natural
+  > isomorphism (see below) of the normal bundle*
+  > $$N_B := \mathcal{O}(\Delta)|_B \simeq \Psi_1^{-1} \otimes \Psi_2^{-1},$$
+  > *such that the following diagram is commutative up to a sign*
+  > $$\begin{array}{ccc}
+  >   K_{\overline{\mathcal{S}}_g}(2\Delta)|_B &
+  >     \xrightarrow{\ SM_{\overline{\mathcal{S}}_g}|_B\ } & \mathrm{Ber}_1^5|_B \\
+  >   \big\downarrow & & \big\downarrow \\
+  >   K_B \otimes N_B & \xrightarrow{\ SM_B\ } & (\mathrm{Ber}_1^B)^5
+  >   \end{array}$$
+- 原文陈述（(8.11)，逐字，p.58；其上下文是 "Proof of Theorem B. Let
+  $\overline{\mathcal{S}} = \overline{\mathcal{S}}_{g,n_{NS},n_R}$."）：
+  > This gives the required isomorphism
+  > $$K_{\overline{\mathcal{S}}} \simeq \mathrm{Ber}_1^5 \otimes \bigotimes_{i=1}^{m}
+  >   \Psi_i(-2\Delta_{NS} - \Delta_R), \qquad (8.11)$$
+  同页 (8.11) 之前作者自列的两个输入（逐字）：
+  > We combine the isomorphism
+  > $$K_{\overline{\mathcal{S}}} \simeq \mathrm{Ber}^{-1} R^1\pi_*\mathcal{L}(X,P_\bullet,R_\bullet)
+  >   (-\Delta_{NS}-\Delta_R) \simeq \mathcal{B}(\mathcal{L}(X,P_\bullet,R_\bullet))
+  >   (-\Delta_{NS}-\Delta_R)$$
+  > (see Sec. 6.4) with Lemma 8.11 and the isomorphism
+  > $$\mathcal{B}(\omega^3_{X/\overline{\mathcal{S}}}) \simeq \mathrm{Ber}_1^5(-\Delta_{NS}).$$
+- 原文陈述（Theorem B，逐字，p.2 —— 作为对照，因为本条的判定正是 B 与 C 的对比）：
+  > **Theorem B**. *Let $\overline{\mathcal{S}} = \overline{\mathcal{S}}_{g,n_{NS},n_R}$. There
+  > exists a canonical isomorphism*
+  > $$K_{\overline{\mathcal{S}}} \xrightarrow{\ SM_{\overline{\mathcal{S}}}\ } \mathrm{Ber}_1^5
+  >   \otimes \bigotimes_{i=1}^{n_{NS}} \Psi_i(-2\Delta_{NS} - \Delta_R),$$
+  > *where $\Delta_{NS}$ and $\Delta_R$ are the components of the boundary divisor corresponding to
+  > nodes of NS and Ramond type, and $\Psi_i$ is the line bundle associated with the ith NS puncture
+  > $P_i$:*
+  > $$\Psi_i := P_i^*\omega_{X/\overline{\mathcal{S}}}.$$
+  >
+  > In the case when there are no punctures the isomorphism becomes
+  > $$K_{\overline{\mathcal{S}}_g} \simeq \mathrm{Ber}_1^5(-2\Delta_{NS} - \Delta_R).$$
+- 文献自称的严格程度：Theorem C 是**编号定理**（§1 引言），正文证明在 §9（"Combining the above
+  Corollary with Theorem 9.2, we get the statement of Theorem C."，p.70）。**无弱化措辞。**
+- 文献列出的依赖：Theorem 9.2（E10）+ §9.2 的 Corollary（p.70，源自 Lemma 9.6 的 Kodaira–Spencer
+  分裂）；$N_B$ 的识别来自 §7.2 的 $\Delta$ 消没轨迹描述（p.3 逐字："The identification of $N_B$ in
+  Theorem C comes from the identification of $\Delta$ as the vanishing locus of a morphism induced
+  on Berezinians by the morphism $R\pi_*(\Omega_{X/\overline{\mathcal{S}}_g}) \to
+  R\pi_*j_*(\Omega_{U/\overline{\mathcal{S}}_g})$, where $j : U \to X$ is the embedding of the
+  smooth locus (see Sec. (7.2))."）。
+- 备注（★★ **本轮最重要的独立复核，裁定如下**）：
+
+  **裁定：SUPPORT（支持本项目既有结论）。FKP 的 Theorem C 的靶逐字确实是不带穿孔指标的
+  $\overline{\mathcal{S}}_g$，而同页 Theorem B 的靶逐字是 $\overline{\mathcal{S}}_{g,n_{NS},n_R}$；
+  两者的下标差异在 500 dpi 放大下清晰可辨，不是渲染/OCR 造成的假象。**
+
+  **逐字证据（支持"FKP 刻意区分"的一侧）：**
+  1. **Theorem B**（p.2）开篇即写 "*Let $\overline{\mathcal{S}} =
+     \overline{\mathcal{S}}_{g,n_{NS},n_R}$*"——下标三元组完整出现，且其公式带
+     $\bigotimes_{i=1}^{n_{NS}}\Psi_i$ 与 $-\Delta_R$，即**显式处理任意 NS/Ramond 穿孔数**。
+  2. **Theorem C**（p.2 末）写的是 "*Let $B \to \overline{\mathcal{S}}_g$*"——**下标只有一个 $g$**
+     （500 dpi 放大逐字符确认：$\overline{\mathcal{S}}$ 右下角只有一个斜体 $g$，其后紧接空格与
+     "be the gluing map"，**没有 $,n_{NS},n_R$**）。
+  3. 同一定理的交换图（p.3）**四个角一致地使用无穿孔形式**：左上 $K_{\overline{\mathcal{S}}_g}
+     (2\Delta)|_B$（**下标同样只有 $g$**），右上 $\mathrm{Ber}_1^5|_B$（**无 $\Psi_i$ 因子**），
+     右下 $(\mathrm{Ber}_1^B)^5$（**无 $\Psi_i$ 因子**）。若靶是带 $n_{NS}$ 个穿孔的
+     $\overline{\mathcal{S}}_{g,n_{NS},n_R}$，按 Theorem B 右上角本应出现
+     $\bigotimes_{i=1}^{n_{NS}}\Psi_i$——**它没有出现**。
+  4. Theorem C 上面一段（p.2，逐字）：*"As in the classical case, each component of $\Delta_{NS}$ is
+     an image of a natural gluing map $B \to \overline{\mathcal{S}}_g$, where $B$ is some lower genus
+     moduli space **with more punctures** or a product of two such moduli spaces (see Sec. 7.5)."*
+     ——**源** $B$ 明确"穿孔更多"，**靶**却始终写作 $\overline{\mathcal{S}}_g$。这说明作者在引言里
+     考虑的是"**无穿孔的紧化超模叠**的边界分量由**带穿孔的**低亏格模空间粘出"这一情形。
+  5. 交换图下行 $K_B \otimes N_B \xrightarrow{SM_B} (\mathrm{Ber}_1^B)^5$ 与 $N_B \simeq
+     \Psi_1^{-1}\Psi_2^{-1}$ 联立，逐字只在 "$B$ 恰好带那两个被粘的 NS 穿孔、没有别的穿孔"时
+     才与 Theorem B 的形状自洽（Theorem B 给 $K_B \simeq \mathrm{Ber}_1^5 \otimes \Psi_1
+     \otimes \Psi_2$，$B$ 未紧化故无 $\Delta$ 项）。**这与 E7/E10 记录的 §9 正文里"只有两个 $\Psi$"
+     的形态完全一致**——不是孤立的疏漏，而是全篇一贯的 $m=0$ 写法。
+
+  **逐字证据（反面 / 不利于"FKP 刻意区分"的一侧，同等记录）：**
+  1. **(8.11) 自身带穿孔**：$K_{\overline{\mathcal{S}}} \simeq \mathrm{Ber}_1^5 \otimes
+     \bigotimes_{i=1}^{m}\Psi_i(-2\Delta_{NS}-\Delta_R)$，而 §9.1 的整套推导（E7、E10）**输入正是
+     (8.11)**，即作者是从**带穿孔**的公式出发的。他们只是在 §9 里把它 "rewrite … near $B$" 成了
+     无穿孔形式（E7 已逐字记录这一步丢掉了 $\bigotimes\Psi_i$ 与 $\Delta_R$）。
+  2. **(7.8)/(7.9) 的粘接映射带一般穿孔指标 $(m,n)$**（见 E12），而 §9.1 的 setup 逐字允许
+     $\iota$ 是 "one of the maps (7.8) or (7.9)"（E7）。即：**§9.1 的 setup 比 Theorem C 的陈述更宽**，
+     Theorem C 的陈述是 setup 的一个特例写法。
+  3. 作者**从未在任何地方写下**"Theorem C 只对无穿孔情形成立"或"Theorem C 对任意穿孔数成立"
+     之类的显式量词声明——**两个方向的显式声明都不存在**。
+
+  **⚠ 记号疑点（L1，500 dpi 复核，如实记录，不替作者改）**：
+  - **(8.11) 用 $\bigotimes_{i=1}^{m}$，而引言的 Theorem B 用 $\bigotimes_{i=1}^{n_{NS}}$。**
+    (8.11) 所在的 "Proof of Theorem B" 段开头逐字是 "Let $\overline{\mathcal{S}} =
+    \overline{\mathcal{S}}_{g,n_{NS},n_R}$"，**没有在该段里把 $m$ 声明为 $= n_{NS}$**；$m$（与 $n$）
+    是 §8.4 起沿用的穿孔数简写（见 E14）。按上下文 $m = n_{NS}$，但**本抽取不替作者补这条等式**，
+    只记录原文的记号漂移。
+  - **Theorem C 的 $N_B := \mathcal{O}(\Delta)|_B$ 用的是全部边界除子 $\Delta$，不是
+    $\Delta_{NS}$**——与 (9.6) 的左端一致（见 E9 备注 (b) 第 1 条：二者的衔接靠 Prop. 7.8(i)，
+    且只在"只有 NS 节点"的邻域成立）。
+  - ⚠ **本抽取不判定** "Theorem C 是否实际上对任意 $(n_{NS}, n_R)$ 成立"。逐字层面能确定的只有：
+    **作者写下来的 Theorem C 的靶是 $\overline{\mathcal{S}}_g$**。要把它推广到带穿孔的靶，属于
+    推断，留给 curator（若做，须标 `inferred: true`，并把上面"反面证据"三条一并带上）。
+
+### E12 ★ 粘接映射 (7.8) 与 (7.9)：**定义域/陪域都带一般穿孔指标 $(m,n)$**
+- 位置：**p.48 中段**（记号 $\overline{\mathcal{S}}_{g;m,n}$ 的定义 + (7.8) + (7.9)），在
+  §7.5 "**The NS node boundary components**"（该节起于 **p.47 下半页**）之内。L1（页图逐字；
+  (7.8)/(7.9) 的全部下标另用 `pdftoppm -r 500` 局部放大逐符号复核）。
+- 类型：definition
+- 原文陈述（逐字，p.48，含记号定义与两条映射，顺序照原文）：
+  > Let $\overline{\mathcal{S}}_{g;m,n}$ denote the moduli superspace of stable supercurves of genus
+  > $g$ with $m$ NS marked points and $n$ Ramond marked points. Then we can apply the above gluing
+  > construction to the pair of families of stable supercurves over
+  > $\overline{\mathcal{S}}_{g_1;m_1+1,n_1} \times \overline{\mathcal{S}}_{g_2;m_2+1,n_2}$, pulled
+  > back from each factor and using the last NS puncture on each of them. This leads to a morphism
+  > $$\overline{\mathcal{S}}_{g_1;m_1+1,n_1} \times \overline{\mathcal{S}}_{g_2;m_2+1,n_2} \to
+  >   \overline{\mathcal{S}}_{g_1+g_2;m_1+m_2,n_1+n_2}. \qquad (7.8)$$
+  > Similarly, if $X/S$ is a stable supercurve with two disjoint NS-punctures $P, P' \subset X$, then
+  > we can glue $P$ with $P'$ and get a new stable supercurve with a non-separating node. This leads
+  > to a morphism
+  > $$\overline{\mathcal{S}}_{g;m+2,n} \to \overline{\mathcal{S}}_{g+1;m,n} \qquad (7.9)$$
+- **分离型 vs 非分离型的归属（逐字判定）**：
+  - **(7.8) = 分离型（separating）NS 节点**。逐字依据有两条：(a) (7.8) 的源是**两个**模空间的**乘积**，
+    靶的亏格与穿孔数是两者之和（$g_1+g_2$；$m_1+m_2$；$n_1+n_2$），正是分离型节点的形状；
+    (b) Lemma 7.10 的后半句逐字写 "*near a stable supercurve with a single **separating** (resp.,
+    **non-separating**) NS node, the divisor $\Delta_{NS}$ coincides with the schematic image of
+    (7.8) (resp., (7.9))*"——即作者**显式**把 separating 配给 (7.8)、non-separating 配给 (7.9)。
+  - **(7.9) = 非分离型（non-separating）NS 节点**。除上述 Lemma 7.10 的逐字配对外，(7.9) 前一句
+    也逐字写明 "*get a new stable supercurve with a **non-separating** node*"，且亏格从 $g$ 升到
+    $g+1$、NS 穿孔从 $m+2$ 降到 $m$（把两个 NS 穿孔粘掉），形状自洽。
+- **穿孔指标（本条的承重信息，逐字）**：
+  - (7.8) 的**源**是 $\overline{\mathcal{S}}_{g_1;m_1+1,n_1} \times
+    \overline{\mathcal{S}}_{g_2;m_2+1,n_2}$：两个因子各自带 $m_i+1$ 个 NS 穿孔与 $n_i$ 个 **Ramond**
+    穿孔；**陪域**是 $\overline{\mathcal{S}}_{g_1+g_2;m_1+m_2,n_1+n_2}$，即**靶带 $m_1+m_2$ 个 NS
+    穿孔与 $n_1+n_2$ 个 Ramond 穿孔**——**靶不是无穿孔的 $\overline{\mathcal{S}}_g$**。
+  - (7.9) 的**源**是 $\overline{\mathcal{S}}_{g;m+2,n}$，**陪域**是
+    $\overline{\mathcal{S}}_{g+1;m,n}$——同样**靶带 $(m,n)$ 一般穿孔指标**。
+  - 两条映射的陈述中**都没有**"$m=n=0$"或类似的限制；$m_i, n_i, m, n$ 是自由的一般指标。
+- 文献自称的严格程度：正文构造（definition 级；粘接超概形的良定性由 §7.5 开头的一般构造 + Lemma 7.9
+  保证，见 E13）。
+- 文献列出的依赖：§7.5 开头的"沿闭子概形粘接两个超概形"的一般构造（p.47 下半页，逐字给出
+  $\mathcal{O}_X$ 作为 $j_*\mathcal{O}_X \oplus j'_*\mathcal{O}_{X'}$ 中对角线原像的子层的定义）；
+  Lemma 7.9（粘出来的 $Z/S$ 确实是稳定超曲线）。
+- 备注（**记号与判定**）：
+  - ⚠ **记号漂移（L1 逐字核实）**：§7.5 用**分号**写作 $\overline{\mathcal{S}}_{g;m,n}$（"genus $g$;
+    $m$ NS marked points, $n$ Ramond marked points"），而 Theorem A / Theorem B（§1、§5）用**逗号**
+    写作 $\overline{\mathcal{S}}_{g,n_{NS},n_R}$。按两处的文字说明这是**同一个对象的两套记号**
+    （$m \leftrightarrow n_{NS}$，$n \leftrightarrow n_R$），但**本文没有在任何地方写下一句
+    "$\overline{\mathcal{S}}_{g;m,n} = \overline{\mathcal{S}}_{g,m,n}$" 式的记号对照声明**。
+    curator 跨节引用时须自行注明这一点。另注 §7.5 这里用的措辞是 "**marked points**" 而
+    Definition 2.4 用的是 "**punctures**"。
+  - ⚠ **本条与 E11 的张力，如实并列**：**(7.8)/(7.9) 的靶逐字带一般穿孔指标**（本条），而
+    **Theorem C 的靶逐字是无穿孔的 $\overline{\mathcal{S}}_g$**（E11）、**§9.1 的比较论证与
+    Theorem 9.2 逐字写的也是无穿孔形式**（E7、E10）。两者**不矛盾**（Theorem C 是 setup 允许范围内
+    的一个特例写法），但**"作者是否证明了带穿孔靶的版本"这一问题，逐字层面在本文里没有答案**——
+    本抽取不判定，留给 curator（若判定，须标 `inferred: true`）。
+  - ⚠ Ramond 型节点的粘接**不在 §7.5**：§7.6 标题逐字是 "**The Ramond node boundary components**"，
+    开篇第一句逐字 "*Gluing along two Ramond punctures is more subtle.*"（p.49）。即 (7.8)/(7.9)
+    **只处理 NS 节点**。Ramond 的对应映射是 **(7.11)**（非分离型）与 **(7.12)**（分离型），位于
+    **p.51**，逐字（L1，400 dpi 复核）：
+    > $$\mathrm{Isom}(\mathcal{P}_{n+1}, [i]_*\mathcal{P}_{n+2}) \to
+    >   \overline{\mathcal{S}}_{g+1;m,n} \qquad (7.11)$$
+    > Similarly, we can glue the last Ramond punctures $R, R'$ on the stable supercurves $X, X'$ over
+    > the moduli space $\overline{\mathcal{S}}_{g_1;m_1,n_1+1} \times
+    > \overline{\mathcal{S}}_{g_2;m_2,n_2+1}$ pulled back from each factor. This gives a morphism
+    > $$\mathrm{Isom}(\mathcal{P}_R, [i]_*\mathcal{P}_{R'}) \to
+    >   \overline{\mathcal{S}}_{g_1+g_2;m_1+m_2,n_1+n_2}. \qquad (7.12)$$
+    > Note that in this case $n_1$ and $n_2$ are odd, so $n_1 + n_2 \geq 2$.
+
+    （(7.11) 的源是 $\overline{\mathcal{S}}_{g;m,n+2}$ 上的 $\mathbb{Z}/2 \ltimes
+    \mathbb{A}^{0|1}$-主丛 $\mathrm{Isom}(\cdot,\cdot)$，**不是模空间本身**——这就是 §7.6 开头所谓
+    "more subtle"、以及 p.3 引言所说 "*The components of the Ramond boundary divisor $\Delta_R$
+    have a more complicated relation to lower genus moduli spaces*" 的具体内容。逐字注意
+    (7.11)/(7.12) 的靶也**都带一般穿孔指标 $(m,n)$**。）
+  - ⚠ **原文编号疑点（本轮发现，L1）**：§9.1 setup（E7）逐字说 $\iota$ 是 "one of the maps (7.8) or
+    (7.9)"，与本条一致（两者都是 NS 粘接）；但 **§9.3（Ramond 边界分量，p.70）逐字写的是
+    "a gluing map for the Ramond boundary component, i.e., one of the maps **(7.9)**"**——而 (7.9)
+    是 **NS** 非分离粘接映射，Ramond 的应当是 (7.11)/(7.12)。**疑为编号笔误**（很可能想写
+    (7.11)、(7.12) 或 "(7.11) or (7.12)"）。本抽取如实记录，**不替作者改**，详见 E15。
+
+### E13 Lemma 7.9 与 Lemma 7.10：粘接的良定性与"(7.8)/(7.9) 的像 = $\Delta_{NS}$"
+- 位置：**Lemma 7.9** 陈述在 **p.47 末**，证明在 **p.48 上半页**；**Lemma 7.10** 陈述在 **p.48
+  中下部**（紧接 (7.9)），证明跨 **p.48 下半页–p.49 上半页**。L1（页图逐字）。
+- 类型：proposition（两条都是编号引理，均给出完整证明）
+
+#### (a) Lemma 7.9 —— 粘出来的东西**确实是**稳定超曲线
+- 原文陈述（逐字，p.47；连同其前定义 $Z/S$ 的两句）：
+  > We can apply this to gluing two stable supercurves along NS-punctures.
+  >
+  > Suppose $X/S$ and $X'/S$ is a pair of stable supercurves with NS-punctures $P \subset X$ and
+  > $P' \subset X'$. We have an isomorphism $P \simeq S \simeq P'$, so we can define a new
+  > superscheme $Z/S$ by gluing $X$ and $X'$ along $P \simeq P'$.
+  >
+  > **Lemma 7.9.** *The glued superscheme $Z/S$ has a natural stable supercurve structure such that
+  > the derivation $\delta$ on $Z$ is defined as the composition*
+  > $$\mathcal{O}_Z \to j_*\mathcal{O}_X \oplus j'_*\mathcal{O}_{X'}
+  >   \xrightarrow{\ (j_*\delta, j'_*\delta')\ }
+  >   j_*\omega_{X/S} \oplus j'_*\omega_{X'/S} \to \omega_{Z/S}.$$
+- 证明梗概（逐字要点，p.48）：
+  > *Proof.* If $U \subset X$, $U' \subset X'$ are smooth loci, then $(U \setminus P) \sqcup
+  > (U' \setminus P')$ is an open subset of $Z$, which is a smooth supercurve over $S$. Next, we need
+  > to check that in the case when $S$ is a point, $\delta^-$ induces an isomorphism of
+  > $\mathcal{O}_{\widetilde{Z}}$ with $\omega_{\widetilde{Z}}$. Since the base is even, we have
+  > identifications
+  > $$\mathcal{O}_X = \mathcal{O}_C \oplus L, \quad \mathcal{O}_{X'} = \mathcal{O}_{C'} \oplus L',$$
+  > […] Note that $L$ and $L'$ are generalized spin-structures, i.e., we have an isomorphism
+  > $L \xrightarrow{\ \sim\ } \underline{\mathrm{Hom}}(L, \omega_C)$ (which corresponds to $\delta^-$
+  > on $X$), and similarly, for $L'$. Furthermore, we know that $L$ (resp., $L'$) is locally free
+  > near $P$ (resp., $P'$).
+  >
+  > The glued superscheme $Z$ has the underlying nodal curve $Z_0$, which is glued from $C$ and $C'$
+  > along $P \simeq P'$, and
+  > $$\mathcal{O}_Z \simeq \mathcal{O}_{Z_0} \oplus j_*L \oplus j'_*L'.$$
+  > It is well known that the natural map
+  > $$j_*L \oplus j'_*L' \to \underline{\mathrm{Hom}}(j_*L \oplus j'_*L', \omega_{Z_0})$$
+  > is an isomorphism, i.e., $j_*L \oplus j'_*L'$ is a generalized spin-structure. It is easy to see
+  > that above map is precisely $\delta^-$, so this proves that $Z/S$ is a stable supercurve.
+  > $\square$
+- 文献自称的严格程度：编号引理 + 完整证明，唯一外包的一步逐字自称 "**It is well known that** the
+  natural map $j_*L \oplus j'_*L' \to \underline{\mathrm{Hom}}(j_*L \oplus j'_*L', \omega_{Z_0})$
+  is an isomorphism"——**这一步以"众所周知"引入，本文未给引文，也未自证**（经典自旋曲线上广义
+  自旋结构在节点处的标准事实）。如实记录。
+- 文献列出的依赖：§7.5 开头的一般粘接构造（p.47）；"广义自旋结构"的概念（本文 Lemma 2.6，
+  见 E4）；**上述 "well known" 的经典事实（无引文）**。
+- **对穿孔数目的依赖（逐字）**：Lemma 7.9 的陈述**只提到被粘的那一对 NS 穿孔 $P \subset X$、
+  $P' \subset X'$**，对 $X, X'$ 上**其余**穿孔的数目**不作任何限制，也不出现**。证明也只在
+  $P, P'$ 的邻域讨论。**即：本条对穿孔数目没有任何显式依赖。**（但同样地，作者也**没有**写下
+  "对任意穿孔数成立"这句话——只是陈述里根本没有出现穿孔数这个量。）
+
+#### (b) Lemma 7.10 —— 切空间余维 $1|0$ 的嵌入 + $\Delta_{NS}$ 就是 (7.8)/(7.9) 的概形像
+- 原文陈述（逐字，p.48；500 dpi 复核）：
+  > **Lemma 7.10.** *Both morphisms (7.8) and (7.9) induce embeddings of codimension $1|0$ on tangent
+  > spaces and factor through the divisor $\Delta_{NS}$. Furthermore, near a stable supercurve with a
+  > single separating (resp., non-separating) NS node, the divisor $\Delta_{NS}$ coincides with the
+  > schematic image of (7.8) (resp., (7.9)).*
+- 证明梗概（逐字要点，p.48–49）：
+  > *Proof.* The idea is to use exact sequences (3.9). Let $X$ be a stable supercurve with punctures
+  > and a fixed NS-node $q \in X$, and let $\rho : \widetilde{X} \to X$ be the normalization at $q$,
+  > equipped with the two NS punctures over $q$. Then by Proposition 3.11(i), we have
+  > $$\mathcal{A}_X \simeq \rho_*\mathcal{A}_{\widetilde{X}}$$
+  > (where we take into account all the punctures on both sides). Hence, the natural map
+  > $$H^1(\widetilde{X}, \mathcal{A}_{\widetilde{X}}) \to H^1(X, \mathcal{A}_X)$$
+  > is an isomorphism.
+  >
+  > Let $q_1, \dots, q_m$ be the nodes of $X$ different from $q$. Then we have a morphism of exact
+  > sequences
+  > $$\begin{array}{ccccccccc}
+  >   0 & \to & H^1(\widetilde{X}, \mathcal{A}_{\widetilde{X}}) & \to & T_{\mathrm{Def}(\widetilde{X})}
+  >     & \to & \bigoplus_{i=1}^{m} T_{\mathrm{Def}(\mathcal{O}_{X,q_i})} & \to & 0 \\
+  >   0 & \to & H^1(X, \mathcal{A}_X) & \to & T_{\mathrm{Def}(X)} & \to &
+  >     T_{\mathrm{Def}(\mathcal{O}_{X,q})} \oplus \bigoplus_{i=1}^{m}
+  >     T_{\mathrm{Def}(\mathcal{O}_{X,q_i})} & \to & 0
+  >   \end{array}$$
+  > in which the right vertical arrow is the natural inclusion of codimension $1|0$. Since the left
+  > vertical arrow is an isomorphism, the assertion about the map of tangent spaces follows.
+  >
+  > To check that our morphisms factor through $\Delta_{NS}$, we have to check that the pull-back of
+  > the morphism $\mathcal{O} \to \mathcal{O}(\Delta_{NS})$ is zero. Since the sources are smooth, it
+  > is enough to check this generically, so we can consider a neighborhood of the point corresponding
+  > to a supercurve with a single NS node. Then we know that the local equation of $\Delta_{NS}$ will
+  > be $(t = 0)$, where $t$ corresponds to the map to the universal deformation of the node. Since the
+  > deformation of the node given by the source of the maps (7.8) and (7.9) is trivial, this proves
+  > that the pull-back of $t$ with respect to one of these maps is zero. Using the fact that the
+  > morphism on tangent spaces is an embedding with the image which is the orthogonal to $dt$, we
+  > deduce that near this point $\Delta_{NS}$ is the schematic image of the morphism. $\square$
+- 文献自称的严格程度：编号引理 + 完整证明（"the assertion follows" / "we deduce that…"，无外包、
+  无弱化措辞）。
+- 文献列出的依赖（作者自列，逐字）：(3.9)（§3 的正合列）；**Proposition 3.11(i)**（$\mathcal{A}_X
+  \simeq \rho_*\mathcal{A}_{\widetilde{X}}$）；Proposition 7.8（$\Delta_{NS}$ 作为有效 Cartier
+  除子的存在与局部方程，见下）；节点的普适形变理论（§3.5/3.6）。
+- **对穿孔数目的依赖（★ 本条的承重信息，正反两侧逐字证据）**：
+  **支持"与穿孔数无关"的一侧：**
+  1. 证明第二句逐字：*"Let $X$ be a stable supercurve **with punctures** and a fixed NS-node
+     $q \in X$"*——**明确允许 $X$ 带（任意多个）穿孔**，没有任何数量限制。
+  2. Proposition 3.11(i) 的引用处作者**特意加了括注**，逐字：*"(where we take into account **all the
+     punctures on both sides**)"*——即同构 $\mathcal{A}_X \simeq \rho_*\mathcal{A}_{\widetilde{X}}$
+     是在"把两边**所有**穿孔都算进去"的意义下成立的。**这是本轮找到的、作者亲手写下的、最接近
+     "本论证对任意穿孔数成立"的一句话**，但注意它**只是对 Lemma 7.10 证明中 $\mathcal{A}$ 层这一步
+     的说明，不是对 (9.6)/Theorem C 的任何声明**。
+  3. Lemma 7.10 的陈述本身逐字只谈 (7.8)/(7.9) 与 $\Delta_{NS}$，而 (7.8)/(7.9) 的定义域/陪域
+     带一般 $(m,n)$ 指标（E12）——**故 Lemma 7.10 逐字就是"对任意穿孔数的 (7.8)/(7.9)"成立的**。
+     ⚠ 这是 E7–E11 各条里**唯一**一条陈述层面就覆盖一般穿孔指标的结果。
+  4. 证明里出现的 $m$ 是"**除 $q$ 以外的节点个数**"（$q_1,\dots,q_m$），**不是穿孔数**——⚠ 这是
+     本文第三处 $m$ 的不同用法（(8.11) 里 $m$ = NS 穿孔数，Lemma 9.3 里 $m$ = $\omega$ 的幂次，
+     这里 $m$ = 其余节点个数）。**记号陷阱，curator 引用时务必核对上下文。**
+
+  **反面 / 限制条件的一侧：**
+  1. Lemma 7.10 的第二句只断言"**在带单个（分离/非分离）NS 节点的稳定超曲线附近**，$\Delta_{NS}$
+     与 (7.8)（resp. (7.9)）的概形像重合"——**是局部（"near"）断言，不是全局等式**。
+  2. 证明中 "*Since the sources are smooth, it is enough to check this generically*" 一步用到了源的
+     光滑性（来自 Theorem A 对每个 $(g;m,n)$ 的光滑性），**即本条在逻辑上仍依赖 Theorem A**。
+  3. Lemma 7.10 **完全不涉及 Ramond 节点**——Ramond 的类比是 **Lemma 7.14**（p.51，逐字：
+     "*Both morphisms (7.11) and (7.12) induce embeddings of codimension $1|0$ on tangent spaces and
+     factor through the divisor $\Delta_R$. Furthermore, near a stable supercurve with a single
+     non-separating Ramond node the divisor $\Delta_R$ coincides with the schematic image of
+     (7.11).*"）。⚠ **注意 Lemma 7.14 的第二句只对 non-separating 一种情形断言概形像重合，
+     没有像 Lemma 7.10 那样给出 separating 的 "(resp., …)" 对应**——即 **(7.12)（分离型 Ramond）
+     的概形像与 $\Delta_R$ 的关系，Lemma 7.14 逐字没有断言**。这是原文里一处真实的不对称，如实
+     记录，不替作者补。
+- 备注：**Proposition 7.8(i)**（p.47，$\Delta_{NS}$ 的存在与"在只有 NS 节点的点邻域与 $\Delta$
+  重合"）是 Lemma 7.10 的前置，E9 备注 (b) 第 1 条已逐字抄录；其 (ii) 与其后一段逐字为：
+  > *(ii) There exists a unique effective Cartier divisor $\Delta_R$ supported on the locus of stable
+  > supercurves with at least one Ramond node, such that*
+  > $$\Delta = \Delta_{NS} + \Delta_R.$$
+  > *If $X_0$ is a stable supercurve with NS nodes $q_1,\dots,q_r$ and Ramond nodes
+  > $q_{r+1},\dots,q_k$, then there exists an étale neighborhood $B$ of $[X_0]$ in
+  > $\overline{\mathcal{S}}$ with a smooth morphism $t_1,\dots,t_k : B \to \mathbb{A}^k$ such that
+  > $t_1 \dots t_r$ is an equation of $\Delta_{NS}$ and $t_{r+1} \dots t_k$ is an equation of
+  > $\Delta_R$.*
+
+### E14 ★ §8.4 全节：Lemma 8.7 / Cor 8.8 / **Example 8.9** / Remark 8.10 / Lemma 8.11 / (8.11) 定位
+- 位置：§8.4 "**Canonical line bundle on the moduli space of stable supercurves with punctures**"
+  起于 **p.56 下半页**（节标题 + $\Psi_i$ 的定义 + Lemma 8.7 陈述 + 证明起始），主体在 **p.57**
+  （Lemma 8.7 证明收尾、Corollary 8.8、Example 8.9、Remark 8.10、$\Phi_j$ 的定义、
+  $\mathcal{L}(X,P_\bullet,R_\bullet)$ 的定义、Lemma 8.11 陈述），Lemma 8.11 的证明与 **(8.11)**
+  在 **p.58 上半页**（(8.11) 出现在 "Proof of Theorem B" 里，即 **§8.4 的最后一个式子**，其后紧接
+  §9 的标题）。L1（页图逐字；§8.4 节首、Example 8.9、Lemma 8.11 另用 `pdftoppm -r 500` 放大复核）。
+- 类型：definition + proposition（混合）
+- **§8.4 的 setup（逐字，p.56，500 dpi 复核——这是 $m$、$n$ 的定义处）**：
+  > **8.4. Canonical line bundle on the moduli space of stable supercurves with punctures.**
+  > Let $\pi : X \to S$ be a stable supercurve with NS punctures $P_1, \dots, P_m$ and Ramond
+  > divisors $R_1, \dots, R_n$. We denote by $D_i \subset X$ the divisors associated with $P_i$ as in
+  > Sec. 2.5.
+  >
+  > For every $i = 1, \dots, m$, let us define a line bundle of rank $0|1$ on $S$,
+  > $$\Psi_i := P_i^*\omega_{X/S}.$$
+  ⚠ 注意基底逐字是 **$S$**（不是 $\overline{\mathcal{S}}$），且 **$m$ = NS 穿孔数、$n$ = Ramond
+  除子个数**——这就是 (8.11) 里 $\bigotimes_{i=1}^{m}$ 的 $m$ 的来源（见 E11 记号疑点）。
+
+- **Lemma 8.7（逐字，p.56）**：
+  > **Lemma 8.7.** *One has natural isomorphisms of line bundles of rank $0|1$ on $S$,*
+  > $$\Psi_i \simeq \pi_*\mathcal{O}_{D_i}/\mathcal{O}_S,$$
+  > $$\Psi_i^{-1} \simeq P_i^*\omega_{X/S}(D_i) \simeq P_i^*\omega_{D_i/S} \simeq
+  >   \mathrm{Ber}(\pi_*\mathcal{O}_{D_i}).$$
+  > *Hence, for any line bundle $L$ of rank $1|0$ on $X$, one has*
+  > $$\mathrm{Ber}(\pi_*L|_{D_i}) \simeq \Psi_i^{-1},$$
+  > *while for a line bundle $M$ of rank $0|1$, one has*
+  > $$\mathrm{Ber}(\pi_*M|_{D_i}) \simeq \Psi_i.$$
+  证明（p.56–57）用 Lemma 2.14、(8.2) 与 $\omega_{P/S} = \mathcal{O}_S$，**完整，无外包**。
+  ⚠ **Lemma 8.7 逐字只对 NS 穿孔的 $\Psi_i$ 陈述**（$D_i$ 是 $P_i$ 的伴随除子），**不提 Ramond**。
+
+- **Corollary 8.8（逐字，p.57，500 dpi 复核）**：
+  > **Corollary 8.8.** *The line bundle $P_i^*\omega^2_{X/S}(D_i)$ on $S$ is canonically trivialized.*
+  （这正是 Lemma 9.1(i) 里"$P_1$、$P_2$ 上的典范平凡化"的来源，见 E8。同样**只对 NS 穿孔**。）
+
+- **★ Example 8.9（逐字，p.57，500 dpi 逐字符复核）**：
+  > **Example 8.9.** Suppose $X \to S$, $(P_i)$, is a family of supercurves with **NS-punctures** over
+  > an *even* base $S$. Then $\mathcal{O}_X = \mathcal{O}_C \oplus L$, where $(C, L)$ is the
+  > underlying family of curves with spin-structures, and $\mathcal{I}_{P_i} = \mathcal{I}_{p_i}
+  > \oplus L$, where $p_i \subset C$ are marked points on $C$. We also have $\mathcal{I}_D =
+  > \mathcal{I}_{p_i} \otimes_{\mathcal{O}_C} \mathcal{O}_X$. Thus,
+  > $$\Psi_i^{-1} = P_i^*(\omega_{X/S}(D_i)) = P_i^*(L(p_i) \oplus \omega_{C/S}(p_i)) \simeq
+  >   p_i^*L(p_i) \simeq p_i^*L^{-1},$$
+  > where the last isomorphisms is induced by the trivialization of $L^2(p_i)|_{p_i} \simeq
+  > \omega_{C/S}(p_i)|_{p_i}$.
+
+- **Remark 8.10（逐字，p.57）**，以及紧随其后的 **Ramond 侧对应物 $\Phi_j$** 与
+  $\mathcal{L}(X,P_\bullet,R_\bullet)$ 的定义：
+  > *Remark 8.10.* Note that for an NS-puncture $P_i$ and the corresponding divisor $D_i$, the
+  > decomposition (2.11) can be rewritten as
+  > $$\pi_*\mathcal{O}_{D_i} = \mathcal{O}_S \oplus \Psi_i,$$
+  > where $\Psi_i$ is a square-zero ideal. For any line bundle $L$ over $D_i$ we have an exact
+  > sequence
+  > $$0 \to P_{i*}(\Psi_i \otimes P_i^*L) \to L \to P_{i*}P_i^*L \to 0$$
+  > In the case $L = \omega_{X/S}(D_i)|_{D_i} = \omega_{D_i/S}$, the induced exact sequence of
+  > push-forwards to $S$ has a splitting
+  > $$\pi_*(\omega_{X/S}(D_i)/\omega_{X/S}) \to \mathcal{O}_S$$
+  > given by the residue map for the $0|1$-dimensional superscheme $D_i/S$, so we have a
+  > decomposition
+  > $$\pi_*(\omega_{D_i/S}) = \Psi_i^{-1} \oplus \mathcal{O}_S.$$
+  >
+  > For every Ramond divisor $R_j \subset X$ let us consider the line bundle on the base,
+  > $$\Phi_j := \mathrm{Ber}(\pi_*\mathcal{O}_{R_j})^{-1} \simeq \mathrm{Ber}(\pi_*\omega_{R_j}).$$
+  > Note that $\Phi_j = \Phi_{R_j}$ (see (7.10)), so the line bundles $\Phi_j^2$ are canonically
+  > trivialized.
+  > Let us consider the line bundle of rank $1|0$ over $X$,
+  > $$\mathcal{L}(X, P_\bullet, R_\bullet) := \omega^{-2}_{X/S}\Big(-\sum_i D_i - 2\sum_j R_j\Big).$$
+
+- **Lemma 8.11（逐字，p.57，500 dpi 复核）**：
+  > **Lemma 8.11.** *One has a natural isomorphism*
+  > $$\mathcal{B}(\mathcal{L}(X, P_\bullet, R_\bullet)) \simeq \mathcal{B}(\omega^3_{X/S}) \otimes
+  >   \bigotimes_i \Psi_i$$
+  证明（p.58 上半页）逐字用 Grothendieck 对偶 + 正合列 (8.10) + (8.2) + Lemma 8.7，末句：
+  *"It remains to we use the trivializations of $\Phi_j^2$."* ⚠ 原文此处印作 "It remains to we use"，
+  **疑为排印/语法笔误**（应为 "It remains to use"），如实记录。
+- 文献自称的严格程度：Lemma 8.7 / Cor 8.8 / Lemma 8.11 均为编号引理并给出完整证明；
+  **Example 8.9 与 Remark 8.10 是 example / remark 环境**（不是定理），Example 8.9 无证明环境，
+  是一段直接计算。
+- 文献列出的依赖：Sec. 2.5（$P_i \leftrightarrow D_i$ 的对应）；(2.11)；Lemma 2.14；(8.2)；(8.5)；
+  (8.10)；(7.10)（$\Phi_R$ 的定义，见 E12 备注引 §7.6）；Grothendieck 对偶。
+- 备注（★★ **本轮第二个承重复核，裁定如下**）：
+
+  **裁定：SUPPORT（支持本项目既有判定 `[GAP-FKP-RAMOND]`）。Example 8.9 逐字**只**对 NS 穿孔陈述。
+  明确回答任务书的问题：**它不提及 Ramond 穿孔——全篇（两句话 + 一个显示式 + 一句脚注式说明）
+  没有出现 "Ramond" 一词，也没有出现 $R_j$、$\Phi_j$、$n$ 等任何 Ramond 侧记号。**
+
+  **逐字证据（支持一侧）：**
+  1. Example 8.9 首句逐字：*"Suppose $X \to S$, $(P_i)$, is a family of supercurves with
+     **NS-punctures** over an even base $S$."*——**假设里只列了 $(P_i)$ 这一族数据**，没有 $(R_j)$。
+     （500 dpi 放大逐字符确认 "NS-punctures" 带连字符、无 "and Ramond" 续接。）
+  2. Example 8.9 的结论式只算 $\Psi_i^{-1}$（**NS 穿孔的线丛**），得到经典的 $p_i^*L^{-1}$。
+     **Ramond 侧的对应量 $\Phi_j$ 在本 Example 里完全不出现**——$\Phi_j$ 直到**其后的**
+     Remark 8.10 尾段才被定义。
+  3. 论文里"Example 8.9 只讲 NS"与"§8.4 整节讲 NS + Ramond"是**并存的**：§8.4 的 setup（p.56）
+     逐字同时给了 $P_1,\dots,P_m$ 与 $R_1,\dots,R_n$，Lemma 8.11 与 (8.11) 也都带 Ramond
+     （$\mathcal{L}$ 的定义里有 $-2\sum_j R_j$，(8.11) 里有 $-\Delta_R$）。**即：作者在同一节里
+     处理了 Ramond，却唯独在 Example 8.9 这个"与经典自旋曲线对照"的例子里只写 NS。**
+  4. 对照支持：**Lemma 8.7 与 Corollary 8.8 同样只对 NS 穿孔陈述**（陈述里只有 $\Psi_i$、$D_i$、
+     $P_i$）。而 E8 记录的 Lemma 9.1(i) 正是引用 **Corollary 8.8** 取"$P_1, P_2$ 上的典范平凡化"
+     ——**即 §9 的 NS 粘接机器在这一步就已经只挂在 NS 侧的工具上**。
+
+  **反面 / 不利于该判定的一侧（同等记录）：**
+  1. 作者**从未写下**"Example 8.9 不适用于 Ramond 穿孔"这样的显式否定句；Example 8.9 只是**没提**
+     Ramond，**不是明确排除**。"未提及"与"不成立"是两回事——**本抽取只断言前者**。
+  2. Remark 8.10 的**尾段确实给出了 Ramond 侧的对应构造** $\Phi_j := \mathrm{Ber}
+     (\pi_*\mathcal{O}_{R_j})^{-1}$ 并指出 $\Phi_j^2$ 典范平凡，**Lemma 8.11 与 (8.11) 也都覆盖
+     Ramond**。所以"§8.4 缺 Ramond"的说法**不成立**；准确的说法是"**Example 8.9 这一条**缺
+     Ramond"。curator 措辞时须精确到 Example 8.9，不要扩大到整节。
+  3. Ramond 侧缺的具体是什么（逐字层面）：**$\Phi_j$ 只有"$\Phi_j^2$ 典范平凡"这一性质被用到，
+     没有像 Example 8.9 对 $\Psi_i$ 那样给出"偶基上退化到经典自旋曲线数据"的显式识别**。
+     ⚠ **本抽取不判定**这是否构成一个真实的数学缺口——那是推断，留给 curator（若做，须标
+     `inferred: true`）。
+
+### E15 ★ §9.3 Ramond 边界分量：**逐字是猜想（"We conjecture that…"），不是定理** —— 承重复核
+- 位置：§9.3 "**Ramond boundary components**" 全节 = **p.70 下半页**（起于 "Combining the above
+  Corollary with Theorem 9.2, we get the statement of Theorem C." 之后），**到 p.70 末尾结束**；
+  **p.71 即是 "Appendix A. Relative ampleness criterion"**。即 §9.3 只有**不到一页**，是正文最后
+  一节。L1（页图逐字；"We conjecture" 一句与 "(7.9)" 引用另用 `pdftoppm -r 500` 放大复核）。
+- 类型：**conjecture**
+- 原文陈述（**逐字抄出全节**，p.70）：
+  > **9.3. Ramond boundary components.** Now let $\iota : B \to \overline{\mathcal{S}}$ be a gluing
+  > map for the Ramond boundary component, i.e., one of the maps (7.9), restricted to the locus of
+  > smooth supercurves. Recall that we have a smooth map of relative dimension $0|1$,
+  > $$p : B \to \overline{B}$$
+  > to a moduli space $\overline{B}$ of smooth supercurves of smaller genus, where the universal
+  > smooth supercurve over $\overline{B}$ is equipped with a pair of Ramond punctures $R_1, R_2$.
+  > Furthermore, $p$ has a structure of the principal bundle over the group scheme
+  > $\mathrm{Aut}(\mathcal{P}_{R_1})$ which is an extension of $\mathbb{Z}/2$ by $\Phi_1^{-1}$. Thus,
+  > we have a natural isomorphism
+  > $$K_B \simeq p^*(K_{\overline{B}} \otimes \Phi_1).$$
+  > On the other hand, we have an exact sequence on the universal stable supercurve $X_B$ over $B$,
+  > $$0 \to \mathcal{O}_{X_B} \to \mathcal{O}_{\widetilde{X}} \to \mathcal{O}_{R_1} \to 0,$$
+  > where $\widetilde{X}$ is induced by the universal curve $\overline{X}$ over $\overline{B}$. Taking
+  > push-forwards to $B$ and considering the Berezinians, we get
+  > $$\iota^*\mathrm{Ber}_1 \simeq p^*(\mathrm{Ber}_1^{\overline{B}} \otimes \Phi_1).$$
+  > Note that since $\Phi_1^2$ is canonically trivial, this leads to an isomorphism
+  > $$\iota^*\mathrm{Ber}_1^5 \simeq p^*((\mathrm{Ber}_1^{\overline{B}})^5 \otimes \Phi_1).$$
+  > We can rewrite (8.11) near $B$ as an isomorphism
+  > $$K_{\overline{\mathcal{S}}}(\Delta) \simeq \mathrm{Ber}_1^5.$$
+  > Thus, the restriction to $B$ gives an isomorphism
+  > $$K_B \simeq \iota^*\mathrm{Ber}_1^5.$$
+  > **We conjecture that the following diagram is commutative (up to a sign)**
+  > $$\begin{array}{ccc}
+  >   \iota^*(K_{\overline{\mathcal{S}}}(\Delta)) & \longrightarrow & \iota^*\mathrm{Ber}_1^5 \\
+  >   \big\downarrow & & \big\downarrow \\
+  >   K_B & \longrightarrow & p^*((\mathrm{Ber}_1^{\overline{B}})^5 \otimes \Phi_1)
+  >   \end{array}$$
+
+  （全节到此结束，**其后没有任何证明、没有 "Proof"、没有进一步讨论**，下一页即 Appendix A。）
+- 文献自称的严格程度：**猜想（conjecture）**。
+- 文献列出的依赖：Lemma 7.12/7.13 与 (7.10)（$\Phi_R$、$\mathcal{P}_R$、
+  $\mathrm{Aut}(\mathcal{P}_R)$ 的构造，§7.6，p.49–51）；(8.11)（E11）；Remark 8.10 尾段的 $\Phi_j$
+  定义与"$\Phi_j^2$ 典范平凡"（E14）。
+- 备注（★★ **本轮第三个承重复核，裁定如下**）：
+
+  **裁定：SUPPORT（支持本项目既有判定）。§9.3 的核心结论逐字确实以 "We conjecture that…" 引入，
+  是猜想而非定理。500 dpi 放大复核确认该句逐字为 "We conjecture that the following diagram is
+  commutative (up to a sign)"。全节没有任何证明。**
+
+  **逐字证据（支持一侧）：**
+  1. **§9.3 正文**：*"**We conjecture that** the following diagram is commutative (up to a sign)"*
+     （p.70，500 dpi 复核）。
+  2. **§9 开篇的路线图**（p.58，E7 已抄录）：*"Then we give a proof of Theorem C concerning the NS
+     boundary component. **We also give a conjectural statement for the Ramond boundary
+     component.**"*——作者在节首就自陈 Ramond 侧只是"conjectural statement"。
+  3. **§1 引言**（p.3，本轮 L1 复核）：*"The components of the Ramond boundary divisor $\Delta_R$
+     have a more complicated relation to lower genus moduli spaces (see Sec. 7.6), and in this case
+     **we formulate a conjectural analog of Theorem C** in Sec. 9.3."*
+  4. **结构性证据**：§9.3 全节**不含任何编号定理/引理**，也**不含 "Proof" 环境**，末尾即是论文正文
+     的结束（p.71 起为 Appendix A）。这与 §9.1（Lemma 9.1、Theorem 9.2 + 完整证明）形成鲜明对比。
+  5. **Ramond 侧的另一处不对称**（E13 已记）：Lemma 7.14 对 (7.12)（分离型 Ramond）**没有**给出
+     "概形像 = $\Delta_R$" 的断言，只对 (7.11)（非分离型）给了。
+
+  **反面 / 需要如实并列的一侧：**
+  1. §9.3 里通向该猜想的**准备性同构（三条）是作者当作已建立的事实写的**（"we have a natural
+     isomorphism $K_B \simeq p^*(K_{\overline{B}} \otimes \Phi_1)$"、"we get
+     $\iota^*\mathrm{Ber}_1 \simeq p^*(\mathrm{Ber}_1^{\overline{B}} \otimes \Phi_1)$"、"the
+     restriction to $B$ gives an isomorphism $K_B \simeq \iota^*\mathrm{Ber}_1^5$"），**没有**冠以
+     conjecture。**只有"这个图交换"这一条是猜想。** curator 若要引用 §9.3 的中间同构，可以按
+     "正文推导"处理；但**整个 Ramond 类比 Theorem C 的结论只能标 `conjecture`**。
+  2. 作者**没有**说这个猜想难、也**没有**说它可能为假；只是没有证。
+
+  **⚠ 原文疑点（本轮发现，L1 500 dpi 复核）：**
+  - **编号错误**：§9.3 首句逐字写 *"a gluing map for the **Ramond** boundary component, i.e., one of
+    the maps **(7.9)**"*。但 **(7.9) 是 NS 的非分离粘接映射
+    $\overline{\mathcal{S}}_{g;m+2,n} \to \overline{\mathcal{S}}_{g+1;m,n}$**（E12），Ramond 的
+    粘接映射是 **(7.11)/(7.12)**（E12 备注，p.51）。**疑为排印/交叉引用笔误**（PDF 里该处的
+    超链接框也确实圈在 "7.9" 上，说明 LaTeX 源里引用的就是 (7.9) 的 label）。如实记录，不替作者改。
+  - **$K_{\overline{\mathcal{S}}}(\Delta) \simeq \mathrm{Ber}_1^5$ 与 §9.1 的对应式不一致**：
+    §9.1（E7）把 (8.11) "rewrite near $B$" 成 $K_{\overline{\mathcal{S}}}(2\Delta_{NS}) \simeq
+    \mathcal{B}(\mathcal{O}_X)^5$，而 §9.3 这里写成 $K_{\overline{\mathcal{S}}}(\Delta) \simeq
+    \mathrm{Ber}_1^5$——**一处用 $2\Delta_{NS}$、另一处用 $\Delta$（单重）**。按 (8.11) 的
+    $(-2\Delta_{NS}-\Delta_R)$，NS 侧配 $2\Delta_{NS}$、Ramond 侧配 $\Delta_R$（单重）是自洽的，
+    此处的 $\Delta$ 疑为 $\Delta_R$ 的简写或笔误。如实记录，**不替作者判定**。
+  - 两处**同样都丢掉了 (8.11) 里的 $\bigotimes_{i=1}^{m}\Psi_i$ 因子**（即同样是 $m=0$ 写法），
+    与 E7/E10/E11 的记录一致。
+
+## 未解决的疑问（第三轮）
+
+1. **Lemma 9.3 / 9.4 / 9.5 的证明是否依赖穿孔数**：本轮只核对了三条的**陈述**与**证明首句**
+   （首句都是某种局部性自陈），**没有逐行读完证明**（Lemma 9.5 的证明跨 p.63–68，分 Step 1 起
+   若干步，是全文最长的一段计算）。因此本轮**不能**回答"Theorem 9.2 的证明与穿孔数是否无关"。
+   若 curator 需要该结论，须另派一轮逐行读 p.63–68。
+2. **"$m$" 的三重用法**（本轮发现的记号陷阱，已在 E10/E11/E13 各处标出）：
+   - (8.11) 与 §8.4：$m$ = **NS 穿孔数**（$P_1,\dots,P_m$）；
+   - Lemma 9.1、Lemma 9.3：$m$ = **$\omega$ 的幂次**（$\omega^{2m}$，取遍 $\mathbb{Z}$）；
+   - Lemma 7.10 的证明：$m$ = **除 $q$ 以外的节点个数**（$q_1,\dots,q_m$）。
+   curator 跨节引用本文任何带 $m$ 的公式时，**必须回原文核对该 $m$ 的上下文含义**。
+3. **两套穿孔记号未在原文对照**：$\overline{\mathcal{S}}_{g;m,n}$（§7.5 起，分号）与
+   $\overline{\mathcal{S}}_{g,n_{NS},n_R}$（§1、§5，逗号）。本文**没有**写下二者相等的声明。
+4. **原文疑点清单（本轮新发现，全部 L1 核实，均未替作者改）**：
+   - **p.70（§9.3 首句）**：Ramond 粘接映射被引作 **(7.9)**，而 (7.9) 是 NS 非分离映射；Ramond 的
+     应为 (7.11)/(7.12)。**疑为交叉引用笔误**（PDF 超链接框也圈在 "7.9" 上，说明 LaTeX label
+     写错）。
+   - **p.68（Proof of Theorem 9.2 的大图表右上角）**：印作
+     $\mathcal{B}(\omega_X)^2\mathcal{B}(\mathcal{O}_X)^3(-B)|_B$，括号内是 **$-B$**；按上下文
+     疑为 $(-\Delta)$。
+   - **p.70（§9.3）**：$K_{\overline{\mathcal{S}}}(\Delta) \simeq \mathrm{Ber}_1^5$ 与 §9.1 的
+     $K_{\overline{\mathcal{S}}}(2\Delta_{NS}) \simeq \mathcal{B}(\mathcal{O}_X)^5$ 的边界项不一致
+     （$\Delta$ vs $2\Delta_{NS}$）；按 (8.11) 疑为 $\Delta_R$。
+   - **p.58（Lemma 8.11 证明末句）**：印作 "It remains to we use the trivializations of $\Phi_j^2$."
+     ——**语法笔误**，应为 "It remains to use"。
+   - **p.57（Example 8.9）**：印作 "$p_i \subset C$ are marked points on $C$"（用 $\subset$ 而非
+     $\in$）；同句末 "where the last isomorphism**s** is induced by" 单复数不一致。均为无害排印。
+   - **p.51（Lemma 7.14）**：只对 (7.11)（非分离 Ramond）断言"$\Delta_R$ = 概形像"，**没有**像
+     Lemma 7.10 那样给出 (7.12)（分离 Ramond）的 "(resp., …)" 对应——**作者自留的不对称**。
+   - （承接第二轮 E9 的记号疑点：(9.6) 及 p.60 的三个显示式里基底写作不带上划线的 $S$。）
+5. **未取得 / 未核实**：本轮全部材料取自 arXiv 公开 PDF（`https://arxiv.org/pdf/2006.13271v3`），
+   **无付费墙问题**。仍未核实的是参考文献表的完整书目（[7]、[11]、[22]、[23]、[27]、[32]、[29]、
+   [15]、[25] 等，承接第一轮"未解决的疑问"第 4、5 条）；以及 AJM 145 (2023) 正式发表版与 v3 是否
+   逐字一致（本项目一律以 arXiv v3 为准，页码按 v3 PDF 页眉）。
