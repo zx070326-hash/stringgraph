@@ -1,0 +1,26 @@
+id: math.supermoduli-ramond-punctures-not-projected--via-donagi-ott
+target: math.supermoduli-ramond-punctures-not-projected
+kind: proof
+status: rigorous
+depends_on: []
+sources:
+  - ref: donagi-ott-2023
+    loc: "arXiv:2308.07957v1, 摘要与正文 Theorem 1；§1 Lemma 2、Corollary 4（结构性引用，非逐字，pp.1–6）"
+    note: 部分 L1（仅 pp.1–6），见 statement sources note。
+summary: |
+  记账已发表数学论证。摘要与正文明确以"Theorem 1"编号给出定理陈述，论文标题/摘要自称是对"Donagi,
+  Witten, and Ott"既有结果基线的改进（依据既有 Green 障碍理论框架），但本项目未读 pp.7 起的具体证明
+  技术步骤，故不在此挂出指向 `math.supermoduli-space-not-projected` 的结构性 depends_on 边——
+  Donagi-Witten 的引用在已读部分（§1 Preliminaries）中只是背景框架回顾（split/projected 标准定义、
+  障碍理论一般设置），未确认 Theorem 1 的证明本身在具体步骤上引用 Donagi-Witten 2013 的特定引理。
+gaps:
+  - |
+    **pp.7 起（全文 21 页中的绝大部分，含 Theorem 1 完整证明的核心技术步骤）完全未读**——只核实到
+    "存在这样一条定理、量词范围是 g≥5r+1≥6、覆盖纯 Ramond 穿孔情形"这一层级，证明方法本身（是否
+    类似 Donagi-Witten 2013 的分歧覆盖技术，或另有新技术）未核实。
+  - |
+    Lemma 2、Corollary 4 的精确数学陈述本项目只做了结构性定位，未逐字核实。
+  - |
+    "2r 中的 '0' 代表 NS 穿孔数为零"这一记号解读是本项目基于惯例的推断，未见论文正文明确逐字解释。
+author: curator-supermoduli-post-2024
+created: "2026-09-18"

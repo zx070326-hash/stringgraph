@@ -1,0 +1,42 @@
+id: math.supermoduli-ramond-punctures-not-projected
+kind: proposition
+title: 带纯 Ramond 穿孔（无 NS 穿孔）的未紧化超模叠不可投影（Donagi–Ott Theorem 1）：g≥5r+1≥6, r>0 时 𝔐_{g,0,2r} 不可投影
+statement: |
+  **对象**：𝔐_{g,0,2r} 为亏格 g、带 2r 个 Ramond 穿孔（无 Neveu-Schwarz 穿孔）的未紧化超黎曼曲面模叠
+  （记号约定同 arXiv:2308.07957 摘要；"2r"计数惯例——Ramond 穿孔须成对出现以维持整体 GSO/边界条件
+  一致性——为本项目基于记号惯例的合理解读，论文正文是否显式解释此点本项目未核实，标记为推断）。
+
+  **定理**（Theorem 1，逐字，正文；与摘要一致或几乎逐字一致）：
+  "Let r > 0. The supermoduli space 𝔐_{g,0,2r} is not projected for all g ≥ 5r + 1 ≥ 6."
+
+  即：r≥1 时，对一切 g≥5r+1（r=1 时 g≥6，r=2 时 g≥11，……），带 2r 个纯 Ramond 穿孔、无 NS 穿孔的
+  未紧化超模叠 𝔐_{g,0,2r} 不可投影。**r=0（无穿孔）情形不在本定理范围内，回到既有节点
+  `math.supermoduli-space-not-projected`（Donagi–Witten 2013）的范围**。本定理只覆盖"纯 Ramond
+  穿孔"情形，**不涉及 NS 穿孔或 NS+Ramond 混合穿孔**——后者由
+  `math.supermoduli-ns-ramond-punctures-not-projected`（Wang）处理。
+
+  **本节点不断言**：紧化空间（Corrêa–Noja 系列节点覆盖紧化无穿孔情形，本文与之在"是否带穿孔"维度
+  互补，均未覆盖"紧化+带穿孔"这一象限）；证明的具体技术方法（本项目只读 pp.1–6，Theorem 1 证明的
+  核心技术步骤在 pp.7 起未读，故无法确认是否与 Donagi–Witten 2013 的分歧覆盖方法类似或另有新技术）。
+uses_conventions: []
+sources:
+  - ref: donagi-ott-2023
+    loc: "arXiv:2308.07957v1, 摘要（逐字，经 export.arxiv.org API 核验）；正文 Theorem 1（本项目 L1 读取 PDF 得到的措辞，与摘要一致或几乎逐字一致）"
+    note: |
+      **部分 L1**：仅 pp.1–6（标题页、摘要、§1 "Preliminaries"、Theorem 1 逐字、Lemma 2、直至
+      Corollary 4 与一个应用示例）已读（researcher 2026-09-18，抽取记录 donagi-ott-2023.md E1–E3）。
+      **pp.7 起（全文 21 页中的绝大部分，含 Theorem 1 完整证明的核心技术步骤）未读**——本节点的
+      status 依据"已发表定理陈述 + 完整证明性文章"的来源强度，非本项目独立复核证明本身。
+tags: [supermoduli, super-riemann-surface, non-projected, ramond-puncture, math-input, donagi-ott]
+notes: |
+  与既有节点 `math.supermoduli-space-not-projected`（Donagi–Witten 2013，无穿孔）在"是否带穿孔"
+  维度互补，不构成对该节点红线的修订：该节点只处理无穿孔情形，本节点填补"带纯 Ramond 穿孔"这一此前
+  完全未提及的维度。
+
+  **与 `math.supermoduli-ns-ramond-punctures-not-projected`（Wang）的关系**：Wang 论文摘要称
+  "improve the result of Donagi, Witten, and Ott"，但**"improve"指的是把结论推广到 NS+Ramond 混合
+  穿孔（n>0）的情形，不是在同一设置（n=0）下把界收紧**——事实上在 n=0 时 Wang 给出的界 g≥5r+3
+  比本节点的 g≥5r+1 更严格（更弱的结果）。本节点不写"Wang 严格改进 Donagi-Ott"这类无条件比较
+  措辞，任何比较均需加 n>0 限定，详见 Wang 节点 notes。
+author: curator-supermoduli-post-2024
+created: "2026-09-18"
