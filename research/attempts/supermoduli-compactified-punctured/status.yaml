@@ -1,0 +1,42 @@
+state: draft
+reviewer: null
+verdict: null
+captain_confirmed: false
+notes: |
+  进度快照（2026-09-18，theorem-prover / agent/prover/supermoduli-compactified-punctured）：
+
+  已完成：
+  - prior-art.md：13 条检索/核实记录，确认"紧化+穿孔"象限在检索范围内公开文献零覆盖；副产品发现
+    FKP arXiv:2006.13271（紧化+穿孔超模叠的存在性构造，Theorem A）未登记入 literature/sources.bib，
+    已在 prior-art.md「情报移交 lead」一节记录，需 lead 派 researcher 补做 L1 抽取。
+  - claim.md：精确陈述命题 A（NS 穿孔紧化非投影）、B（Ramond 穿孔紧化非投影）、C（混合穿孔，天花板
+    physical-argument，已标红）；判断方向为"非投影"并给出理由；逐条列出所用图砖块的 effective
+    status。
+  - proof.md §0–§1：证明了"紧化提升引理"（Compactification Lifting Lemma）——若开子叠非投影则其
+    紧化非投影——完整、初等、自包含的层论证明，不依赖任何 conjecture/physical-argument 节点。
+  - proof.md §2–§4：把引理推广到 DM 超叠（标准下降论证，标 [GAP-STACK]，低风险未完全走完）；验证
+    FKP Theorem A 满足引理前提；核实 FKP 与 Donagi–Ott 的 Ramond 穿孔定义在几何结构层面精确匹配
+    （[GAP-DEF-R] 风险由中降为低）；得出推论 A/B（若 GAP 补齐后 effective status 应为 rigorous）
+    与推论 C（天花板 physical-argument，已标红）。
+  - proof.md §5：回答任务书要求的"三机制是否叠加/抵消/互不适用"——结论：互不适用，本尝试的机制是
+    第四个独立搬运通道，可与 Donagi–Ott 机制串联但不能与 Corrêa–Noja 的椭圆尾粘接"叠加"突破种子
+    门槛。
+  - proof.md §6：自检——把引理应用到无穿孔情形只能重现 DW 的 g≥5 门槛，严格弱于 Corrêa–Noja 自己
+    用椭圆尾粘接达到的 g≥3；证实本方法的能力上限，如实记录，不夸大。
+
+  未完成（[GAP] 清单，见 proof.md §7 完整版）：
+  - [GAP-STACK]（低风险）：超叠层面的引理推广未逐条画出余循环相容性图表。
+  - [GAP-LIT]（程序性）：FKP arXiv:2006.13271 未登记，推论 A/B 毕业前必须先补齐。
+  - [GAP-DEF-NS] / [GAP-DEF-R] / [GAP-DEF-MIX]（低风险）：跨论文模函子级等价未完全走完形式化对照。
+  - [GAP-ELLIPTIC-TAIL]（★★ 唯一真正硬的开放问题，非本轮范围）：把 Corrêa–Noja 椭圆尾粘接技术推广
+    到带穿孔情形，是把推论 A/B 的门槛降到 CN-2026 式"低于种子"范围的唯一已知路线，本尝试未触及。
+  - "split"方向完全未探索。
+
+  下一步建议：(1) lead 派 researcher 登记 FKP arXiv:2006.13271；(2) 若 lead 认为 proof.md §1 的
+  引理 1.1 本身值得先行审查（它不依赖任何未登记文献，纯粹是层论初等事实），可以请 graph-reviewer
+  先单独审这一条，同时推论 A/B/C 继续留在 draft 等 GAP 补齐；(3) [GAP-ELLIPTIC-TAIL] 建议作为独立
+  的后续 prover 任务派工，量级明显大于本轮。
+
+  本尝试判断：命题方向（非投影）几乎可以确信为真，风险集中在"定义匹配"这类 bookkeeping 层面，不在
+  "数学是否成立"层面；但因多条 [GAP] 未闭合（尤其 GAP-LIT 与 GAP-STACK），诚实起见暂不提交
+  under-review，留在 draft，待 GAP 补齐或经与 lead 进一步讨论后再决定是否升级。
