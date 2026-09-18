@@ -1,0 +1,53 @@
+id: math.supermoduli-compactified-genus-geq3-not-projected
+kind: proposition
+title: 紧化亏格 g≥3 两个自旋分量超模叠均不可投影（Corrêa–Noja Theorem 1.1 item 3，原创贡献，独立于 FKP 与 item(1)/(2)）：∀g≥3, ω₂(𝔐̄_g^±)≠0
+statement: |
+  **对象**：记号同 `math.supermoduli-compactified-genus-2-odd-split`。𝔐̄_g^± 为亏格 g 无穿孔超黎曼
+  曲面模叠的 Deligne–Mumford 型紧化的两个宇称分量（ε∈{+,−}）。
+
+  **定理**（Theorem 1.1 item (3)，逐字，p.1）：
+  "For every g ≥ 3, both compactified parity components 𝔐̄_g^± are non-projected. More precisely, for
+  every g ≥ 3, ω₂(𝔐̄_g^±) ≠ 0."
+
+  **本节点是本文的原创贡献，不依赖 FKP，也不依赖 item (1)/(2) 的结论**（§8 p.21 逐字："We now prove
+  the higher-genus assertion. Fix ε ∈ {+,−}. Let g ≥ 3, and put h := g−1 ≥ 2."——随后的证明只引用
+  §2 一般引理（Theorem 2.2：障碍消没⇒可投影 的逆否；Theorem 2.6：障碍类沿态射的函子性比较）、§5–§6
+  本文自建的 Donagi–Witten 一点障碍族回顾与"constant-tail NS gluing construction"、§7 的存在性引理
+  Theorem 7.2，**未引用 Theorem 3.5（item 1）、Theorem 4.3（item 2）或 FKP [10] 的任何结果**）。
+
+  **证明构造**（§5–§7）：取亏格 h=g−1≥2 曲线 C 配备无效偶 theta 特征 L（L^⊗2≃ω_C，H⁰(C,L)=0）；用
+  §6 粘接映射把亏格 h 的 Donagi–Witten 一点障碍族 X_η 沿一条椭圆自旋尾 (E,M,q) 嵌入紧化亏格 g 边界，
+  得测试态射 F_{η,M}: X_η → 𝔐̄_g^ε；由 §7 Theorem 7.2（Riemann–Roch + 核维数计数，要求 h≥2 即 g≥3）
+  证明存在 η 使子空间上的障碍类 J(η)≠0；再用 Theorem 2.6 的函子性把 j_F(ω₂(X_η))=J(η)≠0 搬运到
+  ι_F(ω₂(𝔐̄_g^ε))=J(η)≠0，得 ω₂(𝔐̄_g^ε)≠0。椭圆自旋曲线的奇偶 theta 特征分别给出偶/奇两个分量，
+  故两个宇称分量对每个 g≥3 均不可投影（p.24 逐字："Therefore both 𝔐̄_g^+ and 𝔐̄_g^- are non-projected
+  for every g ≥ 3."）。
+
+  **本节点不断言**：g=2 情形（分裂，见 `math.supermoduli-compactified-genus-2-odd-split`；偶分量非
+  投影，见 `math.supermoduli-compactified-genus-2-even-not-projected`）；未紧化空间（见既有节点
+  `math.supermoduli-space-not-projected` 与 `math.supermoduli-genus-4-even-spin-not-projected`）；
+  带穿孔情形（见 `math.supermoduli-ramond-punctures-not-projected` 等）。
+uses_conventions: []
+sources:
+  - ref: correa-noja-2026
+    loc: "arXiv:2606.06733v1, p.1 Theorem 1.1 item (3)（逐字）；§5（p.15）、§6（Lemmas 6.1/6.2, Proposition 6.3, pp.15–19）、§7（Lemma 7.1, Corollary 7.2, Theorem 7.2, pp.19–21）；§8 pp.21–24（'We now prove the higher-genus assertion'……'Therefore both 𝔐̄_g^+ and 𝔐̄_g^- are non-projected for every g≥3', 逐字）"
+    note: |
+      L1 全文逐页读取（researcher 2026-09-18，抽取记录 correa-noja-2026.md E1, E5, E6, E7）。§2 的
+      Theorem 2.2/Theorem 2.6（§8 证明所引用的两条一般引理）本身未被抽取者逐字重读证明细节，只核实
+      了其在 §8 中被使用的方式与结论文字（见抽取记录"未解决的疑问"第1条）。
+tags: [supermoduli, super-riemann-surface, non-projected, compactified, higher-genus, math-input, correa-noja]
+notes: |
+  **★★ 与 item (2)（`math.supermoduli-compactified-genus-2-even-not-projected`）及 FKP
+  （`math.supermoduli-compactified-genus-2-canonical-projection-fails`）无依赖关系**：Corrêa–Noja
+  论文正文"the second item was first proved by [FKP]"这句话里的"second item"指 item (2)（g=2 偶
+  分量），**不指本节点**。§8 组装证明对 item (3) 的论证从头到尾只引用 §2/§5/§6/§7 本文自建的工具，
+  未引用 Theorem 3.5、Theorem 4.3 或参考文献 [10]（抽取记录 E7 备注逐字："g≥3 部分的证明完全不引用
+  FKP [10]——只有 item (2)……依赖 FKP"）。因此本节点对应的推导 `depends_on: []`，不挂任何指向 FKP
+  卡或 item(1)/(2) 卡的边。
+
+  **与 `math.supermoduli-space-not-projected`（Donagi–Witten 2013）的关系**：两者都用 Green
+  障碍理论把低亏格"种子"结果沿某种几何构造搬运到更高亏格，但搬运机制不同——Donagi–Witten 用分歧
+  三重覆盖，本节点（Corrêa–Noja §5–§6）用椭圆尾粘接映射（"constant-tail NS gluing construction"）。
+  两者是覆盖不同参数范围（未紧化 vs 紧化）的独立结果，不构成同一条依赖链。
+author: curator-supermoduli-post-2024
+created: "2026-09-18"
