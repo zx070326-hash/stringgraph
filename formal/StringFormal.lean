@@ -78,4 +78,5 @@ import StringFormal.NoGhost.DescendantKernel
 import StringFormal.NoGhost.LevelFiveCount
 import StringFormal.NoGhost.LevelSixCount
 import StringFormal.NoGhost.LevelSevenCount
+import StringFormal.NoGhost.SeedTransferSix
 import StringFormal.NoGhost.Ghost
