@@ -364,3 +364,149 @@ MSRI Publications **3**, Springer-Verlag New York, 1985（= 1983-11-10..17 Berke
   **FLM 第 8 章正文维持完全 L0**（第一轮 E11 的结论不变）。
 
 ---
+
+## ★★★ 候选 4（意外命中，不在任务书名单）：L. M. Grotenhuis, *Vertex Algebras and String
+Theory in Monstrous Moonshine*, Leiden 大学**本科（BSc）**毕业论文，2020-06-19，127 页。
+新登记 bib key `grotenhuis-2020`。
+
+**发现方式**：在候选 2 的转引路线上做 WebSearch（关键词组合含 `FLM` / `lattice vertex operator` /
+`normal ordering` / `string`）时，检索后端带出 `stat.ucla.edu/~ywu/moonshineString.pdf` 这一公开镜像，
+遂下载核实。**这不是任务书三个候选中的任何一个。**
+
+**获取与 L 级**：官方托管 `studenttheses.universiteitleiden.nl/handle/1887/123029`（Leiden 学生论文库，
+公开可获取，符合 `literature/CLAUDE.md` 规则 1「公开可获取的文献」）；本轮实际下载自公开镜像
+`stat.ucla.edu/~ywu/moonshineString.pdf`（HTTP 200，6 396 181 字节）。
+**L1：全文 `pdftotext -layout` 5993 行，并对两处承载页（p. 54 与 p. 106）用 `Read` 工具
+直接渲染 PDF 页图逐字核对**（按任务书纪律：凡逐字引用公式必须看页图，不能只信 pdftotext——
+本轮这条纪律**确实救了命**，见 E4.3 的 `e^α` 因子）。
+
+⚠ **来源性质先说清楚**：这是一份**本科毕业论文**，指导教师 Prof. dr. K. E. Schalm（Leiden 弦论/
+凝聚态）与 Dr. R. I. van der Veen（数学）。它**不是同行评议出版物**，没有期刊或 arXiv 编号。
+它公开、可引、可核，但**证据分量应当低于任何一篇已发表论文**。这一点 lead 必须在裁决时纳入。
+
+### E4.1 物理侧对象：闭弦顶点算子与模展开（判据 1）
+- 位置：**p. 106，(6.3)–(6.5)**，§6.1 "String diagrams and vertex operators"
+- 类型：definition（物理侧构造，承第 4–5 章的 Polyakov 作用量量子化而来）
+- 原文陈述（逐字，已用页图核对）：
+  > For a string state `|k⟩` of momentum `k`, the corresponding vertex operator is given by
+  >
+  > `V_k(z, z̄) = :e^{ikX(z,z̄)}:`   (6.3)
+  >
+  > where
+  >
+  > `X(z, z̄) = x_0 - iα'p ln|z|² + i√(α'/2) Σ_{n≠0} (1/n)(α_n z^{-m} + ᾱ z̄^{-n}).`   (6.4)
+  >
+  > Note that the above expression can be obtained from our general solution for the closed string
+  > given in (5.10) by setting `z = e^{i(τ+σ)}` and `z̄ = e^{i(τ-σ)}`, and assuming `τ` to take
+  > imaginary values. In particular, we obtain
+  >
+  > `X_L(z) = x_0^L - iα'p ln z + i√(α'/2) Σ_{n≠0} (1/n) α_n z^{-m}.`   (6.5)
+- 文献自称的严格程度：物理推导（由第 5 章 (5.10) 的闭弦通解 + Wick 转动得到），非公理化。
+- 文献列出的依赖：(5.10)（闭弦模展开）；脚注 ‡ 说明 Wick 转动 `τ = -it`。
+- 备注：**判据 1 满足。** 这是四轮检索里**第一次**同时出现：显式 `X(z,z̄)` 的完整模展开
+  （含 `x_0`、`α'p ln|z|²` 零模项、`α_n` 振子）**与** 冒号正规序记号 `: :`，
+  且明确来自世界面作用量而非抽象 Heisenberg 代数。
+  ⚠ **印刷错误（本轮页图核对发现）**：(6.4) 与 (6.5) 的求和项写作 `α_n z^{-m}`，
+  按上下文应为 `z^{-n}`（求和指标是 `n`，`m` 从未定义）；(6.4) 的反手征项写作 `ᾱ` 漏了下标 `n`。
+  这两处是笔误，不影响内容。
+
+### E4.2 ★ 识别句：判据 2 与判据 3 的承载处
+- 位置：**p. 106，(6.6) 与紧随其后的一句**
+- 类型：**identification / proposition（正是本卡断言 (2) 所要的那种「跨框架恒等式」）**
+- 原文陈述（逐字，已用页图核对）：
+  > and thus
+  >
+  > `:e^{ikX_L(z)}: = e^{ikx_0^L} z^{α'kp} e^{-k Σ_{n<0} (α_n/n) z^{-n}} e^{-k Σ_{n>0} (α_n/n) z^{-n}}.`   (6.6)
+  >
+  > **We recognise this expression as the lattice vertex operators `Y(|α⟩, z)` given in (3.15).
+  > In this way, our mathematical definitions in chapter 1 describe the chiral (i.e. left-moving)
+  > vertex operators in string theory.**^§
+- 脚注 §（逐字，**作者自陈的假设**）：
+  > Recall that the reconstruction theorem from chapter 2 implies that the vertex operators
+  > `Y(|α⟩, z)` determine the vertex operators of the whole state space. **Assuming that the 'string'
+  > vertex operators `V_A(z, z̄)` satisfy the vertex algebra axioms as well**, we obtain that not just
+  > the pure momentum vertex operators (as given by (6.3)) but also the vertex operators of the
+  > oscillator states correspond to the 'mathematical' lattice vertex operators.
+- 文献自称的严格程度：**"We recognise this expression as …"**——即**肉眼识别**。
+  没有逐项比对系数，没有证明，没有说"one checks that"。附带的脚注把从纯动量态推广到振子态
+  的那一步**明确标注为假设**（"Assuming that …"）。
+- 文献列出的依赖：(3.15)（第 3 章独立构造的格点结构映射，见 E4.3）；第 2 章重构定理。
+- 备注：**这是四轮检索中第一次出现「物理侧显式正规序指数」与「VOA 结构映射 `Y(|α⟩,z)`」
+  之间的一个真正的等号，且两侧是独立构造的。判据 2 满足，判据 3 在形式上也满足。**
+
+### E4.3 等号右边确系**独立构造**（判据 3 的核查）
+- 位置：**p. 51–54，(3.11)–(3.15) 与 Theorem 3.4 / Theorem 3.5**，§3.2 "Vertex algebras
+  associated to a lattice"
+- 类型：proposition（构造定理）
+- 原文陈述（逐字，**已用页图核对**）：
+  > **Theorem 3.4.** There exists a conformal vertex algebra structure on `V_L` with vacuum vector
+  > `|0⟩` and conformal vector `ω` as defined in (3.5) and such that for each `a ∈ 𝔤` we have
+  > `Y(a_{-1}|0⟩, z) = a(z)`, if and only if for each `α ∈ L` there exists an operator `c_α` that
+  > commutes with every `a_n` (for all `a ∈ 𝔤, n ∈ Z`) such that these operators satisfy
+  > `c_α|0⟩ = |0⟩`, `c_0 = id` and (3.14). In this case, the mapping
+  >
+  > `Y(|α⟩, z) = e^α c_α z^{α_0} e^{-Σ_{n<0} (α_n/n) z^{-n}} e^{-Σ_{n>0} (α_n/n) z^{-n}}.`   (3.15)
+  >
+  > for `α ∈ L` defines a vertex algebra structure on `V_L`.
+  >
+  > (3.14):  `e^α c_α e^β c_β = (-1)^{(α,β)} e^β c_β e^α c_α.`
+- 文献自称的严格程度：**完整证明**。§3.2 从 (3.10) 的对易子出发，定义辅助场 `X_α(z)`（(3.11)）、
+  证明 Lemma 3.2（`[a_n, X_α(z)] = 0`）、用真空公理与**局域性公理**（(3.13) 的
+  `f_α(z)f_β(w) = e^α c_α e^β c_β z^{α_0} w^{β_0} (z-w)^{(α,β)} S^{α(z),β(w)}` 计算）
+  推出充要条件 (3.14)，再由 Theorem 3.5（引 [Kac97] 推论 5.5）给出 `c_{α,β}` 解的存在唯一性。
+  **这是从 VOA 公理出发、与任何弦论输入无关的独立构造。**
+- 文献列出的依赖：Lemma 3.3（引 [LL04] (6.3.46)）；Theorem 3.5 引 [Kac97] Corollary 5.5。
+- 备注：⚠ **`pdftotext` 把 (3.15) 最左边的 `e^α`（平移算符）整个吞掉了**，只剩 `c_α z^{α_0}…`。
+  若只信文本抽取，就会得到「(3.15) 与 (6.6) 逐项对应得天衣无缝」的错误结论。
+  **用 `Read` 渲染页图才看到 `e^α c_α` 是两个因子**——这一点正是 E4.4 那条缺口的要害。
+
+### E4.4 ⚠ 这条识别的四个缺口（作者未处理，本条目逐条列出，**不做推断只做对照**）
+- 位置：对照 E4.2 与 E4.3 的两条公式，以及本卡【本卡明确不断言】(b)(c)
+- 类型：（判据与接缝核对，非文献陈述）
+- 备注（逐条）：
+  1. **cocycle 被静默跳过。** (3.15) 的零模因子是 **`e^α c_α`**（平移算符 × cocycle 算符），
+     且 Theorem 3.4 逐字要求它满足 (3.14) `e^α c_α e^β c_β = (-1)^{(α,β)} e^β c_β e^α c_α`。
+     (6.6) 的物理侧零模因子只有 **`e^{i k x_0^L}`** 一个。作者在 "We recognise …" 一句里
+     **没有提到 `c_α`**，也没有讨论 `e^{ikx_0^L}` 是否满足 (3.14)。
+     ⭐ **这恰好落在本卡断言 (1) 的位置上**：断言 (1) 说的正是「秩 1 类光格上 cocycle 平凡
+     （`ε(mk,nk)=1`）」。换句话说，Grotenhuis 的识别在**一般偶格**上有一个未处理的 cocycle 缺口，
+     而本卡断言 (1)（已有 Gebert–Nicolai 1995 §3.1 与 Li–Wang 2008 §4 两条 L1 来源）
+     **正是把这个缺口在秩 1 类光格情形下补上的那一步**。
+     （本条只陈述两者位置重合这一**事实对照**；「补上之后是否就完整」属于 curator/prover 的判断，
+     researcher 不越权下结论。）
+  2. **连续动量 ↔ 离散格（本卡接缝 (b)）未处理。** (6.3) 逐字写 "For a string state `|k⟩` of
+     momentum `k`"，(6.4) 的 `p` 是连续动量算符；而 (3.15) 要求 `α ∈ L` 是格点。
+     作者在 (6.6) 之后**没有**说明 `k` 何时落在格里（第 5.4 节的环面紧化确实把动量离散化，
+     但 §6.1 的 (6.3)–(6.6) **没有**声明自己处在紧化设定下）。
+  3. **`δ` 归一化（本卡接缝 (c)）完全未提。**
+  4. **格的类型不对。** 全文的格是**正定偶格**（第 3.1 节逐字要求 "`L` is even and positive
+     definite"，最终用的是 24 维 Leech 格）。**本卡要的是秩 1 类光格与动量塔 `T(p;k₀)`**——
+     那是**不定（洛伦兹）**签名下的退化情形，Grotenhuis 的 Theorem 3.4/3.5 的前提（正定偶格、
+     `L_0` 的 `N`-分次、特征有限维）**在类光情形下不成立**。
+  5. **额外的 `α'` 归一化不自洽（印刷/推导错误）。** 由 (6.5)，`:e^{ikX_L}:` 的振子指数应带
+     `√(α'/2)` 因子（`ik · i√(α'/2)(α_n/n)z^{-n} = -k√(α'/2)(α_n/n)z^{-n}`），
+     但 (6.6) 右端写的是 `e^{-k Σ (α_n/n) z^{-n}}`，**`√(α'/2)` 不见了**；
+     而零模项的 `α'` 却保留着（`z^{α'kp}`）。即 **(6.6) 与 (6.5) 在 `α'` 归一化上内部不自洽**。
+     这正好说明「We recognise」那一步**确实没有逐项核对系数**。
+
+### 小结（Grotenhuis 2020 → 断言 (2)）
+
+**(A) 找到了——但带三个必须同时说出口的限定词。**
+- **三条判据形式上全部满足**：判据 1（E4.1，显式 `X(z,z̄)` 模展开 + 冒号正规序）、
+  判据 2（E4.2，与 `Y(|α⟩,z)` 划等号）、判据 3（E4.3，右端是第 3 章独立用 VOA 公理构造的对象，
+  (6.6) 之后的句子是 "We recognise …" 而非 `:=`）。
+  **这是四轮、十余篇候选里唯一一次三条全中。**
+- **限定词 1：来源分量低。** 本科毕业论文，非同行评议，无 arXiv/期刊编号。
+- **限定词 2：论证强度低。** "We recognise this expression as …" 是肉眼识别，
+  无逐项系数核对（(6.6) 自身的 `√(α'/2)` 就掉了，见 E4.4(5)），
+  推广到振子态那步作者自己标了 "Assuming that …"。
+- **限定词 3：命题不是本卡那一条。** 正定偶格（Leech），不是秩 1 类光格；
+  cocycle、连续动量↔格、`δ` 归一化三个接缝全部未处理（E4.4）。
+- ⭐ **对 lead 的实际意义**：本卡此前的前提是「公开文献里**连这个等式的陈述**都找不到」。
+  **这个前提现在被部分推翻了**——等式的陈述是存在的（虽然只在一份本科论文里，
+  且只对正定偶格、且只靠肉眼识别）。但「**证明**」这一前提**没有**被推翻：
+  Grotenhuis 没有证明它，也没有处理本卡列出的任何一条接缝。
+  即：从「查无此陈述」降格为「查无此**证明**，但陈述在一份低分量来源里出现过」。
+  这两者对是否开原创轨道的含义不同，**必须由 lead 而非 researcher 裁决**。
+
+---
