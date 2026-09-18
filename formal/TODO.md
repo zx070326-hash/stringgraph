@@ -2194,10 +2194,102 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
       都不在对角线 `m+n=0, |m|≥2`）；这是对 §B⁗.9「在 `V(26,-5)` 中算得」这句话的细化而非否定
       （`c=26` 在 N=6 论证的别处进入），已写进本文件头，建议补进对应图节点 `notes`。
       对 §B⁗.2、§B⁗.9、`BLUEPRINT-noghost-N6.md` 三处 `x₄`/`y₃` 公式做过逐字复核，**无分歧**。
-      **未做**（文件头列明）：横向半边（`x₄v`、`y₃v` 是 `V(26,-4)` 的奇异矢量）与 `N=6` 判据本身
+      **本 PR 未做**（文件头列明）：横向半边（`x₄v`、`y₃v` 是 `V(26,-4)` 的奇异矢量）与 `N=6` 判据本身
       （`b26_six` / `ddfSpans_bigrade_neg_six_six`）——两者都需要更多工作，留给下一个 PR。
+      **续**：横向半边与判据（双向）已由下面的 `noghost-pr-d2` 关闭；
+      `b26_six` / `ddfSpans_bigrade_neg_six_six` 仍未做（缺口清单见 `noghost-pr-d2` 末尾）。
       公理检查：本文件全部 18 个声明 `check_axioms` 输出 `ok`，只有
       `propext Classical.choice Quot.sound`。
+
+- [x] `noghost-pr-d2`（蓝图 **§B⁗.2 / §B⁗.9**，**`[GAP-N6-seed]` 判据本身，双向关闭**，2026-09-18）：
+      三个新文件共 **39 条声明**，全部无 `sorry`、无 `native_decide`，`check_axioms` 逐条 `ok`
+      （只有 `propext Classical.choice Quot.sound`）。承接 `noghost-pr-d1` 留下的「未做：横向半边」。
+  - (1) `StringFormal/NoGhost/SingularVectorsSix.lean`（26 条）：**算子层**，
+        对**任意权 `h`、任意 `D`、任意 ℚ-代数 `R`、任意 rung** 给出 `y₃φ`、`x₄φ` 的四条
+        正模方程（`φ` 是种子，`L_0φ = h•φ`）：
+        `towerLop_one_apply_y3 = (12h+48)•L_{−2}φ + (6h+24)•L_{−1}²φ`、
+        `towerLop_two_apply_y3 = (42h + 3D + 90)•L_{−1}φ`、
+        `towerLop_one_apply_x4 = (−104h−416)•L_{−3}φ + (−80h−320)•L_{−2}L_{−1}φ + (−24h−96)•L_{−1}³φ`、
+        `towerLop_two_apply_x4 = (−216h−12D−552)•L_{−2}φ + (−188h−10D−492)•L_{−1}²φ`。
+        代入 `h = −4` 得 `_of_eq_neg_four` 四条：两条 `L_1` 方程**恒为零**，两条 `L_2` 方程分别是
+        `3(D−26)•L_{−1}φ` 与 `12(26−D)•L_{−2}φ + 10(26−D)•L_{−1}²φ`。再加 `n ≥ 3` 自动
+        （`towerLop_eq_zero_of_pos_of_one_two`，由 `⁅L_1,L_n⁆`、`⁅L_2,L_n⁆` 递推，与 `c` 无关）
+        得 ⭐⭐ `y3_mem_towerPositiveModeSubmodule` / `x4_mem_towerPositiveModeSubmodule`
+        ——即「`x₄v`、`y₃v` 是 `V(26,−4)` 的奇异矢量」。
+        反向：`towerLop_two_apply_y3_eq_zero_iff`（整环 + 特征零 + `L_{−1}φ ≠ 0`）说
+        `L_2(y₃φ) = 0 ⟺ (D:R) = 26`，所以 `c = 26` 在这里是**必要**的，不只是充分。
+  - (2) ⭐⭐⭐ **`c = 26` 到底从哪一步进来**（lead 点名要求定位并记录）：
+        **只从 `L_2` 条件进来，且只经过 Gram 的那**一个**条目 `⁅L_2,L_{−2}⁆ = 4L_0 + c/2`**
+        （`NullSeedsTwo.towerLop_two_apply_towerLop_neg_two` + `two_mul_centralTerm_two_eq_one`，
+        后者说 `2·centralTerm 2 = 1`，即中心项恰是 `c/2`）。逐词对账：
+        - `y₃ = 12L_{−3} + 6L_{−2}L_{−1} + L_{−1}³`。`L_2` 打在 `L_{−3}` 上用 `⁅L_2,L_{−3}⁆ = 5L_{−1}`、
+          打在 `L_{−1}³` 上用 `⁅L_2,L_{−1}⁆ = 3L_1`，都**不在中心对角线** `m+n = 0, |m| ≥ 2` 上；
+          `towerLop_two_apply_y3` 里的 `3(D:R)` **全部**来自 `6L_{−2}L_{−1}` 这一个词
+          （`6 · D · centralTerm 2 = 3D`）。
+        - `x₄ = −76L_{−4} − 52L_{−3}L_{−1} − 12L_{−2}² − 20L_{−2}L_{−1}² − 3L_{−1}⁴`。
+          `towerLop_two_apply_x4` 里的 `−12(D:R)` 来自 `−12L_{−2}²`
+          （原子 `towerLop_two_apply_towerLop_neg_two_sq = (8h+8+D)•L_{−2}φ`），
+          `−10(D:R)` 来自 `−20L_{−2}L_{−1}²`（`−20 · D · centralTerm 2 = −10D`）。
+          含 `L_{−4}`、`L_{−3}L_{−1}`、`L_{−1}⁴` 的三个词对 `D` 无贡献。
+        - **两条 `L_1` 方程完全与中心荷无关**：`⁅L_1,L_{−1}⁆ = 2L_0`
+          （`centralTerm_one_eq_zero`）、`⁅L_1,L_{−n}⁆ = (1+n)L_{−(n−1)}`（`n ≥ 2`，非对角），
+          所以 `towerLop_one_apply_y3` / `towerLop_one_apply_x4` 的系数里**一个 `(D:R)` 都没有**，
+          且在 `h = −4` 处对**一切 `c`** 归零。
+        结论：`h = −4`（由片 `j + M = −5` 给出）单独负责杀掉 `L_1`；`c = 26` 单独负责杀掉 `L_2`。
+        这与 `noghost-pr-d1` 发现的「纵向恒等式与 `c` 无关」拼在一起，给出完整图景。
+  - (3) `StringFormal/NoGhost/SingularVectorsSixSlice.lean`（6 条）：把 (1) 搬到双分次片上。
+        `y3_mem_towerBigrade`（bidegree `(0,+3)`）/ `x4_mem_towerBigrade`（`(0,+4)`）**无任何假设**；
+        `towerLop_zero_apply_eq_neg_four`（截距 `a₀ = 1` 即 `k·k = 2` 时 `L_0 = 1 + j + M`，
+        故 `h = −4 ⟺ j + M = −5`，而 `(−6,1)` 正好满足）；`y3_mem_towerSeed` / `x4_mem_towerSeed`
+        （`Q_{j,M} = towerSeed`，需 `(D:R) = 26`）；⭐⭐⭐ `x4_y3_mem_towerSeed_neg_six_one`
+        = §B⁗.9 判据的横向（⟹）半边，逐字。
+  - (4) `StringFormal/NoGhost/SeedCriterionSix.lean`（7 条）：⭐⭐⭐ **判据的逆向（⟸）半边**
+        `mem_towerSeed_neg_six_one_of_towerLop_one_apply_y3_eq_zero`，与打包的双向版
+        `mem_towerSeed_neg_six_one_iff`。证法：把 `u ∈ V_{−6,1}` 写成 `(e·α_{−1})|0;p_{−6}⟩`
+        （`Fock.exists_polState_of_mem_levelSubmodule_one`），沿 rung 动量正交分解
+        `e = e_⊥ + λp`（`λ = (e·p)/(p·p)`，需 `p_{−6}·p_{−6} = 2 + 2j = −10 ≠ 0`）；
+        `u_⊥` 是权 `−4` 的种子走横向半边（`L_1(y₃u_⊥) = 0`），`λp` 那半是
+        `λ • L_{−1}|0;p_{−6}⟩`（`hlong`，由 `Fock.Lop_neg_one_apply_one_eq_polState`）走
+        `noghost-pr-d1` 的纵向半边（权 `−5`，`L_1(y₃L_{−1}v) = 2h•y₃v = −10•y₃v`），
+        于是 `0 = L_1(y₃u) = (−10λ)•y₃v ⟹ λ = 0 ⟹ e·p = 0 ⟹ u ∈ Q_{−6,1}`。
+  - (5) 新技术：**`y₃|0;p_j⟩ ≠ 0`** 不走 `LevelTwoCount.descTwo_single_neg_two_ne_zero` 的
+        `MvPolynomial` 系数提取，而走 `LevelThreeCount` 的偏振模工具箱：
+        `towerModeVec_three_apply_y3_of_mem_towerBigrade_zero`，
+        `A_ε(3)(y₃v) = 60(ε·p_j)•v`（**任意 `D`、任意 `R`、任意 rung、任意 `c`**，只需 `hη`），
+        取 `ε := p_j` 即可。系数 `60 = 3 × 20`，`20 = 12·1 + 6·1 + 1·2` 是 `y₃v` 的
+        `α^ε_{−3}` 分量 `20p_j`。附带 `dotVec_towerMomentum_self`（`p_j·p_j = 2 + 2j`）。
+  - (6) ⭐⭐ **数学发现：`[GAP-N6-seed]` 的逆向半边与中心荷完全无关**，对**一切 `D`** 成立
+        （两个输入——横向 `L_1(y₃φ) = 0 (h=−4)` 与纵向 `L_1(y₃L_{−1}v) = 2h•y₃v (h=−5)`——
+        都不含 `c`，见 (2)）。用到 `(D:K) = 26` 的只有正向半边，即「转移映射在 `Q_{−6,1}` 上
+        有定义」这件事本身。另注：**逆向只用到 `y₃` 一半，`x₄u` 从头到尾没被用过**。
+        建议写进图节点 `worldsheet.ddf-spanning-hypothesis` 的 `notes`。
+  - (7) ⚠⚠ **蓝图 §B⁗.2 的一处算术错误（已机检证伪，蓝图已订正）**：§B⁗.2 断言
+        `L_{−1}L_2(x₄v) = (26 − c)·y₃v`。**这是假的**。正确值是
+        `L_{−1}L_2(x₄v) = (26 − c)·(12L_{−3} + 12L_{−2}L_{−1} + 10L_{−1}³)v`，
+        括号里**不是** `y₃ = 12L_{−3} + 6L_{−2}L_{−1} + L_{−1}³`（后两项系数差 `6` 与 `9`）。
+        病根：§B⁗.2 把 `φ := y₃v` 喂进 `NullSeedsTwo.towerLop_two_apply_descTwo_of_eigenvalue`，
+        而后者的前件 `hpos`（「`φ` 是种子」）对 `y₃v` **只在 `c = 26` 时成立**；
+        偏离 `c = 26` 时多出的 `2L_{−2}(L_2y₃v) + 3L_{−1}²(L_2y₃v)` 恰是差额。
+        **下游结论「`x₄v ∈ Q₄ ⟺ c = 26`」不受影响**，现在由
+        `towerLop_two_apply_x4_of_eq_neg_four` 直接证出，不经过那条错误的中间式。
+  - **未做（Goal B：`N = 6` 的账）**——如实报告，未动手，**没有留任何 `sorry` 占位**：
+    - 蓝图「`N = 6` 最便宜，因为 `p_D(N−7) = 0`」的判断**经核对是对的**：
+      `Σ κ_N q^N = P_D · (q⁵ + q⁷ − q¹² − q¹⁵ + ⋯)`（Euler 五边形），`N = 6` 时 `q⁷` 项贡献
+      `p_D(−1) = 0`，所以只需 `s = 5` 的 syzygy 对 `(x₄, y₃)`，`s = 7` 的那对不出现。
+      数值：`κ₆ = p_D(1) + p_D(−1) = D = 26`，种子版 `τ₆ = p_{D−1}(1) = D − 1 = 25`
+      （`Σ τ_N q^N = P_{D−1} · (q⁵ + q⁷ − ⋯)`），差 **1**，与蓝图一致——也就是说
+      **种子条件必须真的被用上**，而 `[GAP-N6-seed]` 正是用它的那一步。
+    - 但「最便宜」≠「便宜」。`b26_six` 还缺三块，都没开始：
+      (a) `Finsupp.oscWeight_eq_six_cases` —— level-6 的**十一种形状**
+          （6 / 5+1 / 4+2 / 4+1+1 / 3+3 / 3+2+1 / 3+1³ / 2³ / 2²+1² / 2+1⁴ / 1⁶），
+          外加十一项的指标类型、`modeCount` 轮廓判别的单射性与 `surjOn`。
+          照 `LevelFiveCount.oscWeight_eq_five_cases`（七形）的模板估计约 800–1000 行机械劳动。
+      (b) `levelSix_count_identity`：`p_{D−1}(5) + p_{D−1}(4) − (D−1) = p_{D−1}(6) − p_{D−2}(6)`
+          （形状同 `levelFive_count_identity_gen`，多一个 `−(D−1)` 的种子修正项）。
+      (c) 组装 `b26_six` / `ddfSpans_bigrade_neg_six_six`：要把 `[GAP-N6-seed]`（已有）
+          接成 `S₆ : Q_{−6,1} → Q_{−6,5} × Q_{−6,4}` 的单射，再走 `DescendantKernel` 的秩–零化度。
+    - 另外未做：`y₃`、`x₄` 的像**落在零态子模里**（本轮只证了「落在正模核里」，
+      即种子性；零态还要配 `L_0` 条件与配对论证）。
 
 - [x] `no_ghost_theorem`：组装 —— **条件版已完成**（`no_ghost_of_spans`，见 `noghost-c5`）；
       无条件版等 `ddf-spans`。
