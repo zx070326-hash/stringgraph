@@ -2309,23 +2309,56 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
       `D` 不出现，纯组合数学，对任意指标类型 `ι` 成立。`lake build
       StringFormal.NoGhost.LevelSixCount` 成功，`check_axioms` 对该声明 `ok`，
       只有 `propext Classical.choice Quot.sound`。
-      **尚未做**（超出 (a) 本身，是 (c) 的前置台阶，不是分类定理的一部分）：
-      level-6 的指标类型家族 `LevelSixIdx`/`levelSixIndex`（单射/`surjOn`）与由此得到的
-      精确计数 `card_ddfLevel_six_eq`——`LevelFiveCount.LevelFiveIdx` 那套机器在 `N=6`
-      的类比，`grep` 确认全仓库仍不存在。是否需要它取决于 (c) 的秩–零化度论证具体怎么走
-      （也可能只需 (b) 已有的上界型恒等式，不需要精确计数）。
+      **指标类型家族 `LevelSixIdx` 已完成**（`StringFormal/NoGhost/LevelSixCount.lean`，
+      commits `fbde674`/`fe5da66`/`9aa5626`，2026-09-18/19，formalizer）：
+      `LevelFiveCount.LevelFiveIdx` 那套机器在 `N=6` 的完整类比，十一个分支
+      （`[6][5,1][4,2][4,1,1][3,3][3,2,1][3,1,1,1][2,2,2][2,2,1,1][2,1,1,1,1][1⁶]`），
+      两处新技术：重复模值的形状用 `Sym ι k`（未定序），两两不同模值的形状用有序积
+      `ι×ι`/`ι×ι×ι`（模值本身已经区分因子，`Sym` 会重复计数）——对照既有先例
+      `LevelFourIdx` 的 `[2,2]` 分支确实用 `Sym ι 2` 而非 `ι×ι`，一致。
+      `levelSixIndex_injective`（11 种对角情形，其中 `[3,2,1]` 用三点交叉消去、
+      `[2,2,1,1]` 用 `Finsupp.ext`+`by_cases` 逐点论证，均为本卡新技术）、
+      `levelSixIndex_surjOn`（dispatch `oscWeight_eq_six_cases`，`[2,2,2]` 一处需要
+      `add_assoc` 修正分类定理默认左结合与 `symModeIndex_mk_three` 天然右结合的错位）、
+      **`card_ddfLevel_six_eq`**（`p_m(6)` 的精确计数，`le_antisymm` 合并单射/满射两个方向）、
+      **`card_conjFree_six_le`**（⭐(U6)，`dim(H_phys⊓V₆)` 上界所需的横向计数）。
+      全部 `lake build` 通过、无 `sorry`、`check_axioms` 只有标准三条。
 
-      **(c0) 未做**（`(c)` 的前置）：`y₃`、`x₄` 的像**落在零态子模里**
-      （`[GAP-N6-seed]` 只证了「落在正模核里」，即种子性；零态还要配 `L_0` 条件与配对论证，
-      是 `LevelFourCount`/`LevelFiveCount` 里 (N4)/(N5) 那一步在 `N=6` 的类比，
-      目前完全没有对应引理）。
+      **(c0) 已完成**：`le_finrank_towerNull_inf_towerBigrade_six`
+      （`StringFormal/NoGhost/LevelSixCount.lean`，commit `6174bee`，2026-09-19，formalizer），
+      逐字镜像 `LevelFiveCount.le_finrank_towerNull_inf_towerBigrade_five` 的证明结构
+      （秩–零化度 + `towerLop_neg_one_mem_towerNullSubmodule_of_mem_towerBigrade` /
+      `descTwo_mem_towerNullSubmodule_of_mem_towerBigrade` 两条 Type-1/Type-2 零态归属引理），
+      连同其前置的通用核维数上界 **`finrank_ker_descPair_six_le`**（⭐⭐(K6)，
+      `dim ker(T₆) ≤ D`，`T₆ = seedPair`/`descPair` 在 `V_{j,5}×V_{j,4}` 上，
+      用 `finrank_ker_descPair_add_le` + `card_ddfLevel_six_eq` + `card_ddfLevel_five_eq`
+      + `card_ddfLevel_four_le` + `card_conjFree_six_le` + `levelSix_count_identity_full`
+      纯计数 `omega` 得出）与 **`finrank_ker_seedPair_six_le`**（限制到种子的推论）。
+      得到 **(N6)**：`dim Q_{−6,5} + dim Q_{−6,4} ≤ dim(H_null⊓V₆) + D`。
+      三条声明 `check_axioms` 全部只有 `propext Classical.choice Quot.sound`。
 
-      **(c) 未做**：组装 `b26_six` / `ddfSpans_bigrade_neg_six_six`：要把 `[GAP-N6-seed]`
-          （已有）接成 `S₆ : Q_{−6,1} → Q_{−6,5} × Q_{−6,4}` 的单射，再走 `DescendantKernel`
-          的秩–零化度。**(c0) 未解决前 (c) 无法开始**——formalizer 2026-09-18 评估：
-          (c0) 的核心难点是 N=6 的种子条件（`κ₆=D` 超出目标 `τ₆=D−1` 恰好 1）意味着
-          「像落在正模核里」不能像 N≤5 那样直接当「落在零态里」用，需要额外的维数论证，
-          在剩余预算内未能完成，如实留空，不留 `sorry`。
+      **(c) 组装 `b26_six` 未做，且经手算确认——生成式路线无法用它闭合**
+      （formalizer 2026-09-19 评估，非 `sorry` 占位而是数学结论）：
+      把 N=5 那条闭合路线（`b26_five_of_D26`）逐字搬到 N=6，用 (I6) 恒等式
+      `p_{D−1}(6) + (D−1) = p_{D−2}(6) + p_{D−1}(5) + p_{D−1}(4)`
+      加 (N6) 的 `+D` 松弛，得到的只是
+
+          dim(H_phys⊓V₆) ≤ dim(ddfSpan⊓V₆) + dim(H_null⊓V₆) + 1，
+
+      比 `B26 6`要求的**恰好多 1**（N=5 的对应算式里 `−1`（来自 (I5) 的 `+1`）
+      与 `+1`（来自 (N5) 的松弛）严格抵消；N=6 的 `−(D−1)`（来自 (I6)）
+      与 `+D`（来自 (N6)）相差 `1`，抵消不掉）。这与蓝图 §B⁗.7/§B⁗.9
+      记录的判断完全吻合：`κ₆ = D` 是通用秩–零化度论证给出的松弛，
+      而 `B26 6` 需要的是 `τ₆ = D − 1`，二者差 1 当且仅当
+      `seedPair η a b (−6) 6` 的核在种子限制下**恰好**丢掉一维——
+      这是一条关于 `dim ker(seedPair(-6,6)|_{Q×Q}) ≤ D−1` 的**加强**命题
+      （即对某个陪集/子空间的 S₆-型单射性），秩–零化度的通用论证**证不出**它，
+      需要专门针对 N=6 的（可能涉及 `y₃`/`x₄` 具体奇异矢量结构的）新论证，
+      不是纯计数可以补上的缺口。**因此本卡到此为止不再尝试写
+      `b26_six` / `ddfSpans_bigrade_neg_six_six` 的陈述**——写出来也证不出来，
+      写不完整的陈述比不写更糟。缺口已记在
+      `LevelSixCount.lean` 文件头 `⚠` 段与本条目，供下一个 PR/lead 判断是否值得
+      开一条 `research/` 原创证明尝试。
 
 - [x] `no_ghost_theorem`：组装 —— **条件版已完成**（`no_ghost_of_spans`，见 `noghost-c5`）；
       无条件版等 `ddf-spans`。
