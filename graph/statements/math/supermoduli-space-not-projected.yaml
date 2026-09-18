@@ -89,5 +89,24 @@ notes: |
   supermoduli space. It can also be used globally, with careful treatment of the modular identification and the
   limits of moduli space」——那是 1998 年对全局问题的措辞；本定理（2013）把「全局」这一层的一个具体版本
   （全纯投影到约化空间）在 g ≥ 5 否定了。见 consistency.superstring-perturbative-consistency-unproven-1998。
+
+  【6. 2023–2026 后续工作交叉引用（curator-supermoduli-post-2024，2026-09-18）】
+  本卡红线 (1)（Theorem 1.1 只到 g≥5，未断言 g=3,4）出现的 **g=4 缺口，由 Donagi–Noja arXiv:2608.24996
+  （新节点 `math.supermoduli-genus-4-even-spin-not-projected`）填补，但只填了偶自旋分量**（Theorem 1.1
+  逐字只断言 𝔐₄^+ 非投影；"整个 𝔐₄"是平凡不交并推论，不是该文独立证明的结果，见该节点正文）；**g=3
+  情形依然是开放问题**——Donagi–Noja 论文致谢部分自陈 genus-3 是"work in progress, joint with [Corrêa]"，
+  本项目 researcher 已独立核实这句致谢原文（非泛泛猜测其为开放），故本卡红线 (1) 关于 g=3,4 未解决的
+  表述，对 g=3 依然成立，对 g=4（仅偶分量）已被填补。
+
+  本卡红线 (4)（不考虑 Deligne–Mumford 紧化）**依然完全成立**：Corrêa–Noja arXiv:2606.06733（新节点
+  `math.supermoduli-compactified-genus-2-odd-split`、`math.supermoduli-compactified-genus-2-even-not-
+  projected`、`math.supermoduli-compactified-genus-geq3-not-projected`）处理的是**紧化**空间 𝔐̄_g，
+  与本卡断言的**未紧化**𝔐_g 是覆盖不同参数象限的正交互补结果，不构成对本卡红线 (4) 的修订——本卡从未
+  对紧化空间的（非）投影性作出任何断言，Corrêa–Noja 的结果既不证实也不证伪本卡，只是填补了本卡
+  Remark 1.4 明确排除在外的另一个问题。
+
+  另见带穿孔情形的新节点 `math.supermoduli-ramond-punctures-not-projected`（Donagi–Ott，纯 Ramond
+  穿孔）与 `math.supermoduli-ns-ramond-punctures-not-projected`（Wang，NS+Ramond 混合穿孔）——两者
+  处理的是"带穿孔"维度，同样与本卡（无穿孔）正交互补，不修订本卡。
 author: curator-superstring-pert
 created: "2026-09-11"
