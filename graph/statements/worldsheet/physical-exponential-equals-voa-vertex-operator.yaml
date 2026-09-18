@@ -291,5 +291,92 @@ notes: |
   **没有任何一篇独立构造出两侧再证明相等**，且原因是可说明的：桥梁综述的作者**没有动机**这么做——
   他们构造出一侧，然后给它改个名字。这是支持原创轨道 (iii) 的**正面结构性论证**，
   不只是「我们没找到」。(iii) 的前提仍需候选 5–7 清完才算清干净。
+  【2026-09-18 第四轮（最后一轮）：**首次命中**，裁定 (A)，但带三重限定；status 仍不变】
+  抽取记录 literature/extractions/assertion-2-round4-msri-flm-2026-09-18.md。四轮十余篇候选里
+  **第一次**出现三条判据全中的文献，且**不在任务书的三个候选里**——是顺着 FLM Ch.8 的引用链
+  追出来的：
+
+  ⭐ **L. M. Grotenhuis, *Vertex Algebras and String Theory in Monstrous Moonshine*,
+  Leiden 大学本科毕业论文, 2020-06-19, 127 页**（bib key `grotenhuis-2020`）。
+  **lead 已用 Read 独立渲染 p.106 与 p.54 页图逐字复核**（不经 pdftotext，见下方陷阱）：
+  · 判据 (1) ✔ 物理侧独立给出，p.106 (6.5) 逐字：
+      X_L(z) = x_0^L − i α' p ln z + i √(α'/2) Σ_{n≠0} (1/n) α_n z^{−m}
+    并由 (6.6) 写出正规序展开：
+      :e^{i k X_L(z)}: = e^{i k x_0^L} z^{α' k p} e^{−k Σ_{n<0} (α_n/n) z^{−n}}
+                                                  e^{−k Σ_{n>0} (α_n/n) z^{−n}}
+  · 判据 (2)(3) ✔ p.106 (6.6) 正下方逐字：
+      "**We recognise this expression as the lattice vertex operators Y(|α⟩, z) given in (3.15).**
+       In this way, our mathematical definitions in chapter 1 describe the chiral (i.e. left-moving)
+       vertex operators in string theory."
+    ——是"recognise"（识别）不是 `:=`（定义），且 (3.15) 确由**第 3 章独立**用 VOA 公理构造：
+    p.54 Theorem 3.4 逐字给出
+      Y(|α⟩, z) = e^α c_α z^{α_0} e^{−Σ_{n<0} (α_n/n) z^{−n}} e^{−Σ_{n>0} (α_n/n) z^{−n}}   (3.15)
+    其存在性条件是 (3.14) e^α c_α e^β c_β = (−1)^{(α,β)} e^β c_β e^α c_α。
+    **这正是前三轮四篇全部倒在的那一步**（见上文四种失败模式）。
+
+  ⚠ **三重限定，缺一不可，引用本条时必须同时说出口**：
+  (1) **本科毕业论文，非同行评议**，按本项目的来源分级是最低分量的一档；
+  (2) **"We recognise" 是肉眼识别，零论证、零逐项核对**。作者自己的公式就不自洽——
+      (6.6) 的振子指数**漏掉了 (6.5) 里的 √(α'/2)**，而零模的 α' 却保留着；
+      (6.4)(6.5) 的求和项写 α_n z^{−m}（应为 z^{−n}，m 全文未定义）。
+      **公式内部的不自洽本身就证明那句 "recognise" 没有逐项核对过。**
+  (3) **命题是正定偶格（Leech）上的，不是本卡的秩 1 类光格 / 连续动量塔 T(p;k_0)**。
+      本卡【不断言】(b)(c) 两条接缝（连续动量 ↔ 离散格、δ-归一化）它一个字都没碰。
+
+  ⭐ **lead 独立发现（比 agent 报告更要紧，方向相反）**：agent 正确指出两侧零模对不上——
+  物理侧是 `e^{i k x_0^L}` 一个因子，VOA 侧是 `e^α c_α` 两个因子，cocycle c_α 在物理侧缺席；
+  (α,β) 为奇时 (3.14) 要求反对易，而 `e^{i k x_0}` 两两对易，**故一般偶格上这个识别是错的**，
+  作者对此只字未提。**但这个缺口恰好在本卡的特例下消失**：本卡的格 L = Z k 秩 1 且类光，
+  ⟨α,β⟩ ≡ 0 ⟹ (−1)^{(α,β)} ≡ 1 ⟹ c_α 可取 1——**这正是本卡断言 (1)**，而断言 (1)
+  已有两条独立 L1 来源（Gebert–Nicolai (3.1)、Li–Wang §4 p.21）。
+  即：**Grotenhuis 的识别在一般格上有一个他没看见的洞，而在本卡需要的那个特例上恰好是对的，
+  且"为什么对"正是本图已经严格记账过的那一步。**
+
+  ⭐ **lead 独立发现之二（agent 未提）**：p.106 脚注 § 逐字——
+  > "Recall that the reconstruction theorem from chapter 2 implies that the vertex operators
+  >  Y(|α⟩,z) determine the vertex operators of the whole state space. **Assuming that the 'string'
+  >  vertex operators V_A(z,z̄) satisfy the vertex algebra axioms as well**, we obtain that not just
+  >  the pure momentum vertex operators (as given by (6.3)) but also the vertex operators of the
+  >  oscillator states correspond to the 'mathematical' lattice vertex operators."
+  **作者自己把"物理顶点算子满足 VOA 公理"明写成未证的假设。** 这把本轮裁定钉死为
+  「**陈述**有，**证明**无」——而根 CLAUDE.md 的开轨门槛是「确认查无此**证明**」，不是「查无陈述」。
+
+  ⚠ **记号陷阱（第二次印证页图纪律）**：`pdftotext` **吞掉了 (3.15) 里的 `e^α` 因子**。
+  只信文本抽取会得出「两侧严丝合缝、无 cocycle 问题」的**错误**结论，从而误判本轮。
+  与 2026-09-18 supermoduli 线上的同类教训（overline、希腊字母、上下标丢失）合并为一条项目通则：
+  **任何要当作判据依据的公式，必须用 Read 渲染页图核对，不得只用 pdftotext。**
+  ⚠ 另：(6.6) 的等号在页图上 `=` 与 `:=` 难以分辨（左端本身以正规序冒号收尾），lead 渲染后
+  仍不能定论。**这不影响裁定**——判据 (3) 骑在 "We recognise" 那句散文上，不骑在 (6.6) 的等号上。
+
+  ⚠ **防误引**：WebSearch 曾把 Dong–Mason–Nagatomo math/0004132 的
+  "For the purposes of **this paper** we do not make explicit…" 转述成「**FLM** 那里没写明」，
+  **主语被换掉了**。不得引为「FLM 第 8 章没写公式」的证据。
+  本轮新增的 FLM Ch.8 编号（§8.1–8.3、Rem 8.9.1、Thm 8.9.5、§8.10、(8.1.5)(8.1.6)(8.10.23)
+  (8.10.32)(8.10.37)）**全部 L3**，转抄自 Rosellen math/0607270，未与原书核对。
+  本轮另有四篇判 REFUTE：MSRI vol.3 的 Lepowsky 导论 pp.1–13（L1，判据 1、2 不满足）、
+  Ogg 1991 书评 Bull. AMS 25 p.430（L1 页图；且 p.429 自陈 "The treatment in the book is
+  **entirely algebraic**"，与判据 1 直接冲突，"The definition is extended to general u ∈ V_L"
+  指向 FLM 是 `:=`，判据 3 失败）、Dong–Mason–Nagatomo §4.1、Runkel 1209.5554 §3.3。
+  仍 L0 未取得：MSRI vol.3 的 Goddard–Olive pp.51–96 与 Mandelstam pp.15–35（九渠道实测付费墙）、
+  FLM 1988 Ch.8 正文（四轮全败）、Kac–Raina 第 2 版（本轮实测 403+Cloudflare，把第二轮的外推
+  升级为实测）。**Grotenhuis 127 页未通读，只读了承载页与相关章节。**
+
+  ⭐ **lead 裁决（2026-09-18，第三次，终审）：status 不变，(iii) 原创轨道的前提**
+  **现在成立，可以发起。** 三条理由：
+  (1) **status 仍且只能是 physical-argument**。原则 2 写的是「自身论证的严格程度」——
+      一篇本科论文里零论证、且公式内部不自洽的一句 "We recognise"，不构成 rigorous 的论证。
+      有了来源不等于有了证明。
+  (2) **开轨门槛已达成**。CLAUDE.md 要求的是「确认查无此**证明**」。四轮下来：三条判据全中的
+      文献只有一篇，那一篇自陈是假设、没有论证、且在一般情形下有一个作者未察觉的实质错误。
+      这已经是「确认查无此证明」，不是「我们没读到」。
+  (3) **Grotenhuis 的存在反而抬高了原创轨道的价值，不是削弱**：它给了一个**具体的、可引用的、
+      带可指出错误的**先例，比"没人写过"是强得多的动机段落。
+  ⚠ **开轨时的硬性要求**：research/ 下的文档**必须**登记 `grotenhuis-2020` 并写明上述三重限定
+  与 cocycle 缺口，免得日后被指「其实有人写过」。原创性主张只能是
+  「首次**证明**」，**不得**主张「首次陈述」。
+
+  📎 **本轮旁支情报（与本卡无关，已转 lead 排期）**：`driscoll-spittler-2024`（arXiv:2408.07597，
+  用无鬼定理回答 Borcherds 的一个问题，V ⊗ V_{II_{1,1}}）与 Thorn 1985（MSRI vol.3 pp.411–417，
+  用 Kac 行列式证无鬼定理，比 Lian–Zuckerman 1991 早六年）都与本图无鬼定理主线相关且此前未登记。
 author: curator
 created: "2026-09-15"
