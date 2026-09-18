@@ -252,13 +252,33 @@ milestones hit (1):
   *** ms.no-ghost-theorem ...
 ```
 
-**真实原因**：`worldsheet.ddf-spanning-rank-inequality` 是 N=6 无鬼定理形式化线在
-`120ac3d` 之后新落地的卡（`fb28d4a` "formal: merge the N=6 eleven-shape occupation
-classification" 及其相邻提交），把它接到了无鬼定理证明链的临界路径上。这不是测量误差，
-是图在两次提交之间真的往前走了一步——把船长基线里"最大杠杆猜想"的桂冠从 AdS/CFT 换成了
-这张新卡，而"最大也只钉住 4 张"这个**量级**结论反而保持不变（4 张，精确复现）。这提醒我们：
-"哪张卡是当前最大杠杆"是一个会随图演化而变的活问题，不是一次性结论——`stringgraph
-counterfactual` 命令本身就是让任何人在任意 HEAD 上重新问这个问题的工具。
+**真实原因**（🔴 **2026-09-19 lead 订正：本节初稿把原因归给"图在两次提交之间往前走了"，
+那是错的；实测否定，改写如下**）：
+
+本文初稿称该卡是 N=6 形式化线在 `120ac3d` **之后**才落地、才被接上无鬼临界路径的。
+lead 逐条实测，四项全部否定这个解释：
+
+- 建卡提交是 `fe17d48`（2026-09-12，"add ddf-spanning-rank-inequality card (B26 as an
+  open Prop, SliceRank PR1)"），`git merge-base --is-ancestor fe17d48 120ac3d` 为真
+  ——该卡**早于**基线六天就存在；
+- 现在引用它的 10 个 derivation 文件，在 `120ac3d` 上**逐个都已存在**（含
+  `no-ghost-theorem-v4--via-goddard-thorn.yaml`），依赖结构未变；
+- 该卡在基线上 `kind: proposition`、无任何 derivation 指向它；现在仍是零 derivation；
+- 故 `own_status = effective = open` 在两个提交上相同。
+
+⇒ 依赖结构、卡状态、下游集合在基线与 HEAD 上**完全一致**，这条 +4 在 `120ac3d` 上就成立。
+**分歧的来源不是图漂移，是船长基线分析本身漏了这张卡**（漏判的机制与第 7 节
+`swampland.wgc-sharp-form-i` 同类：基线脚本按 statement 级 `status: conjecture` 筛选，
+`open` 这一档没被扫进来）。本文的结论正确，本节初稿给出的**理由**不正确。
+
+保留下来的实质结论有两条，且比初稿写的更强：
+1. 全图最大杠杆的猜想/open 卡是 `worldsheet.ddf-spanning-rank-inequality`，不是 AdS/CFT；
+   这一点在船长基线那一刻就已经为真，不是新发生的事。
+2. "最大也只钉住 4 张"这个**量级**结论不受影响（4 张，精确复现）——换了主角，没换数量级。
+
+⚠ 方法论教训（比结论本身重要）：一个用 `counterfactual` 实跑得到的数字推翻了一个凭
+**卡的知名度**形成的直觉（"最大的猜想当然是 Maldacena"）。`stringgraph counterfactual`
+存在的理由正是这个：杠杆是拓扑性质，与命题有多出名无关。
 
 ## 7. 缺失的一张卡：`swampland.wgc-sharp-form-i`
 
