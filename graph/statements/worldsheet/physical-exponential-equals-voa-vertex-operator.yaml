@@ -63,6 +63,7 @@ statement: |
       记录了 Polchinski 侧的一般 C_k(α_0)。
   (f) **不断言 k_0·p = 0 的扇区**（含 p = 0）：那里整性条件 (I) 的取法与塔的构造都失效。
 uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+superseded_by: worldsheet.physical-exponential-equals-voa-vertex-operator-v2
 sources:
   - ref: gebert-nicolai-1995
     loc: "§3.1 'DDF vertex operators', 刊 p.593, eq. (3.1)（ε(mk, nk) = 1）；同节 (3.2)–(3.3)"
@@ -378,5 +379,34 @@ notes: |
   📎 **本轮旁支情报（与本卡无关，已转 lead 排期）**：`driscoll-spittler-2024`（arXiv:2408.07597，
   用无鬼定理回答 Borcherds 的一个问题，V ⊗ V_{II_{1,1}}）与 Thorn 1985（MSRI vol.3 pp.411–417，
   用 Kac 行列式证无鬼定理，比 Lian–Zuckerman 1991 早六年）都与本图无鬼定理主线相关且此前未登记。
+
+  【2026-09-18：本卡换代为 v2（curator，分支 agent/curator/bridge-card-v2；
+  lead 裁决见 docs/reviews/bridge-card-index-shift-2026-09-18.md；**本卡 statement 一字未动**，
+  只加 superseded_by 与本段】
+  **缺陷（记号错误，不是实质缺口）**：本卡断言 (2) 括注逐字写
+  `V^{(n)}_K = 零模移位 ∘ worldsheet.exponential-vertex-operator-modes 的 V^{(b)}_K`
+  ——**没有**洛朗指标移位。但 `formal/StringFormal/NoGhost/DDF.lean` 的 `towerVertex`
+  与本图 worldsheet.ddf-operators-v6（第 149/216 行，均 formalized，转抄同一 Lean 定义）
+  逐字给出 `V^{(n)}_K = S_n ∘ V^{(b)}_{K−n}`（**带**移位，Lean 里 ν 取 1 的特例）。
+  两者对同一符号给出相差单值因子 z^{nν} 的两个不同算子，对一切 n ≠ 0 不等。
+  本卡（v1）的括注是错的，v6/Lean 是对的（后者有机检背书）。
+  按根 CLAUDE.md 原则 1，statement 正文内的错误不得就地编辑，换代为 v2；
+  v2 把括注改为 `V^{(n)}_K = S_n ∘ V^{(b)}_{K−nν}`，`ν := 2α'(k_0·p)`。
+
+  **status 未变**：v2 仍且只能是 physical-argument。断言 (2) 的真正瓶颈
+  ——「物理正规序指数 = VOA 结构映射」这一识别在任何公开文献里都无证明（见上面四轮检索史）
+  ——分毫未被本次订正触碰。**不要因为「修了一个记号 bug」就顺手抬 status。**
+
+  **下游改动**：worldsheet.ddf-contour-equals-mode-sum--via-voa-residue 的非 inferred 依赖
+  已改指 v2。本卡的唯一推导 `--via-cocycle-triviality` 已 `git mv` 改名改指 v2
+  （worldsheet.physical-exponential-equals-voa-vertex-operator-v2--via-cocycle-triviality），
+  该推导 summary 第 2 段同时订正了另一处独立发现的自相矛盾（单值因子的来源应归 Δ̄ 的零模算子
+  x^{α(0)}，而非恒等于 1 的格点常数 x^{⟨α,β⟩}；详见该推导 notes）。**本卡自此无推导**
+  （effective = open，但因带 superseded_by 不进 report 的 open_propositions 清单，
+  与 worldsheet.ddf-operators-adjoint 换代 v2 时的处理方式一致）。
+
+  完整的四轮文献检索历史（【2026-09-15】至【2026-09-18 第四轮】的全部 notes）与 v2 无关
+  （那些记的是断言 (2) 本身有无来源，不是本次的记号订正），**保留在本卡，不转录到 v2**，
+  v2 notes 只做一句指针式引用。
 author: curator
 created: "2026-09-15"
