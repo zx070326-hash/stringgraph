@@ -1,0 +1,44 @@
+id: math.supermoduli-genus-4-even-spin-not-projected
+kind: proposition
+title: 亏格四偶自旋结构超模叠不可投影（Donagi–Noja）：𝔐₄^+ 非投影，ω₂(𝔐₄^+)≠0；标题/摘要「整个 𝔐₄ 非投影」是不交并逐分量的平凡推论，非独立证明
+statement: |
+  **对象**（Donagi–Noja arXiv:2608.24996v2 沿用 Donagi–Witten 2013 的障碍理论框架，"we use Green's
+  obstruction theory in the form recalled by Donagi–Witten"）：𝔐₄^+ 表示亏格 4、偶自旋结构、无穿孔的
+  超黎曼面模叠；ω₂(𝔐) ∈ H¹(X, T_X ⊗ Λ²T_-^∨𝔐) 为 P. Green (1982) 意义下的第一障碍类（primary/Green
+  obstruction），与既有节点 `math.supermoduli-space-not-projected` 用同一套约定。
+
+  **定理**（Theorem 1.1，逐字，p.1）：
+  "Let 𝔐₄^+ denote the moduli superstack of unpunctured super Riemann surfaces of genus four with even
+  spin structure. Then 𝔐₄^+ is non-projected. More precisely, ω₂(𝔐₄^+) ≠ 0."
+
+  **证明方法**：取超椭圆测试曲线 C: y² = x⁶ − 1（亏格 4）配自由（无不动点）阶 6 自同构
+  σ(x,y) = (ζx, −y)（ζ 为本原三次单位根），在其 Čech 上同调中显式计算第一障碍类分量的矩阵表示，证得
+  该分量非零。
+
+  **本节点的范围红线（★★ 最易误用处）**：
+  (1) 本定理**只直接断言偶自旋分量 𝔐₄^+**。标题与摘要所写「genus 4 supermoduli space is not
+      projected」（不带分量限定词）依赖"𝔐₄ = 𝔐₄^+ ⊔ 𝔐₄^- 逐分量可投影"这一平凡不交并逻辑：证明
+      𝔐₄^+ 不可投影足以推出整个 𝔐₄ 不可投影。**这条平凡逻辑本身不是本文独立论证/强调的一步**（论文
+      §2–§5 只给出 𝔐₄^+ 的显式计算），本节点不为它单独建卡；引用本节点时若要精确到"哪个分量"，只能
+      引到偶分量。
+  (2) 亏格 3（未紧化）非投影性**仍未被证明**：论文致谢部分（p.2）逐字 "is a work in progress, joint
+      with him [Mauricio Corrêa]"。
+  (3) 本定理**不涉及 Deligne–Mumford 紧化**（正文未讨论紧化空间）。
+  (4) 本定理**不涉及穿孔**（对象是 unpunctured 超模叠）。
+uses_conventions: []
+sources:
+  - ref: donagi-noja-2026
+    loc: "arXiv:2608.24996v2, p.1 Theorem 1.1（逐字）；p.2 Acknowledgments（亏格 3 work in progress）；§2–§5 证明（测试曲线+显式 Čech 计算）"
+    note: |
+      L1 全文（16 页）逐页读取（researcher 2026-09-18，抽取记录 literature/extractions/donagi-noja-2026.md
+      E1–E6）。摘要/标题层面「整个 𝔐₄」的不交并逻辑见抽取记录 E2（抽取者自陈"未逐字符对照 TeX
+      源码，允许极小排版误差，但数学内容、量词、条件已核实无误"）。
+tags: [supermoduli, super-riemann-surface, non-projected, genus-4, math-input, donagi-noja]
+notes: |
+  与既有节点 `math.supermoduli-space-not-projected`（Donagi–Witten 2013）的关系：该节点红线(1)称
+  "g=5 已证，g=3,4 仅为猜测（'we suspect ... g≥3'）"——本节点填补了 g=4 这一格（偶分量非投影已证），
+  g=3 仍开放（见上）。该节点红线(4)"不考虑紧化"对本节点同样成立（本节点同样不涉及紧化）。
+
+  奇自旋分量 𝔐₄^- 本身是否非投影，本节点不断言（论文没有对它做独立计算，只靠不交并逻辑搭它的便车）。
+author: curator-supermoduli-post-2024
+created: "2026-09-18"

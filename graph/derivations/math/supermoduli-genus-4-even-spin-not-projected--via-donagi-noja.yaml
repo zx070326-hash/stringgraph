@@ -1,0 +1,26 @@
+id: math.supermoduli-genus-4-even-spin-not-projected--via-donagi-noja
+target: math.supermoduli-genus-4-even-spin-not-projected
+kind: proof
+status: rigorous
+depends_on: []
+sources:
+  - ref: donagi-noja-2026
+    loc: "arXiv:2608.24996v2 全文（16 页），Theorem 1.1 + §2–§5 证明 + Remark 3.1 勘误"
+    note: L1 全文逐页读取，见 statement sources note。
+summary: |
+  记账已发表数学论证：显式测试曲线（超椭圆曲线 y²=x⁶−1）+ 自由阶 6 自同构，在 Čech 上同调中直接算出
+  第一 Green 障碍类分量非零，方法论与 Donagi–Witten 附录 A（亏格 5 例子）同构。本项目已读全文
+  （16 页），但未逐行复核代数计算本身（矩阵元、上同调基底选取等），因此仍按"来源是已发表数学论证"
+  记 rigorous，而非独立复核，具体缺口见 gaps。
+gaps:
+  - |
+    本项目未逐行复核 §2–§5 的显式矩阵/上同调计算本身，只确认了定理陈述、方法论轮廓与证明骨架无跳步
+    迹象；rigorous 档位依据来源强度（"we prove"+显式计算，无 [TODO]/[GAP] 类跳步痕迹），非本图独立
+    验算。
+  - |
+    奇自旋分量 𝔐₄^- 未被本文独立计算；"整个 𝔐₄ 非投影"这一摘要级断言依赖不交并的平凡逻辑，
+    本推导只承载偶分量结论。
+  - |
+    亏格 3（未紧化）情形据作者自陈仍是"work in progress"，不在本推导范围内。
+author: curator-supermoduli-post-2024
+created: "2026-09-18"
