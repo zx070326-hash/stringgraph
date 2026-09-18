@@ -1,0 +1,116 @@
+id: math.lattice-vertex-algebra-odd-pairing-obstruction
+kind: proposition
+title: 存在奇配对的偶格上，格点顶点代数模的 cocycle 无法被"无 cocycle 归一化"的分层等变同构吸收（奇配对障碍）
+statement: |
+  **设定**（Li–Wang 记号，一般偶格 L；照抄本项目 research/attempts/physical-exponential-equals-lattice-voa/proof.md
+  的设定 6.6，只把层指标从物理专用的 Z 换回一般偶格 L 本身——6.6 已经是这个一般版本）。
+
+  设 𝔥 是复数域上的有限维向量空间，带非退化对称 ℂ-双线性型 ⟨·,·⟩。设 L ⊂ 𝔥 是加法子群，满足
+    (3.5)  ⟨α, α⟩ ∈ 2Z    对一切 α ∈ L   （"偶格"，与 math.lattice-vertex-algebra 的假设相同），
+  并给定函数 ε : L × L → ℂ^× 满足
+    (3.6)  ε(α, 0) = ε(0, α) = 1,
+    (3.7)  ε(α, β+γ) ε(β, γ) = ε(α+β, γ) ε(α, β),
+    (3.8)  ε(α, β) ε(β, α)^{-1} = (−1)^{⟨α, β⟩}      （α, β, γ ∈ L）。
+
+  设 M(1) 是 𝔥 上 level-1 的 Heisenberg 顶点代数（Fock 空间），p̃ ∈ 𝔥 满足 **Condition C_L**：
+  ⟨λ, p̃⟩ ∈ Z 对一切 λ ∈ L（记 ν_γ := ⟨γ, p̃⟩ ∈ Z）。设 U := M(1, p̃) 是相应的 level-1
+  ĥ-模（h(0) 在 U 上作用为标量 ⟨h, p̃⟩，h(n)（n ≥ 1）为湮灭算子）。
+
+  设 W := V_(𝔥,L)(U) = ℂ_ε[L] ⊗ U 是格点顶点代数 V_(𝔥,L)（math.lattice-vertex-algebra）
+  在 U 上的模（Li–Wang Theorem 3.6 后半 + Condition C_L 保证其存在；层 W_λ := e^λ ⊗ U），
+  其上的模顶点算子按 Li–Wang (3.14) 给出：
+    Y_W(e^γ ⊗ v, x)(e^δ ⊗ w) = ε(γ,δ) e^{γ+δ} ⊗ x^{⟨γ,δ⟩} E^-(−γ,x) Y_U(Δ̄(δ,x)v, x) Δ̄(γ,−x) w,
+  其中 E^±(α,x) = exp(Σ_{n≥1} (α(±n)/(±n)) x^{∓n})，Δ̄(α,x) = (−x)^{α(0)} E^+(−α,−x)
+  （同 math.lattice-vertex-algebra 的 (3.10)；E^±、Δ̄ 是 Li–Wang §2–§3 的标准算子，本卡照抄为记号）。
+
+  设 T := ⊕_{λ∈L} T_λ 是另一个 L-分次 ℂ-向量空间，每层带一个固定的非零向量 |0;λ⟩ ∈ T_λ，
+  并带一族与 W 同型的"振子"算子 {h(m) : h∈𝔥, m≠0}（逐层作用、与层指标无关，同 W 上 h(m) 的形状）。
+  称 ℂ-线性双射 Ψ : W → T 是**分层等变同构**，若
+    (Φ1) 分层：Ψ(W_λ) = T_λ，对一切 λ ∈ L；
+    (Φ3) 振子等变：Ψ ∘ h(m) = h(m) ∘ Ψ，对一切 h ∈ 𝔥 与一切 m ≠ 0
+  （物理侧的原始版本按层指标 j ∈ Z 编号，见 proof.md 定义 1.3；这里把 Z 换成一般偶格 L，
+  是设定 6.6 声明"定义照搬"的那一步）。
+
+  **定义（无 cocycle 归一化）。** 称算子族 {A^{(γ)}_K : γ∈L, K∈Z} ⊆ End_ℂ(T) **无 cocycle 归一化**，
+  若对每对 γ, λ ∈ L 存在整数 K_γ(λ) 使
+    A^{(γ)}_{K_γ(λ)} |0;λ⟩ = |0;γ+λ⟩ ,      且     A^{(γ)}_K |0;λ⟩ = 0   对一切 K < K_γ(λ) 。
+  （即：每对层之间那个"标准跃迁"的系数恰为 1，不带任何 λ-依赖的相位——这正是层移位算子
+  "系数为 1"这条写死约定的直接推论型表述，不额外引入任何相位自由度。定义**不**指定 K_γ(λ) 的
+  具体值，故下面的定理对任何洛朗指标约定都成立。）
+
+  **定理（奇配对障碍）。** 在上述设定下，若存在 γ*, δ* ∈ L 使 ⟨γ*, δ*⟩ 为**奇数**，
+  则**不存在**任何一对
+    （分层等变同构 Ψ : W → T ,  无 cocycle 归一化的族 {A^{(γ)}_K}）
+  满足
+    Ψ ∘ ( [x^K] Y_W(e^γ⊗1, x) ) ∘ Ψ^{−1} = A^{(γ)}_K      对一切 γ ∈ L 与一切 K ∈ Z 。   (6.3)
+
+  **锐利性（本卡把原文的注 6.10 一并纳入陈述，不单独立卡）。** 定理的假设只用到
+  "L 上存在一对奇配对"，与 L 的秩无关：秩 1 偶格永远没有奇配对
+  （⟨mk,nk⟩ = mn⟨k,k⟩ ∈ 2Z 对任意生成元 k），故定理对秩 1 格是空话；
+  秩 ≥ 2 时奇配对可以出现（例如满足 (3.5) 但 ⟨·,·⟩|_L 不处处偶的格），也可以不出现
+  （例如 L = Zk_1 ⊕ Zk_2 且 ⟨·,·⟩|_L ≡ 0）。
+  **⇒ 正确的分界不是"秩 1 vs 秩 ≥ 2"，而是"⟨·,·⟩|_L 是否处处取偶值"。**
+
+  **本命题不断言的三条边界：**
+  1. **不断言正面方向。** 当 ⟨·,·⟩|_L ≡ 0（从而不存在奇配对）时，是否真的存在满足 (6.3) 的
+     (Ψ, {A^{(γ)}_K}) 对，本卡不置一词；秩 1 类光的这一正面情形由另一条独立结果覆盖
+     （worldsheet.physical-exponential-equals-voa-vertex-operator-v2，effective = physical-argument，
+     因为它额外依赖把物理记号 :e^{i n k_0·X(z)}: 锚定到某个满足 (C1)(C2)(C3) 的算子族这一条
+     图内无源前提 (H-anchor)；本卡完全不涉及这条前提，是纯代数事实）。
+  2. **不断言 W 的模结构对一般 L 在图中有承载。** 本卡把"W = V_(𝔥,L)(U) 是 V_(𝔥,L)-模，
+     Y_W 由 (3.14) 给出"当作 Li–Wang Theorem 3.6 后半 + Condition C_L（Definition 3.5）的直接应用，
+     写进**设定**而非结论；math.lattice-vertex-algebra 明确声明它自己不承载"不可约模的构造与分类"
+     （该卡"本命题不断言"第 5 条），而本图目前只有秩 1 类光特例的模构造被单独立卡
+     （worldsheet.free-boson-vertex-algebra-with-lightlike-momentum-tower）。一般偶格 L 上的模构造
+     在本图现状下没有独立节点承载，见本卡对应推导的 gaps。
+  3. **不涉及任何具体物理识别、无鬼定理或 DDF 算子。** T、|0;λ⟩、{A^{(γ)}_K} 全部是抽象的代数对象；
+     "T 恰好是物理动量塔、A^{(γ)}_K 恰好是 DDF 类算子"是 proof.md 的动机与命名来源，不是本卡的内容。
+uses_conventions: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: |
+      research/attempts/physical-exponential-equals-lattice-voa/proof.md ::
+      设定 6.6（第 1062–1067 行）、定义 6.7（1069–1076 行）、定理 6.8 及其证明（1078–1124 行）、
+      推论 6.9（1126–1130 行）、注 6.10（1132–1137 行）。
+    note: |
+      **本项目原创证明，非已发表文献**（research/CLAUDE.md §"毕业"）。
+      本卡毕业的只是定理 6.8（含随附的注 6.10 锐化，不含推论 6.9——推论 6.9 是把定理 6.8
+      应用到 Grotenhuis 2020 那条特定先例上的注记，涉及 research/CLAUDE.md 与
+      prior-art.md §2 的原创性限定词，本卡不重复，见推导卡 notes）。
+      `research/attempts/physical-exponential-equals-lattice-voa/status.yaml`：
+      attempt 整体 state 仍为 `under-review`；定理 6.8 单支已由**逐步重算审查**
+      （docs/reviews/theorem-6-8-recomputation-audit-2026-09-19.md，2026-09-19）裁定
+      "准予升 verified，可单独毕业成图卡"，`captain_confirmed: false`（尚未经船长最终确认，
+      按 research/CLAUDE.md 的先例，这不阻塞 curator 按 `verified` 单支毕业）。
+      毕业时 proof.md 所在分支 HEAD 提交 sha: 3188fa9。
+  - ref: li-wang-2008
+    loc: "Theorem 3.6 (3.14), p.13（模格点顶点算子公式）；(3.5)–(3.8), p.12（偶格与 cocycle 公理）；(3.2), p.11（E^± 定义）；Definition 3.5（Condition C_L）, p.13"
+    note: |
+      本卡陈述里复述的 (3.5)–(3.8)、(3.14) 与 math.lattice-vertex-algebra 逐字相同（同一份 L1
+      抽取，literature/extractions/math-sources.md §36.6）；本卡只是把该卡明确排除的
+      "Theorem 3.6 后半（模的存在性）"重新写进**设定**（不重证，只引用），因为定理 6.8 的陈述
+      本身需要先假设 W 是模，Y_W 才有意义。
+tags: [vertex-algebra, lattice, cocycle, no-go, math-input, original-result]
+notes: |
+  【为什么归入 math 而非 worldsheet】本命题的全部内容是纯代数：一个偶格 L 上的 2-cocycle ε
+  （满足 (3.6)–(3.8)）与一个抽象的"无 cocycle 归一化"算子族之间的不相容性，证明只用到群代数、
+  扭群代数的可逆元与 (3.14) 的逐系数展开，不引用任何世界面作用量、Virasoro、BRST 或时空维数。
+  T、|0;λ⟩ 等记号虽然沿用了 proof.md 里"物理塔"的名字，但本卡（见"不断言"第 3 条）刻意剥离了
+  这层物理外衣；按 `graph/schema/areas.yaml`，`math` 是"纯数学基础……供引用"，`worldsheet`
+  要求"世界面理论：玻色弦/超弦的作用量、量子化、CFT……"，本命题不含后者的任何要素，故取 `math`。
+
+  【与 worldsheet.physical-exponential-equals-voa-vertex-operator-v2 的关系】那张卡断言的是
+  **正面**方向（秩 1 类光 ⟹ cocycle 平凡 ⟹ 存在等式），且卡内 notes 已经引用了本卡对应的
+  proof.md 定理 6.8（作为"这不是取巧而是命题成立的边界"的旁证，见 -v2 卡历史与
+  prior-art.md §3 的口头版本）。本卡是那条边界论证的量词完整、有证明版本，**不修改**那张卡。
+
+  【与 Grotenhuis 2020 的关系，仅供背景，不构成本卡内容】proof.md 推论 6.9 用本定理精确裁定了
+  `grotenhuis-2020`（Leiden 本科毕业论文）p.106 的识别句在他自己设定的一般偶格（如 Leech 格）上
+  不成立——他的"We recognise …"是零论证的肉眼识别，且本卡的定理证明了那个识别在存在奇配对的
+  偶格上**不可能**成立。若后续要把推论 6.9 单独立卡，引用 Grotenhuis 时必须同时说出
+  `research/attempts/physical-exponential-equals-lattice-voa/prior-art.md` §2 的五条限定词
+  （本科论文/非同行评议；论证强度为零且他自己的公式内部不自洽；他的命题是正定偶格 Leech
+  而非本卡这种一般设定；他自陈关键推广步骤是假设；零模因子对不上），
+  且只能主张"首次给出证明"，绝不可主张"首次陈述"——proof.md §0.3 已把这条纪律写死。
+author: curator
+created: "2026-09-19"
