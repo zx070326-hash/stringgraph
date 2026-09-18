@@ -476,4 +476,161 @@ lemma modeVec_levelSixIndex (x : LevelSixIdx ι) :
 
 end LevelSixIndex
 
+/-! ### Injectivity of the level-six parametrisation
+
+Mirrors `LevelFiveCount`'s injectivity proof: the mode profile `levelSixShape` settles all but
+the eleven diagonal (same-shape) cases; those eleven are settled by `Finsupp.single`
+injectivity and `symModeIndex_injective`.  Two cases are genuinely new relative to levels
+`≤ 5`: `[3,2,1]` needs a three-point (rather than two-point) cross-elimination, and
+`[2,2,1,1]` needs a `Finsupp.ext` argument since **both** factors are `Sym`, so there is no
+single evaluation point that isolates one factor from the other — instead, the mode value `2`
+itself does the separating (`symModeIndex_apply_of_ne`, plus the vanishing of the mode-`1`
+part off mode `2`, are used pointwise for every `v`). -/
+
+section LevelSixInjective
+
+variable {ι : Type*} [DecidableEq ι]
+
+private lemma single_apply_mode_ne (i j : ι) (m n : ℕ+) (hmn : m ≠ n) :
+    (Finsupp.single ((j, n) : ι × ℕ+) (1 : ℕ)) ((i, m) : ι × ℕ+) = 0 := by
+  refine Finsupp.single_eq_of_ne fun hc => hmn ?_
+  have hc2 := congrArg (fun v : ι × ℕ+ => v.2) hc
+  simp only at hc2
+  first | exact hc2 | exact hc2.symm
+
+private lemma fst_of_single_apply (i j : ι) (n : ℕ+)
+    (h : (Finsupp.single ((j, n) : ι × ℕ+) (1 : ℕ)) ((i, n) : ι × ℕ+) = 1) : j = i := by
+  by_contra hc
+  rw [Finsupp.single_eq_of_ne (fun hcc => hc (by
+      have hz := congrArg (fun v : ι × ℕ+ => v.1) hcc
+      simp only at hz
+      first | exact hz | exact hz.symm))] at h
+  exact zero_ne_one h
+
+/-- **The level-six parametrisation is injective.** -/
+theorem levelSixIndex_injective : Function.Injective (levelSixIndex ι) := by
+  have h61 : (6 : ℕ+) ≠ 1 := by decide
+  have h51 : (5 : ℕ+) ≠ 1 := by decide
+  have h41 : (4 : ℕ+) ≠ 1 := by decide
+  have h42 : (4 : ℕ+) ≠ 2 := by decide
+  have h32 : (3 : ℕ+) ≠ 2 := by decide
+  have h31 : (3 : ℕ+) ≠ 1 := by decide
+  have h21 : (2 : ℕ+) ≠ 1 := by decide
+  intro x y h
+  have hs : levelSixShape ι x = levelSixShape ι y := by
+    rw [← modeVec_levelSixIndex x, ← modeVec_levelSixIndex y, h]
+  obtain i | p | q | ps | s | pqr | pt | s3 | pp | pu | t := x <;>
+      obtain i' | p' | q' | ps' | s' | pqr' | pt' | s3' | pp' | pu' | t' := y <;>
+    simp only [levelSixShape, Prod.mk.injEq] at hs <;> try (exfalso; omega)
+  · -- `[6]` versus `[6]`
+    refine congrArg Sum.inl ?_
+    have h1 := DFunLike.congr_fun h ((i, 6) : ι × ℕ+)
+    rw [levelSixIndex, levelSixIndex, Finsupp.single_eq_same] at h1
+    exact (fst_of_single_apply i i' 6 h1.symm).symm
+  · -- `[5,1]` versus `[5,1]`
+    refine congrArg (Sum.inr ∘ Sum.inl) ?_
+    have h1 := DFunLike.congr_fun h ((p.1, 5) : ι × ℕ+)
+    have h2 := DFunLike.congr_fun h ((p.2, 1) : ι × ℕ+)
+    rw [levelSixIndex, levelSixIndex, Finsupp.add_apply, Finsupp.add_apply,
+      Finsupp.single_eq_same, single_apply_mode_ne p.1 p.2 5 1 h51,
+      single_apply_mode_ne p.1 p'.2 5 1 h51, add_zero, add_zero] at h1
+    rw [levelSixIndex, levelSixIndex, Finsupp.add_apply, Finsupp.add_apply,
+      Finsupp.single_eq_same, single_apply_mode_ne p.2 p.1 1 5 (Ne.symm h51),
+      single_apply_mode_ne p.2 p'.1 1 5 (Ne.symm h51), zero_add, zero_add] at h2
+    exact Prod.ext (fst_of_single_apply p.1 p'.1 5 h1.symm).symm
+      (fst_of_single_apply p.2 p'.2 1 h2.symm).symm
+  · -- `[4,2]` versus `[4,2]`
+    refine congrArg (Sum.inr ∘ Sum.inr ∘ Sum.inl) ?_
+    have h1 := DFunLike.congr_fun h ((q.1, 4) : ι × ℕ+)
+    have h2 := DFunLike.congr_fun h ((q.2, 2) : ι × ℕ+)
+    rw [levelSixIndex, levelSixIndex, Finsupp.add_apply, Finsupp.add_apply,
+      Finsupp.single_eq_same, single_apply_mode_ne q.1 q.2 4 2 h42,
+      single_apply_mode_ne q.1 q'.2 4 2 h42, add_zero, add_zero] at h1
+    rw [levelSixIndex, levelSixIndex, Finsupp.add_apply, Finsupp.add_apply,
+      Finsupp.single_eq_same, single_apply_mode_ne q.2 q.1 2 4 (Ne.symm h42),
+      single_apply_mode_ne q.2 q'.1 2 4 (Ne.symm h42), zero_add, zero_add] at h2
+    exact Prod.ext (fst_of_single_apply q.1 q'.1 4 h1.symm).symm
+      (fst_of_single_apply q.2 q'.2 2 h2.symm).symm
+  · -- `[4,1,1]` versus `[4,1,1]`
+    refine congrArg (Sum.inr ∘ Sum.inr ∘ Sum.inr ∘ Sum.inl) ?_
+    have h1 := DFunLike.congr_fun h ((ps.1, 4) : ι × ℕ+)
+    rw [levelSixIndex, levelSixIndex, Finsupp.add_apply, Finsupp.add_apply,
+      Finsupp.single_eq_same, symModeIndex_apply_of_ne 1 ps.2 (by simpa using h41),
+      symModeIndex_apply_of_ne 1 ps'.2 (by simpa using h41), add_zero, add_zero] at h1
+    have hfst : ps'.1 = ps.1 := fst_of_single_apply ps.1 ps'.1 4 h1.symm
+    rw [levelSixIndex, levelSixIndex, hfst] at h
+    exact Prod.ext hfst.symm (symModeIndex_injective 1 (add_left_cancel h))
+  · -- `[3,3]` versus `[3,3]`
+    exact congrArg (Sum.inr ∘ Sum.inr ∘ Sum.inr ∘ Sum.inr ∘ Sum.inl)
+      (symModeIndex_injective 3 h)
+  · -- `[3,2,1]` versus `[3,2,1]`: the new three-point cross-elimination
+    refine congrArg (Sum.inr ∘ Sum.inr ∘ Sum.inr ∘ Sum.inr ∘ Sum.inr ∘ Sum.inl) ?_
+    have h1 := DFunLike.congr_fun h ((pqr.1, 3) : ι × ℕ+)
+    have h2 := DFunLike.congr_fun h ((pqr.2.1, 2) : ι × ℕ+)
+    have h3 := DFunLike.congr_fun h ((pqr.2.2, 1) : ι × ℕ+)
+    rw [levelSixIndex, levelSixIndex] at h1 h2 h3
+    simp only [Finsupp.add_apply, Finsupp.single_eq_same,
+      single_apply_mode_ne pqr.1 pqr.2.1 3 2 h32, single_apply_mode_ne pqr.1 pqr.2.2 3 1 h31,
+      single_apply_mode_ne pqr.1 pqr'.2.1 3 2 h32, single_apply_mode_ne pqr.1 pqr'.2.2 3 1 h31,
+      add_zero] at h1
+    simp only [Finsupp.add_apply, Finsupp.single_eq_same,
+      single_apply_mode_ne pqr.2.1 pqr.1 2 3 (Ne.symm h32),
+      single_apply_mode_ne pqr.2.1 pqr.2.2 2 1 h21,
+      single_apply_mode_ne pqr.2.1 pqr'.1 2 3 (Ne.symm h32),
+      single_apply_mode_ne pqr.2.1 pqr'.2.2 2 1 h21,
+      add_zero, zero_add] at h2
+    simp only [Finsupp.add_apply, Finsupp.single_eq_same,
+      single_apply_mode_ne pqr.2.2 pqr.1 1 3 (Ne.symm h31),
+      single_apply_mode_ne pqr.2.2 pqr.2.1 1 2 (Ne.symm h21),
+      single_apply_mode_ne pqr.2.2 pqr'.1 1 3 (Ne.symm h31),
+      single_apply_mode_ne pqr.2.2 pqr'.2.1 1 2 (Ne.symm h21),
+      add_zero, zero_add] at h3
+    have hfst : pqr'.1 = pqr.1 := fst_of_single_apply pqr.1 pqr'.1 3 h1.symm
+    have hsnd : pqr'.2.1 = pqr.2.1 := fst_of_single_apply pqr.2.1 pqr'.2.1 2 h2.symm
+    have hthd : pqr'.2.2 = pqr.2.2 := fst_of_single_apply pqr.2.2 pqr'.2.2 1 h3.symm
+    exact Prod.ext hfst.symm (Prod.ext hsnd.symm hthd.symm)
+  · -- `[3,1,1,1]` versus `[3,1,1,1]`
+    refine congrArg (Sum.inr ∘ Sum.inr ∘ Sum.inr ∘ Sum.inr ∘ Sum.inr ∘ Sum.inr ∘ Sum.inl) ?_
+    have h1 := DFunLike.congr_fun h ((pt.1, 3) : ι × ℕ+)
+    rw [levelSixIndex, levelSixIndex, Finsupp.add_apply, Finsupp.add_apply,
+      Finsupp.single_eq_same, symModeIndex_apply_of_ne 1 pt.2 (by simpa using h31),
+      symModeIndex_apply_of_ne 1 pt'.2 (by simpa using h31), add_zero, add_zero] at h1
+    have hfst : pt'.1 = pt.1 := fst_of_single_apply pt.1 pt'.1 3 h1.symm
+    rw [levelSixIndex, levelSixIndex, hfst] at h
+    exact Prod.ext hfst.symm (symModeIndex_injective 1 (add_left_cancel h))
+  · -- `[2,2,2]` versus `[2,2,2]`
+    exact congrArg (Sum.inr ∘ Sum.inr ∘ Sum.inr ∘ Sum.inr ∘ Sum.inr ∘ Sum.inr ∘ Sum.inr ∘ Sum.inl)
+      (symModeIndex_injective 2 h)
+  · -- `[2,2,1,1]` versus `[2,2,1,1]`: the new `Sym × Sym` case
+    refine congrArg (Sum.inr ∘ Sum.inr ∘ Sum.inr ∘ Sum.inr ∘ Sum.inr ∘ Sum.inr ∘ Sum.inr
+      ∘ Sum.inr ∘ Sum.inl) ?_
+    have hEq2 : symModeIndex ι 2 pp.1 = symModeIndex ι 2 pp'.1 := by
+      ext v
+      by_cases hv : v.2 = (2 : ℕ+)
+      · have hv1 : v.2 ≠ (1 : ℕ+) := by rw [hv]; exact h21
+        have hL := DFunLike.congr_fun h v
+        rw [levelSixIndex, levelSixIndex, Finsupp.add_apply, Finsupp.add_apply,
+          symModeIndex_apply_of_ne 1 pp.2 hv1, symModeIndex_apply_of_ne 1 pp'.2 hv1,
+          add_zero, add_zero] at hL
+        exact hL
+      · rw [symModeIndex_apply_of_ne 2 pp.1 hv, symModeIndex_apply_of_ne 2 pp'.1 hv]
+    have hpp1 : pp.1 = pp'.1 := symModeIndex_injective 2 hEq2
+    rw [levelSixIndex, levelSixIndex, hpp1] at h
+    exact Prod.ext hpp1 (symModeIndex_injective 1 (add_left_cancel h))
+  · -- `[2,1,1,1,1]` versus `[2,1,1,1,1]`
+    refine congrArg (Sum.inr ∘ Sum.inr ∘ Sum.inr ∘ Sum.inr ∘ Sum.inr ∘ Sum.inr ∘ Sum.inr
+      ∘ Sum.inr ∘ Sum.inr ∘ Sum.inl) ?_
+    have h1 := DFunLike.congr_fun h ((pu.1, 2) : ι × ℕ+)
+    rw [levelSixIndex, levelSixIndex, Finsupp.add_apply, Finsupp.add_apply,
+      Finsupp.single_eq_same, symModeIndex_apply_of_ne 1 pu.2 (by simpa using h21),
+      symModeIndex_apply_of_ne 1 pu'.2 (by simpa using h21), add_zero, add_zero] at h1
+    have hfst : pu'.1 = pu.1 := fst_of_single_apply pu.1 pu'.1 2 h1.symm
+    rw [levelSixIndex, levelSixIndex, hfst] at h
+    exact Prod.ext hfst.symm (symModeIndex_injective 1 (add_left_cancel h))
+  · -- `[1⁶]` versus `[1⁶]`
+    exact congrArg (Sum.inr ∘ Sum.inr ∘ Sum.inr ∘ Sum.inr ∘ Sum.inr ∘ Sum.inr ∘ Sum.inr
+      ∘ Sum.inr ∘ Sum.inr ∘ Sum.inr) (symModeIndex_injective 1 h)
+
+end LevelSixInjective
+
 end StringFormal.NoGhost
