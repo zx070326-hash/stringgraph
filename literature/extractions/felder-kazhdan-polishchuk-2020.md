@@ -629,3 +629,105 @@ A/B 的地基性依赖（紧化 + 任意穿孔数超模叠的存在性，即 The
   - ⚠ 本抽取**不判定**"把 $m$ 个额外 $\Psi_i$ 加到 Theorem 9.2 图表两侧后是否仍交换"。
     **本轮没有追进 Lemma 9.3 / 9.4 / 9.5 的证明全文**（只读了陈述与证明首句），因此**不能**断言
     "Theorem 9.2 的证明与穿孔数无关"。需要该断言者留给 curator，并须标 `inferred: true`。
+
+### E11 ★ Theorem C（§1 引言）与 (8.11)：**靶空间逐字是无穿孔的 $\overline{\mathcal{S}}_g$** —— 承重复核
+- 位置：**Theorem C** 陈述在 **p.2 末（"Theorem C. Let $B \to \overline{\mathcal{S}}_g$ …"）**，
+  交换图在 **p.3 顶**；**(8.11)** 在 **p.58 上半页**（Proof of Theorem B 的收尾式）。
+  **Theorem B** 在 **p.2 中**。L1（三处都用 `pdftoppm -r 500` 局部放大逐符号复核下标）。
+- 类型：proposition
+- 原文陈述（Theorem C，逐字，跨 p.2–3）：
+  > **Theorem C**. *Let $B \to \overline{\mathcal{S}}_g$ be the gluing map to one of the components
+  > of $\Delta_{NS}$ from a lower genus (uncompactified) moduli space $B$. There exists a natural
+  > isomorphism (see below) of the normal bundle*
+  > $$N_B := \mathcal{O}(\Delta)|_B \simeq \Psi_1^{-1} \otimes \Psi_2^{-1},$$
+  > *such that the following diagram is commutative up to a sign*
+  > $$\begin{array}{ccc}
+  >   K_{\overline{\mathcal{S}}_g}(2\Delta)|_B &
+  >     \xrightarrow{\ SM_{\overline{\mathcal{S}}_g}|_B\ } & \mathrm{Ber}_1^5|_B \\
+  >   \big\downarrow & & \big\downarrow \\
+  >   K_B \otimes N_B & \xrightarrow{\ SM_B\ } & (\mathrm{Ber}_1^B)^5
+  >   \end{array}$$
+- 原文陈述（(8.11)，逐字，p.58；其上下文是 "Proof of Theorem B. Let
+  $\overline{\mathcal{S}} = \overline{\mathcal{S}}_{g,n_{NS},n_R}$."）：
+  > This gives the required isomorphism
+  > $$K_{\overline{\mathcal{S}}} \simeq \mathrm{Ber}_1^5 \otimes \bigotimes_{i=1}^{m}
+  >   \Psi_i(-2\Delta_{NS} - \Delta_R), \qquad (8.11)$$
+  同页 (8.11) 之前作者自列的两个输入（逐字）：
+  > We combine the isomorphism
+  > $$K_{\overline{\mathcal{S}}} \simeq \mathrm{Ber}^{-1} R^1\pi_*\mathcal{L}(X,P_\bullet,R_\bullet)
+  >   (-\Delta_{NS}-\Delta_R) \simeq \mathcal{B}(\mathcal{L}(X,P_\bullet,R_\bullet))
+  >   (-\Delta_{NS}-\Delta_R)$$
+  > (see Sec. 6.4) with Lemma 8.11 and the isomorphism
+  > $$\mathcal{B}(\omega^3_{X/\overline{\mathcal{S}}}) \simeq \mathrm{Ber}_1^5(-\Delta_{NS}).$$
+- 原文陈述（Theorem B，逐字，p.2 —— 作为对照，因为本条的判定正是 B 与 C 的对比）：
+  > **Theorem B**. *Let $\overline{\mathcal{S}} = \overline{\mathcal{S}}_{g,n_{NS},n_R}$. There
+  > exists a canonical isomorphism*
+  > $$K_{\overline{\mathcal{S}}} \xrightarrow{\ SM_{\overline{\mathcal{S}}}\ } \mathrm{Ber}_1^5
+  >   \otimes \bigotimes_{i=1}^{n_{NS}} \Psi_i(-2\Delta_{NS} - \Delta_R),$$
+  > *where $\Delta_{NS}$ and $\Delta_R$ are the components of the boundary divisor corresponding to
+  > nodes of NS and Ramond type, and $\Psi_i$ is the line bundle associated with the ith NS puncture
+  > $P_i$:*
+  > $$\Psi_i := P_i^*\omega_{X/\overline{\mathcal{S}}}.$$
+  >
+  > In the case when there are no punctures the isomorphism becomes
+  > $$K_{\overline{\mathcal{S}}_g} \simeq \mathrm{Ber}_1^5(-2\Delta_{NS} - \Delta_R).$$
+- 文献自称的严格程度：Theorem C 是**编号定理**（§1 引言），正文证明在 §9（"Combining the above
+  Corollary with Theorem 9.2, we get the statement of Theorem C."，p.70）。**无弱化措辞。**
+- 文献列出的依赖：Theorem 9.2（E10）+ §9.2 的 Corollary（p.70，源自 Lemma 9.6 的 Kodaira–Spencer
+  分裂）；$N_B$ 的识别来自 §7.2 的 $\Delta$ 消没轨迹描述（p.3 逐字："The identification of $N_B$ in
+  Theorem C comes from the identification of $\Delta$ as the vanishing locus of a morphism induced
+  on Berezinians by the morphism $R\pi_*(\Omega_{X/\overline{\mathcal{S}}_g}) \to
+  R\pi_*j_*(\Omega_{U/\overline{\mathcal{S}}_g})$, where $j : U \to X$ is the embedding of the
+  smooth locus (see Sec. (7.2))."）。
+- 备注（★★ **本轮最重要的独立复核，裁定如下**）：
+
+  **裁定：SUPPORT（支持本项目既有结论）。FKP 的 Theorem C 的靶逐字确实是不带穿孔指标的
+  $\overline{\mathcal{S}}_g$，而同页 Theorem B 的靶逐字是 $\overline{\mathcal{S}}_{g,n_{NS},n_R}$；
+  两者的下标差异在 500 dpi 放大下清晰可辨，不是渲染/OCR 造成的假象。**
+
+  **逐字证据（支持"FKP 刻意区分"的一侧）：**
+  1. **Theorem B**（p.2）开篇即写 "*Let $\overline{\mathcal{S}} =
+     \overline{\mathcal{S}}_{g,n_{NS},n_R}$*"——下标三元组完整出现，且其公式带
+     $\bigotimes_{i=1}^{n_{NS}}\Psi_i$ 与 $-\Delta_R$，即**显式处理任意 NS/Ramond 穿孔数**。
+  2. **Theorem C**（p.2 末）写的是 "*Let $B \to \overline{\mathcal{S}}_g$*"——**下标只有一个 $g$**
+     （500 dpi 放大逐字符确认：$\overline{\mathcal{S}}$ 右下角只有一个斜体 $g$，其后紧接空格与
+     "be the gluing map"，**没有 $,n_{NS},n_R$**）。
+  3. 同一定理的交换图（p.3）**四个角一致地使用无穿孔形式**：左上 $K_{\overline{\mathcal{S}}_g}
+     (2\Delta)|_B$（**下标同样只有 $g$**），右上 $\mathrm{Ber}_1^5|_B$（**无 $\Psi_i$ 因子**），
+     右下 $(\mathrm{Ber}_1^B)^5$（**无 $\Psi_i$ 因子**）。若靶是带 $n_{NS}$ 个穿孔的
+     $\overline{\mathcal{S}}_{g,n_{NS},n_R}$，按 Theorem B 右上角本应出现
+     $\bigotimes_{i=1}^{n_{NS}}\Psi_i$——**它没有出现**。
+  4. Theorem C 上面一段（p.2，逐字）：*"As in the classical case, each component of $\Delta_{NS}$ is
+     an image of a natural gluing map $B \to \overline{\mathcal{S}}_g$, where $B$ is some lower genus
+     moduli space **with more punctures** or a product of two such moduli spaces (see Sec. 7.5)."*
+     ——**源** $B$ 明确"穿孔更多"，**靶**却始终写作 $\overline{\mathcal{S}}_g$。这说明作者在引言里
+     考虑的是"**无穿孔的紧化超模叠**的边界分量由**带穿孔的**低亏格模空间粘出"这一情形。
+  5. 交换图下行 $K_B \otimes N_B \xrightarrow{SM_B} (\mathrm{Ber}_1^B)^5$ 与 $N_B \simeq
+     \Psi_1^{-1}\Psi_2^{-1}$ 联立，逐字只在 "$B$ 恰好带那两个被粘的 NS 穿孔、没有别的穿孔"时
+     才与 Theorem B 的形状自洽（Theorem B 给 $K_B \simeq \mathrm{Ber}_1^5 \otimes \Psi_1
+     \otimes \Psi_2$，$B$ 未紧化故无 $\Delta$ 项）。**这与 E7/E10 记录的 §9 正文里"只有两个 $\Psi$"
+     的形态完全一致**——不是孤立的疏漏，而是全篇一贯的 $m=0$ 写法。
+
+  **逐字证据（反面 / 不利于"FKP 刻意区分"的一侧，同等记录）：**
+  1. **(8.11) 自身带穿孔**：$K_{\overline{\mathcal{S}}} \simeq \mathrm{Ber}_1^5 \otimes
+     \bigotimes_{i=1}^{m}\Psi_i(-2\Delta_{NS}-\Delta_R)$，而 §9.1 的整套推导（E7、E10）**输入正是
+     (8.11)**，即作者是从**带穿孔**的公式出发的。他们只是在 §9 里把它 "rewrite … near $B$" 成了
+     无穿孔形式（E7 已逐字记录这一步丢掉了 $\bigotimes\Psi_i$ 与 $\Delta_R$）。
+  2. **(7.8)/(7.9) 的粘接映射带一般穿孔指标 $(m,n)$**（见 E12），而 §9.1 的 setup 逐字允许
+     $\iota$ 是 "one of the maps (7.8) or (7.9)"（E7）。即：**§9.1 的 setup 比 Theorem C 的陈述更宽**，
+     Theorem C 的陈述是 setup 的一个特例写法。
+  3. 作者**从未在任何地方写下**"Theorem C 只对无穿孔情形成立"或"Theorem C 对任意穿孔数成立"
+     之类的显式量词声明——**两个方向的显式声明都不存在**。
+
+  **⚠ 记号疑点（L1，500 dpi 复核，如实记录，不替作者改）**：
+  - **(8.11) 用 $\bigotimes_{i=1}^{m}$，而引言的 Theorem B 用 $\bigotimes_{i=1}^{n_{NS}}$。**
+    (8.11) 所在的 "Proof of Theorem B" 段开头逐字是 "Let $\overline{\mathcal{S}} =
+    \overline{\mathcal{S}}_{g,n_{NS},n_R}$"，**没有在该段里把 $m$ 声明为 $= n_{NS}$**；$m$（与 $n$）
+    是 §8.4 起沿用的穿孔数简写（见 E14）。按上下文 $m = n_{NS}$，但**本抽取不替作者补这条等式**，
+    只记录原文的记号漂移。
+  - **Theorem C 的 $N_B := \mathcal{O}(\Delta)|_B$ 用的是全部边界除子 $\Delta$，不是
+    $\Delta_{NS}$**——与 (9.6) 的左端一致（见 E9 备注 (b) 第 1 条：二者的衔接靠 Prop. 7.8(i)，
+    且只在"只有 NS 节点"的邻域成立）。
+  - ⚠ **本抽取不判定** "Theorem C 是否实际上对任意 $(n_{NS}, n_R)$ 成立"。逐字层面能确定的只有：
+    **作者写下来的 Theorem C 的靶是 $\overline{\mathcal{S}}_g$**。要把它推广到带穿孔的靶，属于
+    推断，留给 curator（若做，须标 `inferred: true`，并把上面"反面证据"三条一并带上）。
