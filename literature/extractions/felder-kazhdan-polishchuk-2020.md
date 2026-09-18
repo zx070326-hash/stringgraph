@@ -215,3 +215,240 @@ A/B 的地基性依赖（紧化 + 任意穿孔数超模叠的存在性，即 The
    的完整书目条目（本轮受任务书时间预算限制，聚焦 Theorem A 本身，未展开核实参考文献表）。
 5. **Moosavian–Zhou [27]（Theorem A 的独立平行证明，E1 备注）与 forthcoming paper [7]**（Hilbert/
    Picard superscheme 存在性）的完整书目信息本轮未核实，供后续参考。
+
+---
+
+# 第二轮抽取（2026-09-18）：§7.5 / §8.4 / §9 的粘接机器
+
+- 抽取者：researcher（agent/researcher/fkp-deep-gluing）
+- 日期：2026-09-18
+- 版本：arXiv:2006.13271**v3**（2023-03-07 编译，74 页；`curl -sL https://arxiv.org/pdf/2006.13271v3`）
+- 页码约定：**PDF 页码 = 排版页眉页码**（已在 pp.45/47/49/56/58/59/61 逐页核对页眉数字，例如 PDF 第 58 页
+  页眉印 "58"）。本节所有页码均指该编号，**不是** AJM 145 (2023) 1777–1886 的期刊页码。
+- 方法等级（沿用 `alvarez-gaume-witten-1984.md` §0 的 L0–L4 制）：
+  **本轮 E7–E15 的每一条公式与逐字引文均为 L1**——用 `Read` 工具直接渲染 PDF 页图像逐字核对
+  （pp.2–3、45–50、56–61、70–71），`pdftotext -layout` 只用于定位与 ASCII 骨架交叉校验。
+  (9.6) 与 Example 8.9 的公式另外用 `pdftoppm -r 400` 局部放大复核。
+- 覆盖范围：§7.3（(7.6) 边界线丛定义）、§7.4（Prop 7.8）、§7.5（Lemma 7.9、(7.8)、(7.9)、Lemma 7.10）、
+  §7.6 开头（Ramond 粘接，Lemma 7.11–7.13）、§8.3 末（Prop 8.5、Theorem 8.6）、§8.4（Lemma 8.7、
+  Cor 8.8、Example 8.9、Remark 8.10、Lemma 8.11、(8.11)）、§9.1（全节）、§9.2 抬头、§9.3（Ramond 猜想）、
+  §1 引言里的 Theorem B / Theorem C。
+- ⚠ **本轮未做**：§9.2 的 Lemma 9.3–9.6 的证明细节（只记录了 Lemma 9.3 的陈述位置）；Theorem C
+  证明的收尾（§9.2 末）；§3/§6 的变形理论；参考文献表书目核实。
+
+## 陈述（第二轮）
+
+### E7 §9 开篇与 §9.1 setup：法丛 $N_B \cong \Psi_1^{-1}\otimes\Psi_2^{-1}$ 的**启发式比较论证**
+- 位置：p.58，§9 标题段 + §9.1 "NS boundary components" 开头至 p.59 第 3 个公式。L1（页图逐字）。
+- 类型：definition + proposition（正文推导段落，无编号）
+- 原文陈述（逐字）：
+  > **9. Splitting at the boundary divisor**
+  >
+  > Now we are going to study the restriction of the isomorphism of Theorem B to the boundary
+  > divisor. Using our presentation of the line bundle corresponding to the boundary divisor as a
+  > Berezinian (see Sec. 7.2) we find a natural identification of the normal line bundle to the
+  > boundary divisor. Then we give a proof of Theorem C concerning the NS boundary component.
+  > We also give a conjectural statement for the Ramond boundary component.
+  >
+  > **9.1. NS boundary components.** Let $\iota : B \to \overline{\mathcal{S}}$ be the standard
+  > gluing map covering an NS type boundary component, i.e., one of the maps (7.8) or (7.9),
+  > restricted to the locus of smooth supercurves. Let $X_B \to B$ denote the universal stable
+  > supercurve, which is obtained by identifying two NS punctures $P_1, P_2$ on a smooth supercurve
+  > $\widetilde{X} \to B$ into a node $Q \subset X_B$. Let $D_1, D_2 \subset \widetilde{X}$ be the
+  > corresponding divisors. Note that we have a finite morphism $\rho : \widetilde{X} \to X_B$, and
+  > an exact sequence on $X_B$,
+  > $$0 \to \mathcal{O}_{X_B} \to \rho_*\mathcal{O}_{\widetilde{X}} \to \mathcal{O}_Q \to 0.$$
+  > In particular, the Berezinian line bundle $\mathcal{B}(\mathcal{O}_{X_B})$ for the family
+  > $X_B \to B$ is naturally identified with $\mathcal{B}(\mathcal{O}_{\widetilde{X}})$ defined for
+  > the family $\widetilde{X} \to B$.
+  >
+  > Note that in the case of a separating node, where $B = \mathcal{S}_1 \times \mathcal{S}_2$, the
+  > line bundle $\mathcal{B}(\mathcal{O}_{\widetilde{X}})$ is the exterior product of two similar
+  > line bundles on the factors $\mathcal{S}_1$ and $\mathcal{S}_2$.
+  >
+  > We can rewrite (8.11) near $B$ as an isomorphism
+  > $$K_{\overline{\mathcal{S}}}(2\Delta_{NS}) \simeq \mathcal{B}(\mathcal{O}_X)^5.$$
+  > Thus, pulling it back to $B$ leads to an isomorphism
+  > $$K_B \otimes N_B \simeq \mathcal{B}(\mathcal{O}_{X_B})^5,$$
+  > where $N_B$ is the normal bundle defined as the pull-back of $\mathcal{O}(\Delta_{NS})$ to $B$.
+  > Note that the universal supercurve over $B$ is equipped with two NS punctures $P_1, P_2$ and the
+  > isomorphism (8.11) in smaller genus gives
+  > $$K_B \simeq \mathcal{B}(\mathcal{O}_{\widetilde{X}})^5 \otimes \Psi_1 \otimes \Psi_2.$$
+  > Comparing with the previous isomorphism we get an isomorphism
+  > $$N_B \simeq \Psi_1^{-1} \otimes \Psi_2^{-1}.$$
+  > Below we will define such a canonical isomorphism independently and then will check its
+  > compatibility with two above isomorphisms.
+- 文献自称的严格程度：正文推导（非编号定理）。最后一句**明确声明这只是启发式比较**，真正的定义在
+  下文独立给出（即 (9.6)，见 E9），并在 Theorem 9.2（E10）里检验两者相容。
+- 文献列出的依赖：(8.11)（即带穿孔版的 Theorem B 公式，p.58 上半页）；Sec. 7.2（边界除子的
+  Berezinian 表示，即 (7.6)）；(7.8)/(7.9)（粘接映射，见 E12）。
+- 备注（**穿孔判定，逐字证据**）：
+  - **支持"与穿孔数无关"的一侧**：setup 句逐字允许 $\iota$ 是 "**one of the maps (7.8) or (7.9)**"，
+    而 (7.8)/(7.9) 的定义域/陪域**都带一般的 $(m,n)$ 穿孔指标**（见 E12），setup 本身**没有**加
+    "$m=n=0$" 之类的限制。
+  - **反面 / 必须如实记下的一侧**：紧接着的比较论证把 (8.11) "near $B$" 重写成
+    $K_{\overline{\mathcal{S}}}(2\Delta_{NS}) \simeq \mathcal{B}(\mathcal{O}_X)^5$，**丢掉了 (8.11)
+    里的 $\bigotimes_{i=1}^{m}\Psi_i$ 因子**（(8.11) 逐字为
+    $K_{\overline{\mathcal{S}}} \simeq \mathrm{Ber}_1^5 \otimes \bigotimes_{i=1}^{m}\Psi_i(-2\Delta_{NS}-\Delta_R)$，
+    见 E11 备注）；同样地，下一句只说 $B$ 上的普适超曲线带 "**two** NS punctures $P_1, P_2$"，
+    于是 $K_B \simeq \mathcal{B}(\mathcal{O}_{\widetilde{X}})^5 \otimes \Psi_1 \otimes \Psi_2$
+    也**只有两个 $\Psi$**。**即：这段比较论证逐字写的是 $m=0$（靶无穿孔）的情形。**
+  - 本抽取**不判定**"把 $m$ 个 $\Psi_i$ 加回两边是否相消"——那是推断，留给 curator（若做，须标
+    `inferred: true`）。本条只如实记录：**作者在这段里写的是无穿孔形式**。
+  - 另注：$\mathcal{B}(\mathcal{O}_{X_B}) \simeq \mathcal{B}(\mathcal{O}_{\widetilde{X}})$ 这一步
+    的依据是节点处的正合列 $0 \to \mathcal{O}_{X_B} \to \rho_*\mathcal{O}_{\widetilde{X}} \to
+    \mathcal{O}_Q \to 0$，$\mathcal{O}_Q$ 支撑在**节点**上——这是"只用节点邻域局部数据"的第一处
+    逐字证据。
+
+### E8 Lemma 9.1（i)–(iv)：(9.6) 的全部技术输入，**证明逐字自陈只在节点的形式/平展邻域里做**
+- 位置：p.59（陈述 + (9.1)–(9.5)）、p.60（证明）。L1（页图逐字）。
+- 类型：proposition
+- 原文陈述（逐字，含 (9.1)–(9.5)）：
+  > First, recall that we have a line bundle $\omega^2_{X/S}$ defined on the universal curve of
+  > $\overline{\mathcal{S}}$ by extending from the smooth locus (see Theorem 4.1).
+  >
+  > **Lemma 9.1.** *(i) For any integer $m$ let us set*
+  > $$\omega^{2m}_{X_B/B} := \omega^{2m}_{X/\overline{\mathcal{S}}}|_B.$$
+  > *Then one has an exact sequence on $X_B$,*
+  > $$0 \to \omega^{2m}_{X_B/B} \to \rho_*\omega^{2m}_{\widetilde{X}/B}(mD_1 + mD_2) \to
+  >   \mathcal{O}_Q \to 0 \qquad (9.1)$$
+  > *where $Q \subset X_B$ is the relative node obtained by gluing $P_1 \simeq B \simeq P_2$. Here we
+  > use the canonical trivializations of the restrictions of $\omega^2_{\widetilde{X}/B}(D_1+D_2)$ to
+  > $P_1$ and $P_2$ (see Corollary 8.8). Hence, we have a natural isomorphism*
+  > $$\mathcal{B}(\omega^{2m}_{X/\overline{\mathcal{S}}})|_B \simeq
+  >   \mathcal{B}(\omega^{2m}_{\widetilde{X}/B}(mD_1+mD_2)). \qquad (9.2)$$
+  > *(ii) Let us set $\omega^{2m+1}_{X_B/B} := \omega^{2m}_{X_B/B} \otimes \omega_{X_B/B}$. Then one
+  > has an exact sequence on $X_B$,*
+  > $$0 \to \rho_*\omega^{2m+1}_{\widetilde{X}/B}(mD_1+mD_2) \to \omega^{2m+1}_{X_B/B} \to
+  >   Q_*\mathcal{O}_S \to 0. \qquad (9.3)$$
+  > *Hence, we have a natural isomorphism*
+  > $$\mathcal{B}(\omega^{2m+1}_{X/\overline{\mathcal{S}}})|_B \simeq
+  >   \mathcal{B}(\omega^{2m+1}_{\widetilde{X}/B}(mD_1+mD_2)). \qquad (9.4)$$
+  > *In addition, we have a natural exact sequence*
+  > $$0 \to \omega^{2m+1}_{X_B/B} \to \rho_*\omega^{2m+1}_{\widetilde{X}/B}((m+1)D_1+(m+1)D_2)
+  >   \to \mathcal{C} \to 0,$$
+  > *where $\mathcal{C}$ is a sheaf supported on the node fitting into an exact sequence*
+  > $$0 \to Q_*\mathcal{O}_S \to \mathcal{C} \to Q_*(\Psi_1^{-1} \oplus \Psi_2^{-1}) \to 0.
+  >   \qquad (9.5)$$
+  > *(iii) One has an exact sequence on $X_B$,*
+  > $$0 \to \mathcal{K} \to \Omega_{X_B/B} \to \rho_*\Omega_{\widetilde{X}/B} \to 0,$$
+  > *where the sheaf $\mathcal{K}$ is supported on the node, and has a filtration with the subfactors*
+  > $$Q_*(\Psi_1^2\Psi_2^2), \; Q_*(\Psi_1^2\Psi_2), \; Q_*(\Psi_1\Psi_2^2), \; Q_*(\Psi_1\Psi_2).$$
+  > *In particular, $\mathrm{Ber}\,\pi_*\mathcal{K}$ is canonically trivial, so*
+  > $$\mathrm{Ber}\,R\pi_*(\Omega_{X_B/B}) \simeq \mathrm{Ber}\,R\pi_*\Omega_{\widetilde{X}/B}.$$
+  > *(iv) One has an exact sequence over the smooth locus of $B$,*
+  > $$0 \to j_*\Omega_{U/\overline{\mathcal{S}}}|_{X_B} \to \Omega_{\widetilde{X}/B}(D_1+D_2) \to
+  >   \widetilde{\mathcal{C}} \to 0,$$
+  > *where $U \subset X$ is the smooth locus of $X \to \overline{\mathcal{S}}$, and the sheaf
+  > $\widetilde{\mathcal{C}}$ is supported on the node and has a filtration with the subfactors*
+  > $$\mathcal{O}_Q, \; \mathcal{O}_Q, \; Q_*(\Psi_1^{-1} \oplus \Psi_2^{-1}).$$
+- 证明梗概（p.60，**局部性的逐字证据**）：
+  > *Proof.* (i) We just have to identify the pull-back of the line bundle $\omega^2_{X_B/B}$ to
+  > $\widetilde{X}$, $\rho^*\omega^2_{X_B/B}$ with $\omega^2_{\widetilde{X}/B}(D_1+D_2)$. Note that we
+  > have a natural identification of these line bundles over the smooth locus of $\widetilde{X}$.
+  > Thus, we need to check that it extends to an isomorphism over the node. **For this, it is enough
+  > to study these line bundles in an étale neighborhood of the node.** Thus, we can place ourselves
+  > in the framework of Sec. 6.2 and use a generator $e$ of $\omega^2_{X/S}$ (see (6.13)). Since
+  > $\rho^*e$ is a generator of $\omega^2_{\widetilde{X}/B}(D_1+D_2)$, the assertion follows.
+  >
+  > (ii) […] We claim that $\omega_{X_B/B}/\omega_{\widetilde{X}/B}$ coincides with the kernel of the
+  > addition map $\mathcal{O}_Q \oplus \mathcal{O}_Q \to \mathcal{O}_Q$. **Indeed, this is a local
+  > statement.** In local coordinates the generators of two summands $\mathcal{O}_Q$ are
+  > $\frac{\theta_i}{z_i}[dz_i|d\theta_i]$, and the generator $s_0$ of
+  > $\omega_{X_B/B}/\omega_{\widetilde{X}/B}$ is mapped to their difference. […] To derive the case
+  > of arbitrary $m$ from that of $m = 0$, we tensor the sequence (9.5) with the line bundle
+  > $\omega^{2m}_{X_B/B}$. By the triviality of $Q^*(\omega^{2m}_{X_B/B})$, we get the sequence of the
+  > required form.
+  >
+  > (iii) First, we note that **$\mathcal{K}$ is supported on the node, so it is enough to prove the
+  > assertion after replacing $X_B$ with the formal neighborhood of the node.** Then $\widetilde{X}$
+  > becomes the union of two branches $X_1 \sqcup X_2$, so that $P_1 \in X_1$, $P_2 \in X_2$. […]
+  > Using Lemma 7.2(ii), one checks that $\kappa$ is an isomorphism, and the assertion follows.
+  >
+  > (iv) This follows from parts (i), (ii) and from the exact sequence (7.1) (and a similar exact
+  > sequence for $\Omega_{\widetilde{X}/B}$ which holds over the smooth locus).
+- 文献自称的严格程度：编号引理 + 完整证明（"the assertion follows"，无外包）。
+- 文献列出的依赖：Theorem 4.1（$\omega^2_{X/\overline{\mathcal{S}}}$ 的延拓）；Corollary 8.8（$P_i$
+  处的典范平凡化）；Remark 8.10（p.60 证明里用到 $\Psi_i^{-1} \simeq P_i^*\omega_{\widetilde{X}/B}(D_i)$）；
+  Sec. 6.2 与 (6.13)（节点的平展局部模型）；Lemma 7.2(ii)；(7.1)。
+- 备注（**穿孔判定**）：Lemma 9.1 的**陈述与证明中出现的唯一除子是 $D_1, D_2$（粘接用的那两个 NS
+  穿孔）**，$\Psi$ 也只有 $\Psi_1,\Psi_2$；**全篇未出现其他穿孔 $P_i$ / $R_j$ 的任何指标**。
+  证明里三处逐字自陈局部性（上文加粗处：étale neighborhood of the node / this is a local statement /
+  formal neighborhood of the node）。⚠ 但要注意 (iii)、(iv) 的**结论形式**不是纯局部的：它们把局部
+  计算**接到全局 Berezinian** $\mathrm{Ber}\,R\pi_*(-)$ 上（$\pi$ 是到 $B$ 的投影，整条曲线），
+  局部性保证的是"两个层的差只支撑在节点"，不是"整个同构与曲线其余部分无关"。**本条不替作者
+  推断这一差别是否影响带穿孔情形。**
+
+### E9 ★ 式 (9.6)：法丛的**独立**典范同构 —— 承重条目
+- 位置：p.60 末段（推导）→ p.61 顶（公式 (9.6)）。L1（页图逐字；(9.6) 另用 `pdftoppm -r 400`
+  局部放大二次核对）。
+- 类型：proposition
+- 原文陈述（逐字；推导段在 p.60，(9.6) 在 p.61）：
+  > We can use the definition of the NS boundary line bundle (7.6) to compute the normal bundle over
+  > the smooth part of $B$. From the above Lemma we get
+  > $$\mathrm{Ber}\,R\pi_*(j_*\Omega_{U/S})|_B \simeq
+  >   \mathrm{Ber}\,R\pi_*(\Omega_{\widetilde{X}/B}(D_1+D_2)) \otimes \Psi_1^{-1}\Psi_2^{-1},$$
+  > $$\mathrm{Ber}\,R\pi_*(\Omega_{X/S}|_B) \simeq \mathrm{Ber}\,R\pi_*\Omega_{\widetilde{X}/B}.$$
+  > Finally the exact sequence
+  > $$0 \to \omega^2_{\widetilde{X}/B} \to \Omega_{\widetilde{X}/B} \to \omega_{\widetilde{X}/B} \to 0$$
+  > near $D_1, D_2$, together with Lemma 8.7, show that
+  > $$\mathrm{Ber}\,R\pi_*\Omega_{\widetilde{X}/B}(D_1+D_2) \simeq
+  >   \mathrm{Ber}\,R\pi_*\Omega_{\widetilde{X}/B}.$$
+  >
+  > Hence, we deduce an isomorphism
+  > $$\mathcal{O}(\Delta)|_B \simeq \mathrm{Ber}\,R\pi_*(j_*\Omega_{U/S})|_B \otimes
+  >   \mathrm{Ber}^{-1}R\pi_*(\Omega_{X/S}|_B) \simeq \Psi_1^{-1}\Psi_2^{-1}. \qquad (9.6)$$
+- 输入的 (7.6)（逐字，p.45，L1）：
+  > We define the effective Cartier divisor $\Delta$ to be the vanishing divisor of this global
+  > section. Note that by definition, we have an isomorphism
+  > $$\mathcal{O}(\Delta) \simeq \mathcal{L} \simeq \mathrm{Ber}\,R\pi_*(j_*\Omega_{U/\overline{S}})
+  >   \otimes \mathrm{Ber}^{-1}R\pi_*(\Omega_{X/\overline{S}}). \qquad (7.6)$$
+  （其中 $\mathcal{L} := \mathrm{Ber}\,\pi_*[\Omega_{X/\overline{\mathcal{S}}} \to
+  j_*\Omega_{U/\overline{\mathcal{S}}}]$，p.45 上方逐字。）
+- 文献自称的严格程度：正文推导（"Hence, we deduce an isomorphism"），输入全是已证引理，**无
+  "one expects" / "conjecturally" 等弱化措辞**。
+- 文献列出的依赖：(7.6)（$\Delta$ 的 Berezinian 表示，§7.3）；Lemma 9.1(iii)(iv)（E8）；
+  Lemma 8.7（$\Psi_i$ 与 $\mathrm{Ber}$ 的关系，p.56）。
+- 备注（★★ **任务书的关键判定，逐字证据全列在此**）：
+  **判定：本抽取在 (9.6) 的推导链条里没有找到任何显式依赖穿孔数目 $(m,n)$ 的步骤；但作者也
+  从未把 (9.6) 写成"对任意穿孔数成立"，(9.6) 所在的上下文（§9.1 前半的比较论证 E7、下文的
+  Theorem 9.2 E10、以及被证的 Theorem C E11）逐字都是无穿孔靶的形式。两边的逐字证据如下。**
+
+  **(a) 支持"只用节点邻域局部数据"的逐字证据：**
+  1. Lemma 9.1(i) 证明：*"For this, it is enough to study these line bundles in an étale
+     neighborhood of the node."*（p.60）
+  2. Lemma 9.1(ii) 证明：*"Indeed, this is a local statement."*（p.60）
+  3. Lemma 9.1(iii) 证明：*"First, we note that $\mathcal{K}$ is supported on the node, so it is
+     enough to prove the assertion after replacing $X_B$ with the formal neighborhood of the
+     node."*（p.60）
+  4. Lemma 9.1(iii)(iv) 的陈述本身：*"the sheaf $\mathcal{K}$ is supported on the node"*、
+     *"the sheaf $\widetilde{\mathcal{C}}$ is supported on the node"*（p.59）。
+  5. (9.5) 的 $\mathcal{C}$：*"where $\mathcal{C}$ is a sheaf supported on the node"*（p.59）。
+  6. §9.1 开头的 $0 \to \mathcal{O}_{X_B} \to \rho_*\mathcal{O}_{\widetilde{X}} \to
+     \mathcal{O}_Q \to 0$，余项 $\mathcal{O}_Q$ 支撑在节点（p.58）。
+  7. (9.6) 推导的最后一步只在 $D_1, D_2$ **附近**用正合列：*"near $D_1, D_2$, together with
+     Lemma 8.7"*（p.60）——$D_1,D_2$ 就是粘接用的两个 NS 除子。
+  8. Lemma 9.1 与 (9.6) 的**记号里除 $D_1,D_2$、$\Psi_1,\Psi_2$、$Q$ 外不出现任何其他穿孔符号**。
+
+  **(b) 反面 / 限制条件的逐字证据（同等重要，不可略）：**
+  1. (9.6) 左端是 $\mathcal{O}(\Delta)|_B$ 而**不是** $\mathcal{O}(\Delta_{NS})|_B$。$\Delta$ 是
+     §7.2/§7.3 定义的**全部**边界除子；$N_B$ 在 E7 里被定义为 $\mathcal{O}(\Delta_{NS})$ 到 $B$ 的
+     拉回。二者的衔接靠 **Proposition 7.8(i)** 逐字：*"The ideal sheaf $\mathcal{I}_\delta$ defines
+     an effective Cartier divisor $\Delta_{NS}$ on $\overline{\mathcal{S}}$, which coincides with
+     $\Delta$ in a neighborhood of any point $[X_0]$ corresponding to a stable supercurve $X_0$ with
+     only NS nodes."*（p.47）——即 $\Delta|_B = \Delta_{NS}|_B$ **只在"只有 NS 节点"的邻域成立**，
+     而 §9.1 已把 $B$ 限制到 "the locus of smooth supercurves"，故此条在此上下文中满足。
+     **但 curator 引用 (9.6) 作为"法丛 = $\Psi_1^{-1}\Psi_2^{-1}$"时必须带上这个限制。**
+  2. $\mathrm{Ber}\,R\pi_*(-)$ 是**整条曲线上的**高阶推出的 Berezinian（$\pi : X \to$ 基），不是
+     节点处的局部对象；局部性论证保证的是两个层的**商**支撑在节点，见 E8 备注的 ⚠。
+  3. 全套推导写在 §9.1，其 setup（E7）自陈 $\iota$ 是 (7.8)/(7.9) **限制到光滑超曲线轨迹**——
+     即 $B$ 只允许**一个**节点，且是 NS 型。Ramond 节点的类比在 §9.3 **只是猜想**（见 E15）。
+  4. 作者在 §9.1 里唯一一次显式点穿孔数的地方（E7）用的是 $m=0$ 形式。
+  - ⚠ **未尝试 / 未核实**：本轮**没有**追进 §9.2 的 Lemma 9.3–9.6 的证明细节，因此**不能**断言
+    "Theorem 9.2 的相容性证明也与穿孔数无关"；(9.6) 本身的推导链条（(7.6) + Lemma 9.1 + Lemma 8.7）
+    是本轮逐页读完的部分。
+  - ⚠ **记号疑点（L1 核实）**：(9.6) 与 p.60 的三个显示式里，基底写作**不带上划线的 $S$**
+    （$\Omega_{U/S}$、$\Omega_{X/S}$），而 §9.1 setup 与 (7.6) 写的是**带上划线的
+    $\overline{\mathcal{S}}$**。400 dpi 放大复核确认 (9.6) 里确实**无上划线**。按上下文这应指同一个
+    $\overline{\mathcal{S}}$（(9.6) 就是 (7.6) 的限制），判为**排印上的上划线遗漏**，但本条如实记录
+    原文形态，不替作者改。
