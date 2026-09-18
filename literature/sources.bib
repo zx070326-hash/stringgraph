@@ -1224,7 +1224,27 @@
              gebert-nicolai-1995 p.583 把「非退化偶格 => 顶点代数；再正定 => 顶点算子代数」这条结果归给 **[6, 17] = Borcherds + FLM**。
              **任务书假设的「FLM §8.4-8.6 Thm 8.x 处理一般非退化偶格含洛伦兹」本轮未能核实（L0），
              连 §8 的标题都没拿到。图里不得写「FLM, Theorem 8.x」。**
-             见 extractions/math-sources.md §36.3(f)、§36.5、§38.2。}
+             见 extractions/math-sources.md §36.3(f)、§36.5、§38.2。
+
+             **2026-09-18 更新（专题 extractions/assertion-2-lattice-vertex-physical-identification-2026-09-18.md
+             §候选4/E11）：为核实 Ch.8 是否承载"物理正规序指数 = VOA 格点顶点算子结构映射"这一断言，
+             本轮穷尽五条公开渠道，全部失败，Ch.8 正文维持完全 L0：**
+             (1) `openlibrary.org/books/OL2031899M/...` 可访问（200），但页面**没有**指向
+             archive.org 扫描件的链接；即便存在 CDL 借阅扫描，按 literature/CLAUDE.md 规则 1 与
+             本项目 2001-2024 Hachette v. Internet Archive 侵权判例口径**不采信**。
+             (2) ScienceDirect（该书现归 Elsevier Pure and Applied Mathematics vol.134）
+             `sciencedirect.com/bookseries/pure-and-applied-mathematics/vol/134` 返回 **403**（bot 拦截），
+             且即便可读也是订阅付费，不合"公开可获取"，原则上也不合规。
+             (3) Google Books 预览（volume id `yOC9OFC1YSUC`）：用"已知应无命中对照短语法"测试四个查询
+             （"untwisted vertex operators"、"Chapter 8"、"normal ordered exponential"、
+             "vertex operator representation of the Virasoro algebra"），**全部返回同一固定回落页
+             `pg=PA508`**（全书末页/索引），即**该书在 Google Books 完全没有可搜索的预览内容**。
+             (4) 未找到 Lepowsky 或 Meurman 个人主页挂出该书任何章节 PDF。
+             (5) Bates College / U. Missouri 图书馆目录链接仅为馆藏索引页，不含扫描内容。
+             **结论：FLM 1988 Ch.8 正文本轮（及此前所有轮次）从未以任何公开渠道读到过，完全维持 L0。**
+             这是"断言 (2) 三候选文献核查"任务中唯一未能读到底（而非"读到底后判定不承载"）的候选，
+             若未来能获取（例如某高校课程页挂出单章，或版权方公开），应第一时间重开
+             `physical-exponential-equals-voa-vertex-operator` 卡。}
 }
 
 @misc{tomassini-2008,
@@ -1961,6 +1981,34 @@
             见 extractions/math-sources.md §8 与 §13。}
 }
 
+@article{frenkel-2000-bourbaki,
+  author  = {Frenkel, Edward},
+  title   = {Vertex Algebras and Algebraic Curves},
+  journal = {S{\'e}minaire Bourbaki},
+  volume  = {52{\`e}me ann{\'e}e, 1999--2000, n\textsuperscript{o} 875},
+  year    = {2000},
+  note    = {由 researcher 于 2026-09-18 登记（专题
+             extractions/assertion-2-lattice-vertex-physical-identification-2026-09-18.md
+             §候选2）。**全文 41 页 L1 通读到底。** 获取途径：arXiv:math/0007054v4 [math.QA]
+             （`https://arxiv.org/pdf/math/0007054`，PDF 内标注「7 Sep 2001」，v4）；
+             作者本人也把它列为 `frenkel-benzvi-2004`（书）的公开前身/概要（主页挂
+             `bourbaki.ps`/`bourbaki.pdf`，见 math-sources.md §9.0）。
+             引言自陈「§§4–6 contain previously unpublished results」developed in the
+             forthcoming book [FB]（=`frenkel-benzvi-2004`）——**言下之意 §§1–3（含格点
+             顶点代数一节）是既有结果综述，不是本文新结果**，与书的对应章节
+             （核实为 Ch.4 §4.2–4.4，见 `frenkel-benzvi-2004` 条目）内容路线高度重叠。
+             **核实结果：不承载 worldsheet.physical-exponential-equals-voa-vertex-operator
+             的断言 (2)。** §3.3（p.875-13）给出格点顶点算子的显式公式
+             `Y(1_λ,z) = S_λ z^{λb_0} exp(-λΣ_{n<0}(b_n/n)z^{-n}) exp(-λΣ_{n>0}(b_n/n)z^{-n})`，
+             结构上与物理 `:e^{ikX(z)}:` 的 E₋·零模·E₊ 分解逐项同构，但记号是抽象 Heisenberg
+             振子 `b_n`，全文无 `X^μ(z)`。§3.4(1)（p.875-14）给出全文**唯一**的物理识别句：
+             「The vertex algebra `V_L` is the chiral symmetry algebra of the free bosonic
+             conformal field theory compactified on the torus `W/L`.」——**零公式、零论证、
+             零引用**，不满足「写出物理侧公式」的判据，比 well-known 带过更简略。
+             `pdftotext` 全文关键词复核（`grep worldsheet\|X\^\\mu\|string theory\|X(z)`）
+             除引言首句与参考文献表外**零命中**，确认物理记号全文不出现。}
+}
+
 @book{frenkel-benzvi-2004,
   author    = {Frenkel, Edward and Ben-Zvi, David},
   title     = {Vertex Algebras and Algebraic Curves},
@@ -1998,7 +2046,23 @@
                **本书的结合性/OPE 是纯形式的**：陈述场所全是 V((w))((z-w))、V[[z^+-,w^+-]] 等形式级数空间，
                勘误表通篇没有 converge / holomorphic / analytic continuation 任何一词。
                与 gui-2023-lectures 的解析版 OPE **是两个不同的节点，不可合并**。
-               见 extractions/math-sources.md §9 与 §13。}
+               见 extractions/math-sources.md §9 与 §13。
+
+               **2026-09-18 更新（专题 extractions/assertion-2-lattice-vertex-physical-identification-2026-09-18.md
+               §候选3）：官方免费预览 PDF 改用浏览器 UA 的 curl 直接下载，200（此前 WebFetch 得 403），
+               拿到完整前 4 页含**完整目录**（第 2 版）。** 目录逐字核实：
+               `Chapter 4. Rational Vertex Algebras` (p.69) 下含
+               `4.2. Vertex algebras associated to one-dimensional integral lattices` (p.72)、
+               `4.3. Boson-fermion correspondence` (p.77)、`4.4. Lattice vertex algebras` (p.80)；
+               `Chapter 5. Vertex Algebra Bundles` (p.87) 下是 `5.1 The group Aut O`、`5.2 Exponentiating
+               vector fields`、`5.3 Primary fields` 等——**与格点顶点代数无关**。
+               **⚠ 任务书假设的"Frenkel–Ben-Zvi §5 处理格点顶点算子"是错的定位；正确章节是 Ch.4
+               §4.2–4.4。** ScienceDirect（该书现属 Elsevier Pure and Applied Mathematics 丛书 vol.134）
+               返回 403（bot 拦截页，且即便可读也是付费墙，不合"公开可获取"）。**Ch.4 §4.2/§4.4 正文
+               仍是 L0**——本轮改读该书的公开前身 `frenkel-2000-bourbaki`（同作者 Bourbaki 综述，
+               §3.3/§3.4 与书 Ch.4 §4.3/§4.4 页码结构、节标题几乎逐一对应，L1 通读到底）作为代用，
+               结论：**不承载断言 (2)**（唯一识别句零论证零引用，见 `frenkel-2000-bourbaki` 条目）。
+               这是**推断**（书正文本身未核实），不是对书正文的直接核实，残余风险见抽取记录结论段。}
 }
 
 @incollection{frenkel-1985,
@@ -2011,18 +2075,24 @@
   address   = {Providence, RI},
   pages     = {325--353},
   year      = {1985},
-  note      = {由 researcher 于 2026-09-15 登记（专题 extractions/voa-residue-mode-sum-2026-09-15.md）。
-               **书目 L1**（标题页/系列/卷号/页码已确认）；**内容 L0**：公开 PDF 为扫描件、CCITT 传真编码，
-               本轮 WebFetch 落盘 1.1 MB 但正文 OCR 极差，**未能读图，无法逐字引任何公式号**。
+  note      = {由 researcher 于 2026-09-15 登记（专题 extractions/voa-residue-mode-sum-2026-09-15.md）；
+               **2026-09-18 全文 L1 通读到底**（专题 extractions/assertion-2-lattice-vertex-physical-identification-2026-09-18.md
+               §候选1 E1–E4）：上一轮 WebFetch 走文本 OCR 失败，本轮改用 `Read` 工具直接读扫描图像
+               （多模态），29 页（pp.325–353）全部清晰可读。
                获取途径（公开镜像，作者主页系）：
                https://cpb-us-w2.wpmucdn.com/campuspress.yale.edu/dist/2/3739/files/2021/06/frenkel_representations_kac_moody.pdf
-               登记理由：这是「把 DDF 算子当作顶点算子（vertex operator）」的**历史源头**，
-               GN 1995、FLM 等格点顶点代数文献都上溯到它；其 §4 标题
-               「The dual model in the critical dimension and hyperbolic algebras of rank 26」正是 DDF/无鬼语境。
-               **潜在用途**：若日后 L1 读到它把横向 DDF 写成顶点算子的留数/模，可望消掉
-               worldsheet.ddf-contour-equals-mode-sum 里「物理 :e^{ink_0X}: = VOA 𝒴(e^{nk_0},z)」那条 inferred 桥。
-               ⚠ **区分 key**：`frenkel-1986` 是 Frenkel--Garland--Zuckerman (FGZ, PNAS 1986) 的别名，**不是**本文；本文 key 是 `frenkel-1985`。
-               **本条内容未核实，不得承载论证、不得代写任何公式号。**}
+               **核实结果：不承载 worldsheet.physical-exponential-equals-voa-vertex-operator 的断言 (2)。**
+               物理侧构造存在且逐字：p.326-327 eq.(3) `X(p,z) = exp(p·Σα(-n)/n z^n)·exp(p(p log z - ix))
+               ·exp(-p·Σα(n)/n z^{-n})`（正是 `:e^{ipX(z)}:` 的 E₋·零模·E₊ 分解）；p.332 eq.(2.3) 推广到
+               格点 `X(α,z)`。**但全文没有独立的 VOA 结构映射（本文写于 Borcherds 1986 提出"vertex
+               algebra"术语之前，全文无此词），`X(α,z)` 本身就是全篇唯一的"顶点算子"对象，没有
+               第二个独立构造可供"划等号"**——断言 (2) 需要的"两套构造之间的恒等式"在本文里没有
+               陈述对象。p.347 Theorem 4.1 (no-ghost theorem) 是超越型双曲 Kac-Moody 代数版本的无鬼定理，
+               自陈只给"main steps"（完整证明外包 [25]=Scherk 1975），与本图 DDF/Goddard-Thorn 路线不同源，
+               不建议挂靠。
+               登记理由（历史价值，不变）：这是「把 DDF 算子当作顶点算子（vertex operator）」的**历史源头**，
+               GN 1995、FLM 等格点顶点代数文献都上溯到它。
+               ⚠ **区分 key**：`frenkel-1986` 是 Frenkel--Garland--Zuckerman (FGZ, PNAS 1986) 的别名，**不是**本文；本文 key 是 `frenkel-1985`。}
 }
 
 @book{kac-1998,
