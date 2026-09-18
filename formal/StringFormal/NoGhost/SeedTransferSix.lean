@@ -66,10 +66,16 @@ refines (does not contradict) blueprint §B⁗.9's framing of the computation as
 ## What is **not** done here (explicitly out of scope for this PR)
 
 * The **transverse half**: that `x₄v`, `y₃v` are singular vectors of `V(26,-4)` (`v` the rung-`-5`
-  Fock vacuum) is *not* formalised.  This is the bulk of the remaining work towards `b26_six` /
-  `ddfSpans_bigrade_neg_six_six` per §B⁗.9's "下一步", and is out of scope for this file.
+  Fock vacuum) is *not* formalised in this file.  **Now done in
+  `NoGhost/SingularVectorsSix.lean`** (`y3_mem_towerPositiveModeSubmodule`,
+  `x4_mem_towerPositiveModeSubmodule`), transported onto the slice by
+  `NoGhost/SingularVectorsSixSlice.lean`.
 * The `N = 6` seed criterion itself (`x₄u ∈ Q_{-6,5} ∧ y₃u ∈ Q_{-6,4} ⟹ u ∈ Q_{-6,1}`, §B⁗.9's
-  main theorem) is untouched: this file only supplies its "前置事实 3" plus the longitudinal half.
+  main theorem) is untouched here: this file only supplies its "前置事实 3" plus the longitudinal
+  half.  **Now done in `NoGhost/SeedCriterionSix.lean`** (`mem_towerSeed_neg_six_one_iff`), which
+  consumes `towerLop_one_apply_y3_towerLop_neg_one_of_eq_neg_five` below as its longitudinal input.
+  Still open: the `N = 6` count itself (`b26_six`, `ddfSpans_bigrade_neg_six_six`); see
+  `formal/TODO.md` entry `noghost-pr-d2`.
 -/
 
 namespace StringFormal.NoGhost
