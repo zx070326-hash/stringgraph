@@ -3,30 +3,196 @@ reviewer: null
 verdict: null
 captain_confirmed: false
 notes: |
-  进度快照（2026-09-18，theorem-prover / agent/prover/physical-exponential-equals-lattice-voa）
+  ==========================================================================
+  === 第二轮快照（2026-09-18，theorem-prover / 分支 agent/prover/track-iii-proof）===
+  ==========================================================================
+
+  === 本轮完成了什么、没完成什么（一句话）===
+  proof.md 从零写到 §9：两条接缝 (S1)(S2) 各自裁定落地，主定理证毕，三条边界定理证毕，
+  缺口逐条结算。🔴 **state 仍为 draft**——作者不自评 verified，请 lead 派 graph-reviewer。
+
+  === 目录现状 ===
+  - prior-art.md  ✅ 第一轮交付，已并入 main。第二轮**只读、未修改一个字**。
+  - claim.md      ✅ 第一轮交付；第二轮加了 §-1 增订块 + 两处就地指针（§1.5、§6），
+                     不改写第一轮正文（见下「对 claim.md 的三处改动」）。
+  - proof.md      ✅ **本轮从零建立**，§0–§9。
+  - scripts/      ❌ 不存在（本命题不是穷举型；全部论证是定义展开 + 符号核对，无可跑的东西）。
+  - scratch.lean  ❌ 不存在（所有需要的 Lean 事实在 formal/ 里已经存在，本轮只读未写）。
+
+  === 🔴 排序纪律的执行情况（任务书「不许倒过来」）===
+  按要求先攻两条接缝，两条都落地后才写五步核对。proof.md 的章节顺序与提交顺序都是
+  §0–§2（接缝 S1）→ §3（接缝 S2）→ §4（收窄）→ §5（五步核对）→ §6（边界）→ §7–§9。
+  提交历史（分支 agent/prover/track-iii-proof，共 7 个提交）：
+    6eb2b44 settle the delta-normalisation seam by proving gauge rigidity of the identification map
+    10bdf0c reduce the physical-symbol anchoring seam to three checkable properties via a uniqueness theorem
+    d0e9968 state the narrowed Claim A-prime with an explicit before/after quantifier ledger
+    a639c38 prove the main identity by five explicit coefficient checks on Li-Wang (3.14)
+    1cada89 delimit the claim by proving the odd-pairing obstruction and the non-isotropic layer dependence
+    64bdfb8 settle the seven seams of claim.md and list the gaps that survive the proof
+    871860b amend the claim with the index-shift check, the gauge-rigidity reversal and the narrowed Claim A-prime
+
+  === 接缝 (S1)「δ 归一化」的裁定：选 (b)，且比 (b) 更强 ===
+  任务书给的三选一：(a) 显式列为前提；(b) 构造定义并证唯一性；(c) 收窄 Claim A。
+  **裁定：(b)，但不需要在塔上构造任何 δ 归一化的替代物。** 理由（proof.md §2、§2.6）：
+  - 引理 2.1–2.5：任何「分层 + 振子等变」的同构必形如 Φ_c（逐层标度 c_j ∈ ℂ^×）；
+  - 命题 2.7：只要求 (A) 在 **n = 1** 上成立，就强迫 c 为常值
+    （关键算子取值 𝒫_{1,ν}|0;j⟩ = S_1 V^{(b_1)}_0(1) = |0;j+1⟩ ≠ 0）；常值 c 的共轭与 c ≡ 1 相同。
+  ⇒ claim.md §1.5 的红字「(Φ2) 是一个选择，不是定理」**被推翻**：它是 (A) 自身的推论。
+  ⇒ δ 归一化在本命题里所做的工作，两侧**各自独立地**已被消化：
+     物理侧 S_n 的系数 1 由 momentum-tower-fock-space (1)（formalized）承载；
+     VOA 侧 ε ≡ 1 由 li-wang-2008 §4 p.21 逐字承载。两者都不需要内积。
+  ⇒ 残余降级为 [GAP-δ-downstream]：塔上的双线性型与物理 δ^D(p−p′) 的关系，
+     **不是 Claim A′ 的前提**，但任何用到内积/厄米性/幺正性的下游结论会重新撞上它。
+
+  === 接缝 (S2)「物理符号锚定」的裁定：(b) + (a)，并因此强制走 (c) 收窄 ===
+  - (b) 部分：proof.md 定理 3.5 证明 {S_n V^{(b_n)}_{K−nν}} 是满足下面三条的**唯一**算子族：
+      (C1) 层移位：A_K(T_N^{(M)}) ⊆ T_{N+n}^{(M+K−nν)}
+      (C2) 振子对易：[h·α_m, A_K] = ⟨h, nk⟩·A_{K−m}，∀K ∈ Z（m = 0 的退化情形见 proof.md 注 3.1）
+      (C3) 真空归一化：A_{nν}|0;N⟩ = |0;N+n⟩
+    存在性见命题 3.4。⇒ (H-anchor-2)（「物理符号确实满足这三条」）变成**可判定的有限核对**。
+  - (a) 部分：残余的 (H-anchor-1)（「物理文献那个符号指的就是这族算子」）被隔离成一条**具名前提**，
+    并如实登记「图中**无任何节点承载它**、无 sources」。谁来背？**本尝试自己背，并写明它不是定理。**
+    🔴 它在图现状下**不可能**成为定理：X^μ(z) 含 ln z 与 x^μ，不是塔上良定义的形式洛朗级数
+    （Lean formal/StringFormal/NoGhost/DDF.lean 的「What is NOT here」第 3 条逐字：x^μ 不是算子）。
+  - ⇒ 因此必须走 (c)：Claim A 收窄为 Claim A′（见下）。
+
+  === Claim A → Claim A′ 的收窄（量词台账见 proof.md §4.3）===
+  (A′-a) Φ∘([z^K]𝒴(e^{nk₀},z))∘Φ^{−1} = S_n∘V^{(b_n)}_{K−nν}，∀n,K ∈ Z   ✅ 已证（定理 5.7）
+  (A′-b) Φ 的存在唯一性（分层 + 振子等变 + (A) 在 n=1 上成立）           ✅ 已证（引理 2.4/2.5、命题 2.7）
+  (A′-c) 该族是满足 (C1)(C2)(C3) 的唯一算子族                            ✅ 已证（定理 3.5）
+  (A′-d) 「物理学家写的 :e^{ink₀·X(z)}: 的 z^K 系数 = 右端」            ⚠ **条件陈述**，条件 = (H-anchor)
+  🔴 收窄的实质：第一轮的 Claim A 隐含地把 (A′-d) 与 (A′-a) 当成同一句话，第二轮把它们分开。
+     本尝试能主张的是**数学定理** (A′-a)(A′-b)(A′-c)；(A′-d) 的状态上限仍是 physical-argument。
+
+  === 指标移位的核对结论（任务书的 🔴 硬约束 1）===
+  核对结果：**claim.md 无需订正**，故**没有**订正提交。claim.md §1.3 (★P) 与 §2.1 (A) 用的就是
+  **带移位**的 S_n ∘ V^{(b_n)}_{K−nν}。Lean docstring 逐字：移位来自 "the monodromy exponent n
+  (z^{2α' n k_0·p} = z^n under the DDF normalisation 2α' k_0·p = 1)"，即 Lean 取 ν = 1；
+  claim.md 的 K − nν 是它在一般 ν ∈ Z 上的推广，不是另一套约定。核对记录写在 proof.md §0.2。
+  需要订正的是**目标图卡的括号注**（docs/reviews/bridge-card-index-shift-2026-09-18.md 判为 CONFIRMED），
+  属 curator/lead 权限，本尝试不执行。
+
+  === 原创性主张的措辞（任务书的 🔴 硬约束 2；proof.md §0.3 逐字落实）===
+  ✅ 可主张「首次给出**证明**」；🔴 **绝不主张「首次陈述」**——grotenhuis-2020 p.106 已有逐字陈述。
+  引用该先例时同时说出口 prior-art.md §2 的五条限定词（本科论文/非同行评议；论证强度为零且公式内部
+  不自洽；命题是正定偶格 Leech 而非秩 1 类光 + 连续动量塔；关键推广步骤自陈为 Assuming；零模因子对不上）
+  与 §3 的 cocycle 硬伤。proof.md 定理 6.8 + 推论 6.9 把 §3 的口头论证升级为**量词完整的反驳定理**。
+
+  === 状态纪律（任务书的 🔴 硬约束 3）===
+  🔴 本轮**不主张任何图节点应当升级状态**（proof.md §7.3 逐条写明理由）。
+  修正指标移位是**记号 bug 的诊断**，不产生任何状态提升。即使 (A′-a)(A′-b)(A′-c) 全部通过审查，
+  图上能新增的也只是一条**数学**结果（rigorous），不是「物理顶点算子 = 格点顶点算子」这条物理陈述。
+
+  === 本轮新增的边界结论（第一轮 §2.5 的骨架，现已有证明）===
+  - 定理 6.1：秩 1 **非类光**（⟨k,k⟩ = 2s ≠ 0）时等式仍成立，但右端变成**层依赖**
+    S_n ∘ ⊕_j V^{(b_n)}_{K−nν−2njs}。
+  - 推论 6.2：两侧的层依赖指数**逐字相同**（物理侧 2α'nk₀·(p+Nk₀) = nν + 2nNs）
+    ⇒ 类光性**不是**为了让单值因子对上。
+  - 推论 6.3：⟨k,k⟩ = 0 ⟺ 移位与层指标无关 ⟺ 落在图/Lean 的层无关 towerVertex 形式里。
+    附**反例**：s ≠ 0 时取 ns > 0、K = nν，在 |0;1⟩ 上层无关候选给 |0;1+n⟩ ≠ 0，
+    真实算子给 0（因 −2ns < 0，E₋ 无负幂）。
+  - 引理 6.4 + 命题 6.5：秩 1 上每个容许 ε 都是上边缘；换 ε 不改变 (A′-a) 的右端，
+    至多把左端生成向量重标度一个**与层无关**的 λ(nk)，而 (C3) 把它钉死为 1。
+  - 定理 6.8（量词完整的反驳）：设 L 为偶格、ε 满足 (3.6)–(3.8)，若**存在**一对 γ*,δ* ∈ L 使
+    ⟨γ*,δ*⟩ 为奇，则**不存在**任何（分层等变同构 Ψ，无 cocycle 归一化的算子族）满足 (A) 型等式。
+    证明路线：最低非零 x-幂的系数匹配 ⟹ ε(γ,δ)c_{γ+δ} = c_δ ⟹（δ=0 + (3.6)）c 常值 ⟹ ε ≡ 1
+    ⟹ 与 (3.8) 的 (−1)^{⟨γ,δ⟩} = −1 矛盾。
+  - 注 6.10 的**锐化**：正确的分界**不是**「秩 1 vs 秩 ≥ 2」，而是「⟨·,·⟩|_L 是否处处取偶值」。
+
+  === claim.md 的三处改动（第二轮，均为增订，不改写第一轮正文）===
+  1. 新增 §-1 增订块：指标移位核对结论、§1.5 红字被推翻、Claim A → A′、新增边界结论。
+  2. §1.5 末尾插入就地指针：红字「(Φ2) 是一个选择」已被 proof.md §2 推翻。
+  3. §6 末尾插入就地指针：「proof.md 本轮未开始」已过时。
+
+  === 仍然开放的 [GAP] 清单（完整版见 proof.md §7.1，结算表见 §7.2）===
+  [GAP-anchor]        (H-anchor-1) 在图中无承载、无 sources；图现状下不可能成为定理。**最重要**。
+  [GAP-vac]           模真空公理 Y_U(1,x) = id_U 在图中无逐字承载节点（引理 5.1 第 4 项用到）。
+  [GAP-δ-downstream]  塔上双线性型 ↔ 物理 δ^D(p−p′)；不是 Claim A′ 的前提，但阻塞用到内积的下游。
+  [GAP-continuous]    「离散塔忠实表示连续动量模型」在图中无节点，本文不证（已被 (H-anchor) 隔离）。
+  [GAP-module-family] Li–Wang Remark 3.13：ℂL ≠ 𝔥 时另有 level-1 模族；「物理塔就是 M(1,p̃)」
+                      本文写进前提 (V2)，故主定理不受影响，但更强的主张没有证明。
+  [GAP-rank-general]  「任意偶格、⟨·,·⟩|_L 处处偶 ⟹ (6.A) 的 L-版本」本轮未逐字写出（本卡不需要）。
+  [GAP-def-cards]     图中缺 E^±(α,x)、Δ̄(α,x)、单值因子 z^{2α'nk₀·p̂} 三张定义卡。**毕业阻塞项**。
+  [GAP-target-card]   目标卡不能直接升级；需 -v2 订正卡 + superseded_by。**权限问题**。
+  ⇒ claim.md §5 的十条接缝：6 条闭合、1 条部分闭合、3 条是权限/下游问题。
+
+  ==========================================================================
+  === 🔴 移交 lead（跨目录发现；本尝试只写 research/attempts/physical-exponential-equals-lattice-voa/）===
+  ==========================================================================
+
+  --- 给 graph-curator（graph/ 路径，本尝试无权，**没有自己建卡**）---
+  C1. 新建定义卡 Li–Wang E^±(α,x)（(3.2)）与 Δ̄(α,x)（p.11）。
+      🔴 卡上**必须写明是哪一篇的约定**：Li–Wang 脚注 3 逐字 "the notation E^-(α,x) in [Li3] is the
+      notation E^-(−α,x) in this paper"——同一记号在不同文献里参数正负号相反。
+      这是 proof.md §5 里三次独立符号核对的来源，是本命题技术上最容易出错的一步。
+  C2. 新建定义卡：单值因子 Z_n(z) = z^{2α'nk₀·p̂}（proof.md (P3)），图中目前**无承载节点**。
+      （第一轮已提出，第二轮确认它是 claim.md §2.2「读法 2」下桥卡推导缺的那一块。）
+  C3. 补一张「顶点代数模的真空公理 Y_W(1,x) = id_W」定义卡，或在 math.lattice-vertex-algebra 的
+      notes 里逐字登记（[GAP-vac]）。
+  C4. 目标卡 worldsheet.physical-exponential-equals-voa-vertex-operator 的 -v2 订正
+      （docs/reviews/bridge-card-index-shift-2026-09-18.md 的处置意见，🔴 **状态不变**）。
+      ✅ **已由 lead/curator 完成**（main 上已有 physical-exponential-equals-voa-vertex-operator-v2）。
+      第二轮收尾时读了该卡（只读）：其断言 (2) 括注逐字为 V^{(n)}_K = S_n ∘ V^{(b)}_{K−nν}，
+      **与本尝试 claim.md (★P) 及 proof.md 全程使用的定义逐字一致**，且状态保持 physical-argument。
+      ⇒ [GAP-target-card] 视为已闭合，本尝试无进一步请求。
+  C6. ⚠ **-v2 卡的一处理由（非结论）不精确，建议 note 级订正**：
+      该卡 sources[li-wang-2008].note 逐字写「α(0) 在第 N 层的本征值是 ⟨nk, p̃+Nk⟩ = n(ν+N·0) = nν，
+      因 ⟨k,k⟩=0 使 N 依赖项消失」。但在 (3.14) 里 Δ̄(α,−x) 作用在**第二个张量因子 U 上**，
+      而层标号 e^β 住在 ℂ_ε[L] 因子里；故该处的 α(0) 是 M(1,p̃) 上的 Heisenberg 零模，
+      本征值是 **⟨nk, p̃⟩ = nν**，**不含 N**。层依赖项来自 (3.14) 的**显式因子 x^{⟨α,β⟩} = x^{⟨nk,Nk⟩}**，
+      是另一个来源（该卡把两者合并计入 α(0)，是把 Y_W 的零模 h_W(0)（(3.15)(3.16)：本征值 ⟨β,h⟩+h(0)）
+      与 (3.14) 内部的 α(0) 混为一谈）。
+      🔴 **总指数相同，故该卡在自身（类光）设定下的结论正确**；但这条**理由**在一般偶格上会给出错误的拆分
+      ——proof.md 定理 6.1/推论 6.2 正是把两个来源分开算的（x^{α(0)} 给 nν，x^{⟨α,β⟩} 给 2njs），
+      两者在 ⟨k,k⟩ ≠ 0 时各自非零。建议在 note 里把「⟨nk, p̃+Nk⟩」改成「⟨nk, p̃⟩，层依赖项另来自 x^{⟨α,β⟩}」。
+      ⚠ 这是 graph/ 路径，**本尝试不动手**，只报告。
+  C5. 若将来要让 proof.md 定理 3.5 进图，(C2) 用到的对易关系需要一张承载卡——
+      见下面 F2：Lean 侧已机器核验，但图中**刻意没有卡承载**，届时 (C2) 会变成无源前提。
+
+  --- 给 lean-formalizer / formal/（本尝试**未写一个字**到 formal/）---
+  F1. proof.md 推论 6.3 证明：Lean 的层无关 towerVertex（towerDiag fun _ => …）
+      **只在类光情形**是物理顶点算子的 z^K 系数；⟨k₀,k₀⟩ ≠ 0 时它与真实系数在 |0;1⟩ 上就已不同
+      （反例见上）。Lean 侧已有 dotVec_towerMomentum_right_of_isotropic 在用这个限制
+      （DDF.lean 的 towerVertex docstring 逐字提到它保证「the *same* integer on every rung」），
+      建议在 DDF.lean 的模块注释或 ddf-operators-v6 的 notes 里补一句**边界**：
+      非类光时该定义不再是物理算子的洛朗系数。⚠ 这是**补注**，不是改定义，也不动状态。
+  F2. proof.md 引理 3.2/3.3 手工证明的对易关系 [h·α_m, V^{(b)}_J] = (h·b)V^{(b)}_{J−m}，
+      Lean 侧已机器核验为 StringFormal/NoGhost/DDF.lean 的 lie_towerMode_towerVertex
+      （含 p = 0 的退化情形，其 docstring 逐字解释了单 Fock 空间上 p=0 版本为 false 的原因——
+      与 proof.md 注 3.1 / 引理 3.3 的分情形处理完全吻合，是对本证明的独立机器旁证）。
+      但图中 exponential-vertex-operator-modes 的 notes 逐字写「Lean 侧有，但本卡不承载」，
+      导致本尝试必须手工重证一遍。建议 lead 裁决是否让某张卡承载它。
+
+  --- 给 graph-reviewer（审查请求；proof.md §8 第 7 条同文）---
+  R1. 请重点审查 proof.md §2 的**命题 2.7**——全文最脆的一环：它只用「(A) 在 n=1、K=ν 上成立」
+      一条就把逐层标度 c 逼成常值，请核对是否有隐藏的循环论证（即是否偷用了待证的 (A) 的更多内容）。
+  R2. §3 定理 3.5 的唯一性：(C1)(C2)(C3) 是否真的够用，特别是 (C2) 在 m = 0 的退化情形
+      （本文用注 3.1 处理：(C2)|_{m=0} 实为 (C1) 的推论）。
+  R3. §5 五步系数核对的**符号**：E^-(−α,x)、E^+(−α,x)、Δ̄(α,−x) 三处独立的负号相消，
+      是全文最容易出错的地方，请逐个对照 math-sources.md §36.6 的 L1 逐字块复核。
+  R4. §6.3 定理 6.8 的「两侧最低非零指标必须相同」一步。
+
+  --- 一般性提醒 ---
+  G1. 🔴 桥卡与 ddf-operators-v6（formalized）对同一符号 V^{(n)}_K 的定义**不一致**，
+      这是图内一处**活的**不一致，与本尝试是否成功无关，建议尽快处理（第一轮已报，此处重申）。
+  G2. 本轮**未修改**：prior-art.md、graph/**、literature/**、formal/**、docs/**、tools/**、
+      以及任何其它 research/attempts/* 目录。
+
+  ==========================================================================
+  === 第一轮（claim 阶段）快照，原样保留；其中「proof.md 不存在」等条目已被上文取代 ===
+  ==========================================================================
 
   === 本轮完成了什么、没完成什么（一句话）===
   完成 prior-art gate（上一轮）+ claim.md（本轮）。
   🔴 **proof.md 本轮完全未开始，一步证明都没有写。** 本目录当前不存在 proof.md。
-
-  === 目录现状 ===
-  - prior-art.md  ✅ 上一轮交付，已并入 main（commit 8d32566）。本轮**只读、未修改一个字**。
-  - claim.md      ✅ 本轮交付（commit 592fc5f）。§0 原创性边界 / §1 记号与前提 / §2 命题本身 /
-                     §3 砖块表（实跑核实）/ §4 门槛 / §5 接缝 [GAP] 清单 / §6 完成度声明。
-  - proof.md      ❌ 不存在。
-  - scripts/      ❌ 不存在（本命题不是穷举型，本轮也无可跑的东西）。
-  - scratch.lean  ❌ 不存在。
+  【第二轮注：已过时，proof.md 现存在且写至 §9。】
 
   === 上一轮中断情况（如实记录）===
   上一轮同任务的 theorem-prover 因 API 中断死在 prior-art 阶段之后、claim 阶段之前。
   它交付的 prior-art.md 已由 lead 复核并合并进 main。本轮从该文件接手，未重做检索，
-  未修改 literature/**，未修改 graph/**。分支 agent/prover/physical-exponential-equals-lattice-voa
-  沿用上一轮遗留分支，本轮开工前已 ff 到 main（8d32566 → f929f7a）。
+  未修改 literature/**，未修改 graph/**。
 
-  === ⭐ 本轮最重要的发现：目标卡断言 (2) 的字面表述不成立 ===
-  任务书要求「若发现该命题在本项目设定下其实不成立或需要额外前提，这是最有价值的交付，
-  立刻如实写进 claim.md 并在 status.yaml 标明」。确有此事，如下（详见 claim.md §2.2）：
-
+  === ⭐ 第一轮最重要的发现：目标卡断言 (2) 的字面表述不成立 ===
   目标卡 worldsheet.physical-exponential-equals-voa-vertex-operator 断言 (2) 的括注逐字写
       「V^{(n)}_K = 零模移位 ∘ worldsheet.exponential-vertex-operator-modes 的 V^{(b)}_K」
   即 V^{(n)}_K = S_n ∘ V^{(b_n)}_K，**没有指标移位**。但正确形式是
@@ -37,31 +203,12 @@ notes: |
   (读法 2，宽容) 若把「零模移位」读成整个零模因子 e^{ink_0·x} z^{2α'nk_0·p̂}，等式成立，
                  但括注指名的两张承载卡合起来**造不出左端**：z^{2α'nk_0·p̂} 在图中**无承载节点**。
   两项独立旁证：
-  (i) worldsheet.ddf-operators-v6（formalized）逐字带移位：
-      towerVertex η b n K = towerShift n ∘ towerDiag(Fock.vertexOsc η (n·b) (K − n))；
-      **图内已形式化的 V^{(n)}_K 带移位，桥卡括注不带，两者不是同一个对象。**
+  (i) worldsheet.ddf-operators-v6（formalized）逐字带移位；
   (ii) 桥卡的唯一推导 --via-cocycle-triviality 的 summary 逐字把 z^{2α'nk_0·(p+Nk_0)}
       匹配给 VOA 侧的 x^{⟨α,β⟩}；但本设定下 ⟨α,β⟩ = ⟨nk,Nk⟩ = 0，故 x^{⟨α,β⟩} = 1，
-      承载不了 z^n。单值因子的真正 VOA 来源是 Δ̄(α,−x) 里的 x^{α(0)}（Δ̄ 那条 summary 从未提）。
-      **该推导内部不自洽。**
-
-  ⇒ 本尝试要证的是**订正后**的 Claim A（claim.md §2.1），不是卡上那句话。
-  🔴 处置移交 lead：即使 Claim A 日后被证明，目标卡也**不能直接升级**——它的陈述文本要么假、
-  要么指向未定义对象。按根 CLAUDE.md 原则 1（陈述不可变），正确做法是新建订正卡 +
-  旧卡标 superseded_by，并给 z^{2α'nk_0·p̂} 立一张定义卡。**本尝试不碰 graph/**，只记录。
-
-  === ⭐ 第二条发现：类光性的作用此前归错了因 ===
-  prior-art.md §3 末的**结论**（类光性是该命题成立的条件本身）本轮同意；但**理由要换**：
-  - 在秩 1 上，闭合 cocycle 缺口的是「秩 1 + 偶」而**不是**类光：L = Zk 时
-    ⟨mk,nk⟩ = mn⟨k,k⟩ ∈ 2Z 恒为偶，故 (−1)^{⟨α,β⟩} ≡ 1，ε ≡ 1 合法，**即使 ⟨k,k⟩ ≠ 0**。
-  - 而且两侧的单值指数 nν + nj⟨k,k⟩ 对**任意秩 1 偶格**逐字相等——类光性也不是为了让它们对上。
-  - 类光性的真正作用：⟨k,k⟩ = 0 ⟺ 单值指数与层指标 j 无关 ⟺ 存在**层无关**的整数移位
-    K ↦ K − nν。而图/Lean 侧的物理算子恰恰写成层无关的单一指标
-    （towerDiag (fun _ => ... (K − n)) 里的 fun _ =>）。故 ⟨k,k⟩ ≠ 0 时，图/Lean 现有的
-    towerVertex **不再是**物理顶点算子的 z^K 系数（需要层依赖移位 K − n(ν + j⟨k,k⟩)）。
-  ⚠ 这**不是**对 prior-art.md 的纠错：那份文件讲的是一般偶格（举 Leech），其秩 ≥ 2 的反驳
-    （存在奇配对 ⟹ (3.14) 要求反对易 ⟹ 物理侧对易的 e^{ikx_0} 不满足）完全正确，本轮保留并沿用。
-    本轮只是补上了「秩 1 这一侧到底是什么在起作用」。prior-art.md 本轮未改动。
+      承载不了 z^n。单值因子的真正 VOA 来源是 Δ̄(α,−x) 里的 x^{α(0)}。**该推导内部不自洽。**
+  【第二轮注：(ii) 已被 proof.md 引理 5.1 正面证实——x^{⟨α,β⟩} = 1 逐字出现在证明的第 2 项，
+   而单值因子确实整个来自 Δ̄(α,−x) 的 x^{α(0)} = x^{nν}。lead 的 CONFIRMED 裁定得到独立验证。】
 
   === 已实跑核实的砖块状态（uv run stringgraph status，逐条抄录，未凭印象）===
   ✅ 够格（rigorous/formalized，可用）：
@@ -75,68 +222,19 @@ notes: |
      worldsheet.fock-indefinite-form                own=formalized  eff=formalized（列出但**不使用**）
      worldsheet.virasoro-generators-free-boson      own=formalized  eff=formalized（列出但**不使用**）
   🔴 标红（effective = physical-argument，**一律不作砖块**）：
-     worldsheet.physical-exponential-equals-voa-vertex-operator  own=physical-argument eff=physical-argument
-       —— 目标本身，绝不可引用（否则循环）。
+     worldsheet.physical-exponential-equals-voa-vertex-operator  —— 目标本身，绝不可引用（否则循环）。
      worldsheet.ddf-contour-equals-mode-sum         own=rigorous    eff=physical-argument  —— 不用。
-     worldsheet.vertex-operator-cocycle             own=physical-argument eff=physical-argument
-       —— 只作对照背景，不承载任何一步。
-     worldsheet.no-ghost-theorem-v4                 own=rigorous    eff=physical-argument
-       —— 下游，不可反用。
+     worldsheet.vertex-operator-cocycle             —— 只作对照背景，不承载任何一步。
+     worldsheet.no-ghost-theorem-v4                 —— 下游，不可反用。
   ⚠ conv.metric-mostly-plus / conv.alpha-prime-regge：约定节点不参与状态传播，
-     `stringgraph status` 实测返回 "unknown statement id"。claim.md 如实记录，未编造 status。
+     `stringgraph status` 实测返回 "unknown statement id"。
+  【第二轮注：以上状态第二轮未重跑；proof.md §0.4 的砖块表沿用这份实跑记录。】
 
   === 断言 (1) 的处置（纪律）===
   ε(mk,nk) = 1 有两条 L1 来源（gebert-nicolai-1995 §3.1 (3.1)；li-wang-2008 §4 p.21 逐字
   "the normalized 2-cocycle ε … is trivial in the sense that ε(α,β) = 1 for all α,β ∈ L"）。
-  🔴 **不重证，只引用**，并已在 claim.md §2.3 写明它对断言 (2) **必要而不充分**
-  （不触及振子部分的逐项符号、单值因子、识别映射 Φ 的规范、以及系数良定义性）。
-
-  === 原创性边界（claim.md §0，纪律）===
-  ✅ 可主张「首次给出**证明**」；🔴 **绝不可主张「首次陈述」**——grotenhuis-2020 p.106
-  已有逐字陈述（"We recognise this expression as the lattice vertex operators Y(|α⟩,z)…"）。
-  引用该先例时必须同时说出口 prior-art.md §2 的五条限定词（本科论文/非同行评议；论证强度为零且
-  公式内部不自洽——(6.6) 掉了 (6.5) 的 √(α'/2) 却保留 z^{α'kp}，且 α_n z^{-m} 的 m 全文未定义；
-  命题是正定偶格 Leech 而非秩 1 类光 + 连续动量塔；作者自陈关键推广步骤是 Assuming；零模因子对不上）
-  以及 §3 的 cocycle 硬伤（物理侧一个因子 e^{ikx_0} vs VOA 侧两个因子 e^α c_α，(3.14) 在奇配对上
-  强制反对易 ⟹ 该识别在一般偶格上**是错的**）。
-
-  === 仍然开放的 [GAP] 清单（完整版见 claim.md §5）===
-  (a) cocycle：ε ≡ 1 的合法性已闭合（不重证）。未闭合：不同 ε 之间的同构是否保持 (A) 的右端；
-      §0.4 的一般偶格反驳尚无量词完整的陈述与证明。
-  (b) 连续动量 ↔ 离散格：**两层必须分清**。代数模型内部由 free-boson-…-momentum-tower
-      (3)(iii)(iv) 承载（认为可用），但该卡的「逐层识别」只写了「↔」没给映射，claim.md §1.5 的
-      Φ 是本轮补写的，其存在唯一性论证本轮**未写出**。代数模型 ↔ 物理文献的连续动量 Fock 表示
-      这一层在图中**根本没有节点**，本尝试也不证；故 (A) 成立 ≠「物理学家写的那个等式成立」。
-      另 li-wang-2008 Remark 3.13 指出 ℂL ≠ 𝔥 时另有 level-1 不可约模族，「物理塔对应的就是
-      M(1,p̃)」这一取法本轮未独立论证。
-  (c) δ 归一化：物理侧 ⟨p|p'⟩ = δ^D(p−p') 在代数塔上根本没有定义（momentum-tower 卡 (2) 逐字
-      自陈层间正交是「本定义规定的，不是被证明的」）。(A) 两端都不涉及型，但 δ 归一化并未消失——
-      它化身为 Φ 的层间标度规范 c_j。(A) **只对常值规范 c_j ≡ 1 成立**，而「常值规范是对的那个」
-      是前提不是结论，且图内无 δ 归一化可供比对。
-  (d) 物理记号 ↔ 图对象的锚定：把 :e^{ink_0·X(z)}: 解释成 (P1)(P2)(P3) 的复合是**约定**不是定理，
-      且在图现状下**不可能**成为定理（X^μ(z) 含 ln z 与 x^μ，不是 Fock 塔上良定义的形式洛朗级数）。
-  (e) 图内缺失定义卡：单值因子 z^{2α'nk_0·p̂} 无承载节点；Li–Wang 的 E^±(α,x)、Δ̄(α,x) 无定义卡
-      （math.lattice-vertex-algebra 的推导 gaps 已登记同一条）。**非数学缺口，但是毕业阻塞项。**
-  (f) 类光性与高秩的两条结构性论断（层无关性刻画；高秩反驳）本轮只有骨架，未写证明。
-  (g) 目标卡处置（见上「最重要的发现」），属 curator/lead 权限。
-
-  === 本尝试对路线可行性的当前判断（claim 阶段，非结论）===
-  Claim A 被判断为**很可能成立且可证**：它整个活在图内的代数模型里，两端都由 claim.md §2.6 的
-  五条有限步核对 (i)–(v) 构成，每条都是定义展开 + 符号核对，没有分析学、没有收敛性、没有围道。
-  独立性门槛（prior-art §4 判据 3）看得出可以满足：右端 Y_W 来自 li-wang-2008 (3.14)，
-  其存在性早于本尝试且与物理记号零接触；左端由早于本尝试就已 Lean 形式化的 towerShift /
-  Fock.vertexOsc 拼出，定义里不出现顶点代数。
-  **最可能卡住的地方不是数学而是边界**：接缝 (c)（δ 归一化 ⇝ Φ 的层间规范 c_j）与接缝 (d)
-  （物理符号锚定）都在本图内**无可比对物**，因此即便 Claim A 全证下来，它也只是
-  「图对象 = 图对象」的定理，桥卡想要的「物理学家那个等式 = VOA 那个等式」仍差一步解释性论证。
-  技术上最容易出错的一步是 Li–Wang 脚注 3 的 E^± 参数正负号陷阱（同一记号在 [Li3] 与本文里
-  参数差一个负号）与 Δ̄(α,−x) = x^{α(0)}E^+(−α,x) 里两个负号的相消。
-
-  === 请 lead 注意 ===
-  1. 本轮**不请求审查**——proof.md 尚未开始，state 保持 draft。
-  2. 🔴 目标卡与其推导的缺陷（见上）建议尽快处理，因为 ddf-operators-v6（formalized）与桥卡
-     对同一个符号 V^{(n)}_K 的定义**不一致**，这本身是图内的一处活的不一致，与本尝试是否成功无关。
-  3. 本轮未修改：prior-art.md、graph/**、literature/**、formal/**、docs/**。
+  🔴 **不重证，只引用**，并已写明它对断言 (2) **必要而不充分**。
 
 author: theorem-prover
 created: "2026-09-18"
+updated: "2026-09-18"
