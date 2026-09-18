@@ -63,19 +63,62 @@ at `m = 2`, `221 + 3 = 65 + 108 + 51`; at `m = 3`, `574 + 4 = 221 + 252 + 105`.
   `eq_zero_of_oscWeight_eq_zero`).  `D` never appears — this is pure combinatorics on an
   arbitrary index type `ι`.
 
+## The `LevelSixIdx` machinery and the generic (K6)/(N6) bounds
+
+Mirroring `LevelFiveCount`'s `LevelFiveIdx` exactly (mode-count-profile injectivity dispatch,
+case-by-case surjectivity onto `Finsupp.oscWeight_eq_six_cases`), this file also builds:
+
+* `LevelSixIdx` / `levelSixIndex` / `levelSixIndex_injective` / `levelSixIndex_surjOn` —
+  the eleven-branch index family for level-six occupation functions and the **exact** count
+  `card_ddfLevel_six_eq`, plus the upper bound `card_conjFree_six_le` (U6).
+* `finrank_ker_descPair_six_le` / `finrank_ker_seedPair_six_le` — the generic (K6) bound
+  `dim ker T₆ ≤ D`, from `DescendantKernel.finrank_ker_descPair_add_le` plus
+  `levelSix_count_identity_full` (`κ₆ = D`, i.e. `κ_N(D) = p_D(N-5)`; at `N = 6` this is
+  `p_D(1) = D`, genuinely linear in `D`, unlike `κ₅ = p_D(0) = 1`).
+* `le_finrank_towerNull_inf_towerBigrade_six` — **(c0)/(N6)**: the rank–nullity argument
+  combining (K6) with the two null-membership lemmas
+  `NullSeedsTwo.towerLop_neg_one_mem_towerNullSubmodule_of_mem_towerBigrade` (`j+N=-1`, the
+  `L_{-1}`-image) and `LevelThreeCount.descTwo_mem_towerNullSubmodule_of_mem_towerBigrade`
+  (`j+N=-2`, the `𝒟₂`-image), instantiated at `j = -6`.  Gives
+  `dim(H_null ⊓ V_{-6,6}) ≥ dim(H_phys ⊓ V_{-6,6}) − D` with **generic slack `D`**, mirroring
+  `le_finrank_towerNull_inf_towerBigrade_five`'s structure exactly (levels 5→6, 4→5, 3→4).
+
+## ⚠ The precise remaining gap: `b26_six` needs the slack sharpened from `D` to `D − 1`
+
+`b26_six` (`B26 6` in `SliceRank.lean`'s sense) needs
+`dim(H_null ⊓ V_{-6,6}) ≥ D − 1`, not merely `≥ (generic bound) − D`.  Chasing the arithmetic:
+
+* (K6)'s own slack is exactly `D` (`levelSix_count_identity_full`: `κ₆ = p_D(1) = D`), one
+  more than the target `D − 1`.  This is the precise sense in which `N = 6` is the first level
+  where the *generic* two-family kernel bound is **not** sharp enough — at `N ≤ 5`,
+  `κ_N(D) = p_D(N-5)` happened to be `D`-independent (`κ_{≤4}=0`, `κ_5=p_D(0)=1`), so the
+  generic bound was automatically exact; at `N = 6`, `κ_6 = p_D(1) = D` is genuinely linear
+  in `D`, and using the *generic* (K6) bound loses exactly one dimension of slack relative to
+  `[GAP-N6-seed]`'s `dim Q_{-6,1} = D - 1` (`SeedCriterionSix.mem_towerSeed_neg_six_one_iff`).
+* Closing the gap needs the **sharp** bound `dim ker(seedPair η a b (-6) 6) ≤ D − 1`, i.e.
+  restricting `descPair` to the **seed** domain `Q_{-6,5} × Q_{-6,4}` (not the whole slices
+  `V_{-6,5} × V_{-6,4}`) must not lose dimension relative to the target `D − 1 = dim Q_{-6,1}`.
+  Combined with `x4_y3_mem_towerSeed_neg_six_one` (`u ∈ Q_{-6,1} ⟹ (x₄u, y₃u)` is a seed pair)
+  and `[GAP-N6-seed]`'s converse, this reduces to: **the map**
+  `S₆ : Q_{-6,1} → Q_{-6,5} × Q_{-6,4}, u ↦ (x₄u, y₃u)` **is injective on the whole slice**
+  `V_{-6,1}` (dimension `D`, not just `Q_{-6,1}`, dimension `D-1`) — equivalently
+  `ker(seedPair) = S₆(Q_{-6,1})` exactly.
+* This `S₆`-injectivity fact is **explicitly flagged as an unverified route judgement** by
+  `formal/BLUEPRINT-noghost.md` §B⁗.7/§B⁗.9 (`⟨路线判断，未验证⟩`), and is **not proved
+  anywhere in this repository**.  It is genuinely new mathematics — either a PBW-triangularity
+  argument (showing `x₄`, `y₃` applied to a *non-seed* vector of `V_{-6,1}` cannot land in the
+  seed subspace of the target, i.e. picks up a nonzero non-seed / non-positive-mode component)
+  or a fresh explicit moment computation in the style of `LevelThreeCount`/`LevelFourCount`,
+  not mechanical Lean bookkeeping — and is **out of scope for this file**.
+
+`b26_six` and `ddfSpans_bigrade_neg_six_six` are therefore **not stated** in this file (per
+repository discipline: no `sorry`, and no theorem statement without a completed proof).  See
+`formal/TODO.md` entry `noghost-pr-d2` for the itemised status.
+
 ## Status
 
 No `sorry`, no `native_decide`.  All declarations `check_axioms`-clean (only `propext`,
 `Classical.choice`, `Quot.sound`).
-
-**Not done** (out of scope for this file so far): the level-six index family `LevelSixIdx` /
-`levelSixIndex` and the resulting exact count `card_ddfLevel_six_eq` (the analogue of
-`LevelFiveCount`'s `LevelFiveIdx` machinery — injectivity via a mode-count profile argument,
-surjectivity by case-by-case witnesses); and, further downstream, `b26_six` /
-`ddfSpans_bigrade_neg_six_six` themselves, which additionally need the images of `y₃`/`x₄`
-(on a seed `u ∈ Q_{-6,1}`) to land in the **null** submodule, not just the positive-mode kernel
-(the seed property `SeedCriterionSix.mem_towerSeed_neg_six_one_iff` only gives the latter).
-See `formal/TODO.md` (`noghost-pr-d2`, "未做（Goal B）") for the itemised gap list.
 -/
 
 namespace StringFormal.NoGhost
