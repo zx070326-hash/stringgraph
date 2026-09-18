@@ -2,25 +2,64 @@ id: math.supermoduli-genus-3-cdvg-ansatz-excluded-by-pole--via-dunin-barkowski-f
 target: math.supermoduli-genus-3-cdvg-ansatz-excluded-by-pole
 kind: proof
 status: rigorous
-depends_on: []
+depends_on:
+  - id: math.supermoduli-witten-genus-3-hyperelliptic-pole
+    inferred: true
+    note: |
+      本论证真正需要的只是该卡的 D′ 支半句——"π_*(Υ) 沿 D′ 有极点（阶 1/q²）"——而该卡本身的记号
+      （Witten 的 π_*(Υ)）与 DBFS 正文使用的记号（π_*ψ_3/φ_3）出自两篇不同论文，本项目未见任何文献
+      逐字确认两者是同一对象，只是同一物理对象（亏格三真实超弦测度）在两套记号下的自然识别（DBFS
+      摘要自己也把这条极点结果直接归于 Witten 2015，见该卡 notes）。标 `inferred: true` 是因为
+      这一步"记号对接"本身在两篇来源里都找不到逐字论证，而不是因为被依赖的命题（超椭圆轨迹极点
+      存在性）本身有问题——按 graph/CLAUDE.md 的 `inferred` 使用判据，这条边不满足"去掉 inferred
+      后新卡即完整承载我需要的那句话"的反面（新卡确实完整承载了 D′ 支极点这句话本身），故不需要
+      另立记号桥接节点，只需诚实标注这一处未核实的记号对接。
 sources:
   - ref: dunin-barkowski-fedorov-sleptsov-2025
-    loc: "arXiv:2505.02950v2, p.5（逐字排除论证）；References [27]（p.48–52，Witten 极点结果引用）"
+    loc: >-
+      arXiv:2505.02950v2, p.5（逐字排除论证）；摘要（"our formula has a polar singularity along the
+      hyperelliptic locus; the existence of this singularity was established by Witten in 2015"）；
+      References [27]（DBFS 论文自己的参考文献列表 pp.48–52 区间内的条目，非 Witten 论文内的页码——
+      见下方 2026-09-18 更正）。
     note: 部分 L1，见 statement sources note。
 summary: |
   记账已发表数学论证的一条逻辑推断步骤：给定"真实测度在超椭圆轨迹处有极点"（引用 Witten 2015 既有
-  结果作为前提）与"CDvG Ansatz 处处全纯"（本文自己的直接观察），逻辑上得出"CDvG Ansatz 不能是真实
-  测度公式"。这是一个完整、初等的条件性推断（若前提成立，结论必然成立），本身不涉及计算错误指控。
-  depends_on 留空，因为前提（Witten 2015 极点存在性结果）尚未被本项目登记为图节点（见 gaps）。
+  结果作为前提，现接到 `math.supermoduli-witten-genus-3-hyperelliptic-pole`）与"CDvG Ansatz 处处
+  全纯"（本文自己的直接观察），逻辑上得出"CDvG Ansatz 不能是真实测度公式"。这是一个完整、初等的
+  条件性推断（若前提成立，结论必然成立），本身不涉及计算错误指控。
+
+  **2026-09-18 更新：depends_on 边已接上。** 前提（Witten 2015 极点存在性结果）已被
+  researcher/curator 读取、登记 bib（`witten-2015-ramond-period-matrix`）并立卡
+  （`math.supermoduli-witten-genus-3-hyperelliptic-pole`，status: physical-argument，见该卡的
+  推导 `--via-witten-2015` 的判据）。**本卡逻辑推断本身仍是 rigorous**（"若 A 则 B"这一步是初等
+  的、不涉及计算错误指控的逻辑推断），**但本卡的 effective status 现在会被新依赖边下拉到
+  physical-argument**——这正是本次任务要暴露的隐形承重前提：此前该前提只以文字记录挂在 notes 里、
+  未接图边时，本卡 effective 显示为 rigorous；现在诚实接线后，`uv run stringgraph status` 会显示
+  真实的瓶颈（Witten 2015 D′ 支论证本身只是 physical-argument，理由见该推导 summary 的 (a)–(d)）。
+  这不是本卡论证质量下降，而是此前虚高的纠正。
 gaps:
   - |
-    **本论证的关键前提"Witten 2015 建立了超椭圆轨迹处的极点存在性"（arXiv:1501.02499，"The super
-    period matrix with Ramond punctures"）本身未被本项目独立读取，也未登记到 `literature/
-    sources.bib`（不在本任务允许写入的 literature/** 范围内）。** 这条边目前只以文字记录的形式留在
-    statement 正文与 notes 里，未接成真正的 depends_on 图边——若后续该文献被抽取并立卡，应回来给
-    本推导补一条 depends_on 边。
+    [20]（CDvG 2008 原始 Ansatz 论文）的确切 arXiv 号本项目未直接在 DBFS 参考文献表 [20] 条目原文
+    核对到。**2026-09-18 更新（新证据，仍未 100% 确定）**：researcher 读取 Witten 2015 论文自己的
+    参考文献表 [24] 条目（p.59），逐字为 "S. L. Cacciatori, F. Della Piazza, and B. van Geemen,
+    'Modular Forms And Three Loop Superstring Amplitudes,' arXiv:0801.2543, Nucl.Phys. B800 (2008)
+    565-590."；Witten 论文 p.56 (C.22) 之后紧接着批评的正是这篇 [24]："The literature actually
+    contains a proposal [24] for a holomorphic measure on M_{3,spin+} that is supposed to arise by
+    integrating over the odd variables in some fashion that has not been specified. This formula is
+    holomorphic along D′, so it does not coincide with π_*(Υ)."——这段批评的语境（亏格三、CDvG 全纯
+    Ansatz、与超椭圆轨迹上的真实测度不符）与 DBFS 引言批评 [20] 的语境（"the Ansatz of [20] is
+    holomorphic everywhere on the Siegel upper half-space H_3, so this Ansatz cannot be a formula for
+    π_*ψ_3/φ_3"）**几乎逐字对应同一件事、同一篇被批评的论文**，是支持"[20] = [24] =
+    arXiv:0801.2543"的**极强间接证据**。但这仍然是"Witten 论文引用同一篇被批评论文"的间接确认，
+    **不是**直接读到 DBFS 论文 References 页 [20] 条目原文本身——本项目仍未做这一步直接核对，故
+    [20] 的确切 arXiv 号**依然标记为未绝对确定**，不代替补核工作作出最终决定。
   - |
-    [20]（CDvG 2008 原始 Ansatz 论文）的确切 arXiv 号本项目未核实到（0801.2543 vs 0804.0457 两候选
-    间未决），不影响本推导的逻辑本身，但影响未来若要给 [20] 单独立卡时的文献登记。
+    **发现（2026-09-18，优先权）**：Witten 2015 本人已在 p.56 (C.22) 之后针对同一篇 [24]/[20] 做出
+    与 DBFS 2025 几乎相同的排除结论（见上一条 gap 引文）。**这意味着"CDvG Ansatz 因全纯而被排除"这
+    一结论并非 DBFS 首创**，DBFS 2025 是把 Witten 2015 已经指出的这一点重新表述并纳入自己的引言
+    论证。本卡 target 陈述卡的 title/statement 只记 DBFS 一家（措辞里写"Dunin-Barkowski–Fedorov–
+    Sleptsov"），这一 provenance 问题按根 CLAUDE.md 原则 1 不得就地改 target 陈述文本，已作为 notes
+    记录在 `math.supermoduli-genus-3-cdvg-ansatz-excluded-by-pole` 的 notes 字段（本任务范围内
+    唯一允许改动该卡的字段），供 lead 判断是否需要走里程碑规范化流程调整 title 的独占措辞。
 author: curator-supermoduli-post-2024
 created: "2026-09-18"
