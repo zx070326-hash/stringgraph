@@ -1,0 +1,127 @@
+state: draft
+reviewer: null
+verdict: null
+captain_confirmed: false
+notes: |
+  进度快照（2026-09-18，theorem-prover / agent/prover/supermoduli-elliptic-tail-punctured）
+
+  === 一句话结论 ===
+  CN 的椭圆尾粘接**可以**推广到带穿孔情形，而且门槛被压到种子界以下：紧化带穿孔超模叠
+  S̄_{g;n,2r} 在 g>=3（任意 n,r）以及 g=2（只要 n+2r>=2）时非投影。DW 的 n<=g-1 限制被完全
+  去掉；Donagi–Ott 的 g>=5r+1 与 Wang 的 g>=n+5r+3 被替换成 g>=2，且**不依赖 Wang**，因此
+  不继承 physical-argument 天花板。同时得到一条同等重要的负面结论（命题 N）。
+
+  === 任务书第一要务的完成情况 ===
+  CN 原文（arXiv:2606.06733v1）已亲自下载并**逐页读完 24 页**（无付费墙），§2/§5/§6/§7/§8 的
+  全部引理与证明已逐字抽出，见 proof.md §1（标 ⟦CN 原文⟧ 的段落是逐字抄录，标 ⟦重述⟧ 的是本文
+  改写，两者严格区分）。FKP arXiv:2006.13271v3 亦已下载并抽取关键段落（§2.6、Lemma 7.9/7.10、
+  式 (7.8)/(7.9)、Theorem C 与式 (9.6)、Example 8.9、§9.3）。
+
+  ⭐ 任务书特别要求核查的「CN 有没有预告穿孔情形」：**CN 论文根本没有 outlook / further
+  directions 一节**，§8 的证明在 p.24 结束后紧接 References。不存在「the punctured case can be
+  handled similarly」之类的句子。本轮定位不受影响。详见 prior-art.md §2。
+
+  === 已完成的引理清单 ===
+  - prior-art.md：一手全文获取记录 + 6 条 WebSearch + 4 条一手页面核查；四象限零覆盖结论重新
+    独立核实；CN outlook 核查（否定）；风险信号登记。
+  - claim.md：定理 M（量词完备）+ 推论 A(1)(2) + 推论 B + 负面命题 N；与种子界的逐格对照表；
+    明确声明不覆盖的范围。
+  - proof.md §1：CN 椭圆尾论证的忠实重述（Prop 2.2、Lemma 2.6、§5 DW 一点障碍族、§6 构造与
+    Lemma 6.1/6.2/Prop 6.3、§7 Lemma 7.1/Cor 7.2、§8 组装与宇称），全部逐字。
+  - proof.md §2：解剖。查明 CN 的门槛 g>=3 的**唯一**来源是「无穿孔时有理尾不稳定，只能用
+    亏格 1 的尾」；逐处清点「无穿孔」在 CN 论证里被用到的地方（结论：几乎没有，唯一的隐性依赖
+    是尾巴的选择）；并逐字核实 FKP 的粘接机器 (7.8)/Lemma 7.10/Theorem C **本来就是带任意
+    NS+Ramond 穿孔的一般形式**，CN 只用了 m_i=n_i=0 的特例。
+  - proof.md §3（负面结论，与正面结论同等价值）：**命题 N** —— 把旁观穿孔装在运动分量上，
+    测试基退化为仿射曲线 C∖{p_1..p_n}，Serre 消没给出 H^1 = 0，整条路线恒等于零。
+    推论 N′：同一障碍杀死 FKP 的非分离粘接 (7.9)。推论 N″：Ramond 穿孔放在运动分量上会同时
+    破坏 L^2≅ω_C 这一识别。已明确声明命题 N **不**断言目标空间是投影的。
+  - proof.md §4：推广的完整构造与全部引理重做——
+      引理 4.1（玻色截断 (S̄_{g;m,n})_bos ≅ S̄_{g;m,n}，用纯偶基的万有性质 + FKP §2.6，有证明）
+      引理 4.2（固定尾存在性，含 a=0/a=1 的自旋结构与宇称统计，有证明）
+      §4.1 构造（B := S^+_{h;1,0} × S_{a;n+1,2r}，Γ = FKP (7.8)，常值尾 τ_ξ，测试曲线 i）
+      引理 4.3（= CN 6.1 的推广；尾因子只贡献常值丛，维数无关紧要）
+      引理 4.4（= CN 6.2 的推广；⭐ 关键：**不去算尾巴那条 psi-线**，只用「它是一条线」，
+                从而完全绕开 Ramond 情形下 Example 8.9 不直接适用的问题）
+      命题 4.5（= CN 6.3 的推广）
+      引理 4.6（= CN 7.1；证明对 dim W 完全不敏感——这是推广「免费」的技术根源）
+      推论 4.7（= CN 7.2；h>=2 门槛）
+      定理 M（四步组装，用 CN Lemma 2.6 的函子性）
+      命题 4.8（r=0 时的宇称加细）
+  - proof.md §5：门槛推导；§5.2 证明 h>=2 是硬门槛（h=1 时 H^1(C,L^{-1})=0，无 η 可取）。
+  - proof.md §6：四条自洽性检验，其中 §6.2 是关键——本方法**结构上不可能**触及
+    S̄^-_{2;0,0}（CN 已证其分裂），也不可能在 g=2 触及奇宇称分量。§6.4 正面回答了「能不能用
+    忘掉穿孔的态射平凡地得到推论 A」这个质疑（答：不能，两个缺口；但诚实标为价值风险）。
+  - scripts/thresholds.py：门槛算术与自洽性检验的机器穷举复核，实跑 RESULT: ALL OK，退出码 0。
+    （Windows GBK 控制台需用 `python -X utf8` 运行。）
+
+  === 仍然开放的 [GAP] 清单（完整版见 proof.md §7）===
+  1. [GAP-LIT]（程序性，**毕业阻塞**）：FKP arXiv:2006.13271 = Amer. J. Math. 145 (2023)
+     1777–1886 **不在 literature/sources.bib**，无抽取条目。本证明对它是结构性依赖。
+     本轮无权登记，已移交 lead（见下）。
+  2. [GAP-FKP-RAMOND]（低）：FKP Lemma 7.9 的**证明正文**把广义自旋结构写成 L ≅ Hom(L,ω_C)，
+     漏掉 Ramond 扭转 ω_C(R)，尽管其陈述 (7.8) 允许 Ramond 穿孔。判断为无害省略（粘接是 NS
+     节点处的局部操作），但未独立重写该局部计算。影响推论 B。
+  3. [GAP-COMP]（低，仅影响加细）：r>0 时 S̄_{g;n,2r} 的连通分量分类未知，故只断言整个叠
+     非投影，不指认分量。
+  4. [GAP-IMM]（低）：命题 4.5 只使用 FKP Lemma 7.10 的**切层面**陈述，未讨论 Γ_bos 是否闭
+     浸入。本文在这一点上不比 CN 更弱，也不比 CN 更强。
+  5. [GAP-STD]（低）：T_+X|_X ≅ T_X 等标准超几何识别直接引用，未重证。
+  6. [GAP-DW]（低）：DW 一点障碍族的 ω_2(X_η)=η 未独立复核，按 CN §5 的逐字回顾使用；其图卡
+     math.supermoduli-space-not-projected 状态为 rigorous。
+  7. [GAP-ALT]（价值风险，非数学缺口）：若有人补齐「紧化超模叠上的忘却穿孔态射」并证明
+     ι_π 非零，推论 A（纯 NS）会退化为 CN 的推论。**推论 B（含 Ramond）不受影响**，因为忘却
+     Ramond 穿孔根本不是态射。
+  8. 未触及：未紧化情形、任何「分裂/可投影」正面方向、(g,n,r)=(2,1,0)、g=2 的奇宇称带穿孔
+     分量、Ramond 节点处的粘接（FKP §9.3 只是**猜想**，本文刻意避开，不走这条会把结论压到
+     conjecture 的捷径）。
+
+  === 图卡引用的状态标记 ===
+  🔴 本轮主结论**完全不使用** math.supermoduli-ns-ramond-punctures-not-projected（Wang，
+     physical-argument），**也不使用** math.supermoduli-ramond-punctures-not-projected
+     （Donagi–Ott）。所用外部输入全部是 rigorous：CN Prop 2.2 / Lemma 2.6（CN 论文，rigorous
+     图卡）、DW Prop 3.4（donagi-witten-2013，rigorous 图卡）、FKP-A（已发表 AJM，rigorous，
+     但未登记 → [GAP-LIT]）、Mumford/Cornalba（标准）、Serre 消没（标准）。
+     ⭐ 因此本轮推论 B 在覆盖上一轮推论 C 的全部量词范围的同时，把天花板从
+     physical-argument 提到 rigorous（补齐 [GAP-LIT] 后）。
+
+  === 本轮相对上一轮的增量 ===
+  上一轮 supermoduli-compactified-punctured 的紧化提升引理只能达到种子门槛，其 §7 把
+  [GAP-ELLIPTIC-TAIL] 列为唯一真正硬的开放问题。本轮做的就是那条 GAP，且拿到了种子界以下的
+  新范围（见 claim.md §4 的两张对照表）。两轮结果**逻辑独立**：本轮完全不使用上一轮的引理 1.1。
+  本轮未修改上一轮目录下的任何文件（任务书要求：只读）。
+
+  === 情报移交 lead（本轮无权处理，仅记录）===
+  1. **[必办] FKP arXiv:2006.13271**（"The Moduli Space of Stable Supercurves and Its Canonical
+     Line Bundle", Amer. J. Math. 145 (2023) no. 6, 1777–1886）仍未登记入 literature/
+     sources.bib，无 extractions 条目。这是本轮**毕业阻塞项**。建议派 researcher 做 L1 抽取，
+     至少覆盖：Theorem A、§2.6（偶基上超曲线 = 广义自旋曲线；广义自旋结构定义 L²≅ω_C(R)；
+     S̄_{g,nNS,nR} 光滑固有 DM，引 Jarvis [22][23]）、Lemma 7.9/7.10 与式 (7.8)/(7.9)、
+     Theorem C 与式 (9.6)、Example 8.9、§9.3（Ramond 类比**只是猜想**——这一条对图很重要，
+     它划出了「哪些边界论证还不能用」的边界）。
+     注：上一轮已提过同一条，至今未办，本轮再次提请。
+  2. **[建议] 新预印本未登记**：Noja 个人主页列有 "Schottky vs super Schottky in genus 4",
+     arXiv:2609.16131 (2026)，本项目 literature/ 中没有。标题看不出与可投影性直接相关，但
+     同作者同时期，建议登记以防遗漏。
+  3. **[风险信号] Noja 主页 "In preparation" 列有 "Supermoduli spaces (with M. Corrêa,
+     R. Donagi)"，无任何范围说明。** 无法排除它覆盖本轮内容（也可能是综述/专著）。按
+     literature/CLAUDE.md 规则 1，未发表草稿不可引用，本轮照常推进；若将来该文出现且覆盖本轮
+     结论，本尝试应按「被超越 / 独立重现」而非「被推翻」处理。
+  4. **[工具噪声，无害]** `file cn.pdf` 把 24 页的 CN PDF 报成 "9 page(s)"，一度造成下载被截断
+     的假警报；已用 Content-Length 逐字节核对 + 实际渲染 p.10–24 排除。记录在 prior-art.md §1，
+     以免后续 agent 重复踩坑。
+  5. **[对上一轮的观察，不是纠错]** 上一轮 proof.md §5 判断「本尝试的机制不能与 CN 的椭圆尾
+     粘接叠加来突破种子门槛」——这个判断对**它自己的机制**是正确的，本轮没有推翻它；本轮是
+     换了一条完全不同的路（直接在紧化叠上做粘接构造）。上一轮文件本轮未作任何修改。
+
+  === 本尝试对自身的判断 ===
+  路线可行，结论方向（非投影）本轮认为成立。核心论证是把 CN 的证明在一个更一般的粘接态射上
+  重新装配，每条引理都逐条核对过「逐字相同 / 需要修改」，修改点只有两处且都不影响论证结构。
+  §6.2 的反向检验（本方法结构上碰不到 CN 已证分裂的 S̄^-_2）是一条强的无隐藏错误的证据。
+  但因 [GAP-LIT] 未闭合（外部依赖未登记）、[GAP-FKP-RAMOND] 与 [GAP-COMP] 未走完，诚实起见
+  暂留 draft，不自行升 under-review。
+
+  **请 lead 派 graph-reviewer 做对抗性审查**——本轮自认为主线论证已完整，最值得被挑战的三点是：
+  (a) 引理 4.4 的 (c) 步「不去算尾巴的 psi-线」是否真的合法（会不会漏掉尾巴那条线其实依赖 p）；
+  (b) 命题 4.5 的正合列拼接在带穿孔情形是否仍然成立（[GAP-IMM]）；
+  (c) §6.4 对「忘却态射平凡化」的反驳是否站得住。
