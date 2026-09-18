@@ -303,16 +303,28 @@ def test_seed_no_ghost_v4_drops_to_physical_argument_after_ddf_split() -> None:
         effs["worldsheet.ddf-contour-equals-mode-sum"].name == "physical-argument"
     )
     # 桥节点本身：显式、可被 why/report 看见，而不是藏在 flag 里
+    #
+    # 2026-09-18（分支 agent/curator/bridge-card-v2）：桥卡换代为 -v2，修正断言 (2)
+    # 括注缺失的洛朗指标移位 V^{(n)}_K = S_n ∘ V^{(b)}_{K−nν}（v1 无移位，与 v6/Lean
+    # towerVertex 不一致；lead 裁决见 docs/reviews/bridge-card-index-shift-2026-09-18.md）。
+    # 唯一那条推导 --via-cocycle-triviality 随之改名改指 v2，故**旧卡不再有推导、
+    # effective 落到 open**——它有 superseded_by，不进 open_propositions 报告。
+    # 这与 ddf-operators-adjoint → v2 的先例同构。本断言随之改指 v2。
     assert (
-        effs["worldsheet.physical-exponential-equals-voa-vertex-operator"].name
+        effs["worldsheet.physical-exponential-equals-voa-vertex-operator-v2"].name
         == "physical-argument"
+    )
+    assert (
+        g.statements["worldsheet.physical-exponential-equals-voa-vertex-operator"]
+        .superseded_by
+        == "worldsheet.physical-exponential-equals-voa-vertex-operator-v2"
     )
     # --via-voa-residue 的 own 仍是 rigorous，但 effective 被桥节点压到 physical-argument。
     # 这正是「严格的推理作用在尚未严格建立的前提上」的正确记账。
     voa = g.derivations["worldsheet.ddf-contour-equals-mode-sum--via-voa-residue"]
     assert voa.status == "rigorous"
     assert not any(d.inferred for d in voa.depends_on)
-    assert "worldsheet.physical-exponential-equals-voa-vertex-operator" in {
+    assert "worldsheet.physical-exponential-equals-voa-vertex-operator-v2" in {
         d.id for d in voa.depends_on
     }
     gt = g.derivations["worldsheet.no-ghost-theorem-v4--via-goddard-thorn"]
