@@ -2174,6 +2174,31 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
       `card_ddfLevel_{three,four}_le` / `card_ddfLevel_five_eq`，以及通用桥
       `card_conjFree_le_card_ddfLevel`（`conjFreeEmbed` 的满射半边）。
 
+- [x] `noghost-pr-d1`（蓝图 **§B⁗.2 / §B⁗.9**，`[GAP-N6-seed]` 前置事实 3，2026-09-17/18）：
+      `StringFormal/NoGhost/SeedTransferSix.lean`。定义 syzygy 对
+      `y3 = 12L_{-3} + 6L_{-2}L_{-1} + L_{-1}³`、
+      `x4 = -76L_{-4} - 52L_{-3}L_{-1} - 12L_{-2}² - 20L_{-2}L_{-1}² - 3L_{-1}⁴`
+      （`Module.End`，从 `towerLop` 构造，与 `(c,h)` 无关），证出
+      ⭐⭐⭐ **syzygy 恒等式** `towerLop_neg_one_mul_x4_add_descTwo_mul_y3`：
+      `L_{-1}x₄ + 𝒟₂y₃ = 0`，对一切 `D`、任意 `ℚ`-代数 `R`、任意 `η,a,b`（`U(Vir⁻)` 中的纯代数
+      恒等式，无中心项、无最高权假设）。证法：四条负模对易子原子（`towerLop_apply_towerLop_of_ne_zero`
+      的实例）作 `simp` 重写规则，把任意负模词正规序到「大下标在外」，再 `module` 收尾数值抵消
+      （与 §B⁗.2 手算的逐项相消表完全一致，`L_{-5}: -240/+240` 等）。
+      **附赠（time-permitting 项，已完成）**：纵向半边
+      `towerLop_one_apply_y3_towerLop_neg_one_of_eq_neg_five`——对任意权 `h` 的种子 `φ`
+      （任意中心荷），`L_1(y₃(L_{-1}φ)) = 24h•L_{-3}φ + (24h+60)•L_{-2}(L_{-1}φ) + (8h+30)•L_{-1}³φ`；
+      与 `2h•y₃φ` 比较，`L_{-3}φ` 系数对一切 `h` 自动相等，另两项都单独逼出 `h = -5`——
+      这正是 §B⁗.9「`L_1(y₃L_{-1}v) = 2h·y₃v`」那句话的完整证明。**副产品发现**：该恒等式
+      与中心荷无关（只对 `h` 敏感，`c = 26` 不出现在这条具体恒等式里——每个用到的对易子都是
+      `⁅L_1,L_{-1}⁆=2L_0`（`centralTerm_one_eq_zero`）、`⁅L_1,L_{-2}⁆=3L_{-1}`、`⁅L_1,L_{-3}⁆=4L_{-2}`，
+      都不在对角线 `m+n=0, |m|≥2`）；这是对 §B⁗.9「在 `V(26,-5)` 中算得」这句话的细化而非否定
+      （`c=26` 在 N=6 论证的别处进入），已写进本文件头，建议补进对应图节点 `notes`。
+      对 §B⁗.2、§B⁗.9、`BLUEPRINT-noghost-N6.md` 三处 `x₄`/`y₃` 公式做过逐字复核，**无分歧**。
+      **未做**（文件头列明）：横向半边（`x₄v`、`y₃v` 是 `V(26,-4)` 的奇异矢量）与 `N=6` 判据本身
+      （`b26_six` / `ddfSpans_bigrade_neg_six_six`）——两者都需要更多工作，留给下一个 PR。
+      公理检查：本文件全部 18 个声明 `check_axioms` 输出 `ok`，只有
+      `propext Classical.choice Quot.sound`。
+
 - [x] `no_ghost_theorem`：组装 —— **条件版已完成**（`no_ghost_of_spans`，见 `noghost-c5`）；
       无条件版等 `ddf-spans`。
 - [x] `negative-norm-above-26`：D > 26 时显式负模态 —— `StringFormal/NoGhost/LevelTwo.lean`。
