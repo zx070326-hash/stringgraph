@@ -22,6 +22,22 @@
   - **本轮三条续派**（写入路径互不相交）：researcher 补 FKP **E10–E15**（只写 `literature/extractions/felder-kazhdan-polishchuk-2020.md`，末尾追加，不改 E1–E9）；prover 写轨道 (iii) 的 **`claim.md` + `status.yaml`**（只写 `research/attempts/physical-exponential-equals-lattice-voa/**`，proof 本轮不写）；formalizer 推 **N=6 横向半边 + `b26_six`**（只写 `formal/**` 与图节点的 `formal:` 字段）。
   - main 在合并两条残留后复验：`validate` **0 errors**（671 陈述 / 566 推导 / 5 里程碑 / 24 约定），`pytest` **64 passed**。
 
+- ✅ **FKP 抽取第三轮交付，`[GAP-LIT]` 关闭**（2026-09-18 合并 `agent/researcher/fkp-gluing-round3`，6 提交，**纯追加 717 行 0 删除**，lead 已核 `git diff` 确认 E1–E9 一字未动）。E10 Theorem 9.2 + Lemma 9.3/9.4/9.5 陈述、E11 Theorem C 与 (8.11) 与 Theorem B、E12 (7.8)/(7.9) 并补录 Ramond 侧 (7.11)/(7.12)、E13 Lemma 7.9/7.10、E14 §8.4 全节、E15 §9.3 全节，全部 L1 页图逐字（关键式另用 `pdftoppm -r 400~500` 放大复核）。**椭圆尾原创结果的毕业阻塞 `[GAP-LIT]` 原文列出的五项已逐条覆盖，本轮关闭。**
+  - **三个点名复核点全部 SUPPORT**（与本项目既有判断一致，且是第二/第三次独立确认）：Theorem C 的靶逐字是**无穿孔**的 `𝒮̄_g`（500 dpi 逐字符确认下标只有一个斜体 g；同页 Theorem B 逐字带 `𝒮̄_{g,n_NS,n_R}` 与 `⊗Ψ_i`）；Example 8.9 **不提及 Ramond 穿孔**；§9.3 逐字 "**We conjecture that** the following diagram is commutative (up to a sign)"，全节无编号定理无 Proof 环境。三处都同时并列了反面证据，没有只报支持面。
+  - ⭐ **新增负面情报（已写进 attempt 的 status.yaml 1b 条）**：**Lemma 8.7 与 Cor 8.8 也只对 NS 穿孔陈述**，而 Lemma 9.1(i) 的证明正是引用 Cor 8.8——即 **(9.6) 的推导链条整条都走在只对 NS 陈述的引理上**。这与本尝试的设计一致（只在 NS 节点粘接），**不构成新缺口**，但把 `[GAP-FKP-RAMOND]` 的足迹从「Lemma 7.9 证明的一处省略」扩大到「§8.4–§9.1 的整条 NS-only 链」。日后推广到 Ramond 粘接者必须补齐整条链。
+  - 📌 **新记号陷阱（引用任何 FKP 公式前必读）**：同一篇论文里 **`m` 有三重含义**（(8.11)/§8.4 = NS 穿孔数；Lemma 9.1/9.3 = ω 的幂次；Lemma 7.10 证明 = 除 q 外的节点个数）；§7.5 起用分号记号 `𝒮̄_{g;m,n}`、§1/§5 用逗号记号 `𝒮̄_{g,n_NS,n_R}`，**原文从未写下二者相等的声明**；(8.11) 逐字的乘积上限是 `m` 而引言 Theorem B 写 `n_NS`，**原文未声明 m = n_NS**。
+  - **原文疑点 6 条**（全 L1，均未替作者改）：§9.3 首句把 Ramond 粘接映射引作 **(7.9)**（应为 (7.11)/(7.12)，PDF 超链接框也圈在 "7.9" 上，说明 LaTeX label 就错）；p.68 大图右上角 `𝓑(O_X)^3(−B)|_B` 疑为 `(−Δ)`；p.70 的 `K_{𝒮̄}(Δ)` 与 §9.1 的 `K_{𝒮̄}(2Δ_NS)` 边界项不一致疑为 `Δ_R`；另三条语法/单复数笔误。**Lemma 7.14 的不对称**（只对 (7.11) 断言"Δ_R = 概形像"，没给 (7.12) 的对应）是作者自留缺口。
+  - ⚠ **仍未覆盖，不得声称已读完 FKP §9**：Lemma 9.3/9.4/9.5 的**证明正文**（p.63–68，Lemma 9.5 是全文最长计算）只读了陈述与首句，故**仍不能回答「Theorem 9.2 的相容性证明是否与穿孔数无关」**。本尝试的承重链走 (7.6)+Lemma 9.1+Lemma 8.7 ⟹ (9.6)，不经过 Theorem 9.2，故不受影响。
+
+- ⭐⭐ **轨道 (iii) 的 `claim.md` 已落地，并带回一条比证明本身更要紧的负面结果**（2026-09-18 合并 `agent/prover/physical-exponential-equals-lattice-voa`，2 提交）。命题已精确到量词（Claim A：对一切 `n, K ∈ Z`，`Φ∘([z^K]Y_W(e^{nk}⊗1,z))∘Φ^{-1} = S_n ∘ V^{(b_n)}_{K−nν}`，`ν := 2α'(k₀·p) ∈ Z\{0}`，等号是 `(End T)[[z,z^{-1}]]` 中形式级数系数的逐个相等）。state 保持 `draft`，**本轮不请求审查**，proof 未开始。
+  - 🔴 **桥卡断言 (2) 的字面表述不成立——lead 已独立复核确认，裁定见 `docs/reviews/bridge-card-index-shift-2026-09-18.md`**：
+    - **(1) 指标移位缺失（CONFIRMED）**。桥卡 `statement:` 的括注逐字写 `V^{(n)}_K = 零模移位 ∘ V^{(b)}_K`（**无**移位），而 `formal/StringFormal/NoGhost/DDF.lean` 的 `towerVertex` 逐字是 `towerShift n ∘ₗ towerDiag (… vertexOsc η (n·b) (K − n))`（**带**移位），`ddf-operators-v6`（formalized）两处转抄该定义均带移位。两张卡对同一符号 `V^{(n)}_K` 给出相差 `z^{nν}` 的两个算子，对一切 `n ≠ 0` 不等。**桥卡错，Lean 与 v6 对**（后者有机检背书且移位来历写在注释里）。
+    - **(2) 唯一推导 `--via-cocycle-triviality` 的 summary 内部自相矛盾（CONFIRMED）**：第 1 段算出 `x^{⟨α,β⟩} = x^0 = 1`，第 2 段却用同一个因子去匹配 `n≠0` 时非平凡的单值因子 `z^n`。正确出处是 `Δ̄(α,±x)` 里的**零模算子** `x^{α(0)}`（第 N 层本征值 `⟨α,p+Nk₀⟩ = nν`），不是两个格元之间的常数 `x^{⟨α,β⟩}`。
+    - 🛡 **lead 订正 agent 的一处佐证错误**：agent 称「那条 summary 从未提 `Δ̄`」——**不实**，summary 第 2 段逐字写了 "`E^-(−α,x)` 与 `Δ̄(α,±x)` 正对应物理侧的两半"。缺陷不是"漏提 Δ̄"，而是**把单值因子错归给 `x^{⟨α,β⟩}`**。按后者记账。
+  - 📌 **这是图内一处此前未被发现的活缺陷，与轨道 (iii) 成败无关**；`validate` 查不出它是意料之中的——校验管道不查两张卡对同一符号的定义是否一致，那需要人读。
+  - **处置：本轮不施工**（收官轮不匆忙动承重卡）。括注在 `statement:` 正文内，按原则 1 + 2026-09-18 新判例必须**换代为 v2**，涉及下游边重指（至少 `ddf-contour-equals-mode-sum--via-voa-residue` 一条非 inferred 依赖），是完整的 curator 工作。**列为下一轮第一件事**，详细步骤见该 review 文档。🔴 **状态不变**：修的是记号错误，断言 (2) 的实质缺口（两侧独立构造之间的识别无来源）分毫未动，v2 仍是 `physical-argument`，整条无鬼链仍被它压着——**不要因为"修了一个 bug"就顺手抬状态。**
+  - **prover 的路线判断（待下一轮检验）**：Claim A 整个活在代数模型内，归结为五条有限步核对，无分析学/无收敛性/无围道，独立性门槛可满足；**最可能卡住的是 δ 归一化与物理符号锚定两条接缝**——不是数学难，是图内**无可比对物**（δ 归一化在代数塔上根本没定义；`X(z)` 含 `ln z` 故物理侧的锚定在本图现状下不可能成为定理）。即便 Claim A 全证下来，也只是「图对象 = 图对象」的定理。另指出毕业前需 curator 为 `E^±`/`Δ̄` 与单值因子 `z^{2α'nk₀·p̂}` 立定义卡（图内目前无节点承载）。
+
 - ⭐ **紧化+穿孔象限：从"记账搬运"升级为真结果（2026-09-18 合并 `agent/prover/supermoduli-elliptic-tail-punctured`）。** 上一轮 `supermoduli-compactified-punctured` 的 Compactification Lifting Lemma 只能复现种子门槛；本轮把 Corrêa–Noja 的椭圆尾粘接**推广到带穿孔情形**，得 **定理 M**：
   > 𝔖̄_{g;n,2r} 非投影，只要 **g ≥ 3，或（g = 2 且 n + 2r ≥ 2）**。
   - **Donagi–Witten 的 n ≤ g−1 限制被完全去掉**（穿孔替尾巴"付"稳定性，有穿孔时有理尾就稳定，省下一个亏格）；Donagi–Ott 的 g≥5r+1、Wang 的 g≥n+5r+3 换成 g≥2。🔴 **主结论不使用 Wang，故不继承其 `physical-argument` 天花板**——本轮推论 B 覆盖上一轮推论 C 的全部量词范围且状态更高。
