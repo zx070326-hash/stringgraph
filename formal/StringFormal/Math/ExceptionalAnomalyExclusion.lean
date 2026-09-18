@@ -78,9 +78,23 @@ def g2PowerSumTwo : ℚ := powerSum3 g2Roots g2Witness 2
 def g2PowerSumFour : ℚ := powerSum3 g2Roots g2Witness 4
 def g2PowerSumSix : ℚ := powerSum3 g2Roots g2Witness 6
 
-theorem g2_power_sum_two_value : g2PowerSumTwo = 48 := by native_decide
-theorem g2_power_sum_four_value : g2PowerSumFour = 360 := by native_decide
-theorem g2_power_sum_six_value : g2PowerSumSix = 3048 := by native_decide
+theorem g2_power_sum_two_value : g2PowerSumTwo = 48 := by
+  simp only [g2PowerSumTwo, powerSum3, g2Roots, g2Witness, dot3, List.map_cons, List.map_nil,
+    List.sum_cons, List.sum_nil, Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.head_cons,
+    Matrix.cons_val_two, Matrix.tail_cons]
+  norm_num
+
+theorem g2_power_sum_four_value : g2PowerSumFour = 360 := by
+  simp only [g2PowerSumFour, powerSum3, g2Roots, g2Witness, dot3, List.map_cons, List.map_nil,
+    List.sum_cons, List.sum_nil, Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.head_cons,
+    Matrix.cons_val_two, Matrix.tail_cons]
+  norm_num
+
+theorem g2_power_sum_six_value : g2PowerSumSix = 3048 := by
+  simp only [g2PowerSumSix, powerSum3, g2Roots, g2Witness, dot3, List.map_cons, List.map_nil,
+    List.sum_cons, List.sum_nil, Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.head_cons,
+    Matrix.cons_val_two, Matrix.tail_cons]
+  norm_num
 
 theorem g2_rhs_value : (1/48) * g2PowerSumFour * g2PowerSumTwo - (1/14400) * g2PowerSumTwo^3 = 8808/25 := by
   rw [g2_power_sum_two_value, g2_power_sum_four_value]
@@ -137,9 +151,26 @@ def f4PowerSumTwo : ℚ := powerSum4 f4Roots f4Witness 2
 def f4PowerSumFour : ℚ := powerSum4 f4Roots f4Witness 4
 def f4PowerSumSix : ℚ := powerSum4 f4Roots f4Witness 6
 
-theorem f4_power_sum_two_value : f4PowerSumTwo = 18 := by native_decide
-theorem f4_power_sum_four_value : f4PowerSumFour = 15 := by native_decide
-theorem f4_power_sum_six_value : f4PowerSumSix = 57/4 := by native_decide
+theorem f4_power_sum_two_value : f4PowerSumTwo = 18 := by
+  simp only [f4PowerSumTwo, powerSum4, f4Roots, f4RootsD4, f4RootsShort, f4RootsHalf, f4Witness,
+    dot4, List.cons_append, List.nil_append, List.map_cons, List.map_nil,
+    List.sum_cons, List.sum_nil, Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.head_cons,
+    Matrix.cons_val_two, Matrix.cons_val_three, Matrix.tail_cons]
+  norm_num
+
+theorem f4_power_sum_four_value : f4PowerSumFour = 15 := by
+  simp only [f4PowerSumFour, powerSum4, f4Roots, f4RootsD4, f4RootsShort, f4RootsHalf, f4Witness,
+    dot4, List.cons_append, List.nil_append, List.map_cons, List.map_nil,
+    List.sum_cons, List.sum_nil, Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.head_cons,
+    Matrix.cons_val_two, Matrix.cons_val_three, Matrix.tail_cons]
+  norm_num
+
+theorem f4_power_sum_six_value : f4PowerSumSix = 57/4 := by
+  simp only [f4PowerSumSix, powerSum4, f4Roots, f4RootsD4, f4RootsShort, f4RootsHalf, f4Witness,
+    dot4, List.cons_append, List.nil_append, List.map_cons, List.map_nil,
+    List.sum_cons, List.sum_nil, Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.head_cons,
+    Matrix.cons_val_two, Matrix.cons_val_three, Matrix.tail_cons]
+  norm_num
 
 theorem f4_rhs_value : (1/48) * f4PowerSumFour * f4PowerSumTwo - (1/14400) * f4PowerSumTwo^3 = 261/50 := by
   rw [f4_power_sum_two_value, f4_power_sum_four_value]
