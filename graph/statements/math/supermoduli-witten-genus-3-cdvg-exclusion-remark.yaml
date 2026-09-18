@@ -1,0 +1,91 @@
+id: math.supermoduli-witten-genus-3-cdvg-exclusion-remark
+kind: proposition
+title: >-
+  Witten 2015：文献中已有的 CDvG 亏格三全纯测度提案（[24] = arXiv:0801.2543）因沿 D′ 全纯而与
+  π_*(Υ) 不重合（条件性排除论证，前提为同文 Appendix C.4 的 D′ 支极点结果）（Witten）
+statement: |
+  **对象**（记号完全沿用 `math.supermoduli-witten-genus-3-hyperelliptic-pole`，即 Witten,
+  "The Super Period Matrix With Ramond Punctures", arXiv:1501.02499, Appendix C 的记号）：
+  Υ 为 (C.19) 定义的超模空间 M_{3,+} 上的弦论测度；π: M_{3,+} → M_{3,spin+} 为超周期矩阵投影；
+  π_*(Υ) 为推前测度；D′ ⊂ M_{3,spin+} 为 h⁰(L)=0 的 35 个偶自旋结构所参数化的那一支不可约除子。
+
+  **论证**（Appendix C.4, p.56, 紧接 (C.22) "Thus π_*(Υ) is of order 1/ε⁴ or 1/q² along D′." 之后，
+  逐字，经 L1 直接读取，未替作者加强）：
+  "The literature actually contains a proposal [24] for a holomorphic measure on M_{3,spin+} that is
+  supposed to arise by integrating over the odd variables in some fashion that has not been specified.
+  This formula is holomorphic along D′, so it does not coincide with π_*(Υ)."
+
+  **[24] 的身份**：Cacciatori, Dalla Piazza, van Geemen, "Modular Forms And Three Loop Superstring
+  Amplitudes", arXiv:0801.2543, Nucl. Phys. B800 (2008) 565–590。Witten 自己的参考文献表 [24]
+  （p.59）逐字条目见 sources；该条目把第二作者姓氏印作 "F. Della Piazza"，正确拼写为 "Dalla Piazza"
+  （arXiv:0801.2543 作者栏与 Dunin-Barkowski–Fedorov–Sleptsov 2025 参考文献 [20] 均作 "Dalla
+  Piazza"），系 Witten 论文参考文献表自身的笔误，不影响身份判定。
+
+  **本节点断言的精确范围**：这是一条条件性排除论证，其逻辑结构为——
+  (前提 A，本文自己在同一附录刚给出) π_*(Υ) 沿 D′ 有极点（阶 1/q²），见
+  `math.supermoduli-witten-genus-3-hyperelliptic-pole`；
+  (前提 B，本文自己对 [24] 公式的检视) [24] 的提案沿 D′ 全纯；
+  (结论) 故 [24] 的提案与 π_*(Υ) 不重合。
+
+  **本节点明确不断言**：
+  (a) **不断言 [24] 在整个 Siegel 上半空间 H_3 上处处全纯**——那是 Dunin-Barkowski–Fedorov–Sleptsov
+      2025 独立做出的**严格更强**的断言（见
+      `math.supermoduli-genus-3-cdvg-ansatz-excluded-by-pole`）。本节点只用"沿 D′ 全纯"这个更弱、
+      更经济的前提。两张卡的前提强度不同，**不应合并为一张卡**。
+  (b) **不断言前提 A 本身的证明**——那是 `math.supermoduli-witten-genus-3-hyperelliptic-pole`
+      的内容（status: physical-argument，理由见该卡推导 `--via-witten-2015` 的判据 (a)–(d)）。
+  (c) **不断言 [24] 的构造或计算本身有误**——原文只说 "does not coincide with"，不说 "is wrong"。
+  (d) **本节点不是编号定理**——Witten 全文 Appendix C 无 Theorem/Proposition 标签，这是紧跟
+      (C.19)–(C.22) 计算之后的正文陈述。
+  (e) **不断言 π_*(Υ)（Witten 记号）与 π_*ψ_3/φ_3（DBFS 记号）是同一对象**——该记号对接本项目
+      未见任何文献逐字确认，已在
+      `math.supermoduli-genus-3-cdvg-ansatz-excluded-by-pole--via-dunin-barkowski-fedorov-sleptsov`
+      的 depends_on 边上标为 `inferred: true`。本节点全程只用 Witten 自己的记号，不跨这条缝。
+uses_conventions: []
+sources:
+  - ref: witten-2015-ramond-period-matrix
+    loc: "Appendix C.4, p.56（紧接 (C.22) 之后的排除陈述，逐字）；References [24], p.59"
+    note: |
+      **L1**，与 `math.supermoduli-witten-genus-3-hyperelliptic-pole` 同一次读取
+      （literature/extractions/witten-2015-super-period-matrix-ramond.md E7/E8）。
+      该卡的 statement"第二部分"第 3 条已把同一句话逐字收录为其上下文；本卡把这句话本身
+      提成独立命题，见 notes。
+tags: [supermoduli, superstring-measure, genus-3, math-input, witten, exclusion-argument, priority]
+notes: |
+  **查重**（2026-09-18，lead）：`search "genus 3"` / `search cdvg` / `search exclusion` 命中的是
+  `math.supermoduli-genus-3-cdvg-ansatz-excluded-by-pole`（DBFS 的排除论证）与
+  `math.supermoduli-witten-genus-3-hyperelliptic-pole`（前提 A），两者都不是本卡的命题。
+
+  **本卡是什么、为什么单独立卡（lead 裁决 2026-09-18，依据 physics-auditor 报告
+  docs/reviews/cdvg-exclusion-provenance-2026-09-18.md 的方案 (c)）**：
+  Witten 这句排除陈述此前只作为"上下文引文"寄居在
+  `math.supermoduli-witten-genus-3-hyperelliptic-pole` 的 statement 正文里——而那张卡的命题是
+  "超椭圆轨迹分裂为 D/D′ 两支 + 测度沿两支的解析行为"，**不是**"CDvG 提案被排除"。按
+  graph/CLAUDE.md"一个节点一个命题"，这条排除本身是一条完整的、可独立引用的数学论断，应当有自己的
+  节点，才能被 `search`、`status`、`why` 与未来的下游推导直接引用。本卡是补上的那个节点。
+
+  ⭐ **优先权（本卡存在的实质理由）**：本卡记录的排除论证比
+  `math.supermoduli-genus-3-cdvg-ansatz-excluded-by-pole`（Dunin-Barkowski–Fedorov–Sleptsov 2025）
+  **早十年**，且针对**同一篇**被排除的论文（Witten [24] = DBFS [20] = arXiv:0801.2543——身份已由
+  physics-auditor 2026-09-18 直接核对双方参考文献表原文确认，并由 lead 用 arXiv 摘要页独立复核
+  篇名/作者/卷页三项全部吻合，不再是"未决事项"）。
+  **DBFS 2025 在其 p.5 的排除段落里明确引用 Witten [27, appendix C.4]，但引用的只是"π_*ψ_3 有
+  极点"这一前提 A，从未提及/引用 Witten 本人已在被引用的同一个 Appendix C.4 里、对同一篇论文做过
+  的这条排除陈述**（auditor 已读 DBFS pp.1–10 Introduction 全节，含排除论证所在的 §1.6 整节，以及
+  pp.42–52 References 全节；§2–§6 未读，见该报告"不确定性"第 1 条）。
+
+  **两条排除不是同一条命题，故两卡并存而非换代**：骨架相同（前提 A + 前提 B ⟹ 排除），但前提 B
+  的强度不同——本卡"[24] 沿 D′ 全纯"**严格弱于** DBFS 的"[20] 在整个 H_3 上处处全纯"（后者蕴含
+  前者，反之不成立）。即：**DBFS 的版本不是 Witten 版本的推广，而是用了一个不必要地更强的前提去
+  得到同一个矛盾的、更粗糙但仍然有效的重述**。此外两者记号对象不同（Υ vs π_*ψ_3/φ_3，对接关系本
+  项目标为 `inferred`）、结论范围不同（D′ 单支 vs 整个 H_3）。
+
+  **对 DBFS 卡不作任何改动**：auditor 的回译审计裁定该卡 title + statement 对 DBFS 论文的转述
+  **faithful**（量词、条件、逻辑连接词与原文一一对应，未加强未减弱），且 title 末尾的作者括号在
+  本项目一贯用法里是**来源标注**而非首创权声明（对照 `math.supermoduli-space-not-projected` 的
+  "（Donagi–Witten）"等）。故不换代、不改字。
+  ⚠ **auditor 顺带确立的判例（lead 采纳）**：**title 与 statement 正文同等受根 CLAUDE.md 原则 1
+  约束，改 title 的语义内容（包括增删署名）等于改陈述文本，必须换代，不得就地编辑。** 此前
+  graph/CLAUDE.md 的判例只覆盖"陈述正文内嵌 id"，未涉及 title。
+author: lead
+created: "2026-09-18"

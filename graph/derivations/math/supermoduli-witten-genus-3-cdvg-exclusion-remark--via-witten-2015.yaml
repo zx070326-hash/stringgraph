@@ -1,0 +1,50 @@
+id: math.supermoduli-witten-genus-3-cdvg-exclusion-remark--via-witten-2015
+target: math.supermoduli-witten-genus-3-cdvg-exclusion-remark
+kind: proof
+status: rigorous
+depends_on:
+  - id: math.supermoduli-witten-genus-3-hyperelliptic-pole
+    inferred: false
+    note: |
+      **本条边不需要标 `inferred`**：被依赖的命题（π_*(Υ) 沿 D′ 有极点，阶 1/q²）与本卡的排除
+      陈述出自**同一篇论文、同一个附录、同一段落的相邻两句**（(C.22) 与其紧接的下一句），记号
+      完全一致（Υ、π_*、D′ 都是 Witten 自己的记号），不存在跨文献的记号对接问题。
+      ⚠ 与 `math.supermoduli-genus-3-cdvg-ansatz-excluded-by-pole--via-dunin-barkowski-fedorov-sleptsov`
+      的对照：那条边标 `inferred: true`，是因为 DBFS 用的是 π_*ψ_3/φ_3 而被依赖的卡用的是
+      Witten 的 π_*(Υ)，两套记号的同一性无文献逐字确认。本条边没有这个问题——这正是本卡比 DBFS 卡
+      "更经济"的一处体现。
+sources:
+  - ref: witten-2015-ramond-period-matrix
+    loc: "Appendix C.4, p.56，紧接 (C.22) 之后；References [24], p.59"
+    note: |
+      L1，见 statement 的 sources note 与
+      literature/extractions/witten-2015-super-period-matrix-ramond.md E7/E8。
+summary: |
+  记账 Witten 论文 Appendix C.4 在算出 D′ 支极点阶数之后**紧接着**做的一步文献核对：把刚得到的
+  "π_*(Υ) 沿 D′ 有极点"拿去检验文献中一个具体的、已发表的全纯提案（[24] = arXiv:0801.2543），
+  发现矛盾，给出排除结论。
+
+  **本推导自身的论证步骤是初等的**：给定 (前提 A) π_*(Υ) 沿 D′ 有极点、(前提 B) [24] 的公式沿 D′
+  全纯，则两者不可能相等——这是"有极点"与"全纯"在同一除子上的直接矛盾，不引入任何新的数学工具。
+  故本推导 `status: rigorous` 记的是**这一步逻辑组合本身**的严格程度。
+
+  **目标卡的 effective status 由依赖决定，不由本推导决定**：前提 A 所在的卡
+  `math.supermoduli-witten-genus-3-hyperelliptic-pole` 自身是 `physical-argument`（理由见该卡推导
+  `--via-witten-2015` 的判据 (a)–(d)：无编号定理、"generically"未消解、D 支只是 "expect"、D′ 支的
+  关键推理步骤部分归属 P. Deligne 的私人交流），故本卡的 effective 亦为 `physical-argument`。
+  这与 `math.supermoduli-genus-3-cdvg-ansatz-excluded-by-pole` 的记账方式一致（那条推导同样标
+  `kind: proof, status: rigorous`，同样被同一张前提卡压到 physical-argument）。
+gaps:
+  - |
+    **前提 B（"[24] 的公式沿 D′ 全纯"）是 Witten 对 [24] 显式公式的断言，本文未展示核验过程**，
+    本项目也未独立读取 arXiv:0801.2543 去核实其 Ansatz 沿 D′ 的解析行为。这条 gap 与
+    `math.supermoduli-genus-3-cdvg-ansatz-excluded-by-pole` 面临的同类 gap（DBFS 断言 [20] 在整个
+    H_3 上处处全纯，同样未展示核验）是**同一类**，且本卡的前提 B 更弱、因此更容易成立。
+    若未来要消解这条 gap，需要 researcher 直接读 arXiv:0801.2543 的显式模形式并核对其沿 D′ 的行为。
+  - |
+    **本推导不重新核实前提 A 自身的论证**（超 Mumford 同构、D'Hoker–Phong 展开、genericity 假设、
+    Deligne 私人交流等），那些 gap 全部记在
+    `math.supermoduli-witten-genus-3-hyperelliptic-pole--via-witten-2015` 上，本推导不借道把它们
+    悄悄消解。
+author: lead
+created: "2026-09-18"
