@@ -5560,3 +5560,52 @@
              不承载断言 (2)**，理由与 `frenkel-2000-bourbaki`/`li-wang-2008` 同类（VOA 侧内部构造，
              非物理↔VOA 翻译句）。见 extractions/assertion-2-physics-side-voa-bridge-2026-09-18.md §候选7。}
 }
+
+@article{gebert-1993,
+  author  = {Gebert, Reinhold W.},
+  title   = {Introduction to Vertex Algebras, {B}orcherds Algebras and the {M}onster {L}ie Algebra},
+  journal = {Int. J. Mod. Phys. A},
+  volume  = {8},
+  pages   = {5441--5504},
+  year    = {1993},
+  eprint  = {hep-th/9308151},
+  archivePrefix = {arXiv},
+  primaryClass  = {hep-th},
+  note   = {由 researcher 于 2026-09-18 第三轮"断言 (2)"检索登记（arXiv 全文开放，无付费墙）。
+            **⚠ 与已登记的 `gebert-nicolai-1995`（不同论文，两位作者，只承载断言 (1) 的 cocycle
+            平凡性）严格区分**：本条是 Gebert 单作者 1993 年综述，55 页，全文 L1（`pdftotext -layout`
+            落盘 3442 行 + 关键页原始图像核实，PDF pp.27--30）。
+            **§3.1 Definition 1（p.9--10，原文页码，逐字，含轴 (15)--(21) 与 Jacobi 恒等式 (22 区）)**：
+            顶点代数被抽象公理化定义为"a linear map V: F -> (End F)[[z,z^{-1}]] which assigns to
+            each state ψ∈F a vertex operator V(ψ,z)"，满足 Regularity/Vacuum/Injectivity/Conformal
+            vector/Jacobi identity 五条公理——**这是独立于任何格点/物理构造的抽象定义**，先于 §4。
+            **§4.1 Theorem 5（PDF p.27）**："Associated with each nondegenerate even lattice Λ there
+            is a vertex algebra (F,V,1,ω)."——存在性定理，§4.2--4.3 给出构造并验证公理。
+            **§4.2（PDF p.29--30）核心链**：引入 Fubini--Veneziano 场
+            `Q^μ(z) ≡ q^μ - i p^μ ln z + i Σ_{m∈Z,m≠0} (1/m) α^μ_m z^{-m}`（原文页图逐字核实），
+            正规序记号显式定义（"colons indicate that ... q^ν is written to the left of p^μ, as well
+            as the creation operators are to be placed to the left of the annihilation operators"）；
+            先以 (69) **定义** `V(e^r,z) := exp(∫r_<(z)dz) e^r z^{r(0)} exp(∫r_>(z)dz)`（振子分裂记号），
+            再写"This can be written in a way more familiar to physicists by introducing FORMALLY the
+            Fubini-Veneziano field ... **which really only has a meaning when exponentiated**. We find
+            V(e^r,z) = :e^{i r·Q(z)}: c_r"。
+            **★★ 对断言 (2) 判据的严格核实结论：不满足，理由与 Round 2 的 Nikolov--Todorov 2004 同型
+            但更明确**——(a) 满足判据条件 1（写出带时空指标 μ 的 `Q^μ(z)`，正规序 `: :` 显式定义，
+            且整节明写"can be thought of as a bosonic string theory with d spacetime dimensions
+            compactified on a torus"）；(b) **不满足判据条件 2 的"独立构造后划等号"要求**——`V(e^r,z)`
+            虽然是先经 §3.1 Definition 1 抽象公理化（这点比 N-T 更强，VOA 侧是真独立定义的），但
+            **物理侧的 `Q^μ(z)` 本身没有独立于 (69) 的物理构造**：作者原文用"formally"（只是形式上
+            引入）与"which really only has a meaning when exponentiated"（只有指数化后才有意义）
+            两处措辞**自陈** Q(z) 只是把 (69) 的振子分裂表达式改写成物理记号的**记号装置**，不是先用
+            自由玻色场正则量子化等物理论证独立构造出 `X^μ(z)`/`:e^{ikX(z)}:` 再证明与 VOA 结构映射
+            相等。⇒ **"V(e^r,z)=:e^{ir·Q(z)}:c_r" 是单一构造的改写恒等式，不是两个独立构造对象之间
+            的识别（identification）**，与 N-T (5.51)/(5.53) 属同一缺陷模式，但本文作者用词更直白地
+            承认了这一点（"formally"）。**这是本轮读到的、结构上最接近断言 (2) 但仍不满足严格判据
+            的最强候选**，详见 extractions/assertion-2-arxiv-bridge-reviews-2026-09-18.md E1。
+            **(b)(c) 两个附带问题**：本文全文只处理离散格点动量 `r ∈ Λ`（Λ 为偶格），**不涉及连续
+            动量、无光滑到离散的极限论证**（(b) 未处理）；cocycle 因子 `c_r` 显式处理（§4.1
+            (63)--(67)），但**无 δ 函数归一化讨论**（本文动量离散，无需 δ(k-k')，(c) 不适用/未处理）。
+            **§4.3 逐字**："in agreement with the well-known expression from string theory"（PDF
+            p.31 附近，L(n) Virasoro 生成元与弦论已知表达式一致）——这是关于 Virasoro 生成元的确认句，
+            不是关于顶点算子本身的确认句，不可误引为断言 (2) 的支持证据。}
+}
