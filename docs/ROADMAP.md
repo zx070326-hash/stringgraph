@@ -34,6 +34,16 @@
   - 🛡 **护栏**：Gebert §4.3 那句 "in agreement with the well-known expression from string theory" 的**语法主语是 `L(n)`，不是 `V(e^r,z)`**，不得引为断言 (2) 的支持。
   - 第四轮（`agent/researcher/assertion-2-round4-msri-flm`，只写 `literature/**`）打三个残留 L0：**Goddard–Olive 编 MSRI Publications vol.3**（1983 Berkeley 那场物理学家与数学家当面对记号的会议文集，三轮从未尝试，历史上最可能写下断言 (2) 的场合）、**FLM Ch.8 改走后续论文逐字转引路线**（不再试图拿原书）、Kac–Raina 复核。此轮若仍为负面，「确无来源可查」的门槛即达成，**原创轨道 (iii) 可以发起**。
 
+- ⭐⭐ **断言 (2) 第四轮：首次命中，裁定 (A)，原创轨道 (iii) 解锁**（2026-09-18 合并，5 提交，只写 `literature/**`）。命中的文献**不在任务书的三个候选里**，是顺 FLM Ch.8 引用链追出来的：
+  - **`grotenhuis-2020`：L. M. Grotenhuis, *Vertex Algebras and String Theory in Monstrous Moonshine*，Leiden 大学本科毕业论文，2020-06-19，127 页。** p.106 (6.5)(6.6) 独立写出物理侧模展开与正规序指数（判据 1 ✔），紧接着逐字写 "**We recognise this expression as the lattice vertex operators Y(|α⟩, z) given in (3.15).**"（判据 2 ✔，且是 "recognise" 不是 `:=`，判据 3 ✔），而 (3.15) 由 p.54 Theorem 3.4 用 VOA 公理**独立**构造。**这正是前三轮四篇全部倒下的那一步。** lead 已用 Read 渲染 p.106 与 p.54 页图逐字复核。
+  - ⚠ **三重限定，引用时必须同时说出口**：(1) 本科毕业论文，非同行评议；(2) "We recognise" 零论证零核对——(6.6) 自身漏掉了 (6.5) 的 `√(α'/2)` 而零模的 `α'` 却保留，公式内部不自洽本身就证明那句话没逐项核对过；(3) 命题在正定偶格（Leech）上，**不是**本卡的秩 1 类光格 / 连续动量塔。
+  - ⭐ **lead 独立发现（方向与 agent 报告相反）**：两侧零模对不上（物理侧 `e^{ikx₀}` 一个因子 vs VOA 侧 `e^α c_α` 两个因子），`(α,β)` 为奇时 (3.14) 要求反对易而 `e^{ikx₀}` 对易，**故一般偶格上该识别是错的**；**但本卡格秩 1 类光 ⟹ ⟨α,β⟩≡0 ⟹ 缺口恰好消失**——而"为什么消失"正是本卡断言 (1)，已有两条 L1 来源。Grotenhuis 的洞恰好不在我们需要的那个特例上。
+  - ⭐ **lead 独立发现之二**：p.106 脚注 § 逐字 "**Assuming** that the 'string' vertex operators V_A(z,z̄) satisfy the vertex algebra axioms as well…"——**作者自己把它标成未证假设**。裁定因此钉死为「**陈述**有，**证明**无」。
+  - 🔴 **终审裁决**：`status` 仍且只能是 `physical-argument`（原则 2：本科论文里零论证且公式不自洽的一句 "We recognise" 不是 rigorous 论证，有来源 ≠ 有证明）；**但 CLAUDE.md 的开轨门槛是「确认查无此*证明*」而非「查无陈述」，该门槛现已达成，(iii) 可以发起**。且 Grotenhuis 的存在**抬高**而非削弱原创价值——它给了一个具体可引、带可指出错误的先例。**硬性要求：research/ 文档必须登记 `grotenhuis-2020` 并写明三重限定与 cocycle 缺口；原创性主张只能是「首次*证明*」，不得主张「首次陈述」。**
+  - 🛡 **页图纪律第二次被印证**：`pdftotext` **吞掉了 (3.15) 里的 `e^α` 因子**，只信文本抽取会得出「两侧严丝合缝、无 cocycle 问题」的**错误**结论。与 supermoduli 线的同类教训合并为项目通则：**任何作为判据依据的公式必须用 Read 渲染页图核对。**
+  - ⚠ **防误引**：WebSearch 曾把 Dong–Mason–Nagatomo 的 "For the purposes of **this paper** we do not make explicit…" 转述成「**FLM** 那里没写明」——**主语被换掉**，不得引为证据。本轮新增的 FLM Ch.8 编号全部 L3（转抄自 Rosellen，未与原书核对）。
+  - 📎 **旁支情报（待派 curator 评估）**：`driscoll-spittler-2024`（arXiv:2408.07597，用无鬼定理回答 Borcherds 的一个问题）与 **Thorn 1985**（MSRI vol.3 pp.411–417，用 Kac 行列式证无鬼定理，比 Lian–Zuckerman 1991 早六年）都与本图无鬼定理主线相关且此前未登记。
+
 - ✅ **无鬼定理瓶颈：诊断已结案，结论一半一半**（2026-09-18 合并 `agent/researcher/li-wang-vertex-operator`，图侧落盘 commit 见 `graph/statements/worldsheet/physical-exponential-equals-voa-vertex-operator.yaml` 的 notes）。下面那条"在途"项里 lead 写的「弱在**抽取偷工**而非开放数学」这一判断**只对了一半**，如实记账：
   - **断言 (1)（cocycle 平凡）：确是抽取偷工，已修且升级。** (3.10) 的右端此前只列算子名不写公式，现已补全，连同 `E^±` (3.2) 与 `Δ̄` 的显式定义。更要紧的是 Li–Wang **§4 (p.21) 自己就逐字写了** `ε(α,β) = 1 for all α,β ∈ L`，且是对**任意** ⟨·,·⟩|_L = 0 的格陈述的（秩 1 类光只是特例）——此前本图以为只能靠 GN (3.1) 加本项目自补的退化推断步，现在是两个独立 L1 来源，自补步可撤。
   - **断言 (2)（物理正规序指数 = VOA 结构映射）：不是偷工，是真开放。** 通读 pp.9–24 复核：Li–Wang **全文无任何物理记号**（无 X^μ(z)、无 `:·:`、无 worldsheet），不承载这句翻译。**故该节点 status 仍且只能是 `physical-argument`，整条无鬼链依旧被它一个点压着。**
