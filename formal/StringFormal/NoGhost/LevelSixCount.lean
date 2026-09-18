@@ -633,4 +633,150 @@ theorem levelSixIndex_injective : Function.Injective (levelSixIndex ι) := by
 
 end LevelSixInjective
 
+/-! ### Surjectivity of `levelSixIndex`, and the exact level-six count
+
+Dispatches `Finsupp.oscWeight_eq_six_cases` directly; the witnesses are literal, except for the
+three shapes with a `Sym`-valued factor of size `≥ 2`, which need `symModeIndex_mk_two/_three/
+_four/_six`.  `[2,2,2]` is the one shape where the classification's left-associated triple sum
+`(a + b) + c` disagrees with `symModeIndex_mk_three`'s right-associated form `a + (b + c)`; a
+single `add_assoc` rewrite closes it. -/
+
+section LevelSixSurjOn
+
+variable {ι : Type*} [DecidableEq ι]
+
+/-- The level-six parametrisation hits every level-six occupation function. -/
+theorem levelSixIndex_surjOn {d : (ι × ℕ+) →₀ ℕ} (h : Finsupp.oscWeight d = 6) :
+    ∃ x : LevelSixIdx ι, levelSixIndex ι x = d := by
+  classical
+  rcases Finsupp.oscWeight_eq_six_cases h with
+    ⟨i, hd⟩ | ⟨i, j, hd⟩ | ⟨i, j, hd⟩ | ⟨i, j, k, hd⟩ | ⟨i, j, hd⟩ | ⟨i, j, k, hd⟩
+      | ⟨i, j, k, l, hd⟩ | ⟨i, j, k, hd⟩ | ⟨i, j, k, l, hd⟩ | ⟨i, j, k, l, m, hd⟩
+      | ⟨i, j, k, l, m, n, hd⟩
+  · -- `[6]`
+    exact ⟨Sum.inl i, hd.symm⟩
+  · -- `[5,1]`
+    exact ⟨Sum.inr (Sum.inl (i, j)), hd.symm⟩
+  · -- `[4,2]`
+    exact ⟨Sum.inr (Sum.inr (Sum.inl (i, j))), hd.symm⟩
+  · -- `[4,1,1]`
+    have hc : Multiset.card ({j, k} : Multiset ι) = 2 := by simp
+    refine ⟨Sum.inr (Sum.inr (Sum.inr (Sum.inl (i, ⟨{j, k}, hc⟩)))), ?_⟩
+    show Finsupp.single ((i, 4) : ι × ℕ+) 1 + symModeIndex ι 1 ⟨{j, k}, hc⟩ = d
+    rw [symModeIndex_mk_two, hd]
+  · -- `[3,3]`
+    have hc : Multiset.card ({i, j} : Multiset ι) = 2 := by simp
+    refine ⟨Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inl ⟨{i, j}, hc⟩)))), ?_⟩
+    show symModeIndex ι 3 ⟨{i, j}, hc⟩ = d
+    rw [symModeIndex_mk_two, hd]
+  · -- `[3,2,1]`
+    exact ⟨Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inl (i, j, k)))))), hd.symm⟩
+  · -- `[3,1,1,1]`
+    have hc : Multiset.card ({j, k, l} : Multiset ι) = 3 := by simp
+    refine ⟨Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr
+      (Sum.inl (i, ⟨{j, k, l}, hc⟩))))))), ?_⟩
+    show Finsupp.single ((i, 3) : ι × ℕ+) 1 + symModeIndex ι 1 ⟨{j, k, l}, hc⟩ = d
+    rw [symModeIndex_mk_three, hd]
+  · -- `[2,2,2]`
+    have hc : Multiset.card ({i, j, k} : Multiset ι) = 3 := by simp
+    refine ⟨Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr
+      (Sum.inl ⟨{i, j, k}, hc⟩))))))), ?_⟩
+    show symModeIndex ι 2 ⟨{i, j, k}, hc⟩ = d
+    rw [symModeIndex_mk_three, hd, add_assoc]
+  · -- `[2,2,1,1]`
+    have hc1 : Multiset.card ({i, j} : Multiset ι) = 2 := by simp
+    have hc2 : Multiset.card ({k, l} : Multiset ι) = 2 := by simp
+    refine ⟨Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr
+      (Sum.inl (⟨{i, j}, hc1⟩, ⟨{k, l}, hc2⟩))))))))), ?_⟩
+    show symModeIndex ι 2 ⟨{i, j}, hc1⟩ + symModeIndex ι 1 ⟨{k, l}, hc2⟩ = d
+    rw [symModeIndex_mk_two, symModeIndex_mk_two, hd]
+  · -- `[2,1,1,1,1]`
+    have hc : Multiset.card ({j, k, l, m} : Multiset ι) = 4 := by simp
+    refine ⟨Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr
+      (Sum.inr (Sum.inl (i, ⟨{j, k, l, m}, hc⟩)))))))))), ?_⟩
+    show Finsupp.single ((i, 2) : ι × ℕ+) 1 + symModeIndex ι 1 ⟨{j, k, l, m}, hc⟩ = d
+    rw [symModeIndex_mk_four, hd]
+  · -- `[1⁶]`
+    have hc : Multiset.card ({i, j, k, l, m, n} : Multiset ι) = 6 := by simp
+    refine ⟨Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr
+      (Sum.inr (Sum.inr ⟨{i, j, k, l, m, n}, hc⟩))))))))), ?_⟩
+    show symModeIndex ι 1 ⟨{i, j, k, l, m, n}, hc⟩ = d
+    rw [symModeIndex_mk_six, hd]
+
+end LevelSixSurjOn
+
+/-! ### The exact level-six count, and the `b̃`-free upper bound (U6) -/
+
+section LevelCountsSix
+
+variable (ι : Type*) [Fintype ι] [DecidableEq ι]
+
+/-- **`p_m(6) = m + 2m² + m·C(m+1,2) + C(m+1,2) + m³ + m·C(m+2,3) + C(m+2,3) + C(m+1,2)²
++ m·C(m+3,4) + C(m+5,6)`**, the level-six count; the eleven index families of `LevelSixIdx` are
+a bijective parametrisation. -/
+theorem card_ddfLevel_six_eq :
+    Fintype.card {d : (ι × ℕ+) →₀ ℕ // ddfLevel d = 6}
+      = Fintype.card ι + 2 * (Fintype.card ι * Fintype.card ι)
+        + Fintype.card ι * Nat.choose (Fintype.card ι + 1) 2 + Nat.choose (Fintype.card ι + 1) 2
+        + Fintype.card ι * Fintype.card ι * Fintype.card ι
+        + Fintype.card ι * Nat.choose (Fintype.card ι + 2) 3 + Nat.choose (Fintype.card ι + 2) 3
+        + (Nat.choose (Fintype.card ι + 1) 2) * (Nat.choose (Fintype.card ι + 1) 2)
+        + Fintype.card ι * Nat.choose (Fintype.card ι + 3) 4
+        + Nat.choose (Fintype.card ι + 5) 6 := by
+  classical
+  have hcard : Fintype.card (LevelSixIdx ι)
+      = Fintype.card ι + 2 * (Fintype.card ι * Fintype.card ι)
+        + Fintype.card ι * Nat.choose (Fintype.card ι + 1) 2 + Nat.choose (Fintype.card ι + 1) 2
+        + Fintype.card ι * Fintype.card ι * Fintype.card ι
+        + Fintype.card ι * Nat.choose (Fintype.card ι + 2) 3 + Nat.choose (Fintype.card ι + 2) 3
+        + (Nat.choose (Fintype.card ι + 1) 2) * (Nat.choose (Fintype.card ι + 1) 2)
+        + Fintype.card ι * Nat.choose (Fintype.card ι + 3) 4
+        + Nat.choose (Fintype.card ι + 5) 6 := by
+    show Fintype.card (ι ⊕ (ι × ι) ⊕ (ι × ι) ⊕ (ι × Sym ι 2) ⊕ Sym ι 2 ⊕ (ι × ι × ι)
+      ⊕ (ι × Sym ι 3) ⊕ Sym ι 3 ⊕ (Sym ι 2 × Sym ι 2) ⊕ (ι × Sym ι 4) ⊕ Sym ι 6) = _
+    simp only [Fintype.card_sum, Fintype.card_prod, Sym.card_sym_eq_choose]
+    rw [show Fintype.card ι + 2 - 1 = Fintype.card ι + 1 by omega,
+      show Fintype.card ι + 3 - 1 = Fintype.card ι + 2 by omega,
+      show Fintype.card ι + 4 - 1 = Fintype.card ι + 3 by omega,
+      show Fintype.card ι + 6 - 1 = Fintype.card ι + 5 by omega]
+    ring
+  refine le_antisymm ?_ ?_
+  · rw [← hcard]
+    exact card_ddfLevel_le_of_surjOn (levelSixIndex ι) oscWeight_levelSixIndex
+      fun _ hd => levelSixIndex_surjOn hd
+  · rw [← hcard]
+    refine Fintype.card_le_of_injective
+      (fun x => (⟨levelSixIndex ι x, ?_⟩ : {d : (ι × ℕ+) →₀ ℕ // ddfLevel d = 6})) ?_
+    · rw [ddfLevel_eq_oscWeight]; exact oscWeight_levelSixIndex x
+    · intro x y hxy
+      exact levelSixIndex_injective (congrArg Subtype.val hxy)
+
+end LevelCountsSix
+
+/-! ### From the level-six count to the `b̃`-free bound (U6) -/
+
+section ConjFreeSix
+
+variable {D : ℕ}
+
+/-- ⭐ **(U6)**: `p_{D−1}(6) ≤ (D−1) + 2(D−1)² + (D−1)C(D,2) + C(D,2) + (D−1)³
++ (D−1)C(D+1,3) + C(D+1,3) + C(D,2)² + (D−1)C(D+2,4) + C(D+4,6)`, the upper bound on
+`dim (H_phys ⊓ V_6)`. -/
+theorem card_conjFree_six_le (hD : 2 ≤ D) :
+    Fintype.card {d : Osc D →₀ ℕ // Fock.level D d = 6 ∧ conjDeg hD d = 0}
+      ≤ (D - 1) + 2 * ((D - 1) * (D - 1)) + (D - 1) * Nat.choose D 2 + Nat.choose D 2
+        + (D - 1) * (D - 1) * (D - 1) + (D - 1) * Nat.choose (D + 1) 3 + Nat.choose (D + 1) 3
+        + (Nat.choose D 2) * (Nat.choose D 2) + (D - 1) * Nat.choose (D + 2) 4
+        + Nat.choose (D + 4) 6 := by
+  classical
+  have hκ : Fintype.card {μ : Fin D // μ ≠ conjIdx D hD} = D - 1 := by
+    rw [Fintype.card_subtype_compl, Fintype.card_subtype_eq, Fintype.card_fin]
+  have h1 := card_ddfLevel_six_eq {μ : Fin D // μ ≠ conjIdx D hD}
+  have h2 := card_conjFree_le_card_ddfLevel hD 6
+  rw [hκ, show D - 1 + 1 = D by omega, show D - 1 + 2 = D + 1 by omega,
+    show D - 1 + 3 = D + 2 by omega, show D - 1 + 5 = D + 4 by omega] at h1
+  omega
+
+end ConjFreeSix
+
 end StringFormal.NoGhost
