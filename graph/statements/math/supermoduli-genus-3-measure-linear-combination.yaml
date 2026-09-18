@@ -1,0 +1,47 @@
+id: math.supermoduli-genus-3-measure-linear-combination
+kind: proposition
+title: 亏格三 RNS 超弦测度是三个已知函数的复系数线性组合（形式被证明；具体系数数值未被证明，仅为猜测）（Dunin-Barkowski–Fedorov–Sleptsov）
+statement: |
+  **对象**：π_*ψ_3/φ_3 为亏格三 RNS 超弦测度（记号约定同既有节点 `math.supermoduli-space-not-
+  projected` 系列文献，H_3 为 Siegel 上半空间）。
+
+  **结论**（摘要，逐字，经 export.arxiv.org API 核验）：
+  "We prove that the superstring measure is a linear combinaition (with complex coefficients) of three
+  known functions."
+
+  **本节点断言的精确范围**——**只是线性组合这一"形式"被证明，不包括三个系数的具体数值**：摘要紧接着
+  逐字写道："Furthermore, we conjecture the values of the coefficients of this linear combination and
+  provide evidence for this conjecture." 即：三个系数的具体取值**全部**是猜测（有证据支持但未证明），
+  **不是"两证一猜"**（这一点本项目的抽取记录经逐字核对摘要后自我更正过一次，特此在本节点正文中明确
+  避免重犯：既不写"部分系数已证明"，也不写"三系数皆已确定"）。
+
+  **方法论**（引言，忠实转述）：沿用 Witten 用代数参数化重新推导 D'Hoker–Phong 亏格二测度公式的
+  思路，但本文所用的具体参数化此前未被应用于超弦理论。
+
+  **本节点不断言**：三个系数的具体数值（该猜测本项目判断证据深度不足、暂不立卡，见 notes）；本
+  节点不断言公式在超椭圆轨迹处的解析行为（极点存在性，见
+  `math.supermoduli-genus-3-cdvg-ansatz-excluded-by-pole` 的条件性论证，那是基于 Witten 2015 的
+  另一条既有结果，不是本节点本身证明的内容）。
+uses_conventions: []
+sources:
+  - ref: dunin-barkowski-fedorov-sleptsov-2025
+    loc: "arXiv:2505.02950v2, 摘要（逐字，经 export.arxiv.org API 核验）；Introduction pp.2–4（方法论忠实转述）"
+    note: |
+      **部分 L1**：仅摘要 + pp.1–10（Introduction §1.1–§1.8）+ pp.42–52（参考文献列表）已读
+      （researcher 2026-09-18，抽取记录 dunin-barkowski-fedorov-sleptsov-2025.md E0, E2）。
+      **pp.11–41（技术推导 §2–§6 与附录 A–D，即"形式证明"本身的具体定理编号与证明步骤）完全未读**
+      ——本节点的具体定理编号无法给出，status 依据摘要"we prove"的明确断言与期刊发表信息
+      （J. High Energ. Phys. 2025, 193），非本项目独立复核 §2–§6 的证明细节。
+tags: [supermoduli, superstring-measure, genus-3, math-input, dunin-barkowski-fedorov-sleptsov]
+notes: |
+  **系数猜测未单独立卡**：本节点刻意不把"三个系数的具体数值"做成独立图节点——抽取记录明确指出
+  pp.11–41（含系数猜测的具体数值与支持证据的具体形式）完全未读，"未解决的疑问"第2条要求"若 curator
+  需要把这一结果做成图节点并标注精确的 status……必须先补读 §2–§6 正文"。在补读之前立卡会导致
+  status 判断（conjecture？physical-argument？）缺乏可核实的来源定位，故本轮判断为"警告但不建"，
+  留待后续补读后再建，见本项目向 lead 的最终报告。
+
+  **与 `math.supermoduli-genus-3-cdvg-ansatz-excluded-by-pole` 的关系**：两者都来自同一篇论文，但是
+  两个不同的命题——本节点是"本文自己的正面结果"（线性组合形式），另一节点是"本文对 CDvG 2008 既有
+  Ansatz 的条件性排除论证"，两者不应合并（一个节点一个命题）。
+author: curator-supermoduli-post-2024
+created: "2026-09-18"

@@ -1,0 +1,22 @@
+id: math.supermoduli-genus-3-measure-linear-combination--via-dunin-barkowski-fedorov-sleptsov
+target: math.supermoduli-genus-3-measure-linear-combination
+kind: proof
+status: rigorous
+depends_on: []
+sources:
+  - ref: dunin-barkowski-fedorov-sleptsov-2025
+    loc: "arXiv:2505.02950v2, 摘要；Introduction pp.2–4；正文证明在 §2–§6（未读）"
+    note: 部分 L1（仅摘要+引言+参考文献列表），见 statement sources note。
+summary: |
+  记账已发表数学论证（J. High Energ. Phys. 2025, 193）。摘要明确用"we prove"断言线性组合形式，与
+  "we conjecture"断言系数数值形成对照，本项目严格只记账前者。未挂依赖边：本项目未确认 D'Hoker–Phong
+  亏格二公式或 Witten 的代数参数化方法论在图中已有对应节点，方法论先例关系仅在摘要/引言层面确认为
+  背景引用，未核实证明本身是否结构性依赖某条具体既有引理。
+gaps:
+  - |
+    **pp.11–41（技术推导 §2–§6 与附录 A–D，"形式证明"本身的具体步骤）完全未读**——rigorous 档位
+    依据来源强度（期刊发表 + 摘要"we prove"的明确断言），非本项目独立复核证明细节。
+  - |
+    "三个已知函数"具体是哪三个函数、线性组合形式定理的确切编号，均未核实到逐字精度。
+author: curator-supermoduli-post-2024
+created: "2026-09-18"
