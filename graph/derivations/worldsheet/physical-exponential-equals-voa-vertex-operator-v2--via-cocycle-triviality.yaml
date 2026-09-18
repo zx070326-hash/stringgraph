@@ -1,5 +1,5 @@
-id: worldsheet.physical-exponential-equals-voa-vertex-operator--via-cocycle-triviality
-target: worldsheet.physical-exponential-equals-voa-vertex-operator
+id: worldsheet.physical-exponential-equals-voa-vertex-operator-v2--via-cocycle-triviality
+target: worldsheet.physical-exponential-equals-voa-vertex-operator-v2
 kind: physical-argument
 status: physical-argument
 depends_on:
@@ -72,8 +72,19 @@ summary: |
   **第 2 段（无来源，本推导的实际弱点）：两套算子相同。**
   第 1 段消掉了 cocycle 这一个**已知的**障碍，于是 VOA 侧的 𝒴(e^{n k_0}, z) 与物理侧的
   :e^{i n k_0·X(z)}: 在「形状」上一致：两者都是（零模移位）×（E₋ 型产生指数）×（E₊ 型湮灭指数），
-  Li–Wang (3.10) 里的 E^-(−α, x) 与 Δ̄(α, ±x) 正对应物理侧的两半，
-  x^{⟨α,β⟩} 对应物理侧的单值因子 z^{2α' n k_0·(p+Nk_0)}（由 k_0² = 0 与整性条件 (I) 等于 z^n）。
+  Li–Wang (3.10) 里的 E^-(−α, x) 与 Δ̄(α, ±x) 正对应物理侧的两半。
+  ⚠ **【2026-09-18 订正，lead 裁决见 docs/reviews/bridge-card-index-shift-2026-09-18.md】**
+  此前本段紧接着写「x^{⟨α,β⟩} 对应物理侧的单值因子 z^{2α' n k_0·(p+Nk_0)}……」——这与第 1 段
+  **自相矛盾**：第 1 段刚算出 x^{⟨α,β⟩} = x^0 = 1（对一切 m, n 恒为常数 1，因 ⟨k,k⟩ = 0），
+  一个恒等于 1 的常数不可能同时是随 n、随塔层号 N 变化的单值因子 z^{nν}。
+  单值因子真正的来源是 **Δ̄(α, ±x) 里的零模算子 x^{α(0)}**（Li–Wang (3.10) 的
+  Δ̄(α,x) = (−x)^{α(0)} exp(…) 那一项，不是 (3.10) 最前面的常数因子 x^{⟨α,β⟩}）：
+  取 α = nk，作用在塔第 N 层 |0; p+Nk_0⟩ 上，α(0) 的本征值是
+  ⟨nk, p̃+Nk⟩ = n · 2α'k_0·(p+Nk_0) = n·(2α'k_0·p + N·2α'k_0²) = nν
+  （记 ν := 2α'(k_0·p)，⟨k,k⟩ = 0 使 N 依赖项消失，故 ν 沿塔各层不变），
+  给出单值因子 z^{nν}，与整性条件 (I) 下 ν ∈ Z 时 z^{nν} 是塔上处处相同的整数幂一致。
+  这正是目标卡 v2 断言 (2) 括注里洛朗指标移位 K ↦ K − nν 的 VOA 出处
+  （详见目标卡 v2 sources 的 li-wang-2008 条）。
   **但「形状一致」不等于「是同一个算子」**，还差两条实质接缝：
   · **连续 ↔ 离散**：物理侧的塔以连续动量 p 为基点（横向/纵向分量连续，只有 2α' k_0·p 受整性约束），
     Li–Wang 的 V_(𝔥,L) 建在离散格 L = Z k 上；两者相接靠「p 固定、沿 k 离散」这一取法，
@@ -129,5 +140,28 @@ notes: |
   但经本卡传播后 effective 落到 physical-argument。**这是刻意的**：
   旗舰链 worldsheet.no-ghost-theorem-v4 的回译审计要看到这一条瓶颈，
   而不是被一个 inferred flag 掩盖（见目标卡 notes 的 lead + graph-reviewer 裁决）。
+
+  【2026-09-18：`git mv` 改名改指 v2，并订正 summary 第 2 段的自相矛盾（curator，
+  分支 agent/curator/bridge-card-v2；lead 裁决见 docs/reviews/bridge-card-index-shift-2026-09-18.md）】
+  本文件由 `worldsheet.physical-exponential-equals-voa-vertex-operator--via-cocycle-triviality.yaml`
+  `git mv` 改名而来，`id`/`target` 同步改指 v2。**depends_on / sources / status / kind
+  均未改**（仍是 physical-argument；四条依赖、三条来源逐字保留）。
+
+  两处订正：
+  (1) **目标卡的洛朗指标移位记号错误**（v1 括注无移位，v6/Lean 有移位）已在目标卡
+      换代为 v2 时修正，本推导只需同步 id/target，正文论证本身不受影响。
+  (2) **summary 第 2 段的独立自相矛盾**：原文先在第 1 段算出 x^{⟨α,β⟩} = x^0 = 1
+      （对一切 m,n 恒为常数），随后第 2 段却又说 x^{⟨α,β⟩} 对应随 n 变化的单值因子 z^n——
+      两句话不可能同时为真。**订正后**单值因子的来源改记为 Δ̄(α,±x) 的**零模算子** x^{α(0)}
+      （α = nk 在第 N 层的本征值 ⟨nk, p̃+Nk⟩ = nν，ν := 2α'(k_0·p)，因 ⟨k,k⟩=0 而与 N 无关），
+      不是恒等于 1 的格点常数 x^{⟨α,β⟩}。
+      ⚠ **本条订正不是「补充 Δ̄」**：原文第 2 段第一句本就逐字写了
+      「Li–Wang (3.10) 里的 E^-(−α, x) 与 Δ̄(α, ±x) 正对应物理侧的两半」——Δ̄ 从未缺席。
+      缺陷是**紧接着那句把单值因子错误地归给了另一个记号**（x^{⟨α,β⟩}），
+      不是「没提到 Δ̄」。
+
+  **status 未变，仍是 physical-argument**：两处都是记号/归因层面的订正，不触及本推导
+  gaps 里记录的实质缺口（断言 (2) 无来源、连续 ↔ 离散接缝、δ-归一化接缝）。
+  【本推导为什么不是 rigorous】一段的论证完全不变。
 author: curator
 created: "2026-09-15"

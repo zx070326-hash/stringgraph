@@ -14,10 +14,12 @@ depends_on:
       Schottenloher Def 10.12）也在这张卡建立的框架里。
       ⚠ 这条边**只**承载上述结构；「物理 :e: = VOA 𝒴(e)」那条字典**不**在这张卡里
       （其边界 (N6) 逐字排除），已单列为下一条依赖。
-  - id: worldsheet.physical-exponential-equals-voa-vertex-operator
+  - id: worldsheet.physical-exponential-equals-voa-vertex-operator-v2
     inferred: false
     note: |
-      **本推导与文献之间那条实质字典，2026-09-15 由 inferred flag 提升为显式节点。**
+      **本推导与文献之间那条实质字典，2026-09-15 由 inferred flag 提升为显式节点；
+      2026-09-18 改指 v2（v1 断言 (2) 括注的洛朗指标移位记号有误，已换代，
+      见 docs/reviews/bridge-card-index-shift-2026-09-18.md；本条论证内容不受影响）。**
       断言：在类光动量塔上 :e^{i n k_0·X(z)}: = 𝒴(e^{n k_0}, z)
       （秩 1 类光 ⟹ 扭群 2-cocycle ε(mk,nk) = 1，c_{n k_0} = 1）。
       本推导第 0 步把物理对象接入 VOA 框架**全靠这一条**：
