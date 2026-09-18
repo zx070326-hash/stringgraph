@@ -102,5 +102,34 @@ notes: |
   的缺口：若后续要把"前提 A"接上真正的 depends_on 边（而不是留在本节点正文的文字记录里），需要先
   由 researcher 补做该文献的抽取记录、curator 或 lead 再登记 bib 条目并立卡。
   **（2026-09-18：此缺口已按上方"前提 A 已接图"一条关闭，本段保留作历史记录，不删除。）**
+  **2026-09-18 优先权裁定落地（lead，依据 physics-auditor 报告
+  docs/reviews/cdvg-exclusion-provenance-2026-09-18.md）**：
+  · **本卡 title/statement 一个字不改。** auditor 的回译审计裁定本卡对 DBFS 论文的转述 **faithful**
+    （量词、条件、逻辑连接词与原文一一对应，未加强未减弱；逐字引文经原文 PDF 复核**逐字符一致**
+    含标点），且 title 末尾的作者括号在本项目一贯用法里是**来源标注**而非首创权声明。
+  · **Witten 本人的排除陈述已独立立卡**：`math.supermoduli-witten-genus-3-cdvg-exclusion-remark`
+    （及其推导 `--via-witten-2015`）。两卡并存而非换代——两者前提强度不同：本卡的前提 B
+    「[20] 在整个 H_3 上处处全纯」**严格强于** Witten 的「[24] 沿 D′ 全纯」（前者蕴含后者，反之
+    不成立），故本卡的排除论证**不是** Witten 版本的推广，而是用了不必要地更强的前提去得到同一个
+    矛盾的、更粗糙但仍然有效的重述。
+  · **新发现（auditor 直读 DBFS pp.1–10 Introduction 全节 + pp.42–52 References 全节）**：
+    DBFS 在 p.5 的排除段落里**明确引用** Witten [27, appendix C.4]，但引用的只是「Witten 证明了
+    π_*ψ_3 有极点并算出阶数」这一**前提 A**；DBFS **从未提及/引用** Witten 本人已在被引用的同一个
+    Appendix C.4 里、对同一篇论文做过的排除陈述。DBFS 甚至在脚注 3 里显示出对 C.4 的细致阅读
+    （提到 C.4 反驳了 Witten 自己 2013 年的早期猜测），却没有提到紧随同一计算之后的那句排除。
+    ⚠ DBFS §2–§6（pp.11–41）本轮未读，见该报告「不确定性」第 1 条。
+
+  **[20] 的 arXiv 号：已解决（但 statement 正文的「未决事项」段按原则 1 不得就地修改，保留原样）**。
+  auditor 直读 DBFS References [20] 原文条目（印刷 p.49）："S.L. Cacciatori, F. Dalla Piazza and
+  B. van Geemen, *Modular forms and three loop superstring amplitudes*, Nucl. Phys. B **800** (2008)
+  565 [**0801.2543**]"，与 Witten References [24]（p.59）的 arXiv 号、卷页、篇名、作者全部吻合；
+  lead 用 arXiv 摘要页独立复核 0801.2543 = Cacciatori / Dalla Piazza / van Geemen,
+  "Modular Forms and Three Loop Superstring Amplitudes", Nucl.Phys.B800:565-590,2008，三项全中。
+  **即 [20] = [24] = arXiv:0801.2543，不再是待核事项。** 另：statement「未决事项」里列为候选之一的
+  arXiv:0804.0457（"Genus four superstring measures"）**根本不在 DBFS 的参考文献表里**；DBFS 的
+  [21] 实为 Dalla Piazza–van Geemen, *Siegel modular forms and finite symplectic groups*,
+  arXiv:0804.3769。候选范围讨论到此关闭。
+  ⚠ 「Della Piazza」（Witten 参考文献表）vs「Dalla Piazza」（DBFS 与 arXiv 作者栏）是 Witten 论文
+  自身的拼写笔误，指同一人，不影响身份判定；未找到官方勘误，严格说是极强证据支持的推断。
 author: curator-supermoduli-post-2024
 created: "2026-09-18"
