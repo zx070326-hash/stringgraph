@@ -1,0 +1,78 @@
+id: holography.bss-rossello-dstar-normalization-constant
+kind: proposition
+title: BSS-Rosselló d* 归一化常数乘积关系
+statement: |
+  记 BSS 定义的 Φ̃₁ 与 Igusa Φ₁₀ 的比值为 c := Φ̃₁/Φ₁₀（非零常数，存在性由
+  权 10 Sp(4,ℤ) 尖点形式空间一维性保证）。记 E := Q²/2、M := P²/2、ℓ := Q·P，
+  定义裸积分
+    I := ∫ dρ dσ dv · e^{−2πi(Mρ + Eσ + ℓv)} / Φ₁₀(ρ,σ,v)
+  其中围道由 BSS (5.14) 与 Rosselló (2.22) 共同指定（两者经坐标对应与虚部核对
+  确认为同一围道）。
+
+  由两文的 d* 定义式逐字对比（BSS (5.13) 与 Rosselló (2.23)）及 N=1 代入，
+  可推出关系式
+    d*_BSS = (−1)^{ℓ+1}·(1/c)·η·I ,   d_*^R = (−1)^ℓ·I
+  其中 η := ±1 是三重围道积分微分次序的定向因子：
+  - η = +1：若微分 dτ dσ_B dz（BSS 记号）与 dρ dσ_R dv（Rosselló 记号）按
+    Fubini 迭代积分理解（次序无关）；
+  - η = −1：若按定向 3-形式（楔积 dτ∧dσ_B∧dz vs dσ_R∧dρ∧dv，对换变号）理解。
+
+  数值锚点 (M,E,ℓ)=(1,1,0)：两文各自报告 d*(1,1,0)=+50064（BSS eq (5.69) 与
+  Rosselló Cor 1.1 配合本项目 coefficients.py 验证），代入上式得
+    d*_BSS / d_*^R = (−1)·(η/c) = 1  ⟹  **c·η = −1**
+
+  **推论（两个分支给出同一结果）**：
+  从 d*_BSS / d_*^R = (−1)·(η/c) 代入 c·η = −1，即 1/c = −η：
+    η/c = η·(1/c) = η·(−η) = −η² = −1
+  ⟹ d*_BSS / d_*^R = (−1)·(−1) = +1
+  因为 η²=1 恒成立（η = ±1），两个分支（η=+1 或 η=−1）给出完全相同的结论
+  **d*_BSS = d_*^R**，即 BSS 与 Rosselló 两套定义在代表元范围内给出同一组数值。
+  η 取 +1 还是 −1 不影响这一结果。
+uses:
+  - holography.bss-phi-tilde-proportional-to-igusa-phi10
+uses_conventions: []
+sources:
+  - ref: bhand-sen-singh-2023
+    loc: "eq (5.13)：d* 定义式包含 (−1)^{Q·P+1} 因子与被积函数 1/Φ̃_k（N=1 时 Φ̃₁）"
+  - ref: bhand-sen-singh-2023
+    loc: "eq (5.14)：围道虚部 Im τ=P²/(Nε)、Im σ=NQ²/ε、Im z=−ℓ/ε，实部 [0,1)³×[0,N)"
+  - ref: bhand-sen-singh-2023
+    loc: "p.40 正文：'for N=1, the CHL partition function Φ̃_k⁻¹ is exactly the inverse of the Igusa cusp form Φ₁₀'（逐字原句）"
+  - ref: bhand-sen-singh-2023
+    loc: "eq (5.69)：数值 d*(10,14,5) = d*(1,0,1) = 50064（BSS 用 S-对偶联系两组；BSS 记号 (n_B,ℓ_B,m_B)=(1,0,1) 对应 Rosselló (m,n,ℓ)=(1,1,0)）"
+  - ref: rossello-2024
+    loc: "eq (2.22)：围道虚部 ρ₂=2nΛ、σ₂=2mΛ、v₂=−ℓΛ，实部 [0,1]³"
+  - ref: rossello-2024
+    loc: "eq (2.23)：d_* 定义式半周期平移在指数内 e^{−2πi(mρ+nσ+ℓ(v+1/2))}，被积函数 1/Φ₁₀"
+  - ref: rossello-2024
+    loc: "Appendix C eq (C.2)：数值 c_1^F(1,0)=−50064（Rosselló 记号，(m,n,ℓ)=(1,1,0)）；结合 eq (2.26) 关系式得 d_*(1,1,0)=+50064"
+notes: |
+  **完整推导（lead 2026-09-20）**：
+
+  记 E := Q²/2，M := P²/2（N=1），ℓ := Q·P，
+  `I := ∫ dρ dσ dv · e^{−2πi(Mρ + Eσ + ℓv)} / Φ₁₀`。
+
+  - Rosselló (2.23)：半周期平移写在指数内 ⇒ `d_*^R = (−1)^ℓ · I`。
+  - BSS (5.13)（N=1）：`d*^BSS = (−1)^{ℓ+1} ∫ dτ dσ_B dz · e^{−2πi(Eτ + Mσ_B + ℓz)} / Φ̃₁`。
+  - **字典**（由指数配对与围道虚部**双重**确定，互相印证）：`τ ↔ σ_R`、`σ_B ↔ ρ`、`z ↔ v`。
+    验证：BSS (5.14) 给 `Im τ = 2M/ε`、`Im σ_B = 2E/ε`、`Im z = −ℓ/ε`；
+    Rosselló (2.22) 逐字给 `ρ₂ = 2nΛ = 2EΛ`、`σ₂ = 2mΛ = 2MΛ`、`v₂ = −ℓΛ`。
+    取 Λ = 1/ε，**三个虚部逐项完全吻合，连 v/z 虚部的负号都一致**；实部都是
+    单位立方体（BSS 的 `0 ≤ Re σ < N` 在 N=1 即 [0,1)）。围道**没有**任何差异。
+  - 于是两个积分是同一个积分，**只差三个微分的书写次序**：BSS 写 `dτ dσ_B dz = dσ_R dρ dv`，
+    Rosselló 写 `dρ dσ_R dv`——差一次对换。
+  - 令 η := +1（若三重积分按 Fubini 迭代积分理解，次序无关）或 η := −1
+    （若按定向 3-形式 / 楔积理解，对换变号）。则
+    `d*^BSS = (−1)^{ℓ+1}·(1/c)·η·I = −η·(1/c)·d_*^R`。
+  - 数值锚点 (M,E,ℓ)=(1,1,0)：两边都是 +50064 ⇒ `−η/c = 1` ⇒ **c·η = −1**。
+
+  **分歧点是具体的**：两篇文章都没有明写三重围道积分的微分书写次序是否带定向。
+  注意 ℓ=0 时锚点对 v 虚部符号不敏感，所以上式与 ℓ≠0 的任何壁跨越问题无关，
+  是干净的。
+
+  **与 ℓ=0 壁穿越的关系**：research/attempts/ell-zero-wall-degeneracy 证明了
+  ℓ=0 时吸引子围道穿过 Φ₁₀ 的二阶零点（v=1/2），但留数 ∝ ℓ = 0 使 d* 自动良定。
+  该证明不依赖 c 的具体值（只需 c≠0），故不受本卡中 η 未定的影响。
+tags: [siegel-modular-form, normalization]
+author: graph-curator
+created: "2026-09-20"

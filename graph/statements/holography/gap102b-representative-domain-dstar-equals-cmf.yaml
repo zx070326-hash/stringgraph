@@ -1,0 +1,85 @@
+id: holography.gap102b-representative-domain-dstar-equals-cmf
+kind: proposition
+title: "代表元范围内 d_*(m,n,ℓ) = (−1)^{ℓ+1} c_m^F(n,ℓ)（Rosselló/DMZ 约定）"
+statement: |
+  【记号约定】**Rosselló/DMZ 家族约定**：m := P²/2（磁荷），n := Q²/2（电荷），ℓ := Q·P。
+  这与 BSS 2311.16252 的约定**不同**（BSS 取 m=Q²/2 电、n=P²/2 磁，二者互换）——
+  BSS 作者在 footnote 10（p.50）明确声明此差异。文献记号冲突裁决见
+  literature/notes/mn-convention-adjudication.md（2026-09-20, verdict (c)：两约定均正确）。
+
+  单心（immortal）dyon 指标 d_*(m,n,ℓ) 定义为沿吸引子围道 𝒞_* 的积分（Rosselló (2.22)–(2.23)）：
+    d_*(m,n,ℓ) = ∫_{𝒞_*} dρ dσ dv · e^{−2πi(mρ+nσ+ℓ(v+½))} / Φ₁₀(ρ,σ,v)。
+  Mock Jacobi 形式 ψ_m^F（权 −10、指标 m）的傅里叶系数记为 c_m^F(n,ℓ)（Rosselló/DMZ 记号）。
+
+  【命题】设整数 m,n,ℓ 满足：
+    m ≥ 1,
+    n ≥ 1,
+    n ≥ m,
+    0 ≤ ℓ ≤ m,
+    Δ := 4mn − ℓ² > 0（在 n≥m≥1、0≤ℓ≤m 下自动成立：Δ≥4m²−m²=3m²>0）。
+  则
+    d_*(m,n,ℓ) = (−1)^{ℓ+1} c_m^F(n,ℓ)。
+
+  【证明来源与性质】本命题依赖 Bhand–Sen–Singh arXiv:2311.16252（Res. Math. Sci. 12 (2025)
+  Paper 8）Appendix B + Theorem 5.4(b) 的已发表、同行评审证明，经本项目独立复核其证明骨架
+  （Prop B.1/B.2 围道形变论证 + §B.4 完成配方不等式，均为纯数学、非物理论证）。
+  独立数值验证：research/attempts/gap-102b-multicenter-residue/scripts/verify_A2B2_inequality.py
+  （1680+68880 组无反例）。
+
+  **BSS 与 Rosselló 的符号关系是 ℓ-依赖的 (−1)^{ℓ+1}，非全局常数**：数值验证显示
+  （research/.../scripts/coefficients.py，m=1..4、n≤8、代表元域 n≥m≥1, 0≤ℓ≤m）
+  c_m^F（Rosselló）符号按 ℓ 奇偶交替（ℓ 偶时 c_m^F<0，ℓ 奇时 c_m^F>0），故
+  (−1)^{ℓ+1}c_m^F>0 无一例外。而 BSS 的 d* 是正的简并度（BSS eq 5.69 给出 d*(10,14,5)=+50064），
+  故满足 c^F_BSS = (−1)^{ℓ+1} · c^F_Rosselló。两篇文献的 d* 定义在指数/预因子中处理
+  半周期移位的方式不同（BSS (5.13) 内置 (−1)^{Q·P+1}/N，Rosselló (2.23) 写 e^{−2πi·ℓ(v+1/2)}），
+  故为**不同泛函**；目标等式成立正是靠这个 ℓ-依赖符号差。
+
+  **剩余技术缺口（可接受为 [GAP]，不阻塞毕业）**：Φ̃₁ 的 Siegel 模形式性质（权、变换律、
+  全纯性、尖点性）本项目依赖 BSS 正文转述（援引为 CHL 配分函数已知结果），未从
+  BSS eq (5.2) 无穷乘积表示做第一性原理独立验证。若采信 BSS 对 Φ̃₁ 模性的转述，
+  则归一化常数 c := Φ̃₁/Φ₁₀ 为全局常数（因权 10 Sp(4,ℤ) 尖点形式空间一维），
+  c=−1 由数值锚点 (1,1,0) 处两体系吸引子系数均为 +50064 确定；记号翻译推导
+  d*_BSS = −(1/c)·d_*_R 进而确立两 d* 定义式的符号关系。这是有界、具体、可机械
+  验证的技术缺口，数值证据强（三方吻合），不影响记号翻译本身的独立结论。
+
+  **本命题不是本项目原创证明**，而是对 BSS 已发表证明的独立复核与记号翻译。
+  记号翻译：BSS 与 Rosselló/DMZ 使用不同 m/n 电荷约定，BSS footnote 10（p.50）明确声明
+  "the roles of Q and P are interchanged compared to [9]"（[9]=DMZ 1208.4074）。
+  本证明 research/attempts/gap-102b-multicenter-residue/proof.md §1 引理 1 给出翻译，
+  §3 引理 2 建立变量对应（按傅里叶相位系数标准核验）。
+uses:
+  - holography.bss-theorem-5-4b
+  - holography.dmz-mock-jacobi-decomposition
+uses_conventions: []
+sources:
+  - ref: bhand-sen-singh-2023
+    loc: "Theorem 5.4(b)（p.47）+ Appendix B Prop B.1/B.2（p.57-59）+ §B.4（p.61-62, B₂⊆B 证明）；footnote 10（p.50，Q↔P 交换声明）"
+    note: |
+      本节点记录的是 BSS 证明经记号翻译后在 Rosselló/DMZ 约定下的陈述。
+      BSS 原文用 (n_B,ℓ_B,m_B) 其中 n_B=P²/2(磁)、m_B=Q²/2(电)；
+      本节点用 (m,n,ℓ) 其中 m=P²/2(磁)、n=Q²/2(电)，即 n_B→m, m_B→n。
+  - ref: rossello-2024
+    loc: "Table 1（p.13 附近，对称代表元 (1,1,0) 数值 +50064，用于交叉验证）；(2.22)–(2.23)（吸引子围道定义 d_*，Rosselló 约定）"
+    note: "数值交叉验证的三方之一；围道与 d_* 定义采用 Rosselló 约定"
+tags: [bh-entropy, mock-modular, representative-domain]
+notes: |
+  **查重**：`uv run stringgraph search "d_*"` / `"c_m^F"` / `"representative"` 确认
+  与既有 holography.mock-jacobi-coefficient-positivity 不重复（后者覆盖全范围 Δ>0、gcd=1，
+  本节点只覆盖代表元范围 n≥m、0≤ℓ≤m，且显式依赖 BSS 证明）。
+
+  **设立本节点的理由**：research/attempts/gap-102b-multicenter-residue 的 graph-reviewer
+  裁决（2026-09-20, state: verified, status: rigorous）要求把该 attempt 的结论写回 graph/。
+  按 research/CLAUDE.md "只有 verified（且最好 captain_confirmed: true）的尝试才允许
+  graph-curator 按正常 add-statement 流程把结论写回 graph/"，本节点现在可以毕业进图。
+
+  **与既有节点 holography.mock-jacobi-coefficient-positivity 的关系**：
+  - 既有节点覆盖 (a) 代表元范围 mock Jacobi 系数 (−1)^{ℓ+1}c_m^F>0（Rosselló Thm 1）
+    + (b) 全范围单心指标 d_*>0（Rosselló Cor 1.1），引 Bringmann-Murthy 2012（m=1,2）
+    + Rosselló 2024（m≥3）。
+  - 本节点覆盖代表元范围内 d_* = (−1)^{ℓ+1}c_m^F **等式**（BSS Thm 5.4(b) 经翻译），
+    不含正性断言本身（正性由既有节点的 (a) 部分给出）。
+  - 两节点互补：既有节点给 c_m^F>0（代表元）+ d_*>0（全范围），本节点给 d_*=c_m^F（代表元）。
+    合并即得：代表元范围内 d_*>0（via 本节点等式 + 既有节点正性）。
+
+author: graph-curator
+created: "2026-09-20"

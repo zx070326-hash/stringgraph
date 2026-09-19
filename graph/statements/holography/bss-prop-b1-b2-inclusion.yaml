@@ -1,0 +1,39 @@
+id: holography.bss-prop-b1-b2-inclusion
+kind: proposition
+title: "BSS Appendix B：电荷集 B₂⊆B 的完成配方证明（Prop B.2 + §B.4）"
+statement: |
+  【记号】BSS 自己的记号约定：(n,ℓ,m) 其中（N=1 时）m=Q²/2（电荷），n=P²/2（磁荷），
+  ℓ=Q·P。电荷集 B 由不等式 (5.49) 定义（围道变形合法性条件），B₂ 由
+  holography.bss-charge-set-b2-definition 定义（m≥n, 0≤|ℓ|≤2n 的显式充分子集）。
+
+  【命题】（BSS Appendix B §B.4, eq (B.35)–(B.42)）B₂ ⊆ B，即：
+  对一切满足 m,n>0、m≥n/N、0≤|ℓ|≤2n（N=1 时 m≥n）的整数三元组 (n,ℓ,m)，
+  围道变形不等式 (5.49) 恒成立。
+uses:
+  - holography.bss-charge-set-b2-definition
+uses_conventions: []
+sources:
+  - ref: bhand-sen-singh-2023
+    loc: "Proposition B.2（p.59，围道变形合法性，对称于 Prop B.1）；§B.4 eq (B.35)–(B.42)（p.61-62，完成配方 + 奇偶性论证，B₂⊆B 的显式证明）"
+    note: |
+      literature/extractions/bhand-sen-singh-2023.md E7/E9 逐字核对：Prop B.2 陈述
+      "If (n,ℓ,m)∈B, then ... does not have poles in the region bounded by C and C″"；
+      §B.4 的关键步 (B.41)–(B.42) 给出 (|j|−2|n₁N|)²−1≥0 这一奇偶性论断。
+      本项目 research/attempts/gap-102b-multicenter-residue/scripts/verify_A2B2_inequality.py
+      独立数值验证（1680+68880 组无反例，纯 Python + Fraction 精确算术），
+      confirm BSS 证明骨架的完成配方步骤与奇偶性论断，运行记录见 proof.md §2 附录。
+tags: [bh-entropy, contour-deformation, algebraic-inequality]
+notes: |
+  **查重**：`uv run stringgraph search "prop b"` / `"inclusion"` 无同内容命中（2026-09-20）。
+
+  **设立本节点的理由**：本节点记录 BSS Appendix B 的 B₂⊆B 证明（纯代数不等式，
+  非物理论证），使 gap-102b 毕业推导能指向一个 rigorous 图节点。按 graph/CLAUDE.md
+  "一个节点一个命题"原则，本节点只含 B₂⊆B 包含关系本身，不含 B 的原始定义 (5.49)
+  （后者若需立节点由后续 curator 决定）或 Prop B.1（A 集合的对称命题，暂不立节点）。
+
+  **与 Theorem 5.4(b) 的关系**：本命题是 Thm 5.4(b) 适用范围论证的一部分——
+  Thm 5.4(b) 断言"对 (n,ℓ,m)∈B，围道积分等于 ψ_n^F 系数"，本命题提供了一个
+  显式可验证的充分子集 B₂⊆B，使得具体 (m,n,ℓ) 三元组可以通过简单不等式检验
+  是否落在 Thm 5.4(b) 的适用范围内。Theorem 5.4(b) 本身见姐妹节点。
+author: graph-curator
+created: "2026-09-20"

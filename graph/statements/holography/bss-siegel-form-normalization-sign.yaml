@@ -1,0 +1,57 @@
+id: holography.bss-siegel-form-normalization-sign
+kind: proposition
+title: BSS Siegel 形式 Φ̃₁ 与 Igusa Φ₁₀ 的归一化符号
+statement: |
+  记 BSS 定义的 N=1 Siegel 形式 Φ̃₁ 与 Igusa Φ₁₀ 的比值为 c := Φ̃₁/Φ₁₀。
+  由 holography.bss-rossello-dstar-normalization-constant 已确定 c·η = −1，
+  其中 η := ±1 是三重围道积分微分次序的定向因子（η=+1：Fubini 迭代积分，
+  次序无关；η=−1：定向 3-形式/楔积，对换变号）。因此：
+  - 若 η=+1，则 c=−1，Φ̃₁ = −Φ₁₀；
+  - 若 η=−1，则 c=+1，Φ̃₁ = +Φ₁₀。
+
+  但 BSS p.40 逐字原文称："for N=1, the CHL partition function Φ̃_k⁻¹ is
+  exactly the inverse of the Igusa cusp form Φ₁₀"，其字面读法为 Φ̃₁ = Φ₁₀
+  （即 c=+1）。这与 η=+1 分支矛盾，与 η=−1 分支一致。
+
+  本项目尚未判定 η（等价地 c）的取值，因两篇文献均未显式声明三重围道积分
+  的微分书写次序是否携带定向（Fubini 迭代 vs 楔积）。
+uses:
+  - holography.bss-rossello-dstar-normalization-constant
+uses_conventions: []
+sources:
+  - ref: bhand-sen-singh-2023
+    loc: "p.40 正文：'for N=1, the CHL partition function Φ̃_k⁻¹ is exactly the inverse of the Igusa cusp form Φ₁₀'（逐字原句）"
+notes: |
+  **候选出口**（相对可信度标注）：
+  (a) BSS "exactly the inverse" 是松散措辞，不承诺整体正负号/归一化（有可能，
+      松散措辞在物理文献里常见）。**威胁对象**：只影响哪一支（η=+1 vs η=−1），
+      不影响 c·η=−1 本身（后者的推导从头到尾没用过 p.40，只用了 (5.13)/(5.14)/(2.22)/(2.23)/(5.69)）。
+  (b) Rosselló（或本项目 coefficients.py）用的 Φ₁₀ 归一化与 BSS 差整体 −1
+      （有可能，且 Rosselló 是否明示其 Φ₁₀ 出处本身待查）。**威胁对象**：同 (a)，
+      只影响哪一支。c 本就定义为相对于推导中那个 Φ₁₀ 的比值，只要全程用同一个 Φ₁₀，
+      c·η=−1 不受影响。
+  (c) 某个定义式的符号被本项目 extraction 读错（可能性极低，两份 extraction 已
+      交叉核对）。**威胁对象**：**这一条确实会推翻 c·η=−1**，但它是"我们抄错了"，
+      不是"数学未定"，且两份 extraction 已交叉核对。这与图上每一张卡共享的基线
+      假设是同一级别的，不构成单独降级理由。
+  (d) 三重积分定向约定（Fubini vs 楔积）确为分歧点，η=−1 是正确解释（**很可能
+      不成立，但未被排除**——这类围道积分在物理文献里的通行用法是对三个实圈
+      各自 0→1 的迭代积分 Fubini，次序无关；这是**惯例判断，不是证明**，且两
+      篇都没明写）。**威胁对象**：这就是 η 本身，不是独立的出口。
+  (e) Sen 的 Φ̂ 首项负号路线：**已调查，不足以定出 c**。Researcher 逐字核实
+      Sen arXiv:0708.1270v4 Appendix C，(C.25) 的负号 `Φ̂(ρ,σ,v) = −4π²v²g(ρ)g(σ) + O(v⁴)`
+      确实存在，但 Sen 未给 N=1 时 g(ρ) 与 η(ρ)²⁴ 的关系（只给一般 N 的乘积公式
+      (C.27)），且**没有任何已取到的来源给出标准 Igusa χ₁₀ 的首项 v² 系数数值**
+      （Igusa / Gritsenko-Nikulin 1996 / Sen / Rosselló 均未给）。所以 `−4π²` 无法
+      与"标准 Φ₁₀ 的首项"比对。这是**文献缺口**，不是问题不良定。
+      **注**：曾有 agent 声称存在 `Φ̃₁ = Φ̂ / 16π⁴` 一式，**已确认为臆造**——Sen
+      Appendix C 全文（p.159–169）无此式，BSS 正文亦无（与 2026-09-20
+      `docs/reviews/citation-fabrication-incidents-2026-09-20.md` 事件 3 一致）。
+
+  **图节点不得 depends_on 本卡**：本卡是诚实留白（η 未定），不是承重件。
+  holography.bss-rossello-dstar-normalization-constant 已确定 c·η=−1 且两个分支
+  给出同一结果 d*_BSS = d_*^R（因 η²=1），因此 BSS 与 Rosselló 两套定义的一致性
+  **不依赖 η 或 c 的单独取值**。本卡只记录哪一支与 BSS p.40 字面一致的问题。
+tags: [siegel-modular-form, normalization, open-problem]
+author: graph-curator
+created: "2026-09-20"

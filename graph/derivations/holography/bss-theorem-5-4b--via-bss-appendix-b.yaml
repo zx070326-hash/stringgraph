@@ -1,0 +1,22 @@
+id: holography.bss-theorem-5-4b--via-bss-appendix-b
+target: holography.bss-theorem-5-4b
+kind: proof
+status: rigorous
+depends_on:
+  - id: holography.bss-prop-b1-b2-inclusion
+  - id: holography.dmz-mock-jacobi-decomposition
+sources:
+  - ref: bhand-sen-singh-2023
+    loc: "Proof of Theorem 5.4(b)（p.47-48）：围道变形（引 Prop B.1/B.2）+ τ 方向留数提取 + z 方向围道搬移（用 ψ_n 模不变性）+ 周期性（用 DMZ 分解的 h_ℓ 关于 ℓ mod 2m 周期性）"
+    note: |
+      literature/extractions/bhand-sen-singh-2023.md E3/E6/E7 逐字核对：Thm 5.4 证明引用
+      Prop B.1/B.2 作为围道变形合法性的唯一外部输入；证明本身是显式的复变函数围道操作
+      + 留数 + 周期性论证，无物理输入。本推导记录 BSS 已发表证明的依赖结构，
+      使其 rigorous 状态能沿图传播到依赖它的节点。
+summary: |
+  用 Prop B.1/B.2 保证的围道变形合法性（电荷集 B 内变形不跨极点），把吸引子围道积分
+  改写为对变形后围道的积分；对 τ 做留数提取；用 ψ_n 的模不变性做 z 方向围道搬移
+  （仍不跨极点，因已在 B 内）；最后用 DMZ 分解给出的有限部 h_ℓ 关于 ℓ mod 2m 的
+  周期性，把结果写成 c_n^F(m,ℓ) 的形式。全程纯数学论证（围道/留数/周期性），
+  无物理输入。
+author: graph-curator
