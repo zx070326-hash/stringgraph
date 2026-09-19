@@ -42,14 +42,18 @@ canonical_source:
   ref: rossello-2024
   loc: "Thm 1（代表元范围，m>0, n≥m, 0≤ℓ≤m）与 Cor 1.1（全范围，m,n≥1, Δ>0, gcd=1）；(2.22)–(2.23) 定义 d_*"
 audit:
-  status: approved
+  status: back-translated
   captain: |
     panguancheng（船长 2026-09-15 签字确认 #16）：canonical_text 与第二轮独立回译语义等价、
     裁定 faithful；纯数学脊柱 Φ₁₀→DMZ→mock-Jacobi 正性三步均 rigorous，
     物理识别 d_*=immortal-dyon 简并度明确划为 physical-argument 且不在审计范围；
     #20 两处错误——BM 覆盖 m=1,2 全 Δ>0（非「充分大判别式」）、
     全范围正性对象为单心指标 d_* 而非 c_m^F——已在 canonical_text/statement/回译三处同步订正。
-  approved_on: "2026-09-15"
+    【2026-09-20 physics-auditor 附注：以上是 2026-09-15 那一轮审批的原始历史记录，逐字保留，
+    不代表当前状态——见下方 approved_on 后的降级说明与 diff_notes 追加段。】
+  approved_on: "2026-09-15（该批准已因下述 2026-09-20 发现的事实错误而失效，status 已降级为
+    back-translated，需船长重新审阅并重新签字确认；本字段保留原批准日期作历史记录，不代表
+    当前仍处于 approved 状态——现行状态以上面的 audit.status 为准）"
   back_translation:
     by: physics-auditor
     text: |
@@ -61,7 +65,24 @@ audit:
       数学对象。Igusa 权 10 尖点形式 Φ₁₀(Ω) 是 Sp(4,ℤ)（整 Siegel 模群）的权 10 尖点形式，
       Ω = [[ρ, v], [v, σ]] 为 Siegel 上半空间（度 2）变量（ρ,σ∈ℍ，v∈ℂ，Im Ω>0）。
       由 Borcherds 升举公式定义，在 Sp(4,ℤ) 权 10 尖点形式空间中（至标量倍）唯一，
-      唯一零点位于超曲面 {mρ + nσ + lv ∈ ℤ，4mn−l²=1} 的 Sp(4,ℤ)-轨道上，为单零点。
+      零点除子位于超曲面 {mρ + nσ + lv ∈ ℤ，4mn−l²=1} 的 Sp(4,ℤ)-轨道上（即 Humbert
+      曲面 H₁），沿该轨道为**二重**零点：Div(Φ₁₀) = 2H₁。
+      【2026-09-20 physics-auditor 复核订正，见 docs/reviews/phi10-zero-multiplicity-defect-2026-09-20.md
+      与 docs/reviews/phi10-multiplicity-normalization-2026-09-20.md】：本段在 2026-09-15
+      批准版本中原写「唯一零点……为单零点」，与本项目已登记的一手来源矛盾——
+      literature/sources.bib 的 gritsenko-nikulin-1996 条目 note 给出 Div(Δ₅)=H₁ 且
+      χ₁₀=Φ₁₀=Δ₅²（p.7 环生成元列表），故 Div(Φ₁₀)=2·Div(Δ₅)=2H₁（重数 2，非 1）；
+      sen-2008-precision-counting 条目 note 给出独立物理 threshold-integral 推导
+      （(C.25)/(C.26)：Φ̂(ρ,σ,v)=−4π²v²g(ρ)g(σ)+O(v⁴)），在 v=0 附近显式为 v² 阶（二重）零点，
+      与前者局部吻合。经本轮复核，图内 holography.dvv-wall-crossing-identification 的
+      Δd=(−1)^{Q·P+1}(Q·P)·d_{1/2}(Q²/2)·d_{1/2}(P²/2) 跳变公式（线性正比于 Q·P）也只与
+      二重极点的留数（Laurent 展开 1/(w²h(Ω))，Res[f(w)/w²]=f'(0)：取 f(w)=e^{-2πi(Q·P)w}
+      时 f'(0)∝Q·P；简单极点 1/(wh(Ω)) 给出的 Res[f(w)/w]=f(0) 是与 Q·P 无关的常数，
+      给不出这个线性因子）自洽——三条独立证据一致指向重数 2。本段已按二重零点订正；
+      **此订正先于 holography.igusa-cusp-form-phi10 / phi10-wall-crossing-poles 的 v2 卡落地**，
+      v2 落地后本里程碑应重新核对是否需要把依赖链的指针改到新 id（本里程碑自身的
+      statement_id 是 holography.mock-jacobi-coefficient-positivity，该卡本身不含此断言，
+      本段属回译时对依赖链背景信息的转述，不是本里程碑核心命题的一部分）。
 
       DMZ 正则分解定理（rigorous）。设 φ(τ,z) 是指标 m∈ℤ_{>0} 的亚纯 Jacobi 形式
       （weight k∈ℤ，对 SL(2,ℤ)×ℤ² 变换），极点仅在 z∈ℚτ+ℚ 处（即极点在 z=0 的
@@ -151,4 +172,59 @@ audit:
       裁定：faithful。canonical_text 与回译在命题内容上语义等价，措辞差异只在分段标题与叙述顺序，
       不改变陈述范围。数学脊柱（Φ₁₀ → DMZ → 正性）均 rigorous，物理识别（dyon 简并度）
       为 physical-argument，边界清晰。两个已知错误已在两侧同步订正。
+
+      ---
+
+      【2026-09-20 physics-auditor 再审，第三轮，仅裁决 Φ₁₀ 零点重数这一处，其余不重复取证】
+
+      背景：graph-curator 于 2026-09-20 毕业两张卡（holography.attractor-contour-hits-phi10-zero-at-ell-zero、
+      holography.attractor-contour-avoids-phi10-linear-wall）时，顺带发现本里程碑上方 back_translation.text
+      第 64 行「为单零点」与本项目已登记的一手来源（literature/sources.bib 的 gritsenko-nikulin-1996、
+      sen-2008-precision-counting 两条 note）矛盾。完整取证见
+      docs/reviews/phi10-zero-multiplicity-defect-2026-09-20.md；本节点只记裁决，不重复取证。
+
+      核实结果：**错误确认成立，重数应为 2（二重零点），不是 1**。三条独立证据：
+      (1) gritsenko-nikulin-1996 正文 p.7 给出 χ₁₀=Φ₁₀=Δ₅² 恒等式 + Div(Δ₅)=H₁，代数上直接推出
+      Div(Φ₁₀)=2H₁；(2) sen-2008-precision-counting (C.25)/(C.26) 独立物理推导给出 v=0 附近
+      Φ̂∝v²+O(v⁴)，即 v² 阶零点；(3) 本轮独立复核了 lead 在缺陷报告 §2.3 提出、且无文献直接背书的
+      "留数需要二重极点才能给出 Q·P 线性因子"论证——用初等 Laurent 展开验证：设 1/Φ₁₀ 在某极点
+      超平面局部坐标 w 下写作 1/(w^k·h(Ω))（h 在该超平面上非零），则围道跳变（穿越该极点的留数）
+      对 k=1（简单极点）给出 Res[f(w)/w] = f(0)，是与对偶变量（Q·P）无关的常数；对 k=2（二重极点）
+      给出 Res[f(w)/w²] = f'(0)，对 f(w)=e^{-2πi(Q·P)w} 型指数核，f'(0) = -2πi(Q·P)，恰好线性正比于
+      Q·P。图内 holography.dvv-wall-crossing-identification 的 Δd 公式明确是线性正比于 Q·P，
+      故只与 k=2（二重极点，对应 Φ₁₀ 二重零点）自洽——lead 的论证经独立核验成立，且是标准
+      Laurent 级数留数计算，不依赖任何额外物理假设。三条证据一致，无一相反。
+
+      裁决：本里程碑 back_translation.text 第 64 行附近关于 Φ₁₀ 零点重数的表述为 **wrong**
+      （断言了与已登记一手来源矛盾的重数）——这是对该背景语句本身的裁决，与上方对
+      canonical_text↔回译核心命题（DMZ 分解 + mock Jacobi 正性）一致性的 faithful 裁决相互独立：
+      canonical_text 从未在任何地方断言 Φ₁₀ 零点重数（该字段只描述"Φ₁₀ 存在傅里叶展开"，不涉及
+      零点阶数），本里程碑核心审计范围（DMZ 分解定理 rigorous + Rosselló 正性定理 rigorous）不受
+      这处背景错误影响，**不需要重新审计**；受影响的仅是 back_translation.text 中作为背景转述
+      的这一句，现已订正为二重零点，理由见上方 canonical_text 之后紧跟的 2026-09-20 订正段。
+
+      争议点（另案，不与上述确定错误混为一谈）：curator 还提出两张已提交卡
+      （holography.igusa-cusp-form-phi10、holography.phi10-wall-crossing-poles）把零点轨迹写成
+      Sp(4,ℤ)-轨道是否遗漏了 Sen 2008 (D.19) 参数化中 n2≠0 的「二次壁」分支。**裁决：证据不足以
+      判定**。支持"轨道已覆盖"的论据：GN1996 的 Humbert 曲面 H_D 经典构造本身通常就定义/等同于
+      某个固定判别式原始向量的 Sp(4,ℤ)-轨道（Eichler 型定理：秩足够高、含两个双曲平面的不定格上，
+      固定范数的本原向量在正交群下通常成单一轨道），Sen (D.19) 的五参数 (m1,n1,m2,n2,j) 结构
+      （判别式不变量 4m1n1+4m2n2+j²=1）与该格的秩（5）吻合，暗示它正是同一轨道在不同局部坐标卡下
+      的表达。但反对/存疑的论据同样存在且更直接：本项目自己的原创研究
+      research/attempts/gap-102b-route-a/（reviewer 已过、状态 verified）明确把 n2≠0 分支列为未闭合
+      的 [GAP-n2]，没有用"取 Sp(4,ℤ) 轨道即可"这一步把它一行带过——如果轨道覆盖是显然的代数事实，
+      这条本项目内部、经过审查的研究不太可能绕开它而不提；这说明轨道-覆盖这一步至少不是本项目
+      已核实的平凡事实。GN1996 的 note（Appendix B Theorem B.1）只给出"构造 Siegel 形式使零点恰为
+      H_D"的一般机制，未见对"H_D 是否恰为某个固定线性代表元的完整 Sp(4,ℤ)-轨道"这一点的逐字确认。
+      在两造证据都不构成决定性文献背书的情况下，按审计纪律"证据不足以判定也是合格答案"，不强判。
+      建议：两张卡维持现有的"Sp(4,ℤ)-轨道"措辞不变（这是标准文献语言，且并未被证伪，只是覆盖性
+      未经本项目独立核实），但在 v2 卡的 notes 中加一条明确的开放性说明，指向
+      research/attempts/gap-102b-route-a/ 的 [GAP-n2]，避免读者误以为覆盖性已被证明。
+
+      本轮裁决范围：仅 Φ₁₀ 零点重数（wrong，已订正）与轨道覆盖性争议点（证据不足以判定，不改动
+      现有措辞）。其余内容（DMZ 分解、mock Jacobi 正性、BM/Rosselló 覆盖范围）维持第二轮
+      （2026-09-15）的 faithful 裁决不变，不重新核对。
+
+      **audit.status 已降级为 back-translated**（见上方 approved_on 后的降级说明），需船长基于本次
+      订正重新审阅并重新签字批准；physics-auditor 无权自行恢复 approved（根 CLAUDE.md 原则 3）。
 phase: 1
