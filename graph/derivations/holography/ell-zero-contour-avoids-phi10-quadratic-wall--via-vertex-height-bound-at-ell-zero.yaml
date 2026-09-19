@@ -1,0 +1,71 @@
+id: holography.ell-zero-contour-avoids-phi10-quadratic-wall--via-vertex-height-bound-at-ell-zero
+target: holography.ell-zero-contour-avoids-phi10-quadratic-wall
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: holography.igusa-cusp-form-phi10-v2
+    inferred: false
+    note: "Φ₁₀ 的定义与零点除子结构（本推导只用零点位置，不用重数）。"
+  - id: holography.sen-d19-family-is-igusa-phi10-divisor
+    inferred: false
+    note: "承重：把「(D.19) 的 F=0 族避开围道」翻译成「Div(Φ₁₀) 的 n₂≠0 分支避开围道」需要该族穷尽 Div(Φ₁₀)。该卡 effective 为 physical-argument。"
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/ell-zero-wall-degeneracy/proof.md §6.1（引理 6.1，三步核对）；research/attempts/gap-102b-route-a/proof.md §5.7（Proposition 7、Corollary 8、Theorem 9 的原始推导与 SymPy 验证脚本 scripts/verify_correct_B.py）"
+    note: |
+      本项目原创证明，非已发表文献。两个 attempt 的 status.yaml 均 state: verified、
+      captain_confirmed: false；但 **ℓ=0 搬运这一步（§6.1）本身未经 graph-reviewer 审查**
+      （ell-zero-wall-degeneracy/status.yaml 逐字：「请 lead 派 graph-reviewer 审查 §6」）。
+  - ref: sen-2008-precision-counting
+    loc: "arXiv:0708.1270v4 Appendix D, eq. (D.19)（p.168）"
+summary: |
+  把 gap-102b-route-a 的 Theorem 9 搬到 ℓ=0，逐处核对无退化。三步（proof.md §6.1）：
+
+  **1. 约束 (I) 在 ℓ=0 不退化**。route-a Lemma 1 由 Im F = 0 给出
+    h(ρ₁,σ₁,v₁) := n₂(2nσ₁ + 2mρ₁ − 2ℓv₁) + jℓ + 2(mn₁ − nm₁) = 0。
+  ℓ=0 时化为 n₂(2nσ₁+2mρ₁) + 2(mn₁−nm₁) = 0，仍是 (ρ₁,σ₁) 的线性约束，可解出 σ₁；
+  全程没有除以 ℓ 的步骤。（curator 亲自重算 Im F：ρ=ρ₁+2inΛ、σ=σ₁+2imΛ、v=v₁+iℓΛ 代入
+  F = n₂(σρ−v²)+jv+n₁σ−m₁ρ+m₂ 得 Im F = Λ·h，与 route-a Lemma 1 逐字一致。）
+
+  **2. 顶点高度闭式在 ℓ=0 不退化**。route-a Proposition 7：
+    Λ²(t*) = 1/(4n₂²Δ) − (j − 2n₂v₁)²/(16mnn₂²)。
+  ℓ=0 ⟹ Δ = 4mn > 0，两项分母皆有限非零，公式不退化；第二项是减去平方数，故
+    Λ²(t*) ≤ 1/(4n₂²Δ) ≤ 1/(4Δ) = 1/(16mn)（因 n₂² ≥ 1），
+  该界对一切 n₂≠0、一切奇 j、一切实 v₁ 与满足 (I) 的 (ρ₁,σ₁) 一致成立。
+
+  **3. 闭合**。若 Λ² > 1/(4Δ)，则 route-a 的 (R) 式 n₂ΔΛ² = g(t) 的抛物线顶点低于要求值，
+  对任意实 t（更无整数 t）无解，n₂≠0 分支无解。取 Λ₀ = 1/(2√Δ)，ℓ=0 时即 1/(4√(mn))。
+
+  **Re v 放开到 ℝ 的两条独立理由**（curator 补，见目标卡 notes）：(i) Prop 7 的闭式中
+  v₁ 只出现在被减去的平方项里，一致界与 v₁ 无关；(ii) (D.19) 的 n₂≠0 子族在 v↦v+1 下
+  自我映射（j'=j−2n₂ 仍奇，m₂'=m₂+j−n₂，判别式不变——curator 亲自验算），故 Re v∈[0,1]
+  的结论自动搬到 Re v∈[1/2,3/2]。
+
+  **最后一步（承重，显式接线）**：以上都在 (D.19) 的 F=0 族上做；要把结论说成
+  「Div(Φ₁₀) 的 n₂≠0 分支」，需要该族穷尽 Div(Φ₁₀)，即
+  holography.sen-d19-family-is-igusa-phi10-divisor（physical-argument）。
+gaps:
+  - "**§6.1 未经 graph-reviewer 审查**。被搬运的 Theorem 9（0<ℓ≤m）已由 n2rev 裁定 rigorous，但
+    「搬到 ℓ=0 合法」这一步只有 prover（gap33-ell-zero）与 lead 的核对，attempt 的 status.yaml
+    明确请求 lead 另派 reviewer 审 §6。按 docs/STATUS_LEVELS.md 等级 4 例外条款（缺
+    reviewer-verified 记录者一律降），本推导定 physical-argument，而非 rigorous。
+    **升级路径**：reviewer 审过 §6.1 后，在本 notes 写 reviewer-verified 并把 kind 改 proof、
+    status 改 rigorous；届时本卡 effective 仍被 sen-d19-family（physical-argument）封顶。"
+  - "route-a §5.7 的核心恒等式由 SymPy 符号化简 + 100 组 Fraction 数值验证支持（脚本
+    scripts/verify_correct_B.py），curator 未重跑脚本，此项为转述信任。"
+  - "上游 [GAP-identify]：Sen 的 Φ̃ 坐标 = 标准 Φ₁₀ 坐标，非文献逐字断言；已由
+    holography.sen-d19-family-is-igusa-phi10-divisor 显式承载，不藏在 inferred 边里。"
+notes: |
+  **不写 reviewer-verified**：§6.1 无 reviewer 复核记录（见 gaps 第 1 条）。
+
+  **curator 亲自核对了什么**：Read 了 research/attempts/ell-zero-wall-degeneracy/proof.md
+  §6 全文与 research/attempts/gap-102b-route-a 的两张已毕业卡（linear/quadratic wall）
+  及其推导；亲自重算了 Im F = Λ·h（步骤 1）与 (D.19) 的 v↦v+1 不变性（Re v 放开的理由
+  (ii)）。未重跑 SymPy 脚本，未独立重推 Proposition 7 的顶点闭式（转述信任，见 gaps）。
+
+  **为什么不把姐妹卡 holography.attractor-contour-avoids-phi10-quadratic-wall 接成依赖**：
+  它的 statement 对 0<ℓ≤m 全称量化，ℓ=0 的结论不是它的逻辑后承；接上去会制造一条
+  假的支撑关系。它 statement 里那段「ℓ=0 可外推」的说明同时声明了「本卡主陈述范围
+  仍写 0<ℓ≤m」，故不是被断言的命题。两卡是平行的姐妹，不是上下游。
+author: graph-curator
+created: "2026-09-20"
