@@ -19,8 +19,14 @@ uses: []
 uses_conventions: []
 sources:
   - ref: dabholkar-gomes-murthy-2008
-    loc: "eq(52)：Ω_I(Q²/2, P²/2, Q·P) = Σ_{s|I} s·Ω₁(Q²/2s², P²/2, Q·P/s)；eq(44)–(47)（推导链：重标 ρ→s²ρ, v→sv）"
-    note: "eq(50)+(51) 与 eq(52) 在本项目复核中确认不相容（对偶数除子 s 且 ℓ/s 奇数差 (−1) 号；显式整数见证见 proof.md §5）；本节点只陈述 eq(52)，原因见 notes。无 erratum。"
+    loc: "**arXiv 官方 PDF eq (3.28)**（p.16, §3.4）：Ω_I(Q²/2, P²/2, Q·P) = Σ_{s|I} s·Ω₁(Q²/2s², P²/2, Q·P/s)。
+          ⚠ 本项目旧记为「eq(52)」，那是 **ar5iv HTML 自动编号**，不是原文编号；订正见下方 note 与本卡 notes 末段。
+          推导链「eq(44)–(47)」同为 ar5iv 编号，其官方 PDF 对应编号本轮**未核实**，暂保留原字样并标注为待核。"
+    note: "**ar5iv 编号订正（researcher, 2026-09-20，见 literature/extractions/dabholkar-gomes-murthy-2008.md 订正 C2）**：
+           ar5iv(50)/(51)/(52) = **官方 PDF (3.26)/(3.27)/(3.28)**，均在 p.16 §3.4（(3.26) 的内容另以 eq(2.13) 更早出现）。
+           数学内容不变，只是编号字符串。——
+           (3.26)+(3.27) 与 (3.28) 在本项目复核中确认不相容（对偶数除子 s 且 ℓ/s 奇数差 (−1) 号；显式整数见证见 proof.md §5）；
+           本节点只陈述 (3.28)，原因见 notes。无 erratum。"
   - ref: alexandrov-nampuri-2020
     loc: "eq(2.13)：Ω_I(n,m,ℓ) = Σ_{d|I} d·Ω₁(n,m/d²,ℓ/d)（符号约定下指标挂 p=e^{2πiσ}，与 eq(52) 同一命题）；eq(2.11)+(2.13) 联立解出的生成函数闭式 Σ_{d|I} d/Φ₁₀(τ,dz+(d−1)/2,d²σ)（含半整平移，与 DGM eq(51) 不同而与 eq(52) 一致）"
     note: "Alexandrov-Nampuri 2020 的 eq(2.13) 是对 eq(52) 的独立表述，且联立 eq(2.11)+(2.13) 得出的生成函数闭式含半整平移，佐证 eq(52) 而非 eq(51)"
@@ -41,6 +47,30 @@ notes: |
   **与 holography.torsion-index-divisor-operator 的关系**：该定义卡定义了数学量 d_*^{(I)}，
   本卡陈述物理识别：Ω_I = d_*^{(I)}（即 d_*^{(I)} 就是物理上所说的挠 I 免死指标）。
   两张卡一起使得 Thm 6.1 的数学内容可被物理解读。
+
+  ---
+  【DGM 公式编号订正，lead 落地 2026-09-20，依据 researcher 的一手 PDF 核实】
+  本卡 `statement` 正文里出现的 **eq(50)/(51)/(52)** 是 **ar5iv HTML 渲染的自动编号，不是 DGM 原文编号**。
+  直接下载 arXiv 官方 PDF（arXiv:0803.2692，30 页，仅 v1）逐页核实后确认，实际编号为：
+
+  | 本卡/本项目旧写法 | **arXiv 官方 PDF 实际编号** | 位置 |
+  |---|---|---|
+  | eq(50) | **eq (3.26)** | p.16, §3.4（内容同更早的 eq(2.13)） |
+  | eq(51) | **eq (3.27)** | p.16, §3.4 |
+  | eq(52) | **eq (3.28)** | p.16, §3.4 |
+
+  **数学内容完全不变**——三式的逐字内容与本卡所述一致，改的只是引用字符串。
+  详见 `literature/extractions/dabholkar-gomes-murthy-2008.md` 订正 C2。
+
+  **为何不就地改 `statement` 与 `title` 的字样**：按根 CLAUDE.md 原则 1 与 graph/CLAUDE.md
+  「换代时陈述正文内嵌 id 的处理」（2026-09-12 裁决）——正文里的外部指针不改变命题内容，
+  就地改字反而会让「statement 不可变」失去可核性；该裁决要求指针留待该卡下次**实质**换代时同步。
+  本次订正因此只改 `sources.loc/note` 与本 notes，不动 `statement`/`title`。
+  ⚠ **下次本卡因实质原因换代（v2）时，必须一并把正文与标题里的 eq 编号改成 (3.26)/(3.27)/(3.28)。**
+  ⚠ 同理，凡读本卡 `statement` 者（含里程碑回译者），请以本段的对照表为准。
+
+  **教训**：ar5iv HTML 的公式编号不可信，尤其对本文这类分节编号的论文——ar5iv 的计数器不逐节重置。
+  引用公式编号一律以 arXiv 官方 PDF 为准并注明页码。
 
   **captain_confirmed**：DGM eq(51)/(52) 矛盾是本项目原创发现，已由两路独立审查（graph-reviewer
   内部逻辑 + general-purpose 文献逐字）确认，但属对外声明，需船长确认后方可正式宣称（见
