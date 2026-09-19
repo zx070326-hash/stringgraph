@@ -53,16 +53,24 @@ notes: |
   [GAP-ℓ0]，标注为"需要主值/留数规定，不在本尝试范围"，本卡同样不断言）。
 
   【与既有图节点 holography.igusa-cusp-form-phi10 / holography.phi10-wall-crossing-poles
-  的关系，curator 主动排查发现，仅报告不修正（不在本 curator 授权范围内改动这两张
-  已提交的卡）】proof.md §1.3 与本卡引用的 GN1996/Sen 2008 D.19 均给出 Div(Φ₁₀) 在
-  {v=0} 处的**重数为 2**（GN1996：Div(Φ₁₀)=2H₁；Sen (D.19) 原文的零点公式本身是
-  "Φ̃ ∼ (...)²"，平方形式）。但已提交的 holography.igusa-cusp-form-phi10 陈述
-  "其唯一零点...为单零点"（重数 1），holography.phi10-wall-crossing-poles 也断言
-  "判别式 4mn−l²=1，故极点为单零点"——**两张已有卡与本卡引用的 GN1996/Sen 2008
-  在零点重数上直接冲突**（1 vs 2）。本卡刻意不把这两张已有卡接成 depends_on/uses，
-  以免继承这条冲突的多重性断言（本卡自身的论证完全不需要多重性信息，只需要
-  "v=0 是一个零点"这一集合论事实）。已如实记录，留给 lead 转 auditor 处理
-  （里程碑/规范化流程，不在 curator 权限内直接改动）。
+  的关系——2026-09-20 已订正为一致，见下方追记】proof.md §1.3 与本卡引用的
+  GN1996/Sen 2008 D.19 均给出 Div(Φ₁₀) 在 {v=0} 处的**重数为 2**（GN1996：
+  Div(Φ₁₀)=2H₁；Sen (D.19) 原文的零点公式本身是 "Φ̃ ∼ (...)²"，平方形式）。本卡
+  提交时，旧卡 holography.igusa-cusp-form-phi10 陈述"其唯一零点...为单零点"
+  （重数 1），holography.phi10-wall-crossing-poles 也断言"判别式 4mn−l²=1，
+  故极点为单零点"——与本卡引用的 GN1996/Sen 2008 在零点重数上直接冲突（1 vs 2）。
+  本卡当时刻意不把这两张已有卡接成 depends_on/uses，以免继承这条冲突的多重性断言
+  （本卡自身的论证完全不需要多重性信息，只需要"v=0 是一个零点"这一集合论事实）。
+
+  【2026-09-20 追记，curator】physics-auditor 已裁决该冲突：重数确为 2（旧卡的
+  "单零点"是错误表述），见
+  docs/reviews/phi10-zero-multiplicity-defect-2026-09-20.md 与
+  docs/reviews/phi10-multiplicity-normalization-2026-09-20.md。已新建
+  holography.igusa-cusp-form-phi10-v2 / holography.phi10-wall-crossing-poles-v2
+  订正重数为"二重零点"，旧卡标 superseded_by。本卡的结论与依据（GN1996/Sen 2008
+  给出的重数 2）与这两张 v2 卡**现已一致**，不再冲突。本卡仍保持 uses: []
+  （论证本身不需要重数信息，无需补边）；此追记只更新记账文字，不改变本卡的
+  statement、sources 或有效状态。
 
   【查重】`uv run stringgraph search "attractor"` / `"phi10"` / `"Igusa"` /
   `"Div"` 均无同内容命中（2026-09-20）；相关命中仅为不同命题的既有卡（见上条）。
