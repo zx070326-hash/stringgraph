@@ -1,0 +1,86 @@
+id: holography.phi10-order-two-in-v-on-ell-zero-contour--via-branch-exclusion
+target: holography.phi10-order-two-in-v-on-ell-zero-contour
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: holography.ell-zero-contour-avoids-phi10-quadratic-wall
+    inferred: false
+    note: "排除 n₂≠0 分支（Λ>1/(4√(mn))；该卡的 Re v 已放开到 ℝ，覆盖平移窗口 Re u∈[1/2,3/2]）。"
+  - id: holography.ell-zero-contour-avoids-nontrivial-linear-walls
+    inferred: false
+    note: "排除 n₂=0 且 (m₁,n₁)≠(0,0) 的分支（一切 Λ>0，一切实 Re v）。"
+  - id: holography.sen-d19-family-is-igusa-phi10-divisor
+    inferred: false
+    note: "承重的穷尽性：Φ₁₀ 的零点全部落在 (D.19) 族内。没有它，上面两条排除只排除了「某些」分支，得不出「只剩 {u∈ℤ}」。"
+  - id: holography.attractor-contour-hits-phi10-zero-at-ell-zero
+    inferred: false
+    note: "存在性一半：这些 (ρ,σ) 处 Φ₁₀(ρ,σ,0)=0（该卡逐字断言围道点 (ρ₁+2inΛ, σ₁+2imΛ, 0) 在 Div(Φ₁₀) 上）。"
+  - id: holography.phi10-periodic-in-v
+    inferred: false
+    note: "把 u=0 处的零点搬到 u=1，并给出 {u∈ℤ} 这一整族。"
+  - id: holography.igusa-cusp-form-phi10-v2
+    inferred: false
+    note: "Div(Φ₁₀)=2H₁：每个分支的重数为 2。最后一步（阶恰为 2）用它。"
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/ell-zero-wall-degeneracy/proof.md §3.2–§3.3（零点在 v∈ℤ、平移后极点在 v∈ℤ−1/2）、§6.1–§6.3（分支穷尽与 [GAP-3.3] 闭合声明）、§2.2（h₀≠0 的使用）"
+    note: |
+      本项目原创证明，非已发表文献。**§6 未经 graph-reviewer 审查**；且 proof.md 对
+      「围道上每一点 h₀≠0」只有 §2.2 的一句话，未把它接到 §6 的分支排除上——
+      本推导的步骤 3 是 curator 自行补全的那一步（见 gaps 第 2 条）。
+  - ref: gritsenko-nikulin-1996
+    loc: "Div(Φ₁₀)=2H₁（经 holography.igusa-cusp-form-phi10-v2）"
+summary: |
+  固定符合 statement 条件的 (ρ,σ)（ℓ=0 围道的 (ρ,σ)-分量，Λ > 1/(4√(mn))）。
+
+  **步骤 1（线段上的零点集）**。设 u ∈ ℝ 且 Φ₁₀(ρ,σ,u) = 0，即点 Ω=(ρ,u;u,σ) ∈ Div(Φ₁₀)。
+  由穷尽性（holography.sen-d19-family-is-igusa-phi10-divisor），该点落在某个 (D.19) 分支上。
+  该点属于 ℓ=0 吸引子围道（Im u = 0、Im ρ=2nΛ、Im σ=2mΛ、Re u ∈ ℝ），于是：
+  n₂≠0 的分支被 holography.ell-zero-contour-avoids-phi10-quadratic-wall 排除；
+  n₂=0 且 (m₁,n₁)≠(0,0) 的分支被 holography.ell-zero-contour-avoids-nontrivial-linear-walls 排除。
+  只剩 n₂=0、m₁=n₁=0、j=±1、m₂∈ℤ 的族，其零点条件 F = jv + m₂ = 0 给出 **u ∈ ℤ**。
+  与线段 [1/2, 3/2] 相交只有 u = 1。
+
+  **步骤 2（u=1 确实是零点）**。holography.attractor-contour-hits-phi10-zero-at-ell-zero
+  给出这些 (ρ,σ) 处 Φ₁₀(ρ,σ,0) = 0；由 v-周期 1（holography.phi10-periodic-in-v）
+  得 Φ₁₀(ρ,σ,1) = 0。与步骤 1 合起来即 statement (a)：线段上恰有一个零点 u=1。
+
+  **步骤 3（阶恰为 2）**。记 p := (ρ,σ,1) ∈ ℍ₂。步骤 1 已证：除 {u=1} 这一个分支外，
+  Div(Φ₁₀) 的任何分支都不经过 p（若经过，p 就是该分支上的一个实 u 点，已被排除）。
+  由 holography.igusa-cusp-form-phi10-v2 的 Div(Φ₁₀) = 2H₁，每个分支的重数为 2，
+  故在 p 的某个邻域内 Div(Φ₁₀) 作为除子等于 2·{u=1}，从而
+    Φ₁₀(ρ,σ,u) = (u−1)²·g(ρ,σ,u)，g 在 p 附近全纯且 g(p) ≠ 0。
+  取 u-直线（它与超曲面 {u=1} 横截，因为该超曲面恰由 u=1 定义）得
+    h₀(ρ,σ) = g(p) ≠ 0，
+  即单变量零点阶恰为 2，这就是 statement (b)。于是 𝒢 = −1/Φ₁₀(ρ,σ,v+1/2) 在 v∈[0,1] 上
+  只有 v=1/2 一个极点且为二阶。
+
+  **接口说明**：步骤 3 的结论正是
+  holography.phi10-shifted-pole-residue-proportional-to-ell 的显式前提，两卡由此对接。
+gaps:
+  - "上游 §6（两条 ell-zero-contour-avoids-* 卡）未经 graph-reviewer 审查，且
+    holography.sen-d19-family-is-igusa-phi10-divisor 是 physical-argument（[GAP-identify]）。
+    本推导 status 因此定 physical-argument；即使 §6 日后被 reviewer 签字，本卡 effective
+    仍被穷尽性那条边封顶在 physical-argument。"
+  - "**步骤 3 是 curator 自行补全的一步，proof.md 没有**。proof.md §2.2 只用一句
+    「否则零点阶数 >2，与引理 1.1 矛盾」带过 h₀≠0，并未讨论「围道上某点同时落在两个
+    分支上时阶会 >2」这一真实可能。本推导把它接到 §6 的分支排除上。该补全未经 reviewer
+    复核，**建议 lead 在派 reviewer 审 §6 时一并审本步骤**。"
+  - "步骤 3 用到「除子局部等于 2·{u=1} ⟹ Φ₁₀/(u−1)² 局部全纯且非零」这一标准复分析事实
+    （解析集的局部分解），未单独立卡，与 holography.phi10-even-in-v--via-borcherds-product
+    把恒等定理留在推导内的做法一致。"
+notes: |
+  **不写 reviewer-verified**：上游 §6 与本推导步骤 3 都无 reviewer 复核记录。
+
+  **curator 亲自核对了什么**：Read 了 proof.md §2、§3、§6 全文与
+  holography.attractor-contour-hits-phi10-zero-at-ell-zero / igusa-cusp-form-phi10-v2 /
+  sen-d19-family-is-igusa-phi10-divisor 三张卡的正文；步骤 1、2 是对 proof.md 结论的
+  重述与拼接（我核对过每一处量词范围，特别是两张 avoids 卡的 Re v 已放开到 ℝ，
+  足以覆盖平移窗口 [1/2,3/2]）；步骤 3 为本人补写。
+
+  **一个容易被漏掉的量词**：两张 avoids 卡断言的是「围道上没有这些分支的点」，其中
+  围道的 Re v 取遍 ℝ、Re ρ,Re σ 取遍 [0,1]。步骤 1 用的正是这个全称量化——若那两张卡
+  只写 Re v∈[0,1]，本推导对平移窗口 [1/2,3/2] 就会有缺口。这是当初把它们的 Re v
+  放开写的原因。
+author: graph-curator
+created: "2026-09-20"
