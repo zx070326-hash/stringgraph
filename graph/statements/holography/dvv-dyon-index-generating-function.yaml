@@ -16,6 +16,13 @@ sources:
   - ref: dijkgraaf-verlinde-verlinde-1997
     loc: "§3, eqs. (3.6)–(3.8) and surrounding discussion"
 notes: |
+  【2026-09-20 Φ₁₀ 重数订正：本陈述刻意留在 v1，不重定向】
+  本陈述依赖 holography.igusa-cusp-form-phi10（v1）而不是 v2 的理由：DVV 识别①只消费
+  1/Φ₁₀ 的 Fourier 展开存在性（将傅里叶系数识别为 dyon 螺旋超迹），完全不依赖零点重数的
+  具体数值（重数=1 还是=2）。v1 卡关于 Fourier 展开的断言是正确的（订正只涉及重数那一句），
+  故本陈述留在 v1 是逻辑正确的选择。
+  详见 docs/reviews/phi10-multiplicity-normalization-2026-09-20.md §2（9 个可留 v1 的判据）。
+
   **严格度：physical-argument（识别①）。**
   傅里叶展开本身（给定 Φ₁₀ 的定义）是数学事实；但"这些系数等于 1/4-BPS dyon 的
   螺旋超迹 −B₆"是物理识别：DVV 通过 4d-5d 提升 + SUSY 非重整化 + 对偶论证

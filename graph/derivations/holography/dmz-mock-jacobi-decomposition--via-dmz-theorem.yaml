@@ -9,6 +9,13 @@ sources:
   - ref: dabholkar-murthy-zagier-2012
     loc: "§3 Theorem 1.1（正则分解的存在性与唯一性），§4–§5（Appell-Lerch 和的构造与模变换证明）"
 summary: |
+  【2026-09-20 Φ₁₀ 重数订正：本边刻意留在 v1，不重定向】
+  本推导依赖 holography.igusa-cusp-form-phi10（v1）而不是 v2 的理由：DMZ 分解定理的假设
+  是"极点仅在 z∈ℚτ+ℚ 处，阶数 ≤ 2"。本推导只消费"Φ₁₀ 的极点在有理格点"这一定位信息，
+  该假设的阶数上界 ≤ 2 已经容纳二重极点，完全不依赖重数的具体数值（重数=1 还是=2）。
+  v1 卡关于极点定位的断言是正确的（订正只涉及重数那一句），故本边留在 v1 是逻辑正确的选择。
+  详见 docs/reviews/phi10-multiplicity-normalization-2026-09-20.md §2（9 个可留 v1 的判据）。
+
   Dabholkar-Murthy-Zagier 2012 对指标 m 的亚纯 Jacobi 形式证明典范正则分解：
   1. 存在性：对任意亚纯 Jacobi 形式 φ，构造 Appell-Lerch 极部 φ_P 使之极点与 φ 完全
      吻合（显式公式），差 φ_F = φ − φ_P 无极点，即 mock Jacobi 形式；

@@ -42,6 +42,13 @@ gaps:
   - "eq(47) 'the contour integral automatically enforces them' 是把 n、ℓ 可除性条件丢掉的关键一步，原文只给物理论断"
   - "eq(51) 与 eq(52) 的不相容（本项目 Prop 5.1 已严格证明）未在原文献中解决；本推导选择 eq(52)，依据是物理自洽性 + A-N 2020 独立佐证，而非原文裁决"
 notes: |
+  【2026-09-20 Φ₁₀ 重数订正：本边刻意留在 v1，不重定向】
+  本推导依赖 holography.igusa-cusp-form-phi10（v1）而不是 v2 的理由：DGM 的推导链
+  (44)–(47) 中重标 ρ→s²ρ, v→sv 的合法性依赖 Φ₁₀ 在 Sp(4,ℤ) 下的模性与 1/Φ₁₀ 的
+  Fourier 结构，完全不依赖零点重数的具体数值（重数=1 还是=2）。v1 卡关于模性的断言
+  是正确的（订正只涉及重数那一句），故本边留在 v1 是逻辑正确的选择。
+  详见 docs/reviews/phi10-multiplicity-normalization-2026-09-20.md §2（9 个可留 v1 的判据）。
+
   **本推导为 physical-argument，是 Thm 6.1 唯一的物理前提来源。**
   本项目 Thm 6.1（holography.torsion-immortal-positivity-thm6-1）的数学部分不依赖本卡，
   但"挠 I 免死 dyon 指标为正"这一物理陈述依赖本卡。因此 Thm 6.1 的 effective status

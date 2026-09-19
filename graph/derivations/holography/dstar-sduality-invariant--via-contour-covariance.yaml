@@ -32,6 +32,14 @@ summary: |
   将 Cor 1.1 的推广步完全落实在 Φ₁₀ 的 Sp(4,ℤ) 模性 + 围道定义上。
   GAP 6.3 于 2026-09-15 关闭（逐字确认 Cor 1.1 陈述不含 gcd=1 前提）。
 notes: |
+  【2026-09-20 Φ₁₀ 重数订正：本边刻意留在 v1，不重定向】
+  本推导依赖 holography.igusa-cusp-form-phi10（v1）而不是 v2 的理由：本推导证明 d_∗ 的
+  GL(2,ℤ) 不变性依赖 Φ₁₀ 的 Sp(4,ℤ) 模性与偶权这两条性质（(i) Sp(4,ℤ) 模性使
+  det A=+1 时 S_A Φ₁₀=Φ₁₀；(ii) 偶权使 det A=−1 时也成立），完全不依赖零点重数的
+  具体数值（重数=1 还是=2）。v1 卡关于模性与偶权的断言是正确的（订正只涉及重数那一句），
+  故本边留在 v1 是逻辑正确的选择。
+  详见 docs/reviews/phi10-multiplicity-normalization-2026-09-20.md §2（9 个可留 v1 的判据）。
+
   reviewer-verified: graph-reviewer(2026-09-15)，Prop 4.4 Step(3)（Sym₂(ℝ)/Sym₂(ℤ) 双射 + Jacobi 行列式
   det(A)³=1）独立确认（CONFIRMED），并确认它替代了对 Rosselló"S-duality invariance"一句的引用。
 author: graph-curator
