@@ -323,3 +323,94 @@ N=4 弦论有多种实现：
 ---
 
 **文件结束**。下一步：commit 本文件，向 lead 报告。
+
+---
+
+# 【[GAP-Step2] 已关闭：逐字取得 S_BH = π√Δ —— lead 2026-09-20】
+
+上文（researcher 本轮）的结论「未能取得任何文献的逐字公式 `S_BH = π√Δ`，系数 π 未核实」
+**已被推翻**。lead 于同日取得逐字原文。记录如下，上文其余内容保留不动。
+
+## 取得方式（重要：不是网络）
+
+researcher 与更早的 theorem-prover 都报告「WebFetch 对 arXiv 全域失效」。**该报告属实**
+——lead 亲自从主会话试 `https://arxiv.org/abs/0708.1270`，同样返回
+`Unable to verify if domain arxiv.org is safe to fetch`。这是**环境级网络限制**，
+不是 agent 的失误，也不是「换个 URL 写法就能绕过」。
+
+但 **PDF 早已落在本地**：另一个 researcher 在当日早些时候（arXiv 尚可达时）下载了
+`sen2008.pdf`（1.88 MB，196 页）到自己的 worktree。lead 直接用 **PyMuPDF** 读取该本地
+文件取得逐字原文。
+
+**教训（写给后续 agent）**：
+1. arXiv 不可达时，**先查本地是否已有 PDF**（`find . -iname "*.pdf"`、以及
+   `%TEMP%` 下历史 agent 留下的文件），不要直接判「未取得」。
+2. **不要用 `pdftotext` 核对含系数的公式**。实测它会**静默丢弃 π 和 √**：
+   本文 (5.6.32) 附近的 `e^{−π√(Q²P²−(Q·P)²)}` 被 pdftotext 输出成
+   `e- . Q2P 2-(Q·P)2`——π 和 √ 全部消失。**用 pdftotext 去判定「系数是 π 还是 2π」
+   会得到系统性的错误结论。** 请改用 PyMuPDF（`fitz`）或 Read 工具读页面图像。
+3. 在 `/tmp` 下建 `struct.py` 之类与标准库同名的脚本会 shadow stdlib，导致
+   `import fitz` 失败；换一个干净目录跑。
+
+## E-LEAD-1（★核心，逐字）Sen 2008 eq. (3.1.23)：超对称分支
+
+- 位置：arXiv:0708.1270v4，**PDF 第 39 页**（§3.1，"Black hole entropy from the
+  entropy function formalism" 一节末尾），紧接 (3.1.22)。
+- 逐字（verbatim，PyMuPDF 提取）：
+
+  > The black hole entropy, given by the value of E for this configuration, is
+  >
+  > **S_BH = π √( Q²P² − (Q·P)² )**    (3.1.23)
+  >
+  > Although this formula has been derived under the condition P² > 0, Q² > 0,
+  > P²Q² > (Q·P)², the final result for the entropy also holds for arbitrary
+  > P², Q² as long as P²Q² > (Q·P)².
+
+- **系数逐字为 π**（不是 2π，不是 π/2）。
+
+## E-LEAD-2（逐字）Sen 2008 eq. (3.1.24)：非超对称分支
+
+- 位置：**PDF 第 40 页**开头。
+- 逐字：
+
+  > The entropy function formalism also allows us to calculate the entropy of extremal
+  > black holes with P²Q² < (Q·P)². We shall not go through the analysis here, but just
+  > quote the final result:
+  >
+  > **S_BH = π √( (Q·P)² − Q²P² )**    (3.1.24)
+
+- 即两分支合起来是 `S_BH = π√|Q²P² − (Q·P)²|`。
+
+## 与本项目 Δ 记号的对应（这一步是代数，不是引用）
+
+本项目（route-a / ell-zero / n₂-wall 各卡）用 `m = Q²/2`、`n = P²/2`、`ℓ = Q·P`，
+`Δ := 4mn − ℓ²`。代入：
+
+    Δ = 4·(Q²/2)·(P²/2) − (Q·P)² = Q²P² − (Q·P)²
+
+**故 (3.1.23) 在本项目记号下逐字就是 `S_BH = π√Δ`。** 归一化完全对上，无待定因子。
+（注意：这依赖 `m=Q²/2, n=P²/2` 这套归一化；researcher 上文 §1 的警告——
+不同文献 Q²/P²/Q·P 差因子 2、4、8——是对的，但本项目已固定用这一套。）
+
+## 适用范围与严格程度（诚实定档）
+
+- **适用范围**：(3.1.19) 给出推导条件 `P²>0, Q²>0, (Q·P)² < Q²P²`；Sen 明说最终结果
+  对任意 P², Q² 成立只要 `P²Q² > (Q·P)²`，即 **Δ > 0**。这正是本项目各卡的 Δ>0 条件。
+- **推导途径**：§3.1 的 **entropy function formalism，两导数有效作用量**（3.1.3）
+  ——即经典超引力的 Bekenstein–Hawking 熵，通过把 E 对 v₁,v₂,u_S,u_a 取极值得到
+  ((3.1.20)→(3.1.22)→(3.1.23))。**这是领头阶**，高导数修正是 Sen 这篇综述后面整章的主题。
+- **严格程度**：`physical-argument`。理由：它是超引力有效作用量上的 attractor/entropy-function
+  计算，不是数学定理；且 Sen 本人在 p.40 就 (3.1.24) 那一支写道
+  "black holes with P²Q² > (Q·P)² are known to be supersymmetric **although we cannot
+  see this in our analysis**"。**不得**因为「公式取到了逐字原文」就定 rigorous——
+  逐字取到的是一条物理推导的结论，不是它的严格性。
+
+## 对下游的影响
+
+1. **[GAP-Step2] 关闭**：`research/attempts/attractor-contour-threshold-entropy/status.yaml`
+   记的「`S_BH = π√Δ` 未取得逐字来源」不再成立。该 attempt 的结论（Λ₀ = π/(2S_BH)
+   基本是量纲强制的假深刻）**不因此改变**——它本来就声明「结论不依赖确切系数」。
+   现在可以说得更强：系数确实是 π，所以 `Λ₀ = 1/(2√Δ) = π/(2S_BH)` 的数值形式**成立**，
+   而它**依然**是量纲重写，依然不值得毕业进图。
+2. **可以立卡了**：这条公式此前在 703 个图节点里无任何承载（lead 2026-09-20 grep 全图确认）。
+   现在有了逐字来源 + 明确适用范围 + 诚实档位，具备立卡条件。
