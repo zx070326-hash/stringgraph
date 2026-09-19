@@ -1,0 +1,67 @@
+id: math.m-colored-partition-count-closed-form
+kind: proposition
+title: "m 色分拆计数 p_m(N) 的组合闭式与生成函数等价式（对一切 N, m ≥ 0）"
+statement: |
+  【记号】固定有限指标集 ι，|ι| = m（"颜色"数）。一个**占据函数**是有限支撑函数
+  d : ι × ℕ₊ →₀ ℕ；其**权重** oscWeight(d) := Σ_{(i,n)} n·d(i,n)。定义
+
+    p_m(N) := #{ d : ι × ℕ₊ →₀ ℕ | oscWeight(d) = N }，
+
+  约定 p_m(0) = 1（一切 m ≥ 0）、p_0(N) = 0（N ≥ 1）。记 p(N) := p_1(N)（通常分拆函数）。
+  对一个分拆 λ ⊢ N（写作 λ = ∏_s s^{r_s}，r_s = 大小为 s 的部分个数），记
+  C(m+r-1, r) := Nat.choose (m+r-1) r（从 m 元集取大小 r 的多重集数，约定 C(m-1,0)=1
+  即使 m=0）。
+
+  设 R 是交换环，P_R(X) := Σ_{N≥0} p(N) X^N ∈ R[[X]]（同
+  math.euler-partition-generating-function 的记号）。则对**一切** N ≥ 0、一切 m ≥ 0：
+
+  **(闭式)**
+    p_m(N) = Σ_{λ ⊢ N}  ∏_{s : r_s(λ) > 0}  C(m + r_s(λ) - 1, r_s(λ))。
+
+  **(生成函数式，与闭式等价)** 作为 ℤ[[X]] 中的形式幂级数恒等式：
+
+    Σ_{N ≥ 0} p_m(N) X^N  =  P_ℤ(X)^m  =  [ ∏'_{n ≥ 1} (1 - X^n) ]^{-m}。
+
+  【本节点明确不断言】p_m(N) 的渐近行为；Δ(s) 的五边形数展开（见姐妹卡
+  math.m-colored-partition-count-kappa-recursion 的边界声明）。
+uses:
+  - math.euler-partition-generating-function
+uses_conventions: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/level-n-count-generalization/proof.md §1（Step 1 / Step 2）；claim.md Claim 1"
+    note: |
+      本项目原创证明，非已发表文献，见 research/attempts/level-n-count-generalization/proof.md。
+      research/attempts/level-n-count-generalization/status.yaml: state: verified，
+      reviewer: graph-reviewer（2026-09-16，独立从头用 DP 重推 p_m(N)、重跑全部脚本、
+      逐条核对 Claim 1-4 的每一步无缺口）+ lead 两轮补充复核与措辞订正（2026-09-18）；
+      captain_confirmed: false（仍待船长确认，按 research/CLAUDE.md 生命周期第 3 步）。
+tags: [combinatorics, partitions, generating-function, oscillator-counting, no-ghost]
+notes: |
+  【论证结构，curator 亲自 Read proof.md §1 全文核对】(★) 生成函数式的证明分两步：
+  Step 1 把「权重 N 的占据函数」逐字等同于「ι 个普通分拆、大小求和为 N 的元组」（数据
+  重新打包，非双射构造），给出 Σp_m(N)X^N = P_R(X)^m；再用**承重依赖**
+  math.euler-partition-generating-function 的 (1) 式（P_R(X) = [∏(1-X^n)]^{-1} 是环中
+  可逆元的逆）得到 P_R(X)^m = [∏(1-X^n)]^{-m}。Step 2 把 (★) 按分拆形状分组重新计数，
+  得到闭式（"stars and bars" 初等有限组合学，proof.md 明确声明「不归因于任何图节点，
+  是纯有限组合学标准双射事实，也是 Mathlib 的 Nat.multichoose_eq」，故不作为
+  depends_on 边，只在本卡 statement 内直接使用）。
+
+  【与 math.euler-partition-generating-function 的对接】该卡内容是"P_ℤ(X) 的乘法逆
+  就是 ∏(1-X^n)"（m=1 情形），本卡的证明把它取 m 次幂；只用到该卡的 (1) 式
+  （无需域、无需特征零），未用其 (2)-(4)。
+
+  【范围边界，明确不断言】本卡不含 Δ(s)/κ_N(m) 递推（见姐妹卡
+  math.m-colored-partition-count-kappa-recursion）、不含 N=7 的显式 10-形状展开
+  （见姐妹卡 math.m-colored-partition-count-level-seven，是本卡在 N=7 处的直接实例）。
+
+  【查重】`uv run stringgraph search "m-colored partition"` / `"convolution"` /
+  `"partition function"` 均无同内容命中（2026-09-19/20）。
+
+  【毕业记录】本节点由 research/attempts/level-n-count-generalization/（state: verified，
+  captain_confirmed: false）毕业，按 research/CLAUDE.md 生命周期第 4 步。本 attempt 未产生
+  可提交的 formal/ 内容（scratch.lean 三条定理均为 sorry 骨架，按 research/CLAUDE.md 的
+  scratch 豁免不受 formal/ 的禁 sorry 约束，但也因此不构成 status: formalized 的证据），
+  故本卡及其姐妹卡一律 status: rigorous，不写 formal: 字段。
+author: graph-curator
+created: "2026-09-20"
