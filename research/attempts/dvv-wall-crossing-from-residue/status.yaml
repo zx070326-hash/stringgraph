@@ -34,3 +34,46 @@ notes: |
   请 lead 派 graph-reviewer 审查。若 verified，建议：
   - 毕业为图节点 `holography.dvv-wall-crossing-from-residue-structure`（physical-argument）
   - 派 researcher 核实 [EXT-g-eta]（Sen (C.27) N=1 代入，或查其它文献）
+
+  ---
+  ## 【前提升级：[EXT-Phi-hat-Phi10] 已获逐字来源 —— lead 2026-09-20，合并时追加】
+
+  本 attempt 把 `[EXT-Phi-hat-Phi10]: Φ₁₀ = c·Φ̂` 列为「合理但未坐实」的外部前提。
+  合并当日的文献重核使它**升级为有逐字来源的推论**，不再是裸假设：
+
+  1. Sen 2008 p.164（Appendix C 末尾）逐字：
+     "For M = K3 and N = 1, the function **Φ̂** constructed in this appendix is the
+      well known weight 10 cusp form of the genus two Siegel modular group [254–257]."
+     即 Sen **本人逐字断言**了 N=1 时 Φ̂ 就是权 10 尖点形式（并援引 Igusa 等经典文献）。
+  2. 权 10 Sp(4,ℤ) 尖点形式空间 S₁₀(Sp(4,ℤ)) **维数为 1**（Igusa 维数公式）。
+     本项目图内已有此论证且定档 rigorous：
+     `holography.bss-phi-tilde-proportional-to-igusa-phi10--via-one-dimensional-space`
+     （sources: igusa-1962）。
+  3. 1 + 2 ⟹ Φ̂ = c·Φ₁₀，c ≠ 0。这正是 [EXT-Phi-hat-Phi10]。
+
+  **结论**：[EXT-Phi-hat-Phi10] 的**定性内容**（成比例）已坐实到「Sen 逐字断言 +
+  图内 rigorous 的一维性」这一档；**只剩 c 的数值 open**，而本 attempt 自己已声明
+  c 只影响整体常数、不影响三条结构特征。故审查点 2（"[EXT-Phi-hat-Phi10] 是否合理"）
+  基本可以关闭，reviewer 只需复核上面 1→3 这步推理，不必再把它当作悬空假设。
+
+  **残留的诚实保留**：Sen 的 p.164 是**作者断言**（援引 [254–257]），本项目未独立
+  验证 Φ̂ 具有**全** Sp(4,ℤ) 的模性——抽取记录 S4 明确记下「本文未明确断言 N=1 时
+  Ĝ=Sp(4,ℤ)，待核实」。而一维性要用在 S₁₀(**全** Sp(4,ℤ)) 上。Sen 那句话本身蕴含
+  了全群断言，所以这是「取信作者」而非「已证」。毕业时按此定 physical-argument
+  是诚实的，不要因为上面的升级就去升 rigorous。
+
+  ## 【关键澄清：本 attempt 不受 Φ̃ 坐标缺口波及】
+
+  同日 lead 立了 `holography.sen-d19-family-is-igusa-phi10-divisor`（physical-argument），
+  记录一条**尚未关闭**的缺口：Sen 附录 D 的除子公式 (D.19) 讲的是 **Φ̃**，而 Sen
+  p.164 断言的是 **Φ̂**，两者由 (C.21) 经一个坐标变换 + 自守因子相联系，该坐标变换
+  在 N=1 是否平凡尚待核实（researcher `sencoord` 正在查）。
+
+  **该缺口与本 attempt 无关**，因为方向恰好相反：
+  - 除子卡用的是 **Φ̃**（Sen **没有**直接与 Φ₁₀ 等同的那一个）⟹ 有缺口；
+  - 本 attempt 用的是 **Φ̂**（Sen **逐字**与 Φ₁₀ 等同的那一个，见 Sen (C.25) 是 Φ̂ 的展开）⟹ 无此缺口。
+
+  所以 `sencoord` 无论返回什么结论，**都不改变本 attempt 的前提地位**。reviewer
+  不需要等 sencoord。这一点务必不要搞反：2026-09-16 的抽取记录曾把 p.164 的 Φ̂
+  误抄成 Φ̃，正是那一字之差同时制造了除子卡的缺口、并一度掩盖了本 attempt 前提
+  其实是有来源的。
