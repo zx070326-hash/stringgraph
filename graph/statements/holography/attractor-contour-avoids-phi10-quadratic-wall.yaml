@@ -1,0 +1,117 @@
+id: holography.attractor-contour-avoids-phi10-quadratic-wall
+kind: proposition
+title: "0<ℓ≤m≤n 时吸引子围道对充分大 Λ 完全避开 Φ₁₀ 的「二次壁」（n2≠0）零点分支"
+statement: |
+  记号（同姐妹卡 holography.attractor-contour-avoids-phi10-linear-wall；
+  Sen 2008 (D.19) 的整数参数化）：Div(Φ₁₀) 的每个分支对应一组
+  (m1,n1,m2,n2,j)∈ℤ⁵、j 奇、4m1n1+4m2n2+j²=1，零点条件
+    F := n2(σρ−v²) + jv + n1σ − m1ρ + m2 = 0。
+  **「二次壁」分支** := 满足 n2≠0 的所有分支（此时 F 关于 (ρ,σ,v) 含二次项）。
+  吸引子围道 C_*(m,n,ℓ;Λ) := { Ω=(ρ,v;v,σ) : Re ρ,Re σ,Re v∈[0,1],
+  Im ρ=2nΛ, Im σ=2mΛ, Im v=ℓΛ }（ε=+1 约定）。
+
+  设整数 n≥m≥1、**0<ℓ≤m**、Δ:=4mn−ℓ²>0。则**存在显式可构造的** Λ₀ = 1/(2√Δ)，
+  使得 ∀Λ>Λ₀：C_*(m,n,ℓ;Λ) 与 Div(Φ₁₀) 的**每一个 n2≠0 分支**（即一切满足
+  n2≠0、4m1n1+4m2n2+j²=1、j 奇的 (m1,n1,m2,n2,j)）都**不相交**。
+
+  换言之：F=0（对某 n2≠0 分支）与 Ω∈C_*(m,n,ℓ;Λ) 联立，在 0<ℓ≤m≤n、Δ>0、
+  Λ>Λ₀ 的条件下，对**一切** n2≠0、j 奇、整数 (m1,n1,m2) 都无解 (ρ1,σ1,v1)
+  （ρ1,σ1,v1∈[0,1]）。
+
+  **关键结果**：Λ₀ 是**显式公式** `1/(2√Δ)`，不依赖穷举或 n2,j 的上界——这比
+  一般"存在性论证"更强。该闭式来自顶点高度的精确相消机制（Proposition 7，
+  所有 n1₀,m1₀,ρ1,σ1 依赖精确相消，只留下 j,n2,v1 的封闭公式，进而得到一致界）。
+
+  **上游开放前提 [GAP-identify]**：Sen 2008 的 Φ̃ 自身坐标 = 标准 Φ₁₀ 坐标，
+  这一等同是合理推断而**非文献逐字断言**（research/attempts/gap-102b-route-a/
+  proof.md §1 标注，经 GN1996 `Div(Φ₁₀)=2H₁` 交叉验证支持）。该 GAP **只影响
+  "这是哪一份 Φ₁₀ 的零点"的诠释，不影响 (D.19) 本身的代数性质**（判别式、
+  F 的定义），故本卡的代数推导不受影响（graph-reviewer n2rev 裁决，2026-09-20，
+  见 research/attempts/gap-102b-route-a/status.yaml）。
+
+  **与姐妹卡的关系**：本卡与 holography.attractor-contour-avoids-phi10-linear-wall
+  （n2=0 分支，对**一切** Λ>0 成立）互补覆盖 Sen (D.19) 的全部分支。两卡合并
+  给出 0<ℓ≤m≤n 时"围道避开 Div(Φ₁₀)"的完整证明。
+
+  **ℓ=0 可外推**：proof.md §5.7 全节没有任何一步除以 ℓ，Proposition 7 的公式
+  在 ℓ=0 处不退化（ℓ=0 ⟹ Δ=4mn>0），故 Theorem 9 搬到 ℓ=0 合法，Λ₀ 具体化为
+  `1/(4√(mn))`。ℓ=0 的完整处理（含 n2=0 分支的零点命中但留数为零）属于另一个
+  attempt（research/attempts/ell-zero-wall-degeneracy/），本卡的主陈述范围
+  仍写 0<ℓ≤m 以与姐妹卡保持一致。
+uses:
+  - holography.igusa-cusp-form-phi10-v2
+uses_conventions: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/gap-102b-route-a/proof.md §5.7（Proposition 7, Corollary 8, Theorem 9）；claim.md §2"
+    note: |
+      本项目原创证明，非已发表文献，见 research/attempts/gap-102b-route-a/proof.md。
+      research/attempts/gap-102b-route-a/status.yaml: state: verified，reviewer:
+      n2rev（graph-reviewer，2026-09-20，天花板 rigorous，逐项对抗性审查通过，
+      见 status.yaml 末尾「审查裁决」一节）；captain_confirmed: false（仍待船长
+      确认，按 research/CLAUDE.md 生命周期第 3 步）。
+  - ref: sen-2008-precision-counting
+    loc: "arXiv:0708.1270v4 Appendix D, eq. (D.19)（p.168，逐字核对见 proof.md §1.3）"
+    note: |
+      D.19 给出 Div(Φ̃) 的整数参数化 F=0；本卡的"n2≠0 分支"即该参数化中 n2≠0
+      的子族（判别式包含 4m2n2 项，允许二次型 σρ−v²）。与 GN1996 Div(Φ₁₀)=2H₁
+      交叉验证一致（proof.md §1.3）。
+tags: [bh-entropy, mock-modular, n4-string-theory, number-theory]
+notes: |
+  【论证，curator 亲自 Read proof.md §5.7 全文核对】本卡毕业 Theorem 9 及其
+  承重依赖 Proposition 7 / Corollary 8。核心突破是 Prop 7 的相消机制（所有
+  n1₀,m1₀,ρ1,σ1 依赖精确相消），使顶点高度公式化简为只依赖 (j,n2,v1) 的闭式：
+  ```
+  Λ²(t*) = 1/(4n2²Δ) − (j − 2n2v1)²/(16mnn2²)
+  ```
+  第二项是减去平方数（非负），故 `Λ²(t*) ≤ 1/(4n2²Δ) ≤ 1/(4Δ)`（Corollary 8），
+  对**所有** n2≠0、所有 j、所有满足 (I) 约束的 (ρ1,σ1,v1)∈[0,1]³ **一致成立**。
+  因此取 Λ₀ = 1/(2√Δ) 使 Λ₀² = 1/(4Δ)，当 Λ > Λ₀ 时 Λ² > 顶点最大值，(R) 式
+  无实数 t 解，更无整数 t 解，n2≠0 分支无解（Theorem 9）。
+
+  **论证路径**（proof.md §5.7，经 graph-reviewer n2rev 2026-09-20 对抗性审查）：
+  - §5.7.1：移位 (n1,m1)→(n1+nt,m1+mt) 下 Λ²(t) 是开口向下抛物线（最高次系数
+    精确等于 −mn/(n2²Δ)<0，对任意 n2≠0 恒负，SymPy 符号验证）。
+  - §5.7.2：(I) 约束允许把 σ1 表示为 ρ1,v1,n1₀,m1₀,n2,j 的函数。
+  - §5.7.3（关键）：直接对顶点值 g(t*) = C − B²/(4A) 做符号化简（不分离 B 和 C），
+    代入 (I) 约束，SymPy `simplify` **自动发现所有 n1₀,m1₀,ρ1,σ1 依赖精确相消**，
+    只留下 Prop 7 的闭式。独立验证脚本 `scripts/verify_correct_B.py`（SymPy 符号
+    恒等式检查 + 100 组精确 Fraction 算术数值验证）全部通过。
+  - §5.7.4：从 Prop 7 直接得 Cor 8（利用"第二项是减去平方数"而非逐项取绝对值，
+    后者会破坏几何意义），再得 Thm 9 的显式 Λ₀。
+  - 参数化完备性（reviewer 补上的承重点）：Sen (D.19) 的零点分支由整数五元组
+    参数化；(I) 式在移位下不变，故任何满足 (I) 的整数对都落在某个 canonical 基点
+    的轨道上；Prop 7 对**任意**基点成立且最终公式与基点无关，故一致覆盖全部分支。
+
+  **本结果比姐妹卡弱一档**：姐妹卡（n2=0，线性壁）对**一切** Λ>0 都成立（纯数论
+  障碍，与 Λ 大小无关）；本卡需要 Λ>Λ₀（解析障碍，但 Λ₀ 是显式可构造的）。
+  两卡适用范围相同（0<ℓ≤m≤n，Δ>0），合并给出完整证明。
+
+  **[GAP-identify] 的处理**（同姐妹卡，照既有做法）：姐妹卡 notes 已详细记录该
+  GAP（Sen 的 Φ̃ 自身坐标 = 标准 Φ₁₀ 坐标的等同是合理推断但非文献逐字断言）；
+  姐妹卡当时刻意不依赖 holography.igusa-cusp-form-phi10 / phi10-wall-crossing-poles
+  两张旧卡（因重数冲突），后来 physics-auditor 已裁决并新建 v2 卡订正，本卡现在
+  可以直接依赖 igusa-cusp-form-phi10-v2（"零点重数为 2"）。本卡在 `uses` 里连该
+  v2 卡，在 statement 里显式写明 [GAP-identify] 的限定与 reviewer 的裁决（只影响
+  诠释不影响代数性质），与姐妹卡保持一致做法。
+
+  **与既有图节点的关系**（2026-09-20 已订正为一致）：holography.igusa-cusp-form-phi10-v2
+  与 holography.phi10-wall-crossing-poles-v2 两张 v2 卡已订正零点重数为 2（旧卡
+  "单零点"是错误表述），与本卡引用的 Sen 2008 D.19 / GN1996（重数 2）一致。
+  v2 卡仍维持"Sp(4,ℤ)-轨道"措辞并在 notes 里注明 n2≠0 轨道覆盖性仍是开放问题，
+  与本卡记录的 [GAP-identify] 一致。本卡依赖 igusa-cusp-form-phi10-v2（零点重数），
+  不依赖 phi10-wall-crossing-poles-v2（那张卡只讲极点结构与留数，与本卡的零点
+  避让无直接依赖）。完整取证与裁决见 docs/reviews/phi10-zero-multiplicity-defect-2026-09-20.md
+  与 docs/reviews/phi10-multiplicity-normalization-2026-09-20.md。
+
+  **查重**（curator 执行）：`uv run stringgraph search "attractor" "quadratic"` /
+  `"n2" "wall"` / `"contour" "avoids"` 均无同内容命中（2026-09-20）；唯一相关
+  命中是姐妹卡 attractor-contour-avoids-phi10-linear-wall（n2=0 分支），已在
+  本卡 statement 与 notes 里明确区分与互补关系。
+
+  **毕业记录**：本节点由 research/attempts/gap-102b-route-a/（state: verified，
+  reviewer: n2rev，captain_confirmed: false）毕业，按 research/CLAUDE.md 生命周期
+  第 4 步。本 attempt 未产生可提交的 formal/ 内容，本卡不填 status（proposition
+  禁止手填），有效状态由推导的 status: rigorous 决定（天花板由 reviewer 给出）。
+author: graph-curator
+created: "2026-09-20"

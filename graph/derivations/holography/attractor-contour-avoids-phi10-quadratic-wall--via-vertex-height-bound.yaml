@@ -1,0 +1,109 @@
+id: holography.attractor-contour-avoids-phi10-quadratic-wall--via-vertex-height-bound
+target: holography.attractor-contour-avoids-phi10-quadratic-wall
+kind: proof
+status: rigorous
+depends_on:
+  - id: holography.igusa-cusp-form-phi10-v2
+    inferred: false
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/gap-102b-route-a/proof.md §5.7（§5.7.1-5.7.4：Proposition 7, Corollary 8, Theorem 9）"
+    note: |
+      本项目原创证明，非已发表文献。proof.md §5.7 的三个核心结果：
+      - Proposition 7（§5.7.3）：顶点高度精确公式 `Λ²(t*) = 1/(4n₂²Δ) − (j−2n₂v₁)²/(16mnn₂²)`，
+        所有 n₁₀,m₁₀,ρ₁,σ₁ 依赖精确相消（SymPy 符号验证 + 100 组精确 Fraction 数值验证，
+        脚本 `scripts/verify_correct_B.py`）。
+      - Corollary 8（§5.7.4）：一致界 `Λ²(t*) ≤ 1/(4n₂²Δ) ≤ 1/(4Δ)`，对所有 n₂≠0、
+        所有 j、所有满足 (I) 约束的 (ρ₁,σ₁,v₁)∈[0,1]³ 一致成立。
+      - Theorem 9（§5.7.4）：取 Λ₀ = 1/(2√Δ)，∀Λ>Λ₀ 围道避开所有 n₂≠0 零点分支。
+
+      状态：state: verified，reviewer: n2rev（graph-reviewer，2026-09-20），
+      captain_confirmed: false（research/attempts/gap-102b-route-a/status.yaml）。
+      reviewer 裁决天花板 rigorous，逐项对抗性审查通过（7 项承重点核实，含参数化
+      完备性、顶点符号、Λ²<0 分支处理、(I) 约束使用、[GAP-identify] 标注、删除正当性、
+      闭合验证，见 status.yaml 末尾「审查裁决（2026-09-20，graph-reviewer agent n2rev）」）。
+  - ref: sen-2008-precision-counting
+    loc: "arXiv:0708.1270v4 Appendix D, eq. (D.19)（p.168）"
+    note: |
+      Sen (D.19) 给出 Div(Φ̃) 的整数参数化（K3/N=1 情形）：零点分支 F = n₂(σρ−v²) +
+      jv + n₁σ − m₁ρ + m₂ = 0（五元组 (m₁,n₁,m₂,n₂,j)∈ℤ⁵，j 奇，判别式 4m₁n₁+4m₂n₂+j²=1）。
+      proof.md §1 通过 WebFetch 下载 arXiv PDF 并用 Read 工具逐页核对 pp.164-169
+      （Appendix D 全文），完成逐字核对，弥补此前抽取记录的"转述而非逐字引用"缺口。
+      与 GN1996 Div(Φ₁₀)=2H₁ 交叉验证一致（零点分支 v=0 的重数 2）。
+
+      [GAP-identify]：Sen 的 Φ̃ 自身坐标 = 标准 Φ₁₀ 坐标的等同是合理推断但非文献
+      逐字断言（proof.md §1 标注，经 GN1996 交叉验证支持）。reviewer n2rev 裁决：
+      该 GAP 只影响"这是哪一份 Φ₁₀ 的零点"的诠释，不影响 (D.19) 本身的代数性质
+      （判别式、F 的定义），故 §5.7 的代数推导不受影响。
+summary: |
+  用移位方向顶点高度的精确相消机制证明吸引子围道对充分大 Λ 避开所有 n₂≠0 零点分支。
+
+  **核心突破**（Proposition 7，§5.7.3）：沿移位不变方向 (n₁,m₁)→(n₁+nt,m₁+mt)，
+  判别式约束解出的 m₂(t) 使 Λ²(t) 成为 t 的开口向下抛物线（最高次系数精确等于
+  −mn/(n₂²Δ)<0，SymPy 符号验证）。代入 (I) 约束（Im(F)=0 给出的 ρ₁,σ₁,v₁ 之间的关系）
+  并对顶点值 g(t*) = C − B²/(4A) 做完整符号化简后，SymPy **自动发现所有 n₁₀,m₁₀,ρ₁,σ₁
+  依赖精确相消**，只留下依赖 (j,n₂,v₁) 的封闭公式：
+  ```
+  Λ²(t*) = 1/(4n₂²Δ) − (j − 2n₂v₁)²/(16mnn₂²)
+  ```
+  独立验证脚本 `scripts/verify_correct_B.py` 通过 SymPy 符号恒等式检查与 100 组
+  精确 Fraction 算术数值验证确认该公式正确。
+
+  **一致界**（Corollary 8，§5.7.4）：第二项是减去平方数（分子 ≥0，分母 >0，整体 ≤0），
+  故 `Λ²(t*) ≤ 1/(4n₂²Δ) ≤ 1/(4Δ)`（因 n₂²≥1），对**所有** n₂≠0、所有奇 j、所有满足
+  (I) 约束的 (ρ₁,σ₁,v₁)∈[0,1]³ **一致成立**。关键教训（proof.md §5.7.4 显式警示）：
+  不能对 Prop 7 的表达式逐项取绝对值（那会把负贡献变成正贡献，破坏几何意义），
+  正确做法是利用"减去非负项 ⟹ 小于等于第一项"。
+
+  **可构造 Λ₀**（Theorem 9，§5.7.4）：取 Λ₀ = 1/(2√Δ) 使 Λ₀² = 1/(4Δ)。当 Λ > Λ₀
+  时 Λ² > 1/(4Δ) > sup_{t∈ℝ} Λ²(t*)（抛物线顶点），故 (R) 式 n₂ΔΛ² = g(t) 无实数 t
+  解，更无整数 t 解，n₂≠0 分支无解。Λ₀ 是**显式公式**（不依赖 n₂,j 的上界或穷举），
+  比一般"存在性论证"更强。
+
+  **参数化完备性**（reviewer 补上的承重点，§5.7 隐含）：Sen (D.19) 的零点分支由整数
+  五元组参数化；(I) 式在移位 (n₁,m₁)→(n₁+nt,m₁+mt) 下不变（其 2mn₁−2nm₁ 项不变，
+  §5.5 已证），故任何满足 (I) 的整数对都落在某个 canonical 基点 (n₁₀,m₁₀) 的移位
+  轨道上。Prop 7 对**任意**基点成立且最终公式与基点无关（完全相消），故一致覆盖
+  Sen (D.19) 的全部 n₂≠0 分支，不遗漏。
+
+  **论证路径**（proof.md §5.7，经 graph-reviewer n2rev 2026-09-20 对抗性审查）：
+  - §5.7.1：移位下 Λ²(t) 的二次标度（最高次系数精确计算，SymPy 符号验证）。
+  - §5.7.2：(I) 约束允许把 σ₁ 表示为其余变量的函数。
+  - §5.7.3（关键）：直接对顶点值做完整符号化简（不分离 B 和 C），代入 (I) 约束，
+    SymPy `simplify` 自动发现相消，得 Prop 7 闭式。独立验证脚本 `verify_correct_B.py`
+    （SymPy + 100 组 Fraction 数值）通过。
+  - §5.7.4：从 Prop 7 直接得 Cor 8（利用第二项符号而非逐项取绝对值），再得 Thm 9。
+  - 审查补充（n2rev）：参数化完备性、顶点符号（n₂ 正负号都对）、Λ²<0 分支处理、
+    (I) 约束使用、[GAP-identify] 标注、删除正当性（错误被正确证明取代，有独立价值
+    的负面结论保留）、8 步论证链逐步核实通过。
+
+  **关键技术点**（使本证明比原设想路线更直接）：
+  1. 移位方向 (n,m) 使判别式约束下 Λ²(t) 成为精确二次多项式（不是近似），最高次
+     系数只依赖 (n,m,n₂,Δ)，对任意 n₂≠0 恒负（开口向下）。
+  2. (I) 约束（Im(F)=0）消去一个自由度（σ₁ 表示为 ρ₁,v₁,基点,n₂,j 的函数）。
+  3. 代入 (I) 并完整化简后，顶点值的所有 n₁₀,m₁₀,ρ₁,σ₁ 依赖通过判别式的二次关系
+     **精确相消**（不是逐项界定再放大），只留下 (j,n₂,v₁) 的封闭公式。
+  4. 第二项 −(j−2n₂v₁)²/(16mnn₂²) 是减去平方数，利用其非正性（而非逐项取绝对值）
+     得到一致界 `≤ 1/(4Δ)`，该界不依赖 v₁（虽然 v₁ 在公式里，但第二项 ≤0 使界
+     由第一项单独给出）。
+  5. 因此无需先验界定 |n₁| 或 |m₁|（原 §5.5 设想的瓶颈），一致界对 (n₂,j) 的所有
+     组合同时成立，Λ₀ 是单一显式值。
+
+  **与姐妹推导的关系**：姐妹卡 attractor-contour-avoids-phi10-linear-wall 的推导
+  （n₂=0 分支，Theorem 4）对**一切** Λ>0 成立（纯数论障碍，与 Λ 大小无关）；本
+  推导需要 Λ>Λ₀（解析障碍，但 Λ₀ 显式可构造）。两推导适用范围相同（0<ℓ≤m≤n，Δ>0），
+  合并给出 0<ℓ≤m≤n 时"围道避开 Div(Φ₁₀)"的完整证明。
+
+  **ℓ=0 外推**（lead 独立核实，status.yaml 末尾「[GAP-ℓ0] 已闭合」一节）：proof.md
+  §5.7 全节没有任何一步除以 ℓ，Prop 7 公式在 ℓ=0 处不退化（ℓ=0 ⟹ Δ=4mn>0），
+  故 Thm 9 搬到 ℓ=0 合法，Λ₀ 具体化为 `1/(4√(mn))`。ℓ=0 的完整处理（含 n₂=0 分支
+  的零点命中但留数为零）在另一个 attempt（ell-zero-wall-degeneracy），本推导的
+  主陈述范围仍写 0<ℓ≤m 以与姐妹推导保持一致。
+
+  **上游开放前提 [GAP-identify]**（同姐妹推导，已由 reviewer 评估影响范围）：
+  Sen 的 Φ̃ 自身坐标 = 标准 Φ₁₀ 坐标的等同是合理推断但非文献逐字断言（proof.md §1
+  标注，经 GN1996 Div(Φ₁₀)=2H₁ 交叉验证支持）。reviewer n2rev 裁决：该 GAP 只影响
+  "这是哪一份 Φ₁₀ 的零点"的诠释，不影响 (D.19) 本身的代数性质（判别式、F 的定义），
+  故 §5.7 的代数推导不受影响。此限定已在 target 卡的 statement 里显式写明。
+author: graph-curator
+created: "2026-09-20"
