@@ -77,3 +77,49 @@ notes: |
     否则本证明在 research/CLAUDE.md 的字面意义上仍缺"图中 rigorous 节点"
     形式的砖块来源（当前砖块清单里的 BSS 引用是"复核过的外部文献"，
     不是"图节点"，proof.md claim.md 已如实说明这一点，未回避）。
+
+  ---
+
+  ## 🔴 lead 复核（2026-09-20，合并本分支时写入）——记号指派与本项目图卡冲突
+
+  合并入 main，但**不得据此判定 [GAP 10.2b] 已关闭**，直到下述冲突被裁决。
+
+  **冲突**：引理 1（proof.md §1）写「Rosselló 记号 `m=P²/2`（磁）、`n=Q²/2`（电）」，
+  并称逐字取自 Rosselló eq (2.3)。但**本项目 `graph/` 里每一张相关卡都写反过来**：
+
+  - `graph/statements/holography/dgm-torsion-divisor-sum.yaml:7`
+    「电荷不变量 (m,n,ℓ) = (Q²/2, P²/2, Q·P)」
+  - 同文件 :22、`torsion-immortal-positivity.yaml:26`（DGM eq(52)）
+  - `dvv-dyon-index-generating-function.yaml:10`「Q²/2=m, P²/2=n, Q·P=l」
+  - `research/attempts/torsion-immortal-positivity-hecke/claim.md:16,174`
+
+  即图卡一律取 **m = Q²/2（电）**，与引理 1 恰好相反。两者必有一错。
+
+  **影响评估（lead 分析，供 reviewer 核对而非替代其裁决）**：
+
+  1. 结论**大概率稳健**，但**路线可能要镜像**。Φ₁₀ 在 ρ↔σ 下对称，故 d_*(m,n,ℓ)
+     在 m↔n 下对称；BSS 同时证了电荷集 A 与 B 两支（Thm 5.4(a)/(b)），二者互为
+     ρ↔σ 镜像。若引理 1 的荷指派写反，则目标域 `n≥m` 落进的是 **A₂ 而非 B₂**，
+     用的是 **Thm 5.4(a) 而非 (b)**，覆盖性结论不变，但 §3 引理 2 的变量对应表、
+     §4 的整体符号推导**全部需要按镜像重写**。
+  2. 因此「BSS 已证一个包含目标域的超集 ⟹ 此 GAP 从来不是公开文献空白」这个
+     **核心 prior-art 发现本身不依赖该指派**，仍然成立且仍然重要。
+  3. 但 §3/§4 现有文字是按 (b) 支写的，**若指派反了则这两节的具体链条失效**，
+     不能按现状毕业。
+  4. 注意 §3 的表格与 (R1) 式在 agent 自己的文本内也需要对照检查：(R1) 写
+     `1/Φ₁₀=Σψ_m(σ,v)p^m`（故 Jacobi 指标 m 共轭于 ρ），而 §3 表格写
+     `Im σ = 2mΛ`（吸引子围道是**交叉**配对）。这两条本身可以自洽，但正因为
+     交叉配对容易看反，指派问题必须由第一手 PDF 逐字重核，不能靠推断。
+
+  **给 reviewer 的优先级**（覆盖 agent 自列的优先级）：
+  - **P0**：回到 Rosselló arXiv:2403.19630 eq (2.3) 与 BSS arXiv:2311.16252
+    p.41 附近，逐字重核 m/n 到 Q²/2、P²/2 的指派，并与上列图卡对帐。
+    裁决三选一：(a) 图卡错（则需按原则 1 走 supersede 修正**已毕业的**卡，
+    影响面 8 处引用）；(b) 本 attempt 错（则 §3/§4 镜像重写）；
+    (c) 两文献本身约定不同（则**更严重**：`torsion-immortal-positivity-hecke`
+    把 DGM eq(52) 与 Rosselló Thm 1 拼在一起时可能有荷标签错配，而该 attempt
+    **已经毕业进图**）。
+  - **P1**：agent 自列的 §3 变量角色引理与 §4 的 [GAP]（Φ̃₁=Φ₁₀ 的转述信任）。
+
+  **未变更**：`state` 仍为 `draft`，`reviewer`/`verdict` 仍为 null——依
+  research/CLAUDE.md，升格是 graph-reviewer 的专属权限，lead 不代行。
