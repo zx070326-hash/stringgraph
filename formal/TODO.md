@@ -2386,6 +2386,24 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
       四条全部 `ok`，只有 `propext Classical.choice Quot.sound`（`SixSeedKernelSharp` 是
       `def` 不是 `theorem`，不参与公理检查）。
 
+      **续，"Form A" 已完成**（`StringFormal/NoGhost/SixSliceInjective.lean`，commit `57003dc`，
+      2026-09-19，formalizer；`StringFormal.lean` 加了一行 `import`，job 数 3979→3980）：
+      正是上一条目 (c) 里点名的选型 (A)——转移映射
+      `S₆ : V_{j,1} → V_{j,5}×V_{j,4}, u ↦ (x₄u,y₃u)` 在**整片** `V_{j,1}`（**任意 rung `j`**，
+      不限于 `j=-6`；任意 `D`、任意 `η`、任意 ℚ-代数 `R`）上单射——现已**证出**：
+      `x4_eq_zero_of_mem_towerBigrade_one`、`y3_eq_zero_of_mem_towerBigrade_one`、
+      `eq_zero_of_mem_towerBigrade_one_of_x4_eq_zero_of_y3_eq_zero`（15 条声明，
+      源自 `research/attempts/s6-injectivity-level-six/proof.md`，转写时**改走**该文件已有的
+      `towerModeVec`（`A_ε(p)`）力矩泛函工具箱而非 proof.md 从头搭建的振子计数分级——
+      两条路线殊途同归，但前者在本仓库已是现成设施）。`check_axioms` 15 条全部 `ok`，
+      只有 `propext Classical.choice Quot.sound`。**尚未做**：从这条 (A) 到上一条目里
+      `SixSeedKernelSharp`（(B)）的桥接（即把整片单射性转成 `dim ker(seedPair(-6,6)) ≤ D-1`
+      的四步论证，上一条目 docstring 已写全该论证但未在 Lean 里实现）——这是可选、优先级低
+      的后续小任务，任务书明确排除在本次 PR 之外，留给下一个 formalizer 或 lead 判断是否值得做。
+      另外注意本文件 docstring 记录的一个**归一化差异**：算出的常数是 `120`（`y₃`）/
+      `-2040`（`x₄`），是 proof.md 的 `30`/`-408` 乘以目标 level 数（`4`/`5`）——两者非零性等价，
+      结论不受影响，纯粹是 `towerModeVec` 的 CCR 归一化与 proof.md「读裸系数」的约定不同。
+
 - [x] `no_ghost_theorem`：组装 —— **条件版已完成**（`no_ghost_of_spans`，见 `noghost-c5`）；
       无条件版等 `ddf-spans`。
 - [x] `negative-norm-above-26`：D > 26 时显式负模态 —— `StringFormal/NoGhost/LevelTwo.lean`。
