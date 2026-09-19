@@ -22,7 +22,8 @@ sources:
   - ref: rossello-2024
     loc: "Cor 1.1（eq.1.6：m,n≥1, Δ=4mn−ℓ²>0 ⇒ d_*(m,n,ℓ)>0，逐字确认不含 gcd 前提）"
   - ref: dabholkar-gomes-murthy-2008
-    loc: "eq(52)：Ω_I(Q²/2,P²/2,Q·P) = Σ_{s|I}s·Ω₁(Q²/2s²,P²/2,Q·P/s)"
+    loc: "**arXiv 官方 PDF eq (3.28)**（p.16, §3.4；本项目其余各处沿用的 ar5iv 编号为 eq(52)）：
+          Ω_I(Q²/2,P²/2,Q·P) = Σ_{s|I}s·Ω₁(Q²/2s²,P²/2,Q·P/s)"
 summary: |
   **(a) 除子和恒等式（纯数学）**：𝒢_I = Σ_{s|I} s·𝒱_s𝒢 是有限和，积分线性，逐项用
   attractor-contour-covariance 的 Cor 4.2。可用性检查：s|I ⟹ s²|I²|m（故 s²|m ✓）
@@ -51,5 +52,13 @@ notes: |
   physical-argument。这正是 graph/CLAUDE.md（lead + graph-reviewer 裁决，2026-09-15）要求的形式：
   物理前提立成节点、正常传播、瓶颈可见（`uv run stringgraph why holography.torsion-immortal-positivity` 指向
   dgm-torsion-divisor-sum）。
+
+  ---
+  【DGM 公式编号对照（lead 2026-09-20）】本卡 `depends_on[].note`、`summary`、`gaps` 中沿用的
+  DGM「eq(52)」是 **ar5iv HTML 自动编号**；arXiv 官方 PDF（arXiv:0803.2692）的实际编号是
+  **eq (3.28)**（p.16, §3.4）。同批订正：ar5iv eq(50)/(51) = 官方 **(3.26)/(3.27)**。
+  **数学内容完全不变**，改的只是引用字符串。依据：
+  `literature/extractions/dabholkar-gomes-murthy-2008.md` 订正 C2（直接下载官方 PDF 逐页核实）。
+  完整对照表见 `holography.dgm-torsion-divisor-sum--via-dgm-duality-argument` 的 notes 末段。
 author: graph-curator
 created: "2026-09-15"

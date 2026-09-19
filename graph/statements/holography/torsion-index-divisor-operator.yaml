@@ -40,6 +40,15 @@ notes: |
 
   **R6′ 符号约定**：𝒢 := −1/Φ₁₀(ρ,σ,v+1/2)。整体负号是符号核算结果（proof.md §1），同时乘在等式两边，
   不影响任何结论；它保证 𝒢 沿吸引子围道的 (m,n,ℓ) 系数恰为 d_*(m,n,ℓ) = (−1)^{ℓ+1}×(1/Φ₁₀ 的同名系数)。
+
+  ---
+  【DGM 公式编号订正，lead 2026-09-20】本卡 `statement` 末句提到的 DGM「eq(51)」是
+  **ar5iv HTML 自动编号**；arXiv 官方 PDF（arXiv:0803.2692）的实际编号是 **eq (3.27)**（p.16, §3.4）。
+  同批订正：ar5iv eq(50)/(52) = 官方 **(3.26)/(3.28)**。**数学内容完全不变**，改的只是引用字符串。
+  依据：`literature/extractions/dabholkar-gomes-murthy-2008.md` 订正 C2。完整对照表见
+  `holography.dgm-torsion-divisor-sum` 的 notes 末段。
+  按原则 1 未就地改 `statement` 正文；**下次本卡实质换代时必须一并改为 (3.27)**。
+  ⚠ 凡读本卡 `statement` 者（含里程碑回译者）请以本段为准。
 tags: [bh-entropy, mock-modular, n4-string-theory, cartography]
 author: graph-curator
 created: "2026-09-15"

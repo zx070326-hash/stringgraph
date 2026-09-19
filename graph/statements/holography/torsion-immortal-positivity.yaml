@@ -23,7 +23,8 @@ sources:
     loc: "Cor 1.1（逐字：m,n≥1, Δ=4mn−ℓ²>0 ⇒ d_*(m,n,ℓ)>0，**不含** gcd 前提）；§2 (2.22)–(2.23)（d_* 定义）"
     note: "Thm 6.1(b) 的唯一外部数学依赖：逐项套用 Cor 1.1"
   - ref: dabholkar-gomes-murthy-2008
-    loc: "eq(52)：Ω_I(Q²/2,P²/2,Q·P) = Σ_{s|I} s·Ω₁(Q²/2s²,P²/2,Q·P/s)"
+    loc: "**arXiv 官方 PDF eq (3.28)**（p.16, §3.4）：Ω_I(Q²/2,P²/2,Q·P) = Σ_{s|I} s·Ω₁(Q²/2s²,P²/2,Q·P/s)。
+          ⚠ 本项目旧记为「eq(52)」，那是 ar5iv HTML 自动编号，非原文编号；对照表见 holography.dgm-torsion-divisor-sum 的 notes 末段。"
     note: "物理前提 (P′)：使 (a)(b) 的纯数学结论可读作物理陈述 (c)"
 notes: |
   **本卡刻意把数学结论与物理前提分开陈列。**
@@ -46,6 +47,14 @@ notes: |
   (a)(b) 的数学结论及其对 (P′) 的依赖不受此限制。
 
   **captain_confirmed: false** —— 见 research/attempts/torsion-immortal-positivity-hecke/status.yaml。
+
+  ---
+  【DGM 公式编号订正，lead 2026-09-20】本卡 notes 与 sources 中出现的 DGM「eq(50)/(51)/(52)」
+  是 **ar5iv HTML 自动编号**；arXiv 官方 PDF（arXiv:0803.2692）的实际编号是
+  **(3.26)/(3.27)/(3.28)**，均在 p.16 §3.4。**数学内容完全不变**，改的只是引用字符串。
+  依据：`literature/extractions/dabholkar-gomes-murthy-2008.md` 订正 C2（researcher 直接下载
+  官方 PDF 逐页核实）。完整对照表见 `holography.dgm-torsion-divisor-sum` 的 notes 末段。
+  本次只改 `sources.loc` 与本 notes，未动 `statement`/`title`（原则 1）。
 tags: [bh-entropy, mock-modular, n4-string-theory, cartography, sen-positivity]
 author: graph-curator
 created: "2026-09-15"

@@ -14,8 +14,11 @@ depends_on:
     note: "DGM 的推导链 (44)–(47) 从 I=1 的围道积分出发，重标 ρ→s²ρ, v→sv，再以对偶不变量重新打包。该重标在生成函数层的合法性依赖 Φ₁₀ 在 Sp(4,ℤ) 下的模性与 1/Φ₁₀ 的 Fourier 结构；DGM 原文未分步证明这一步，只是援引'duality arguments'，故标 inferred: true"
 sources:
   - ref: dabholkar-gomes-murthy-2008
-    loc: "§3, eq(44)–(47)（重标链条）→ eq(50)(51)(52)；脚注 5（(−1)^ℓ 因子的四维量子数 ↔ 五维自旋的来源）"
-    note: "原文用 4d-5d 提升 + fermionic zero mode 计数 + 对偶论证，非严格证明"
+    loc: "§3.4, p.16：**arXiv 官方 PDF eq (3.26)/(3.27)/(3.28)**（= 本文其余各处沿用的 ar5iv 编号 eq(50)/(51)/(52)）；
+          重标链条 ar5iv eq(44)–(47) 的官方 PDF 编号本轮**未核实**，保留 ar5iv 字样；
+          脚注 5（(−1)^ℓ 因子的四维量子数 ↔ 五维自旋的来源）"
+    note: "原文用 4d-5d 提升 + fermionic zero mode 计数 + 对偶论证，非严格证明。
+           ⚠ 公式编号见本卡 notes 末段的 ar5iv ↔ 官方 PDF 对照表。"
 summary: |
   DGM 2008 §3 的物理论证链条：
 
@@ -43,5 +46,22 @@ notes: |
   本项目 Thm 6.1（holography.torsion-immortal-positivity-thm6-1）的数学部分不依赖本卡，
   但"挠 I 免死 dyon 指标为正"这一物理陈述依赖本卡。因此 Thm 6.1 的 effective status
   应为 physical-argument。
+
+  ---
+  【DGM 公式编号对照（lead 2026-09-20）】本卡 `depends_on[].note`、`summary`、`gaps` 中
+  一律沿用本项目既有的 **ar5iv HTML 自动编号**。arXiv 官方 PDF（arXiv:0803.2692，30 页，仅 v1）
+  的实际编号是：
+
+  | 本卡写法（ar5iv） | **官方 PDF 实际编号** | 位置 |
+  |---|---|---|
+  | eq(50) | **eq (3.26)** | p.16, §3.4（内容同更早的 eq(2.13)） |
+  | eq(51) | **eq (3.27)** | p.16, §3.4 |
+  | eq(52) | **eq (3.28)** | p.16, §3.4 |
+  | eq(44)–(47) | **未核实**（researcher 本轮只核了上述三式） | §3 |
+
+  **数学内容完全不变**，三式的逐字内容与本卡所述一致。依据：
+  `literature/extractions/dabholkar-gomes-murthy-2008.md` 订正 C2（直接下载官方 PDF 逐页核实）。
+  未就地替换正文字样是为避免与未核实的 (44)–(47) 混用两套编号。
+  **教训**：ar5iv HTML 的公式编号不可信（其计数器不逐节重置），引用公式编号一律以官方 PDF 为准。
 author: graph-curator
 created: "2026-09-15"
