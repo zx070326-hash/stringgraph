@@ -499,6 +499,7 @@ moved (1 other active cards):
    即**自封顶**。它是否**便宜**取决于 so(N)/usp(N) 伴随迹恒等式在 Mathlib 里的可达性
    （`Math/E8Roots.lean` 的 E₈ 侧之所以做得成，是因为 240 个根可以显式列出；
    一般 N 的 so/usp 没有这个便利）。**本节不对成本下结论**，已另派 scout 评估。
+   ⇒ **成本裁决已回，见 §9.4。**
 
 ### 9.3 reviewer 自报的保留事项（照录，不代为消化）
 
@@ -515,6 +516,30 @@ uv run stringgraph report            # "tied effective derivations" 段给出这
 uv run stringgraph roots <id>        # 现在会追加打平的其它推导及各自的瓶颈根
 uv run stringgraph counterfactual <id>
 ```
+
+### 9.4 `so-usp` 的成本裁决：MODERATE（2026-09-19，闭合 §9.2 第 3 条）
+
+全文见 **`docs/frontier-scouting/so-usp-adjoint-trace-lean-route.md`**。要点：
+
+- **约 400–700 行 Lean，不是「新造无穷秩根系理论」。** 存在一条自足路线：
+  `D := F⊗1 + 1⊗F` 在 `V⊗V` 上二项展开，配 `tr(A⊗B) = tr A·tr B` 与
+  `tr((A⊗B)∘swap) = tr(AB)`，投到 `½(1∓swap)` 得
+  `Tr(Λ²F)^k = ½[Σ_m C(k,m)tr(F^m)tr(F^{k−m}) ∓ 2^k tr(F^k)]`。
+  **组合结构与 N 无关**（`N` 只经 `tr(1)` 进来），故**完全绕开根系与 Chevalley 限制**。
+  奇次迹消失在 so 与 usp 两支各由一行转置/共轭技巧给出，⇒ **本路线覆盖 usp(N)**，
+  而卡面 note 记的 antonelli-2015 那条恰恰未核实是否覆盖 usp。
+- 🔴 **lead 已数值验证 scout 唯一未 derisk 的那一步**（「抽象 Λ² 公式 = 李代数上的
+  `Tr(ad F)^k`」这道基匹配桥）：`docs/frontier-scouting/so-usp-adjoint-trace-check.py`，
+  精确整数运算，在显式基上组装 `ad(F)` 矩阵直接比较——
+  **so(N) N=3..8 与 sp(2n) N=2,4,6,8，k=2,4,6，60 项检查全部精确相等，0 例外。**
+  ⇒ 剩下的是纯 Lean 工程量，不是未知数学。（边界：验的是小 `N` 实例，不是一般 `N` 的证明。）
+- ⚠ **裁决不含派工。** 这 +3 **不命中任何里程碑**，投不投 400–700 行是船长的资源判断。
+- ⚠ **另一条方法论发现**（详见该文件 §4）：E₈ 那张卡暴露了自封顶的一个**误用**形态——
+  把推导的 **own status** 调低去反映**依赖弱**，而非反映该步自身论证的松紧。
+  这既重复计账（依赖的弱已由 `min(own, deps)` 传播过一次），又**让 `counterfactual` 失明**
+  （实测强制 `math.chevalley-restriction-theorem` 移动 0 张卡，而它确实是真实待办）。
+  与 §9.1 的打平盲点**不是同一件事**：打平盲点的解药正是 `counterfactual`，
+  本形态把解药也挡住了。**未修**，属 curator + reviewer 领域。
 
 ## 命令一览
 
