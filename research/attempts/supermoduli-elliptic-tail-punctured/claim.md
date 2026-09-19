@@ -34,7 +34,7 @@
 | I1 | Green 第一障碍类的存在性、étale 下降、$\omega_2\neq0\Rightarrow$ 非投影 | CN Proposition 2.2 | **rigorous**（图卡 `math.supermoduli-compactified-genus-geq3-not-projected` 所属论文） | |
 | I2 | 障碍类沿**任意**态射的函子性：$j_f(\omega_2(\mathfrak Y))=\iota_f(\omega_2(\mathfrak X))$ | CN Lemma 2.6（= DW [7, Cor. 2.10, 2.12] 的叠版本） | **rigorous** | |
 | I3 | Donagi–Witten 一点障碍族 $X_\eta$，$\omega_2(X_\eta)=\eta$ | DW 2013 [Prop. 3.4]，经 CN §5 逐字回顾 | **rigorous**（图卡 `math.supermoduli-space-not-projected`） | |
-| I4 | $\overline{\mathfrak S}_{g;n,2r}$ 存在、光滑、固有 | FKP-A Theorem A | rigorous（已发表 Amer. J. Math. 145 (2023)）🟡 **未登记入 `literature/sources.bib`**，见 `[GAP-LIT]` | |
+| I4 | $\overline{\mathfrak S}_{g;n,2r}$ 存在、光滑、固有 | FKP-A Theorem A | **rigorous**（已发表 Amer. J. Math. **145** (2023) no.6, 1777–1886）✅ 已登记 `literature/sources.bib`（`@article`，Crossref 核对 DOI `10.1353/ajm.2023.a913296`），抽取见 `literature/extractions/felder-kazhdan-polishchuk-2020.md` E1；`[GAP-LIT]` **已关闭**（2026-09-20） | |
 | I5 | NS 粘接态射 (7.8)（**带任意穿孔**）：$\overline{\mathfrak S}_{g_1;m_1+1,n_1}\times\overline{\mathfrak S}_{g_2;m_2+1,n_2}\to\overline{\mathfrak S}_{g_1+g_2;m_1+m_2,n_1+n_2}$，及 Lemma 7.10（切层面余维 $1|0$ 嵌入、像 $=\Delta_{\rm NS}$） | FKP-A Lemma 7.9/7.10 | 同 I4 | |
 | I6 | 法丛公式 $\mathcal O(\Delta)|_B\cong\Psi_1^{-1}\otimes\Psi_2^{-1}$，对 (7.8)/(7.9) **两者**成立 | FKP-A **§9.1 / Lemma 9.1(iii)(iv) / 式 (9.6)，pp.59–61** 🔴 **不是 Theorem C**——Theorem C (p.2) 的靶逐字是无穿孔的 $\overline{\mathcal S}_g$（对照同页 Theorem B 明写 $\overline{\mathcal S}_{g,n_{NS},n_R}$），本文需要带穿孔的靶；(9.6) 走 Lemma 9.1，其层"supported on the node"，与穿孔无关。2026-09-18 对抗审查订正 | 同 I4 | |
 | I7 | 偶基上 $\Psi_i^{-1}\cong p_i^*L^{-1}$ | FKP-A Example 8.9 | 同 I4 | 本证明**只在无穿孔的亏格 $h$ 侧**使用它 |
@@ -137,7 +137,7 @@ $$\boxed{\ \overline{\mathfrak S}_{g;n,2r}\ \text{非投影，只要}\quad g\ge3
 | $n=0,\ r=2$ | $g\ge11$ | $g\ge13$ 🔴 | ✅ $g\ge2$ |
 | $n=0,\ r=5$ | $g\ge26$ | $g\ge28$ 🔴 | ✅ $g\ge2$ |
 | $n\ge1,\ r\ge1$ | ❌ 完全不覆盖 | $g\ge n+5r+3$ 🔴 | ✅ $g\ge2$，任意 $n$ |
-| status 天花板 | rigorous | 🔴 **physical-argument** | **rigorous**（补齐 `[GAP-LIT]` 后） |
+| status 天花板 | rigorous | 🔴 **physical-argument** | ✅ **rigorous**（`[GAP-LIT]` 已于 2026-09-20 关闭，此条件已满足） |
 
 ⭐ **本轮推论 B 严格包含上一轮推论 B 与推论 C 的全部量词范围，且把 Wang 带来的
 `physical-argument` 天花板一并去掉**——这是图上一个从 `physical-argument` 升到 `rigorous` 的净增益。

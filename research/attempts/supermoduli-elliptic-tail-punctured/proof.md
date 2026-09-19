@@ -855,15 +855,35 @@ marked points!"），故该路线对推论 B 完全不适用。⭐ **推论 B �
 
 按风险从高到低：
 
-1. **`[GAP-LIT]`（程序性，毕业前阻塞，**2026-09-18 部分关闭**）**：FKP-A（arXiv:2006.13271 =
-   Amer. J. Math. **145** (2023) 1777–1886）**现已登记** `literature/sources.bib`，且
-   `literature/extractions/felder-kazhdan-polishchuk-2020.md` 已存在（由另一条并行任务补上）。
-   ⚠ **但该抽取记录覆盖的是 Theorem A、Def 2.1/2.4、§2.6、§5.4——恰好一条本证明的承重依赖都不覆盖**，
-   且其条目 E6 自陈「**不建议 curator 直接引用本条目的 Theorem B 公式作为图节点来源**」。
-   **剩余阻塞（已派 researcher）**：把该抽取记录**追加**扩展到 §7.5 的 (7.8)/(7.9)、Lemma 7.9、
-   Lemma 7.10、§8.4 Example 8.9、§9.1 / Lemma 9.1 / (9.6)。本文 §4.3、§4.4、§4.5 的逐字引用
-   已由 2026-09-18 的对抗审查用**页图**独立核实（pp. 2, 48, 49, 57, 58, 59, 60, 61），
-   可直接交给 researcher 作为 append 的底稿。
+1. ✅ **`[GAP-LIT]`：已完全关闭（lead 2026-09-20 核实）。不再是毕业阻塞。**
+   FKP-A（arXiv:2006.13271 = Amer. J. Math. **145** (2023) no.6, 1777–1886）已登记
+   `literature/sources.bib`，条目类型 `@article`，journal/volume/number/pages/doi 六个字段
+   由 researcher 于 2026-09-20 经 **Crossref API** 核对（DOI `10.1353/ajm.2023.a913296`，
+   publisher Project MUSE，issued 2023-12），与此前只写在 note 散文里的著录完全一致。
+
+   **本条上一版所列的"剩余阻塞"（把抽取记录追加扩展到 (7.8)/(7.9)、Lemma 7.9/7.10、
+   Example 8.9、§9.1 / Lemma 9.1 / (9.6)）其实早在 2026-09-18 当天就由并行的 researcher
+   轮次做完了，本文件只是没有同步。** lead 逐条核对
+   `literature/extractions/felder-kazhdan-polishchuk-2020.md` 的条目表，承重依赖全部覆盖：
+
+   | 本证明的依赖 | 抽取条目 | 提交 |
+   |---|---|---|
+   | §9.1 setup / 法丛启发式比较 | **E7** | `a4d0ac4` |
+   | Lemma 9.1(i)–(iv) | **E8** | `a4d0ac4` |
+   | 式 (9.6)（承重） | **E9** | `a4d0ac4` |
+   | Theorem 9.2（(9.6) 与超 Mumford 同构相容） | **E10** | `b524f12` |
+   | Theorem C 靶空间逐字是无穿孔 $\overline{\mathcal S}_g$（承重复核） | **E11** | `efb4b41` |
+   | 粘接映射 (7.8)/(7.9) 带一般穿孔指标 $(m,n)$ | **E12** | `2ec33d6` |
+   | Lemma 7.9 与 Lemma 7.10 | **E13** | `ca794da` |
+   | §8.4 全节含 Example 8.9 | **E14** | `1958787` |
+   | §9.3 Ramond 分量逐字是"We conjecture"（承重复核） | **E15** | `2d201ec` |
+
+   E6 那条"不建议 curator 直接引用 Theorem B 公式"的自我保留**仍然有效且仍应遵守**，
+   但它只约束 Theorem B，不约束以上任何一条承重依赖。
+
+   ⇒ **本 attempt 的 status 天花板不再被文献侧压制**（claim.md 表末「补齐 `[GAP-LIT]` 后应为
+   `rigorous`」的条件已满足）。剩余的是数学侧的 `[GAP-FKP-RAMOND]` / `[GAP-COMP]` /
+   `[GAP-STD]` / `[GAP-DW]`，均自评为低风险，以及 `[GAP-ALT]`（不是缺口，是价值风险）。
 2. **`[GAP-FKP-RAMOND]`（低）**：FKP-A Lemma 7.9 的**证明正文**把广义自旋结构写成
    $L\cong\mathrm{Hom}(L,\omega_C)$，漏掉了 Ramond 扭转 $\omega_C(R)$，尽管其陈述 (7.8) 允许
    $n_1,n_2>0$。本文判断这是无害省略（粘接是 NS 节点处的局部操作，可在与 Ramond 除子不交的邻域内
