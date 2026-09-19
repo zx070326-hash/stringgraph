@@ -1,0 +1,54 @@
+id: math.fkp-ns-boundary-gluing-normal-bundle-formula
+kind: proposition
+title: "FKP：NS 边界粘接态射的法丛公式（Theorem C 逐字陈述，靶为无穿孔紧化超模叠 S̄_g）"
+statement: |
+  【对象】设 ι: B → \overline{\mathcal S}_g 是覆盖边界除子 Δ_NS 的某个分量的标准粘接态射，即
+  Felder–Kazhdan–Polishchuk（FKP-A）式 (7.8) 或 (7.9) 之一，限制在光滑超曲线轨迹上；B 是较低亏格
+  （可能带任意 NS/Ramond 穿孔数）的未紧化超模叠，或两个这样的模叠之积。记
+  N_B := O(Δ)|_B（Δ 为 \overline{\mathcal S}_g 的完整边界除子）为对应的法丛；记
+  Ψ_i := P_i^*ω_{X/\overline{\mathcal S}_g}（FKP-A 记号，p.57）为被粘接的两个 NS 分支点 P_1,P_2
+  处的丛。
+
+  【定理】（FKP-A Theorem C，逐字陈述）存在典范同构
+    N_B ≅ Ψ_1^{-1} ⊗ Ψ_2^{-1}，
+  使某交换图（与典范态射 SM 相容，见来源）在符号意义下交换。
+
+  【靶空间的量词范围——本节点的核心信息】FKP-A 原文在此处（Theorem C 陈述、及其证明所在的 §9.1
+  的中间步骤即式 (9.6)）逐字只把靶写成不带穿孔下标的 \overline{\mathcal S}_g（500dpi 页面复核确认，
+  与同页 Theorem B 的靶 \overline{\mathcal S}_{g,n_{NS},n_R} 形成刻意对照——Theorem B 明确处理
+  任意 NS/Ramond 穿孔数，Theorem C 未在下标中写出任何穿孔指标）。FKP-A 全文**未在任何地方明确声明**
+  该公式对带穿孔的靶 \overline{\mathcal S}_{g;n_{NS},n_R}（n_NS+n_R>0）成立，也未声明其不成立——
+  这一情形原文未置一词。
+
+  【本节点明确不断言】该同构对带穿孔靶的推广（见姐妹卡对该推广的独立处理与 inferred 标注）；
+  该同构与 Theorem C 所述交换图的相容性证明（依赖 Theorem 9.2 的整体相容性论证，本节点不涉及）；
+  Ramond 节点处粘接的类比公式（FKP-A §9.3 仅以猜想形式给出："We conjecture that..."，本节点不采纳）。
+uses: []
+uses_conventions: []
+sources:
+  - ref: felder-kazhdan-polishchuk-2020
+    loc: "Theorem C（p.2 末–p.3 顶，逐字陈述，靶为 \\overline{\\mathcal S}_g）；证明途径 §9.1，
+      eq. (9.6)（p.60–61，Lemma 9.1(i)-(iv) + eq.(7.6) + Lemma 8.7 的组合）"
+    note: |
+      literature/extractions/felder-kazhdan-polishchuk-2020.md 三处抽取记录（E7/E8/E9/E11）逐字核对：
+      Theorem C 的靶下标只有 g（E11，500dpi 复核，"$\overline{\mathcal{S}}$ 右下角只有一个斜体
+      $g$……没有 $,n_{NS},n_R$"），与同页 Theorem B 对照；Lemma 9.1 的证明三次自称局部陈述
+      （"it is enough to study these line bundles in an étale neighborhood of the node"；
+      "this is a local statement"；"K is supported on the node, so it is enough to prove the
+      assertion after replacing X_B with the formal neighborhood of the node"，E8）；作者
+      "从未在任何地方写下'Theorem C 只对无穿孔情形成立'或'Theorem C 对任意穿孔数成立'之类的显式
+      量词声明——两个方向的显式声明都不存在"（E11 原话）。本节点如实只登记 FKP 逐字写下的形式
+      （无穿孔靶），不对推广方向下判断。
+tags: [supermoduli, deformation-theory, node-locality, boundary-divisor, math-input]
+notes: |
+  【查重】`uv run stringgraph search "normal bundle"` / `"gluing"` 均无同内容命中（2026-09-20）。
+
+  【设立本节点的理由】本节点存在的唯一目的是让姐妹卡（定理 M 系列，见
+  math.supermoduli-compactified-punctured-genus-geq3-not-projected 等）能够诚实地表达一条推理：
+  "FKP 逐字证明的是无穿孔靶的情形；本证明把它用于带穿孔的靶，依据是 Lemma 9.1 的证明是关于节点
+  形式邻域的局部陈述，这是几何上合理但超出 FKP 逐字论断范围的推断"。按 graph/CLAUDE.md 的
+  `inferred: true` 判据（"这条边如果去掉 inferred，它指向的节点是否就完整承载了我需要的那句话？
+  若否，就是在用 flag 藏命题，立卡"）——本节点恰好精确承载"FKP 逐字证明了什么"，从而使下游的
+  `inferred: true` 边诚实、有据可查，而不是凭空指向一个并不存在的更宽泛命题。
+author: graph-curator
+created: "2026-09-20"
