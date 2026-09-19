@@ -202,6 +202,41 @@ notes: |
   已派 lean-formalizer（agent s6lean）形式化形式 A，目标文件
   `formal/StringFormal/NoGhost/SixSliceInjective.lean`（新建）。
 
+  ### ✅ 形式 A 已形式化并合并（lead 2026-09-19，闭合上一段的派工）
+
+  `formal/StringFormal/NoGhost/SixSliceInjective.lean`（15 条声明）已合并到 main
+  （merge `187d13c`，主体 `57003dc`）。**本 attempt 的数学内容至此全部进入 Lean。**
+
+  **lead 按裁决要点 11 的硬性要求实际验证了编译，未以该条代替**：
+  - `lake build` → **3980 jobs**（基线 3979）。job 数**增加**才证明新文件真被编译——
+    `formal/CLAUDE.md` 的孤儿模块陷阱：没有 importer 的新文件会让 `lake build` 报
+    "Build completed successfully" 却根本没编译它。`StringFormal.lean` 确已加 import 行。
+  - `check_axioms` 15 条全部 `ok`，只有 `propext Classical.choice Quot.sound`；
+    全图 `uv run stringgraph check-axioms` 111/111 ok。无 `sorry`（独立全目录扫描确认，
+    命中项全是写着「no `sorry`」的 docstring 散文）。
+  - `validate` 0 errors、`pytest` 86 passed。
+
+  **路线与 proof.md 不同（更短）**：formalizer 改走本仓库已有的 `towerModeVec`（`A_ε(p)`）
+  力矩泛函工具箱，而非 proof.md 从零搭建的振子计数分级——`towerModeVec_apply_towerLop`
+  本身就是 proof.md 的 Lemma 0，故 proof.md 需要自建的单调性子引理被整个绕开。
+  **这不削弱 proof.md**：两条路线殊途同归，proof.md 的自足性是它作为论文级证明的价值所在。
+
+  ⭐ **归一化差异，lead 已独立复核确属归一化而非错误**：Lean 算出的常数是
+  `120`（`y₃`）与 `−2040`（`x₄`），而 proof.md 是 `30` / `−408`，**相差恰是力矩阶数
+  4 / 5**（`towerModeVec` 的 CCR 归一化 vs proof.md「读裸系数」）。lead 逐词验算：
+      y₃ 逐词系数 4 / 8 / 24        ⇒ 12·4 + 6·8 + 1·24 = 120 = 4 × 30
+      x₄ 逐词系数 5 / 10 / 15 / 30 / 120 ⇒ −76·5 − 52·10 − 12·15 − 20·30 − 3·120 = −2040 = 5 × (−408)
+  且**两条主引理都以 `norm_num` 收尾于逐词引理之上**，即常数是 Lean **算出**的，
+  不是写进陈述当输入——这正是 lead 预设的合并门槛之一。非零性等价，单射性结论不受影响。
+
+  ⚠ **仍未做（按任务书明确排除，非缺口）**：形式 A ⟹ 形式 B 的四步桥接未在 Lean 里实现。
+  故 `LevelSixClosure.lean` 的 `SixSeedKernelSharp` **目前仍是具名假设**，
+  N=6 仍是**有条件**闭合。桥接所需的全部引理都已存在且无 sorry（裁决要点 11），
+  但**它消耗 `D = 26`**（裁决要点 10），已补记进 `formal/TODO.md` 的 `noghost-pr-d2`。
+
+  ⇒ **对船长的现状陈述**：本 attempt 的定理**已形式化**；N=6 的**无条件**闭合还差那四步桥接。
+  `captain_confirmed` 维持 `false`，等船长确认。
+
   ---
 
   ## 以下为 prover 提交时的原始记录（2026-09-19，未改动）
