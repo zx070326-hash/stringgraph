@@ -237,6 +237,40 @@ notes: |
   ⇒ **对船长的现状陈述**：本 attempt 的定理**已形式化**；N=6 的**无条件**闭合还差那四步桥接。
   `captain_confirmed` 维持 `false`，等船长确认。
 
+  ### ✅ 桥接已形式化并合并；且上面关于 D = 26 的限定被 Lean 推翻（lead 2026-09-19/20）
+
+  `formal/StringFormal/NoGhost/SixBridge.lean`（22 条声明，无 `sorry`、无 `native_decide`）
+  已合并到 main（`39c5e5a`）。**上一段「仍未做」的四步桥接至此全部实现，N=6 无条件闭合。**
+  `b26_six_of_D26` 与 `ddfSpans_bigrade_neg_six_six` 现在与它们 N ≤ 5 的同辈**假设完全相同**。
+  lead 实测：`lake build` 3981 jobs（基线 3980，job 数增加才证明新文件真被编译，见
+  `formal/CLAUDE.md` 的孤儿模块陷阱）、全图 `check-axioms` 111/111 ok / 0 non-standard、
+  `validate` 0 errors、`pytest` 86 passed。
+
+  ❌ **订正：上面裁决要点 10、保留事项第 2 条、以及 lead 自己那条「实质限定」（第 182-188 行、
+  第 235 行）关于「A ⟹ B 的第 3 步消耗 D = 26」的说法，是错的。**
+
+  - 事实：`sixSeedKernelSharp_of_frame` 的签名里**没有** `hD26`（lead 直接 Read 核实）。
+    形式 B（`SixSeedKernelSharp`）是 `dim ker(seedPair) ≤ D − 1`，是个**上界**，
+    因此桥接只需要**包含方向** `ker(seedPair) ⊆ S₆(Q_{-6,1})` 这一半，
+    而这一半走的是 `SeedCriterionSix.mem_towerSeed_neg_six_one_of_towerLop_one_apply_y3_eq_zero`
+    （`SeedCriterionSix.lean:244`，签名里**无** `hD26`，lead 直接 Read 核实），
+    **不**需要 `mem_towerSeed_neg_six_one_iff` 那条带 `hD26` 的双向版。
+  - 旧记录之所以出错，是因为它从 `LevelSixClosure.lean` docstring 的散文路线图
+    （第 56-58 行写「这使用已证的**两个方向**」）推断出必须用双向 iff，
+    而实际实现只用了其中一个方向，且那个方向是中心荷无关的。
+  - **结论不变，定位变了**：N=6 的闭合**确实**需要 D = 26，但 26 是在**下游**的
+    `b26_six_of_D26` 进入的，入口与 N = 2…5 **完全相同**
+    （`LevelThreeCount.descTwo_mem_towerNullSubmodule_of_mem_towerBigrade`
+    → `NullSeedsTwo.towerLop_two_apply_descTwo`，即 `L₂𝒟₂φ = (D−26)φ`）。
+    ⭐ **N = 6 没有引入任何新的 D = 26 依赖**；形式 A 与整条 A⟹B 桥都与中心荷无关。
+  - **教训（与 `08bfed3` 记录的同一类错误）**：docstring 的散文路线图是**作者写作时的意图**，
+    不是已编译证明项的事实。裁决要点 9 把「reviewer 独立重建 == docstring」当作收敛性确认，
+    但两者其实共享同一个未经编译检验的前提，所以那次"独立确认"**不构成**独立证据。
+    真正推翻它的是 Lean 内核。**凡涉及某条假设是否被消费，一律以声明签名为准，不看散文。**
+
+  ⇒ **更新后的现状陈述**：本 attempt 的定理已形式化，且它支撑的 N=6 闭合**已无条件完成**。
+  `captain_confirmed` 仍维持 `false`，等船长确认。
+
   ---
 
   ## 以下为 prover 提交时的原始记录（2026-09-19，未改动）
