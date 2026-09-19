@@ -1,0 +1,52 @@
+id: worldsheet.x4-injective-on-level-one-slice--via-lean
+target: worldsheet.x4-injective-on-level-one-slice
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.virasoro-generators-free-boson
+    inferred: false
+    note: |
+      F(p)（含零模）与 Sugawara L_n 的定义均取自本卡；x4 是 L_n 的显式多项式词，
+      定义域/陪域都是该卡定义的 Fock 空间的 level 切片。
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/s6-injectivity-level-six/proof.md :: Fact 0/1、Lemma 0、子引理（振子计数单调性）、Lemma A、Lemma B、主定理（x4 单射半）"
+    note: |
+      本项目原创证明，非已发表文献；见目标卡 sources 的完整 status.yaml 摘要。
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/SixSliceInjective.lean :: section MainInjectivitySix, theorem x4_eq_zero_of_mem_towerBigrade_one"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry（curator 亲自 Read 全文件 356 行确认）。
+summary: |
+  两条独立路线到达同一结论，逐字核对一致：
+  (1) proof.md 的手证路线：Fact 0/1（振子计数分级、L_n 层次记账，backed by
+      worldsheet.bosonic-fock-space / worldsheet.fock-space-virasoro-representation，
+      两者均非本推导的载重依赖，见目标卡"不需要"清单）→ Lemma 0（[L_n,α^μ_m]=-mα^μ_{n+m}，
+      n≠0 时正规序歧义自动消失，且与已形式化的 Sugawara.lean:Lop_apply_mode 独立吻合）→
+      子引理（L_{-n} 保持 ≥2 振子子空间，不下漏到 ≤1，归纳证明）→ Lemma A（词的领头单振子
+      分量 = 部分和之积 × α^μ_{-s_k}，对每个 D、每个 p、每个词成立）→ Lemma B（x4 的五项
+      代入给出领头系数 -408，手算 + 脚本对 D∈{6,8,10,12} 交叉验证）→ 主定理（-408≠0，
+      特征零域 ⟹ 单射）。
+  (2) Lean 形式化路线（SixSliceInjective.lean，由 formalizer 独立选择的更短路线）：复用已有
+      的 towerModeVec/力矩泛函工具箱（towerModeVec_apply_towerLop，即 proof.md 的 Lemma 0），
+      而非 proof.md 从零搭建的振子计数分级；主引理以 norm_num 收尾于逐词引理之上，算出
+      常数 -2040（= 5 × (-408)，力矩阶数归一化差异，非零性等价，见目标卡 notes）。
+  两条路线互相独立、殊途同归；status.yaml 记录 reviewer 与 lead 均已核对 x4 的系数/词序
+  与 Lean 侧 SeedTransferSix.lean:x4_apply 逐字吻合。
+gaps:
+  - "curator 未自行重跑 lake build / check-axioms（本 worktree 未配置构建缓存）；status.yaml
+    记录 lead 已重跑，3980 jobs（较基线 +1，确认非孤儿模块）、check_axioms 15/15 ok，仅标准
+    三公理。合并前建议 lead 再次确认一次（虽然 lead 自己已做过）。"
+  - "本推导只覆盖形式 A（x4 单射）本身，不覆盖形式 A ⟹ 形式 B 的四步桥接（未在 Lean 里
+    实现，按任务书明确排除，非缺口，见 research/attempts/s6-injectivity-level-six/status.yaml
+    「仍未做」条目）。"
+  - "curator 未独立重跑 proof.md 的三个 Python 交叉验证脚本，也未独立重做 reviewer/lead 的
+    对抗性数值测试；结论取自 status.yaml 对这些测试的记录（reviewer 独立重推 + lead 用真实
+    随机有理动量与三种非 Lorentz 号差重做，34 项检查满秩）。"
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目。
+  curator 亲自 Read 了 SixSliceInjective.lean 全文（356 行）与 DDF.lean 第 108 行的
+  towerMomentum 定义，核实 Lean 定理的动量量词（经 a,b 自由 + j=0 特例）确实覆盖 claim.md
+  的「∀ p 任意」，不是窄化（详见目标卡 notes 的完整核对记录）。
+author: graph-curator
+created: "2026-09-20"

@@ -1,0 +1,83 @@
+id: worldsheet.x4-injective-on-level-one-slice
+kind: proposition
+title: "x4（level-4 合冲词）在自由玻色 Fock 空间任意动量的 level-1 切片上单射"
+statement: |
+  沿用 worldsheet.virasoro-generators-free-boson 的记号：设 K 是 CharZero 域、Algebra ℚ K，
+  D : ℕ（D ≥ 1 即可），η : Fin D → K 满足 hη : ∀ μ, η μ · η μ = 1，p : Fin D → K **任意**
+  （对 p·p 不设任何约束；这里的 p 就是该卡 statement 里零模本征值 a^μ = α^μ_0 那个自由参数，
+  不预设它与物理动量 k 经 √(2α') 的具体关系）。记 F(p) 为该卡定义的 Fock 空间（基态 |0;p⟩
+  满足 α^μ_0|0;p⟩ = p^μ·|0;p⟩，用 α^μ_{-n}（n > 0）作用生成），L_n 为该卡的 Sugawara 生成元。
+  定义 level-4 算子
+
+    x4 := -76 L_{-4} - 52 L_{-3}L_{-1} - 12 L_{-2}² - 20 L_{-2}L_{-1}² - 3 L_{-1}⁴  : F(p) → F(p)，
+
+  作用在 level-1 切片 F(p)_1 := span{α^μ_{-1}|0;p⟩}_{μ=0}^{D-1}（维数恰为 D）上。则
+
+    ∀ u ∈ F(p)_1,  x4·u = 0  ⟹  u = 0，
+
+  即 x4|_{F(p)_1} : F(p)_1 → F(p)_5 单射。
+uses:
+  - worldsheet.virasoro-generators-free-boson
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.virasoro-standard
+formal:
+  lean_decl: StringFormal.NoGhost.x4_eq_zero_of_mem_towerBigrade_one
+  lean_file: StringFormal/NoGhost/SixSliceInjective.lean
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/s6-injectivity-level-six/proof.md :: 主定理（x4 单射半，Lemma A/B 组装）；claim.md §2"
+    note: |
+      本项目原创证明，非已发表文献，见 research/attempts/s6-injectivity-level-six/proof.md。
+      research/attempts/s6-injectivity-level-six/status.yaml: state: verified，
+      reviewer: graph-reviewer（agent s6review，2026-09-19，独立重推 claim.md §4 逻辑链 +
+      独立对抗性数值测试，覆盖多种 D、多种号差、p=0 退化情形）+ lead 补充复核（Lean 编译/
+      公理审计）；captain_confirmed: false（仍待船长确认，按 research/CLAUDE.md 生命周期第 3 步）。
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/SixSliceInjective.lean :: StringFormal.NoGhost.x4_eq_zero_of_mem_towerBigrade_one"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1；curator 亲自 Read 全文件（356 行）确认无 sorry
+      （文件头 docstring "No sorry"，独立全目录扫描确认，命中项全是散文声明 no sorry）。
+      curator 本人未重跑 lake build/check-axioms（本 worktree 未配置构建缓存）；
+      status.yaml 记录 lead 已重跑 `lake build`（3980 jobs，较基线 3979 增加，确认非孤儿模块）
+      与 `check_axioms`（15/15 ok，仅 propext/Classical.choice/Quot.sound）。
+tags: [bosonic-string, no-ghost, virasoro, null-state, momentum-tower, formalized]
+notes: |
+  【与 claim.md 的对应，逐字核对 —— curator 亲自 Read claim.md 全文、SixSliceInjective.lean
+  全文 356 行、DDF.lean 第 108 行 towerMomentum 定义，非转述 status.yaml 的自我报告】
+
+  claim.md 的定理量词是「∀ p : Fin D → K **任意**（对 p·p 无约束）」；Lean 定理
+  `x4_eq_zero_of_mem_towerBigrade_one` 表面量词是「∀ 整数 rung j、u ∈ towerBigrade D R j 1」，
+  未显式出现自由动量参数 p。curator 核实两者一致（不是窄化）：`towerBigrade D R j 1` 上
+  x4 的作用经 `towerLop`/`towerMomentum a b j := a + j·b`（DDF.lean:108，curator 亲自 Read）
+  实现，而 `a b : Fin D → R` 是该定理**完全自由**的 section 变量（无 hab/hbb 等关系假设）。
+  取 j = 0、b = 0、a = p（p 任意），towerMomentum a b 0 = a = p 恰好实现「rung 0 = 单份
+  F(p)」，故该 Lean 定理对每个（a,b,j）成立 ⟹ 对每个自由动量 p 成立（j=0 特例即复现
+  claim.md 的任意 p）。status.yaml 裁决要点 10 独立指出「形式 A 本身对每个 D、每个 eta、
+  每个 p 成立」，但未展开 towerMomentum 的具体机制；本条 notes 是 curator 自己核对源码
+  补的机制确认。
+
+  【D 无关性，curator 亲自 Read 确认】本卡对**每个** D（Lean 侧 section 变量无下界约束，
+  claim.md 保留 D≥2 只是为了与光锥标架惯例兼容）、每个 CharZero 的 Algebra ℚ 交换环 R
+  （NoZeroDivisors）成立；D=26 完全不出现在本卡陈述或其 Lean 证明里（D=26 只出现在
+  **另一条**命题——形式 A ⟹ 形式 B 桥接的第 3 步，见 SeedCriterionSix 的
+  mem_towerSeed_neg_six_one_iff 的 hD26 假设——本卡不涉及，不应被误读为消费了 D=26）。
+
+  【归一化差异，诚实记录，取自 status.yaml】Lean 证明算出的常数是 -2040（≠0，蕴含单射），
+  proof.md 手算给出 -408；两者相差恰是力矩阶数因子 5（`towerModeVec` 的 CCR 归一化 vs
+  proof.md「读裸系数」的差异），非零性等价，结论（单射）不受影响。该差异已由 lead 逐词
+  核验（status.yaml「归一化差异」条目，curator 未重复核验，取自 status.yaml 的记录）。
+
+  【范围边界，明确不断言】本卡**不**断言、**不**依赖：
+  (a) 形式 A ⟹ 形式 B 的四步桥接（未在 Lean 里实现，按任务书明确排除，非缺口，
+      见 status.yaml「仍未做」条目）；
+  (b) SixSeedKernelSharp（形式 B）在一般 D 上成立；
+  (c) N=6 的 (B-26) 无条件闭合（仍需 D=26 且仍需上面 (a) 的桥接）。
+
+  【查重】`uv run stringgraph search "x4"` / `"level-six"` / `"S6"` / `"syzygy"` 均无同内容
+  命中（2026-09-20）。
+
+  【毕业记录】本节点由 research/attempts/s6-injectivity-level-six/（state: verified，
+  captain_confirmed: false）毕业，按 research/CLAUDE.md 生命周期第 4 步。
+author: graph-curator
+created: "2026-09-20"
