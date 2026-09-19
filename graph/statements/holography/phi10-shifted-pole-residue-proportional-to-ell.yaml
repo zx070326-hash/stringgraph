@@ -1,0 +1,93 @@
+id: holography.phi10-shifted-pole-residue-proportional-to-ell
+kind: proposition
+title: "半周期平移积分核在二阶极点 v=1/2 处的留数线性正比于 ℓ：Res = (−1)^ℓ·2πiℓ/h₀（条件命题，前提是零点阶恰为 2）"
+statement: |
+  记号（Rosselló 2403.19630 约定，同 holography.torsion-index-divisor-operator 的定义 D）：
+  Φ₁₀ 是 Igusa 权 10 亏格 2 尖点形式，Ω = [[ρ, v], [v, σ]] ∈ ℍ₂，并记
+    𝒢(ρ,σ,v) := −1/Φ₁₀(ρ,σ, v + 1/2)
+  （定义 D 的 R6′ 约定：半周期平移写在 𝒢 的定义里，且带整体负号）。
+
+  固定 ρ,σ ∈ ℍ。使 Ω = [[ρ,u],[u,σ]] ∈ ℍ₂ 的 u 的集合是含实轴的开带
+    S(ρ,σ) := { u ∈ ℂ : |Im u| < √(Im ρ · Im σ) }，
+  单变量函数 u ↦ Φ₁₀(ρ,σ,u) 在 S(ρ,σ) 上全纯。
+
+  **前提（本卡不证明，须由别处供给）**：u = 1 是 u ↦ Φ₁₀(ρ,σ,u) 的零点，且其阶**恰为 2**。
+  等价说法：令 h(ρ,σ,u) := Φ₁₀(ρ,σ,u)/(u−1)²（在 u=1 处全纯延拓），则
+    h₀(ρ,σ) := h(ρ,σ,1) ≠ 0。
+
+  **断言**：在上述前提下，对**每个整数 ℓ**，单变量函数
+    v ↦ 𝒢(ρ,σ,v) · e^{−2πiℓv}
+  在 v = 1/2 处有一个二阶极点，且其（关于 dv 的）留数为
+    Res_{v=1/2} [ 𝒢(ρ,σ,v) · e^{−2πiℓv} ] = (−1)^ℓ · 2πi ℓ · (1 / h₀(ρ,σ))。
+  特别地：该留数 **= 0 当且仅当 ℓ = 0**；ℓ ≠ 0 时它非零，并且线性正比于 ℓ。
+
+  【同一留数在 Rosselló (2.23) 自身约定下的形式——约定换算，不是第二条命题】
+  把半周期平移写在指数内（被积函数 e^{−2πiℓ(v+1/2)}/Φ₁₀(ρ,σ,v)，极点在 v = 0）时，
+  同一个留数是 (−1)^{ℓ+1} · 2πi ℓ · (1/h₀)，与上式恰差一个整体负号；该负号就是 𝒢
+  定义里的整体负号，对应 d_*^{定义D} = − d_*^{Rosselló}（见 notes）。两式中的 h₀ 是同
+  一个函数值：由 Φ₁₀ 的 v-周期 1（holography.phi10-periodic-in-v），u=1 处与 u=0 处的
+  h₀ 相等。
+uses:
+  - holography.igusa-cusp-form-phi10-v2
+  - holography.phi10-even-in-v
+  - holography.phi10-periodic-in-v
+  - holography.torsion-index-divisor-operator
+uses_conventions: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/ell-zero-wall-degeneracy/proof.md §2.1–§2.5（引理 2.1 偶性、引理 2.4 整数点偶性、§2.5 留数公式与【订正记录】）+ §5.1（与 Rosselló (2.23) 的约定换算与独立交叉验证）"
+    note: |
+      本项目原创证明，非已发表文献，见 research/attempts/ell-zero-wall-degeneracy/proof.md。
+      research/attempts/ell-zero-wall-degeneracy/status.yaml: state: verified，reviewer:
+      graph-reviewer agent ell0rev（2026-09-20，天花板 rigorous；逐步亲自核实
+      「周期性 ⇒ 极点定位 ⇒ v-偶性 ⇒ h 只含偶次项 ⇒ Laurent 乘积 ⇒ Res ∝ ℓ」6 步）；
+      **captain_confirmed: false**（尚未经船长确认，按 research/CLAUDE.md 生命周期第 3 步）。
+      本卡抄录的是 **2026-09-20 订正后**的留数公式：首版 §2.5 有两处符号错误
+      （(i) 双负号算成负号，reviewer 与 lead 独立手算一致确认应为正；
+      (ii) 丢掉式 (161) 已导出的常数相位 e^{πiℓ}=(−1)^ℓ，lead 复核时发现），
+      两处都是与 ℓ 的零点无关的常数因子，故「留数 ∝ ℓ」与 ℓ=0 结论不受影响。
+  - ref: rossello-2024
+    loc: "§2, (2.22)–(2.23)（吸引子围道与 d_* 的定义；本卡末段的约定换算以此式为对照）"
+tags: [bh-entropy, mock-modular, n4-string-theory, siegel-modular-form]
+notes: |
+  【为什么写成条件命题】「u=1 处零点阶恰为 2」是承重前提，不是自动的：
+  holography.igusa-cusp-form-phi10-v2 给出 Div(Φ₁₀) = 2H₁，即沿 H₁ 的**一般点**
+  重数为 2；但在 H₁ 与 Div(Φ₁₀) 其它分支的交点上，限制到 u-直线的零点阶会 >2
+  （即 h₀ = 0），留数公式失效。按 graph/CLAUDE.md 2026-09-15 裁决（不得把图外的
+  实质命题藏进 inferred 边或 notes），本卡把该前提写进 statement 作为显式假设；
+  在吸引子围道上兑现它的是另一张卡
+  holography.phi10-order-two-in-v-on-ell-zero-contour。
+
+  【本卡断言的是纯局部复分析事实】不涉及任何围道、不涉及 d_* 是否良定，也不涉及
+  物理解释。ℓ=0 时 d_* 的良定性在 holography.dstar-well-defined-at-ell-zero。
+
+  【先行工作与优先权——按 literature/notes/ell-zero-wall-residue-prior-art.md 的裁定措辞】
+  结论层（⟨Γ₁,Γ₂⟩ = Q·P = 0 ⟹ 壁跨越跳变 Δd = 0）**已由 Denef–Moore 2007 的壁跨越
+  公式确立，本项目不作任何优先权主张**。本卡记录的是**推导路径**：从 Φ₁₀ 的 v-偶性
+  与二阶零点、用留数演算直接得出 Res ∝ ℓ。该机制性推导在已检索文献中未找到
+  （Sen 2007/2008、Cheng–Verlinde 2007、DGM 2008、Rosselló 2024、BSS 2023；
+  检索盲区见 literature/notes/ell-zero-wall-residue-prior-art.md）。两条路径在数学上
+  独立（Denef–Moore 是多中心 BPS 物理论证，本路径是纯复分析），但**不得据此声称
+  「首次」**——检索有明确盲区。
+
+  【与 holography.phi10-wall-crossing-poles-v2 的关系——不是重复，是互补且可解其不自洽】
+  那张卡的 (b) 用简单极点的留数写法 Res = f·g，与它自己 (a) 订正后的「二阶极点」
+  字面冲突（physics-auditor 2026-09-20 发现，该卡 notes 已记录，留待回 DVV §4 /
+  Sen 2007 §2 逐字核对后定 v3）。本卡给出的正是二阶极点下的留数：它带一个
+  正比于 ℓ 的因子，而不是与 ℓ 无关的乘积——这与 holography.dvv-wall-crossing-identification
+  的 Δd ∝ (−1)^{Q·P+1}(Q·P) 线性依赖同形。**本卡不改那两张卡**（curator 无权；
+  已作为建议写进交给 lead 的报告）。
+
+  【符号自洽性核对，curator 亲自重算】
+  记 s := v − 1/2（= u − 1）。由偶性+周期性（引理 2.4：f 偶且周期 1 ⇒ f(k+s)=f(k−s)），
+  Φ₁₀(ρ,σ,1+s) = s²·h(1+s) 且 h 只含 s 的偶次项，故 𝒢 = −(1/h₀)s^{−2} + O(1)，
+  **不含 s^{−1} 项**；指数核 e^{−2πiℓv} = e^{−2πiℓ(s+1/2)} = (−1)^ℓ(1 − 2πiℓs + O(s²))。
+  两者相乘的 s^{−1} 系数 = (−1)^ℓ·[(−1/h₀)·(−2πiℓ)] = (−1)^ℓ·2πiℓ/h₀。与订正后的
+  proof.md §2.5 逐字一致。Rosselló 约定下重算（极点在 v=0，核为 (−1)^ℓ(1−2πiℓv)，
+  Φ₁₀ = v²h）：v^{−1} 系数 = (−1)^ℓ·(−2πiℓ/h₀) = (−1)^{ℓ+1}·2πiℓ/h₀，与 §5.1 一致。
+
+  【查重】`uv run stringgraph search` 查 `residue`/`留数`/`极点`/`wall`/`ell`/`Laurent`
+  （2026-09-20）：相关命中只有 holography.phi10-wall-crossing-poles(-v2)（见上条，
+  不同命题）与 holography.dvv-wall-crossing-identification（物理识别），无同内容卡。
+author: graph-curator
+created: "2026-09-20"

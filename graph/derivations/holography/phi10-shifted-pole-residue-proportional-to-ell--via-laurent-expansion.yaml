@@ -1,0 +1,86 @@
+id: holography.phi10-shifted-pole-residue-proportional-to-ell--via-laurent-expansion
+target: holography.phi10-shifted-pole-residue-proportional-to-ell
+kind: proof
+status: rigorous
+depends_on:
+  - id: holography.igusa-cusp-form-phi10-v2
+    inferred: false
+    note: "供给「u=0（Humbert 面 H₁={v=0}）是 Φ₁₀ 的零点」这一事实；本推导只用「是零点」，阶数由 statement 的前提给定。"
+  - id: holography.phi10-even-in-v
+    inferred: false
+    note: "[EXT-Even]：Φ₁₀(ρ,σ,−v)=Φ₁₀(ρ,σ,v)。这是杀死 s^{−1} 项的那一步，承重。"
+  - id: holography.phi10-periodic-in-v
+    inferred: false
+    note: "把 u=0 处的零点与偶性搬到 u=1（引理 2.4），并保证 u=1 确实是零点。"
+  - id: holography.torsion-index-divisor-operator
+    inferred: false
+    note: "定义 D：𝒢 := −1/Φ₁₀(ρ,σ,v+1/2) 与 R6′ 整体负号约定（接口边：供给被求留数的对象本身）。"
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/ell-zero-wall-degeneracy/proof.md §2.1（引理 2.1）、§2.2–2.3（Laurent 展开）、§2.4（引理 2.4）、§2.5（留数公式 + 2026-09-20 订正记录）、§5.1（约定换算与交叉验证）"
+    note: |
+      本项目原创证明，非已发表文献，见 research/attempts/ell-zero-wall-degeneracy/proof.md。
+      status.yaml: state: verified，reviewer: graph-reviewer agent ell0rev（2026-09-20，
+      天花板 rigorous），captain_confirmed: false。reviewer 逐项裁决中第 1 条即
+      「§2.5 留数符号 —— CONFIRMED 错误（亲自重算 Laurent 乘积）……不影响 ∝ ℓ 主结论」，
+      订正后的式子已就地记入 proof.md §2.5 引用块。
+  - ref: rossello-2024
+    loc: "§2 (2.23)（d_* 的被积函数；§5.1 的约定换算以此为对照）"
+summary: |
+  四步 Laurent 展开。固定 ρ,σ ∈ ℍ，令 u := v + 1/2、s := u − 1。
+
+  **步骤 1（u=1 是零点）**：holography.igusa-cusp-form-phi10-v2 给出 Div(Φ₁₀) = 2H₁ ∋ {u=0}，
+  故 Φ₁₀(ρ,σ,0) = 0；由 v-周期 1（holography.phi10-periodic-in-v）得 Φ₁₀(ρ,σ,1) = 0。
+
+  **步骤 2（关于 u=1 的偶性）**：设 f(u) := Φ₁₀(ρ,σ,u)。f 偶（holography.phi10-even-in-v）
+  且周期 1，故对任意整数 k 与任意 s，f(k+s) = f(s) = f(−s) = f(k−s)，即 f 关于每个整数点
+  都偶（proof.md 引理 2.4；此处给出的是比 proof.md 更短的两行证明，curator 自行推出，
+  结论相同）。取 k=1：f(1+s) 是 s 的偶函数，其 Taylor 展开只含 s 的偶次幂。
+
+  **步骤 3（Laurent 展开不含 s^{−1} 项）**：由步骤 1、2，
+    Φ₁₀(ρ,σ,1+s) = s²·h(ρ,σ,1+s)，h(ρ,σ,1+s) = h₀ + h₂s² + O(s⁴)（只含偶次项），
+  其中按 statement 的前提 h₀ := h(ρ,σ,1) ≠ 0（即零点阶恰为 2）。于是在 s ≠ 0 的邻域内
+    𝒢 = −1/[s²h] = −(1/h₀)·s^{−2}·[1 − (h₂/h₀)s² + O(s⁴)] = −(1/h₀)s^{−2} + (h₂/h₀²) + O(s²)，
+  **没有 s^{−1} 项**——这一步正是偶性承重的地方：若 h 含 s 的一次项 h₁，𝒢 会多出
+  (h₁/h₀²)s^{−1}，给出一个与 ℓ **无关**的留数贡献，ℓ=0 的结论就不成立。
+
+  **步骤 4（指数核的一阶项造出 s^{−1}）**：v = s + 1/2，故
+    e^{−2πiℓv} = e^{−πiℓ}·e^{−2πiℓs} = (−1)^ℓ·[1 − 2πiℓ·s + O(s²)]（ℓ ∈ ℤ）。
+  与步骤 3 相乘，s^{−1} 的系数 = (−1)^ℓ·[(−1/h₀)·(−2πiℓ)] = (−1)^ℓ·2πiℓ/h₀。因 e^{−2πiℓv}
+  处处非零，极点阶仍恰为 2。故
+    Res_{v=1/2}[𝒢·e^{−2πiℓv}] = (−1)^ℓ·2πiℓ·(1/h₀(ρ,σ))。
+  由 h₀ ≠ 0 与 2πi ≠ 0，该留数为零 ⟺ ℓ = 0。
+
+  **约定换算（statement 末段）**：在 Rosselló (2.23) 自身约定下（平移写在指数内，
+  极点在 v=0，核 = e^{−2πiℓ(v+1/2)} = (−1)^ℓ(1−2πiℓv+O(v²))，Φ₁₀ = v²h），
+  v^{−1} 系数 = (1/h₀)·(−1)^ℓ·(−2πiℓ) = (−1)^{ℓ+1}·2πiℓ/h₀，恰比上式多一个负号，
+  与 proof.md §5.1 推出的 d_*^{定义D} = −d_*^{Rosselló} 独立吻合；两处 h₀ 由周期性相等。
+gaps:
+  - "本推导**不**证明前提「u=1 处零点阶恰为 2」（h₀≠0）。该前提写在 statement 里，由
+    holography.phi10-order-two-in-v-on-ell-zero-contour 在吸引子围道上兑现。"
+  - "本 attempt 未产生 formal/ 下无 sorry 的 Lean 证明，status 诚实定为 rigorous 而非 formalized。"
+  - "captain_confirmed: false——上游 attempt 已过 graph-reviewer，但尚未经船长确认。"
+notes: |
+  reviewer-verified: graph-reviewer agent ell0rev, 2026-09-20（research/attempts/
+  ell-zero-wall-degeneracy/status.yaml 的 verdict：「证明逻辑完整性（reviewer 逐步亲自
+  核实 6 步，无跳步、无循环）：周期性 ⇒ 极点定位 ⇒ v-偶性 ⇒ h 只含偶次项 ⇒ Laurent 乘积
+  ⇒ Res ∝ ℓ ⇒ ℓ=0 时围道两侧相同」；第 1 条逐项裁决亲自重算 Laurent 乘积并确认符号错误，
+  订正后的公式即本推导步骤 4 的结果）。按 docs/STATUS_LEVELS.md 等级 4 的例外条款
+  （前提完整写出 + 有限步初等计算 + reviewer 独立复核 + 本条记录）定 rigorous。
+
+  **curator 亲自复核**（不是转述）：本人独立重算了步骤 2（两行，比 proof.md 引理 2.4
+  的写法短）、步骤 3、步骤 4 与 §5.1 的 Rosselló-约定交叉验证，四处结果与订正后的
+  proof.md 逐字一致；同时确认 §2.5 引用块记录的两处符号订正（双负号、丢失的 (−1)^ℓ）
+  都是与 ℓ 无关的常数因子，「留数 ∝ ℓ」不受影响。
+
+  **[EXT-Even] 阻塞项已解除**：本 attempt 毕业的唯一硬前置是「v-偶性未在图内登记」
+  （reviewer 逐项裁决第 3 条）。偶性现已立卡 holography.phi10-even-in-v（effective
+  rigorous，其推导所需的绝对收敛前提另立 holography.phi10-borcherds-product-convergence），
+  故本推导正常接上，不需要 inferred 边。
+
+  **[EXT-Div] 的使用范围**：本推导只从 igusa-cusp-form-phi10-v2 取「{v=0} ⊆ Div(Φ₁₀)」
+  这一集合论事实（步骤 1），**不**从它取阶数——阶数是 statement 的显式前提。这样做的
+  理由见目标卡 notes：Div(Φ₁₀)=2H₁ 只给出沿 H₁ 一般点的重数，在分支交点处限制到
+  u-直线的阶可能 >2。
+author: graph-curator
+created: "2026-09-20"
