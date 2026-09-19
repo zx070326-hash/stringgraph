@@ -104,3 +104,25 @@ notes: |
 # 2. [GAP-Step2] 属实且重要：`S_BH = π√Δ` 至今**没有任何图节点承载**
 #    （lead 于 2026-09-20 grep 全图确认）。整个「Λ₀ 与黑洞熵有关」的说法
 #    因此连起点都还没进图。谁要认真推这条线，第一步是给 S_BH = π√Δ 立卡。
+#
+# ---------------------------------------------------------------------------
+# 【[GAP-Step2] 已关闭 —— lead 2026-09-20 晚】
+# 上面第 2 点「没有任何图节点承载」**已过时**，同日晚间已补上：
+#   graph/statements/holography/n4-dyon-leading-bekenstein-hawking-entropy.yaml
+#   （effective = physical-argument）
+# 逐字来源：Sen 2008 (3.1.23)，PDF p.39：
+#   "S_BH = π√(Q²P² − (Q·P)²)"
+# 系数**确为 π**（不是 2π/π/2）；用本项目 m=Q²/2, n=P²/2, ℓ=Q·P 得
+# Q²P² − (Q·P)² = 4mn − ℓ² = Δ，故逐字就是 S_BH = π√Δ。
+# 逐字核对记录见 literature/extractions/n4-dyon-leading-entropy.md（E-LEAD-1/2）。
+#
+# **本 attempt 的结论不因此改变**：verdict 说「Λ₀ = π/(2S_BH) 基本是量纲强制的
+# 假深刻」，且本就声明该结论不依赖确切系数。现在只是可以补一句：系数确实是 π，
+# 所以 π/(2S_BH) 的**数值形式成立**——而它**依然**是 Theorem 9 的量纲重写，
+# 依然不值得毕业进图。`state` 维持 under-review，不因缺口关闭而上调。
+#
+# 附带更正一条方法学记录：verdict 与 notes 都写 researcher「WebFetch 对 arXiv
+# 失效」。**该报告属实**（lead 从主会话亲试 arxiv.org 同样被拒，是环境级限制，
+# 不是 agent 失误）。lead 最终是靠**更早 agent 下载到 worktree 的本地 PDF**
+# 取得原文的。教训：arXiv 不可达时先找本地已有 PDF，且**不要用 pdftotext 核对
+# 含系数的公式**（实测静默丢弃 π 和 √）。
