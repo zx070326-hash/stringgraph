@@ -1,0 +1,53 @@
+id: holography.bss-theorem-5-4b
+kind: proposition
+title: "BSS Theorem 5.4(b)：电荷集 B 上单心黑洞简并度等于 ψ_n^F 系数（N=1）"
+statement: |
+  【记号约定】Type IIB on K3×S̃¹×S¹ 的 ℤ_N orbifold（CHL 模型），N=1 时退化为旗舰 N=4 情形。
+  **BSS 自己的记号约定**：(n,ℓ,m) 其中（N=1 时）m := Q²/2（电荷），n := P²/2（磁荷），
+  ℓ := Q·P。**与 Rosselló/DMZ 约定不同**：后者取 m := P²/2（磁），n := Q²/2（电），
+  二者互换——BSS 作者在 footnote 10（p.50）明确声明此差异。文献记号冲突裁决见
+  literature/notes/mn-convention-adjudication.md（2026-09-20, verdict (c)：两约定均正确）。
+
+  CHL 配分函数倒数 Φ̃_k⁻¹（N=1 时 Φ̃₁⁻¹ 恰为 Igusa 尖点形式 Φ₁₀ 的倒数）经
+  Fourier–Jacobi 展开、再经 mock Jacobi 分解得有限部 ψ_n^F（权 −10、指标 n 的
+  mock Jacobi 形式），记其傅里叶系数为本文的"c_n^F(m,ℓ)"（BSS 自己的记号；
+  对应 Rosselló/DMZ 记号中的"c_m^F(n,ℓ)"——指标字母与参数位置均互换）。
+  电荷集 B 由围道变形不等式 (5.49) 定义，B₂ 为其显式充分子集
+  （holography.bss-charge-set-b2-definition，holography.bss-prop-b1-b2-inclusion 已证 B₂⊆B）。
+
+  【定理】（BSS Theorem 5.4(b)，逐字）对 (n,ℓ,m) ∈ B（电荷集 B），
+  单心黑洞简并度（吸引子围道积分）等于 mock Jacobi 形式 ψ_n^F 的傅里叶系数：
+    d*(P²/2N, Q·P, NQ²/2) = (−1)^{Q·P+1} · c_n^F(m,ℓ)
+  其中 n = P²/2N，m = NQ²/2，ℓ = Q·P（N=1 时 n = P²/2, m = Q²/2）。
+
+  【证明方法】（BSS p.47-48，围道变形 + 留数 + 周期性，纯数学论证）
+  用 Prop B.1/B.2（围道变形合法性）把吸引子围道 C 变形到 C′（τ→i∞ 方向）或 C″（σ→i∞），
+  在 B 内变形不跨越 Φ̃_k⁻¹ 的极点；对 τ 做留数提取；用 ψ_n 的模不变性做 z 方向围道搬移；
+  最后用有限部 h_ℓ 关于 ℓ mod 2m 的周期性（DMZ 分解的直接推论）写成 c_n^F(m,ℓ)。
+  全程无物理输入，纯围道/留数/周期性论证。
+uses:
+  - holography.dmz-mock-jacobi-decomposition
+  - holography.bss-prop-b1-b2-inclusion
+uses_conventions: []
+sources:
+  - ref: bhand-sen-singh-2023
+    loc: "Theorem 5.4(b)（p.47，陈述）；Proof（p.47-48，围道变形+留数+周期性论证，引 Prop B.1/B.2）"
+    note: |
+      literature/extractions/bhand-sen-singh-2023.md E3 逐字核对：Thm 5.4(b) 原文
+      "For (n,ℓ,m) ∈ B, the single-centered black hole degeneracies with NQ²/2 = m,
+      P²/2 = n and Q·P = ℓ are the Fourier coefficients of the mock Jacobi form ψ_n^F."
+      本节点转录时已显式标注 BSS 与 Rosselló/DMZ 的记号差异（m/n 互换）。
+tags: [bh-entropy, mock-modular, contour-integral]
+notes: |
+  **查重**：`uv run stringgraph search "theorem 5.4"` / `"bss"` 无同内容命中（2026-09-20）。
+
+  **设立本节点的理由**：research/attempts/gap-102b-multicenter-residue 的 graph-reviewer
+  裁决（2026-09-20）要求"BSS 必须先立成图节点……使 BSS 的 rigorous 状态能沿边传播"。
+  本节点记录 BSS Theorem 5.4(b) 本身（已发表、同行评审的定理），使 gap-102b 毕业推导
+  能指向一个承载 rigorous 证明的图节点，而不是只靠 sources 指向 extraction。
+
+  **与 derivation 的关系**：本节点是 statement（定理陈述本身），姐妹 derivation
+  `holography.bss-theorem-5-4b--via-bss-appendix-b` 记录其证明路径（依赖 Prop B.1/B.2
+  + DMZ 分解）。按 graph/CLAUDE.md"陈述与推导分离"原则，定理本身与其证明是两个节点。
+author: graph-curator
+created: "2026-09-20"
