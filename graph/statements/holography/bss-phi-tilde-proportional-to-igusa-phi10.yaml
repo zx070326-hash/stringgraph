@@ -1,0 +1,35 @@
+id: holography.bss-phi-tilde-proportional-to-igusa-phi10
+kind: proposition
+title: BSS Siegel 形式 Φ̃₁ 与 Igusa Φ₁₀ 成比例
+statement: |
+  若 BSS 定义的 N=1 Siegel 形式 Φ̃₁(Ω)（由 BSS eq (5.2) 无穷乘积给出）
+  是 Sp(4,ℤ) 的权 10 尖点形式，则存在非零常数 c 使得
+    Φ̃₁(Ω) = c·Φ₁₀(Ω)
+  其中 Φ₁₀ 是 Igusa 权 10 尖点形式。
+uses:
+  - holography.igusa-cusp-form-phi10-v2
+uses_conventions: []
+sources:
+  - ref: igusa-1962
+    loc: "权 10 Sp(4,ℤ) 尖点形式空间一维性（Igusa 维数公式，一手数学来源）"
+    note: "一维性保证两个权 10 尖点形式至多差非零常数倍"
+  - ref: bhand-sen-singh-2023
+    loc: "eq (5.2)：Φ̃_k 的无穷乘积定义（N=1 时即 Φ̃₁）"
+    note: "BSS 援引 CHL 配分函数构造给出 Φ̃₁ 定义，声称其为权 10 尖点形式，但未在本文证明模性"
+notes: |
+  **前提的承重性（遵照 graph/CLAUDE.md 2026-09-15 裁决）**：本命题的前提"Φ̃₁ 是权 10
+  Sp(4,ℤ) 尖点形式"是承重命题（若不成立则结论无意义），但本项目尚未从 BSS eq (5.2)
+  无穷乘积独立验证其模性（BSS 只援引 CHL 构造为已知，未回溯原始文献）。按裁决，
+  这不得藏在 inferred 边或 note 里；本卡通过"若…则…"结构将其显式写入 statement。
+
+  **常数 c 的取值**：本卡只断言存在性与唯一性（至符号），不给具体值。c 的取值判定
+  见 holography.bss-rossello-dstar-normalization-constant（依赖两条独立路径的证据，
+  目前未能裁决）。
+
+  **原地改写裁决（lead, 2026-09-20）**：本卡替换同日首版的
+  holography.bss-phi-tilde-equals-minus-igusa-phi10（断言 c=−1）。首版尚未进入 main
+  （仅在 agent 分支上），lead 裁定允许原地改写而不走 superseded_by 流程，避免 main
+  在第一天就收进死卡。
+tags: [siegel-modular-form, normalization]
+author: graph-curator
+created: "2026-09-20"

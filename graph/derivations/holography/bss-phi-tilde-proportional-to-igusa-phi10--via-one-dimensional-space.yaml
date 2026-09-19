@@ -1,0 +1,25 @@
+id: holography.bss-phi-tilde-proportional-to-igusa-phi10--via-one-dimensional-space
+target: holography.bss-phi-tilde-proportional-to-igusa-phi10
+kind: proof
+status: rigorous
+depends_on:
+  - id: holography.igusa-cusp-form-phi10-v2
+    note: "Φ₁₀ 的存在性与其作为权 10 Sp(4,ℤ) 尖点形式空间（至多差标量倍数意义下）唯一元素"
+sources:
+  - ref: igusa-1962
+    loc: "权 10 Sp(4,ℤ) 尖点形式空间维数为 1（Igusa 维数公式）"
+  - ref: bhand-sen-singh-2023
+    loc: "eq (5.2)：Φ̃_k 的无穷乘积定义；p.40 正文声称 N=1 时为权 10 尖点形式（援引 CHL 构造，未在本文证明）"
+summary: |
+  Igusa 维数公式保证 S₁₀(Sp(4,ℤ))（权 10 Sp(4,ℤ) 尖点形式空间）维数为 1。
+  在 statement 前提"Φ̃₁ ∈ S₁₀(Sp(4,ℤ))"下，Φ̃₁ 与 Φ₁₀ 均为该一维空间元素，
+  故至多差非零常数 c。
+
+  **前提的 status**：Φ̃₁ ∈ S₁₀(Sp(4,ℤ)) 依赖 BSS eq (5.2) 无穷乘积的模性验证
+  （Sp(4,ℤ) 变换律、全纯性、尖点性），BSS 援引 CHL 配分函数构造为已知，
+  本项目尚未回溯 Chaudhuri–Hockney–Lykken 1995 或 David–Jatkar–Sen 2006 原始文献。
+  本推导的 status 按一维性本身（Igusa 维数公式，rigorous 数学定理）定为 rigorous，
+  但 target 的 effective status 会因前提未独立验证而被压低（若前提本身建成图节点且
+  status < rigorous）。
+author: graph-curator
+created: "2026-09-20"
