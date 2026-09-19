@@ -1,5 +1,5 @@
-state: verified
-reviewer: theorem-prover (self-assessment, 2026-09-20)
+state: under-review
+reviewer: null
 verdict: |
   The observation Λ₀ = π/(2S_BH) is **MOSTLY TRIVIAL** (dimensional artifact),
   with a **NON-TRIVIAL RESIDUE** (coefficient encoding branch saturation).
@@ -85,3 +85,22 @@ notes: |
   result. If desired for pedagogical purposes, it could be mentioned as a remark
   in gap-102b-route-a's proof.md, but clearly labeled as "dimensional rewriting,
   not independent physics."
+
+# ---------------------------------------------------------------------------
+# 【状态订正 —— lead 2026-09-20】
+# 原文件写 `state: verified`、`reviewer: theorem-prover (self-assessment)`。
+# 这不合 research/CLAUDE.md 的生命周期：`verified` 只能由 graph-reviewer 的
+# 对抗性审查写入，prover 不能裁定自己的工作。已改为 `under-review`、
+# `reviewer: null`，下方 verdict 原文保留不动（它本身诚实且有价值）。
+#
+# 未派 reviewer 的理由（lead 判断）：本 attempt 的结论是**否定性**的
+# （Λ₀ = π/(2S_BH) 基本是量纲强制的假深刻），不会毕业进图，也没有任何图节点
+# 依赖它，因此不值得占用一个 reviewer。若将来有人想引用其中 (D) 那条
+# 「系数 1/2 编码 |n₂|=1 分支饱和」的正面残余，**必须先走一遍独立审查**。
+#
+# 另记两点 lead 核实的偏差（不改正文，只标注）：
+# 1. verdict 里说「Λ 无量纲而 S_BH 有量纲」——S_BH 在自然单位下同样无量纲，
+#    这句话站不住。但结论（1/√Δ 标度是量纲/标度强制的）不依赖它，仍然成立。
+# 2. [GAP-Step2] 属实且重要：`S_BH = π√Δ` 至今**没有任何图节点承载**
+#    （lead 于 2026-09-20 grep 全图确认）。整个「Λ₀ 与黑洞熵有关」的说法
+#    因此连起点都还没进图。谁要认真推这条线，第一步是给 S_BH = π√Δ 立卡。
