@@ -335,4 +335,40 @@ theorem sixSeedKernelSharp_of_frame (hD : 2 ≤ D) (F : DDFLightConeFrame η a b
 
 end Bridge
 
+/-! ### `B26 6` and the level-six slice of `ddf-spans`, unconditionally -/
+
+section Closure
+
+variable {D : ℕ} {K : Type*} [Field K] [LinearOrder K] [IsStrictOrderedRing K] [Algebra ℚ K]
+variable {η a b : Fin D → K}
+
+/-- ⭐⭐⭐ **`B26 6` at `D = 26`, unconditionally.**
+
+`LevelSixClosure.b26_six_of_sixSeedKernelSharp` with its named hypothesis discharged by
+`sixSeedKernelSharp_of_frame`.  The sixth antidiagonal slice of the counting chain is therefore
+closed on the same footing as `N ≤ 5`: the only hypotheses are `2 ≤ D`, a DDF light-cone frame,
+and `(D : K) = 26`.
+
+⭐ **Where `D = 26` is consumed**: not in the bridge, but exactly where it is consumed for
+`N = 2, …, 5`, namely in the Type-2 null state
+`LevelThreeCount.descTwo_mem_towerNullSubmodule_of_mem_towerBigrade` (via
+`NullSeedsTwo.towerLop_two_apply_descTwo`), which enters through
+`LevelSixClosure.le_finrank_towerNull_inf_towerBigrade_six_of_sixSeedKernelSharp`. -/
+theorem b26_six_of_D26 (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (hD26 : (D : K) = 26) :
+    B26 η a b F.hη F.trans 6 :=
+  b26_six_of_sixSeedKernelSharp hD F hD26 (sixSeedKernelSharp_of_frame hD F)
+
+/-- ⭐⭐⭐ **The DDF spanning lemma on the level-six slice `(rung -6, level 6)`, at `D = 26`,
+unconditionally.**
+
+The sixth antidiagonal slice of `ddf-spans`, after `LevelFiveCount.ddfSpans_bigrade_neg_five_five`
+and with the same hypotheses — the named hypothesis of `LevelSixClosure` is discharged by
+`sixSeedKernelSharp_of_frame`. -/
+theorem ddfSpans_bigrade_neg_six_six (hD : 2 ≤ D) (F : DDFLightConeFrame η a b)
+    (hD26 : (D : K) = 26) :
+    DDFSpansOn η a b F.hη F.trans (towerBigrade D K (-((6 : ℕ) : ℤ)) 6) :=
+  ddfSpans_bigrade_neg_six_six_of_sixSeedKernelSharp hD F hD26 (sixSeedKernelSharp_of_frame hD F)
+
+end Closure
+
 end StringFormal.NoGhost
