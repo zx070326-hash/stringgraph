@@ -1,0 +1,55 @@
+id: holography.sen-d19-family-is-igusa-phi10-divisor--via-standard-identification
+target: holography.sen-d19-family-is-igusa-phi10-divisor
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: holography.igusa-cusp-form-phi10-v2
+    inferred: false
+sources:
+  - ref: sen-2008-precision-counting
+    loc: "arXiv:0708.1270v4 Appendix D, eq. (D.19)（p.168）；附录 D 全文 pp.164-169"
+    note: |
+      Sen 附录 D 从 N=4 dyon 配分函数出发推出 (D.19)。**原文未逐字断言**他的 Φ̃
+      与标准 Igusa Φ₁₀ 是同一函数，也未逐字给出两者的坐标约定对照。
+  - ref: gritsenko-nikulin-1996
+    loc: "Div(Φ₁₀) = 2H₁（判别式 1 的 Humbert 曲面）"
+    note: |
+      用作一致性检验：(D.19) 在 n₂=0 的退化分支与 H₁ 的线性代表元形式一致，
+      v=0 分支两边都有。单边、部分覆盖，不构成集合相等的证明。
+summary: |
+  **本推导不是证明，是如实记录一条社群标准识别的档位。**
+
+  论据（合起来支持 physical-argument，不足以支持 rigorous）：
+  1. Sen 2008 附录 D 是从物理配分函数出发的标准推导，N=4 dyon 计数文献
+     （DVV 1997 以降）普遍把该权 10 Siegel 尖点形式与 Igusa Φ₁₀ 等同使用。
+  2. 权 10 Sp(4,ℤ) 尖点形式空间一维（Igusa 维数公式），故**若** Sen 的 Φ̃ 确为
+     Sp(4,ℤ) 权 10 尖点形式，则 Φ̃ = c·Φ₁₀（c≠0），零点集自动相同。
+     但「Φ̃ 是 Sp(4,ℤ) 权 10 尖点形式」本身在本项目内同样未独立坐实——
+     参见 holography.bss-phi-tilde-proportional-to-igusa-phi10，那张卡对 BSS 的
+     Φ̃₁ 遇到同一障碍，因而只能写成「若…则…」的条件形式。
+  3. 交叉验证：(D.19) 在 n₂=0、j=±1 处退化为线性超曲面，与 GN1996 的 H₁
+     代表元形式一致；v=0 分支两边都出现。
+
+  为什么 1–3 不足以升 rigorous：
+  - 论据 1 是社群惯例，不是证明。
+  - 论据 2 的前提未坐实，且**还需要**「Sen 与本项目用同一套 (ρ,σ,v)↔Ω 坐标约定」
+    这一条（比例关系在任一坐标下都成立，但零点集的**参数化形式**依赖坐标约定；
+    (D.19) 的 F 是坐标表达式，不是坐标无关的陈述）。
+  - 论据 3 只验证了 n₂=0 的部分分支，对 n₂≠0 分支无覆盖——而 n₂≠0 恰恰是
+    `attractor-contour-avoids-phi10-quadratic-wall` 全部内容所在。
+    `igusa-cusp-form-phi10-v2` notes 里那条至今未判定的留白（n₂≠0 分支是否落在
+    H₁ 的 Sp(4,ℤ)-轨道内）正是本条缺口的另一面。
+
+  因此按 docs/STATUS_LEVELS.md 等级 3（「形式操作、『标准推导』」）定档
+  physical-argument，让它沿图正常传播，而不是藏进 note 或 inferred 边。
+notes: |
+  **本推导的传播后果（lead 已核实并接受，2026-09-20）**：接线后
+  `holography.attractor-contour-avoids-phi10-linear-wall` 与
+  `holography.attractor-contour-avoids-phi10-quadratic-wall` 两张卡的
+  effective 从 rigorous 降到 physical-argument。这是**有意的诚实降级**，
+  不是缺陷：两张卡的原创数学（Theorem 4 / Theorem 9）本身仍然严格
+  （由 graph-reviewer g102brev / n2rev 分别裁定），被压低的是
+  「该结论是关于 Igusa Φ₁₀ 的」这层断言。
+  若要让两张卡回到 rigorous，走本卡 statement notes 里列的 (a)/(b)/(c) 三条路径
+  之一关闭本卡，而**不是**把这条依赖删掉。
+author: lead

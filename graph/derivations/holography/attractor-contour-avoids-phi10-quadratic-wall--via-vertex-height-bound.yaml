@@ -5,6 +5,8 @@ status: rigorous
 depends_on:
   - id: holography.igusa-cusp-form-phi10-v2
     inferred: false
+  - id: holography.sen-d19-family-is-igusa-phi10-divisor
+    inferred: false
 sources:
   - ref: stringgraph-research-2026
     loc: "research/attempts/gap-102b-route-a/proof.md §5.7（§5.7.1-5.7.4：Proposition 7, Corollary 8, Theorem 9）"

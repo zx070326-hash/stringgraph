@@ -2,7 +2,9 @@ id: holography.attractor-contour-avoids-phi10-linear-wall--via-diophantine-obstr
 target: holography.attractor-contour-avoids-phi10-linear-wall
 kind: proof
 status: rigorous
-depends_on: []
+depends_on:
+  - id: holography.sen-d19-family-is-igusa-phi10-divisor
+    inferred: false
 sources:
   - ref: stringgraph-research-2026
     loc: "research/attempts/gap-102b-route-a/proof.md §4.1-§4.5（引理 A/B/C + 定理 4）"
@@ -31,5 +33,17 @@ notes: |
   代数操作，不依赖图内其他已有节点，与姐妹卡
   holography.attractor-contour-hits-phi10-zero-at-ell-zero--via-direct-substitution
   的自足风格一致。
+
+  【上句「depends_on 为空」已过时 —— lead 2026-09-20】
+  已接上 holography.sen-d19-family-is-igusa-phi10-divisor（physical-argument）。
+  上段说的仍然对：**四条引理的数论论证确实自足**，不依赖图内其他节点。
+  但本推导的 **target 卡断言的是关于 Div(Φ₁₀) 的命题**，而引理算的是关于
+  Sen (D.19) 的 F=0 族的命题；两者之间那条等同此前无节点承载，属
+  graph/CLAUDE.md 2026-09-15 裁决禁止的「承重且隐形」。现已立卡接线。
+  后果：本推导的 effective 从 rigorous 降到 physical-argument。原创数学
+  （定理 4）的严格性不受影响，被压低的是「这是 Φ₁₀ 的零点」这层断言。
+  关闭路径见 sen-d19-family-is-igusa-phi10-divisor 的 notes。
+  姐妹卡 attractor-contour-hits-phi10-zero-at-ell-zero 不受波及（它断言存在性，
+  只需 v=0 ⊂ Div(Φ₁₀)，由 GN1996 直接给出）。
 author: graph-curator
 created: "2026-09-20"

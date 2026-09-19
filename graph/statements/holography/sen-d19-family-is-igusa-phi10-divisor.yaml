@@ -1,0 +1,75 @@
+id: holography.sen-d19-family-is-igusa-phi10-divisor
+kind: proposition
+title: Sen 2008 (D.19) 的五参数族 F=0 即 Igusa Φ₁₀ 的零点除子（同一 (ρ,σ,v) 坐标下）
+statement: |
+  在 Siegel 参数化 Ω = [[ρ, v], [v, σ]]（ρ,σ ∈ ℍ，v ∈ ℂ，Im Ω > 0）下，
+  Sen 2008 (arXiv:0708.1270v4) 附录 D eq. (D.19) 给出的零点族
+    F := n₂(σρ − v²) + jv + n₁σ − m₁ρ + m₂ = 0,
+    (m₁,n₁,m₂,n₂,j) ∈ ℤ⁵，j 奇，4m₁n₁ + 4m₂n₂ + j² = 1
+  **穷尽**（且只包含）Igusa 权 10 尖点形式 Φ₁₀ 的零点：
+    {Ω ∈ ℍ₂ : Φ₁₀(Ω) = 0} = ⋃_{(m₁,n₁,m₂,n₂,j)} {Ω : F(Ω) = 0}。
+  等价地：Sen 的 Siegel 形式 Φ̃ 与标准 Igusa Φ₁₀ 在**同一套 (ρ,σ,v) 坐标**下
+  有相同的零点集（两者至多差一个处处非零的因子）。
+uses:
+  - holography.igusa-cusp-form-phi10-v2
+uses_conventions: []
+sources:
+  - ref: sen-2008-precision-counting
+    loc: "arXiv:0708.1270v4 Appendix D, eq. (D.19)（p.168）"
+    note: |
+      (D.19) 给出 Div(Φ̃) 的五参数整数参数化。Sen 在该处写的是他自己的 Φ̃；
+      **原文未逐字断言 Φ̃ 与标准 Igusa Φ₁₀ 是同一函数，也未逐字断言两者使用
+      同一套 (ρ,σ,v) 坐标约定**。本卡断言的正是这条等同。
+      逐字核对见 research/attempts/gap-102b-route-a/proof.md §1.3（WebFetch 下载
+      arXiv PDF、Read 逐页核对 pp.164-169）。
+  - ref: gritsenko-nikulin-1996
+    loc: "Div(Φ₁₀) = 2H₁，H₁ = 判别式 1 的 Humbert 曲面（见 igusa-cusp-form-phi10-v2 的 sources）"
+    note: |
+      交叉验证：(D.19) 在 n₂=0、j=±1 处的分支退化为线性超曲面
+      {m₁ρ + n₁σ + jv + m₂ = 0}，与 H₁ 的 {mρ+nσ+lv ∈ ℤ, 4mn−l²=1} 型代表元
+      形式一致；特别地 v=0 分支的存在与 GN1996 的 H₁ 一致。这是**一致性检验**，
+      不是两个集合相等的证明。
+tags: [bh-entropy, siegel-modular-form, n4-string-theory, cartography]
+notes: |
+  **为什么必须立这张卡（lead 裁决，2026-09-20）**
+
+  `holography.attractor-contour-avoids-phi10-linear-wall` 与
+  `holography.attractor-contour-avoids-phi10-quadratic-wall` 两张卡都断言
+  「吸引子围道与 **Div(Φ₁₀)** 的某族分支不相交」，而其证明实际计算的是
+  「围道与 **(D.19) 的 F=0 族**不相交」。两者之间隔着本卡这条等同。
+  在本卡建立之前，这条等同是**图外的、无节点承载的承重命题**——正是
+  `graph/CLAUDE.md` 2026-09-15 裁决所禁止的情形（命题既承重又隐形，造成
+  status 虚高）。判据原文：「问『这条边如果去掉 inferred，它指向的节点是否
+  就完整承载了我需要的那句话？』若否，就是在用 flag 藏命题，立卡。」
+  `igusa-cusp-form-phi10-v2` 只说 Div(Φ₁₀)=2H₁（Sp(4,ℤ)-轨道语言），
+  **不**承载「(D.19) 的五参数族就是它」这句话，故必须立卡。
+
+  **与 graph-reviewer n2rev 裁决的关系（不是推翻，是问了不同的问题）**：
+  n2rev（2026-09-20）就 [GAP-identify] 裁决「只影响『这是哪一份 Φ₁₀ 的零点』
+  的诠释，不影响 (D.19) 本身的代数性质」。该裁决**正确且本卡不推翻它**：
+  §5.7 的代数（判别式、顶点高度、相消）确实完全不依赖这条等同。
+  但两张目标卡的 **statement 断言的是关于 Div(Φ₁₀) 的命题**，不是关于
+  (D.19) 抽象族的命题；「诠释」恰恰就是那两张卡所断言的内容。
+  n2rev 问的是「算错了吗」（没有），lead 问的是「卡断言的那句话被完整证明了吗」
+  （还差这一步）。
+
+  **为什么是 physical-argument 而不是 rigorous**（见配套推导卡）：
+  Sen 附录 D 是从物理配分函数出发的标准推导，社群普遍把该 Siegel 形式与
+  Igusa Φ₁₀ 等同使用；但本项目既未取得该等同的逐字文献断言，也未独立证明
+  两个零点集相等（上面 GN1996 那条只是一致性检验，方向单边且只覆盖部分分支）。
+  按 docs/STATUS_LEVELS.md 等级 3 的判据（「形式操作、『标准推导』」）定档。
+
+  **不波及 `holography.attractor-contour-hits-phi10-zero-at-ell-zero`**：
+  那张卡断言的是**存在性**（ℓ=0 时围道经过零点 v=0），只需要「v=0 ⊂ Div(Φ₁₀)」
+  这一条，由 GN1996 的 H₁={v=0} 直接给出，不需要本卡的穷尽性。
+  本卡只接到两张**避开**类卡（它们对整个除子作全称量化）。
+
+  **关闭本卡的路径**（留给后人）：
+  (a) 找到 Sen 或后续文献逐字断言 Φ̃ = Φ₁₀（含坐标约定）——最省力，researcher 可查；
+  (b) 从 GN1996/Gritsenko-Nikulin 的 Borcherds 乘积独立推出 Div(Φ₁₀) 的五参数
+      参数化，与 (D.19) 逐项比对——纯数学路线，可升 rigorous；
+  (c) 证明 (D.19) 族的并集在 Sp(4,ℤ) 下恰是 H₁ 的轨道（这同时会回答
+      `igusa-cusp-form-phi10-v2` notes 里那条至今未判定的「n₂≠0 分支是否落在
+      H₁ 轨道内」留白——两者是同一件事的两面）。
+author: lead
+created: "2026-09-20"
