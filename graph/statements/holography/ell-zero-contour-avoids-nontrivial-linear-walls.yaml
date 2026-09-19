@@ -1,0 +1,65 @@
+id: holography.ell-zero-contour-avoids-nontrivial-linear-walls
+kind: proposition
+title: "ℓ=0 时吸引子围道对一切 Λ>0 避开 Φ₁₀ 的全部「非平凡线性壁」（n₂=0 且 (m₁,n₁)≠(0,0)）"
+statement: |
+  记号（与 holography.attractor-contour-avoids-phi10-linear-wall 逐字相同，取 Sen 2008
+  (D.19) 的整数参数化）：Div(Φ₁₀) 的每个分支对应一组 (m₁,n₁,m₂,n₂,j) ∈ ℤ⁵、j 奇、
+  4m₁n₁ + 4m₂n₂ + j² = 1，零点条件
+    F := n₂(σρ − v²) + jv + n₁σ − m₁ρ + m₂ = 0；
+  吸引子围道（ε=+1 约定）
+    C_*(m,n,ℓ;Λ) := { Ω = (ρ,v; v,σ) : Re ρ, Re σ ∈ [0,1], Re v ∈ ℝ,
+                      Im ρ = 2nΛ, Im σ = 2mΛ, Im v = ℓΛ }。
+  定义**「非平凡线性壁」** := 满足 n₂ = 0 且 (m₁,n₁) ≠ (0,0) 的分支。
+  （n₂=0 且 m₁=n₁=0 的剩余子族由判别式得 j=±1、m₂ ∈ ℤ 自由，零点条件退化为 v = ∓m₂，
+  即超曲面族 {v ∈ ℤ}；那一族**确实**命中 ℓ=0 围道，见
+  holography.attractor-contour-hits-phi10-zero-at-ell-zero，不在本卡断言范围内。）
+
+  设整数 m, n ≥ 1、**ℓ = 0**。则对**一切** Λ > 0：C_*(m,n,0;Λ) 与 Div(Φ₁₀) 的
+  **每一个非平凡线性壁分支**都**不相交**。
+
+  障碍是纯数论的、与 Λ 的大小无关，也与 Re ρ, Re σ, Re v 的取值无关（故 Re v 放开到 ℝ，
+  下游需要的半周期平移窗口 Re v ∈ [1/2,3/2] 一并覆盖）。
+
+  【为什么不能直接用姐妹卡】holography.attractor-contour-avoids-phi10-linear-wall 对
+  **0 < ℓ ≤ m** 全称量化，且断言的是**全部** n₂=0 分支不相交——这在 ℓ=0 处**是假的**
+  （m₁=n₁=0 子族命中）。本卡是它在 ℓ=0 边界处的正确类比：范围收窄到非平凡子族，
+  结论仍成立。必须单独立卡。
+uses:
+  - holography.igusa-cusp-form-phi10-v2
+  - holography.sen-d19-family-is-igusa-phi10-divisor
+uses_conventions: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/ell-zero-wall-degeneracy/proof.md §6.2（n₂=0 分支的完整分类：子族 (a)(b)(c)）；约束 (I) 取自 research/attempts/gap-102b-route-a/proof.md §2 Lemma 1"
+    note: |
+      本项目原创证明，非已发表文献，见 research/attempts/ell-zero-wall-degeneracy/proof.md §6.2。
+      status.yaml: state: verified，reviewer: graph-reviewer agent ell0rev（2026-09-20），
+      captain_confirmed: false。**但 §6 整节（含 §6.2）写于该轮审查之后，至今未经
+      graph-reviewer 审查**——status.yaml 逐字写着「请 lead 派 graph-reviewer 审查 §6」。
+      故本卡推导诚实定为 physical-argument（见推导的 gaps）。
+  - ref: sen-2008-precision-counting
+    loc: "arXiv:0708.1270v4 Appendix D, eq. (D.19)（p.168）"
+    note: "D.19 的五参数零点族；本卡的「线性壁」即 n₂=0 子族（此时 F 关于 (ρ,σ,v) 是线性的）。"
+tags: [bh-entropy, mock-modular, n4-string-theory, number-theory]
+notes: |
+  【论证只有四行，curator 亲自重做并得到比 proof.md §6.2 更短的版本】见推导 summary。
+  要点：n₂=0、ℓ=0 时约束 (I)（= Im F = 0，Λ>0 故可约去 Λ）退化为 **m n₁ = n m₁**，
+  与判别式 4m₁n₁ + j² = 1（j 奇）联立即得 m₁ = n₁ = 0。proof.md §6.2 把它拆成三个子族
+  ((a) m₁=0,n₁≠0；(b) n₁=0,m₁≠0；(c) j²≥9）分别用 Im v ≠ 0 或符号矛盾排除，结论相同。
+
+  【承重上游 [GAP-identify]】同姐妹卡：本卡 statement 说的是 **Div(Φ₁₀)** 的分支，
+  而计算做在 **(D.19) 的 F=0 族**上，中间隔着
+  holography.sen-d19-family-is-igusa-phi10-divisor（effective physical-argument）。
+  该边显式接上，不藏在 inferred 里。
+
+  【查重】`uv run stringgraph search` 查 `wall` / `linear wall` / `ell` / `围道`
+  （2026-09-20）：holography.attractor-contour-avoids-phi10-linear-wall（0<ℓ≤m，
+  且在 ℓ=0 处其全称断言为假，见 statement 末段）与
+  holography.attractor-contour-hits-phi10-zero-at-ell-zero（断言 m₁=n₁=0 子族命中）
+  为仅有的相关命中；三卡互补不重叠，无同内容卡。
+
+  【毕业记录】由 research/attempts/ell-zero-wall-degeneracy/（state: verified，
+  reviewer: ell0rev，captain_confirmed: false）的 §6.2 毕业，按 research/CLAUDE.md
+  生命周期第 4 步。proposition 禁止手填 status。
+author: graph-curator
+created: "2026-09-20"
