@@ -42,6 +42,14 @@ summary: |
 
   整个证明只用伴随矩阵恒等式和围道变量替换，无需 mock 模形式结构。
 notes: |
+  【2026-09-20 Φ₁₀ 重数订正：本边刻意留在 v1，不重定向】
+  本推导依赖 holography.igusa-cusp-form-phi10（v1）而不是 v2 的理由：本推导只消费
+  𝒢 = −1/Φ₁₀(ρ,σ,v+1/2) 的周期性 F(Ω+S)=F(Ω)（对整对称 S），该周期性来自
+  Φ₁₀ 的 Fourier 展开只含半整 T 这一事实（Tr(ST)∈ℤ），完全不依赖零点重数的具体数值
+  （重数=1 还是=2）。v1 卡关于 Fourier 结构的断言是正确的（订正只涉及重数那一句），
+  故本边留在 v1 是逻辑正确的选择。
+  详见 docs/reviews/phi10-multiplicity-normalization-2026-09-20.md §2（9 个可留 v1 的判据）。
+
   reviewer-verified: graph-reviewer(2026-09-15)，Step1（虚部映射）、Step3（区域扩张+Jacobi消）、
   Step4（非整性情形额外周期性 + case(b) 极点回避）均已独立逐步确认（CONFIRMED）。
   proof.md 提交 sha: 322e5f9 包含 F1 形式缺口的补充论证（case(b) 极点回避）。
