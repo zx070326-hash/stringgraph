@@ -1,0 +1,40 @@
+id: holography.bss-phi-tilde-equals-minus-igusa-phi10
+kind: proposition
+title: BSS N=1 Siegel 形式 Φ̃₁ = −Φ₁₀（归一化关系）
+statement: |
+  对 N=1 的 CHL 模型（即标准 N=4 弦论，无 orbifold），BSS 定义的权 10 Siegel
+  尖点形式 Φ̃₁(Ω) 与 Igusa 尖点形式 Φ₁₀(Ω) 满足
+    Φ̃₁ = c·Φ₁₀
+  其中 c = −1（全局常数）。
+
+  该关系由权 10 Sp(4,ℤ) 尖点形式空间一维性（Igusa）保证：两者皆为该空间唯一
+  生成元，故最多差一个非零常数；数值验证 (m,n,ℓ)=(1,1,0) 处两体系吸引子系数
+  一致（均为 +50064），确定 c=−1。
+uses:
+  - holography.igusa-cusp-form-phi10-v2
+uses_conventions: []
+sources:
+  - ref: bhand-sen-singh-2023
+    loc: "p.40 正文：'for N=1, the CHL partition function Φ̃_k⁻¹ is exactly the inverse of the Igusa cusp form Φ₁₀'（声明两者互逆，即 Φ̃₁/Φ₁₀ 为常数）"
+  - ref: bhand-sen-singh-2023
+    loc: "eq (5.13) 与 eq (5.69)：d*(10,14,5)=50064（BSS 体系）"
+  - ref: rossello-2024
+    loc: "Appendix C eq (C.2)：c_1^F(1,0)=−50064（Rosselló 体系，(m,n,ℓ)=(1,1,0)）"
+    note: "数值锚点：两体系在 (1,1,0) 处 d* 符号一致（+50064），配合两篇 d* 定义式的符号差 (−1)^ℓ=1（ℓ=0），反推 Φ̃₁/Φ₁₀=−1"
+notes: |
+  **严格程度判断依据（遵照 graph/CLAUDE.md 原则 2）**：
+  - 权 10 Sp(4,ℤ) 尖点形式空间一维性是经典 Siegel 模形式理论（Igusa 1962），属 rigorous。
+  - Φ̃₁ 作为权 10 尖点形式的模性（变换律、全纯性、尖点性）由 BSS eq (5.2) 无穷乘积
+    表示给出，需核对乘积收敛性与 Sp(4,ℤ) 变换性——BSS 原文援引为已知结果（来自
+    CHL 配分函数构造），未在本文证明。若采信 BSS 对 Φ̃₁ 模性的转述，则 c 为常数
+    这一结论 rigorous；若要求独立验证 Φ̃₁ 模性，则需回溯 CHL 配分函数原始构造
+    （Chaudhuri–Hockney–Lykken 1995、David–Jatkar–Sen 2006），当前未做。
+  - c=−1 的数值确定：(1,1,0) 锚点计算可机械复核（coefficients.py 已验证），但依赖
+    BSS 与 Rosselló 两体系 d* 定义式的"符号差公式 d*_BSS = −(1/c)·d_*_R"（本项目
+    research/attempts/gap-102b.../proof.md §4 引理 3 推导，尚未毕业进图）。
+
+  **当前标记为 conjecture**：保守标记，因 Φ̃₁ 模性依赖对 BSS 的转述信任（未从 eq 5.2
+  独立算出零点与权），且 c=−1 数值确定依赖一个尚在 research/ 中的符号公式推导。
+  该卡建立是为让状态正常传播（graph/CLAUDE.md 2026-09-15 裁决：承重命题必须是
+  图上节点），待相关推导毕业或 Φ̃₁ 模性独立验证后可升级。
+tags: [siegel-modular-form, normalization]
