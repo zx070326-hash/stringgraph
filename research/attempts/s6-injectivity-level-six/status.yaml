@@ -1,8 +1,106 @@
-state: draft
-reviewer: null
-verdict: null
+state: verified
+reviewer: graph-reviewer (agent s6review, 2026-09-19)
+verdict: VERIFIED
 captain_confirmed: false
 notes: |
+  ## 2026-09-19 graph-reviewer 裁决：VERIFIED（lead 转录；reviewer 角色只读，故由 lead 写入）
+
+  裁决 state: draft -> verified。`captain_confirmed: false`——按 research/CLAUDE.md
+  生命周期第 3 步，仍待船长最终确认。
+
+  ### reviewer 的独立工作（非转述 prover 的自我评估）
+
+  - **独立重推**了 lead 点名的最高风险项 claim.md §4 的完整逻辑链，方法是自己读所引
+    Lean 源码，而不是相信 claim.md 的散文转述。
+  - **独立重跑**了 prover 的三个脚本（非缓存结果，reviewer 自己执行到 D=26），全部通过。
+  - **自己另写了一个对抗性脚本**（非 prover 提供）：在**任意/随机有理动量**（而非写死的
+    p_{-6}）与 p=0 上测试 x4/y3 的单射性——因为本claim 的独特强度正是"对每个 p 都成立、
+    对 p 毫无约束"。这是超出 prover 自测范围的新覆盖。
+  - **直接读了**所引的每条 Lean 声明（SeedCriterionSix.lean:291-307、
+    SeedTransferSix.lean:85-206、DescendantKernel.lean:316-348、Sugawara.lean:955-981、
+    LevelSixCount.lean:71-109），核实 claim.md/proof.md 里每一处"confirmed by direct Read"。
+  - 明确未做：没有从零手推 Lemma A/B 的归纳（lead 已手工核验过该机制与算术），
+    reviewer 把手工核验的力气放在 lead **未**覆盖的部分：§4 链条，以及对子引理归纳的
+    对抗性阅读。
+
+  ### 裁决要点 1：lead 点名的风险（§4 的"equivalently"）——CONFIRMED，无缺口
+
+  lead 的疑虑是：S₆ 单射只给出 `dim S₆(Q) = D-1`，并**不显然**给出包含方向
+  `ker(seedPair) ⊆ S₆(Q)`。reviewer 用只依赖已 formalized/无 sorry 砖块的论证重建了等价性：
+
+  - `seedPair_eq_comp`（DescendantKernel.lean:344-348，已 Read 核实）**按定义**给出
+    `ker(seedPair) = ker(descPair) ∩ (Q_5 × Q_4)`——这是定义性事实，不是假设。
+  - 合冲恒等式（SeedTransferSix.lean:196-206，对 D、η、动量**无条件**，已 Read 核实）给出
+    `S(V_{-6,1}) ⊆ ker(descPair)` 对**每个** u 成立，不需要种子条件。
+  - (K6) `finrank_ker_descPair_six_le` 给出 `dim ker(descPair) ≤ D`。
+  - 本定理（S₆ 整片单射）给出 `dim S(V_{-6,1}) = D`。
+  - 三者合起来**强制** `S(V_{-6,1}) = ker(descPair)` 精确相等。
+  - ⭐ **关键**：`mem_towerSeed_neg_six_one_iff`（SeedCriterionSix.lean:301-307，已 Read 核实）
+    的量词是 `hu : u ∈ towerBigrade D K (-6) 1`，即跑遍**整片** V_{-6,1}，**不是**只跑 Q_{-6,1}。
+    这正是推出 `{u ∈ V_{-6,1} : x4u∈Q_5 ∧ y3u∈Q_4} = Q_{-6,1}` 精确相等所需要的，
+    再配合 S 单射即得 `ker(seedPair) = S(V_{-6,1}) ∩ (Q_5×Q_4) = S(Q_{-6,1})` 精确相等。
+
+  ⇒ claim.md §4 确实如 prover 自评的那样"是已证引理之上的初等线性代数"，**没有藏一步实质新命题**。
+  **lead 的主要疑虑就此解决：缺的那个包含方向不是缺的，它由已关闭的种子判据 iff 提供，
+  而那条 iff 恰好是在正确的（整片）定义域上陈述的。**
+
+  ### 裁决要点 2：proof-too-much 检查——未发现风险
+
+  该技术只证明一个**特定**线性映射（由 N=6 合冲对构造的 u↦(x4u,y3u)）的单射性，
+  本身对别的 N 的 (B-26) 一无所言。这里**没有**可被误用到 N≥12 去推出假结论的通用机制
+  （例如"任何奇异向量词作用在 level-1 后代上都自动单射"）——换一个 N 需要它自己的合冲对
+  和它自己的 Lemma-B 式领头系数计算，本证明既不提供也不声称。
+
+  ### 裁决要点 3：x4/y3 的词序与系数——CONFIRMED 精确吻合
+
+  对照 SeedTransferSix.lean:92-121（x4_apply/y3_apply）直接 Read 核实。
+  ⚠ reviewer 报告在此处被传输截断，lead 已要求重发第 3 条起的全部内容；
+  补全后会更新本文件。第 1、2 条已完整收到，且与 lead 的独立核查一致。
+
+  ### lead 的独立补充核查（2026-09-19，闭合 prover 自报的唯一未决 caveat）
+
+  prover 在本文件旧版第 91-95 行自报：「我没有独立核实所引的那几条 Lean 声明在 HEAD 上
+  确实无 sorry 编译通过（我没有 formal/ 写权限）；建议有 formal/ 权限的 reviewer 在推荐
+  毕业前抽查。」——**lead 已抽查，全部通过**：
+
+      cd formal && lake env lean --run scripts/check_axioms.lean --all < names.txt
+      ok  StringFormal.NoGhost.finrank_ker_descPair_six_le                 propext Classical.choice Quot.sound
+      ok  StringFormal.NoGhost.seedPair_eq_comp                            propext Classical.choice Quot.sound
+      ok  StringFormal.NoGhost.mem_towerSeed_neg_six_one_iff               propext Classical.choice Quot.sound
+      ok  StringFormal.NoGhost.finrank_towerBigrade                        propext Classical.choice Quot.sound
+      ok  StringFormal.NoGhost.towerLop_neg_one_mul_x4_add_descTwo_mul_y3  propext Classical.choice Quot.sound
+      # summary: ok=5 bad=0 missing=0
+
+  全图 `uv run stringgraph check-axioms` 同日为 111 declarations / 111 ok / 0 non-standard，
+  `lake build` 3979 jobs 成功。
+
+  ⚠ **lead 记录的一条实质限定（reviewer 与 prover 均未点明）**：
+  `mem_towerSeed_neg_six_one_iff` 的签名带假设 `(hD26 : (D : K) = 26)`。
+  也就是说，虽然 **S₆ 整片单射本身与 D 无关**（本证明对每个 D、每个动量都成立，
+  这是它比要求的更强的地方），但**上面那条 A ⟹ B 链的第 3 步消费了 D = 26**。
+  后果：**形式 A 单独并不能对一般 D 兑现形式 B**；兑现 `SixSeedKernelSharp` 时
+  D = 26 仍然是必需的输入。这与整体架构一致（B26 本来就只在 D = 26 上主张），
+  但写清楚，免得后人误以为 N=6 的闭合完全不依赖 26。
+
+  ### 与 Lean 侧的接口（2026-09-19 当日合并到 main）
+
+  `formal/StringFormal/NoGhost/LevelSixClosure.lean`（lake build 3979 jobs、
+  check-axioms 111/111 ok、无 sorry）已把 N=6 的缺口**有条件地**关闭，条件是单一具名假设
+
+      SixSeedKernelSharp η a b : Prop := finrank K ↥(ker (seedPair η a b (-6) 6)) ≤ D - 1
+
+  （形式 B），并由它证出 `b26_six_of_sixSeedKernelSharp` 与
+  `ddfSpans_bigrade_neg_six_six_of_sixSeedKernelSharp`。本 attempt 证的是**形式 A**
+  （S₆ 整片单射）。该文件 docstring 记录了 A ⟹ B 的四步推导，与上面裁决要点 1 的重建同构。
+
+  ⇒ **N=6 距离无条件闭合只差「把形式 A 写进 Lean，再走那四步」**。
+  已派 lean-formalizer（agent s6lean）形式化形式 A，目标文件
+  `formal/StringFormal/NoGhost/SixSliceInjective.lean`（新建）。
+
+  ---
+
+  ## 以下为 prover 提交时的原始记录（2026-09-19，未改动）
+
   2026-09-19, prover agent (role=prover, branch agent/prover/s6-injectivity-level-six).
 
   Task (verbatim from lead): prove that S6 : u |-> (x4 u, y3 u) is injective on the
