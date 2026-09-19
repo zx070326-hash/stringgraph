@@ -1,0 +1,35 @@
+id: holography.attractor-contour-avoids-phi10-linear-wall--via-diophantine-obstruction
+target: holography.attractor-contour-avoids-phi10-linear-wall
+kind: proof
+status: rigorous
+depends_on: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/gap-102b-route-a/proof.md §4.1-§4.5（引理 A/B/C + 定理 4）"
+    note: |
+      本项目原创证明，非已发表文献；见目标卡 sources 的完整 status.yaml 摘要。
+  - ref: sen-2008-precision-counting
+    loc: "arXiv:0708.1270v4 Appendix D, eq. (D.19)"
+    note: "n2=0 子族的判别式 4m1n1+j²=1 取自 D.19 的一般判别式在 n2=0 处的退化。"
+summary: |
+  §4.1：n2=0 时 Lemma 1 的 (I)/(R) 化简为纯整数约束 (I0): jℓ+2mn1−2nm1=0（Λ
+  无关）与自由变量约束 (R0)。§4.2 引理 A：宇称论证排除 ℓ 奇。§4.3 引理 B：
+  换元 u:=nm1+mn1, w:=mn1−nm1=−jℓ/2 代入判别式得恒等式 u²=mn−(Δ/4)j²，配合
+  0<ℓ≤m≤n 的初等不等式链 9ℓ²<32mn 得 j²<9，j 奇 ⟹ j=±1。§4.4 引理 C：j=±1
+  的四种子情形逐一反解 (m1,n1)，全部得非整数值，矛盾。§4.5：四种情形穷尽，
+  (I0) 在 0<ℓ≤m≤n、Δ>0 下无整数解，n2=0 分支整族与围道不相交，对一切 Λ>0。
+  无缺口——纯初等数论论证，不需要任何图内已有节点作为砖块。
+gaps:
+  - "本推导只覆盖 n2=0 分支；n2≠0 的「二次壁」分支未闭合（proof.md §5，
+    [GAP-n2]），不在本推导范围内，也不由本推导蕴含。"
+  - "本 attempt 未产生 formal/ 下的无 sorry Lean 证明；status 诚实定为 rigorous。"
+notes: |
+  curator 亲自 Read research/attempts/gap-102b-route-a/proof.md §4 全文
+  （4.1-4.5，含引理 A/B/C 与定理 4 的完整推导）与 status.yaml 的 reviewer
+  复核记录（明确核实：2026-09-16 修正轮的两处缺陷均在 §5，未触及 §4），
+  核对一致。depends_on 为空——四条引理都是从 (I0)/判别式出发的纯初等数论
+  代数操作，不依赖图内其他已有节点，与姐妹卡
+  holography.attractor-contour-hits-phi10-zero-at-ell-zero--via-direct-substitution
+  的自足风格一致。
+author: graph-curator
+created: "2026-09-20"
