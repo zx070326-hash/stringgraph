@@ -1,0 +1,75 @@
+id: math.m-colored-partition-count-kappa-recursion
+kind: proposition
+title: "m 色分拆计数的 “N−1, N−2 加修正” 递推：κ_N(m) = Σ_{s=0}^N Δ(s)·p_m(N−s)（对一切 N ≥ 2, m ≥ 0），附 N ≤ 7 显式值"
+statement: |
+  沿用 math.m-colored-partition-count-closed-form 的记号（p_m(N)、p(N) := p_1(N)）。
+  对 N ≥ 2、m ≥ 0，定义
+
+    κ_N(m) := p_m(N) + p_{m+1}(N−1) + p_{m+1}(N−2) − p_{m+1}(N)。
+
+  再定义"记账差分" Δ(s)（约定 p(负数) := 0）：
+
+    Δ(s) := p(s−1) + p(s−2) − p(s)   （s ≥ 1）；   **Δ(0) := 0**（单独约定，非字面公式代入——
+    字面公式在 s=0 处给出 p(−1)+p(−2)−p(0) = 0+0−1 = −1 ≠ 0，必须单独约定为 0）。
+
+  则对**一切** N ≥ 2、一切 m ≥ 0：
+
+  **(a) 一般式**
+    κ_N(m) = Σ_{s=0}^{N} Δ(s) · p_m(N−s)。
+
+  **(b) N ≤ 7 的显式值**（由 p(0..7) = 1,1,2,3,5,7,11,15 直接代入 Δ 的定义得
+  Δ(0..4)=0, Δ(5)=1, Δ(6)=1, Δ(7)=3，再代入 (a)）：
+
+    - N ≤ 4： κ_N(m) = 0，对一切 m（Δ(s)=0 对 0≤s≤4）；
+    - N = 5： κ_5(m) = 1，对一切 m；
+    - N = 6： κ_6(m) = m + 1（**第一个 κ 依赖 m 的 N**）；
+    - N = 7： κ_7(m) = p_m(2) + m + 3 = 2m + C(m+1,2) + 3 = C(m+3,2)。
+
+  【本节点明确不断言】Δ(s)（s ≥ 5）经 Euler 五边形数定理展开为
+  Δ(s) = p(s−5)+p(s−7)−p(s−12)−p(s−15)+⋯ 这条说明性备注——proof.md 明确声明它既未被证明
+  也未被本卡任何一步使用（Euler 五边形数定理本身不是图里已建立的砖块，见姐妹卡
+  math.euler-partition-generating-function 的 notes (c)）。本卡的 (a)(b) 完全不依赖它，
+  只用到 Claim 2 的卷积递推与 p(0..7) 七个直接算出的小值。
+uses:
+  - math.m-colored-partition-count-convolution-recursion
+uses_conventions: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/level-n-count-generalization/proof.md §3；claim.md Claim 3"
+    note: |
+      本项目原创证明，非已发表文献，见 research/attempts/level-n-count-generalization/proof.md。
+      research/attempts/level-n-count-generalization/status.yaml: state: verified，
+      reviewer: graph-reviewer（2026-09-16，独立重算 Δ(0..7) 与 κ_N(m) 表格）+ lead 两轮
+      补充复核（2026-09-18，收窄 claim.md 的新颖性措辞、补上 Δ(0):=0 约定的显式声明）；
+      captain_confirmed: false（仍待船长确认，按 research/CLAUDE.md 生命周期第 3 步）。
+tags: [combinatorics, partitions, oscillator-counting, no-ghost]
+notes: |
+  【论证，curator 亲自 Read proof.md §3 全文核对】把姐妹卡
+  math.m-colored-partition-count-convolution-recursion 代入 κ_N(m) 定义里的三个 p_{m+1}(·)
+  项，按目标下标 j 重新收集系数（proof.md 逐项列出 c(N−s) 的推导，s=0 边界情形单独核验：
+  真实 c(N) = 1 而字面 Δ 公式在 s=0 给 −1，两者相差恰是 p_m(N) 项贡献的额外 +1，故需要
+  单独约定 Δ(0):=0），得到 κ_N(m) = Σ_s Δ(s)p_m(N−s)。(b) 的四条数值/多项式结论是把
+  p(0..7) 的七个具体值代入 (a) 的直接算术，proof.md §4 用三条独立方法（分拆形状公式 /
+  生成函数幂级数 DP / 暴力按模式枚举）数值核验 N=2..10、m=1..7 全部吻合，逐条与本卡 (b)
+  一致。无缺口。
+
+  【与既有 Lean 文件的关系，出自 proof.md §5，仅作记录不作依赖】proof.md 报告
+  formal/StringFormal/NoGhost/LevelSixCount.lean 的 levelSix_count_identity_gen 断言
+  形如 F(m+1)=F(m) 的恒等式，与本卡 (b) 的 κ_6(m)=m+1≠0（蕴含 p_{m+1}(6)≠p_m(6) 对一切 m）
+  矛盾，且 lake build 在该文件的 ring 收尾步骤失败。**此发现不在本 curator 的授权写入范围
+  （只能写 graph/statements、graph/derivations），也不属于本次毕业任务范围，如实转达 lead
+  按 research/CLAUDE.md 流程处理（可能需要 lean-formalizer 重做该文件）。curator 未亲自
+  重跑 lake build，此处完全是转述 proof.md/status.yaml 的自我报告，非亲自核验。**
+
+  【范围边界，明确不断言】Δ(s) 的五边形数展开（s≥5 时的一般闭式）；N≥8 的 κ_N(m) 闭式
+  （proof.md 只数值列出 κ_8,κ_9,κ_10，未给出封闭式，明确标为 [GAP]，本卡不断言）。
+
+  【查重】`uv run stringgraph search "kappa"` / `"level-seven"` 均无同内容命中（2026-09-20）；
+  唯一相关命中是本 attempt 已毕业的姐妹卡 math.m-colored-partition-count-closed-form /
+  -convolution-recursion，以及与本命题无关的 Riemann–Roch κ−μ 系列（不同符号，不同领域）。
+
+  【毕业记录】本节点由 research/attempts/level-n-count-generalization/（state: verified，
+  captain_confirmed: false）毕业，按 research/CLAUDE.md 生命周期第 4 步。本 attempt 未产生
+  可提交的 formal/ 内容，故 status: rigorous，不写 formal: 字段。
+author: graph-curator
+created: "2026-09-20"
