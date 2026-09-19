@@ -141,6 +141,43 @@ theorem finrank_towerBigrade_one (hη : ∀ μ, η μ * η μ = 1) (j : ℤ) :
   rw [← range_oneSeedₗ hη j,
     LinearMap.finrank_range_of_inj (oneSeedₗ_injective hη j), Module.finrank_fin_fun]
 
+/-- ⭐ **`dim Q_{j,1} ≤ D - 1`** on any rung with non-null momentum.
+
+The level-one seed space is the image of the transversality hyperplane `{e | e · p_j = 0}`
+under `e ↦ (e·α_{-1})|0; p_j⟩`, and `LevelThreeCount.finrank_ker_transFunctional` computes that
+hyperplane to have dimension `D - 1`.  (With `oneSeedₗ_injective` this is in fact an equality,
+but only `≤` is needed downstream.) -/
+theorem finrank_towerSeed_one_le (hη : ∀ μ, η μ * η μ = 1) {j : ℤ}
+    (hpp : dotVec η (towerMomentum a b j) (towerMomentum a b j) ≠ 0) :
+    Module.finrank K ↥(towerSeed η a b j 1) ≤ D - 1 := by
+  classical
+  have hWle : (LinearMap.ker (transFunctional η a b j)).map (oneSeedₗ η j)
+      ≤ towerBigrade D K j 1 := by
+    rintro _ ⟨e, -, rfl⟩
+    exact oneSeed_mem_towerBigrade j e
+  have hWfin : FiniteDimensional K
+      ↥((LinearMap.ker (transFunctional η a b j)).map (oneSeedₗ η j)) :=
+    Submodule.finiteDimensional_of_le hWle
+  have hle : towerSeed η a b j 1
+      ≤ (LinearMap.ker (transFunctional η a b j)).map (oneSeedₗ η j) := by
+    intro u hu
+    obtain ⟨hpos, hbig⟩ := mem_towerSeed.1 hu
+    obtain ⟨hu1, hu2⟩ := mem_towerBigrade.1 hbig
+    obtain ⟨e, he⟩ := Fock.exists_polState_of_mem_levelSubmodule_one hη hu2
+    have hue : u = oneSeed η j e := by rw [oneSeed, ← he, ← hu1]
+    have h1 : dotVec η e (towerMomentum a b j) = 0 := by
+      have h2 := hpos 1 (by norm_num)
+      rw [hue, towerLop_one_apply_oneSeed a b hη] at h2
+      refine (smul_eq_zero.1 h2).resolve_right ?_
+      exact Finsupp.single_ne_zero.2 one_ne_zero
+    exact ⟨e, LinearMap.mem_ker.2 h1, hue.symm⟩
+  calc Module.finrank K ↥(towerSeed η a b j 1)
+      ≤ Module.finrank K ↥((LinearMap.ker (transFunctional η a b j)).map (oneSeedₗ η j)) :=
+        Submodule.finrank_mono hle
+    _ ≤ Module.finrank K ↥(LinearMap.ker (transFunctional η a b j)) :=
+        Submodule.finrank_map_le _ _
+    _ = D - 1 := finrank_ker_transFunctional hpp
+
 end LevelOneDimensions
 
 end StringFormal.NoGhost
