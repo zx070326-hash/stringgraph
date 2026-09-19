@@ -1,0 +1,75 @@
+id: holography.attractor-contour-hits-phi10-zero-at-ell-zero
+kind: proposition
+title: "ℓ=0 时吸引子围道对一切 Λ>0 恒经过 Φ₁₀ 的零点 v=0：原始「围道避开零点」命题在此边界不成立"
+statement: |
+  记号（Rosselló (R5) 型吸引子围道，ε=+1 约定，与 holography.attractor-contour-covariance
+  的 C_* 同构）：对整数 m,n≥1、ℓ、Λ>0，
+    C_*(m,n,ℓ;Λ) := { Ω=(ρ,v;v,σ) ∈ ℍ₂ : Re ρ,Re σ,Re v ∈ [0,1],
+                       Im ρ = 2nΛ, Im σ = 2mΛ, Im v = ℓΛ }。
+
+  设 m,n≥1，**ℓ = 0**（故 Δ := 4mn−ℓ² = 4mn > 0）。则对**每一个** Λ > 0，取
+  ρ1,σ1 ∈ [0,1] 任意、v1 := 0，点 Ω := (ρ1+i·2nΛ, σ1+i·2mΛ, 0) ∈ C_*(m,n,0;Λ)，
+  且该点在 Φ₁₀ 的零点除子上：取 Sen 2008 (D.19) 参数化中的分支
+  (m1,n1,m2,n2,j) = (0,0,0,0,1)（满足判别式 4m1n1+4m2n2+j² = 1），对应
+  F := n2(σρ−v²)+jv+n1σ−m1ρ+m2 = v，此时 F(Ω) = 0 − 0i = 0 精确成立（与 Λ、
+  ρ1、σ1 无关，因为 Im v = ℓΛ = 0 时 v = v1 = 0 恒成立）——即整条超曲面 {v=0}
+  （GN1996 意义下的 Humbert 曲面 H₁）与围道的交集非空，对**任意** Λ。
+
+  **结论**：不存在 Λ₀ = Λ₀(m,n,0) 使得对一切 Λ > Λ₀，C_*(m,n,0;Λ) 与 Div(Φ₁₀) 不相交。
+  即"存在 Λ₀ 使得充分大 Λ 时吸引子围道避开 Φ₁₀ 零点"这一（对 0≤ℓ≤m 全称量化的）
+  命题，在 **ℓ=0** 这个边界处对**一切** m,n≥1 都不成立——障碍与 Λ 无关，是恒等式
+  层面的，不是"Λ 不够大"的问题。
+uses: []
+uses_conventions: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/gap-102b-route-a/proof.md §3（ℓ=0 反例）；claim.md §1（原始命题）、§2（命题 A 的范围收窄理由）"
+    note: |
+      本项目原创证明，非已发表文献，见 research/attempts/gap-102b-route-a/proof.md。
+      research/attempts/gap-102b-route-a/status.yaml: state: verified，reviewer:
+      review-102b-routes（2026-09-16，两处缺陷已修正并复核，见 verdict）；
+      captain_confirmed: false（仍待船长确认，按 research/CLAUDE.md 生命周期第 3 步）。
+  - ref: sen-2008-precision-counting
+    loc: "arXiv:0708.1270v4 Appendix D, eq. (D.19)（p.168，逐字核对见 proof.md §1.3）"
+    note: |
+      D.19 给出 Div(Φ̃) 的整数参数化 F=0（判别式 4m1n1+4m2n2+j²=1）；本卡取
+      (m1,n1,m2,n2,j)=(0,0,0,0,1) 这一具体分支（F=v）。
+  - ref: gritsenko-nikulin-1996
+    loc: "Div(Δ₅)=H₁, H₁={z₂=0}（正文 p.7 环生成元列表 + 几何结果段落，逐字见该 bib 条目 note）"
+    note: |
+      独立交叉验证：GN1996 用代数几何方法给出 H₁={v=0}（Sen 坐标下 z₂=v），与
+      Sen (D.19) 取 (0,0,0,0,1) 分支给出的 {v=0} 完全一致，两条独立文献吻合。
+tags: [bh-entropy, mock-modular, n4-string-theory, number-theory]
+notes: |
+  【论证，curator 亲自 Read proof.md §3 全文核对】直接代入：ℓ=0 时 Im v = ℓΛ = 0，
+  故 v = v1（纯实部，与 Λ 无关）；取 v1=0（在实部闭方体 [0,1]³ 内的一点）即得
+  F=v=0 对任意 Λ>0 精确成立。proof.md §6 用独立网格搜索脚本
+  （scripts/verify_route_a.py）在 3 个 ℓ=0 样本 (n,m)=(2,2),(5,3),(10,1)、7 个
+  Λ 值（1~100）下精确复现 min|F|²=0（argmin 落在 (ρ1,σ1,v1)=(0,0,0)），逐位与
+  本卡解析结论一致。无缺口。
+
+  【范围边界，明确不断言】本卡只断言"原始命题在 ℓ=0 处不成立"这一反例事实，不
+  处理 ℓ=0 情形下 d_*(m,n,0) 的围道积分本身该如何重新定义（proof.md 明确留
+  [GAP-ℓ0]，标注为"需要主值/留数规定，不在本尝试范围"，本卡同样不断言）。
+
+  【与既有图节点 holography.igusa-cusp-form-phi10 / holography.phi10-wall-crossing-poles
+  的关系，curator 主动排查发现，仅报告不修正（不在本 curator 授权范围内改动这两张
+  已提交的卡）】proof.md §1.3 与本卡引用的 GN1996/Sen 2008 D.19 均给出 Div(Φ₁₀) 在
+  {v=0} 处的**重数为 2**（GN1996：Div(Φ₁₀)=2H₁；Sen (D.19) 原文的零点公式本身是
+  "Φ̃ ∼ (...)²"，平方形式）。但已提交的 holography.igusa-cusp-form-phi10 陈述
+  "其唯一零点...为单零点"（重数 1），holography.phi10-wall-crossing-poles 也断言
+  "判别式 4mn−l²=1，故极点为单零点"——**两张已有卡与本卡引用的 GN1996/Sen 2008
+  在零点重数上直接冲突**（1 vs 2）。本卡刻意不把这两张已有卡接成 depends_on/uses，
+  以免继承这条冲突的多重性断言（本卡自身的论证完全不需要多重性信息，只需要
+  "v=0 是一个零点"这一集合论事实）。已如实记录，留给 lead 转 auditor 处理
+  （里程碑/规范化流程，不在 curator 权限内直接改动）。
+
+  【查重】`uv run stringgraph search "attractor"` / `"phi10"` / `"Igusa"` /
+  `"Div"` 均无同内容命中（2026-09-20）；相关命中仅为不同命题的既有卡（见上条）。
+
+  【毕业记录】本节点由 research/attempts/gap-102b-route-a/（state: verified，
+  captain_confirmed: false）毕业，按 research/CLAUDE.md 生命周期第 4 步。本 attempt
+  未产生可提交的 formal/ 内容，故本卡不写 status（proposition 禁止），有效状态由
+  推导的 status: rigorous 决定。
+author: graph-curator
+created: "2026-09-20"

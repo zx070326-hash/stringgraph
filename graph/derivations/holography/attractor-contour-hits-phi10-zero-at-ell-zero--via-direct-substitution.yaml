@@ -1,0 +1,33 @@
+id: holography.attractor-contour-hits-phi10-zero-at-ell-zero--via-direct-substitution
+target: holography.attractor-contour-hits-phi10-zero-at-ell-zero
+kind: proof
+status: rigorous
+depends_on: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/gap-102b-route-a/proof.md §2（Lemma 1，Re/Im 精确分解）+ §3（ℓ=0 反例）"
+    note: |
+      本项目原创证明，非已发表文献；见目标卡 sources 的完整 status.yaml 摘要。
+  - ref: sen-2008-precision-counting
+    loc: "arXiv:0708.1270v4 Appendix D, eq. (D.19)"
+    note: "D.19 的 F=0 参数化，本推导取 (m1,n1,m2,n2,j)=(0,0,0,0,1) 分支。"
+summary: |
+  proof.md §2 Lemma 1 给出 F 的 Re/Im 精确（非渐近）分解：Im F = Λ·h(ρ1,σ1,v1)，
+  Re F = −n2ΔΛ²+g(ρ1,σ1,v1)。取分支 (0,0,0,0,1) 即 F=v，直接展开
+  v = v1 + i·ℓΛ；ℓ=0 时 Im v ≡ 0，故 v=v1 与 Λ 完全无关。取 v1=0（[0,1] 闭
+  区间内一点）给出 F=0 精确成立，对任意 ρ1,σ1∈[0,1]、任意 Λ>0。既然存在
+  Λ 不影响的恒等式解，"存在 Λ₀ 使充分大 Λ 时围道避开零点"这一命题在 ℓ=0
+  处对一切 m,n≥1 都失败。无缺口——这是一步直接代入，不需要任何图内已有
+  节点作为砖块。
+gaps:
+  - "本推导不处理 ℓ=0 情形下 d_*(m,n,0) 围道积分应如何重新定义（主值/留数
+    规定），proof.md 明确留 [GAP-ℓ0]，本推导同样不涉及。"
+  - "本 attempt 未产生 formal/ 下的无 sorry Lean 证明；status 诚实定为 rigorous。"
+notes: |
+  curator 亲自 Read research/attempts/gap-102b-route-a/proof.md §2-§3 全文
+  （含 §6 数值验证脚本对 3 个 ℓ=0 样本的独立复现）与 status.yaml 的
+  reviewer 复核记录，核对一致。depends_on 为空，与目标卡 uses:[] 一致
+  （本推导是一步纯代入，不承重于任何其他图节点，与姐妹卡
+  holography.attractor-contour-covariance 的自足风格一致）。
+author: graph-curator
+created: "2026-09-20"
