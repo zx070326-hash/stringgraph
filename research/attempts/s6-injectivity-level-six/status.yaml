@@ -1,0 +1,112 @@
+state: draft
+reviewer: null
+verdict: null
+captain_confirmed: false
+notes: |
+  2026-09-19, prover agent (role=prover, branch agent/prover/s6-injectivity-level-six).
+
+  Task (verbatim from lead): prove that S6 : u |-> (x4 u, y3 u) is injective on the
+  WHOLE level-1 slice V_{-6,1} (dimension D), not merely on the seed subspace
+  Q_{-6,1} (dimension D-1) -- equivalently ker(seedPair eta a b (-6) 6) = S6(Q_{-6,1})
+  exactly, giving the sharp bound dim ker(seedPair) <= D-1 needed to close the
+  (B-26) N=6 gap recorded in formal/StringFormal/NoGhost/LevelSixCount.lean's module
+  docstring. Allowed write path: research/attempts/s6-injectivity-level-six/** only.
+
+  Deliverables, all completed this round:
+    - prior-art.md (gate CLEARED -- no equivalent "two-family joint injectivity on an
+      intermediate weight-space slice" lemma found in Goddard-Thorn 1972, Brower 1972,
+      Thorn 1985/1987/1989, Gebert-Nicolai, FLM/Borcherds, or the classical
+      Feigin-Fuchs/Kac Verma-embedding literature; the one genuine near-hit -- "nonzero
+      Verma morphism is injective, dim Hom <= 1" -- is explicitly distinguished on two
+      independent grounds. Honest caveats recorded for sources whose primary text
+      could not be fetched; none of those are used as bricks).
+    - claim.md (precise quantified statement: for every field K with CharZero K, every
+      D, every eta with hη : forall mu, eta mu * eta mu = 1, and every momentum p
+      -- no constraint on p at all -- x4 and y3 are EACH injective on the level-1
+      Fock slice F(p)_1, a fortiori S6 = (x4,.)x(y3,.) is injective; bricks table with
+      live `stringgraph status` output for the 5 graph nodes actually used, all
+      effective:formalized; explicit note that
+      worldsheet.ddf-contour-equals-mode-sum and
+      worldsheet.physical-exponential-equals-voa-vertex-operator-v2 are NOT used
+      anywhere; logical chain in §4 showing how this theorem plus already-proven Lean
+      facts (finrank_ker_descPair_six_le, seedPair_eq_comp,
+      SeedCriterionSix.mem_towerSeed_neg_six_one_iff, finrank_towerBigrade) closes the
+      docstring's exact target).
+    - proof.md (complete, self-contained mathematical proof from the bare CCR +
+      Sugawara definition, no `[GAP]` markers remaining -- see "Completed lemmas"
+      below and "Honest assessment" section 6 of proof.md itself, which explains why
+      both potentially delicate points (normal-ordering ambiguity in L_n for n != 0;
+      whether L_{-n} could leak oscillator-count from >=2 back down to <=1) were
+      resolved in full, not waved through).
+    - scripts/ (three exact-rational-arithmetic Python scripts, independent code path
+      from the hand proof, cross-checking Lemma B's constants and the injectivity
+      conclusion for many D).
+
+  Completed lemmas (proof.md):
+    - Fact 0 (oscillator-count bigrading of the free Fock space) and Fact 1 (L_n's
+      level-bookkeeping) -- elementary structural facts, backed by
+      worldsheet.bosonic-fock-space / worldsheet.fock-space-virasoro-representation.
+    - Lemma 0: [L_n, alpha^mu_m] = -m alpha^mu_{n+m} for every n != 0, derived by hand
+      from the bare CCR + Sugawara definition (Wick contraction), including an
+      explicit resolution of the normal-ordering-ambiguity worry (vacuous for n != 0
+      since the CCR commutator is identically zero whenever the two mode indices sum
+      to n != 0, which holds for every term of L_n's sum whenever n != 0 -- and this
+      proof only ever applies L_{-1}..L_{-4}). Cross-checked: this is *exactly* the
+      already-proven, no-sorry Lean lemma Sugawara.lean:Lop_apply_mode (verified by
+      direct Read, lines 955-981), confirming the hand derivation independently.
+    - Sub-lemma (oscillator-count monotonicity): L_{-n} (n>=1) maps the
+      >=2-oscillator subspace into itself (never leaks down to <=1 oscillators),
+      proved by a clean nested induction (on monomial oscillator count r, base case
+      r=2 spelled out in full, general r by peeling one factor at a time).
+    - Lemma A: the leading single-oscillator component of any word L_{-n_k}...L_{-n_1}
+      applied to alpha^mu_{-1}|0;p> is exactly (product of partial sums s_0*s_1*...*
+      s_{k-1}) * alpha^mu_{-s_k}|0;p>, proved by induction on word length using Lemma 0
+      + the sub-lemma. Fully general: works for every D, every p, every word.
+    - Lemma B: explicit evaluation of Lemma A on the specific 3-term (y3) and 5-term
+      (x4) words gives universal constants +30 (y3) and -408 (x4), hand-computed via
+      an explicit table and cross-checked against scripts/verify_leading_coefficient.py
+      for D in {6,8,10,12} (exact match, no discrepancy).
+    - Main theorem: x4 alone, and y3 alone, are each injective on F(p)_1 for every D,
+      K (CharZero), eta (hη), p -- because -408 != 0 and 30 != 0 in characteristic
+      zero. A fortiori S6 = (x4,.)x(y3,.) is injective. Cross-checked against
+      scripts/verify_single_operator_injectivity.py (D in {3,4,5,6,7,10,26,27}) and
+      scripts/verify_s6_injectivity.py (D in {3,4,5,10,25,26,27,30}).
+
+  Open [GAP]s: NONE remaining in the mathematical argument itself (see proof.md
+  section 6 for the explicit accounting of why the two potentially delicate points
+  were fully closed, not glossed over). What is explicitly NOT done, by scope, not
+  because of an unresolved gap:
+    - No Lean code written (no formal/ write access). proof.md section 5 / claim.md
+      section 5 record the seams: the whole hand proof is a direct analogue of the
+      already-formalized Sugawara.lean:Lop_apply_mode /
+      LevelThreeCount.lean:towerModeVec_apply_towerLop, so a future formalizer's real
+      work should be a mechanical induction in that existing style, not a fresh
+      derivation.
+    - claim.md section 4's "logical chain" (S-injectivity + already-proven Lean facts
+      => dim ker(seedPair(-6,6)) = D-1 exactly) is recorded as context/bookkeeping,
+      not re-derived as new mathematics in proof.md -- it is elementary linear algebra
+      over cited, already-proven Lean lemmas (finrank_ker_descPair_six_le,
+      seedPair_eq_comp, SeedCriterionSix.mem_towerSeed_neg_six_one_iff), not this
+      attempt's own contribution.
+    - I did not independently re-verify that those four cited Lean declarations
+      currently compile with no sorry at HEAD (I have no formal/ write access and
+      this is not a load-bearing claim of the mathematical proof itself, which stands
+      on its own regardless of formal/'s current build state); a reviewer with
+      formal/ access should spot-check this before recommending graduation.
+
+  Honest viability assessment: this route is NOT merely viable, it is DONE. The
+  target claim is proved, in full, by an elementary (no c=26, no highest-weight
+  vector, no DDF, no physicality) argument that is strictly more general than what
+  was asked (holds for every D and every momentum, not just D=26 rung -6). The proof
+  is short, checkable by hand (the table in proof.md section 3 is literally
+  arithmetic), and triple cross-checked computationally via three independent exact-
+  arithmetic scripts. I recommend graph-reviewer be dispatched next; state is capped
+  at `draft` per this role's permissions (only the reviewer may promote to
+  under-review/verified).
+
+  Cross-attempt finding for the lead: this closes exactly the one remaining item
+  listed in formal/BLUEPRINT-noghost.md §B⁗.9's N=6 accounting ("组装：把判据接成 S₆
+  单射，再走 DescendantKernel 的秩–零化度"). If a lean-formalizer picks this up next,
+  the natural target file is a new formal/StringFormal/NoGhost/LevelSixInjectivity.lean
+  (or similar), NOT a modification of SeedCriterionSix.lean/LevelSixCount.lean
+  themselves (both already sorry-free per the blueprint's own accounting).
