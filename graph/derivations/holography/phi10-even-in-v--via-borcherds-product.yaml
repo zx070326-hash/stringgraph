@@ -1,0 +1,28 @@
+id: holography.phi10-even-in-v--via-borcherds-product
+target: holography.phi10-even-in-v
+kind: proof
+status: rigorous
+depends_on:
+  - id: holography.igusa-cusp-form-phi10-v2
+sources:
+  - ref: kawai-1997
+    loc: "§5, eq.(5.13) + §4, eq.(4.32)（Borcherds 乘积公式与 c(N) 低阶值）"
+summary: |
+  从 Borcherds 乘积 χ₁₀ = pqy ∏_{(k,l,r)>0} (1−p^k q^l y^r)^{c(4kl−r²)} 推导 v→−v 对称性。
+  按 (k,l) 拆分乘积：(k,l)≠(0,0) 块中 r 遍历全体整数，映射 r→−r 是双射且指数 c(4kl−r²)
+  通过 r² 不变，故该块在 y→1/y 下逐因子配对后整体不变。k=l=0 块由 c(N)=0 (N<−1) 截断为
+  只有 r=−1 一项存活（c(−1)=2），化简为 (1−y^{−1})²。前因子并入后 pqy·(1−y^{−1})² =
+  pq(y−2+y^{−1})，该组合在 y→1/y 下显然对称（y与y^{−1}互换，−2不变）。两块合并得
+  χ₁₀(y→1/y) = χ₁₀(y)，即 Φ₁₀(v→−v) = Φ₁₀(v)。
+notes: |
+  本推导是纯代数操作，依赖 kawai-1997 eq.(5.13) 的指标集结构与 eq.(4.32) 的截断性质。
+  关键步骤：
+  (a) (k,l)≠(0,0) 时指标集对 r 无限制（r∈ℤ）——已逐字核实 eq.(5.13) 脚注的三条件。
+  (b) 无穷乘积按 r→−r 重排的合法性依赖 Borcherds 乘积在适当区域的绝对收敛性。这是
+      Borcherds 升举定理（Borcherds 1995 + Gritsenko-Nikulin alg-geom/9611028）的标准
+      组成部分，kawai-1997 援引但未逐字陈述收敛性。本推导把该前提作为已知事实使用。
+
+  **此卡是 research/attempts/ell-zero-wall-degeneracy/ 毕业的硬前置 [EXT-Even]。**
+
+  【变量换名】kawai-1997 用 (τ,z,σ)，本项目 holography 区用 (ρ,v,σ)，对应 τ↔ρ、z↔v、σ↔σ。
+author: curator
