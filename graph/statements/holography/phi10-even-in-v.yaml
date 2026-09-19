@@ -14,9 +14,15 @@ sources:
     loc: "§5, eq.(5.13) + §4, eq.(4.32)（Borcherds 乘积公式与 c(N) 的低阶值）"
 notes: |
   本命题是 research/attempts/ell-zero-wall-degeneracy/ 的硬前置 [EXT-Even]。
-  证明需要 Borcherds 乘积的显式结构（指标集与指数 c(4kl−r²)）加上 c(N)=0 对 N<−1
-  的截断性质，从而把 k=l=0 块化简为 (1−y^{−1})²，其与前因子 pqy 的组合
-  pq(y−2+y^{−1}) 在 y→1/y 下不变。见推导 phi10-even-in-v--via-borcherds-product。
+
+  **推导路径（两步）**：
+  步骤 1：从 Borcherds 乘积的显式结构（kawai-1997 eq.(5.13) 指标集与 eq.(4.32) 的 c(N)
+  截断性质）在乘积收敛区域证明代数对称性 Φ₁₀(ρ,σ,−v) = Φ₁₀(ρ,σ,v)。
+  步骤 2：由 Φ₁₀ 全纯性（尖点形式定义的标准部分）+ ℍ₂ 连通性，用恒等定理将等式从
+  收敛区域解析延拓到全 ℍ₂。见推导 phi10-even-in-v--via-borcherds-product。
+
+  下游用途（吸引子围道）要求等式在全 ℍ₂ 成立，不能只在收敛区域，故步骤 2 承重。
+
   【变量换名】kawai-1997 用 (τ,z,σ)，本项目 holography 区用 (ρ,v,σ)，对应关系
   τ↔ρ、z↔v、σ↔σ（见 literature/extractions/phi10-periodicity-and-product.md 未解决疑问 2）。
 author: curator
