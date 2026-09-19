@@ -1,0 +1,27 @@
+id: holography.phi10-borcherds-product-convergence
+kind: proposition
+title: Φ₁₀ 的 Borcherds 乘积在适当区域收敛
+statement: |
+  Igusa 尖点形式 Φ₁₀ 的 Borcherds 乘积表示
+    Φ₁₀(Ω) = e^{2πi(ρ+σ+v)} ∏_{(m,n,l)>0} (1 − e^{2πi(mρ+nσ+lv)})^{c(4mn−l²)}
+  在 Siegel 上半空间 ℍ₂ 的某个区域内绝对收敛，定义一个全纯函数。
+  （具体收敛区域形式未在本项目已获取文献中逐字给出；标准结果是尖点附近的适当锥形区域。）
+uses:
+  - holography.igusa-cusp-form-phi10-v2
+uses_conventions: []
+sources:
+  - ref: kawai-1997
+    loc: "§5, eq.(5.13)（援引 Gritsenko-Nikulin 的 Borcherds 升举结果，但未逐字陈述收敛性）"
+notes: |
+  本命题是 Borcherds 升举定理（Borcherds 1995, Gritsenko-Nikulin 1998 alg-geom/9611028）
+  的标准组成部分。kawai-1997 援引该结果给出 Φ₁₀ 的乘积公式，但作为物理综述未逐字陈述
+  收敛性或收敛区域的具体形式。
+
+  本项目未获取 Borcherds 1995 或 Gritsenko-Nikulin 1998 原文逐字，故无法给出收敛区域
+  的精确陈述。标准结果是：Borcherds 乘积在 Siegel 上半空间的尖点附近某个锥形区域
+  （典型形如 Im Ω 充分大）绝对收敛。
+
+  本卡的作用是让「偶性与周期性推导依赖收敛性」这一前提在图中可见，能被 why/report 追踪。
+author: curator
+created: "2026-09-20"
+tags: [bh-entropy, mock-modular]

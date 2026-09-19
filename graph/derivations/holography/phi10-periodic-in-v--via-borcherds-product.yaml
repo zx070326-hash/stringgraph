@@ -1,0 +1,42 @@
+id: holography.phi10-periodic-in-v--via-borcherds-product
+target: holography.phi10-periodic-in-v
+kind: proof
+status: rigorous
+depends_on:
+  - id: holography.igusa-cusp-form-phi10-v2
+  - id: holography.phi10-borcherds-product-convergence
+sources:
+  - ref: kawai-1997
+    loc: "§5, eq.(5.13) + §2, eq.(2.19)（Borcherds 乘积公式与变量定义）"
+summary: |
+  从 Borcherds 乘积 χ₁₀(Ω) = pqy ∏_{(k,l,r)>0} (1−p^k q^l y^r)^{c(4kl−r²)} 推导 v→v+1 周期性。
+
+  **步骤 1（收敛区域内的周期性）**：在乘积收敛的区域，每个因子的 y 指数 r 都是整数
+  （乘积指标集 r∈ℤ），前因子 pqy 的 y 指数是 1。因此 χ₁₀ 只含 y 的整数次幂。
+  由 y = e^{2πiv}，在 v→v+1 下 y → y·e^{2πi} = y（因为 e^{2πi}=1），故 χ₁₀(v+1) = χ₁₀(v)
+  在收敛区域成立。
+
+  **步骤 2（解析延拓到全 ℍ₂）**：Φ₁₀ 是 Sp(4,ℤ) 权 10 尖点形式，故在整个 Siegel 上半空间 ℍ₂
+  上全纯（模形式定义的标准部分）。定义 f(Ω) := Φ₁₀(ρ,σ,v) 与 g(Ω) := Φ₁₀(ρ,σ,v+1)，
+  两者都在 ℍ₂ 上全纯。步骤 1 证明它们在收敛区域（ℍ₂ 的非空开子集）上相等。
+  ℍ₂ 连通，由恒等定理（两个全纯函数在连通域的开子集上相等 ⇒ 处处相等），
+  得 f ≡ g 于全 ℍ₂，即 Φ₁₀(ρ,σ,v+1) = Φ₁₀(ρ,σ,v) 于全 ℍ₂。
+notes: |
+  **前提差异（周期性 vs 偶性）**：
+  - 周期性推导**不需要重排**无穷乘积（y=e^{2πiv} 在 v→v+1 下自动不变，无需 r→−r 映射），
+    故不依赖绝对收敛来做重排。
+  - 但仍需收敛性 (phi10-borcherds-product-convergence) 来**定义函数** χ₁₀（只有在乘积收敛处
+    才有函数值），以及步骤 2 的延拓前提（恒等定理只能在函数定义了的地方应用）。
+
+  **步骤 1 关键点**：
+  kawai-1997 eq.(5.13) 给出的指标集是：(k,l,r) 满足 k>0 且 l≥0；或 k≥0 且 l>0；或 k=l=0 且 r<0。
+  三个条件并集覆盖的 r 全是整数，无分数次幂。
+
+  **步骤 2 关键点**（与偶性推导相同）：
+  - "Φ₁₀ 在 ℍ₂ 上全纯"是尖点形式定义的标准部分（Siegel 模形式 := 满足变换律的全纯函数 + 尖点条件），
+    igusa-cusp-form-phi10-v2 断言它是"Sp(4,ℤ) 权 10 尖点形式"已隐含全纯性。
+  - ℍ₂ 连通性：Siegel 上半空间 ℍ₂ = {Ω ∈ M₂(ℂ) : Ω=Ω^T, Im Ω > 0} 是 ℂ³ 的开子集，连通。
+  - 恒等定理（复分析标准定理）：连通域上两个全纯函数在非空开子集上相等 ⇒ 处处相等。
+
+  【变量换名】kawai-1997 用 (τ,z,σ)，本项目 holography 区用 (ρ,v,σ)，对应 τ↔ρ、z↔v、σ↔σ。
+author: curator

@@ -1,0 +1,28 @@
+id: holography.phi10-periodic-in-v
+kind: proposition
+title: Φ₁₀ 在椭圆变量 v 下的整周期性
+statement: |
+  Igusa 尖点形式 Φ₁₀(ρ, σ, v) 满足
+    Φ₁₀(ρ, σ, v+1) = Φ₁₀(ρ, σ, v)。
+  这里 (ρ, σ, v) 是 Siegel 上半空间 Ω = [[ρ,v],[v,σ]] 的参数化（对应 Kawai 1997 的 (τ,σ,z)
+  通过换名 τ↔ρ, z↔v, σ↔σ）。
+uses:
+  - holography.igusa-cusp-form-phi10-v2
+uses_conventions: []
+sources:
+  - ref: kawai-1997
+    loc: "§5, eq.(5.13)（Borcherds 乘积公式，其显式结构直接蕴含整周期性）"
+notes: |
+  **推导路径（两步）**：
+  步骤 1：从 Borcherds 乘积的显式结构（kawai-1997 eq.(5.13)，乘积因子只含 y 的整数指数）
+  在乘积收敛区域证明周期性 Φ₁₀(ρ,σ,v+1) = Φ₁₀(ρ,σ,v)。
+  步骤 2：由 Φ₁₀ 全纯性（尖点形式定义的标准部分）+ ℍ₂ 连通性，用恒等定理将等式从
+  收敛区域解析延拓到全 ℍ₂。见推导 phi10-periodic-in-v--via-borcherds-product。
+
+  周期性与偶性的前提差异：周期性不需要重排无穷乘积（y=e^{2πiv} 在 v→v+1 下自动不变），
+  故不依赖绝对收敛来做重排，但仍需收敛来定义函数 + 步骤 2 的延拓前提。
+
+  【变量换名】kawai-1997 用 (τ,z,σ)，本项目用 (ρ,v,σ)，对应 τ↔ρ、z↔v、σ↔σ。
+author: curator
+created: "2026-09-20"
+tags: [bh-entropy, mock-modular]

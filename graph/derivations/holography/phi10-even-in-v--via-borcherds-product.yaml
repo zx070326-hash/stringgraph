@@ -1,0 +1,48 @@
+id: holography.phi10-even-in-v--via-borcherds-product
+target: holography.phi10-even-in-v
+kind: proof
+status: rigorous
+depends_on:
+  - id: holography.igusa-cusp-form-phi10-v2
+  - id: holography.phi10-borcherds-product-convergence
+sources:
+  - ref: kawai-1997
+    loc: "§5, eq.(5.13) + §4, eq.(4.32)（Borcherds 乘积公式与 c(N) 低阶值）"
+summary: |
+  从 Borcherds 乘积 χ₁₀ = pqy ∏_{(k,l,r)>0} (1−p^k q^l y^r)^{c(4kl−r²)} 推导 v→−v 对称性。
+
+  **步骤 1（收敛区域内的代数对称性）**：在乘积收敛的区域，按 (k,l) 拆分：
+  (k,l)≠(0,0) 块中 r 遍历全体整数，映射 r→−r 是双射且指数 c(4kl−r²) 通过 r² 不变，
+  故该块在 y→1/y 下逐因子配对后整体不变（需绝对收敛允许重排）。k=l=0 块由 c(N)=0 (N<−1)
+  截断为只有 r=−1 一项存活（c(−1)=2），化简为 (1−y^{−1})²。前因子并入后
+  pqy·(1−y^{−1})² = pq(y−2+y^{−1})，该组合在 y→1/y 下显然对称（y 与 y^{−1} 互换，−2 不变）。
+  两块合并得：χ₁₀(y→1/y) = χ₁₀(y) 在收敛区域成立。
+
+  **步骤 2（解析延拓到全 ℍ₂）**：Φ₁₀ 是 Sp(4,ℤ) 权 10 尖点形式，故在整个 Siegel 上半空间 ℍ₂
+  上全纯（模形式定义的标准部分，igusa-cusp-form-phi10-v2 隐含）。定义 f(Ω) := Φ₁₀(ρ,σ,v)
+  与 g(Ω) := Φ₁₀(ρ,σ,−v)，两者都在 ℍ₂ 上全纯。步骤 1 证明它们在收敛区域（ℍ₂ 的非空开子集）
+  上相等。ℍ₂ 连通，由恒等定理（两个全纯函数在连通域的开子集上相等 ⇒ 处处相等），
+  得 f ≡ g 于全 ℍ₂，即 Φ₁₀(ρ,σ,−v) = Φ₁₀(ρ,σ,v) 于全 ℍ₂。
+notes: |
+  **前提差异（偶性 vs 周期性）**：
+  - 偶性推导需要**绝对收敛**（步骤 1 的无穷乘积按 r→−r 重排），故依赖
+    holography.phi10-borcherds-product-convergence。
+  - 周期性推导不需要重排（y=e^{2πiv} 在 v→v+1 下自动不变），但仍需收敛来**定义函数**，
+    以及步骤 2 的延拓前提（只能在定义了的地方谈恒等定理）。
+
+  **步骤 1 关键点**：
+  (a) (k,l)≠(0,0) 时指标集对 r 无限制（r∈ℤ）——已逐字核实 kawai-1997 eq.(5.13) 脚注的三条件。
+  (b) r→−r 重排需绝对收敛，由 phi10-borcherds-product-convergence 提供。
+
+  **步骤 2 关键点**：
+  - "Φ₁₀ 在 ℍ₂ 上全纯"是尖点形式定义的标准部分（Siegel 模形式 := 满足变换律的全纯函数 + 尖点条件），
+    igusa-cusp-form-phi10-v2 断言它是"Sp(4,ℤ) 权 10 尖点形式"已隐含全纯性，但 statement 未显式写出。
+    本推导把该标准定义内容作为已知前提。
+  - ℍ₂ 连通性：Siegel 上半空间 ℍ₂ = {Ω ∈ M₂(ℂ) : Ω=Ω^T, Im Ω > 0} 是 ℂ³ 的开子集，连通。
+  - 恒等定理（复分析标准定理）：连通域上两个全纯函数在非空开子集上相等 ⇒ 处处相等。
+
+  **此卡是 research/attempts/ell-zero-wall-degeneracy/ 毕业的硬前置 [EXT-Even]。**
+  下游用途（吸引子围道上的偶性）要求等式在全 ℍ₂ 成立，不能只在收敛区域，故步骤 2 承重。
+
+  【变量换名】kawai-1997 用 (τ,z,σ)，本项目 holography 区用 (ρ,v,σ)，对应 τ↔ρ、z↔v、σ↔σ。
+author: curator
