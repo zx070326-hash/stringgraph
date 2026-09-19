@@ -25,9 +25,6 @@ summary: |
   执行 BSS Thm 5.4(b) 从 BSS 记号到 Rosselló/DMZ 记号的翻译，得到代表元范围内的等式
   d_*(m,n,ℓ) = (−1)^{ℓ+1} c_m^F(n,ℓ)（Rosselló 约定：m=P²/2 磁、n=Q²/2 电、ℓ=Q·P）。
 
-  **本推导的代数步骤在 η=+1（等价地 c=−1）的前提下成立；该前提本身未判定，见
-  holography.bss-rossello-dstar-normalization-constant。**
-
   **翻译路径包含符号核算**（proof.md §1 引理 1 + §3 引理 2 + §4 引理 3）：
   1. BSS 自己声明（footnote 10，p.50）其约定与 DMZ 的 Q↔P 互换：
      BSS 取 (n_B,ℓ_B,m_B) 其中 n_B=P²/2(磁)、m_B=Q²/2(电)、ℓ_B=Q·P；
