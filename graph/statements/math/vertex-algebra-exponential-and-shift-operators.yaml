@@ -1,0 +1,82 @@
+id: math.vertex-algebra-exponential-and-shift-operators
+kind: definition
+status: rigorous
+title: 顶点代数的指数算子 E^±(α,x) 与零模移位算子 Δ̄(α,x)（Li–Wang 2008 符号约定）
+statement: |
+  设 M(1) 是秩为 dim 𝔥 的 Heisenberg 顶点代数（见 math.lattice-vertex-algebra 的设定：
+  𝔥 带非退化对称双线性型 ⟨·,·⟩，ĥ 是相应仿射 Heisenberg 代数，M(1) 是其 level 1 最高权模）。
+  对 α ∈ 𝔥，记 α(n)（n ∈ Z）为 ĥ 在 M(1) 上的振子模。
+
+  **(1) 指数算子 E^±(α,x)（(3.2)）：**
+    E^±(α,x) := exp( Σ_{n=1}^∞ (α(±n)/(±n)) x^{∓n} ) ∈ (End M(1))[[x^{∓1}]]。
+  展开写出：E^-(α,x) = exp(Σ_{n≥1} (α(-n)/(-n)) x^n) 只含**产生模** α(-n)（n≥1）；
+  E^+(α,x) = exp(Σ_{n≥1} (α(n)/n) x^{-n}) 只含**湮灭模** α(n)（n≥1）。
+  立即性质（原文逐字列出，无需证明的定义直接推论）：
+    E^±(0,x) = 1,
+    E^±(α,x_1) E^±(β,x_2) = E^±(β,x_2) E^±(α,x_1),
+    E^+(α,x_1) E^-(β,x_2) = (1 − x_2/x_1)^{⟨α,β⟩} E^-(β,x_2) E^+(α,x_1),
+    E^±(α,x) E^±(β,x) = E^±(α+β,x)。
+
+  **(2) 零模移位算子 Δ̄(α,x)（p.11，无编号式）：**
+    Δ̄(α,x) := (−x)^{α(0)} exp( Σ_{n=1}^∞ (α(n)/(−n)) (−x)^{−n} ) = (−x)^{α(0)} E^+(−α,−x)。
+  它是 (End W)[[x, x^{-1}]] 中良定义的元素，条件是：W 是顶点代数 M(1) 的模，
+  α(0) 在 W 上半单作用且本征值全为整数，α(n)（n ≥ 1）在 W 上局部幂零。
+  立即性质：Δ̄(0,x) = 1, Δ̄(α,x_1)Δ̄(β,x_2) = Δ̄(β,x_2)Δ̄(α,x_1), Δ̄(α,x)Δ̄(β,x) = Δ̄(α+β,x)。
+
+  **(3) 与记号 Δ(α,x) 的关系（Remark 3.3）：** 文献 [Li2][Li3] 里另有记号
+    Δ(α,x) := x^{α(0)} E^+(−α,−x)，
+  两者相差 Δ̄(α,x) = (−1)^{α(0)} Δ(α,x)（因 (−x)^{α(0)} = (−1)^{α(0)} x^{α(0)}）。
+  本卡以 Δ̄（不带 (−1)^{α(0)} 因子分离）为准，(3.10)/(3.14) 用的正是 Δ̄。
+
+  **(4) 🔴 符号约定归属（脚注 3，逐字，必须钉死）：**
+    「the notation E^-(α,x) in [Li3] is the notation E^-(−α,x) in this paper and in [FLM],
+    and all the related formulas have been adjusted correspondingly」
+  即：**本卡 (1)(2) 中的 E^±、Δ̄ 采用的是 Li–Wang 2008 本文（与 [FLM]）的符号约定**——
+  同一记号 E^-(α,x) 在 H.-S. Li 早期论文 [Li3]（= Li, *Extension of vertex operator algebras by a
+  self-dual simple module*, J. Algebra 187 (1997)）里代表本卡的 E^-(−α,x)（参数正负号相反）。
+  **任何从 [Li3] 或引用 [Li3] 记号的文献里搬运涉及 E^- 的公式到本图，必须先做这一步符号翻译，
+  否则符号会整体错一遍**（这是本项目 physical-exponential-equals-lattice-voa 证明尝试
+  proof.md §5 里三次独立核对的来源）。
+uses: []
+uses_conventions: []
+sources:
+  - ref: li-wang-2008
+    loc: "(3.2), p.11（E^± 定义与四条立即性质）；p.11 无编号式（Δ̄ 定义、良定义条件与三条立即性质）；Remark 3.3, p.11（Δ 记号、脚注 3 的符号换算警告）"
+    note: |
+      **L1（researcher 2026-09-18 全文逐页读图 arXiv:0802.0173 pp.9–24；
+      逐字文本见 literature/extractions/math-sources.md §36.6(a)(b)）。**
+      (3.2) 逐字：「For α ∈ 𝔥, we set ([LW1], [FLM]) E^±(α,x) = exp( Σ_{n=1}^∞ (α(±n)/(±n)) x^{∓n} ).」
+      Δ̄ 定义逐字：「Set Δ̄(α,x) = (−x)^{α(0)} exp( Σ_{n=1}^∞ (α(n)/(−n)) (−x)^{−n} ) = (−x)^{α(0)} E^+(−α,−x).
+      This is a well defined element of (End W)[[x, x^{−1}]] for any module W for vertex algebra M(1),
+      on which α(0) acts semisimply with only integer eigenvalues and α(n) for n ≥ 1 act locally
+      nilpotently.」
+      脚注 3 逐字（紧接 Remark 3.3 的 Δ(α,x) 定义之后）：「Note that the notation E^-(α,x) in [Li3] is the
+      notation E^-(−α,x) in this paper and in [FLM], and all the related formulas have been adjusted
+      correspondingly.」
+      ⚠ 本卡**不引** [Li3]、[Li2]、[FLM] 原文本身（本项目未独立读过它们，对它们仍是 L3，
+      见 math-sources.md §36.6(h)）；(3) 里对 Δ(α,x) 的转述只是搬运 Li–Wang 论文里对 [Li2][Li3]
+      记号的**转述**，不是对 [Li2][Li3] 的独立核实。
+tags: [vertex-algebra, heisenberg, lattice, exponential-operator, notation, math-input]
+notes: |
+  【为什么合成一张卡而不是两张】E^±(α,x) 与 Δ̄(α,x) 在 Li–Wang p.11 是紧邻定义的一对算子
+  （Δ̄ 直接由 E^+ 构造：Δ̄(α,x) = (−x)^{α(0)} E^+(−α,−x)），且 🔴 符号约定归属（脚注 3）同时约束
+  两者在 (3.10)/(3.14) 里的用法——拆成两张卡会迫使脚注 3 的警告要么重复两遍，要么让其中一张卡
+  依赖另一张卡才能读懂自己的符号，价值不大。判据依「一个节点一个命题」：这里的"命题"是
+  "(3.10)/(3.14) 右端两个记号在 Li–Wang 本文里精确是什么，以及它们在跨文献引用时如何变号"，
+  是单一、不可再拆的一件事。
+
+  【为什么单独立卡而非塞进 math.lattice-vertex-algebra 的 notes】该卡的 statement 正文里已经把
+  E^-、Δ̄ 当作"照抄的记号"使用（原文逐字："本卡照抄为记号，见 gaps"），但从未给出它们的显式定义——
+  这正是 research/attempts/physical-exponential-equals-lattice-voa/status.yaml 第 157–160 行
+  （C1 移交条目）指出的缺口。补上本卡后，math.lattice-vertex-algebra 的 (3.10) 里 E^-(−α,x)、
+  Δ̄(β,x)、Δ̄(α,−x) 三处都有精确定义可查，且符号翻译陷阱在一处钉死。
+
+  【search 查重】`uv run stringgraph search "E^-"`、`"Delta"`、`"单值"`（2026-09-19）：
+  前者无命中；"Delta" 命中的是 math.locality-ope-equivalences 等无关卡（用 delta 分布，非本卡的
+  Δ̄ 零模算子）；"单值" 无命中。确认非重复。
+
+  【与 (b) 里 Δ 记号的边界】Remark 3.3 说 Δ(α,x) 的三条基本性质「were established in [Li2] and
+  [Li3]」——这条历史来源本卡不独立核实（同上，[Li2][Li3] 仍是 L3），本卡只登记 Li–Wang 2008
+  自己转述的 Δ 定义式，不登记 [Li2][Li3] 对 Δ 性质的证明。
+author: curator
+created: "2026-09-19"
