@@ -9,22 +9,6 @@ statement: |
   【命题】（BSS Appendix B §B.4, eq (B.35)–(B.42)）B₂ ⊆ B，即：
   对一切满足 m,n>0、m≥n/N、0≤|ℓ|≤2n（N=1 时 m≥n）的整数三元组 (n,ℓ,m)，
   围道变形不等式 (5.49) 恒成立。
-
-  【证明骨架】（逐字来自 BSS Appendix B，本项目独立数值验证见下方来源 note）
-  用 m≥n/N 把 (5.49) 的极小值放缩到一个只依赖 ℓ/n 的下界；
-  令 a := ℓ/(2n) ∈ [−1,1]（用 |ℓ|≤2n），改写不等式为
-    j² + 4ajn₁N + 4n₁²N² − 1 ≥ 0（对一切满足 s(s+1)≡0 mod n₁ 的整 n₁,s,j 奇）；
-  用 |a|≤1 放缩 4ajn₁N ≥ −4|j||n₁N| 得
-    j² + 4ajn₁N + 4n₁²N² − 1 ≥ (|j| − 2|n₁N|)² − 1；
-  因 j 为奇整数、n₁∈ℤ（N=1 时 n₁ 本身为整数；一般 N 时 n₁∈Nℤ 使 n₁N 也为整数），
-  |j| − 2|n₁N| 为奇整数，其平方 ≥ 1，故上式右边 ≥ 0。∎
-
-  **符号关系由数值交叉验证确立**：BSS 与 Rosselló/DMZ 的整体符号归一化（Φ̃₁ vs Φ₁₀）
-  差一个全局常数 c=−1，由 research/attempts/gap-102b-multicenter-residue proof.md §4
-  在对称代表元 (1,1,0) 处数值交叉验证确立（本项目 coefficients.py、Rosselló Table 1、
-  BSS §5.3 三方均报 +50064，只有 c=−1 一致），但未从 BSS 一般乘积公式 (5.2) 独立推导
-  N=1 特化的权与零点结构来做第一性原理确认——这是转述信任而非独立计算，
-  数值证据强，但仍属本证明的剩余技术缺口。
 uses:
   - holography.bss-charge-set-b2-definition
 uses_conventions: []

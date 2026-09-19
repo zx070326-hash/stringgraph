@@ -1,0 +1,34 @@
+id: holography.bss-prop-b1-b2-inclusion--via-bss-completing-square
+target: holography.bss-prop-b1-b2-inclusion
+kind: proof
+status: rigorous
+depends_on:
+  - id: holography.bss-charge-set-b2-definition
+sources:
+  - ref: bhand-sen-singh-2023
+    loc: "Appendix B §B.4, eq (B.35)–(B.42)（p.61-62，完成配方 + 奇偶性论证，B₂⊆B 的显式证明）"
+    note: |
+      literature/extractions/bhand-sen-singh-2023.md E9 逐字核对：§B.4 的关键步 (B.41)–(B.42)
+      给出 (|j|−2|n₁N|)²−1≥0 这一奇偶性论断。本项目
+      research/attempts/gap-102b-multicenter-residue/scripts/verify_A2B2_inequality.py
+      独立数值验证（1680+68880 组无反例，纯 Python + Fraction 精确算术），confirm BSS
+      证明骨架的完成配方步骤与奇偶性论断，运行记录见 proof.md §2 附录。
+summary: |
+  用完成配方与奇偶性论证证明 B₂ ⊆ B（逐字来自 BSS Appendix B，本项目独立数值验证）。
+
+  **证明步骤**（BSS Appendix B §B.4, eq (B.35)–(B.42)）：
+  1. 用 m≥n/N 把围道变形不等式 (5.49) 的极小值放缩到一个只依赖 ℓ/n 的下界；
+  2. 令 a := ℓ/(2n) ∈ [−1,1]（用 B₂ 定义中的 |ℓ|≤2n），改写不等式为
+       j² + 4ajn₁N + 4n₁²N² − 1 ≥ 0
+     （对一切满足 s(s+1)≡0 mod n₁ 的整 n₁,s,j 奇）；
+  3. 用 |a|≤1 放缩 4ajn₁N ≥ −4|j||n₁N| 得
+       j² + 4ajn₁N + 4n₁²N² − 1 ≥ (|j| − 2|n₁N|)² − 1；
+  4. 因 j 为奇整数、n₁∈ℤ（N=1 时 n₁ 本身为整数；一般 N 时 n₁∈Nℤ 使 n₁N 也为整数），
+     |j| − 2|n₁N| 为奇整数，其平方 ≥ 1，故上式右边 ≥ 0。∎
+
+  **全程无物理输入，纯代数不等式论证**。本项目
+  research/attempts/gap-102b-multicenter-residue/scripts/verify_A2B2_inequality.py
+  独立数值验证（1680+68880 组电荷三元组无反例，纯 Python + Fraction 精确算术），
+  confirm BSS 证明骨架的完成配方步骤与奇偶性论断。
+author: graph-curator
+created: "2026-09-20"
