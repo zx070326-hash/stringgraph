@@ -103,9 +103,12 @@ summary: |
   Humphreys Table 1 的次数表（2, 8, 12, 14, 18, 20, 24, 30）解释「为什么」是 |x|² 的幂，本推导**不需要**它。
 gaps:
   - |
-    **两座桥的来源在本项目 L0**：math.adjoint-weights-are-roots-and-zero（GTM 9 §8）与
-    math.chevalley-restriction-theorem（GTM 9 §23）内容都未核实，两卡有效状态 physical-argument，
-    本推导被压在 physical-argument。researcher 结清 Q39 并核实 §8 后两卡可升 rigorous。
+    **2026-09-19 更正（curator，e8-own-status 审计；原文见 notes 顶部）**：本条原写「两座桥的来源在本项目
+    L0……两卡有效状态 physical-argument」——已过时。math.adjoint-weights-are-roots-and-zero 已于
+    2026-09-13 升级为 rigorous（kirillov-2008 L1 页图 + humphreys-1972 L1⁻）。现在只剩
+    math.chevalley-restriction-theorem（GTM 9 §23）仍 L0/physical-argument，从**依赖侧**单独压低
+    effective；researcher 结清 Q39/Q50.1 后该卡可升 rigorous，effective 会随之解锁。
+    **但 own status 不会因此自动跟着升**——本推导自身另有一条独立的封顶，见下一条 gap。
   - |
     **(2) 的根系识别没有节点**：「𝔢₈ 相对 𝔥 的根集合是 E₈ 型根系，且 E₈ 型根系在同构意义下唯一，
     故与 Humphreys 的显式列表同构」——前半句是 𝔢₈ 的定义方式（以 Dynkin 图 E₈ 定义的单李代数）
@@ -116,8 +119,13 @@ gaps:
     多项式函数为零 ⇒ 多项式为零」与「多项式恒等式在任意交换代数上代入仍成立」，初等；但没有来源，
     也没有 reviewer 复核。
   - |
-    **本推导自身的 (4)(5)(6) 是有限步初等推理**，若 reviewer 复核并按 docs/STATUS_LEVELS.md 的例外条款
-    记 `reviewer-verified`，本推导的 own status 可改 rigorous（kind 改 proof）；届时有效状态仍由两座桥决定。
+    **本推导自身的 (4)(5)(6) 是有限步初等推理**，已由 reviewer-batch18（2026-09-11，见 notes）复核确认；
+    但 own status **没有**升 rigorous，因为 reviewer 同批复核明确**不签 (2)**（根系识别，上一条 gap），
+    而 docs/STATUS_LEVELS.md 的 rigorous 例外条款要求「陈述的前提已完整写出」——(2) 那条前提在本图
+    完全没有节点，不满足该条件。**2026-09-19 复核（curator，e8-own-status 审计）维持这一判断**：
+    这不是"用 own 模仿弱依赖"，而是本推导自身确实含有一条未立卡的前提。若要解开，需要新立一张
+    卡承载「𝔢₈ 相对 𝔥 的根系 ≅ Humphreys 240 元列表（Serre 存在定理 + ADE 根系分类唯一性）」并接成
+    depends_on——这超出本次审计的写入范围（不许碰 graph/statements/**），留给 lead 转派 curator。
   - |
     **Lean 证的是 ℚ⁸，用在 ℂ⁸/ℝ²⁴⁸ 上**：(3) 末与 (6) 的域扩张论证是多项式恒等式的标准事实，
     未形式化；E8Roots.lean 的 docstring 未提这一点。
@@ -135,7 +143,43 @@ notes: |
   Tr F² ↔ 60|x|² 的对应下逐位一致；抽取记录 math-sources §44.7 的手算（按 Σx⁴、Σ_{i<j}x_i²x_j² 等展开）
   是第三份独立复算。三者互证。
 
-  【有效状态】physical-argument（被两座桥压住）。这比 --via-casimir-structure 的 physical-argument
-  在**内容**上强得多（系数有了机器检查的来路），但在等级上暂时持平；工具取最强推导，两条并存。
+  【有效状态】physical-argument。**不再**「被两座桥压住」（一座桥即 math.adjoint-weights-are-roots-and-zero
+  已于 2026-09-13 升 rigorous）；现由 (i) math.chevalley-restriction-theorem 从依赖侧压低 effective，
+  与 (ii) own status 自身被 (2) 的根系识别缺口封在 physical-argument（见下方「own status 评估」）共同
+  决定。这比 --via-casimir-structure 的 physical-argument 在**内容**上强得多（系数有了机器检查的来路），
+  但在等级上暂时持平；工具取最强推导，两条并存。
+
+  【2026-09-19 own status 评估（curator，e8-own-status 审计，回应 lead 转达的 scout 论证）】
+
+  lead 转达的具体问题：「Tr_ad(F)^k = Σ_α α(H)^k 只在 F = H ∈ 𝔥 时显然成立；推广到一般 F ∈ 𝔤 正是
+  不变多项式限制论证——两边在 Cartan 上相等，Cartan 与每个共轭类相交，故处处相等。这条『轨迹延拓』
+  论证，究竟是本推导自己隐藏做的，还是完全由 math.chevalley-restriction-theorem 这条依赖边承担？」
+
+  核查结果：**完全由依赖边承担，不在本推导的 own 步骤里**。证据：
+  1. math.chevalley-restriction-theorem 的 statement (1) 逐字就是这条引理本身：「一个 Ad-不变多项式
+     函数由它在 𝔥 上的取值唯一确定；于是两个 Ad-不变多项式若在 𝔥 上相等，就在整个 𝔤 上相等」。
+  2. 该卡自己的 notes 写明：「本卡之所以出现在 math.e8-adjoint-trace-identities--via-root-power-sums
+     的依赖里，是因为那张迹恒等式卡的 statement 说的是任意 𝔢₈ 取值的二形式 F，比 Cartan 元宽」——
+     即该卡自认自己就是为这条推广而设的桥。
+  3. 该卡的推导 math.chevalley-restriction-theorem--via-conjugacy-and-density 的 summary (1) 才是
+     scout 描述的那个具体机制（半单元素都 Ad-共轭进某个 Cartan 子代数 + 正则半单元素 Zariski 稠密 +
+     多项式在稠密集上为零则恒为零）——这正是「Cartan 与每个共轭类相交」论证的严格版本，它是
+     **chevalley-restriction-theorem 自己的推导**，不是 e8-trace-identities 这条推导写的。
+  4. 本推导（--via-root-power-sums）的 summary 第 (5) 步只做了两件事：(i) 验证
+     X ↦ Tr(ad X)^k 是 Ad-不变多项式（迹在共轭下不变，`Tr((Ad_g ad X Ad_g⁻¹)^k) = Tr((ad X)^k)`，
+     一行初等论证，不需要额外来源）；(ii) **引用**上面 (4) 的两边在 𝔥 上相等 + chevalley-restriction (1)
+     的单性结论，得到在整个 𝔢₈(ℂ) 上相等。这是显式引用一条专门为此设的依赖卡的结论，不是重新做
+     一遍轨迹延拓论证，也不是把它悄悄藏进 own 步骤。
+
+  结论：**scout 的担心不成立**——(5) 里的轨迹延拓不是本推导自己隐藏的论证，是显式挂在
+  math.chevalley-restriction-theorem 这条 depends_on 边上，且该卡的 statement 与其自身推导逐字
+  承担了这条内容。lead 原始框架（「own 被下调以模仿弱依赖」）也不完全对：本推导 own status 确实该
+  维持 physical-argument，但理由不是"模仿两座桥的弱"，而是本推导自己在步骤 (2)（根系识别，
+  Φ(𝔢₈,𝔥) ≅ Humphreys 240 元列表）里用了一条本图完全没有节点承载的前提（Serre 存在定理 + ADE
+  根系分类唯一性；math.e8-root-system 明文「本卡不断言 (b)」）。除 (2) 外，own 的其余步骤
+  (1)(3)末(4)(5)(6) 都是有限、初等、且已被 reviewer-batch18（2026-09-11）复核或直接引用依赖卡结论
+  的步骤，不含额外的手摆或未写出的断言。**own status 维持 physical-argument 不变**——这是本审计
+  的结论，不是没查就抄旧值：如果哪天 (2) 的隐含前提被立卡并接成 depends_on，own 才有理由升 rigorous，
+  届时 effective 仍会被 math.chevalley-restriction-theorem 单独封顶，直至它自身也升级。
 author: curator
 created: "2026-09-11"
