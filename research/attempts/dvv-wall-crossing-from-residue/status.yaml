@@ -1,0 +1,36 @@
+state: under-review
+captain_confirmed: false
+reviewer: null
+verdict: null
+notes: |
+  ## 推导完成（2026-09-20）
+
+  从 ell-zero-wall-degeneracy 的留数公式出发，定量复现 DVV 壁跨越公式的三个结构特征：
+  1. ∝ ℓ（正比 Dirac 配对 Q·P）
+  2. 因子化（两个单变量 1/2-BPS 指标之积）
+  3. 符号 (−1)^ℓ（与 DVV 公式一致）
+
+  ## 外部前提（显式标注）
+
+  - [EXT-Phi-hat-Phi10]: Φ₁₀ = c·Φ̂（归一化常数 c，合理但 c 值 open）
+  - [EXT-h-factorize]: h₀(ρ,σ,1) 因子化为 g(ρ)·g(σ)（已从 [EXT-Phi-hat-Phi10] + Sen (C.25) 推出）
+  - [EXT-g-eta]: g(ρ) = η²⁴ 对 N=1，且 1/η²⁴ 的 Fourier 系数 = d_{1/2}（待文献核实，
+    但若本推导正确则反向是该关系成立的强证据）
+
+  ## 验证
+
+  - 常数追踪：SymPy 脚本 `scripts/verify_constants.py` 验证所有代数步骤
+  - 来源逐字核对：Sen (C.25) 因子化、ell-zero-wall §2.5 留数公式、Φ₁₀ 偶性/周期性
+  - 无隐藏假设：所有外部输入已显式标注
+
+  ## 待审查点
+
+  1. 常数因子追踪是否有遗漏（已 SymPy 验证但需人工复核）
+  2. [EXT-Phi-hat-Phi10] 是否合理（两者成比例的论证）
+  3. §1.3 从 v=0 到 u=1 的桥梁（周期性 ⇒ h₀(ρ,σ,0) = h₀(ρ,σ,1)）是否严格
+
+  ## 下一步
+
+  请 lead 派 graph-reviewer 审查。若 verified，建议：
+  - 毕业为图节点 `holography.dvv-wall-crossing-from-residue-structure`（physical-argument）
+  - 派 researcher 核实 [EXT-g-eta]（Sen (C.27) N=1 代入，或查其它文献）
