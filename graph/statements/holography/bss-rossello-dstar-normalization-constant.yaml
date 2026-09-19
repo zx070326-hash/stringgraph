@@ -43,7 +43,7 @@ sources:
   - ref: bhand-sen-singh-2023
     loc: "p.40 正文：'for N=1, the CHL partition function Φ̃_k⁻¹ is exactly the inverse of the Igusa cusp form Φ₁₀'（逐字原句）"
   - ref: bhand-sen-singh-2023
-    loc: "eq (5.69)：数值 d*(10,14,5)=50064（BSS 记号 (n,ℓ,m)，对应 Rosselló (m,n,ℓ)=(1,1,0)）"
+    loc: "eq (5.69)：数值 d*(10,14,5) = d*(1,0,1) = 50064（BSS 用 S-对偶联系两组；BSS 记号 (n_B,ℓ_B,m_B)=(1,0,1) 对应 Rosselló (m,n,ℓ)=(1,1,0)）"
   - ref: rossello-2024
     loc: "eq (2.22)：围道虚部 ρ₂=2nΛ、σ₂=2mΛ、v₂=−ℓΛ，实部 [0,1]³"
   - ref: rossello-2024
@@ -76,11 +76,29 @@ notes: |
   注意 ℓ=0 时锚点对 v 虚部符号不敏感，所以上式与 ℓ≠0 的任何壁跨越问题无关，
   是干净的。
 
-  **候选出口**（均未被本轮排除）：
-  (a) BSS "exactly the inverse" 是松散措辞，不承诺整体正负号/归一化；
-  (b) Rosselló（或本项目 coefficients.py）用的 Φ₁₀ 归一化与 BSS 差整体 −1；
-  (c) 某个定义式的符号被本项目 extraction 读错；
-  (d) 三重积分定向约定（Fubini vs 楔积）确为分歧点，η=−1 是正确解释。
+  **候选出口**（相对可信度标注）：
+  (a) BSS "exactly the inverse" 是松散措辞，不承诺整体正负号/归一化（有可能，
+      松散措辞在物理文献里常见）；
+  (b) Rosselló（或本项目 coefficients.py）用的 Φ₁₀ 归一化与 BSS 差整体 −1
+      （有可能，且 Rosselló 是否明示其 Φ₁₀ 出处本身待查）；
+  (c) 某个定义式的符号被本项目 extraction 读错（可能性极低，两份 extraction 已
+      交叉核对）；
+  (d) 三重积分定向约定（Fubini vs 楔积）确为分歧点，η=−1 是正确解释（**很可能
+      不成立，但未被排除**——这类围道积分在物理文献里的通行用法是对三个实圈
+      各自 0→1 的迭代积分 Fubini，次序无关；这是**惯例判断，不是证明**，且两
+      篇都没明写）；
+  (e) `igusa-cusp-form-phi10-v2` 的 sources 记有（有据可查，lead 已 grep 核实
+      确在该文件内）：`sen-2008-precision-counting`, `arXiv:0708.1270v4 Appendix C,
+      (C.25)/(C.26)：Φ̂(ρ,σ,v) = −4π²v²g(ρ)g(σ) + O(v⁴)`。Sen 的 Φ̂ 在 v→0 的首项
+      **带负号**。若标准归一化的 Φ₁₀ 同一首项为 `+4π²v²g(ρ)g(σ)`，则 `Φ̂ = −Φ₁₀`
+      是一条**有来源的归一化关系**，配合 BSS 的 Φ̃₁ 与 Φ̂ 的关系即可定出 c=−1，
+      且**完全绕开围道、测度定向与数值锚点**。本项目已派 researcher（`phitilde`）
+      核查三件事：(i) Sen 的 Φ̂ 的定义与归一化（非其模变换律）；(ii) 标准 Φ₁₀ 首项
+      系数的符号及其出处；(iii) BSS 的 Φ̃_k 与 Sen 的 Φ̂ 的关系。**(e) 目前是候选，
+      不是结论；最有希望，正在核查。**
+
+      **注**：曾有 agent 声称存在 `Φ̃₁ = Φ̂ / 16π⁴` 一式，**lead 已逐字核实此句不在
+      本项目任何图节点内，来源不明，按存疑处理**。
 
   **与 ℓ=0 壁穿越的关系**：research/attempts/ell-zero-wall-degeneracy 证明了
   ℓ=0 时吸引子围道穿过 Φ₁₀ 的二阶零点（v=1/2），但留数 ∝ ℓ = 0 使 d* 自动良定。
