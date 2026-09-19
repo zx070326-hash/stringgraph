@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>stringgraph · 十一日探险志</title>
+<style>
+  :root {
+    color-scheme: light;
+    --surface-1:#fcfcfb; --plane:#f9f9f7;
+    --ink-1:#0b0b0b; --ink-2:#52514e; --ink-3:#898781;
+    --grid:#e1e0d9; --axis:#c3c2b7; --hair:rgba(11,11,11,0.10);
+    --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#eda100; --s5:#e87ba4; --s6:#008300;
+    --o1:#104281; --o2:#1c5cab; --o3:#2a78d6; --o4:#5598e7; --o5:#86b6ef;
+    --good:#0ca30c; --warn:#fab219; --serious:#ec835a; --critical:#d03b3b;
+    --good-ink:#006300;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --surface-1:#1a1a19; --plane:#0d0d0d;
+      --ink-1:#ffffff; --ink-2:#c3c2b7; --ink-3:#898781;
+      --grid:#2c2c2a; --axis:#383835; --hair:rgba(255,255,255,0.10);
+      --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500; --s5:#d55181; --s6:#008300;
+      --o1:#cde2fb; --o2:#9ec5f4; --o3:#6da7ec; --o4:#3987e5; --o5:#256abf;
+      --good-ink:#0ca30c;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --surface-1:#1a1a19; --plane:#0d0d0d;
+    --ink-1:#ffffff; --ink-2:#c3c2b7; --ink-3:#898781;
+    --grid:#2c2c2a; --axis:#383835; --hair:rgba(255,255,255,0.10);
+    --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500; --s5:#d55181; --s6:#008300;
+    --o1:#cde2fb; --o2:#9ec5f4; --o3:#6da7ec; --o4:#3987e5; --o5:#256abf;
+    --good-ink:#0ca30c;
+  }
+
+  * { box-sizing:border-box; }
+  body {
+    margin:0; background:var(--plane); color:var(--ink-1);
+    font-family: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-size:15px; line-height:1.75; -webkit-font-smoothing:antialiased;
+  }
+  .wrap { max-width:1060px; margin:0 auto; padding:0 24px 96px; }
+
+  /* ---------- masthead ---------- */
+  header.top {
+    border-bottom:1px solid var(--hair); margin-bottom:44px;
+    padding:52px 0 36px; display:flex; align-items:flex-end;
+    justify-content:space-between; gap:24px; flex-wrap:wrap;
+  }
+  h1 { font-size:34px; line-height:1.25; margin:0 0 10px; letter-spacing:-0.02em; font-weight:650; }
+  .sub { color:var(--ink-2); margin:0; max-width:56ch; }
+  .kicker {
+    font-size:12px; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--ink-3); margin:0 0 14px;
+  }
+  button.theme {
+    font:inherit; font-size:13px; color:var(--ink-2); background:var(--surface-1);
+    border:1px solid var(--hair); border-radius:8px; padding:7px 14px; cursor:pointer;
+  }
+  button.theme:hover { color:var(--ink-1); }
+
+  /* ---------- stat tiles ---------- */
+  .tiles { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:1px;
+           background:var(--hair); border:1px solid var(--hair); border-radius:12px; overflow:hidden; }
+  .tile { background:var(--surface-1); padding:18px 20px; }
+  .tile .v { font-size:30px; font-weight:600; line-height:1.15; letter-spacing:-0.02em; }
+  .tile .k { font-size:12.5px; color:var(--ink-2); margin-top:3px; }
+  .tile .n { font-size:11.5px; color:var(--ink-3); margin-top:2px; }
+
+  /* ---------- sections ---------- */
+  section { margin-top:64px; }
+  h2 { font-size:22px; margin:0 0 6px; font-weight:620; letter-spacing:-0.01em; }
+  h2 .num { color:var(--ink-3); font-weight:400; margin-right:10px; font-variant-numeric:tabular-nums; }
+  .lede { color:var(--ink-2); margin:0 0 26px; max-width:70ch; }
+
+  .card { background:var(--surface-1); border:1px solid var(--hair); border-radius:12px; padding:22px 24px 18px; }
+  .card + .card { margin-top:18px; }
+  .card h3 { font-size:15px; margin:0 0 2px; font-weight:600; }
+  .card .cap { font-size:12.5px; color:var(--ink-3); margin:0 0 18px; }
+
+  /* ---------- legend ---------- */
+  .legend { display:flex; flex-wrap:wrap; gap:6px 20px; margin:0 0 16px; font-size:12.5px; color:var(--ink-2); }
+  .legend span { display:inline-flex; align-items:center; gap:7px; }
+  .sw { width:11px; height:11px; border-radius:3px; flex:none; }
+
+  svg { display:block; width:100%; height:auto; overflow:visible; }
+  .grid-l { stroke:var(--grid); stroke-width:1; }
+  .axis-l { stroke:var(--axis); stroke-width:1; }
+  .tick { fill:var(--ink-3); font-size:11px; font-variant-numeric:tabular-nums; }
+  .dlabel { fill:var(--ink-1); font-size:12px; font-weight:600; }
+  .note-t { fill:var(--ink-2); font-size:11.5px; }
+
+  .panels { display:grid; grid-template-columns:1fr 1fr; gap:26px; }
+  @media (max-width:760px){ .panels{ grid-template-columns:1fr; } }
+  .scale-note { font-size:11.5px; color:var(--ink-3); margin:0 0 8px; }
+
+  /* ---------- acts ---------- */
+  .act { border-left:2px solid var(--axis); padding:2px 0 2px 22px; margin:0 0 30px; }
+  .act:last-child { margin-bottom:6px; }
+  .act .when { font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-3); }
+  .act h3 { font-size:17px; margin:3px 0 8px; font-weight:620; }
+  .act p { margin:0 0 8px; color:var(--ink-2); max-width:72ch; }
+  .act .fig { font-variant-numeric:tabular-nums; color:var(--ink-1); font-weight:600; }
+
+  /* ---------- ladder ---------- */
+  .ladder { display:grid; gap:1px; background:var(--hair); border:1px solid var(--hair); border-radius:10px; overflow:hidden; }
+  .rung { background:var(--surface-1); padding:14px 18px; display:grid;
+          grid-template-columns:104px 106px 1fr; gap:16px; align-items:baseline; }
+  @media (max-width:680px){ .rung{ grid-template-columns:104px 1fr; } .rung .rdate{ grid-column:1/-1; } }
+  .rung .rn { font-weight:650; font-variant-numeric:tabular-nums; }
+  .rung .rdate { font-size:12.5px; color:var(--ink-3); font-variant-numeric:tabular-nums; }
+  .rung .rb { font-size:13.5px; color:var(--ink-2); }
+  .rung code, code { font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:12.5px;
+                     background:var(--plane); border:1px solid var(--hair); border-radius:4px; padding:1px 5px; color:var(--ink-1); }
+
+  /* ---------- attempt cards ---------- */
+  .grid3 { display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:14px; }
+  .att { background:var(--surface-1); border:1px solid var(--hair); border-radius:10px; padding:14px 16px; }
+  .att .st { font-size:11.5px; font-weight:650; display:inline-flex; align-items:center; gap:6px; letter-spacing:0.02em; }
+  .att .nm { font-size:13.5px; font-weight:600; margin:7px 0 4px; line-height:1.45; word-break:break-word; }
+  .att .ds { font-size:12.5px; color:var(--ink-2); line-height:1.6; }
+  .att.dim { opacity:0.72; }
+  .ico { width:13px; height:13px; flex:none; }
+  .cap-badge { display:inline-block; margin-top:8px; font-size:11px; color:var(--good-ink);
+               border:1px solid var(--hair); border-radius:20px; padding:1px 9px; }
+
+  /* ---------- retraction log ---------- */
+  .retr { border:1px solid var(--hair); border-radius:12px; overflow:hidden; background:var(--surface-1); }
+  .retr .row { display:grid; grid-template-columns:96px 1fr; gap:18px; padding:15px 20px; border-top:1px solid var(--hair); }
+  .retr .row:first-child { border-top:none; }
+  @media (max-width:620px){ .retr .row{ grid-template-columns:1fr; gap:4px; } }
+  .retr .dt { font-size:12.5px; color:var(--ink-3); font-variant-numeric:tabular-nums; }
+  .retr .tt { font-size:14px; font-weight:600; margin:0 0 4px; }
+  .retr .bd { font-size:13px; color:var(--ink-2); margin:0; }
+
+  /* ---------- tables ---------- */
+  details.tv { margin-top:14px; }
+  details.tv > summary { font-size:12.5px; color:var(--ink-2); cursor:pointer; list-style:none;
+                         display:inline-flex; align-items:center; gap:6px; padding:4px 0; }
+  details.tv > summary::-webkit-details-marker { display:none; }
+  details.tv > summary::before { content:"▸"; color:var(--ink-3); font-size:10px; }
+  details.tv[open] > summary::before { content:"▾"; }
+  table { border-collapse:collapse; width:100%; font-size:12.5px; margin-top:10px; }
+  th, td { text-align:right; padding:6px 10px; border-bottom:1px solid var(--hair); font-variant-numeric:tabular-nums; }
+  th:first-child, td:first-child { text-align:left; font-variant-numeric:normal; }
+  th { color:var(--ink-3); font-weight:600; }
+
+  /* ---------- tooltip ---------- */
+  #tip { position:fixed; pointer-events:none; opacity:0; transition:opacity .09s;
+         background:var(--surface-1); border:1px solid var(--hair); border-radius:8px;
+         padding:8px 11px; font-size:12.5px; box-shadow:0 6px 22px rgba(0,0,0,.14); z-index:50; max-width:230px; }
+  #tip b { font-weight:650; }
+  #tip .tr { display:flex; justify-content:space-between; gap:16px; color:var(--ink-2); }
+  #tip .tr .tv2 { font-variant-numeric:tabular-nums; color:var(--ink-1); }
+
+  footer { margin-top:80px; padding-top:26px; border-top:1px solid var(--hair);
+           font-size:12.5px; color:var(--ink-3); }
+  footer p { margin:0 0 6px; max-width:76ch; }
+  a { color:inherit; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div>
+    <p class="kicker">stringgraph · 项目编年</p>
+    <h1>十一日探险志</h1>
+    <p class="sub">2026-09-10 → 2026-09-20。一张弦论结果依赖图从零长到 676 张陈述卡，
+      又从"整理已发表结果"转向"攻无人证过的命题"的全过程。下面每个数字都取自本仓库的
+      git 历史与 <code>stringgraph report</code>，未做平滑或估算。</p>
+  </div>
+  <button class="theme" id="themeBtn" type="button">切换明暗</button>
+</header>
+
+<div class="tiles">
+  <div class="tile"><div class="v">676</div><div class="k">陈述卡</div><div class="n">122 定义 · 554 命题</div></div>
+  <div class="tile"><div class="v">567</div><div class="k">推导</div><div class="n">一条陈述可挂多条</div></div>
+  <div class="tile"><div class="v">2150</div><div class="k">提交</div><div class="n">11 天，日均 195</div></div>
+  <div class="tile"><div class="v">41289</div><div class="k">Lean 行</div><div class="n">91 个自有 .lean 文件</div></div>
+  <div class="tile"><div class="v">205</div><div class="k">文献条目</div><div class="n">85 份抽取记录</div></div>
+  <div class="tile"><div class="v">15</div><div class="k">原创证明尝试</div><div class="n">7 verified · 4 abandoned</div></div>
+</div>
+
+<!-- ================= 三幕 ================= -->
+<section id="acts">
+  <h2><span class="num">01</span>三幕</h2>
+  <p class="lede">按提交的 scope 前缀分类，这十一天的重心迁移得非常干净：
+    <code>graph:</code> 主导的开荒与推广期 → <code>formal:</code> 主导的巩固期 →
+    <code>research:</code> 主导的探索期。第三幕开始时，图本身几乎停止生长。</p>
+
+  <div class="act">
+    <div class="when">第一幕 · 09-10 → 09-11</div>
+    <h3>开荒与爆炸式推广</h3>
+    <p>第一天种下无鬼定理链与图 schema，<span class="fig">95</span> 次提交。第二天多 agent 并行开闸，
+      单日 <span class="fig">1314</span> 次提交、新增 <span class="fig">528</span> 张陈述卡——
+      全部 676 张里的 78% 诞生于这一天。同期 <code>formal:</code> 257 次、<code>merge:</code> 168 次，
+      lead 基本只做合并。</p>
+    <p>代价当天就到账：09-11 三份文档被打上"under revision"横幅，其中形式化提纲带着
+      <span class="fig">15</span> 条 reviewer 确认的错误。速度与诚实在同一天被同时记录下来。</p>
+  </div>
+
+  <div class="act">
+    <div class="when">第二幕 · 09-12 → 09-14</div>
+    <h3>巩固：审计、换代、形式化</h3>
+    <p>提交量从 1314 掉到 223、4、83。重心转向 <code>formal:</code>（09-12 单日 93 次）与回译审计。
+      累计 <span class="fig">77</span> 张卡被标 <code>superseded_by</code> ——按项目铁律，改一个字就等于新建节点，
+      <code>ddf-operators</code> 一路换代到 v6，<code>no-ghost-theorem</code> 到 v4。</p>
+    <p>09-12 开出第一条原创证明尝试（D=10 反常自由分类）。09-14 无鬼定理阶梯的 N=5 台阶闭合。</p>
+  </div>
+
+  <div class="act">
+    <div class="when">第三幕 · 09-15 → 09-20</div>
+    <h3>转向探索</h3>
+    <p>09-15 起 <code>research:</code> 成为主力 scope（50 / 20 / 13 / 72 / 12 / 2）。
+      同期 <code>graph:</code> 六天合计只有 40 次——图停止推广，人力全部压到前沿。
+      09-18 是第三幕的峰值：<span class="fig">190</span> 次提交，research 72 + lit 52，
+      即"攻证明"与"逐字核实文献"各占一半。</p>
+    <p>这一幕产出 15 条原创尝试里的绝大部分，也产出了最多的撤回。</p>
+  </div>
+
+  <div class="card">
+    <h3>每日提交，按 scope</h3>
+    <p class="cap">两个面板各有自己的 y 轴上限（左 1314，右 190）。分面是因为 09-11 的峰值是右侧九天总和的 1.9 倍，
+      放在同一把尺子上右侧会完全不可读——刻度已在每个面板上标出，不要跨面板比较条高。</p>
+    <div class="legend" id="lgScope"></div>
+    <div class="panels">
+      <div>
+        <p class="scale-note">爆发期 09-10 → 09-12 · y 轴 0–1400</p>
+        <svg id="cBurst" viewBox="0 0 470 300" role="img" aria-label="09-10 至 09-12 每日提交堆叠柱状图"></svg>
+      </div>
+      <div>
+        <p class="scale-note">持续期 09-13 → 09-20 · y 轴 0–200</p>
+        <svg id="cSteady" viewBox="0 0 470 300" role="img" aria-label="09-13 至 09-20 每日提交堆叠柱状图"></svg>
+      </div>
+    </div>
+    <details class="tv"><summary>表格视图</summary><div id="tScope"></div></details>
+  </div>
+</section>
+
+<!-- ================= 推广 ================= -->
+<section id="growth">
+  <h2><span class="num">02</span>推广：图长到哪里了</h2>
+  <p class="lede">陈述卡累计数量。这条曲线的形状就是"推广史"本身——一次性的垂直爬升，
+    然后是九天几乎水平的平台。项目早就不靠加节点推进了。</p>
+
+  <div class="card">
+    <h3>陈述卡累计</h3>
+    <p class="cap">按文件在 git 中的创建日计。已换代（superseded）的卡仍计入——它们没有被删除，只是不再是当前表述。</p>
+    <svg id="cGrowth" viewBox="0 0 900 260" role="img" aria-label="陈述卡累计增长曲线"></svg>
+    <details class="tv"><summary>表格视图</summary><div id="tGrowth"></div></details>
+  </div>
+
+  <div class="card">
+    <h3>领土地图：11 个领域</h3>
+    <p class="cap">一个领域一根条，同一种颜色——条长已经编码了大小，不需要再用深浅重复编码一次。</p>
+    <svg id="cDomain" viewBox="0 0 900 400" role="img" aria-label="各领域陈述卡数量条形图"></svg>
+    <details class="tv"><summary>表格视图</summary><div id="tDomain"></div></details>
+  </div>
+
+  <p class="lede" style="margin-top:22px">
+    <strong>worldsheet 占 56%。</strong>这不是偏科，是路线选择：第一形式化目标
+    Goddard–Thorn 无鬼定理住在世界面，所有为它铺路的引理都堆在这里。
+    math（100 张）几乎全是为世界面链服务的数学基础设施。相对地，
+    cft 3 张、susy 4 张——这两块territory 基本还没开垦，图自己诚实地显示了这一点。</p>
+</section>
+
+<!-- ================= 状态 ================= -->
+<section id="status">
+  <h2><span class="num">03</span>诚实度谱系</h2>
+  <p class="lede">这是整个项目存在的理由：<code>status</code> 写的是该节点本身论证的严格程度，
+    不是"大家都信"。有效状态由工具沿依赖图向上传播计算，不手写。</p>
+
+  <div class="card">
+    <h3>675 张卡的严格性阶梯</h3>
+    <p class="cap">这五档是一条有序的严格性阶梯，故用单一色相由深到浅表示，而不是五种身份色。</p>
+    <svg id="cStatus" viewBox="0 0 900 180" role="img" aria-label="陈述卡有效状态分布"></svg>
+    <div class="legend" id="lgStatus" style="margin:18px 0 0"></div>
+    <p class="cap" style="margin:16px 0 0;display:flex;align-items:center;gap:8px">
+      <span style="display:inline-flex;align-items:center;gap:6px;color:var(--critical);font-weight:650;font-size:12px">
+        <svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="8" cy="8" r="6"/><path d="M5 5l6 6M11 5l-6 6"/></svg>
+        refuted 已反驳 · 1
+      </span>
+      <span>第 676 张。它不是阶梯上的一级而是另一种状态，故不进这条堆叠条——在 0.15% 的宽度上它也不可见。</span>
+    </p>
+    <details class="tv"><summary>表格视图（含 refuted）</summary><div id="tStatus"></div></details>
+  </div>
+
+  <p class="lede" style="margin-top:22px">
+    <strong>55% 是 physical-argument。</strong>一张 375 的条。
+    这个数字不是缺陷报告，是这张图的主要发现之一——弦论文献里大量被当作"已知"引用的结论，
+    其公开论证是物理学家式的，不是数学证明。项目的规矩是照实写，不四舍五入成 rigorous。
+    真正被机器检查过的只有 104 张（15%），严格证明 127 张（19%）。</p>
+
+  <div class="card" style="margin-top:22px">
+    <h3>审计核心：5 个里程碑</h3>
+    <p class="cap">只有里程碑需要人类（船长）逐条确认，且必须先通过回译审计——
+      先只看 YAML/Lean 把陈述翻回自然语言，再与原文比对。</p>
+    <div class="ladder">
+      <div class="rung"><span class="rn">approved</span><span class="rdate">rigorous</span>
+        <span class="rb"><code>ms.bh-entropy-cartography</code> → mock-jacobi 系数正性</span></div>
+      <div class="rung"><span class="rn">已回译</span><span class="rdate">formalized</span>
+        <span class="rb"><code>ms.ddf-commute-with-virasoro</code> —— 唯一一条已形式化的里程碑</span></div>
+      <div class="rung"><span class="rn">已回译</span><span class="rdate">rigorous</span>
+        <span class="rb"><code>ms.critical-dimension-brst-nilpotency</code> → v2</span></div>
+      <div class="rung"><span class="rn">已回译</span><span class="rdate">physical-arg.</span>
+        <span class="rb"><code>ms.critical-dimension-bosonic</code> → v3（已三次换代）</span></div>
+      <div class="rung"><span class="rn">已回译</span><span class="rdate">physical-arg.</span>
+        <span class="rb"><code>ms.no-ghost-theorem</code> → v4 —— 第一形式化目标，仍未达 rigorous</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 无鬼定理阶梯 ================= -->
+<section id="ladder">
+  <h2><span class="num">04</span>形式化线：无鬼定理的阶梯</h2>
+  <p class="lede">条件版无鬼定理早已机检通过（任意维数 D、任意有序域），
+    全部猜想负担被压缩到单独一张卡 <code>worldsheet.ddf-spanning-hypothesis</code>。
+    剩下的工作就是一级一级地爬 N——把"DDF 算子在 level N 张成物理态空间"逐级证掉。</p>
+
+  <div class="ladder">
+    <div class="rung"><span class="rn">N ≤ 4</span><span class="rdate">第二幕前</span>
+      <span class="rb">按维数直接计数闭合</span></div>
+    <div class="rung"><span class="rn">N = 5</span><span class="rdate">09-14</span>
+      <span class="rb"><code>DescendantKernel.lean</code> + <code>LevelFiveCount.lean</code>，
+        <code>b26_five_of_D26</code>，无 sorry</span></div>
+    <div class="rung"><span class="rn">N = 6 判据</span><span class="rdate">09-18</span>
+      <span class="rb">双向判据 <code>mem_towerSeed_neg_six_one_iff</code> 机检通过。
+        <strong>c = 26 的进入点被精确定位</strong>：只经 <code>L₂</code> 条件、只经单个 Gram 元；两条 <code>L₁</code> 行完全不含 D。
+        一句话——<em>h = −4 杀 L₁，c = 26 杀 L₂</em></span></div>
+    <div class="rung"><span class="rn">N = 6 条件版</span><span class="rdate">09-19</span>
+      <span class="rb">缺口隔离成单条具名假设 <code>SixSeedKernelSharp</code>（余量差 +1：κ₆ = D，目标要 D−1）</span></div>
+    <div class="rung"><span class="rn">N = 6 无条件</span><span class="rdate">09-19</span>
+      <span class="rb"><code>b26_six</code> 与 level-six ddf-spans 切片闭合。
+        <code>lake build</code> 3979 jobs、<code>check-axioms</code> 111/111、无 sorry</span></div>
+    <div class="rung"><span class="rn">N ≥ 7</span><span class="rdate">前沿</span>
+      <span class="rb">开放。分 N ≤ 4 / 5–11 / ≥ 12 三段的原路线仍未走完</span></div>
+  </div>
+
+  <p class="lede" style="margin-top:22px">
+    09-20 的最后一条提交把 N=6 桥接上"只在 D=26 成立"的限制<strong>撤回</strong>了——
+    <code>SixBridge.lean</code> 证明它在任意 D 都成立，是 lead 自己的判断错了。
+    这是本仓库最新的一条记录，也是它的典型形态。</p>
+</section>
+
+<!-- ================= 探索队列 ================= -->
+<section id="attempts">
+  <h2><span class="num">05</span>探索队列：15 条原创尝试</h2>
+  <p class="lede">规则是硬的：只有当图的审计确认某条关键命题<strong>在任何公开文献里都找不到证明</strong>
+    （不是"我们没读到"，是"确认查无此证明"）才允许开一条。
+    草稿与已发表结果图物理隔离，未经 graph-reviewer 对抗审查不得进入 <code>graph/</code>。
+    失败的记录保留不删——负面结果也是结果。</p>
+
+  <div class="grid3" id="attGrid"></div>
+
+  <p class="lede" style="margin-top:26px">
+    <strong>7 条 verified，但只有 3 条拿到船长确认。</strong>
+    reviewer 的裁定本身也受约束：track-iii 那条的审查者自陈"8 条复核里只有约 1.5 条是独立重算"，
+    并给自己的裁定附了硬条件——毕业前必须再补一轮逐步重算。
+    <strong>4 条 abandoned</strong> 全部是 scoping 判定"此路对本项目不通"，不是被证伪；
+    目录与调研内容一律保留。</p>
+</section>
+
+<!-- ================= 撤回档案 ================= -->
+<section id="retractions">
+  <h2><span class="num">06</span>撤回与反转档案</h2>
+  <p class="lede">这是这个仓库最有特色的一部分，也是最该被当成成果看的一部分。
+    下面每一条都是项目推翻自己既有结论的提交——不是修 bug，是把已经写下的判断撤掉。</p>
+
+  <div class="retr">
+    <div class="row"><div class="dt">09-10</div><div>
+      <p class="tt">首张里程碑卡审计裁定 drift，当场换代</p>
+      <p class="bd">开工第一天，<code>ms.no-ghost-theorem</code> 的回译审计判定陈述第 3 款为假。
+        结果不是改字，是 supersede 整张卡——这条规矩在它第一次被触发时就照办了。</p></div></div>
+
+    <div class="row"><div class="dt">09-11</div><div>
+      <p class="tt">"Mathlib 没有 eta 的 S 变换"结论被撤回</p>
+      <p class="bd">项目曾据此把一张卡标为不可形式化。复查发现它就在 <code>Discriminant.lean</code> 里。
+        旧笔记作废，卡片接线到 <code>StringFormal.DedekindEta.eta_neg_inv</code>，状态升为 formalized。</p></div></div>
+
+    <div class="row"><div class="dt">09-11</div><div>
+      <p class="tt">两份论文提纲被打上"复审失败"横幅</p>
+      <p class="bd">形式化提纲带 15 条 reviewer 确认的错误，方法论提纲复审直接判 failed，
+        船长简报同时标为 under revision。横幅留在文档里，没有静默修掉。</p></div></div>
+
+    <div class="row"><div class="dt">09-11</div><div>
+      <p class="tt">形式化反过来驳倒了审查员</p>
+      <p class="bd"><code>WitnessInt.lean</code>——为 DDF 假设构造的整数见证，推翻了 reviewer-batch26 的目标断言。
+        对抗审查是双向的。</p></div></div>
+
+    <div class="row"><div class="dt">09-15</div><div>
+      <p class="tt">数值验证同时确认一条、反驳一条</p>
+      <p class="bd">Gap 10.3：定理 10.3b CONFIRMED，而 Note 10.3.5 REFUTED——
+        且失效原因被精确定位为 n &lt; m，不是原先归咎的 ℓ &gt; m。归因错了也要记。</p></div></div>
+
+    <div class="row"><div class="dt">09-16</div><div>
+      <p class="tt">自己的证明里找出 ℓ=0 反例，以及一处不等式漏项</p>
+      <p class="bd">Route A 的 §5.4 把 <code>2mn|n₁|+ℓ²|n₁|</code> 错界为 <code>≤2n²|n₁|</code>，
+        在 m=n=ℓ 边界漏了 ℓ² 项。最终界由 <code>1.5|n₁|+5|n₂|</code> 改为 <code>2|n₁|+5|n₂|</code>。</p></div></div>
+
+    <div class="row"><div class="dt">09-18</div><div>
+      <p class="tt">用精确整数见证反驳自己提出的 (P′)</p>
+      <p class="bd">同一轮里既证了格点字典，又把 (P′) 驳掉。另有 gauge-rigidity reversal 与 Claim A′ 的收窄。</p></div></div>
+
+    <div class="row"><div class="dt">09-19</div><div>
+      <p class="tt">lead 设的路障被 Lean 探针拆掉，并追查出"假互证回路"</p>
+      <p class="bd">so-usp 的 "no basis" 阻断是 lead 自己下的判断，一个 Lean probe 证伪了它。
+        撤回之后没有就此收工，而是单开一条提交记录这次错误是怎么被多方"互相佐证"成看似可靠的——
+        <code>docs: record the false-corroboration loop exposed by the so-usp retraction</code>。</p></div></div>
+
+    <div class="row"><div class="dt">09-20</div><div>
+      <p class="tt">N=6 桥接的 D=26 限制被 <code>SixBridge.lean</code> 证伪</p>
+      <p class="bd">仓库当前最后一条 research 提交。限制不存在，桥在任意 D 成立。</p></div></div>
+  </div>
+
+  <p class="lede" style="margin-top:26px">
+    把这九条连起来看，它们构成的不是一份错误清单，而是一条可复用的工作方法：
+    <strong>让形式化工具去检验人的判断，并在它赢的时候留下记录。</strong>
+    09-11 的 <code>WitnessInt.lean</code>、09-19 的 Lean probe、09-20 的 <code>SixBridge.lean</code>——
+    三次都是机器驳倒了人，三次都留了档。
+    项目在 09-16 甚至把这件事本身立成了一个研究方向：<code>docs/verification-finds-errors-20260916.md</code>。</p>
+</section>
+
+<footer>
+  <p><strong>数据来源。</strong>计数取自 <code>uv run stringgraph report</code>（676 / 567 / 24 / 5，有效状态分布与领域分布）、
+    <code>git log</code>（2150 次提交、按日按 scope 前缀分桶、陈述卡文件创建日）、
+    <code>find formal/StringFormal -name "*.lean"</code>（91 个文件 41289 行，不含 .lake 依赖）、
+    <code>literature/sources.bib</code>（205 条）与 <code>research/attempts/*/status.yaml</code>（15 条尝试）。</p>
+  <p><strong>口径说明。</strong>按日 scope 分桶以提交信息的冒号前缀为准，
+    复合前缀（如 <code>graph+formal</code>）归入首个 scope，<code>merge</code> 与无前缀提交归入"其他"。
+    陈述卡增长按文件在 git 中的创建日计，已换代的卡仍计入。两个提交面板各有独立 y 轴刻度，不可跨面板比较条高。</p>
+  <p>生成于 2026-09-20 · <code>docs/expedition-log.html</code></p>
+</footer>
+
+</div>
+<div id="tip" role="tooltip"></div>
+
+<script>
+(function(){
+"use strict";
+
+/* ============ 数据 ============ */
+const SCOPES = [
+  {k:"graph",    label:"graph 图数据", v:"--s1"},
+  {k:"formal",   label:"formal 形式化", v:"--s2"},
+  {k:"research", label:"research 原创证明", v:"--s3"},
+  {k:"lit",      label:"lit 文献", v:"--s4"},
+  {k:"docs",     label:"docs 文档", v:"--s5"},
+  {k:"other",    label:"其他 / 合并", v:"--s6"}
+];
+const DAYS = [
+  {d:"09-10", graph:40,  formal:6,   research:0,  lit:6,  docs:12,  other:31},
+  {d:"09-11", graph:550, formal:257, research:0,  lit:71, docs:107, other:329},
+  {d:"09-12", graph:77,  formal:93,  research:9,  lit:2,  docs:16,  other:26},
+  {d:"09-13", graph:1,   formal:0,   research:0,  lit:2,  docs:0,   other:1},
+  {d:"09-14", graph:24,  formal:22,  research:1,  lit:14, docs:11,  other:11},
+  {d:"09-15", graph:27,  formal:0,   research:50, lit:11, docs:3,   other:11},
+  {d:"09-16", graph:0,   formal:7,   research:20, lit:2,  docs:5,   other:4},
+  {d:"09-17", graph:0,   formal:11,  research:13, lit:5,  docs:1,   other:0},
+  {d:"09-18", graph:28,  formal:25,  research:72, lit:52, docs:11,  other:2},
+  {d:"09-19", graph:12,  formal:27,  research:12, lit:0,  docs:12,  other:4},
+  {d:"09-20", graph:0,   formal:0,   research:2,  lit:2,  docs:0,   other:0}
+];
+const GROWTH = [["09-10",95],["09-11",623],["09-12",643],["09-13",643],["09-14",654],
+                ["09-15",660],["09-16",660],["09-17",660],["09-18",672],["09-19",676],["09-20",676]];
+const DOMAINS = [["worldsheet 世界面",380],["math 数学基础",100],["spectrum 谱",45],
+                 ["swampland 沼泽地",31],["consistency 一致性",29],["compact 紧化",25],
+                 ["holography 全息",25],["branes 膜",24],["duality 对偶",10],
+                 ["susy 超对称",4],["cft 共形场论",3]];
+const STATUS = [
+  {k:"formalized",        zh:"已形式化",   n:104, v:"--o1"},
+  {k:"rigorous",          zh:"严格证明",   n:127, v:"--o2"},
+  {k:"physical-argument", zh:"物理论证",   n:375, v:"--o3"},
+  {k:"conjecture",        zh:"猜想",       n:28,  v:"--o4"},
+  {k:"open",              zh:"开放",       n:41,  v:"--o5"},
+  {k:"refuted",           zh:"已反驳",     n:1,   v:"--critical"}
+];
+const ATTEMPTS = [
+  {n:"torsion-immortal-positivity-hecke", s:"verified", cap:true,  d:"N=4 挠 dyon 免死指标正性。项目黑洞线的主干结果。"},
+  {n:"bkm-shift-explanation",             s:"verified", cap:true,  d:"BKM 半整平移闭式。两条 GAP-前提由 researcher 逐字文献坐实。"},
+  {n:"d10-anomaly-full-classification",   s:"verified", cap:true,  d:"D=10 反常自由分类。reviewer 自建代码独立重建全部 66 个根系，结论一致。"},
+  {n:"s6-injectivity-level-six",          s:"verified", cap:false, d:"无鬼定理 N=6 台阶的纸上证明。reviewer 独立重推最高风险链。"},
+  {n:"torsion-divisor-sum-covariance",    s:"verified", cap:false, d:"挠除数和的协变性。"},
+  {n:"level-n-count-generalization",      s:"verified", cap:false, d:"一般 level N 的核维数计数。verified-with-caveats：claim.md 有措辞越界，proof.md 无缺口。"},
+  {n:"gap-102b-route-a",                  s:"verified", cap:false, d:"GAP 10.2b Route A。n₂=0 分支闭合，n₂≠0 仍开放；审查揪出一处不等式漏项。"},
+  {n:"physical-exponential-equals-lattice-voa", s:"under-review", cap:false, d:"物理指数 = 格点 VOA 顶点算子。审查者自陈覆盖率 4.0/7，毕业前须再补一轮逐步重算。"},
+  {n:"supermoduli-elliptic-tail-punctured",     s:"under-review", cap:false, d:"带穿孔的椭圆尾超模空间。定理 M 的 GAP-LIT 已于 09-20 关闭。"},
+  {n:"supermoduli-compactified-punctured", s:"draft", cap:false, d:"紧化 + 穿孔超模空间。提升引理已证，阈值未动。"},
+  {n:"dmz-finite-part-scoping",           s:"draft", cap:false, d:"DMZ 有限部猜想 scoping。查证结论：公开文献查无严格证明；BSS 给出 naive 全电荷版的反例。"},
+  {n:"umbral-moonshine-origin",           s:"abandoned", cap:false, d:"scoping 判定 umbral / Mathieu moonshine 不可攻——缺根格、权非 0。"},
+  {n:"monstrous-conway-noghost",          s:"abandoned", cap:false, d:"承接上条排查 monstrous / Conway 方向。三条候选命题逐一按四项判据否决。"},
+  {n:"genus-five-supermeasure",           s:"abandoned", cap:false, d:"亏格 5 超弦测度。本轮反而发现亏格 4 问题已于任务前 4 天被 Donagi–Noja 解决，图完全没覆盖。"},
+  {n:"weyl-shift-diagnostic",             s:"abandoned", cap:false, d:"已并入 bkm-shift-explanation，作为独立尝试关闭。"}
+];
+const ATT_STYLE = {
+  verified:     {zh:"VERIFIED",     c:"--good",     ico:"check"},
+  "under-review":{zh:"UNDER REVIEW", c:"--warn",     ico:"eye"},
+  draft:        {zh:"DRAFT",        c:"--ink-3",    ico:"dot"},
+  abandoned:    {zh:"ABANDONED",    c:"--serious",  ico:"slash"}
+};
+
+/* ============ 工具 ============ */
+const NS="http://www.w3.org/2000/svg";
+const cv = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+function el(t,a){ const e=document.createElementNS(NS,t); for(const k in a) e.setAttribute(k,a[k]); return e; }
+function niceTicks(max,count){
+  const raw=max/count, mag=Math.pow(10,Math.floor(Math.log10(raw)));
+  const step=[1,2,2.5,5,10].map(m=>m*mag).find(s=>s>=raw)||10*mag;
+  const out=[]; for(let v=0; v<=max+1e-9; v+=step) out.push(Math.round(v)); return out;
+}
+/* 圆角数据端：只有柱顶（堆叠最上一段）收 4px 圆角 */
+function barPath(x,y,w,h,r){
+  r=Math.min(r,w/2,h);
+  if(r<=0.5) return `M${x},${y}h${w}v${h}h${-w}z`;
+  return `M${x},${y+r}a${r},${r} 0 0 1 ${r},${-r}h${w-2*r}a${r},${r} 0 0 1 ${r},${r}v${h-r}h${-w}z`;
+}
+
+/* ============ tooltip ============ */
+const tip=document.getElementById("tip");
+function showTip(e,html){ tip.innerHTML=html; tip.style.opacity=1; moveTip(e); }
+function moveTip(e){
+  const r=tip.getBoundingClientRect();
+  let x=e.clientX+14, y=e.clientY-r.height-12;
+  if(x+r.width>innerWidth-8) x=e.clientX-r.width-14;
+  if(y<8) y=e.clientY+18;
+  tip.style.left=x+"px"; tip.style.top=y+"px";
+}
+function hideTip(){ tip.style.opacity=0; }
+
+/* ============ 堆叠柱：每日提交 ============ */
+function drawStacked(svgId, rows, yMax){
+  const svg=document.getElementById(svgId); svg.innerHTML="";
+  const W=470,H=300, M={t:22,r:12,b:38,l:46};
+  const pw=W-M.l-M.r, ph=H-M.t-M.b;
+  const band=pw/rows.length, bw=Math.min(46, band*0.62);
+  const y=v=>M.t+ph-(v/yMax)*ph;
+
+  niceTicks(yMax,4).forEach(t=>{
+    svg.appendChild(el("line",{x1:M.l,x2:M.l+pw,y1:y(t),y2:y(t),class:"grid-l"}));
+    const lb=el("text",{x:M.l-9,y:y(t)+4,"text-anchor":"end",class:"tick"});
+    lb.textContent=t.toLocaleString(); svg.appendChild(lb);
+  });
+  svg.appendChild(el("line",{x1:M.l,x2:M.l+pw,y1:y(0),y2:y(0),class:"axis-l"}));
+
+  rows.forEach((row,i)=>{
+    const cx=M.l+band*i+band/2, x=cx-bw/2;
+    const total=SCOPES.reduce((s,sc)=>s+row[sc.k],0);
+    /* 自下而上累加，最后一个非零段收圆角 */
+    const segs=SCOPES.map(sc=>({sc,v:row[sc.k]})).filter(s=>s.v>0);
+    let acc=0;
+    segs.forEach((s,j)=>{
+      const y0=y(acc), y1=y(acc+s.v);
+      const gap = j<segs.length-1 ? 2 : 0;             /* 2px 表面间隙，不是描边 */
+      const h=Math.max(1,(y0-y1)-gap);
+      const top = (j===segs.length-1);
+      const p=el("path",{d:barPath(x,y1,bw,h,top?4:0),fill:cv(s.sc.v)});
+      p.style.cursor="crosshair";
+      p.addEventListener("mouseenter",e=>showTip(e,
+        `<b>${row.d}</b> · 共 ${total.toLocaleString()} 次<div class="tr"><span>${s.sc.label}</span><span class="tv2">${s.v}</span></div>`));
+      p.addEventListener("mousemove",moveTip);
+      p.addEventListener("mouseleave",hideTip);
+      svg.appendChild(p);
+      acc+=s.v;
+    });
+    const dl=el("text",{x:cx,y:y(total)-8,"text-anchor":"middle",class:"dlabel"});
+    dl.textContent=total.toLocaleString(); svg.appendChild(dl);
+    const xl=el("text",{x:cx,y:H-M.b+18,"text-anchor":"middle",class:"tick"});
+    xl.textContent=row.d; svg.appendChild(xl);
+  });
+}
+
+/* ============ 折线：累计陈述卡 ============ */
+function drawGrowth(){
+  const svg=document.getElementById("cGrowth"); svg.innerHTML="";
+  const W=900,H=260,M={t:30,r:64,b:38,l:48};
+  const pw=W-M.l-M.r, ph=H-M.t-M.b, yMax=700;
+  const x=i=>M.l+(pw/(GROWTH.length-1))*i;
+  const y=v=>M.t+ph-(v/yMax)*ph;
+
+  niceTicks(yMax,4).forEach(t=>{
+    svg.appendChild(el("line",{x1:M.l,x2:M.l+pw,y1:y(t),y2:y(t),class:"grid-l"}));
+    const lb=el("text",{x:M.l-9,y:y(t)+4,"text-anchor":"end",class:"tick"});
+    lb.textContent=t; svg.appendChild(lb);
+  });
+  svg.appendChild(el("line",{x1:M.l,x2:M.l+pw,y1:y(0),y2:y(0),class:"axis-l"}));
+
+  const c=cv("--s1");
+  const pts=GROWTH.map((g,i)=>[x(i),y(g[1])]);
+  const area=`M${pts[0][0]},${y(0)}L`+pts.map(p=>p.join(",")).join("L")+`L${pts[pts.length-1][0]},${y(0)}Z`;
+  svg.appendChild(el("path",{d:area,fill:c,opacity:"0.10"}));
+  svg.appendChild(el("path",{d:"M"+pts.map(p=>p.join(",")).join("L"),
+    fill:"none",stroke:c,"stroke-width":2,"stroke-linejoin":"round","stroke-linecap":"round"}));
+
+  /* 只直接标注两个端点与那一天的跃迁 */
+  [[0,"start"],[1,"start"],[GROWTH.length-1,"end"]].forEach(([i,anch])=>{
+    svg.appendChild(el("circle",{cx:x(i),cy:y(GROWTH[i][1]),r:4.5,fill:c,
+      stroke:cv("--surface-1"),"stroke-width":2}));
+    const t=el("text",{x:x(i)+(anch==="end"?12:6),y:y(GROWTH[i][1])-12,
+      "text-anchor":anch==="end"?"start":"middle",class:"dlabel"});
+    t.textContent=GROWTH[i][1]; svg.appendChild(t);
+  });
+  const nt=el("text",{x:x(1)+10,y:y(623)+22,class:"note-t"});
+  nt.textContent="09-11 单日 +528（全部 676 张的 78%）"; svg.appendChild(nt);
+  const nt2=el("text",{x:x(5),y:y(660)+44,class:"note-t"});
+  nt2.textContent="此后九天合计 +53"; svg.appendChild(nt2);
+
+  GROWTH.forEach((g,i)=>{
+    const xl=el("text",{x:x(i),y:H-M.b+18,"text-anchor":"middle",class:"tick"});
+    xl.textContent=g[0]; svg.appendChild(xl);
+    const hit=el("rect",{x:x(i)-pw/(GROWTH.length-1)/2,y:M.t,
+      width:pw/(GROWTH.length-1),height:ph,fill:"transparent"});
+    hit.style.cursor="crosshair";
+    const prev=i?GROWTH[i-1][1]:0;
+    hit.addEventListener("mouseenter",e=>{
+      showTip(e,`<b>${g[0]}</b><div class="tr"><span>累计陈述卡</span><span class="tv2">${g[1]}</span></div>`+
+        `<div class="tr"><span>当日新增</span><span class="tv2">+${g[1]-prev}</span></div>`);
+      cross.setAttribute("x1",x(i)); cross.setAttribute("x2",x(i)); cross.style.opacity=1;
+    });
+    hit.addEventListener("mousemove",moveTip);
+    hit.addEventListener("mouseleave",()=>{hideTip(); cross.style.opacity=0;});
+    svg.appendChild(hit);
+  });
+  const cross=el("line",{y1:M.t,y2:M.t+ph,stroke:cv("--axis"),"stroke-width":1});
+  cross.style.opacity=0; cross.style.pointerEvents="none"; svg.appendChild(cross);
+}
+
+/* ============ 横条：领域 ============ */
+function drawDomain(){
+  const svg=document.getElementById("cDomain"); svg.innerHTML="";
+  const W=900,H=400,M={t:6,r:58,b:8,l:150};
+  const pw=W-M.l-M.r, band=(H-M.t-M.b)/DOMAINS.length, bh=Math.min(22,band*0.62);
+  const max=400, x=v=>(v/max)*pw, c=cv("--s1");
+
+  DOMAINS.forEach((d,i)=>{
+    const y0=M.t+band*i+(band-bh)/2;
+    svg.appendChild(el("rect",{x:M.l,y:y0,width:pw,height:bh,fill:cv("--grid"),opacity:"0.45",rx:4}));
+    const w=Math.max(3,x(d[1]));
+    const p=el("path",{d:`M${M.l},${y0}h${w-4}a4,4 0 0 1 4,4v${bh-8}a4,4 0 0 1 -4,4h${-(w-4)}z`,fill:c});
+    p.style.cursor="crosshair";
+    p.addEventListener("mouseenter",e=>showTip(e,
+      `<b>${d[0]}</b><div class="tr"><span>陈述卡</span><span class="tv2">${d[1]}</span></div>`+
+      `<div class="tr"><span>占比</span><span class="tv2">${(d[1]/676*100).toFixed(1)}%</span></div>`));
+    p.addEventListener("mousemove",moveTip);
+    p.addEventListener("mouseleave",hideTip);
+    svg.appendChild(p);
+
+    const lb=el("text",{x:M.l-12,y:y0+bh/2+4,"text-anchor":"end",class:"tick"});
+    lb.textContent=d[0]; svg.appendChild(lb);
+    const vl=el("text",{x:M.l+w+10,y:y0+bh/2+4,class:"dlabel"});
+    vl.textContent=d[1]; svg.appendChild(vl);
+  });
+}
+
+/* ============ 单条堆叠：状态谱系 ============ */
+function drawStatus(){
+  const svg=document.getElementById("cStatus"); svg.innerHTML="";
+  const W=900,H=180,M={t:26,r:10,b:10,l:10};
+  const pw=W-M.l-M.r, bh=62, top=M.t+24;
+  const rungs=STATUS.filter(s=>s.k!=="refuted");
+  const total=rungs.reduce((a,s)=>a+s.n,0);          /* 675 = 676 − refuted */
+  let acc=0;
+  rungs.forEach((s,i)=>{
+    const w=(s.n/total)*pw, x0=M.l+(acc/total)*pw;
+    const gap = i<rungs.length-1 ? 2 : 0;            /* 2px 表面间隙，不是描边 */
+    const ww=Math.max(2,w-gap), r=Math.min(4,ww/2);
+    const first=(i===0), last=(i===rungs.length-1);
+    let d;
+    if(first) d=`M${x0+r},${top}h${ww-r}v${bh}h${-(ww-r)}a${r},${r} 0 0 1 ${-r},${-r}v${-(bh-2*r)}a${r},${r} 0 0 1 ${r},${-r}z`;
+    else if(last) d=`M${x0},${top}h${ww-r}a${r},${r} 0 0 1 ${r},${r}v${bh-2*r}a${r},${r} 0 0 1 ${-r},${r}h${-(ww-r)}z`;
+    else d=`M${x0},${top}h${ww}v${bh}h${-ww}z`;
+    const p=el("path",{d,fill:cv(s.v)});
+    p.style.cursor="crosshair";
+    p.addEventListener("mouseenter",e=>showTip(e,
+      `<b>${s.k}</b> ${s.zh}<div class="tr"><span>陈述卡</span><span class="tv2">${s.n}</span></div>`+
+      `<div class="tr"><span>占 676 张</span><span class="tv2">${(s.n/676*100).toFixed(1)}%</span></div>`));
+    p.addEventListener("mousemove",moveTip);
+    p.addEventListener("mouseleave",hideTip);
+    svg.appendChild(p);
+
+    /* 段内标注只在放得下时画；否则移到段外上方 */
+    if(w>78){
+      const t1=el("text",{x:x0+13,y:top+27,fill:"#fff",style:"font-size:13.5px;font-weight:650"});
+      t1.textContent=s.n; svg.appendChild(t1);
+      const t2=el("text",{x:x0+13,y:top+46,fill:"#fff",style:"font-size:11.5px;opacity:.92"});
+      t2.textContent=s.zh; svg.appendChild(t2);
+    } else {
+      const t=el("text",{x:x0+ww/2,y:top-9,"text-anchor":"middle",class:"tick"});
+      t.textContent=s.n; svg.appendChild(t);
+    }
+    acc+=s.n;
+  });
+}
+
+/* ============ 图例 ============ */
+function legend(id,items){
+  const box=document.getElementById(id); box.innerHTML="";
+  items.forEach(it=>{
+    const s=document.createElement("span");
+    s.innerHTML=`<i class="sw" style="background:${cv(it.v)}"></i>${it.label}`;
+    box.appendChild(s);
+  });
+}
+
+/* ============ 表格视图 ============ */
+function tables(){
+  let h='<table><thead><tr><th>日期</th>'+SCOPES.map(s=>`<th>${s.k}</th>`).join('')+'<th>合计</th></tr></thead><tbody>';
+  DAYS.forEach(r=>{
+    const t=SCOPES.reduce((a,s)=>a+r[s.k],0);
+    h+=`<tr><td>2026-${r.d}</td>`+SCOPES.map(s=>`<td>${r[s.k]}</td>`).join('')+`<td>${t}</td></tr>`;
+  });
+  h+='</tbody></table>';
+  document.getElementById("tScope").innerHTML=h;
+
+  let g='<table><thead><tr><th>日期</th><th>累计陈述卡</th><th>当日新增</th></tr></thead><tbody>';
+  GROWTH.forEach((r,i)=>{ g+=`<tr><td>2026-${r[0]}</td><td>${r[1]}</td><td>+${r[1]-(i?GROWTH[i-1][1]:0)}</td></tr>`; });
+  g+='</tbody></table>';
+  document.getElementById("tGrowth").innerHTML=g;
+
+  let d='<table><thead><tr><th>领域</th><th>陈述卡</th><th>占比</th></tr></thead><tbody>';
+  DOMAINS.forEach(r=>{ d+=`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${(r[1]/676*100).toFixed(1)}%</td></tr>`; });
+  d+='</tbody></table>';
+  document.getElementById("tDomain").innerHTML=d;
+
+  let s='<table><thead><tr><th>有效状态</th><th>陈述卡</th><th>占比</th></tr></thead><tbody>';
+  STATUS.forEach(r=>{ s+=`<tr><td>${r.k} ${r.zh}</td><td>${r.n}</td><td>${(r.n/676*100).toFixed(1)}%</td></tr>`; });
+  s+='</tbody></table>';
+  document.getElementById("tStatus").innerHTML=s;
+}
+
+/* ============ 尝试卡片 ============ */
+const ICONS={
+  check:'<svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3.2L13 5"/></svg>',
+  eye:  '<svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1.5 8S4 3.5 8 3.5 14.5 8 14.5 8 12 12.5 8 12.5 1.5 8 1.5 8z"/><circle cx="8" cy="8" r="2"/></svg>',
+  dot:  '<svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="8" cy="8" r="5" stroke-dasharray="2.6 2.4"/></svg>',
+  slash:'<svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="8" cy="8" r="6"/><path d="M4 12L12 4"/></svg>'
+};
+function attempts(){
+  const g=document.getElementById("attGrid"); g.innerHTML="";
+  ATTEMPTS.forEach(a=>{
+    const st=ATT_STYLE[a.s];
+    const div=document.createElement("div");
+    div.className="att"+(a.s==="abandoned"?" dim":"");
+    div.innerHTML=
+      `<span class="st" style="color:${cv(st.c)}">${ICONS[st.ico]}${st.zh}</span>`+
+      `<div class="nm">${a.n}</div><div class="ds">${a.d}</div>`+
+      (a.cap?`<span class="cap-badge">✓ 船长已确认</span>`:"");
+    g.appendChild(div);
+  });
+}
+
+/* ============ 渲染 ============ */
+function renderAll(){
+  legend("lgScope",SCOPES);
+  legend("lgStatus",STATUS.filter(s=>s.k!=="refuted")
+    .map(s=>({label:`${s.k} ${s.zh} · ${s.n}`,v:s.v})));
+  drawStacked("cBurst",  DAYS.slice(0,3), 1400);
+  drawStacked("cSteady", DAYS.slice(3),   200);
+  drawGrowth(); drawDomain(); drawStatus(); attempts();
+}
+renderAll(); tables();
+
+/* 主题切换：重绘以取到新的 CSS 变量值 */
+const btn=document.getElementById("themeBtn");
+btn.addEventListener("click",()=>{
+  const cur=document.documentElement.getAttribute("data-theme");
+  const dark=cur ? cur==="dark"
+                 : matchMedia("(prefers-color-scheme: dark)").matches;
+  document.documentElement.setAttribute("data-theme", dark?"light":"dark");
+  renderAll();
+});
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>{
+  if(!document.documentElement.getAttribute("data-theme")) renderAll();
+});
+addEventListener("resize",()=>{ hideTip(); });
+})();
+</script>
+</body>
+</html>

@@ -3,7 +3,7 @@ target: branes.brane-charges-in-susy-algebra
 kind: physical-argument
 status: physical-argument
 depends_on:
-  - id: branes.bps-bound-point-particle-d4
+  - id: susy.bps-bound-point-particle-d4
     note: |
       供给模板：(B.2.36) 点粒子中心荷代数与「中心项是守恒荷、静止系正定性 ⇒ 质量下界」的论证结构。
       原文背书：App. B p. 448「we introduce it … in more variety in chapter 13」、§B.5 p. 454
