@@ -20,6 +20,24 @@ sources:
   - ref: sen-2007-wall-crossing
     loc: "§2, pole structure of Phi_10 and residue factorisation"
 notes: |
+  【本卡已换代（2026-09-20，curator，落地 physics-auditor 裁决）】接替者
+  holography.phi10-wall-crossing-poles-v2，改动是把 (a) 中的重数从"单零点/单极点"
+  订正为"二重零点/二阶极点"；(b)(c) 文本本身未改动（(b) 与订正后的二阶极点结构
+  存在的内部不自洽，已在 v2 notes 与其推导的 gaps 字段中如实记录，未编造新公式）。
+  换代理由：本卡原有的"单零点"断言与本项目已登记的一手来源矛盾——
+  gritsenko-nikulin-1996（Div(Δ₅)=H₁ 且 χ₁₀=Φ₁₀=Δ₅² ⇒ Div(Φ₁₀)=2H₁）与
+  sen-2008-precision-counting（(C.25)/(C.26) 独立给出 v² 阶零点）均给出重数 2；
+  完整取证与裁决见 docs/reviews/phi10-zero-multiplicity-defect-2026-09-20.md 与
+  docs/reviews/phi10-multiplicity-normalization-2026-09-20.md。
+  **本卡 statement 文本一字未动**（根 CLAUDE.md 原则 1）。
+  本卡原有的唯一推导 holography.phi10-wall-crossing-poles--via-siegel-modular-analysis
+  已改指 v2 并随之改名为
+  holography.phi10-wall-crossing-poles-v2--via-siegel-modular-analysis（推导不是
+  不可变卡，旧文件删除），故本卡现在没有推导，在报告里作为 superseded 单列。
+  图上原先指向本卡的依赖边已按 docs/reviews/phi10-multiplicity-normalization-2026-09-20.md
+  §2 的逐文件判据选择性重定向到 v2。
+
+  【原有 notes，未受本次订正影响】
   **数学部分（极点位置和留数因子化的计算）是 rigorous**；依赖 Φ₁₀ 作为 Sp(4,ℤ) 模形式的经典性质。
   留数因子化本身是严格复分析，由模形式代数推出。
   "这些留数 = 半-BPS 简并度之积"是识别②（physical-argument），记录在
@@ -27,3 +45,4 @@ notes: |
   注意：(b) 中的精确表达式需对照原文核实；本文抽取的留数形式取自 Sen 2007 §2 转述，
   具体椭圆亏格函数可能有不同的归一化约定（标记 inferred: false，来源 Sen 2007 §2）。
 tags: [bh-entropy, mock-modular, n4-string-theory, cartography]
+superseded_by: holography.phi10-wall-crossing-poles-v2

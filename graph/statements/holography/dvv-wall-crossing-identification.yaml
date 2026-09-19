@@ -14,8 +14,8 @@ statement: |
   (b) 这一围道跳变被识别为弦论模空间中的**壁穿越**：荷向量 (Q,P) 的 1/4-BPS dyon
       的边缘稳定壁（1/4-BPS 态分裂为两个 1/2-BPS 态处），与 Φ₁₀ 极点超平面一一对应。
 uses:
-  - holography.igusa-cusp-form-phi10
-  - holography.phi10-wall-crossing-poles
+  - holography.igusa-cusp-form-phi10-v2
+  - holography.phi10-wall-crossing-poles-v2
   - holography.dvv-dyon-index-generating-function
 uses_conventions: []
 sources:
@@ -27,10 +27,21 @@ sources:
     loc: "§4, discussion of contour dependence"
 notes: |
   **严格度：physical-argument（识别②）。**
-  留数跳变的数学计算（(a)）是严格复分析，依赖 holography.phi10-wall-crossing-poles。
+  留数跳变的数学计算（(a)）是严格复分析，依赖 holography.phi10-wall-crossing-poles-v2。
   但"围道选择 = 模空间壁穿越"（(b)）是物理识别：将数学积分围道的选取与弦论模参数空间
   中的 BPS stability chamber 对应，依赖超引力 BPS 解的分析（Denef-Moore）和 S-对偶论证
   （Sen），不是纯数学推论。
   与 holography.dvv-dyon-index-generating-function（识别①）合用，共同构成"dyon 指标
   随 chamber 变化"的物理论证。
+
+  ---
+  【2026-09-20 curator：uses 重定向】原指向 holography.igusa-cusp-form-phi10 /
+  holography.phi10-wall-crossing-poles（重数"单零点"）已改指其接替者
+  holography.igusa-cusp-form-phi10-v2 / holography.phi10-wall-crossing-poles-v2
+  （重数"二重零点"）。理由：本卡 (a) 的 Δd 线性正比 Q·P 这一形式，其数学根据正是
+  二阶极点留数的一阶导数项（简单极点的留数是与 Q·P 无关的常数，二阶极点才给出
+  正比 Q·P 的线性因子）——本卡从写下的那一刻起，事实上就是按二重极点的隐含假设写的，
+  只是此前上游卡把重数错记成 1。本次重定向后因果链自洽，Δd 公式数值不变。
+  完整取证见 docs/reviews/phi10-zero-multiplicity-defect-2026-09-20.md 与
+  docs/reviews/phi10-multiplicity-normalization-2026-09-20.md。
 tags: [bh-entropy, mock-modular, n4-string-theory, cartography, physical-identification]

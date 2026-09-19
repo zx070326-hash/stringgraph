@@ -60,17 +60,28 @@ notes: |
   **本结果比原委托目标更强**：不需要"存在 Λ₀ 使 Λ>Λ₀"，对**一切** Λ>0 都成立
   ——因为障碍是纯数论层面的（(I0) 在整数上无解），与几何/解析大小完全无关。
 
-  【与既有图节点的关系，仅报告不修正】同姐妹卡
+  【与既有图节点的关系——2026-09-20 已订正为一致，见下方追记】同姐妹卡
   holography.attractor-contour-hits-phi10-zero-at-ell-zero 的 notes 已详细
   记录：holography.igusa-cusp-form-phi10（"单零点"）与
   holography.phi10-wall-crossing-poles（"判别式 4mn−l²=1，故极点为单零点"）
   两张已提交的卡，其零点重数断言（重数 1）与本卡引用的 Sen 2008 D.19/GN1996
-  （重数 2）冲突。本卡同样刻意不依赖这两张卡（本卡论证完全不需要重数信息，
+  （重数 2）冲突。本卡当时同样刻意不依赖这两张卡（本卡论证完全不需要重数信息，
   只需要"(I0) 无整数解"这一集合论/数论事实），避免继承冲突断言。此外，
   这两张已有卡的零点轨迹描述（"{mρ+nσ+lv∈ℤ, 4mn−l²=1}"，即只含线性
   超平面）实际上只覆盖 D.19 的 n2=0 子族，**未提及** n2≠0 的二次分支
   ——这是除多重性外，curator 发现的第二处、范围完整性上的潜在遗漏，
   一并报告给 lead，供转 auditor 判断是否需要补充/规范化这两张卡。
+
+  【2026-09-20 追记，curator】physics-auditor 已裁决：(1) 重数冲突——确为 2
+  （旧卡"单零点"是错误表述），已新建 holography.igusa-cusp-form-phi10-v2 /
+  holography.phi10-wall-crossing-poles-v2 订正，旧卡标 superseded_by；本卡结论
+  与这两张 v2 卡现已一致，不再冲突。(2) n2≠0 轨道覆盖性——auditor 裁定
+  "证据不足以判定"（既非确认覆盖也非确认不覆盖），v2 卡维持"Sp(4,ℤ)-轨道"措辞
+  并在 notes 里注明该完整性问题仍是开放问题，与本卡记录的 [GAP-n2] 一致。
+  完整取证与裁决见 docs/reviews/phi10-zero-multiplicity-defect-2026-09-20.md 与
+  docs/reviews/phi10-multiplicity-normalization-2026-09-20.md。本卡仍保持
+  uses: []（无需补边），此追记只更新记账文字，不改变本卡的 statement、sources
+  或有效状态。
 
   【查重】`uv run stringgraph search "attractor"` / `"linear wall"` /
   `"wall-crossing"` 均无同内容命中（2026-09-20）；仅有的相关命中是本条 notes

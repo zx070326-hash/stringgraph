@@ -25,9 +25,26 @@ sources:
   - ref: dabholkar-murthy-zagier-2012
     loc: "§2（Siegel 模形式背景，引用 Igusa 1962 原始文献）"
 notes: |
+  【本卡已换代（2026-09-20，curator，落地 physics-auditor 裁决）】接替者
+  holography.igusa-cusp-form-phi10-v2，**唯一差别**是把 statement 末句的零点重数
+  从「唯一零点……为单零点」订正为「……沿该轨道为**二重**零点：Div(Φ₁₀) = 2H₁」；
+  其余文字与全部 sources 逐字相同（v2 另外补了 gritsenko-nikulin-1996 与
+  sen-2008-precision-counting 两条作为重数的直接依据）。
+  换代理由：本卡原有的「单零点」断言与本项目已登记的一手来源矛盾——
+  gritsenko-nikulin-1996（Div(Δ₅)=H₁ 且 χ₁₀=Φ₁₀=Δ₅² ⇒ Div(Φ₁₀)=2H₁）与
+  sen-2008-precision-counting（(C.25)/(C.26) 独立给出 v² 阶零点）均给出重数 2；
+  完整取证与裁决见 docs/reviews/phi10-zero-multiplicity-defect-2026-09-20.md 与
+  docs/reviews/phi10-multiplicity-normalization-2026-09-20.md。
+  **本卡 statement 文本一字未动**（根 CLAUDE.md 原则 1）。
+  图上原先指向本卡的依赖边已按 docs/reviews/phi10-multiplicity-normalization-2026-09-20.md
+  §2 的逐文件判据选择性重定向到 v2（只重定向论证实际用到重数数值的边，其余
+  只用到 Φ₁₀ 存在性/唯一性/模性/Fourier 展开等与重数无关的性质的边留在本卡）。
+
+  【原有 notes，未受本次订正影响】
   数学侧：Φ₁₀ 的存在性与唯一性（至标量）由 Siegel 模形式维数公式保证（Igusa 1962，
   Gritsenko-Nikulin 1995）。Borcherds 升举公式的严格证明见 Borcherds 1995 和
   Gritsenko-Nikulin 1995；这是严格数学定理，不依赖任何物理论证。
   Lean 可行性：需要 Siegel 模形式（Sp(4,ℤ) 表示）和 Borcherds 乘积，Mathlib 无此基础设施，
   近期不可形式化。在图中作为 rigorous 陈述卡即可（不入 formal/）。
 tags: [bh-entropy, mock-modular, n4-string-theory, cartography]
+superseded_by: holography.igusa-cusp-form-phi10-v2

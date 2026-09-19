@@ -1,0 +1,65 @@
+id: holography.phi10-wall-crossing-poles-v2
+kind: proposition
+title: Φ₁₀ 的极点结构与留数因子化（v2：极点阶数订正为二阶）
+statement: |
+  Igusa 尖点形式 Φ₁₀(ρ,σ,v) 在 Siegel 上半空间中的零点（即 1/Φ₁₀ 的极点）满足：
+  (a) 极点位于超平面族 {mρ + nσ + lv ≡ 0 (mod ℤ)} 的 Sp(4,ℤ)-轨道上，
+      其中 (m,n,l) ∈ ℤ³，gcd(m,n,l)=1，判别式 4mn−l²=1；沿该轨道 Φ₁₀ 为**二重**零点，
+      故 1/Φ₁₀ 在此处为**二阶极点**（非单极点）；
+  (b) 在 {ρ=0} 超平面（标准代表元）附近，留数因子化为
+        Res_{ρ=0} (1/Φ₁₀) = f(σ,v) · g(σ,v)，
+      其中 f, g 是各自对应两个 1/2-BPS 子系统的权 −2 椭圆亏格函数（Jacobi 形式），
+      即 1/(η(σ)²⁴ · φ_{0,1}(σ,v)) 型结构（具体形式待原文核实，见来源注记）；
+  (c) 系数跳变（围道穿越极点）= 两个留数因子乘积，与两个半-BPS 简并度之积一致
+      （识别②的数学前提，但识别本身是 physical-argument）。
+uses:
+  - holography.igusa-cusp-form-phi10-v2
+uses_conventions: []
+sources:
+  - ref: dijkgraaf-verlinde-verlinde-1997
+    loc: "§4, discussion of poles of 1/Phi_10"
+  - ref: sen-2007-wall-crossing
+    loc: "§2, pole structure of Phi_10 and residue factorisation"
+  - ref: gritsenko-nikulin-1996
+    loc: "p.7（环生成元列表，χ₁₀=Φ₁₀=Δ₅² 恒等式）+ 正文几何结果段（Div(Δ₅)=H₁，
+          判别式1 Humbert 曲面 H₁={z₂=0}）；重数 2 由 Div(Φ₁₀)=Div(Δ₅²)=2·Div(Δ₅)=2H₁
+          直接代数推出。见 literature/sources.bib gritsenko-nikulin-1996 条目 note，
+          抽取记录 extractions/gritsenko-nikulin-1996-phi10.md（H1–H7）。"
+  - ref: sen-2008-precision-counting
+    loc: "arXiv:0708.1270v4 Appendix C, (C.25)/(C.26)：Φ̂(ρ,σ,v)=−4π²v²g(ρ)g(σ)+O(v⁴)——
+          v=0（Humbert 面 H₁）附近显式 v² 阶零点，独立物理 threshold-integral 推导，
+          非引用 GN，仅作交叉验证（本项目 note 明确标注'非引用 GN'）。"
+notes: |
+  **数学部分（极点位置和留数因子化的计算）是 rigorous**；依赖 Φ₁₀ 作为 Sp(4,ℤ) 模形式的经典性质。
+  留数因子化本身是严格复分析，由模形式代数推出。
+  "这些留数 = 半-BPS 简并度之积"是识别②（physical-argument），记录在
+  holography.dvv-wall-crossing-identification 中，不在本节点。
+  注意：(b) 中的精确表达式需对照原文核实；本文抽取的留数形式取自 Sen 2007 §2 转述，
+  具体椭圆亏格函数可能有不同的归一化约定（标记 inferred: false，来源 Sen 2007 §2）。
+
+  ---
+  【重数/极点阶数订正，physics-auditor 2026-09-20，见
+  docs/reviews/phi10-zero-multiplicity-defect-2026-09-20.md 与
+  docs/reviews/phi10-multiplicity-normalization-2026-09-20.md】
+  本卡是 holography.phi10-wall-crossing-poles 的 v2：改动是把 (a) 中的重数从
+  "单零点/单极点"订正为"二重零点/二阶极点"，依据同 holography.igusa-cusp-form-phi10-v2
+  的 sources（gritsenko-nikulin-1996 的 Div(Φ₁₀)=2H₁、sen-2008-precision-counting 的
+  (C.25)/(C.26) v² 阶零点）。(b)(c) 文本本身未改动。
+
+  【二阶极点与 (b) 的内部不自洽，physics-auditor 2026-09-20 发现，留给 curator 处理，
+  不在裁决授权范围内改写】(a) 订正为二阶极点后，(b) 的表达式
+  "Res_{ρ=0}(1/Φ₁₀) = f(σ,v)·g(σ,v)" 字面上是**简单极点**的留数写法（单个乘积，
+  无导数项）。对二阶极点 1/(w²h(Ω)) 的标准 Laurent 展开，"留数"（围道跳变系数）一般
+  应包含 h 的一阶导数项（∝ ∂_w，对应对偶方向的线性因子），而不是单纯的乘积
+  f(σ,v)·g(σ,v)。本卡旧版 notes 已自行标注"(b) 中的精确表达式需对照原文核实……具体
+  椭圆亏格函数可能有不同的归一化约定"，本次订正只是让这处已知不确定性变得更加突出：
+  (a)(b) 现在字面上互相矛盾（二阶极点 vs 简单极点留数公式）。
+  **curator 2026-09-20 处置**：未能从本项目已登记来源（literature/sources.bib、
+  literature/extractions/）独立核实 (b) 在二阶极点下的精确闭式表达式，
+  按纪律不编造公式。(b) 在本卡 statement 中维持原文（已含"具体形式待原文核实"字样），
+  并在其推导 holography.phi10-wall-crossing-poles-v2--via-siegel-modular-analysis 的
+  `gaps` 字段中显式记录此项未核实的不自洽，作为诚实的开放缺口，留待后续回 DVV 1997 §4
+  或 Sen 2007 §2 原文逐字核对后再定 v3。
+tags: [bh-entropy, mock-modular, n4-string-theory, cartography]
+author: curator
+created: "2026-09-20"

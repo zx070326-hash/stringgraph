@@ -1,0 +1,60 @@
+id: holography.igusa-cusp-form-phi10-v2
+kind: definition
+status: rigorous
+title: Igusa 权 10 尖点形式 Φ₁₀（v2：零点重数订正为二重）
+statement: |
+  Igusa 尖点形式 Φ₁₀(Ω) 是 Sp(4,ℤ)（整 Siegel 模群）的权 10 尖点形式，其中
+  Ω = [[ρ, v], [v, σ]] 为 Siegel 上半空间（度 2）中的变量（ρ,σ ∈ ℍ，v ∈ ℂ，Im Ω > 0）。
+  它由 Borcherds 升举公式给出：
+    Φ₁₀(Ω) = e^{2πi(ρ+σ+v)} ∏_{(m,n,l)>0} (1 − e^{2πi(mρ+nσ+lv)})^{c(4mn−l²)}，
+  其中 c(k) 为 K3 椭圆亏格 χ_{K3}(τ,z)（权 0 指标 1 弱 Jacobi 形式，满足 c(k)=24 对 k=0，
+  c(k)=EG K3 系数，c(k)=0 对 k<−1）的傅里叶系数，排列顺序 (m,n,l)>0 指：
+  m>0；或 m=0, n>0；或 m=n=0, l<0。
+  Φ₁₀ 在 Sp(4,ℤ) 权 10 尖点形式空间中（至多差标量倍数意义下）唯一；
+  其零点除子（在 Siegel 上半空间中）位于超曲面 {mρ + nσ + lv ∈ ℤ，4mn−l²=1} 的
+  Sp(4,ℤ)-轨道上（即判别式 1 的 Humbert 曲面 H₁），沿该轨道为**二重**零点：
+  Div(Φ₁₀) = 2H₁。
+uses: []
+uses_conventions: []
+sources:
+  - ref: igusa-1962
+    loc: "Siegel 权 10 尖点形式 Φ₁₀ 的存在性与维数公式（一手数学来源，正文未获取，见 bib note）"
+  - ref: gritsenko-nikulin-1998
+    loc: "Φ₁₀ 的 Borcherds 乘积升举公式与零点结构（一手数学来源，正文未获取，见 bib note）"
+  - ref: dijkgraaf-verlinde-verlinde-1997
+    loc: "§3, eqs. (3.1)–(3.3)（Borcherds 乘积定义，物理应用出处）"
+  - ref: dabholkar-murthy-zagier-2012
+    loc: "§2（Siegel 模形式背景，引用 Igusa 1962 原始文献）"
+  - ref: gritsenko-nikulin-1996
+    loc: "p.7（环生成元列表，χ₁₀=Φ₁₀=Δ₅² 恒等式）+ 正文几何结果段（Div(Δ₅)=H₁，
+          判别式1 Humbert 曲面 H₁={z₂=0}）；重数 2 由 Div(Φ₁₀)=Div(Δ₅²)=2·Div(Δ₅)=2H₁
+          直接代数推出。见 literature/sources.bib gritsenko-nikulin-1996 条目 note，
+          抽取记录 extractions/gritsenko-nikulin-1996-phi10.md（H1–H7）。"
+  - ref: sen-2008-precision-counting
+    loc: "arXiv:0708.1270v4 Appendix C, (C.25)/(C.26)：Φ̂(ρ,σ,v)=−4π²v²g(ρ)g(σ)+O(v⁴)——
+          v=0（Humbert 面 H₁）附近显式 v² 阶零点，独立物理 threshold-integral 推导，
+          非引用 GN，仅作交叉验证（本项目 note 明确标注'非引用 GN'）。"
+notes: |
+  数学侧：Φ₁₀ 的存在性与唯一性（至标量）由 Siegel 模形式维数公式保证（Igusa 1962，
+  Gritsenko-Nikulin 1995）。Borcherds 升举公式的严格证明见 Borcherds 1995 和
+  Gritsenko-Nikulin 1995；这是严格数学定理，不依赖任何物理论证。
+  Lean 可行性：需要 Siegel 模形式（Sp(4,ℤ) 表示）和 Borcherds 乘积，Mathlib 无此基础设施，
+  近期不可形式化。在图中作为 rigorous 陈述卡即可（不入 formal/）。
+
+  ---
+  【重数订正与开放性说明，physics-auditor 2026-09-20，见
+  docs/reviews/phi10-zero-multiplicity-defect-2026-09-20.md 与
+  docs/reviews/phi10-multiplicity-normalization-2026-09-20.md】
+  本卡是 holography.igusa-cusp-form-phi10 的 v2：唯一实质改动是把重数从
+  "单零点"订正为"二重零点"（Div(Φ₁₀)=2H₁），依据见上方 sources。
+  【未解决，明确留白】"Sp(4,ℤ)-轨道覆盖整个 Div(Φ₁₀)"这一描述沿用自旧卡与经典文献语言
+  （GN1996 式的 Humbert 曲面构造），但 Sen 2008 (D.19) 给出的更一般五参数
+  (m1,n1,m2,n2,j) 零点参数化中 n2≠0 的"二次壁"分支是否确实落在同一条
+  {mρ+nσ+lv∈ℤ}-型线性代表元的 Sp(4,ℤ)-轨道内，本项目审计认为**证据不足以判定**
+  （既非 GN1996 明确证实，也未被本项目自己已审查的
+  research/attempts/gap-102b-route-a/ 证明——该 attempt 把 n2≠0 明确列为未闭合的
+  [GAP-n2]）。本卡措辞维持"Sp(4,ℤ)-轨道"这一标准提法不变，但读者应知晓覆盖性本身
+  是开放问题，非本卡断言的一部分。
+author: curator
+created: "2026-09-20"
+tags: [bh-entropy, mock-modular, n4-string-theory, cartography]
