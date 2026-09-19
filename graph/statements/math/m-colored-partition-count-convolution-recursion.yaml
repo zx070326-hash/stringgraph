@@ -1,0 +1,40 @@
+id: math.m-colored-partition-count-convolution-recursion
+kind: proposition
+title: "m 色分拆计数的精确卷积递推：p_{m+1}(N) = Σ_{k=0}^N p(k)·p_m(N-k)（对一切 N, m ≥ 0）"
+statement: |
+  沿用 math.m-colored-partition-count-closed-form 的记号（p_m(N)、p(N) := p_1(N)）。则
+  对**一切** N ≥ 0、一切 m ≥ 0：
+
+    p_{m+1}(N) = Σ_{k=0}^{N} p(k) · p_m(N-k)。
+
+  （右边是通常分拆函数 p 与 m 色分拆计数 p_m 的 Cauchy 卷积。）
+uses:
+  - math.m-colored-partition-count-closed-form
+uses_conventions: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/level-n-count-generalization/proof.md §2；claim.md Claim 2"
+    note: |
+      本项目原创证明，非已发表文献，见 research/attempts/level-n-count-generalization/proof.md。
+      research/attempts/level-n-count-generalization/status.yaml: state: verified，
+      reviewer: graph-reviewer（2026-09-16）+ lead 两轮补充复核（2026-09-18）；
+      captain_confirmed: false（仍待船长确认，按 research/CLAUDE.md 生命周期第 3 步）。
+tags: [combinatorics, partitions, generating-function, oscillator-counting, no-ghost]
+notes: |
+  【论证，curator 亲自 Read proof.md §2 全文核对】直接来自姐妹卡
+  math.m-colored-partition-count-closed-form 的生成函数式 Σp_m(N)X^N = P_R(X)^m：
+  取 m+1 次幂 = m 次幂乘以 1 次幂，即
+  Σp_{m+1}(N)X^N = P_R(X)^{m+1} = P_R(X)^m·P_R(X) = (Σp_m(N)X^N)·(Σp(N)X^N)，
+  两边取 X^N 系数（形式幂级数乘法的定义）即得卷积式。proof.md 明确称这是
+  "P_R(X)^{m+1} 里剥出一个 m=1 因子"的直接推论，无缺口。
+
+  【范围边界】本卡不含 κ_N(m) 递推（姐妹卡
+  math.m-colored-partition-count-kappa-recursion 由本卡代入两次/三次得到）。
+
+  【查重】`uv run stringgraph search "convolution"` 无同内容命中（2026-09-19/20）。
+
+  【毕业记录】本节点由 research/attempts/level-n-count-generalization/（state: verified，
+  captain_confirmed: false）毕业，按 research/CLAUDE.md 生命周期第 4 步。本 attempt 未产生
+  可提交的 formal/ 内容，故 status: rigorous，不写 formal: 字段。
+author: graph-curator
+created: "2026-09-20"

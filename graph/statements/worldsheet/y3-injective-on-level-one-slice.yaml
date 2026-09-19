@@ -1,0 +1,75 @@
+id: worldsheet.y3-injective-on-level-one-slice
+kind: proposition
+title: "y3（level-3 合冲词）在自由玻色 Fock 空间任意动量的 level-1 切片上单射"
+statement: |
+  沿用 worldsheet.virasoro-generators-free-boson 的记号：设 K 是 CharZero 域、Algebra ℚ K，
+  D : ℕ（D ≥ 1 即可），η : Fin D → K 满足 hη : ∀ μ, η μ · η μ = 1，p : Fin D → K **任意**
+  （对 p·p 不设任何约束；这里的 p 就是该卡 statement 里零模本征值 a^μ = α^μ_0 那个自由参数，
+  不预设它与物理动量 k 经 √(2α') 的具体关系）。记 F(p) 为该卡定义的 Fock 空间（基态 |0;p⟩
+  满足 α^μ_0|0;p⟩ = p^μ·|0;p⟩，用 α^μ_{-n}（n > 0）作用生成），L_n 为该卡的 Sugawara 生成元。
+  定义 level-3 算子
+
+    y3 := 12 L_{-3} + 6 L_{-2}L_{-1} + L_{-1}³  : F(p) → F(p)，
+
+  作用在 level-1 切片 F(p)_1 := span{α^μ_{-1}|0;p⟩}_{μ=0}^{D-1}（维数恰为 D）上。则
+
+    ∀ u ∈ F(p)_1,  y3·u = 0  ⟹  u = 0，
+
+  即 y3|_{F(p)_1} : F(p)_1 → F(p)_4 单射。
+uses:
+  - worldsheet.virasoro-generators-free-boson
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.virasoro-standard
+formal:
+  lean_decl: StringFormal.NoGhost.y3_eq_zero_of_mem_towerBigrade_one
+  lean_file: StringFormal/NoGhost/SixSliceInjective.lean
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/s6-injectivity-level-six/proof.md :: 主定理（y3 单射半，Lemma A/B 组装）；claim.md §2"
+    note: |
+      本项目原创证明，非已发表文献，见 research/attempts/s6-injectivity-level-six/proof.md。
+      research/attempts/s6-injectivity-level-six/status.yaml: state: verified，
+      reviewer: graph-reviewer（agent s6review，2026-09-19，独立重推 claim.md §4 逻辑链 +
+      独立对抗性数值测试，覆盖多种 D、多种号差、p=0 退化情形）+ lead 补充复核（Lean 编译/
+      公理审计）；captain_confirmed: false（仍待船长确认，按 research/CLAUDE.md 生命周期第 3 步）。
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/SixSliceInjective.lean :: StringFormal.NoGhost.y3_eq_zero_of_mem_towerBigrade_one"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1；curator 亲自 Read 全文件（356 行）确认无 sorry
+      （文件头 docstring "No sorry"，独立全目录扫描确认，命中项全是散文声明 no sorry）。
+      curator 本人未重跑 lake build/check-axioms（本 worktree 未配置构建缓存）；
+      status.yaml 记录 lead 已重跑 `lake build`（3980 jobs，较基线 3979 增加，确认非孤儿模块）
+      与 `check_axioms`（15/15 ok，仅 propext/Classical.choice/Quot.sound）。
+tags: [bosonic-string, no-ghost, virasoro, null-state, momentum-tower, formalized]
+notes: |
+  【与 claim.md 的对应，逐字核对 —— curator 亲自 Read claim.md 全文、SixSliceInjective.lean
+  全文 356 行、DDF.lean 第 108 行 towerMomentum 定义，非转述 status.yaml 的自我报告】
+
+  与姐妹卡 worldsheet.x4-injective-on-level-one-slice 完全相同的核对结论适用于本卡（同一
+  towerBigrade D R j 1 上的定理，同一 towerMomentum a b j := a + j·b 机制、j=0/b=0/a=p 特例
+  复现「∀ p 任意」）；此处不重复展开，仅记录 y3 特有的差异点：
+
+  【D 无关性】同姐妹卡：本卡对每个 D（无下界约束）、每个 CharZero 的 Algebra ℚ 交换环 R 成立；
+  D=26 不出现在本卡陈述或其 Lean 证明里。
+
+  【归一化差异，诚实记录，取自 SixSliceInjective.lean 文件头 docstring（curator 亲自 Read）】
+  Lean 证明算出的常数是 120（≠0，蕴含单射），proof.md 手算给出 30；两者相差恰是**目标振子
+  模数** 4（120 = 4×30），而非姐妹卡 x4 的因子 5（-2040 = 5×(-408)）——这是 towerModeVec 力矩
+  提取约定（CCR 归一化 α^μ_{-p}|0;p⟩ 上多一个模数因子 p）与 proof.md「读裸系数」约定之间的
+  系统性差异，随目标 level（y3 是 4、x4 是 5）而不同，不是数值不一致。非零性等价，结论
+  （单射）不受影响。
+
+  【范围边界，明确不断言】本卡**不**断言、**不**依赖：
+  (a) 形式 A ⟹ 形式 B 的四步桥接（未在 Lean 里实现，按任务书明确排除，非缺口，
+      见 status.yaml「仍未做」条目）；
+  (b) SixSeedKernelSharp（形式 B）在一般 D 上成立；
+  (c) N=6 的 (B-26) 无条件闭合（仍需 D=26 且仍需上面 (a) 的桥接）。
+
+  【查重】`uv run stringgraph search "y3"` / `"level-six"` / `"S6"` / `"syzygy"` 均无同内容
+  命中（2026-09-20）。
+
+  【毕业记录】本节点由 research/attempts/s6-injectivity-level-six/（state: verified，
+  captain_confirmed: false）毕业，按 research/CLAUDE.md 生命周期第 4 步。
+author: graph-curator
+created: "2026-09-20"

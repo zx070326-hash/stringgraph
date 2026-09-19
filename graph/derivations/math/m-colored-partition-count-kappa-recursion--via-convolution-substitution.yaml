@@ -1,0 +1,33 @@
+id: math.m-colored-partition-count-kappa-recursion--via-convolution-substitution
+target: math.m-colored-partition-count-kappa-recursion
+kind: proof
+status: rigorous
+depends_on:
+  - id: math.m-colored-partition-count-convolution-recursion
+    inferred: false
+    note: |
+      proof.md §3 把该卡的卷积式代入 κ_N(m) 定义里的三个 p_{m+1}(N)/p_{m+1}(N−1)/p_{m+1}(N−2)
+      项，按目标下标重新收集系数，得到 (a) 式；再代入 p(0..7) 的七个具体值得到 (b) 的四条
+      显式结论。
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/level-n-count-generalization/proof.md §3（含 s=0 边界情形的显式核验）"
+    note: |
+      本项目原创证明，非已发表文献；见目标卡 sources 的完整 status.yaml 摘要。
+summary: |
+  三重代入 + 按目标下标 j := N−(shift)−k 重新收集系数（形式幂级数系数比较的初等操作），
+  s=0 边界情形单独验证（真实系数 c(N)=1 相对字面 Δ 公式的 −1 多出的 +1 恰好来自
+  p_m(N) 项，故需单独约定 Δ(0):=0），得到一般式 κ_N(m)=Σ_s Δ(s)p_m(N−s)。代入
+  p(0..7)=1,1,2,3,5,7,11,15 的具体数值算出 Δ(0..7)，再代回一般式得 N≤7 的四条显式结论。
+  proof.md §4 用三条独立方法数值核验 N=2..10、m=1..7 全部吻合。无缺口。
+gaps:
+  - "本推导只覆盖 N≤7 的显式值；N≥8 的 κ_N(m) 闭式未给出（proof.md 只数值列出
+    κ_8,κ_9,κ_10，标为 [GAP]），本卡与本推导均不断言。"
+  - "Δ(s) 的五边形数一般展开（s≥5）不在本推导范围内，也未被本推导使用——见目标卡 notes。"
+  - "本 attempt 未产生 formal/ 下的无 sorry Lean 证明；status 诚实定为 rigorous。"
+notes: |
+  curator 亲自 Read research/attempts/level-n-count-generalization/proof.md §3 全文
+  （含系数收集表格与 s=0 边界的显式核验段落）与 claim.md Claim 3(a)(b)，核对与
+  status.yaml 的 reviewer/lead 复核记录一致。
+author: graph-curator
+created: "2026-09-20"

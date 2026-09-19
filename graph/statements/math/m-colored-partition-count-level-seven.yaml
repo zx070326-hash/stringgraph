@@ -1,0 +1,64 @@
+id: math.m-colored-partition-count-level-seven
+kind: proposition
+title: "m 色分拆计数在 N=7 的显式 10-形状闭式：p_m(7) 按 7 的 10 种分拆形状展开（对一切 m ≥ 0）"
+statement: |
+  沿用 math.m-colored-partition-count-closed-form 的记号。7 恰有 15 个（无色）分拆，
+  按"形状"（各部分大小的重数多重集 {r_s}）归并，恰好分成 10 类不同形状。对**一切** m ≥ 0：
+
+    p_m(7) =  m                          （形状 {1}：分拆 7）
+            + 3m²                        （形状 {1,1}：分拆 6+1, 5+2, 4+3）
+            + 3m·C(m+1,2)                （形状 {1,2}：分拆 5+1+1, 3+3+1, 3+2+2）
+            + m³                         （形状 {1,1,1}：分拆 4+2+1）
+            + 2m·C(m+2,3)                （形状 {1,3}：分拆 4+1+1+1, 2+2+2+1）
+            + m²·C(m+1,2)                （形状 {1,1,2}：分拆 3+2+1+1）
+            + m·C(m+3,4)                 （形状 {1,4}：分拆 3+1+1+1+1）
+            + C(m+1,2)·C(m+2,3)          （形状 {2,3}：分拆 2+2+1+1+1）
+            + m·C(m+4,5)                 （形状 {1,5}：分拆 2+1+1+1+1+1）
+            + C(m+6,7)                   （形状 {7}：分拆 1+1+1+1+1+1+1）
+
+  逐项的 10 个分拆形状与 15 个分拆之间的对应关系（每种形状对应哪些具体分拆）见
+  research/attempts/level-n-count-generalization/claim.md（Claim 4 表格）。
+uses:
+  - math.m-colored-partition-count-closed-form
+uses_conventions: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/level-n-count-generalization/proof.md §6；claim.md Claim 4"
+    note: |
+      本项目原创证明，非已发表文献，见 research/attempts/level-n-count-generalization/proof.md。
+      research/attempts/level-n-count-generalization/status.yaml: state: verified，
+      reviewer: graph-reviewer（2026-09-16，独立枚举 7 的 15 个分拆并核对 10-形状归类）+
+      lead 两轮补充复核（2026-09-18）；captain_confirmed: false（仍待船长确认，按
+      research/CLAUDE.md 生命周期第 3 步）。
+tags: [combinatorics, partitions, oscillator-counting, no-ghost]
+notes: |
+  【论证，curator 亲自 Read proof.md §6 与 claim.md Claim 4 全文核对】本卡是姐妹卡
+  math.m-colored-partition-count-closed-form 的一般闭式
+  p_m(N) = Σ_{λ⊢N} ∏_s C(m+r_s(λ)−1, r_s(λ)) 在 N=7 处的**直接实例**：把 7 的 15 个
+  （无色）分拆逐一按各自的重数多重集 {r_s} 归入 10 类形状，每类形状贡献一项 ∏_s C(m+r_s−1,r_s)，
+  10 类之和即为上式。proof.md §4 用三条独立方法（分拆形状公式 / 生成函数幂级数 DP / 暴力
+  按模式枚举）数值核验 m=1..5 时 p_m(7) = 15, 110, 429, 1240, 2990，逐项精确吻合。无缺口。
+
+  【与 Lean 骨架的关系，仅作记录】proof.md §7 报告：任务原计划要求把本命题的"递归形式"
+  （p_{m+1}(7)+C(m+3,2) = p_m(7)+p_{m+1}(6)+p_{m+1}(5)）写成 formal/ 下三条 sorry
+  定理骨架，但被本仓库 pre-commit hook（禁止 formal/ 下出现 sorry）拒绝，最终改放
+  research/attempts/level-n-count-generalization/scratch.lean（sorry 骨架，
+  按 research/CLAUDE.md 的 scratch 豁免不受 formal/ 约束，但也因此不构成
+  status: formalized 的证据）。curator 未亲自重跑 lake build 核实 proof.md 所述的编译
+  结果，此处是转述 proof.md 的自我报告。
+
+  【范围边界，明确不断言】本卡只断言 N=7 这一个具体实例，不断言任何一般 N 的显式展开
+  （一般式见姐妹卡 math.m-colored-partition-count-closed-form）；不含"递归形式"
+  （p_{m+1}(7)+C(m+3,2) = p_m(7)+p_{m+1}(6)+p_{m+1}(5)），因为 proof.md 明确声明
+  该递归形式与本卡闭式的等价性是"ring 可判定的有限多项式恒等式，此处未重新推导"，
+  即证明尚未在本材料中完整写出（proof.md §6 末段原话），故不作为本卡断言的一部分，
+  留待未来若有需要单独立卡。
+
+  【查重】`uv run stringgraph search "shape"` / `"10-shape"` / `"level-seven"` 均无
+  同内容命中（2026-09-20）。
+
+  【毕业记录】本节点由 research/attempts/level-n-count-generalization/（state: verified，
+  captain_confirmed: false）毕业，按 research/CLAUDE.md 生命周期第 4 步。本 attempt 未产生
+  可提交的 formal/ 内容，故 status: rigorous，不写 formal: 字段。
+author: graph-curator
+created: "2026-09-20"

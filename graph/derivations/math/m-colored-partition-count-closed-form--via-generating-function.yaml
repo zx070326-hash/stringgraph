@@ -1,0 +1,32 @@
+id: math.m-colored-partition-count-closed-form--via-generating-function
+target: math.m-colored-partition-count-closed-form
+kind: proof
+status: rigorous
+depends_on:
+  - id: math.euler-partition-generating-function
+    inferred: false
+    note: |
+      proof.md §1 Step 1 显式套用该卡的 (1) 式（P_R(X)·∏(1-X^n) = 1，无逆元形式）
+      得到 P_R(X) = [∏(1-X^n)]^{-1}，再取 m 次幂得到本卡的生成函数式。
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/level-n-count-generalization/proof.md §1（Step 1、Step 2）"
+    note: |
+      本项目原创证明，非已发表文献；见目标卡 sources 的完整 status.yaml 摘要。
+summary: |
+  Step 1：占据函数按颜色拆成 m 个普通分拆的直接数据重排，给出
+  Σp_m(N)X^N = P_R(X)^m（数据打包，非双射构造）；再用 math.euler-partition-generating-function
+  的 (1) 式把 P_R(X) 换成 [∏(1-X^n)]^{-1}，取 m 次幂。
+  Step 2：把 Step 1 的组合定义按分拆形状 λ 重新分组，用初等 "stars and bars" 计数
+  （不作为 depends_on 边，见目标卡 notes：proof.md 明确声明这是不归因于任何图节点的
+  纯有限组合学标准事实）得到闭式。两步共同给出目标卡的"闭式"与"生成函数式"两种等价包装。
+gaps:
+  - "本推导只覆盖 Claim 1 本身；κ_N(m) 递推（Claim 3）与 N=7 显式展开（Claim 4）
+    是本卡在姐妹卡中的独立应用，不在本推导范围内。"
+  - "本 attempt 未产生 formal/ 下的无 sorry Lean 证明（scratch.lean 三条定理是 sorry
+    骨架，且内容对应的是 Claim 4 的 N=7 递推式，不是本卡）；status 诚实定为 rigorous。"
+notes: |
+  curator 亲自 Read research/attempts/level-n-count-generalization/proof.md 全文（§0-§8）
+  与 claim.md 全文，核对 Claim 1 的两步论证与 status.yaml 的 reviewer/lead 复核记录一致。
+author: graph-curator
+created: "2026-09-20"

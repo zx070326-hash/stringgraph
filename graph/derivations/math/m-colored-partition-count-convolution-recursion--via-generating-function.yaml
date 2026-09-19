@@ -1,0 +1,27 @@
+id: math.m-colored-partition-count-convolution-recursion--via-generating-function
+target: math.m-colored-partition-count-convolution-recursion
+kind: proof
+status: rigorous
+depends_on:
+  - id: math.m-colored-partition-count-closed-form
+    inferred: false
+    note: |
+      proof.md §2 直接套用该卡的生成函数式 Σp_m(N)X^N = P_R(X)^m，取 m+1 次幂并因式分解
+      为 P_R(X)^m · P_R(X)，两边比较 X^N 系数得到卷积式。
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/level-n-count-generalization/proof.md §2"
+    note: |
+      本项目原创证明，非已发表文献；见目标卡 sources 的完整 status.yaml 摘要。
+summary: |
+  P_R(X)^{m+1} = P_R(X)^m · P_R(X)（形式幂级数乘法的结合律/幂律），两边取 X^N 系数
+  即得 p_{m+1}(N) = Σ_{k=0}^N p(k)p_m(N-k)（Cauchy 乘积系数公式）。无缺口。
+gaps:
+  - "本推导只覆盖 Claim 2 本身；κ_N(m) 递推是本卡的下游应用（姐妹卡
+    math.m-colored-partition-count-kappa-recursion），不在本推导范围内。"
+  - "本 attempt 未产生 formal/ 下的无 sorry Lean 证明；status 诚实定为 rigorous。"
+notes: |
+  curator 亲自 Read research/attempts/level-n-count-generalization/proof.md §2 与
+  claim.md Claim 2，核对与 status.yaml 的 reviewer/lead 复核记录一致。
+author: graph-curator
+created: "2026-09-20"

@@ -1,0 +1,31 @@
+id: math.m-colored-partition-count-level-seven--via-shape-decomposition
+target: math.m-colored-partition-count-level-seven
+kind: proof
+status: rigorous
+depends_on:
+  - id: math.m-colored-partition-count-closed-form
+    inferred: false
+    note: |
+      proof.md §6 直接把该卡的一般闭式 p_m(N)=Σ_{λ⊢N}∏_s C(m+r_s(λ)−1,r_s(λ)) 实例化到
+      N=7：枚举 7 的 15 个分拆，按重数多重集归类为 10 种形状，每种形状对应闭式中的一项，
+      10 项求和给出目标卡的显式表达式。
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/level-n-count-generalization/proof.md §6；claim.md Claim 4 对应表"
+    note: |
+      本项目原创证明，非已发表文献；见目标卡 sources 的完整 status.yaml 摘要。
+summary: |
+  枚举 7 的 15 个（无色）分拆，按各自的部分重数多重集 {r_s} 归并为 10 类不同形状；每类
+  形状 λ 贡献闭式中的一项 ∏_{s:r_s>0} C(m+r_s−1,r_s)（母卡 math.m-colored-partition-count-closed-form
+  的直接代入），10 项相加即为目标卡的显式表达式。proof.md §4 用三条独立方法数值核验
+  m=1..5 时的精确取值，全部吻合。无缺口。
+gaps:
+  - "本推导只覆盖 N=7 一个实例；不覆盖递归形式
+    p_{m+1}(7)+C(m+3,2)=p_m(7)+p_{m+1}(6)+p_{m+1}(5) 与本卡闭式的等价性证明
+    （proof.md 明确声明该等价性是 ring 可判定但未在此重新推导），故不在本推导范围内。"
+  - "本 attempt 未产生 formal/ 下的无 sorry Lean 证明；status 诚实定为 rigorous。"
+notes: |
+  curator 亲自 Read research/attempts/level-n-count-generalization/proof.md §6 全文
+  与 claim.md Claim 4 的分拆↔形状对应表，核对与 status.yaml 的 reviewer/lead 复核记录一致。
+author: graph-curator
+created: "2026-09-20"

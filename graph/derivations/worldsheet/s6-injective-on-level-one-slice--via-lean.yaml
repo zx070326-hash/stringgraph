@@ -1,0 +1,37 @@
+id: worldsheet.s6-injective-on-level-one-slice--via-lean
+target: worldsheet.s6-injective-on-level-one-slice
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.x4-injective-on-level-one-slice
+    inferred: false
+    note: |
+      唯一承重依赖：S6(u)=0 ⟹ x4·u=0，直接套用该卡即得 u=0。Lean 侧
+      （eq_zero_of_mem_towerBigrade_one_of_x4_eq_zero_of_y3_eq_zero）与 proof.md 第 236-237 行
+      的论证都只用到这一步，未使用 y3·u=0 这条假设（Lean 签名用 `_hy` 前缀显式标记未使用）。
+      故本推导刻意不把 worldsheet.y3-injective-on-level-one-slice 接成 depends_on 边——它出现在
+      目标卡 statement 的 uses 列表里只是因为 S6 的*定义*（配对映射的陪域）提到 y3，
+      而不是因为本推导的*论证*用到了它单射这件事。
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/s6-injectivity-level-six/proof.md :: 主定理末句（第 236-237 行，S6 = (x4,y3) 单射）"
+    note: |
+      本项目原创证明，非已发表文献；见目标卡 sources 的完整 status.yaml 摘要。
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/SixSliceInjective.lean :: theorem eq_zero_of_mem_towerBigrade_one_of_x4_eq_zero_of_y3_eq_zero"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry（curator 亲自 Read 全文件 356 行确认）。
+summary: |
+  平凡推论，非独立论证：由 S6(u) = (x4·u, y3·u) = 0 得 x4·u = 0，套用
+  worldsheet.x4-injective-on-level-one-slice 即得 u = 0。两条独立路线（proof.md 手证 /
+  Lean 形式化）都以完全相同的方式跳过 y3 的假设，逐字核对一致。
+gaps:
+  - "本推导只覆盖形式 A（S6 = (x4,y3) 联合单射）本身，不覆盖形式 A ⟹ 形式 B 的四步桥接
+    （未在 Lean 里实现，按任务书明确排除，非缺口）。"
+  - "curator 未自行重跑 lake build / check-axioms（本 worktree 未配置构建缓存）；status.yaml
+    记录 lead 已重跑，check_axioms 15/15 ok，仅标准三公理。"
+notes: |
+  本推导刻意只依赖 x4 卡，不依赖 y3 卡，理由见 depends_on 的 note；这不是遗漏，而是如实
+  反映 Lean 证明与 proof.md 手证共同的论证结构（两条路线都只用 x4 单射）。
+author: graph-curator
+created: "2026-09-20"
