@@ -1,0 +1,65 @@
+id: worldsheet.s6-injective-on-level-one-slice
+kind: proposition
+title: "S6 = (x4, y3) 在自由玻色 Fock 空间任意动量的 level-1 切片上单射"
+statement: |
+  沿用 worldsheet.x4-injective-on-level-one-slice 与 worldsheet.y3-injective-on-level-one-slice
+  的记号与全部前提（K CharZero、Algebra ℚ K、D ≥ 1、η 满足 hη、p 任意，F(p) 与 L_n 同上）。
+  定义配对映射
+
+    S6 : F(p)_1 → F(p)_5 × F(p)_4,   S6(u) := (x4·u, y3·u)，
+
+  其中 x4 := -76 L_{-4} - 52 L_{-3}L_{-1} - 12 L_{-2}² - 20 L_{-2}L_{-1}² - 3 L_{-1}⁴，
+  y3 := 12 L_{-3} + 6 L_{-2}L_{-1} + L_{-1}³（与两张姐妹卡定义完全相同）。则
+
+    ∀ u ∈ F(p)_1,  S6(u) = 0  ⟹  u = 0，
+
+  即 S6 : F(p)_1 → F(p)_5 × F(p)_4 单射。
+uses:
+  - worldsheet.x4-injective-on-level-one-slice
+  - worldsheet.y3-injective-on-level-one-slice
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.virasoro-standard
+formal:
+  lean_decl: StringFormal.NoGhost.eq_zero_of_mem_towerBigrade_one_of_x4_eq_zero_of_y3_eq_zero
+  lean_file: StringFormal/NoGhost/SixSliceInjective.lean
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/s6-injectivity-level-six/proof.md :: 主定理末句（S6 = (x4,y3) 单射，x4 单射的直接推论）；claim.md §2"
+    note: |
+      本项目原创证明，非已发表文献，见 research/attempts/s6-injectivity-level-six/proof.md
+      第 236-237 行：「Since x4 alone is injective, S = (x4,y3) is a fortiori injective
+      (S(u)=0 ⟹ x4u=0 ⟹ u=0)」。research/attempts/s6-injectivity-level-six/status.yaml:
+      state: verified，reviewer: graph-reviewer（agent s6review，2026-09-19）+ lead 补充复核；
+      captain_confirmed: false（仍待船长确认，按 research/CLAUDE.md 生命周期第 3 步）。
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/SixSliceInjective.lean :: StringFormal.NoGhost.eq_zero_of_mem_towerBigrade_one_of_x4_eq_zero_of_y3_eq_zero"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1；curator 亲自 Read 全文件（356 行）确认无 sorry。
+      该定理签名的第二个假设写作 `(_hy : y3 η a b u = 0)`（下划线前缀 = 未使用），
+      与 proof.md 的论证结构完全吻合：整条定理只是 x4_eq_zero_of_mem_towerBigrade_one 的
+      直接应用，y3 的假设在证明里从未被用到。
+tags: [bosonic-string, no-ghost, virasoro, null-state, momentum-tower, formalized]
+notes: |
+  【本卡与两张姐妹卡的关系，curator 亲自核对】本卡的证明**不需要独立论证**：Lean 侧
+  （`eq_zero_of_mem_towerBigrade_one_of_x4_eq_zero_of_y3_eq_zero`，curator 亲自 Read）与
+  proof.md 侧（第 236-237 行，curator 亲自 Read）都只是直接调用 x4 单射半——`S6(u)=0`
+  蕴含 `x4·u=0`，再用 worldsheet.x4-injective-on-level-one-slice 即得 `u=0`；y3 的假设
+  `y3·u=0` 在两条证明路线里都**未被使用**（Lean 签名显式用下划线前缀 `_hy` 标记未使用参数，
+  proof.md 的论证同样只提 x4）。故本卡是姐妹卡 x4-injective-on-level-one-slice 的**平凡推论**，
+  依赖边上诚实标注 y3-injective-on-level-one-slice 为**非承重**（uses 里列出是因为 S6 的
+  *定义*——配对映射的陪域/记号——引用了 y3，而不是因为单射性*论证*用到了它）。
+
+  【范围边界，明确不断言，同两张姐妹卡】本卡不断言、不依赖：
+  (a) 形式 A ⟹ 形式 B 的四步桥接（未在 Lean 里实现，按任务书明确排除，非缺口）；
+  (b) SixSeedKernelSharp（形式 B）在一般 D 上成立；
+  (c) N=6 的 (B-26) 无条件闭合。
+
+  【查重】`uv run stringgraph search "s6-injective"` / `"S6"` / `"syzygy"` 均无同内容命中
+  （2026-09-20）。
+
+  【毕业记录】本节点由 research/attempts/s6-injectivity-level-six/（state: verified，
+  captain_confirmed: false）毕业，按 research/CLAUDE.md 生命周期第 4 步，是该 attempt 标题
+  「S6 is injective on the whole level-1 slice」（Form A）字面对应的图节点。
+author: graph-curator
+created: "2026-09-20"
