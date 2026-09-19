@@ -1,0 +1,79 @@
+id: math.supermoduli-compactified-punctured-genus-2-not-projected
+kind: proposition
+title: "紧化带穿孔超模叠 g=2、n+2r≥2 非投影（原创，椭圆尾粘接的带穿孔推广，定理 M 的 a=0 分支）：∀n≥0,∀r≥0 with n+2r≥2, ω₂(S̄_{2;n,2r})≠0"
+statement: |
+  【对象】记号同 `math.supermoduli-compactified-punctured-genus-geq3-not-projected`：
+  \overline{\mathfrak S}_{g;n,2r} 为亏格 g、n 个 NS 穿孔、2r 个 Ramond 穿孔的稳定超曲线紧化超模叠，
+  ω₂ 为 Green 第一障碍类。本节点固定 g=2。
+
+  【命题】对一切整数 n≥0、r≥0，满足 **n+2r≥2**：
+    ω₂(\overline{\mathfrak S}_{2;n,2r}) ≠ 0，
+  从而 \overline{\mathfrak S}_{2;n,2r} **非投影**。
+
+  **宇称加细（仅当 r=0 时）**：r=0 时 n+2r≥2 等价于 n≥2；此时**只能断言偶宇称分量**：
+    ω₂(\overline{\mathfrak S}{}^{+}_{2;n,0}) ≠ 0（n≥2）。
+  本节点**不断言**奇宇称分量 \overline{\mathfrak S}{}^{-}_{2;n,0} 的任何信息（见下方排除清单）。
+
+  **当 r≥1 时，本节点只断言整个叠 \overline{\mathfrak S}_{2;n,2r} 非投影，不指认具体连通分量**
+  （同 g≥3 姐妹卡的 `[GAP-COMP]` 限制）。
+
+  【证明思路一句话】取亏格 h=g=2 的"运动分量" C（配无效偶 theta 特征 L）与亏格 **a=0**（有理）的
+  固定尾（带 n+1 个 NS 标记点、2r 个 Ramond 标记点），稳定性要求 n+2r≥2；沿 NS 粘接映射构造测试族
+  X_η → \overline{\mathfrak S}_{2;n,2r}。宇称加细来自：a=0 的有理固定尾唯一可能的自旋结构是
+  O(-1)，其宇称必为**偶**（proof.md §4.2 自旋结构统计），故本分支触及的测试曲线只落在偶宇称分量。
+
+  【本节点明确不断言，与排除清单逐条对应】
+  - **(g,n,r)=(2,1,0) 不在本卡覆盖范围内**：n+2r=1<2 不满足前提，(P2) 要求 a=0 时 n+2r≥2；这与
+    `math.supermoduli-space-not-projected`（Donagi–Witten，未紧化，覆盖 g≥2,n≤g-1=1 偶宇称）
+    的量词范围互不包含，不构成冲突。
+  - **g=2 的奇宇称带穿孔分量** \overline{\mathfrak S}{}^{-}_{2;n,0}（n≥1）：不断言，且这是方法的
+    结构性必然而非缺陷——CN 已证 \overline{\mathfrak M}{}^{-}_2（n=0 情形）**分裂**
+    （`math.supermoduli-compactified-genus-2-odd-split`），若本方法能触及 g=2 奇分量将与之矛盾；
+    proof.md §6.2 的反向自洽性检验验证了本方法在 (P1)/(P2) 层面结构上不可能触及该分量。
+  - **未紧化**的 \mathfrak S_{2;n,2r} 的任何断言：不涉及。
+  - 任何"分裂/可投影"的正面方向：不涉及。
+  - Ramond 节点处的粘接（FKP-A §9.3 仅猜想）：本证明刻意避开，只在 NS 节点处粘接。
+uses: []
+uses_conventions: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: >-
+      research/attempts/supermoduli-elliptic-tail-punctured/proof.md §4（同 g≥3 姐妹卡，a=0
+      分支）、§4.7（命题 4.8 宇称加细，a=0 情形自旋结构唯一为 O(-1) 偶宇称）、§5.1（推论 A(2)/B
+      的 a=0 分支阈值推导）、§6.2（关键反向自洽性检验：结构上不可能触及 g=2 奇分量或
+      \overline{\mathfrak M}^-_2）；claim.md §2 定理 M、§3 推论 A(2)/B（a=0 分支）
+    note: |
+      本项目原创证明，非已发表文献，见 research/attempts/supermoduli-elliptic-tail-punctured/
+      proof.md。status.yaml：state: verified（graph-reviewer 两轮审查，同 g≥3 姐妹卡；第二轮
+      2026-09-20 问题 5"量词范围恰好，无过度推广"亲自算术复核 a=0 给 g≥2 且 n+2r≥2；PLAUSIBLE
+      佐证：g=2 只够到偶分量"不是差一点没够到，而是本该如此"——CN 证 \overline{\mathfrak M}^-_2
+      分裂的路子依赖亏格 2 特有的无穿孔性质，加穿孔后这些性质全不存活）；
+      captain_confirmed: false（留船长确认，不代填）。
+tags: [supermoduli, super-riemann-surface, non-projected, compactified, punctured, genus-2, ramond-puncture, math-input, original-research]
+notes: |
+  【查重】同 g≥3 姐妹卡（2026-09-20），另加对 "genus 2" 关键词的检索：最接近的既有卡
+  `math.supermoduli-compactified-genus-2-even-not-projected`（FKP，n=r=0）与
+  `math.supermoduli-compactified-genus-2-odd-split`（CN，n=r=0，分裂）均不覆盖 n+2r>0 情形。
+
+  【⭐ 与既有卡的关系，明确声明】同 g≥3 姐妹卡：本节点完全不依赖 Wang / Donagi–Ott（未紧化范畴，
+  逻辑独立）；不修订 `math.supermoduli-compactified-genus-2-even-not-projected`（FKP，本节点在
+  n=r=0 时不适用——(P2) 要求 a=0 时 n+2r≥2，n=r=0 不满足，本节点从设计上就不重现该卡，是补充而非
+  重复）；不修订 `math.supermoduli-compactified-genus-2-odd-split`（CN 证明 \overline{\mathfrak
+  M}^-_2 分裂）——本节点与其**互补而非矛盾**：本节点只能触及偶宇称分量，proof.md §6.2 显式验证了
+  这一互补关系不是巧合而是结构性必然。
+
+  【FKP 法丛公式的推广——诚实标注，同 g≥3 姐妹卡】本证明同样在 proof.md §4 引理 4.4 使用
+  `math.fkp-ns-boundary-gluing-normal-bundle-formula`（靶逐字无穿孔）于带穿孔靶，依据同一条
+  节点局部性论证；见 derivation 文件的 inferred:true 边与说明。
+
+  【r≥1 时不断言连通分量的原因】同 g≥3 姐妹卡的 `[GAP-COMP]`。
+
+  【为何单独立卡而不与 g≥3 分支合并】(1) 量词范围本质不同：g≥3 分支对一切 n,r 两种宇称皆可断言
+  （r=0 时），g=2 分支的 r=0 情形只能断言偶宇称，且额外要求 n≥2（而非任意 n≥0）；(2) (g,n,r)=
+  (2,1,0) 与 g=2 奇宇称分量的排除清单只对本卡有意义，混在一张卡里会使"本节点不断言"段落被迫用
+  条件从句稀释量词的精确性，不利于后续引用者快速核验适用范围；这与既有卡
+  `math.supermoduli-compactified-genus-2-even-not-projected` 与
+  `math.supermoduli-compactified-genus-geq3-not-projected` 分列为两张卡（而非合并进
+  `math.supermoduli-space-not-projected`）的先例一致。
+author: graph-curator
+created: "2026-09-20"
