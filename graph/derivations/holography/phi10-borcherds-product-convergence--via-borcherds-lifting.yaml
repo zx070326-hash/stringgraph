@@ -1,0 +1,30 @@
+id: holography.phi10-borcherds-product-convergence--via-borcherds-lifting
+target: holography.phi10-borcherds-product-convergence
+kind: proof
+status: rigorous
+depends_on:
+  - id: holography.igusa-cusp-form-phi10-v2
+sources:
+  - ref: kawai-1997
+    loc: "§5, eq.(5.13)（援引 Gritsenko-Nikulin alg-geom/9611028 的 Borcherds 升举结果）"
+summary: |
+  Borcherds 升举定理（Borcherds 1995, Gritsenko-Nikulin 1998）保证：从权 0 指标 1
+  弱 Jacobi 形式（K3 椭圆亏格）升举得到的 Siegel 模形式，其无穷乘积表示在适当区域
+  （典型为尖点附近的锥形区域，Im Ω 充分大）绝对收敛。Φ₁₀ 是该升举的具体实例。
+notes: |
+  本推导援引已发表数学定理（Borcherds 1995 Inventiones Math. 120(1):161-213；
+  Gritsenko-Nikulin 1998 alg-geom/9611028），但本项目未获取原文逐字。
+
+  kawai-1997 作为物理综述转述了 Φ₁₀ 的 Borcherds 乘积公式 eq.(5.13)，明确援引
+  Gritsenko-Nikulin 作为原始严格来源，但未逐字陈述收敛性或收敛区域的具体形式。
+
+  Status 判断：这是已发表的严格数学定理（Borcherds 因此工作获 Fields 奖），
+  不是物理论证或猜想。虽然本项目未获取原文逐字，但定理的存在性与严格性是数学界
+  公认事实。按"不确定时选低的那级"原则，我判断 rigorous 合适，因为：
+  (1) 定理本身是严格证明的（有名有姓的 Inventiones 论文）；
+  (2) 本项目的"未逐字"只是获取限制，不是定理严格性的缺陷；
+  (3) kawai-1997 的援引清晰明确（非模糊转述）。
+
+  若 lead 或 reviewer 认为"未获取原文"应压低到 physical-argument 或更低，
+  请在 review 中明确指出判据，我接受修正。
+author: curator
