@@ -330,3 +330,250 @@ David-Jatkar-Sen 2007（JHEP 01 (2007) 016）：arXiv ID hep-th/0609109，URL ht
 
 Igusa 1962 / Gritsenko-Nikulin 1998（带 Fourier 展开数值的原文）：可能需图书馆/付费（或从合法预印服务器找到 GN1998 的公开版）。若后续需要 Φ₁₀ 首项数值符号的权威来源，这是正道。
 
+---
+
+## Q4（2026-09-20）：坐标映射 (ρ,σ,v) ↦ (ρ̃,σ̃,ṽ) 在 N=1 时是否平凡？
+
+### 任务背景（lead 指派）
+
+图卡 `holography.sen-d19-family-is-igusa-phi10-divisor` 断言：Sen (D.19) 的五参数族 F=0 即 Igusa Φ₁₀ 的零点除子（同一 (ρ,σ,v) 坐标下）。该卡目前 physical-argument，压低两张原创结果卡。
+
+lead 已将缺口收窄为一句纯坐标命题：Sen 在 (C.21) 给出
+```
+Φ̃(ρ̃,σ̃,ṽ) = −(i)^k C₁(2v−ρ−σ)^k Φ̂(ρ,σ,v)
+```
+其中自守因子 (2v−ρ−σ)^k 在整个 ℍ₂ 上处处非零（lead 已证），故对除子无贡献。附录 D 给出的 (D.19) 是 Φ̃ 的除子，而 Sen p.164 逐字断言 N=1 时 Φ̂ 就是 Φ₁₀。
+
+**残余问题**：(C.7) 定义的坐标映射 (ρ,σ,v) ↦ (ρ̃,σ̃,ṽ) 在 N=1 时是什么？
+
+### 核实方式
+
+- 文献：Ashoke Sen, arXiv:0708.1270v4, Appendix C
+- 页码：官方 PDF p.159（C.7/C.8 坐标变换），p.162（C.21 联系 Φ̃ 与 Φ̂）
+- 核实方式：用 Read 工具读取官方 PDF 图像（已于 2026-09-20 下载 /tmp/sen-0708.1270v4.pdf），逐字誊抄
+
+### (C.7)/(C.8) 坐标变换的逐字誊抄
+
+**位置**：p.159，紧接 (C.6) 之后
+
+**原文**（verbatim，一字不差）：
+
+> Let us now introduce another set of variables (ρ̃,σ̃,ṽ) related to (ρ,σ,v) via the relations
+> 
+> ρ̃ = (1/N) · 1/(2v−ρ−σ),  σ̃ = N · (v²−ρσ)/(2v−ρ−σ),  ṽ = (v−ρ)/(2v−ρ−σ)    (C.7)
+> 
+> or equivalently,
+> 
+> ρ = (ρ̃σ̃−ṽ²)/(Nρ̃),  σ = (ρ̃σ̃−(ṽ−1)²)/(Nρ̃),  v = (ρ̃σ̃−ṽ²+ṽ)/(Nρ̃)    (C.8)
+
+**核对细节**：
+- (C.7) 第一式：分子是 `1/N`，分母是 `2v−ρ−σ`（不是 `2v+ρ+σ`）
+- (C.7) 第二式：分子是 `N·(v²−ρσ)`（不是 `v²+ρσ`）
+- (C.7) 第三式：分子是 `v−ρ`（不是 `v+ρ`）
+- (C.8) 逆变换：第二式分子是 `ρ̃σ̃−(ṽ−1)²`（有 `ṽ−1` 的平方）
+
+### (C.12) 的逐字誊抄
+
+**位置**：p.160，紧接 (C.11) 之后
+
+**原文**（verbatim）：
+
+> Using these relations and relabeling the indices m₁, m₂, n₁, n₂ in eqs.(C.4)–(C.5) one can easily prove the relations
+> 
+> Ĩ(ρ,σ,v) = Ĩ(ρ̃,σ̃,ṽ) .    (C.12)
+
+**判定**：这条等式断言的是 threshold 积分 Ĩ 在两套坐标下取相同的值（作为函数在变换下的不变性）。这**不是**说 (ρ̃,σ̃,ṽ) 数值上等于 (ρ,σ,v)（那会是恒等变换），而是说函数 Ĩ 在 (C.7) 变换下不变。
+
+### (C.15)/(C.16) 的逐字誊抄
+
+**位置**：p.161，紧接 (C.14) 之后
+
+**原文**（verbatim）：
+
+> We can now use the modular property of F^{(r,s)}(τ,z) given in (B.8) to evaluate the integrals Ĩ and Ĩ̂. We refer the reader to [11] for detailed calculations in a specific example and quote here the final results:
+> 
+> Ĩ(ρ,σ,v) = −2 ln[(det ImΩ)^k] − 2 ln Φ̃(ρ,σ,v) − 2 ln Φ̃̂(ρ,σ,v) + constant    (C.15)
+> 
+> and
+> 
+> Î(ρ,σ,v) = −2 ln[(det ImΩ)^k] − 2 ln Φ̂(ρ,σ,v) − 2 ln Φ̂̃(ρ,σ,v) + constant    (C.16)
+
+**核对细节**：
+- (C.15) 右边有两项：`−2 ln Φ̃(ρ,σ,v)` 和 `−2 ln Φ̃̂(ρ,σ,v)`（Φ̃ 与 Φ̃̂ 是两个不同的函数，后者带双重符号）
+- (C.16) 同样有 `Φ̂` 与 `Φ̂̃`
+- **注意**：这两式左边的自变量是 `(ρ,σ,v)`，右边的函数 Φ̃、Φ̂ 等也都以 `(ρ,σ,v)` 为自变量——**不是** Φ̃(ρ̃,σ̃,ṽ)
+
+### (C.21) 联系 Φ̃ 与 Φ̂ 的逐字誊抄
+
+**位置**：p.162，紧接 (C.20) 之后
+
+**原文**（verbatim）：
+
+> It follows from (C.12),(C.15) and (C.16) that
+> 
+> Φ̃(ρ̃,σ̃,ṽ) = −(i)^k C₁(2v−ρ−σ)^k Φ̂(ρ,σ,v)    (C.21)
+> 
+> where C₁ is a constant. The factor of −(i)^k has been included to ensure that C₁ is real and positive. To see this we can consider the case where ρ, σ and v are all purely imaginary, with |v₂| << ρ₂, σ₂. In this case Φ̂(ρ,σ,v) defined in (C.19) is real and positive. On the other hand from (C.7) we get ρ̃ and σ̃ purely imaginary and ṽ real. Eq.(C.18), together with the relation Σ_{s=0}^{N−1} c₀^{(0,s)}(−1) = 2 then tells us that Φ̃(ρ̃,σ̃,ṽ) is real and negative. Hence in order to satisfy (C.21) we must have C₁ real and positive. The magnitude of C₁ can be calculated by carefully evaluating the constants in eqs. (C.15), (C.16) but we shall not do it here.
+
+**判定**：(C.21) 的**关键点**在于等式两边的自变量**不同**：
+- 左边：`Φ̃(ρ̃,σ̃,ṽ)`——Φ̃ 函数在**变换后**的坐标 (ρ̃,σ̃,ṽ) 处的值
+- 右边：`Φ̂(ρ,σ,v)`——Φ̂ 函数在**原坐标** (ρ,σ,v) 处的值
+
+这**不是**说 Φ̃ 与 Φ̂ 是同一个函数，而是说它们通过坐标变换 (C.7) 联系起来。
+
+### N=1 时的化简
+
+**代入 N=1 到 (C.7)**：
+
+```
+ρ̃ = 1/(2v−ρ−σ)
+σ̃ = (v²−ρσ)/(2v−ρ−σ)
+ṽ = (v−ρ)/(2v−ρ−σ)
+```
+
+**判定 1：这不是恒等映射。**
+
+若是恒等，应有 ρ̃=ρ、σ̃=σ、ṽ=v。代入第一式得 ρ = 1/(2v−ρ−σ)，即 ρ(2v−ρ−σ) = 1。这在一般的 (ρ,σ,v) 上不成立（左边是复数的二次式，不恒为 1）。**所以 N=1 时 (C.7) 仍是非平凡变换。**
+
+**判定 2：它是 Sp(4,ℤ) 元素吗？**
+
+Sp(4,ℤ) 作用在 Siegel 上半空间 ℍ₂ 的方式是
+```
+Ω → (AΩ+B)(CΩ+D)^{−1}
+```
+其中 Ω = [[ρ,v],[v,σ]]，(A B; C D) 是 4×4 辛矩阵。
+
+(C.7) 给出的变换是**有理函数**（分式线性变换），**形式上与 Sp(4,ℤ) 的作用一致**（都是矩阵元的分式线性组合）。但判定它是否恰好对应某个 Sp(4,ℤ) 元素需要：
+1. 把 (C.7) 写成矩阵形式
+2. 验证该矩阵满足辛条件
+
+Sen 在 (C.13)/(C.14)（p.160）给出一组生成 Ĝ 子群的矩阵，但**未明确说 N=1 时 (C.7) 本身是哪个矩阵**。
+
+**从 (C.12) 推断**：Ĩ(ρ,σ,v) = Ĩ(ρ̃,σ̃,ṽ) 说明 (C.7) 是使 threshold 积分不变的变换。Sen 在 (C.14) 之后（p.160-161）说：
+
+> Via eq.(C.12) this also induces a group of symmetry transformations of Ĩ(ρ̃,σ̃,ṽ); we shall denote this group by G̃.
+
+这暗示 (C.7) **确实**对应某个模群元素（或至少是某个保持 Siegel 形式变换律的映射）。但 Sen **未逐字给出 N=1 时该映射的矩阵形式**。
+
+### 关键观察：N=1 时 Φ̃ 与 Φ̂ 在"原坐标"下的关系
+
+虽然 (C.7) 非平凡，但我们可以问另一个问题：**Φ̃ 与 Φ̂ 作为 (ρ,σ,v) 的函数，在 N=1 时是否相同？**
+
+从既有抽取记录（本文件 S2, S5）：
+- (C.25): `Φ̂(ρ,σ,v) = −4π² v² g(ρ) g(σ) + O(v⁴)`
+- (C.26): `Φ̃(ρ,σ,v) = −4π² v² f₁(Nρ) f₂(σ/N) + O(v⁴)`
+
+**代入 N=1**：
+```
+Φ̃(ρ,σ,v) = −4π² v² f₁(ρ) f₂(σ) + O(v⁴)
+```
+
+**比较**：Φ̂ 的系数是 `g(ρ)g(σ)`，Φ̃ 的系数是 `f₁(ρ)f₂(σ)`。
+
+从 (C.27)–(C.29)（p.163）的定义，`g(ρ)` 与 `f₁(ρ)`、`f₂(σ)` 是**不同的无穷乘积**（含不同的 N-依赖项）。Sen **未逐字说 N=1 时 g=f₁=f₂**。
+
+但 (C.35)（p.164）给出：
+
+> For M = K3 and prime values of N (N = 1, 2, 3, 5, 7) we can use (B.22) to find the explicit expressions for g(τ) and k [11]:
+> 
+> g(τ) = η(τ)^{k+2} η(Nτ)^{k+2} ,    (C.35)
+
+**对 N=1**：`g(τ) = η(τ)^{k+2} η(τ)^{k+2} = η(τ)^{2(k+2)}`
+
+而 (C.36) 给出：`k = 24/(N+1) − 2`，**对 N=1**：`k = 24/2 − 2 = 12 − 2 = 10`
+
+所以 `g(τ) = η(τ)^{2·12} = η(τ)^{24}`（N=1 时）。
+
+**但这还不够**：我们需要知道 f₁ 与 f₂ 在 N=1 时是什么。Sen **未在 Appendix C 中给出 f₁, f₂ 对 N=1 的显式形式**。
+
+### 另一条线索：Appendix D 开篇（p.164）
+
+**位置**：p.164，Appendix D 开篇（紧接 (C.38) 之后）
+
+**原文**（verbatim）：
+
+> For M = K3 and N = 1, the function Φ̂ constructed in this appendix is the well known weight 10 cusp form of the genus two Siegel modular group [254, 255, 256, 257]. For M = K3 and N = 2, 3 the function Φ̂ was found in [258, 259, 260]. A general discussion on construction of Siegel modular forms can be found in [261]. Different ways of constructing the same functions Φ̂ can be found in [262, 263, 10, 12].
+> 
+> **D  Zeroes and Poles of Φ̃**
+> 
+> In this appendix we shall determine the zeroes and poles of the function Φ̃(ρ̃,σ̃,ṽ) introduced in appendix C. Via eq.(C.21) this also determines the zeroes and poles of the function Φ̂(ρ,σ,v). The zeroes of Φ̂ found in (C.26) and (C.32) will be special cases of the general set of zeroes we shall find.
+
+**判定**：
+- Sen 逐字断言："For M = K3 and N = 1, the function **Φ̂** ... is the well known weight 10 cusp form"（即 Φ₁₀）
+- Appendix D 标题是"Zeroes and Poles of **Φ̃**"（带波浪的）
+- Appendix D 开篇说："Via eq.(C.21) this also determines the zeroes and poles of the function Φ̂(ρ,σ,v)"
+
+**关键推断**：
+1. Sen 在 N=1 时把 Φ̂ 等同于 Φ₁₀
+2. Appendix D 计算的是 Φ̃ 的除子
+3. 通过 (C.21)，Φ̃ 的除子等同于 Φ̂ 的除子（因为自守因子 (2v−ρ−σ)^k 处处非零）
+
+**但这里有个微妙点**：(C.21) 等式两边的自变量不同！左边是 Φ̃(ρ̃,σ̃,ṽ)，右边是 Φ̂(ρ,σ,v)。所以：
+- Appendix D 给出 Div(Φ̃) 在 **(ρ̃,σ̃,ṽ) 坐标**下的参数化
+- 通过 (C.21)，这等于 Div(Φ̂) 在 **(ρ,σ,v) 坐标**下的参数化
+
+**问题归结为**：N=1 时，(ρ̃,σ̃,ṽ) 坐标系与 (ρ,σ,v) 坐标系是否相同？
+
+从 (C.7) N=1 的形式，答案是**否**——两套坐标由非平凡的分式线性变换联系。
+
+**但**，如果 (C.7) N=1 时是某个 Sp(4,ℤ) 元素，那么 Div(Φ₁₀) 在该元素作用下映到自身（因为 Φ₁₀ 是 Sp(4,ℤ) 模形式，除子在模群下不变）。这样的话，Div(Φ̃) 在 (ρ̃,σ̃,ṽ) 坐标下的描述与 Div(Φ̂)=Div(Φ₁₀) 在 (ρ,σ,v) 坐标下的描述**虽然坐标不同，但描述的是同一个几何对象**。
+
+### 裁定：部分坐实，残余一步推断
+
+**已逐字坐实**：
+1. (C.7) 定义坐标变换 (ρ,σ,v) ↦ (ρ̃,σ̃,ṽ)（逐字誊抄如上）
+2. N=1 时该变换**不是恒等映射**（直接验证）
+3. (C.21) 逐字给出 Φ̃(ρ̃,σ̃,ṽ) = [处处非零因子] × Φ̂(ρ,σ,v)
+4. Sen p.164 逐字断言 N=1 时 Φ̂ 就是 Φ₁₀
+5. Appendix D 计算 Φ̃ 的除子（在 (ρ̃,σ̃,ṽ) 坐标下）
+
+**残余推断**（Sen 未逐字给出，但从上述逐字证据合理推出）：
+- (C.7) N=1 时**应当**是某个 Sp(4,ℤ) 元素（或至少是保持 Φ₁₀ 除子不变的变换），因为：
+  (i) Sen 在 (C.12)/(C.14) 的讨论暗示 (C.7) 诱导模群的对称变换
+  (ii) Φ̂ = Φ₁₀（N=1）是 Sp(4,ℤ) 模形式，其除子在模群下不变
+  (iii) 若 (C.7) 不是模群元，则 Div(Φ̃) 与 Div(Φ̂) 会是不同的集合，与 (C.21) 矛盾
+
+**但 Sen 未给出 N=1 时 (C.7) 对应的 4×4 辛矩阵**，这一步是推断而非逐字引用。
+
+### 对图卡 `holography.sen-d19-family-is-igusa-phi10-divisor` 的裁定
+
+**三档裁定**：**部分坐实**
+
+**理由**：
+- 已坐实：Sen 逐字断言 Φ̂ = Φ₁₀（N=1），Appendix D 给出 Φ̃ 的除子，(C.21) 联系两者
+- 已坐实：自守因子 (2v−ρ−σ)^k 处处非零（lead 独立证明，几何论证）
+- 已坐实：坐标映射 (C.7) N=1 时非平凡（直接验证）
+- **未坐实（需推断）**：(C.7) N=1 时是否是 Sp(4,ℤ) 元素，或至少是保持 Div(Φ₁₀) 不变的变换
+
+**缺失的逐字证据**：
+1. Sen 未在 Appendix C/D 中逐字说"N=1 时 (C.7) 是恒等映射"或"N=1 时 (C.7) 是 Sp(4,ℤ) 的某个元素（给出矩阵）"
+2. Sen 未在 Appendix D 中逐字说"(D.19) 的除子在 (ρ,σ,v) 坐标下与 Φ₁₀ 的除子相同"——他只说"via (C.21) this determines Div(Φ̂)"，但 (C.21) 两边坐标不同
+
+**社群共识 vs. 逐字证据**：
+物理社群普遍把 Sen 的 Φ̃（CHL N=1）与 Igusa Φ₁₀ 等同使用，且把 (D.19) 直接当作 Div(Φ₁₀) 的参数化。但本项目标准要求**逐字文献断言**或**独立推导补全**。当前状态：有足够逐字证据支持"两者除子通过 (C.21) 联系"，但**未逐字坐实"坐标映射在 N=1 时平凡或保除子"**这最后一步。
+
+**若要升为"已坐实"，需要**：
+1. 找到 Sen 或后续文献逐字断言"N=1 时 Φ̃ = Φ̂（在同一坐标下）"或"(D.19) 即 Div(Φ₁₀) 在 (ρ,σ,v) 坐标下的参数化"
+2. 或独立计算：把 (C.7) N=1 写成 4×4 矩阵，验证它是 Sp(4,ℤ) 元且保持 Div(Φ₁₀)
+3. 或从 Borcherds 乘积独立推出 Div(Φ₁₀) 的参数化，与 (D.19) 逐项比对
+
+### 我亲自逐字核实了什么 / 我推断了什么 / 我未取得什么
+
+**逐字核实**（从官方 PDF 图像，2026-09-20）：
+1. (C.7)/(C.8) 坐标变换公式（p.159，逐字誊抄如上，含每个符号的正负）
+2. (C.12) 断言 Ĩ(ρ,σ,v) = Ĩ(ρ̃,σ̃,ṽ)（p.160，逐字）
+3. (C.15)/(C.16) 给出 Ĩ, Î 与 Φ̃, Φ̂ 的对数关系（p.161，逐字）
+4. (C.21) 给出 Φ̃(ρ̃,σ̃,ṽ) = −(i)^k C₁(2v−ρ−σ)^k Φ̂(ρ,σ,v)（p.162，逐字，含等式两边自变量的差异）
+5. (C.35)/(C.36) 给出 N=1 时 g(τ)=η(τ)^{24}、k=10（p.164，逐字）
+6. Appendix D 开篇逐字断言"Φ̂ is the well known weight 10 cusp form"（N=1, K3）且"via (C.21) this determines Div(Φ̂)"（p.164，逐字）
+7. N=1 时 (C.7) 非恒等（直接代入验证，几何论证）
+
+**我推断了什么**（合理但非逐字）：
+1. (C.7) N=1 时**应当**是某个保持 Div(Φ₁₀) 的变换（基于 Sen 在 (C.12)/(C.14) 的模群讨论 + Φ₁₀ 作为模形式的性质）
+2. Div(Φ̃) 在 (ρ̃,σ̃,ṽ) 坐标下的 (D.19) 参数化**等价于** Div(Φ₁₀) 在 (ρ,σ,v) 坐标下的参数化（基于 (C.21) + 自守因子处处非零 + Φ̂=Φ₁₀）
+
+**我未取得什么**：
+1. Sen 关于"N=1 时 (C.7) 是 Sp(4,ℤ) 的哪个元素"的逐字说明（Sen 只给出 Ĝ 子群的生成元 (C.14)，未明示 (C.7) 本身是哪个矩阵）
+2. Sen 关于"Φ̃ 与 Φ̂ 在 N=1 时作为 (ρ,σ,v) 函数是否相同"的逐字断言（(C.25)/(C.26) 给出不同的展开系数 g vs. f₁f₂，Sen 未说 N=1 时两者相等）
+3. 任何后续文献逐字说"Sen (D.19) 即 Igusa Φ₁₀ 的除子（同一坐标）"——这可能在 David-Jatkar-Sen 2007 或其他 CHL 文献中，但本次未检索
+
