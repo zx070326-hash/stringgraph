@@ -19,12 +19,16 @@ from stringgraph.report import (
     bottleneck_roots,
     counterfactual_report,
     force_rigorous,
+    format_tied_derivations,
     format_why,
     full_report,
     greedy_root_cover,
     hitting_set_report,
     is_self_capped,
     search,
+    tied_bottleneck_info,
+    tied_effective_cards,
+    tied_support_derivations,
     weak_active_ids,
     why_report,
 )
@@ -1170,6 +1174,280 @@ def test_counterfactual_reports_unknown_ids_without_forcing_them(leverage: Path)
     rep = counterfactual_report(g, ["worldsheet.def-x", "nope.does-not-exist"])
     assert rep["forced"] == ["worldsheet.def-x"]
     assert rep["unknown_ids"] == ["nope.does-not-exist"]
+
+
+# ------------------------------------------- tied derivations (roots/why hidden-story note)
+#
+# Reproduces the shape of the real worldsheet.ddf-contour-equals-mode-sum blind spot: two
+# non-refutation derivations of the same proposition tie for the best effective level, but
+# `_proposition`'s tie-break (propagate.py) deterministically anoints only one as
+# `best_derivation`. `bottleneck_roots`/`hitting_set_report` only ever follow that one, so the
+# other tied derivation's own bottleneck (here: prop-bridge) is invisible to the stats unless
+# surfaced through `tied_support_derivations`/`tied_bottleneck_info`.
+
+
+@pytest.fixture
+def tied(tmp_path: Path) -> Path:
+    """prop-target has two derivations tied at effective=physical-argument:
+      --via-a: own status physical-argument, depends on the already-rigorous def-p
+               (self-capped; deps_floor=rigorous). Wins the tie-break (higher deps_floor).
+      --via-b: own status rigorous, depends on prop-bridge (effective=physical-argument,
+               itself self-capped). Loses the tie-break, so its bottleneck (prop-bridge) is
+               exactly what `bottleneck_roots(g, "worldsheet.prop-target", ...)` cannot see.
+    """
+    schema_src = ROOT / "graph" / "schema"
+    for f in schema_src.iterdir():
+        _write(tmp_path, f"graph/schema/{f.name}", f.read_text(encoding="utf-8"))
+    _write(tmp_path, "literature/sources.bib", "@book{ref-a,\n title={A}\n}\n")
+    _write(
+        tmp_path,
+        "graph/statements/worldsheet/def-p.yaml",
+        """
+        id: worldsheet.def-p
+        kind: definition
+        status: rigorous
+        title: P
+        statement: an already-rigorous definition
+        sources: [{ref: ref-a, loc: "1"}]
+        """,
+    )
+    _write(
+        tmp_path,
+        "graph/statements/worldsheet/prop-bridge.yaml",
+        """
+        id: worldsheet.prop-bridge
+        kind: proposition
+        title: Bridge
+        statement: a physically-argued bridge identification
+        sources: [{ref: ref-a, loc: "2"}]
+        """,
+    )
+    _write(
+        tmp_path,
+        "graph/derivations/worldsheet/prop-bridge--via-argument.yaml",
+        """
+        id: worldsheet.prop-bridge--via-argument
+        target: worldsheet.prop-bridge
+        kind: physical-argument
+        status: physical-argument
+        depends_on: [{id: worldsheet.def-p}]
+        sources: [{ref: ref-a, loc: "2"}]
+        summary: physical identification, own status caps it
+        """,
+    )
+    _write(
+        tmp_path,
+        "graph/statements/worldsheet/prop-target.yaml",
+        """
+        id: worldsheet.prop-target
+        kind: proposition
+        title: Target
+        statement: target reachable two independent ways
+        sources: [{ref: ref-a, loc: "3"}]
+        """,
+    )
+    _write(
+        tmp_path,
+        "graph/derivations/worldsheet/prop-target--via-a.yaml",
+        """
+        id: worldsheet.prop-target--via-a
+        target: worldsheet.prop-target
+        kind: physical-argument
+        status: physical-argument
+        depends_on: [{id: worldsheet.def-p}]
+        sources: [{ref: ref-a, loc: "3"}]
+        summary: own status physical-argument, self-capped
+        """,
+    )
+    _write(
+        tmp_path,
+        "graph/derivations/worldsheet/prop-target--via-b.yaml",
+        """
+        id: worldsheet.prop-target--via-b
+        target: worldsheet.prop-target
+        kind: proof
+        status: rigorous
+        depends_on: [{id: worldsheet.prop-bridge}]
+        sources: [{ref: ref-a, loc: "3"}]
+        summary: rigorous reasoning on top of the not-yet-rigorous bridge
+        """,
+    )
+    return tmp_path
+
+
+def test_tied_fixture_reproduces_the_ddf_contour_shape(tied: Path) -> None:
+    g = load_graph(tied)
+    effs = compute_all(g)
+    assert effs["worldsheet.prop-target"].name == "physical-argument"
+    # via-a wins the tie-break: same effective level, but higher deps_floor (rigorous vs.
+    # prop-bridge's physical-argument) -- exactly the real card's --via-laurent... win.
+    assert effs["worldsheet.prop-target"].best_derivation == "worldsheet.prop-target--via-a"
+    # The official, stats-facing root set only ever sees the winning derivation: self-capped.
+    assert bottleneck_roots(g, "worldsheet.prop-target", effs) == {"worldsheet.prop-target"}
+
+
+def test_tied_support_derivations_lists_both_and_tied_bottleneck_info_reveals_hidden_root(
+    tied: Path,
+) -> None:
+    g = load_graph(tied)
+    effs = compute_all(g)
+    tds = tied_support_derivations(g, "worldsheet.prop-target", effs)
+    assert [d.id for d in tds] == [
+        "worldsheet.prop-target--via-a",
+        "worldsheet.prop-target--via-b",
+    ]
+
+    info = tied_bottleneck_info(g, "worldsheet.prop-target", effs)
+    by_id = {t["id"]: t for t in info}
+    assert set(by_id) == {"worldsheet.prop-target--via-a", "worldsheet.prop-target--via-b"}
+    assert by_id["worldsheet.prop-target--via-a"]["is_best"] is True
+    assert by_id["worldsheet.prop-target--via-a"]["roots"] == ["worldsheet.prop-target"]
+    # The hidden story: via-b's own bottleneck is prop-bridge, invisible to bottleneck_roots.
+    assert by_id["worldsheet.prop-target--via-b"]["is_best"] is False
+    assert by_id["worldsheet.prop-target--via-b"]["roots"] == ["worldsheet.prop-bridge"]
+
+
+def test_tied_helpers_are_empty_when_there_is_no_genuine_tie(mini: Path) -> None:
+    """duality.prop-d has exactly one (non-refutation) derivation, so there is nothing to tie:
+    all the tied-* helpers must report "no tie" rather than treating a singleton as a tie."""
+    g = load_graph(mini)
+    effs = compute_all(g)
+    tds = tied_support_derivations(g, "duality.prop-d", effs)
+    assert [d.id for d in tds] == ["duality.prop-d--via-c"]
+    assert tied_bottleneck_info(g, "duality.prop-d", effs) == []
+    assert tied_effective_cards(g, effs) == []
+
+
+def test_tied_effective_cards_and_full_report_key(tied: Path) -> None:
+    g = load_graph(tied)
+    effs = compute_all(g)
+    assert tied_effective_cards(g, effs) == ["worldsheet.prop-target"]
+    rep = full_report(g)
+    assert rep["tied_effective_derivations"] == ["worldsheet.prop-target"]
+    rep_open = full_report(g, open_only=True)
+    assert rep_open["tied_effective_derivations"] == ["worldsheet.prop-target"]
+
+
+def test_full_report_tied_effective_derivations_key_is_empty_without_a_tie(mini: Path) -> None:
+    """No-noise requirement at the whole-graph level: `mini` has no tied cards."""
+    g = load_graph(mini)
+    assert full_report(g)["tied_effective_derivations"] == []
+
+
+def test_format_tied_derivations_marks_best_and_lists_hidden_root(tied: Path) -> None:
+    g = load_graph(tied)
+    effs = compute_all(g)
+    info = tied_bottleneck_info(g, "worldsheet.prop-target", effs)
+    text = format_tied_derivations("worldsheet.prop-target", effs["worldsheet.prop-target"], info)
+    assert "2 derivations" in text
+    assert "worldsheet.prop-target--via-a" in text
+    assert "BEST" in text
+    assert "worldsheet.prop-target--via-b" in text
+    assert "worldsheet.prop-bridge" in text
+
+
+def test_roots_cli_prints_tied_note_and_reveals_hidden_root(tied: Path, capsys) -> None:
+    from stringgraph.cli import main
+
+    assert main(["--root", str(tied), "roots", "worldsheet.prop-target"]) == 0
+    out = capsys.readouterr().out
+    # The headline count is unaffected: still 1 root, the self-capped winner.
+    assert "1 bottleneck root(s)" in out
+    assert "worldsheet.prop-target--via-a" in out and "BEST" in out
+    assert "worldsheet.prop-target--via-b" in out
+    assert "worldsheet.prop-bridge" in out  # the hidden bottleneck, now visible
+
+
+def test_roots_cli_json_carries_tied_derivations_when_tied(tied: Path, capsys) -> None:
+    import json as _json
+
+    from stringgraph.cli import main
+
+    assert main(["--root", str(tied), "roots", "worldsheet.prop-target", "--json"]) == 0
+    rep = _json.loads(capsys.readouterr().out)
+    assert rep["roots"] == ["worldsheet.prop-target"]
+    tied_by_id = {t["id"]: t for t in rep["tied_derivations"]}
+    assert tied_by_id["worldsheet.prop-target--via-a"]["is_best"] is True
+    assert tied_by_id["worldsheet.prop-target--via-b"]["roots"] == ["worldsheet.prop-bridge"]
+
+
+def test_roots_cli_is_silent_about_ties_when_there_is_no_tie(mini: Path, capsys) -> None:
+    """No-noise requirement: a card with a single derivation must not grow any extra output."""
+    from stringgraph.cli import main
+
+    assert main(["--root", str(mini), "roots", "duality.prop-d"]) == 0
+    out = capsys.readouterr().out
+    assert "NOTE" not in out
+    assert "tie at effective level" not in out
+
+
+def test_roots_cli_json_has_no_tied_derivations_key_when_there_is_no_tie(
+    mini: Path, capsys
+) -> None:
+    import json as _json
+
+    from stringgraph.cli import main
+
+    assert main(["--root", str(mini), "roots", "duality.prop-d", "--json"]) == 0
+    rep = _json.loads(capsys.readouterr().out)
+    assert "tied_derivations" not in rep
+
+
+def test_why_cli_prints_tied_note_and_reveals_hidden_root(tied: Path, capsys) -> None:
+    from stringgraph.cli import main
+
+    assert main(["--root", str(tied), "why", "worldsheet.prop-target"]) == 0
+    out = capsys.readouterr().out
+    assert "worldsheet.prop-target [physical-argument]" in out
+    assert "worldsheet.prop-target--via-a" in out and "BEST" in out
+    assert "worldsheet.prop-target--via-b" in out
+    assert "worldsheet.prop-bridge" in out
+
+
+def test_why_cli_json_carries_tied_derivations_when_tied(tied: Path, capsys) -> None:
+    import json as _json
+
+    from stringgraph.cli import main
+
+    assert main(["--root", str(tied), "why", "worldsheet.prop-target", "--json"]) == 0
+    rep = _json.loads(capsys.readouterr().out)
+    tied_by_id = {t["id"]: t for t in rep["tied_derivations"]}
+    assert tied_by_id["worldsheet.prop-target--via-b"]["roots"] == ["worldsheet.prop-bridge"]
+
+
+def test_why_cli_is_silent_about_ties_when_there_is_no_tie(mini: Path, capsys) -> None:
+    from stringgraph.cli import main
+
+    assert main(["--root", str(mini), "why", "duality.prop-d"]) == 0
+    out = capsys.readouterr().out
+    assert "NOTE" not in out
+    assert "tie at effective level" not in out
+
+
+def test_why_cli_json_has_no_tied_derivations_key_when_there_is_no_tie(
+    mini: Path, capsys
+) -> None:
+    import json as _json
+
+    from stringgraph.cli import main
+
+    assert main(["--root", str(mini), "why", "duality.prop-d", "--json"]) == 0
+    rep = _json.loads(capsys.readouterr().out)
+    assert "tied_derivations" not in rep
+
+
+def test_hitting_set_report_unaffected_by_tied_derivation_helpers(tied: Path) -> None:
+    """The headline leverage-analysis numbers (docs/LEVERAGE-ANALYSIS.md) must stay exactly the
+    single-best-derivation view: prop-target's root set is {itself}, not {prop-bridge}, even
+    though prop-bridge is independently weak and self-capped in its own right."""
+    g = load_graph(tied)
+    effs = compute_all(g)
+    rep = hitting_set_report(g, effs)
+    assert set(weak_active_ids(g, effs)) == {"worldsheet.prop-target", "worldsheet.prop-bridge"}
+    root_sets = {sid: bottleneck_roots(g, sid, effs) for sid in weak_active_ids(g, effs)}
+    assert root_sets["worldsheet.prop-target"] == {"worldsheet.prop-target"}
+    assert root_sets["worldsheet.prop-bridge"] == {"worldsheet.prop-bridge"}
+    assert rep["counts"] == {"active": 3, "weak": 2, "distinct_roots": 2}
 
 
 # ---------------------------------------------------------------- bib

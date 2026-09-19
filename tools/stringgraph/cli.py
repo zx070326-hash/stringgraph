@@ -17,6 +17,7 @@ from .report import (
     format_counterfactual,
     format_hitting_set,
     format_report,
+    format_tied_derivations,
     format_why,
     full_report,
     greedy_root_cover,
@@ -24,6 +25,7 @@ from .report import (
     roots_needed_for_target,
     search,
     status_report,
+    tied_bottleneck_info,
     to_dot,
     to_json,
     why_report,
@@ -173,8 +175,19 @@ def main(argv: list[str] | None = None) -> int:
         if args.id not in g.statements:
             print(f"unknown statement id: {args.id}", file=sys.stderr)
             return 2
-        tree = why_report(g, args.id)
-        print(to_json(tree) if args.json else format_why(tree))
+        effs = compute_all(g)
+        tree = why_report(g, args.id, effs)
+        tied = tied_bottleneck_info(g, args.id, effs)
+        if args.json:
+            out = dict(tree)
+            if tied:
+                out["tied_derivations"] = tied
+            print(to_json(out))
+        else:
+            print(format_why(tree))
+            if tied:
+                print("")
+                print(format_tied_derivations(args.id, effs[args.id], tied))
         return 0
 
     if args.cmd == "report":
@@ -205,12 +218,19 @@ def main(argv: list[str] | None = None) -> int:
             return 2
         effs = compute_all(g)
         rs = sorted(bottleneck_roots(g, args.id, effs))
+        tied = tied_bottleneck_info(g, args.id, effs)
         if args.json:
-            print(to_json({"id": args.id, "roots": rs, "count": len(rs)}))
+            out = {"id": args.id, "roots": rs, "count": len(rs)}
+            if tied:
+                out["tied_derivations"] = tied
+            print(to_json(out))
         else:
             print(f"{args.id}: {len(rs)} bottleneck root(s)")
             for r in rs:
                 print(f"  {r}")
+            if tied:
+                print("")
+                print(format_tied_derivations(args.id, effs[args.id], tied))
         return 0
 
     if args.cmd == "hitting-set":
