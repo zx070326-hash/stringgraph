@@ -153,6 +153,112 @@ def all_bottleneck_roots(g: Graph, effs: dict[str, Effective] | None = None) -> 
     return {sid: bottleneck_roots(g, sid, effs) for sid in weak_active_ids(g, effs)}
 
 
+def tied_support_derivations(g: Graph, sid: str, effs: dict[str, Effective]) -> list[Derivation]:
+    """Non-refutation derivations for proposition `sid` whose own effective level equals
+    `effs[sid].level` -- i.e., derivations tied with the winning `best_derivation` for the top
+    spot in `_proposition`'s max-over-derivations formula (`propagate.py`). `_proposition`'s
+    tie-break (deps floor, then fewest conjectures, then derivation id) always resolves such a
+    tie to a single `best_derivation`, so a genuine tie is `len(...) > 1`: the returned list's
+    other members are the derivations `bottleneck_roots`/`why_report` never follow, because both
+    only ever descend `best_derivation`.
+
+    Returns `[]` for definitions/axioms, for propositions with no non-refutation derivation
+    (open), and when the target's effective status was actually decided by a refutation override
+    (`_proposition` returns `refuted` independently of the support tie-break in that case, so
+    "tied support derivations" is not a meaningful question -- see `bottleneck_roots`'s docstring
+    caveat about the same override).
+    """
+    st = g.statements.get(sid)
+    if st is None or st.kind != "proposition":
+        return []
+    eff = effs[sid]
+    best = g.derivations.get(eff.best_derivation) if eff.best_derivation else None
+    if best is None or best.kind == "refutation":
+        return []
+    supports = [d for d in g.derivations_for(sid) if d.kind != "refutation"]
+    prop = Propagator(g)
+    tied = [d for d in supports if prop._derivation(d).level == eff.level]
+    tied.sort(key=lambda d: d.id)
+    return tied
+
+
+def bottleneck_roots_for_derivation(
+    g: Graph, d: Derivation, effs: dict[str, Effective], level: int, seen: set[str] | None = None
+) -> set[str]:
+    """Bottleneck roots reached by descending from derivation `d` specifically, rather than from
+    `d.target`'s `effs[d.target].best_derivation` as `bottleneck_roots` does. `level` is the
+    level `d`'s dependencies are compared against -- pass `d`'s own effective level (equal to
+    `effs[d.target].level` for any `d` returned by `tied_support_derivations`).
+
+    Exists so a *non-winning* tied derivation's bottleneck can be shown too (see
+    `tied_bottleneck_info`); mirrors `bottleneck_roots`'s recursion shape exactly (including its
+    `seen`-guard quirk of returning `set()` for an already-visited dependency rather than
+    excluding it up front) so the two report the same kind of leaf set.
+    """
+    if seen is None:
+        seen = set()
+    seen.add(d.target)
+    dep_ids = [x.id for x in d.depends_on if x.id in g.statements]
+    weak = [u for u in dep_ids if effs[u].level <= level]
+    if not weak:
+        return {d.target}
+    out: set[str] = set()
+    for u in weak:
+        out |= bottleneck_roots(g, u, effs, seen)
+    return out or {d.target}
+
+
+def tied_bottleneck_info(g: Graph, sid: str, effs: dict[str, Effective]) -> list[dict]:
+    """One entry per derivation in `tied_support_derivations(g, sid, effs)` --
+    `{"id", "is_best", "roots"}` -- each carrying that derivation's own bottleneck-root set.
+
+    Returns `[]` when there is no genuine tie (0 or 1 tied derivations), so callers can use
+    truthiness to decide whether to print anything extra at all: `roots`/`why` in cli.py add a
+    "tied derivations" section only when this is non-empty, which keeps their default output
+    (and everything `hitting_set_report` computes from `bottleneck_roots`) byte-for-byte
+    unchanged for the overwhelming majority of cards that have no tie.
+    """
+    tied = tied_support_derivations(g, sid, effs)
+    if len(tied) <= 1:
+        return []
+    eff = effs[sid]
+    return [
+        {"id": d.id, "is_best": d.id == eff.best_derivation, "roots": sorted(bottleneck_roots_for_derivation(g, d, effs, eff.level))}
+        for d in tied
+    ]
+
+
+def format_tied_derivations(sid: str, eff: Effective, tied: list[dict]) -> str:
+    """Render `tied_bottleneck_info`'s output as the "hidden story" note appended below
+    `roots`/`why`'s normal output (see module docstring context in cli.py). Callers must check
+    `tied` is non-empty first; this function always prints something."""
+    lines = [
+        f"NOTE: {len(tied)} derivations of {sid} tie at effective level [{eff.name}]; "
+        f"only best_derivation={eff.best_derivation!r} feeds bottleneck_roots/hitting-set/report above -- "
+        f"the other tied derivation(s) below are otherwise invisible to those numbers.",
+    ]
+    for t in tied:
+        tag = "BEST, used above" if t["is_best"] else "tied, NOT used above"
+        lines.append(f"  [{tag}] {t['id']}")
+        lines.append(f"    roots: {', '.join(t['roots']) if t['roots'] else '(none)'}")
+    return "\n".join(lines)
+
+
+def tied_effective_cards(g: Graph, effs: dict[str, Effective] | None = None) -> list[str]:
+    """Active proposition ids with a genuine tie in `tied_support_derivations` -- cards where
+    two or more independent derivations reach the same winning effective level, so the
+    statistics (`bottleneck_roots`, `hitting_set_report`) that follow only `best_derivation` are
+    silently ignoring at least one other equally-strong story. See docs/LEVERAGE-ANALYSIS.md;
+    this is the population `roots`/`why`'s tied-derivation note exists to surface one card at a
+    time. Sorted for determinism."""
+    effs = effs if effs is not None else compute_all(g)
+    return sorted(
+        sid
+        for sid, st in g.statements.items()
+        if st.kind == "proposition" and not st.superseded_by and len(tied_support_derivations(g, sid, effs)) > 1
+    )
+
+
 def is_self_capped(g: Graph, sid: str, effs: dict[str, Effective]) -> bool:
     """True if `sid`'s own status is (one of) the bottleneck(s) for its effective level, as
     opposed to being capped purely by an upstream dependency.
@@ -456,6 +562,12 @@ def full_report(g: Graph, open_only: bool = False) -> dict:
         if deps and all(effs[u].name == "formalized" for u in deps):
             frontier.append(sid)
     frontier.sort()
+    # Cards where two or more derivations tie for the best effective level: `bottleneck_roots`
+    # and `hitting_set_report` only ever follow `best_derivation`, so these are exactly the
+    # cards where the leverage analysis is silently telling half the story (see
+    # `tied_effective_cards` and cli.py's `roots`/`why` tied-derivation note). Measured at
+    # 20/673 statements (2026-09) -- small enough to list by id rather than count alone.
+    tied_derivation_cards = tied_effective_cards(g, effs)
     by_area = Counter(sid.split(".", 1)[0] for sid in g.statements)
     milestones = []
     for m in g.milestones.values():
@@ -486,9 +598,13 @@ def full_report(g: Graph, open_only: bool = False) -> dict:
         "superseded": superseded,
         "inferred_edges": inferred_edges,
         "gaps": [{"derivation": d, "gap": gp} for d, gp in gaps],
+        "tied_effective_derivations": tied_derivation_cards,
     }
     if open_only:
-        return {k: out[k] for k in ("open_propositions", "superseded", "inferred_edges", "gaps", "formalization_frontier")}
+        return {k: out[k] for k in (
+            "open_propositions", "superseded", "inferred_edges", "gaps", "formalization_frontier",
+            "tied_effective_derivations",
+        )}
     return out
 
 
@@ -525,6 +641,12 @@ def format_report(rep: dict) -> str:
     lines += [f"  {x}" for x in rep["inferred_edges"]]
     lines.append(f"known gaps ({len(rep['gaps'])}):")
     lines += [f"  {x['derivation']}: {x['gap']}" for x in rep["gaps"]]
+    lines.append(
+        f"tied effective derivations ({len(rep['tied_effective_derivations'])}, "
+        "cards where >=2 derivations tie for the best effective level so `roots`/`why` only "
+        "ever follow one of them -- see `stringgraph roots <id>`/`why <id>` for the hidden one):"
+    )
+    lines += [f"  {x}" for x in rep["tied_effective_derivations"]]
     return "\n".join(lines)
 
 
