@@ -1,0 +1,70 @@
+id: holography.n4-dyon-leading-bekenstein-hawking-entropy
+kind: proposition
+title: N=4 1/4-BPS dyon 的领头阶 Bekenstein–Hawking 熵 S_BH = π√Δ
+statement: |
+  在四维 N=4 弦论中，带电荷 (Q⃗, P⃗) 的极端双荷（dyonic）黑洞，其**领头阶**
+  Bekenstein–Hawking 熵由二导数有效作用量的 attractor（entropy function）极值给出：
+
+    S_BH = π · √( Q²P² − (Q·P)² )    当 Q²P² > (Q·P)²，
+    S_BH = π · √( (Q·P)² − Q²P² )    当 Q²P² < (Q·P)²。
+
+  用本项目的整数电荷记号 m := Q²/2、n := P²/2、ℓ := Q·P，
+  判别式 Δ := 4mn − ℓ² = Q²P² − (Q·P)²，第一式即
+
+    **S_BH = π √Δ**   （Δ > 0）。
+
+  系数逐字为 π（不是 2π，也不是 π/2）。
+  「领头阶」指：只用二导数有效作用量；高导数（R² 及更高）修正不包含在内。
+uses: []
+uses_conventions: []
+sources:
+  - ref: sen-2008-precision-counting
+    loc: "arXiv:0708.1270v4 §3.1, eq. (3.1.23)（PDF p.39）；非超对称分支见 eq. (3.1.24)（PDF p.40）"
+    note: |
+      (3.1.23) 逐字："The black hole entropy, given by the value of E for this
+      configuration, is  S_BH = π√(Q²P² − (Q·P)²)   (3.1.23).  Although this formula
+      has been derived under the condition P² > 0, Q² > 0, P²Q² > (Q·P)², the final
+      result for the entropy also holds for arbitrary P², Q² as long as P²Q² > (Q·P)²."
+      逐字核对见 literature/extractions/n4-dyon-leading-entropy.md 的 E-LEAD-1/E-LEAD-2
+      （lead 2026-09-20 用 PyMuPDF 读本地 sen2008.pdf 取得；当日 arXiv 环境级不可达）。
+tags: [bh-entropy, n4-string-theory, attractor, supergravity]
+notes: |
+  **为什么现在才立这张卡（lead 2026-09-20）**：
+  本项目「黑洞 / 原创线」已有二十余张卡在谈 Φ₁₀ 围道、d_*、Δ = 4mn−ℓ²、壁跨越、
+  指标正性，但 **`S_BH = π√Δ` 这条最基本的物理起点，在此前的 703 个节点里没有任何
+  一个承载**（lead 当日 grep 全图确认）。也就是说，「Δ 与黑洞熵有关」这句话
+  一直是图外的默认背景，而不是图内可追溯的命题。本卡补上这个起点。
+
+  **Δ 与 S_BH 的换算不是引用，是代数**：本项目固定 m=Q²/2, n=P²/2, ℓ=Q·P，
+  代入得 4mn − ℓ² = 4·(Q²/2)(P²/2) − (Q·P)² = Q²P² − (Q·P)²，与 (3.1.23) 根号内
+  逐项相同，无待定因子。**但这依赖这一套归一化**——不同文献的 Q²/P²/Q·P
+  可能差因子 2、4、8，引用本卡时必须确认对方用的是哪一套。
+
+  **适用范围**：Sen 的推导条件是 P²>0, Q²>0, (Q·P)² < Q²P²（其 (3.1.19)）；
+  他明说最终结果对任意 P², Q² 成立只要 P²Q² > (Q·P)²，即 **Δ > 0**。
+  这正是本项目各卡普遍假设的 Δ>0 条件。
+
+  **为什么是 physical-argument 而不是 rigorous**（见配套推导卡）：
+  这是超引力有效作用量上的 entropy-function 极值计算，不是数学定理。
+  Sen 本人在紧接的 (3.1.24) 段落里写道 "black holes with P²Q² > (Q·P)² are known to
+  be supersymmetric **although we cannot see this in our analysis**"。
+  **取到逐字原文 ≠ 该结论是严格的**——逐字取到的是一条物理推导的结论。
+
+  **本卡刻意不断言的东西**：
+  - 不断言 S_BH 与微观态计数 d(Q,P) 的相等（那是 Sen 这篇综述的主题，
+    需要另立卡，且涉及高导数修正与 Cardy 极限）；
+  - 不断言任何高导数修正的形式；
+  - 不断言 Δ<0 分支的超对称性（Sen 明说他的分析看不出来）。
+
+  **已知的图外输入（诚实记账，非承重隐藏）**：本卡的推导用到
+  (i) Bekenstein–Hawking 面积律 S=A/(4G_N)、(ii) 四维 N=4 二导数有效作用量、
+  (iii) attractor / entropy-function 形式论。**这三者目前都没有图节点**。
+  本卡因此没有 depends_on（配套推导卡的 depends_on 为空），这是**如实记录当前
+  图的覆盖缺口**，不是声称该推导自足。谁要把这条线做扎实，下一步就是给这三条立卡。
+
+  **与 research/attempts/attractor-contour-threshold-entropy 的关系**：
+  该 attempt 的 [GAP-Step2]（「S_BH=π√Δ 未取得逐字来源」）由本卡关闭。
+  但该 attempt 的结论（Λ₀ = π/(2S_BH) 基本是量纲强制的假深刻）**不因此改变**，
+  它本就声明结论不依赖确切系数；现在只是可以确认其数值形式确实成立。
+author: lead
+created: "2026-09-20"

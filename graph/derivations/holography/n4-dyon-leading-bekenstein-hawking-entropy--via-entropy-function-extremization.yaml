@@ -1,0 +1,62 @@
+id: holography.n4-dyon-leading-bekenstein-hawking-entropy--via-entropy-function-extremization
+target: holography.n4-dyon-leading-bekenstein-hawking-entropy
+kind: physical-argument
+status: physical-argument
+depends_on: []
+sources:
+  - ref: sen-2008-precision-counting
+    loc: "arXiv:0708.1270v4 §3.1：(3.1.3) 二导数作用量 → (3.1.11) entropy function E → (3.1.18) → (3.1.20) → (3.1.21) → (3.1.22) → (3.1.23)"
+    note: |
+      整条极值化链条都在 §3.1 内，各步方程号如上。(3.1.19) 给出推导的适用条件
+      P²>0, Q²>0, (Q·P)² < Q²P²。逐字引用见
+      literature/extractions/n4-dyon-leading-entropy.md 的 E-LEAD-1。
+summary: |
+  Sen 的 entropy function 形式论：对近视界 AdS₂×S² 型极端黑洞，把二导数有效作用量
+  (3.1.3) 的拉氏密度在近视界几何上积分得到函数 E(u,v,e,q,p)，黑洞熵等于 E 在其
+  参数上的极值（attractor：极值处的值与渐近模量无关）。
+
+  具体步骤（Sen §3.1）：
+  1. (3.1.18)：代入近视界 ansatz 后把 E 写成 SO(2,2) 不变形式
+     E = (π/2)[ u_S(v₂−v₁) + (v₁/v₂)( Q²/u_S + (P²/u_S)(u_S²+u_a²) − 2(u_a/u_S) Q·P ) ]。
+  2. (3.1.20)：对 v₁, v₂ 取极值。
+  3. (3.1.21)：回代得 E = (π/2)(1/u_S)[ Q² − 2u_a Q·P + P²(u_S²+u_a²) ]。
+  4. (3.1.22)：再对 u_a, u_S 取极值，得
+     u_S = √(Q²P² − (Q·P)²)/P²，u_a = (Q·P)/P²。
+  5. (3.1.23)：把 (3.1.22) 回代进 (3.1.21)，得 S_BH = π√(Q²P² − (Q·P)²)。
+
+  Δ>0 分支即本卡目标陈述的 S_BH = π√Δ；Δ<0 分支由 (3.1.24) 给出同形结果
+  （根号内取相反符号），Sen 只引述未推导。
+gaps:
+  - |
+    **本推导的三条输入都还没有图节点**：Bekenstein–Hawking 面积律 S=A/(4G_N)、
+    四维 N=4 二导数有效作用量 (3.1.3)、attractor/entropy-function 形式论本身。
+    故 depends_on 为空——这是**如实记录图的覆盖缺口**，不是声称推导自足。
+    按 graph/CLAUDE.md 2026-09-15 裁决的精神，这三条是承重的；此处不用 inferred
+    边掩饰，而是显式写在这里，待后续立卡后补边。补边会把本卡的 effective
+    压到那三张卡的下界（预期仍是 physical-argument）。
+  - |
+    Δ<0 分支（(3.1.24)）Sen 明说 "We shall not go through the analysis here, but
+    just quote the final result"，**本项目未取得其推导**。目标卡的第二式因此
+    比第一式更弱，引用时须区分。
+  - |
+    本推导只给**领头阶**。高导数修正（Sen 这篇综述的主体）会改变系数结构，
+    本卡对此不作任何断言。
+notes: |
+  **status 定 physical-argument 的理由**（按 docs/STATUS_LEVELS.md 等级 3
+  「路径积分操作、非严格渐近、形式操作、『标准推导』」）：
+  这是超引力有效作用量上的经典计算 + attractor 论证，不是数学定理。
+  近视界几何 ansatz、极值的存在唯一性、以及「E 的极值就是 Wald 熵」这一步
+  都按物理标准处理。**不得因为公式取到了逐字原文就升 rigorous**。
+
+  另一条内证：Sen 在 (3.1.24) 处写 "black holes with P²Q² > (Q·P)² are known to be
+  supersymmetric although we cannot see this in our analysis"——作者本人指出该
+  形式论看不到超对称性，是它作为物理论证而非严格刻画的直接体现。
+
+  **取得来源的方式（写给后来者）**：当日 arXiv 全域环境级不可达
+  （WebFetch 返回 "Unable to verify if domain arxiv.org is safe to fetch"，
+  lead 从主会话亲试同样失败），逐字原文取自更早 agent 下载到 worktree 的本地
+  sen2008.pdf，用 PyMuPDF 提取。**注意不要用 pdftotext 核对含系数的公式**：
+  实测它静默丢弃 π 与 √（`e^{−π√(Q²P²−(Q·P)²)}` 被输出成 `e- . Q2P 2-(Q·P)2`），
+  用它判定「系数是 π 还是 2π」会得到系统性错误结论。
+author: lead
+created: "2026-09-20"
