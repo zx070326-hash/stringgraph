@@ -1,0 +1,50 @@
+id: math.supermoduli-moving-marking-test-curve-obstruction-vanishes--via-serre-vanishing
+target: math.supermoduli-moving-marking-test-curve-obstruction-vanishes
+kind: proof
+status: rigorous
+depends_on: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: >-
+      research/attempts/supermoduli-elliptic-tail-punctured/proof.md §3（命题 N 四步证明：
+      Step 1 测试基必须排除固定穿孔点、Step 2 C° := C∖{p_1,...,p_n} 仿射、Step 3 Serre 消没
+      H^i(C°,F)=0 (i≥1) 对任何凝聚层 F、Step 4 障碍值空间 H^1(C°,F^obs)=0 给出 J≡0）；
+      推论 N′（非分离粘接 (7.9) 同样失效）；推论 N″（Ramond 穿孔在运动分量上破坏
+      L^⊗2≅ω_C 识别）；§3 末 2026-09-18 订正记录（初稿错误"参数空间为零"订正为正确的
+      "取值空间为零"，论证因此更强）
+    note: |
+      本项目原创证明，非已发表文献。status.yaml 第二轮裁决（2026-09-20）问题 4 明确验证：
+      F^obs = Hom(Λ²T_-X_η, T_+X_η) 确为局部自由层（T_± 是 DW 一点障碍族给出的向量丛，外幂与
+      Hom 对局部自由封闭），从而 F^obs 凝聚，Serre 消没适用，H^1(C°,F^obs)=0 成立。
+      captain_confirmed: false（留船长确认，不代填）。
+summary: |
+  把 n 个旁观 NS 穿孔装在运动的亏格 h 分量上（即把 n 个点固定在底曲线 C 上作为 p_1,...,p_n，
+  第 n+1 个点随测试族运动作为粘接点）。四步论证：(1) DW 一点障碍族 X_η 的约化基必须排除这 n 个
+  固定穿孔点（它们不在测试族的纤维内，而是在底曲线上），故约化基是 C° := C∖{p_1,...,p_n}；
+  (2) C° 是仿射曲线（从紧曲线 C 移除 n≥1 个点）；(3) Serre 消没定理：仿射曲线上任何凝聚层 F
+  的 H^i(C°,F)=0 对一切 i≥1；(4) 主障碍类 ω₂(X_η) 取值于 H^1(C°,F^obs)，其中 F^obs =
+  Hom(Λ²T_-X_η, T_+X_η) 是凝聚层（T_± 是 DW 构造给出的局部自由层），故 H^1(C°,F^obs)=0，
+  从而障碍类映射 J: H^1(C,L^{-1}(-Σp_i)) → H^1(C°,F^obs) 恒等于零（对一切 η，J(η)=0）。
+  该测试路线给不出任何信息。推论 N′：同一个仿射性障碍也杀死 FKP 非分离粘接 (7.9) 作为载体
+  （两个被粘 NS 穿孔在同一条曲线上，其中一个运动、一个固定，测试基仍是 C∖{q}）。推论 N″：
+  Ramond 穿孔若装在运动分量上会破坏 L^⊗2≅ω_C 识别（需要变成 L^⊗2≅ω_C(R)），使 L 不再是
+  无扭转 theta 特征，DW 构造本身失效。
+gaps:
+  - |
+    本推导只用标准 Serre 消没定理（仿射曲线上凝聚层的 H^i=0, i≥1）与 DW 一点障碍族的构造
+    （T_± 是向量丛，外幂与 Hom 对局部自由封闭），不涉及任何外部依赖节点，故 depends_on: []。
+    Serre 消没本身是标准教材定理（Hartshorne III.3.7），未单独立卡。
+  - |
+    2026-09-18 订正记录（对抗审查）标记的初稿错误："参数空间 H^1(C,L^{-1}(-Σp_i)) 为零"是
+    **错的**（该空间维数为 2h-2+n > 2h-2），正确的是"**取值空间** H^1(C°,F^obs) 为零"。
+    这一订正使论证更强（η 比 CN 还多，却一个都测不到），已写入本卡 statement 的"不断言"段落。
+  - |
+    本 attempt 未产生 formal/ 下的无 sorry Lean 证明；status 诚实定为 rigorous，不写 formal: 字段。
+notes: |
+  curator 亲自 Read research/attempts/supermoduli-elliptic-tail-punctured/proof.md §3 全文与
+  status.yaml 第二轮裁决问题 4，核对命题 N 的四步论证、订正记录、推论 N′/N″ 与本卡 statement
+  逐条一致。本卡的正面结论姐妹卡（g≥3、g=2 两张）均依赖 FKP helper 卡（inferred:true）及其他
+  既有图卡；本卡与 FKP helper 卡一样 depends_on: []，因为命题 N 只用标准 Serre 消没定理
+  与 DW 一点障碍族的局部自由性，不涉及任何图内依赖边。
+author: graph-curator
+created: "2026-09-20"

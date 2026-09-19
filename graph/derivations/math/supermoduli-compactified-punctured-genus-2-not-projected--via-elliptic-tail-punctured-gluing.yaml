@@ -1,0 +1,59 @@
+id: math.supermoduli-compactified-punctured-genus-2-not-projected--via-elliptic-tail-punctured-gluing
+target: math.supermoduli-compactified-punctured-genus-2-not-projected
+kind: proof
+status: rigorous
+depends_on:
+  - id: math.supermoduli-compactified-genus-2-odd-split
+    inferred: false
+    note: |
+      proof.md §6.2 的反向自洽性检验把本证明的方法与该卡的结论（\overline{\mathfrak M}^-_2 分裂）
+      对照，验证本方法在 (P1)/(P2) 层面结构上不可能触及 g=2 奇宇称分量——若能触及将与该卡矛盾。
+      该边记录"本证明用哪条已证结果做自洽性反向核验"，不代表本节点依赖该卡的结论来推出自身命题
+      （本节点的证明构造独立于该卡；该卡只用作 sanity check）。
+  - id: math.supermoduli-space-not-projected
+    inferred: false
+    note: |
+      同 g≥3 姐妹卡：proof.md §1 逐字回顾 Donagi–Witten 一点障碍族构造与障碍类函子性，本证明的
+      测试族与障碍值追踪机制直接复用。
+  - id: math.fkp-ns-boundary-gluing-normal-bundle-formula
+    inferred: true
+    note: |
+      ⚠ 诚实标注（同 g≥3 姐妹卡）：proof.md §4 引理 4.4 把该卡逐字陈述的无穿孔靶法丛公式用于
+      带穿孔靶 \overline{\mathfrak S}_{2;n,2r}（n+2r≥2）。这是依据节点奇点局部性
+      （Lemma 9.1 证明的局部陈述性质）的推断，不是 FKP-A 论文逐字陈述的一般性结论。
+      graph-reviewer 第二轮审查（2026-09-20）亲自核实合法，裁定不降低天花板。
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/supermoduli-elliptic-tail-punctured/proof.md §4.1-§4.7（a=0 分支，
+      h=g=2）；§4.7 命题 4.8（a=0 时自旋结构唯一为 O(-1)，偶宇称，统计见证明正文）；§5.1（推论
+      A(2)/B 的 a=0 分支阈值推导：a=0 时 (P2) 等价于 n+2r≥2）；§6.2（g=2 奇分量不可达的反向
+      检验，四条自洽性检验之一）"
+    note: |
+      本项目原创证明，非已发表文献。status.yaml 记录同 g≥3 姐妹卡；额外记录 reviewer 第二轮
+      PLAUSIBLE（非 CONFIRMED，reviewer 主动补充）佐证："g=2 只够到偶分量不是差一点没够到，而是
+      本该如此——CN 证 \overline{\mathfrak M}^-_2 分裂的路子依赖亏格 2 特有的无穿孔性质（每条亏格
+      2 曲线超椭圆、有一个区分出来的奇 theta 特征），加上 n≥2 个标记点后这些全不存活"。
+      captain_confirmed: false（留船长确认，不代填）。
+summary: |
+  取 a=0（亏格 h=g=2 的运动分量、有理固定尾）分支：固定尾带 n+1 个 NS 标记点（1 个用于粘接）、
+  2r 个 Ramond 标记点，稳定性 (P2) 在 a=0 时退化为 n+2r≥2；沿 NS 粘接映射构造测试态射
+  F_{η,ξ}: X_η → \overline{\mathfrak S}_{2;n,2r}；引理 4.4/命题 4.5/推论 4.7 的通用构造对 dim
+  W（尾巴的辅助参数空间维数）不敏感，故 a=0 分支与 a=1 分支（g≥3 姐妹卡）共用同一套引理，只是
+  取值不同；定理 M 四步组装给出 ω₂≠0。宇称加细：有理固定尾的自旋结构在 FKP-A 的稳定自旋曲线框架下
+  唯一（O(-1)），其宇称由 Mumford 意义下的局部常值性确定为偶，故测试曲线只落在
+  \overline{\mathfrak S}{}^+_{2;n,0} 分量（命题 4.8）。
+gaps:
+  - |
+    同 g≥3 姐妹卡：[GAP-FKP-RAMOND]（低，保留，只影响 r≥1）、[GAP-COMP]（低，已写入本卡 statement
+    的量词范围限制，r≥1 时不指认分量）。
+  - |
+    (g,n,r)=(2,1,0) 与 g=2 奇宇称带穿孔分量被本卡 statement 显式排除，不是本推导的缺口而是命题
+    本身的精确边界——见 statement 的"本节点明确不断言"段落逐条对应的理由。
+  - |
+    本 attempt 未产生 formal/ 下的无 sorry Lean 证明；status 诚实定为 rigorous，不写 formal: 字段。
+notes: |
+  curator 亲自 Read research/attempts/supermoduli-elliptic-tail-punctured/proof.md §4/§5.1/§6.2
+  与 claim.md §2/§3/§4.3、status.yaml 两轮裁决全文，核对 a=0 分支的量词范围、宇称加细（仅偶）、
+  排除清单（(2,1,0)、奇宇称分量）与本卡 statement 逐条一致。
+author: graph-curator
+created: "2026-09-20"

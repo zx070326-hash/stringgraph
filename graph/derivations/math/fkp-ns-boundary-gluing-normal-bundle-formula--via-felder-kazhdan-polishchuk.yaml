@@ -1,0 +1,33 @@
+id: math.fkp-ns-boundary-gluing-normal-bundle-formula--via-felder-kazhdan-polishchuk
+target: math.fkp-ns-boundary-gluing-normal-bundle-formula
+kind: proof
+status: rigorous
+depends_on: []
+sources:
+  - ref: felder-kazhdan-polishchuk-2020
+    loc: "Theorem C（p.2 末–p.3 顶）；证明途径：§9.1 eq.(9.6)（p.60–61）= eq.(7.6) + Lemma 9.1(i)-(iv)
+      （p.59–60）+ Lemma 8.7；由 §9.2 Theorem 9.2 + §9.2 的推论组装成 Theorem C（p.70，
+      'Combining the above Corollary with Theorem 9.2, we get the statement of Theorem C.'）"
+    note: |
+      literature/extractions/felder-kazhdan-polishchuk-2020.md E7（§9.1 setup + 启发式比较）、
+      E8（Lemma 9.1 逐字陈述与证明梗概）、E9（标记"★ 承重条目"的 (9.6) 完整推导）、E11（Theorem C
+      与 (8.11)/Theorem B 的 500dpi 逐字对照复核）均已完成 L1 抽取。已发表论文
+      （Amer. J. Math. 145 (2023) no.6, 1777–1886），编号定理，无弱化措辞（"Theorem C. ... There
+      exists a natural isomorphism"）。本推导记账该定理逐字陈述的形式（无穿孔靶），不涉及任何
+      向带穿孔靶的推广——推广部分留给下游节点用 inferred:true 的依赖边处理。
+summary: |
+  记账 FKP-A 已发表结果。Theorem C 的证明路径是 §9.1 建立 eq.(9.6)（组合 eq.(7.6)、Lemma 9.1 的
+  局部同构、Lemma 8.7 的典范平凡化）给出 N_B ≅ Ψ_1^{-1}⊗Ψ_2^{-1}，再由 §9.2 Theorem 9.2 证明该
+  同构与典范态射 SM 相容，两者组装成 Theorem C。本推导只记账"定理陈述成立"这一事实本身（已发表、
+  编号、无弱化措辞），不重新独立核验 Theorem 9.2 相容性证明（Lemma 9.3–9.6，pp.63–68）的每一步
+  代数——那部分不影响本节点的靶空间量词范围这一核心信息（无穿孔），故不影响 rigorous 档位判断。
+gaps:
+  - |
+    Theorem 9.2 的相容性证明正文（Lemma 9.3/9.4/9.5，p.63–68）本项目只读了陈述与证明首句，未逐行
+    复核；但本节点只记账 Theorem C 的陈述与其靶空间的量词范围（无穿孔），这条信息只需 E11 的
+    500dpi 逐字复核即可确立，不依赖 Theorem 9.2 内部证明细节是否被独立验证。
+  - |
+    法丛公式是否对带穿孔的靶成立，FKP-A 原文未置一词（既未肯定也未否定）；本节点如实只登记
+    "FKP 逐字写下的是无穿孔靶"这一事实，不对推广方向下判断（推广判断见下游节点的 inferred 依赖边）。
+author: graph-curator
+created: "2026-09-20"

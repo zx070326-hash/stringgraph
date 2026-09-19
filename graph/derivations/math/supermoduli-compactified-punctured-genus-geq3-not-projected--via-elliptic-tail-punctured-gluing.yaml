@@ -1,0 +1,78 @@
+id: math.supermoduli-compactified-punctured-genus-geq3-not-projected--via-elliptic-tail-punctured-gluing
+target: math.supermoduli-compactified-punctured-genus-geq3-not-projected
+kind: proof
+status: rigorous
+depends_on:
+  - id: math.supermoduli-compactified-genus-geq3-not-projected
+    inferred: false
+    note: |
+      本证明是 CN 该定理（n=r=0 情形）证明骨架在带穿孔粘接映射上的重新装配；proof.md §1 逐字
+      重述 CN 的 Prop 2.2 / Lemma 2.6 / §5 一点障碍族 / §6 粘接构造 / §7 存在性引理 / §8 组装，
+      §6.1 的自洽性检验明确验证本证明在 n=r=0 时重现该卡结论。该依赖边记录"本证明复用哪条已证
+      结果的论证骨架"，不代表本节点是该卡的特殊情形（本节点量词范围严格更宽）。
+  - id: math.supermoduli-space-not-projected
+    inferred: false
+    note: |
+      proof.md §1 逐字回顾 Donagi–Witten 一点障碍族构造 X_η（该卡 I3，经 CN §5 转述）与障碍类沿
+      态射函子性 j_f(ω₂)=ι_f(ω₂)（该卡的核心工具，经 CN Lemma 2.6 转述）；本证明的测试族 X_η 与
+      障碍值追踪机制直接复用这两条构造/引理，未独立重新证明。
+  - id: math.fkp-ns-boundary-gluing-normal-bundle-formula
+    inferred: true
+    note: |
+      ⚠ **诚实标注（任务硬约束）**：该卡逐字陈述的法丛公式 N_B≅Ψ₁^{-1}⊗Ψ₂^{-1} 是 FKP-A Theorem C
+      的内容，其靶逐字是**无穿孔**的 \overline{\mathcal S}_g。proof.md §4 引理 4.4（法丛计算，
+      本证明构造的关键一步）需要把这条公式用于**带穿孔的靶** \overline{\mathfrak S}_{g;n,2r}
+      （n+2r>0）。这一推广**不是** FKP-A 论文逐字陈述的一般性结论——FKP-A 全文未在任何地方明确
+      声明该公式对带穿孔靶成立（也未声明不成立）。本证明采用该推广的依据是：该公式的证明路径
+      （eq.(9.6) 经由 Lemma 9.1）是关于粘接节点**形式邻域**的局部陈述（Lemma 9.1 证明三次自称
+      "it is enough to study these line bundles in an étale neighborhood of the node"等，见
+      被依赖卡 sources note），这是节点奇点形变理论天然局部这一真实几何事实，不是"作者没写限制"
+      式的消极论证。graph-reviewer 第二轮审查（2026-09-20）亲自核实此步骤"有坚实理由，但仍是
+      推断"，裁定天花板仍为 rigorous（不因此降级为更低状态）。此边如实标 `inferred: true`：
+      去掉该标记，被依赖节点（无穿孔靶的字面陈述）并不完整承载本证明实际需要的那句话
+      （带穿孔靶版本）。
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/supermoduli-elliptic-tail-punctured/proof.md §4.1-§4.7（完整构造：
+      引理 4.1 玻色截断、引理 4.2 固定尾存在性、引理 4.3-4.4 切层与法丛计算、命题 4.5 正合列
+      拼接、引理 4.6/推论 4.7、§4.6 定理 M 四步组装、命题 4.8 宇称加细）；§5.1（推论 A(1)/B 的
+      a=1 分支阈值推导）；§6.1（n=r=0 一致性检验）"
+    note: |
+      本项目原创证明，非已发表文献。research/attempts/supermoduli-elliptic-tail-punctured/
+      status.yaml：state: verified；第二轮裁决（2026-09-20，agent smreview，reviewer-verified）
+      逐条确认：(1) [GAP-FKP-RAMOND]/[GAP-COMP] 不阻塞主结论；(2) 天花板隔离成立（亲自 grep+
+      通读核实不依赖 Wang/Donagi-Ott）；(3) I6（本推导的核心推断步骤）合法且补充了原稿没有的
+      数学理由；(5) 量词范围恰好，无过度推广（亲自算术复核 a=1 给 g≥3）。captain_confirmed:
+      false（留船长确认，不代填）。
+summary: |
+  取亏格 h=g−1≥2 的运动分量 C（带无效偶 theta 特征 L）与亏格 a=1 的常值自旋椭圆尾（带 n+1 个 NS
+  标记点、2r 个 Ramond 标记点），沿 FKP-A 式 (7.8) 粘接映射的带穿孔推广构造测试态射
+  F_{η,ξ}: X_η → \overline{\mathfrak S}_{g;n,2r}；引理 4.4 计算法丛（关键技巧：不计算尾巴那条
+  ψ-线的具体形式，只用"它是一条线"这一事实，从而绕开 Example 8.9 在 Ramond 情形不直接适用的问题，
+  详见 gaps）；命题 4.5 用正合列拼接把尾巴贡献与运动分量的障碍类联系起来；推论 4.7 用
+  h≥2 ⟺ h^1(C,L^{-1})=2h-2≥2 给出 Riemann–Roch 存在性；定理 M 四步组装得到 ω₂≠0；命题 4.8
+  用尾巴自旋结构的宇称给出 r=0 时的分量加细。a=1 分支（本节点）与 a=0 分支（g=2 姐妹卡）共同
+  覆盖claim.md §3 的合并框式结论；本节点只取 a=1 分支给出的 g≥3 部分（a≥2 严格劣于 a=1，
+  proof.md §5.3）。
+gaps:
+  - |
+    proof.md §4 引理 4.4(c) 步"不去算尾巴那条 psi-线"的合法性、命题 4.5 正合列拼接在带穿孔情形
+    是否成立（[GAP-IMM]）、§6.4 对"忘却穿孔态射平凡化"质疑的反驳，是本证明自认为最脆弱的三点；
+    2026-09-18 对抗审查（graph-reviewer）三点全部 CLEAR，且给出了比原稿更强的理由（详见
+    status.yaml"2026-09-18 对抗审查结果"）。本卡的 rigorous 档位依据该轮独立复核，非仅自评。
+  - |
+    [GAP-FKP-RAMOND]（低，保留）：FKP-A Lemma 7.9 证明正文把广义自旋结构写成 L≅Hom(L,ω_C)，漏
+    Ramond 扭转 ω_C(R)；判断为无害省略（粘接是 NS 节点处的局部操作），未独立重写该局部计算。
+    只影响 r≥1 的情形（间接依赖）。
+  - |
+    [GAP-COMP]（低，已写入本卡 statement 的量词范围限制）：r>0 时 \overline{\mathfrak S}_{g;n,2r}
+    的连通分量分类未知，故 r≥1 时本卡只断言整个叠非投影，不指认分量——这不是证明的缺陷，是诚实
+    反映当前数学知识的边界。
+  - |
+    本 attempt 未产生 formal/ 下的无 sorry Lean 证明；status 诚实定为 rigorous，不写 formal: 字段。
+notes: |
+  curator 亲自 Read research/attempts/supermoduli-elliptic-tail-punctured/proof.md 全文（§0-§8）
+  与 claim.md 全文、status.yaml 两轮裁决全文，核对定理 M 的量词范围、宇称加细条件、排除清单
+  （(2,1,0)、g=2 奇宇称分量、未紧化空间、Ramond 节点粘接）与本卡 statement 逐条一致。
+author: graph-curator
+created: "2026-09-20"

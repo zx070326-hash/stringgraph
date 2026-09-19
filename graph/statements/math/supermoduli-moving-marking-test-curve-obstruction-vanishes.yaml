@@ -1,0 +1,74 @@
+id: math.supermoduli-moving-marking-test-curve-obstruction-vanishes
+kind: proposition
+title: "带穿孔超模叠的「运动标记」测试族障碍值恒为零（负面结果，Serre 消没）：把旁观穿孔装在运动分量上使测试基变仿射，H^1=0"
+statement: |
+  【对象与前提】设 h≥2，n≥1。考虑用 Donagi–Witten 一点障碍族 X_η（η∈H^1(C,L^{-1})，C 为亏格 h
+  光滑曲线配无效偶 theta 特征 L）测试**带穿孔**超模叠的投影性，但把 n 个旁观 NS 穿孔装在**运动的
+  亏格 h 分量**上（即把 CN 的 M^+_{h,1} 换成 M^+_{h,n+1}，其中 n 个点 p_1,...,p_n **固定**、
+  第 n+1 个点作为粘接点随测试族运动）。设测试族的约化基空间为
+    C° := C ∖ {p_1,...,p_n}（n 个固定穿孔点在底上的像）。
+  C° 是**仿射**曲线（从紧曲线 C 上移除 n≥1 个点）。
+
+  【命题】设 F^obs := Hom(Λ²T_-X_η, T_+X_η) 为主障碍类的取值层（Donagi–Witten 一点障碍族的
+  Green 障碍类 ω₂(X_η) 取值于 H^1(C°, F^obs) ⊗ Λ² H^1(C,L^{-1})），其中 T_± 是 DW 构造给出的
+  向量丛（局部自由，从而 F^obs 是凝聚层）。则由 Serre 消没定理：
+    H^1(C°, F^obs) = 0（仿射曲线上凝聚层的 H^1 恒为零）。
+  因此障碍类的映射 J: H^1(C,L^{-1}) → H^1(C°, F^obs) **恒等于零**：对**一切** η，
+  ω₂(X_η) = J(η) = 0。**该测试路线给不出任何信息。**
+
+  【本节点明确不断言，必须写在陈述本身】
+  - **不断言** \overline{\mathfrak S}_{g;n,2r}（或任何带穿孔超模叠）**是投影的**。
+  - **不断言**"可用的 η 只有 0"或"参数空间 H^1(C,L^{-1}(-Σp_i)) 为零"——恰恰相反，带穿孔时
+    奇切空间 H^1(C,L^{-1}(-Σp_i)) 的维数为 2h-2+n，**比无穿孔情形（2h-2）更大**。
+    是**取值空间** H^1(C°, F^obs) 为零，不是参数空间为零。
+  - 只断言：这一特定构造（把穿孔装在运动分量上）的测试族**检测不到任何障碍**，这是**方法的
+    局限**，不是几何的结论。
+
+  【与姐妹卡的互补关系】本节点解释了为什么
+  `math.supermoduli-compactified-punctured-genus-geq3-not-projected` 与
+  `math.supermoduli-compactified-punctured-genus-2-not-projected` 必须把所有旁观穿孔装在
+  **常值尾巴**上而非运动分量上——本节点证明后者路线结构上不可行（测试值恒为零）。这把"CN
+  碰巧用常值尾"变成**结构性的必然**。
+uses: []
+uses_conventions: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: >-
+      research/attempts/supermoduli-elliptic-tail-punctured/proof.md §3（命题 N 完整证明，
+      四步：测试基必须排除固定点、C° 仿射、Serre 消没、障碍值空间为零）；推论 N′（非分离粘接
+      同样失效）；推论 N″（Ramond 穿孔在运动分量上破坏自旋结构识别）；§3 末订正记录（2026-09-18
+      对抗审查，初稿的「参数空间为零」错误被订正为「取值空间为零」）
+    note: |
+      本项目原创证明，非已发表文献，见 research/attempts/supermoduli-elliptic-tail-punctured/
+      proof.md。status.yaml：state: verified（graph-reviewer 两轮审查；第二轮 2026-09-20
+      问题 4"命题 N 的订正版本正确"亲自验证 F^obs 确为局部自由层，故 Serre 消没适用）；
+      captain_confirmed: false（留船长确认，不代填）。
+tags: [supermoduli, obstruction-theory, negative-result, serre-vanishing, affine-curve, method-limitation, original-research]
+notes: |
+  【查重】`uv run stringgraph search "Serre vanishing"` / `"affine curve"` / `"moving marking"` /
+  `"obstruction vanishes"`（2026-09-20）均无同内容命中——本节点是首次记录这一**负面**结果。
+
+  【为何单独立卡而不只在姐妹卡的 notes 里提及】(1) 这是与正面结论（定理 M）同等重要的第二个
+  交付物（claim.md §5 明确声明"与正面结论同等重要，不得写软"），有独立的证明结构（四步论证 +
+  订正记录），值得独立引用；(2) 负面结果本身是可证伪的命题（"这一构造的障碍值恒为零"），
+  有明确的 true/false 语义，不是纯粹方法论讨论；(3) 它精确刻画了"为什么必须用常值尾"这一
+  设计约束的几何根源，是对图内既有结果（CN、姐妹卡）设计选择的**事后解释**，这种解释性命题
+  本身有文档价值；(4) 遵循 claim.md §5 的任务要求："若椭圆尾在穿孔情形有本质障碍，必须精确
+  写下来。"——本节点正是那条"本质障碍"的精确陈述。
+
+  【2026-09-18 订正记录的重要性】proof.md §3 命题 N 证明末尾有一段显式的"⚠ **订正记录**"
+  （2026-09-18 对抗审查），记录初稿错误地声称"参数空间 H^1(C,L^{-1}(-Σp_i)) 为零"（这在带穿孔
+  时是**错的**，该空间维数为 2h-2+n>2h-2），订正为正确的"**取值空间** H^1(C°,F^obs) 为零"。
+  这一订正使论证**更强**：η 比 CN 还多（参数空间更大），却依然一个都测不到（取值空间为零）。
+  本卡 statement 明确写入"不断言参数空间为零"就是为了防止此错误再次出现。
+
+  【Serre 消没定理的适用性】status.yaml 第二轮裁决（2026-09-20）问题 4 明确验证：F^obs =
+  Hom(Λ²T_-X_η, T_+X_η) 确为**局部自由层**（T_± 是 DW 一点障碍族给出的向量丛，外幂与 Hom
+  对局部自由封闭），从而 F^obs 凝聚，故 Serre 消没 H^i(C°, F^obs)=0 (i≥1) 适用。
+
+  【与 FKP 非分离粘接 (7.9) 的关系】推论 N′（proof.md §3）：同一个仿射性障碍也杀死 FKP 的
+  **非分离**粘接态射 (7.9)（两个被粘 NS 穿孔在**同一条**曲线上）作为本方法的载体——若其中一个
+  是运动点、另一个是固定点，测试基仍是 C∖{q}，仍为仿射。这解释了为什么姐妹卡只用**分离**
+  粘接 (7.8)（两个穿孔在不同的曲线因子上）。
+author: graph-curator
+created: "2026-09-20"
