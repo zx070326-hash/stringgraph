@@ -2197,7 +2197,9 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
       **本 PR 未做**（文件头列明）：横向半边（`x₄v`、`y₃v` 是 `V(26,-4)` 的奇异矢量）与 `N=6` 判据本身
       （`b26_six` / `ddfSpans_bigrade_neg_six_six`）——两者都需要更多工作，留给下一个 PR。
       **续**：横向半边与判据（双向）已由下面的 `noghost-pr-d2` 关闭；
-      `b26_six` / `ddfSpans_bigrade_neg_six_six` 仍未做（缺口清单见 `noghost-pr-d2` 末尾）。
+      `b26_six` / `ddfSpans_bigrade_neg_six_six`（无条件版）仍未做，但已收敛为条件式版本
+      （`b26_six_of_sixSeedKernelSharp` / `ddfSpans_bigrade_neg_six_six_of_sixSeedKernelSharp`，
+      `StringFormal/NoGhost/LevelSixClosure.lean`；缺口清单见 `noghost-pr-d2` 末尾 (c) 条目）。
       公理检查：本文件全部 18 个声明 `check_axioms` 输出 `ok`，只有
       `propext Classical.choice Quot.sound`。
 
@@ -2279,7 +2281,8 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
       数值：`κ₆ = p_D(1) + p_D(−1) = D = 26`，种子版 `τ₆ = p_{D−1}(1) = D − 1 = 25`
       （`Σ τ_N q^N = P_{D−1} · (q⁵ + q⁷ − ⋯)`），差 **1**，与蓝图一致——也就是说
       **种子条件必须真的被用上**，而 `[GAP-N6-seed]` 正是用它的那一步。
-    - 但「最便宜」≠「便宜」。`b26_six` 拆成四块，(a)(b) 已完成，(c0)(c) 未做。
+    - 但「最便宜」≠「便宜」。`b26_six` 拆成四块，(a)(b)(c0) 已完成，(c) **无条件版未做，
+      条件式版已完成**（formalizer 2026-09-19，见下）。
 
       **(b) 已完成**（`StringFormal/NoGhost/LevelSixCount.lean`，commits `e144b81`/`f45fe14`，
       2026-09-16，**先于** `noghost-pr-d1`/`noghost-pr-d2`，之前漏记进本文件，
@@ -2337,7 +2340,7 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
       得到 **(N6)**：`dim Q_{−6,5} + dim Q_{−6,4} ≤ dim(H_null⊓V₆) + D`。
       三条声明 `check_axioms` 全部只有 `propext Classical.choice Quot.sound`。
 
-      **(c) 组装 `b26_six` 未做，且经手算确认——生成式路线无法用它闭合**
+      **(c) 组装 `b26_six`：无条件版未做，且经手算确认——生成式路线无法用它闭合**
       （formalizer 2026-09-19 评估，非 `sorry` 占位而是数学结论）：
       把 N=5 那条闭合路线（`b26_five_of_D26`）逐字搬到 N=6，用 (I6) 恒等式
       `p_{D−1}(6) + (D−1) = p_{D−2}(6) + p_{D−1}(5) + p_{D−1}(4)`
@@ -2354,11 +2357,34 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
       这是一条关于 `dim ker(seedPair(-6,6)|_{Q×Q}) ≤ D−1` 的**加强**命题
       （即对某个陪集/子空间的 S₆-型单射性），秩–零化度的通用论证**证不出**它，
       需要专门针对 N=6 的（可能涉及 `y₃`/`x₄` 具体奇异矢量结构的）新论证，
-      不是纯计数可以补上的缺口。**因此本卡到此为止不再尝试写
-      `b26_six` / `ddfSpans_bigrade_neg_six_six` 的陈述**——写出来也证不出来，
-      写不完整的陈述比不写更糟。缺口已记在
+      不是纯计数可以补上的缺口。缺口已记在
       `LevelSixCount.lean` 文件头 `⚠` 段与本条目，供下一个 PR/lead 判断是否值得
       开一条 `research/` 原创证明尝试。
+
+      **(c) 更新，条件式版已完成**（`StringFormal/NoGhost/LevelSixClosure.lean`，
+      commit `57ed501`，2026-09-19，formalizer；`StringFormal.lean` 加了一行 `import`）：
+      **不**再尝试直接写 `b26_six`（上面的手算已确认无条件版此刻证不出），而是把缺的那一维
+      收敛成单独一条具名假设 `SixSeedKernelSharp η a b : Prop := dim ker(seedPair η a b (−6) 6)
+      ≤ D − 1`（比通用 (K6) 给出的 `≤ D` 严格一维），在其上把 N=5 的闭合路线
+      （`LevelFiveCount.b26_five_of_D26`）逐字搬到 N=6：
+      `le_finrank_towerNull_inf_towerBigrade_six_of_sixSeedKernelSharp`（(N6) 加强到松弛 `D−1`）
+      → `b26_six_of_sixSeedKernelSharp` → `ddfSpans_bigrade_neg_six_six_of_sixSeedKernelSharp`。
+      另加了 `card_conjFree_five_ge`（`LevelFiveCount.card_conjFree_four_ge` 的 level-5 类比，
+      闭合算式的输入项需要它）。**假设选型**：文件头 docstring 记录了两种等价说法——
+      (A) 转移映射 `S₆ : V_{−6,1} → V_{−6,5}×V_{−6,4}, u ↦ (x₄u,y₃u)` 在**整片** `V_{−6,1}`
+      （维数 `D`）上单射（比 `[GAP-N6-seed]` 已关闭的「种子限制」强，两者是**不同的两条事实**，
+      `[GAP-N6-seed]` 本身不够）；(B) 直接的维数上界 `SixSeedKernelSharp`。选了 (B)（更弱、
+      与既有 (K6)/(N6) 设施对接成本最低），并在 docstring 里写全了从 (A) 推 (B) 的四步论证，
+      供以后真的证出 (A) 时对接。**`SixSeedKernelSharp` 本身在本仓库任何地方都未被证明**，
+      与 `BLUEPRINT-noghost.md` §B⁗.7/§B⁗.9 的 `⟨路线判断，未验证⟩` 标记、
+      `BLUEPRINT-noghost-N6.md` PR-D 的既定目标 `finrank_ker_seedPair_six_le` 完全一致，
+      是**真正的新数学**，不是本条目能顺手补上的缺口。**无条件的 `b26_six` /
+      `ddfSpans_bigrade_neg_six_six` 仍未写、仍未证**——它们等这条假设（或 (A)）被证明。
+      `lake build` 通过，无 `sorry`/`native_decide`，`check_axioms` 对
+      `card_conjFree_five_ge`、`le_finrank_towerNull_inf_towerBigrade_six_of_sixSeedKernelSharp`、
+      `b26_six_of_sixSeedKernelSharp`、`ddfSpans_bigrade_neg_six_six_of_sixSeedKernelSharp`
+      四条全部 `ok`，只有 `propext Classical.choice Quot.sound`（`SixSeedKernelSharp` 是
+      `def` 不是 `theorem`，不参与公理检查）。
 
 - [x] `no_ghost_theorem`：组装 —— **条件版已完成**（`no_ghost_of_spans`，见 `noghost-c5`）；
       无条件版等 `ddf-spans`。
