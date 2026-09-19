@@ -1,0 +1,52 @@
+id: holography.bss-charge-set-b2-definition
+kind: definition
+status: rigorous
+title: "BSS 电荷集 B₂ 定义（eq 5.65, N=1 CHL 模型）"
+statement: |
+  【记号约定】Type IIB on K3×S̃¹×S¹ 的 ℤ_N orbifold（CHL 模型），N=1 时退化为旗舰 N=4 情形。
+  电荷不变量 (n,ℓ,m)（BSS 自己的记号，**不同于 Rosselló/DMZ 约定**——见下方约定差异说明）。
+
+  【定义】（BSS Remark 5.5, eq 5.65，逐字）电荷集 B₂ 定义为满足以下条件的整数三元组 (n,ℓ,m)：
+    m, n > 0,
+    m ≥ n/N,
+    0 ≤ |ℓ| ≤ 2n.
+  N=1 时即：m, n > 0,  m ≥ n,  0 ≤ |ℓ| ≤ 2n。
+
+  【与 Rosselló/DMZ 家族的约定差异】BSS 与 Rosselló/DMZ 使用**不同的 m/n 电荷指派约定**：
+  - BSS（N=1 时）：m := Q²/2（电荷），n := P²/2（磁荷），ℓ := Q·P。
+  - Rosselló/DMZ：m := P²/2（磁荷），n := Q²/2（电荷），ℓ := Q·P。
+  **BSS 作者在 footnote 10（p.50）明确声明**："the roles of Q and P are interchanged
+  compared to [9]"（[9]=DMZ 1208.4074）。这不是本项目的理解错误，而是原始文献之间真实
+  存在的记号分歧。文献记号冲突裁决见 literature/notes/mn-convention-adjudication.md
+  （2026-09-20, verdict (c)：两文献约定不同但均正确）。
+
+  本定义是 BSS Appendix B §B.4 证明 B₂⊆B（电荷集 B 的充分子集）的出发点，
+  也是 Theorem 5.4(b) 适用范围的具体刻画。
+uses: []
+uses_conventions: []
+sources:
+  - ref: bhand-sen-singh-2023
+    loc: "Remark 5.5, eq (5.65)（p.49，主文首次陈述）；同一定义在 Appendix B.4 证明处编号为 eq (B.36)（p.62），内容逐字相同"
+    note: |
+      literature/extractions/bhand-sen-singh-2023.md E5 逐字核对：(5.65) 下半式确实给出
+      B₂ := {(n,ℓ,m): m,n>0, m≥n/N, 0≤|ℓ|≤2n}，与本节点转录完全准确。Appendix B 内同一集合
+      编号 (B.36)——两处内容相同、编号不同，均为原文真实位置（定义首次陈述 vs 证明所在处）。
+  - ref: bhand-sen-singh-2023
+    loc: "footnote 10（p.50，Q↔P 交换的作者自陈）：'Also the roles of Q and P are interchanged compared to [9] since we have Q²/2 = m, P²/2 = n.'"
+    note: "这是 BSS 原文作者自己明确声明的、相对 DMZ（[9]）的记号差异，不是本项目推断"
+tags: [bh-entropy, chl-model, charge-classification]
+notes: |
+  **查重**：`uv run stringgraph search "charge set"` / `"B_2"` 均无同内容命中（2026-09-20）。
+
+  **设立本节点的理由**：research/attempts/gap-102b-multicenter-residue 的 graph-reviewer
+  裁决（2026-09-20）要求"BSS 必须先立成图节点，不能只靠 sources 指向 extraction——
+  因为 depends_on 必须指向图节点 id，否则 BSS 的 rigorous 状态无法沿边传播"。
+  本节点按 graph/CLAUDE.md"一个节点一个命题"原则，只记录 B₂ 的定义本身，
+  不含 B₂⊆B 的包含证明（后者为独立命题，见姐妹节点）。
+
+  **记号约定冲突的处理**：按 literature/notes/mn-convention-adjudication.md verdict (c)，
+  BSS 与 Rosselló/DMZ 的 m/n 指派真实不同，物理内容一致。本节点如实记录 BSS 自己的约定，
+  并在 statement 正文显著标注与 Rosselló/DMZ 的差异（回译审计只读 statement 字段，
+  适用范围限定必须进 statement）。
+author: graph-curator
+created: "2026-09-20"
