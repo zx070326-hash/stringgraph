@@ -26,6 +26,13 @@ sources:
   - ref: rossello-2024
     loc: "§1（(R1)–(R3) 约定：1/Φ₁₀ 按 ρ 展开、指标挂 ρ）；§2 (2.22)–(2.23)（吸引子围道 C_* 与 d_* 的定义）；Γ(2.23) 的 Λ-无关性"
 notes: |
+  【2026-09-20 Φ₁₀ 重数订正：本陈述刻意留在 v1，不重定向】
+  本陈述依赖 holography.igusa-cusp-form-phi10（v1）而不是 v2 的理由：本定义只消费
+  𝒢 := −1/Φ₁₀(ρ,σ,v+1/2) 的存在性与 Fourier 展开结构（定义重标算子与吸引子围道积分），
+  完全不依赖零点重数的具体数值（重数=1 还是=2）。v1 卡关于 Fourier 结构的断言是正确的
+  （订正只涉及重数那一句），故本陈述留在 v1 是逻辑正确的选择。
+  详见 docs/reviews/phi10-multiplicity-normalization-2026-09-20.md §2（9 个可留 v1 的判据）。
+
   **纯数学定义，无物理输入。** 定义对象是 Φ₁₀（Siegel 尖点形式）、显式围道与显式算子 𝒯_I，
   与「挠 I 的单心黑洞指标」的等同**不在本定义内**，是物理命题
   holography.dgm-torsion-divisor-sum（physical-argument）。
