@@ -141,26 +141,15 @@ theorem finrank_towerBigrade_one (hη : ∀ μ, η μ * η μ = 1) (j : ℤ) :
   rw [← range_oneSeedₗ hη j,
     LinearMap.finrank_range_of_inj (oneSeedₗ_injective hη j), Module.finrank_fin_fun]
 
-/-- ⭐ **`dim Q_{j,1} ≤ D - 1`** on any rung with non-null momentum.
+/-- ⭐ **`Q_{j,1}` is the transversality hyperplane**: the level-one seed space is exactly the
+image of `{e | e · p_j = 0}` under `e ↦ (e·α_{-1})|0; p_j⟩`.
 
-The level-one seed space is the image of the transversality hyperplane `{e | e · p_j = 0}`
-under `e ↦ (e·α_{-1})|0; p_j⟩`, and `LevelThreeCount.finrank_ker_transFunctional` computes that
-hyperplane to have dimension `D - 1`.  (With `oneSeedₗ_injective` this is in fact an equality,
-but only `≤` is needed downstream.) -/
-theorem finrank_towerSeed_one_le (hη : ∀ μ, η μ * η μ = 1) {j : ℤ}
-    (hpp : dotVec η (towerMomentum a b j) (towerMomentum a b j) ≠ 0) :
-    Module.finrank K ↥(towerSeed η a b j 1) ≤ D - 1 := by
-  classical
-  have hWle : (LinearMap.ker (transFunctional η a b j)).map (oneSeedₗ η j)
-      ≤ towerBigrade D K j 1 := by
-    rintro _ ⟨e, -, rfl⟩
-    exact oneSeed_mem_towerBigrade j e
-  have hWfin : FiniteDimensional K
-      ↥((LinearMap.ker (transFunctional η a b j)).map (oneSeedₗ η j)) :=
-    Submodule.finiteDimensional_of_le hWle
-  have hle : towerSeed η a b j 1
-      ≤ (LinearMap.ker (transFunctional η a b j)).map (oneSeedₗ η j) := by
-    intro u hu
+Both inclusions are unconditional on the momentum: `≥` is `oneSeed_mem_towerSeed` and `≤` uses
+only that a level-one state is a polarisation state. -/
+theorem towerSeed_one_eq_map (hη : ∀ μ, η μ * η μ = 1) (j : ℤ) :
+    towerSeed η a b j 1 = (LinearMap.ker (transFunctional η a b j)).map (oneSeedₗ η j) := by
+  refine le_antisymm ?_ ?_
+  · intro u hu
     obtain ⟨hpos, hbig⟩ := mem_towerSeed.1 hu
     obtain ⟨hu1, hu2⟩ := mem_towerBigrade.1 hbig
     obtain ⟨e, he⟩ := Fock.exists_polState_of_mem_levelSubmodule_one hη hu2
@@ -171,12 +160,33 @@ theorem finrank_towerSeed_one_le (hη : ∀ μ, η μ * η μ = 1) {j : ℤ}
       refine (smul_eq_zero.1 h2).resolve_right ?_
       exact Finsupp.single_ne_zero.2 one_ne_zero
     exact ⟨e, LinearMap.mem_ker.2 h1, hue.symm⟩
-  calc Module.finrank K ↥(towerSeed η a b j 1)
-      ≤ Module.finrank K ↥((LinearMap.ker (transFunctional η a b j)).map (oneSeedₗ η j)) :=
-        Submodule.finrank_mono hle
-    _ ≤ Module.finrank K ↥(LinearMap.ker (transFunctional η a b j)) :=
-        Submodule.finrank_map_le _ _
-    _ = D - 1 := finrank_ker_transFunctional hpp
+  · rintro _ ⟨e, he, rfl⟩
+    exact oneSeed_mem_towerSeed a b hη (LinearMap.mem_ker.1 he)
+
+/-- ⭐ **`dim Q_{j,1} = D - 1`** on any rung with non-null momentum: `Q_{j,1}` is a copy of the
+transversality hyperplane `{e | e · p_j = 0}`, whose dimension is
+`LevelThreeCount.finrank_ker_transFunctional`. -/
+theorem finrank_towerSeed_one (hη : ∀ μ, η μ * η μ = 1) {j : ℤ}
+    (hpp : dotVec η (towerMomentum a b j) (towerMomentum a b j) ≠ 0) :
+    Module.finrank K ↥(towerSeed η a b j 1) = D - 1 := by
+  classical
+  have hWle : (LinearMap.ker (transFunctional η a b j)).map (oneSeedₗ η j)
+      ≤ towerBigrade D K j 1 := by
+    rintro _ ⟨e, -, rfl⟩
+    exact oneSeed_mem_towerBigrade j e
+  have hWfin : FiniteDimensional K
+      ↥((LinearMap.ker (transFunctional η a b j)).map (oneSeedₗ η j)) :=
+    Submodule.finiteDimensional_of_le hWle
+  rw [towerSeed_one_eq_map hη j, LinearEquiv.finrank_eq
+      (Submodule.equivMapOfInjective (oneSeedₗ η j) (oneSeedₗ_injective hη j)
+        (LinearMap.ker (transFunctional η a b j))).symm,
+    finrank_ker_transFunctional hpp]
+
+/-- `dim Q_{j,1} ≤ D - 1`, the half used by the bridge. -/
+theorem finrank_towerSeed_one_le (hη : ∀ μ, η μ * η μ = 1) {j : ℤ}
+    (hpp : dotVec η (towerMomentum a b j) (towerMomentum a b j) ≠ 0) :
+    Module.finrank K ↥(towerSeed η a b j 1) ≤ D - 1 :=
+  (finrank_towerSeed_one hη hpp).le
 
 end LevelOneDimensions
 
