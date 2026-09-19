@@ -98,6 +98,9 @@ worldsheet.ddf-contour-equals-mode-sum: 1 bottleneck root(s)
 > 本文未逐张核查，不宜假定它们的隐藏瓶颈都无关紧要——这张卡的隐藏瓶颈恰恰是
 > 整条无鬼定理关键路径的真实障碍。
 >
+> ✅ **这 19 张已于 2026-09-19 逐张核查完毕（graph-reviewer，19/19，无遗漏）；结论见第 9 节。
+> 简短版：没有第二例。** 上面这段警告是对的（不该假定无关紧要），但实测答案是良性的。
+
 > **这条订正的实质后果**（🔴 比订正本身重要）：本文「结论先行」第 3 条把这张卡称为全图唯一的
 > 真级联点，据此建议优先形式化它。但按上表，沿 `--via-voa-residue` 这条**已经 own=rigorous**
 > 的路走时，真正的障碍是桥卡，而桥卡的瓶颈是 `[GAP-anchor]`——按
@@ -413,6 +416,106 @@ effective: refuted
 `worldsheet.ddf-spanning-rank-inequality` 是目前已知的唯一反例：厚区域（worldsheet）
 里存在这样一个节点，形式化它能直接拿下一个里程碑。
 
+## 9. 19 张打平推导卡的逐张核查结果（2026-09-19）
+
+第 1 节的订正块留下一份待查清单：除 `worldsheet.ddf-contour-equals-mode-sum` 外，全图还有
+**19 张 active proposition** 的多条推导 effective 打平，其隐藏瓶颈从未被看过。
+graph-reviewer 已逐张核查（19/19，无遗漏），lead 对其两条可执行结论做了独立复核。
+
+### 9.1 结论：没有第二例 ddf-contour 模式
+
+ddf-contour 那一例的要害**不是**"有隐藏瓶颈"，而是三件事叠加：被使用的推导自封顶（看上去无解），
+隐藏推导 own=rigorous（看上去有解），而真正封顶它的是一张**此前未登记、无源、藏在 `inferred`
+边里**的桥接命题——这件事当时在图上、在文档里、在任何 gaps 段落里都不可见。
+
+19 张里**没有一张复现这个组合**。具体分布：
+
+| 类别 | 张数 | 说明 |
+|---|---:|---|
+| 两条推导 root 完全相同（多为自封顶） | 6 | 完全无遮蔽 |
+| root 相同、own 不同（一条 Lean 一条非 Lean） | 2 | 不是遮蔽，只是"这里已有 Lean 版本"被聚合视图吞掉 |
+| root 是子集/超集但同一状态层级 | 8 | `roots`/`why` 少讲一条平行路径，无更严重内容 |
+| **own 更高且 root 确实不同** | **3** | 唯一值得记录的一类，见 9.2 |
+
+关键区别（也是为什么严重度低得多）：那 3 张的差异**在各自 derivation YAML 的 gaps/notes 里
+已经逐字写明了**——
+`math.anomaly-twelve-form-factorization--via-lean` 的 gaps 写"有效状态仍是 physical-argument，
+瓶颈经 tr-f6-coefficient-vanishing 落到 so-usp-adjoint-fundamental-trace-identities"；
+`swampland.wgc-sharp-form-iii--via-form-ii` 的 gaps 写"推导本身严格，但不改变 (III) 的有效状态"；
+`math.e8-adjoint-trace-identities--via-root-power-sums` 的 notes 写"工具取最强推导，两条并存"。
+⇒ 这是**聚合报告工具看不见**，不是**数据本身把问题藏起来**。性质上比 ddf-contour 轻得多。
+
+另外两条否定结论：**未发现 `inferred: true` 误用**（抽查的关键边全部 `inferred: false` 且有具体来源）；
+**19 张无一落在任何里程碑的关键路径上**（5 个里程碑全部围绕无鬼定理/临界维数/DDF 主题）。
+
+### 9.2 实质发现：`math.so-usp-adjoint-fundamental-trace-identities` 是一个此前未列出的 +3 杠杆
+
+reviewer 的两条可执行建议，lead 已用 `roots` + `counterfactual` **独立复核，两条都成立**：
+
+```
+$ uv run stringgraph roots math.anomaly-twelve-form-factorization
+  [BEST, used above] ...--via-direct-expansion
+    roots: math.e8-adjoint-trace-identities, math.so-usp-adjoint-fundamental-trace-identities
+  [tied, NOT used above] ...--via-lean
+    roots: math.so-usp-adjoint-fundamental-trace-identities
+```
+⇒ 走 `--via-lean` 这条（own 已是 **formalized**）只需要修好 `so-usp` **一张**，
+**不需要**连带修 `e8-adjoint-trace-identities`。聚合视图把这条捷径完全吞掉了。
+
+```
+$ uv run stringgraph roots swampland.wgc-sharp-form-iii
+  [BEST, used above] ...--via-heterotic-lattice   roots: swampland.wgc-sharp-form-iii（自封顶）
+  [tied, NOT used above] ...--via-form-ii          roots: swampland.wgc-sharp-form-ii
+```
+⇒ (III) 的真实升级路径绑定在 `swampland.wgc-sharp-form-ii`（经一条 own=rigorous 的严格蕴含），
+**不是**四份独立启发式证据里最强的那份。
+
+🔴 **lead 补测（reviewer 未做，是本节最实质的一条）**：把这两个根各自单独强制为 rigorous，
+真实反事实（强制+重算，非代理频率）给出——
+
+```
+$ uv run stringgraph counterfactual math.so-usp-adjoint-fundamental-trace-identities
+moved (3 other active cards):
+  math.anomaly-twelve-form-factorization: physical-argument -> rigorous
+  math.mixed-anomaly-trace-conditions-n32: physical-argument -> rigorous
+  math.tr-f6-coefficient-vanishing:        physical-argument -> rigorous
+milestones hit (0):
+
+$ uv run stringgraph counterfactual swampland.wgc-sharp-form-ii
+moved (1 other active cards):
+  swampland.wgc-sharp-form-iii: conjecture -> rigorous
+```
+
+**`so-usp` 单卡 +3，是全图已知第二大的单卡杠杆**（仅次于 `ddf-contour-equals-mode-sum` 的 +4
+与 `ddf-spanning-rank-inequality` 的 +4，两者都命中里程碑）。它**从未出现在第 2 节的反事实表里**。
+
+⚠ 三点限定，避免这条被读成"便宜的捷径"：
+1. **它不命中任何里程碑**（+3 全部落在 `math.*` 反常区）。按第 8 节的框架，它的价值是
+   "这三个结果本身值得严格化"，不是"能带动关键路径"。
+2. **这 +3 与打平发现无关**——`counterfactual` 是真强制+重算，不走 `bottleneck_roots`，
+   所以这条杠杆**一直就在那里**，只是本文第 2 节的表没列它。打平发现补的是另一件事：
+   `anomaly-twelve` 的**路由**（走 `--via-lean` 不需要 e8）。
+3. `so-usp` 自身 `own_status = effective = physical-argument`、单条推导、无猜想依赖，
+   即**自封顶**。它是否**便宜**取决于 so(N)/usp(N) 伴随迹恒等式在 Mathlib 里的可达性
+   （`Math/E8Roots.lean` 的 E₈ 侧之所以做得成，是因为 240 个根可以显式列出；
+   一般 N 的 so/usp 没有这个便利）。**本节不对成本下结论**，已另派 scout 评估。
+
+### 9.3 reviewer 自报的保留事项（照录，不代为消化）
+
+- 只对 root 有实质差异的 3 张打开了 derivation YAML 全文读 gaps/notes；其余 16 张只看
+  `roots`/`status` 输出，未逐一读 YAML 全文。
+- **未做来源忠实性审查**（`sources.loc` 是否真对应原文）——本轮范围限定在"隐藏瓶颈"。
+- 里程碑相关性判断用的是 grep 字面匹配 + 读 `canonical_text`，**没有**对每张卡跑
+  `stringgraph why <里程碑 statement id>` 反向确认它不在瓶颈树里。reviewer 判断
+  area 明显不交叉故 grep 足够可靠，但严格说这不是穷尽式验证。
+
+复现：
+```bash
+uv run stringgraph report            # "tied effective derivations" 段给出这 20 张的清单
+uv run stringgraph roots <id>        # 现在会追加打平的其它推导及各自的瓶颈根
+uv run stringgraph counterfactual <id>
+```
+
 ## 命令一览
 
 ```bash
@@ -421,3 +524,4 @@ uv run stringgraph hitting-set --target 0.5       # 只要 50% 检查点对应�
 uv run stringgraph roots <id>                     # 单卡的瓶颈根集合
 uv run stringgraph counterfactual <id> [<id> ...] # 强制若干卡为 rigorous，报告解锁的其他卡与命中的里程碑
 ```
+
