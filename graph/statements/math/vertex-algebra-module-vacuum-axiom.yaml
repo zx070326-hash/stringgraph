@@ -1,0 +1,59 @@
+id: math.vertex-algebra-module-vacuum-axiom
+kind: definition
+status: rigorous
+title: 顶点代数模的真空公理：Y_W(1,x) = id_W
+statement: |
+  设 (V, Y, 1) 是顶点代数（公理体系见 math.vertex-algebra-borcherds-identity），
+  (W, Y_W) 是 V 上的一个模：即对每个 u ∈ V，W 上有算子
+    Y_W(u, x) = Σ_{n ∈ Z} u_n x^{-n-1} ∈ (End W)[[x, x^{-1}]]，
+  且这些算子对一切 u, v ∈ V、w ∈ W 满足与 V 自身相同的关系组（Borcherds 1986 §4 的 (i)–(v)，
+  把其中一个变量的取值范围从 V 换成 W）。
+
+  **真空公理**是该关系组的第 (ii) 条特化到 u = 1（V 的真空向量）：对一切 n ∈ Z、w ∈ W，
+    1_n(w) = 0   (n ≠ −1),      1_{-1}(w) = w,
+  等价地写成生成函数形式：
+    Y_W(1, x) = id_W。
+
+  即真空向量 1 ∈ V 在任意 V-模 (W, Y_W) 上都作用为恒等算子。
+
+  **特例**：取 W = V（Borcherds 逐字「In particular V is a V module」）即退回到顶点代数自身的真空公理
+  （对应 Gebert–Nicolai (2.24) 𝒱(1,z) = id_ℱ、Bakalov–Kac (2.15)/(2.16)），
+  故本卡登记的是同一条公理形式在**模**这一更一般设定下的版本，不是一条新的独立事实。
+
+  **本卡不断言的两条：**
+  1. **不断言这条公理蕴含或等价于其余关系 (i)/(iii)/(iv)/(v)（截断性、L(-1)-导数、结合律/Jacobi 恒等式）。**
+     它们是同一模定义里彼此独立的公理条款，各自的图内承载见 math.vertex-algebra-borcherds-identity
+     （对 (v) 一半的模式版）；本卡只登记 (ii) 这一条。
+  2. **不断言 W 上存在分次、L_0 半单或谱有界等 VOA 模的附加结构。** 那些是顶点算子代数（而非顶点代数）
+     模的额外公理，本卡与之无关。
+uses: []
+uses_conventions: []
+sources:
+  - ref: borcherds-1986
+    loc: "Section 4 'Vertex Algebras'：关系 (i)–(v)（无编号公式，(ii) 即真空公理）；随后模的定义句（无编号，紧接 (v) 之后）"
+    note: |
+      **L1（researcher 2026-09-11 逐页读作者主页重排本 math.berkeley.edu/~reb/papers/va/va.pdf；
+      逐字文本见 literature/extractions/math-sources.md §37.2）。**
+      关系 (ii) 逐字：「`1_n(w) = 0` if `n ≠ −1`, `w` if `n = −1`.」
+      模的定义逐字（紧接 (i)–(v) 之后）：「A module over a vertex algebra `V` is a module `W` with
+      operators `u_n` on `W` satisfying relations *i*–*v* above for `u, v` in `V`, `w` in `W`.
+      In particular `V` is a `V` module.」
+      ⇒ 本卡的真空公理就是把 (ii) 中的 `w` 取自任意模 `W`（而非 `V` 自身）。
+      ⚠ 原文全篇无编号定理/公式，`loc` 只写节号（见 §36.2 的引用陷阱说明）。
+tags: [vertex-algebra, module, vacuum-axiom, definition, math-input]
+notes: |
+  【为什么单独立卡】research/attempts/physical-exponential-equals-lattice-voa/proof.md 第 1092 行
+  裸用了这条公理（引理 5.1 第 4 项），是承重命题，此前图中无逐字承载节点（[GAP-vac]，见该 attempt
+  status.yaml 第 142、163–164 行的移交条目）。按 graph/CLAUDE.md 的规矩：一条边若携带一条图外实质命题，
+  必须立卡，不得藏进 flag 或 notes。
+
+  【来源选择】Li–Wang 2008 在构造 V_(𝔥,L) 的模（Theorem 3.6）时使用的正是这条标准公理，但其正文
+  （已抽取部分，math-sources.md §36.6/§37.x）没有逐字重述"模的定义"本身——它假定读者已知
+  （引用 [LL] = Lepowsky–Li 2004）。本卡改引**模定义与真空公理的原始出处** Borcherds 1986 §4，
+  这是 math.lattice-vertex-algebra 与 math.vertex-algebra-borcherds-identity 两卡已经在用的同一份
+  一手文献，避免为这一张卡新登记文献。
+
+  【search 查重】`uv run stringgraph search "vertex algebra module"`、`"vacuum"`、`"真空"`
+  （2026-09-19）均无命中；图中现有 math.vertex-algebra-* 五张卡都不含模的真空公理，确认非重复。
+author: curator
+created: "2026-09-19"

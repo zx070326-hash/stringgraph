@@ -1,0 +1,94 @@
+id: worldsheet.tower-zero-mode-monodromy-factor
+kind: definition
+status: rigorous
+title: 类光动量塔上的零模标量因子 Z_n(z) = z^{2α'nk_0·p̂}（层无关，值为 z^{nν}）
+statement: |
+  沿用 worldsheet.momentum-tower-fock-space 的动量塔 T(p;k_0) = ⊕_{N∈Z} F(p+Nk_0)（参考向量
+  k_0 ≠ 0，基点动量 p），并沿用 worldsheet.physical-exponential-equals-voa-vertex-operator-v2
+  的两条设定假设：k_0 **类光**（k_0² = 0）与**整性条件** (I) ⟨k,p̃⟩ = 2α'(k_0·p) ∈ Z
+  （记 ν := 2α'(k_0·p) ∈ Z，α' 按 conv.alpha-prime-regge，度规按 conv.metric-mostly-plus）。
+
+  对每个 n ∈ Z，定义 T(p;k_0) 上的**标量算子**（"零模单值因子"）Z_n(z)：
+  在第 N 层 F(p + N k_0) 上，Z_n(z) 作用为乘以标量
+    Z_n(z)|_{F(p+Nk_0)} := z^{ 2α' n k_0·(p + N k_0) } · id_{F(p+Nk_0)}。
+
+  **层无关性（定义的直接推论，非独立命题）**：由 k_0² = 0，
+    2α' n k_0·(p + N k_0) = 2α' n (k_0·p) + 2α' n N k_0² = nν + 0 = nν，
+  与层指标 N 无关。故
+    Z_n(z) = z^{nν} · id_{T(p;k_0)}，
+  是塔上的一个**整数次幂单项式**乘法算子（ν ∈ Z 由整性条件 (I) 保证，故 z^{nν} 是普通形式
+  洛朗单项式，不是分数幂）。
+
+  **物理动机（命名依据，不是本卡断言的内容——见下方边界条款 (a)）**：记号里的 "p̂" 读作
+  "塔上逐层取值 p + N k_0 的动量算子"；物理上这一因子对应闭弦/开弦坐标场 X^μ(z) 标准模展开中
+  含 p^μ ln z 的**零模项**对正规序指数 :e^{i n k_0·X(z)}: 贡献的标量因子。这就是本卡记号
+  "Z_n(z) = z^{2α' n k_0·p̂}" 的来历，也是 worldsheet.physical-exponential-equals-voa-vertex-operator-v2
+  断言 (2) 括注里洛朗指标移位 K ↦ K − nν 的物理侧出处。
+
+  **本卡明确不断言的三条：**
+  (a) **不独立证明这一物理推导本身。** worldsheet.momentum-tower-fock-space 明确声明它
+      "不引入 x^μ 本身，也不引入 [x^μ, p^ν]"（该卡边界 (a)）；本图目前没有任何节点承载
+      "X^μ(z) 的标准模展开、其零模项为 -i·2α' p^μ ln z" 这一物理事实，故"Z_n(z) 就是那一项
+      产生的因子"这句翻译，与 worldsheet.momentum-tower-fock-space 处理 S_n ↔ "e^{i n k_0·x}"
+      的方式相同：是命名/记账动机，是**边界条款**，不是被本卡证明或依赖的等式。
+      🔴 **待澄清（本卡未解决，如实记录）**：Polchinski (2.7.26)（开弦 X^μ(z,z̄) 的模展开式）
+      与本图的 α' 归一化 conv.alpha-prime-regge、goddard-2008 (arXiv:0802.3249) 里 α' = 1/2
+      的 DDF 公式之间的精确系数换算，本卡未独立核对；不影响本卡定义本身的良定义性
+      （定义只用到 momentum-tower-fock-space 已给出的层动量数据与初等指数运算）。
+  (b) **不断言与 worldsheet.exponential-vertex-operator-modes 的振子部分 V^{(b)}_J 复合后的
+      算子性质**（例如 Z_n(z) 与 V^{(b)}_J 的乘积等于某个"完整"顶点算子）。那是
+      research/attempts/physical-exponential-equals-lattice-voa 未毕业草稿里的定义，
+      本图未收录该复合定义。
+  (c) **不断言 k_0² ≠ 0 的情形。** 此时 2α' n k_0·(p+Nk_0) = nν + 2α'nN k_0² 依层 N 变化，
+      Z_n(z) 不再是标量乘法算子；本卡只覆盖类光设定（呼应
+      worldsheet.isotropic-tower-vertex-operators-commute 对单值因子 (w/z)^{mnk_0²}
+      在非类光时不可对易的记录）。
+uses:
+  - worldsheet.momentum-tower-fock-space
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.7, eq. (2.7.26)（开弦 X^μ(z,z̄) 的模展开；式号已核实，见 literature/extractions/polchinski-1998-v1.md 第 2536 行；展开式本身逐字内容与系数本卡未独立核对，仅 L2 页码/式号级）"
+    note: |
+      **仅承载本卡的命名动机（statement 的"物理动机"段），不承载本卡的算子定义本身**——
+      定义本身只用到 worldsheet.momentum-tower-fock-space 已给出的层动量数据，是自足的初等构造。
+      (2.7.26) 的精确内容（-i·2α' p^μ ln z 项的系数与符号）未经本卡逐字核实，
+      也未与 conv.alpha-prime-regge 做逐系数换算，是本卡【明确不断言】(a) 登记的待澄清事项。
+      ⚠ `sources` schema 不接受 `inferred` 字段（该字段只用于 derivation 的 `depends_on`
+      条目）；本条的"未独立核实"状态改用上面的 L2 标注与本 note 文字诚实记录。
+tags: [bosonic-string, tower, zero-mode, monodromy, definition, ddf]
+notes: |
+  【为什么立卡】research/attempts/physical-exponential-equals-lattice-voa/proof.md (P3)
+  与 status.yaml 第 161 行（移交条目 C2）指出：桥卡 worldsheet.physical-exponential-equals-voa-vertex-operator-v2
+  断言 (2) 括注里的洛朗指标移位 K ↦ K − nν 依赖一个"单值因子" z^{2α'nk_0·p} = z^{nν}，
+  但图中此前**没有任何节点承载**这个因子（振子部分由 worldsheet.exponential-vertex-operator-modes
+  承载，零模移位由 worldsheet.momentum-tower-fock-space 的 S_n 承载，两者都不含这个标量指数）。
+  proof.md 把它作为"本尝试自己写出的定义"引入，并在 §7.1 [GAP-def-cards] 里登记为毕业阻塞项——
+  本卡就是补上它，使桥卡的"读法 2"（把断言 (2) 的洛朗指标移位溯源到一个显式承载的算子而非
+  隐藏在括注文字里）有一张可引用的定义卡。
+
+  【为什么 status 是 rigorous 而不是 physical-argument】本卡的**定义本身**
+  （在给定 k_0² = 0 与整性条件 (I) 的塔上，逐层用一个由已给数据算出的标量幂做乘法）是纯粹的
+  初等代数构造，不依赖任何未经证明的物理断言——层无关性是三行代数（k_0²=0 的直接推论）。
+  物理上"这就是 X^μ 零模项的贡献"这句翻译**不是**本卡断言的内容（见【本卡明确不断言】(a)），
+  它只出现在 statement 的"物理动机"段用来解释记号来历，与
+  worldsheet.momentum-tower-fock-space 对 S_n ↔ e^{ink_0·x} 记号的处理方式完全一致
+  （那张卡同样是 formalized/rigorous 的纯代数定义，物理记号只是命名）。
+
+  【α' 换算——诚实记为待办，不阻塞本卡】任务书提醒 goddard-2008 用 α' = 1/2 的 DDF 归一化，
+  与本图 conv.alpha-prime-regge（一般 α'）的逐系数换算，本卡**未做**，因为定义本身不需要它——
+  Z_n(z) 的层无关性只用到 k_0² = 0 与整性条件 (I)（ν ∈ Z），对任意 α' 归一化都成立，
+  换算只影响"这是 X^μ 哪个具体系数的贡献"这句物理解释，已在 (a) 与 sources 的 note 里
+  显式标为待澄清、且标了 `inferred: true`（该 source 边的论证在文献里找不到精确系数核对，
+  但它指向的物理事实——X^μ 模展开含 p ln z 零模项——本身是图外常识，此处不再拆出新节点）。
+
+  【与 worldsheet.momentum-tower-fock-space 的分工】那张卡的 S_n 移动层指标（"平移"），
+  本卡的 Z_n(z) 不移动层指标、只在每层乘一个标量（"相位/幂次记账"）。两者是顶点算子
+  Z_n(z) ∘ S_n ∘ (振子部分) 复合里独立的三个因子（复合本身见【本卡明确不断言】(b)）。
+
+  【search 查重】`uv run stringgraph search "零模"`、`"Z_n"`、`"monodromy"`、`"单值"`
+  （2026-09-19）均无与本卡重复的命中（"单值"命中的是既有卡里对 (w/z)^{mnk_0²} 或
+  ⟨α,β⟩ 型 cocycle 单值性的记录，是不同对象：那些是**两个顶点算子之间**的 OPE 单值因子，
+  本卡是**单个顶点算子在动量塔上**的零模标量因子，见【本卡明确不断言】(c) 的呼应说明）。
+author: curator
+created: "2026-09-19"
