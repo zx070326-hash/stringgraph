@@ -1,0 +1,79 @@
+id: math.supermoduli-compactified-punctured-genus-geq3-not-projected
+kind: proposition
+title: "紧化带穿孔超模叠 g≥3 非投影（原创，椭圆尾粘接的带穿孔推广，定理 M 的 a=1 分支）：∀g≥3,∀n≥0,∀r≥0, ω₂(S̄_{g;n,2r})≠0"
+statement: |
+  【对象】记 \overline{\mathfrak S}_{g;n,2r} 为亏格 g、n 个 Neveu–Schwarz（NS）穿孔、2r 个 Ramond
+  穿孔的稳定超曲线紧化超模叠（光滑固有 Deligne–Mumford 型超叠，FKP-A Theorem A）。ω₂ 为 Green 第一
+  障碍类（记号同 `math.supermoduli-compactified-genus-geq3-not-projected`）。
+
+  【命题】对一切整数 g≥3、一切 n≥0、一切 r≥0：
+    ω₂(\overline{\mathfrak S}_{g;n,2r}) ≠ 0，
+  从而 \overline{\mathfrak S}_{g;n,2r} **非投影**（特别地非分裂）。
+
+  **宇称加细（仅当 r=0 时可断言分量级信息）**：当 r=0 时，两个宇称分量
+  \overline{\mathfrak S}{}^{+}_{g;n,0} 与 \overline{\mathfrak S}{}^{-}_{g;n,0} **均**非投影：
+  ω₂(\overline{\mathfrak S}{}^{ε}_{g;n,0}) ≠ 0，ε∈{+,−}。
+
+  **当 r≥1 时，本节点只断言整个叠 \overline{\mathfrak S}_{g;n,2r} 非投影，不指认具体连通分量**
+  （r>0 时该叠的连通分量分类本身是开放问题，见来源 `[GAP-COMP]`）。
+
+  【证明思路一句话】取亏格 h=g−1≥2 的"运动分量" C（配无效偶 theta 特征 L）与亏格 a=1 的**常值**
+  自旋椭圆尾（带 n+1 个 NS 标记点、2r 个 Ramond 标记点，其中 1 个 NS 点用于粘接），沿 FKP-A 式
+  (7.8) 粘接映射的带穿孔推广构造测试族 X_η → \overline{\mathfrak S}_{g;n,2r}，用 Riemann–Roch
+  存在性论证证明存在 η 使障碍值 J(η)≠0，再用障碍类沿态射的函子性把它搬运回 ω₂(\overline{\mathfrak
+  S}_{g;n,2r})≠0。这是 Corrêa–Noja（`math.supermoduli-compactified-genus-geq3-not-projected`，
+  n=r=0 情形）证明骨架在带穿孔粘接映射上的重新装配；h≥2 的技术门槛来自尾巴亏格 a=1 恒定，故
+  g=h+1≥3。
+
+  【本节点明确不断言】(g,n,r)=(2,·,·) 的任何情形（见姐妹卡
+  `math.supermoduli-compactified-punctured-genus-2-not-projected`，量词范围不同且更窄）；
+  **未紧化**的 \mathfrak S_{g;n,2r} 的任何断言（障碍类是在紧化边界的测试曲线上检测到的，与光滑
+  轨迹的投影性无逻辑关系）；任何"分裂/可投影"的正面方向；Ramond 节点处的粘接（FKP-A §9.3 仅以
+  猜想形式给出该类比，本证明刻意避开，只在 NS 节点处粘接）；r≥1 时任何具体连通分量的断言。
+uses: []
+uses_conventions: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/supermoduli-elliptic-tail-punctured/proof.md §4（构造与定理 M 的四步
+      证明，尤其 §4.6）、§4.7（命题 4.8，r=0 时的宇称加细）、§5.1（推论 A(1) 与推论 B 的 a=1
+      分支推导）；claim.md §2（定理 M 精确陈述）、§3 推论 A(1)/B（a=1 分支）"
+    note: |
+      本项目原创证明，非已发表文献，见 research/attempts/supermoduli-elliptic-tail-punctured/
+      proof.md。research/attempts/supermoduli-elliptic-tail-punctured/status.yaml：
+      state: verified（graph-reviewer 两轮审查，2026-09-18 第一轮 + 2026-09-20 第二轮，第二轮
+      亲自 grep+通读核实与 Wang/Donagi-Ott 的天花板隔离成立，裁定天花板 rigorous）；
+      captain_confirmed: false（仍待船长确认，按 research/CLAUDE.md 生命周期第 3 步，不代填）。
+tags: [supermoduli, super-riemann-surface, non-projected, compactified, punctured, higher-genus, ramond-puncture, math-input, original-research]
+notes: |
+  【查重】`uv run stringgraph search "punctured"` / `"elliptic tail"` / `"Ramond puncture"` /
+  `"gluing"`（2026-09-20）均无覆盖本量词范围（紧化+带穿孔+g≥3 任意 n,r）的同内容命中——最接近的
+  `math.supermoduli-compactified-genus-geq3-not-projected` 只覆盖 n=r=0；
+  `math.supermoduli-ns-ramond-punctures-not-projected`（Wang）覆盖**未紧化**范畴且天花板
+  physical-argument；`math.supermoduli-ramond-punctures-not-projected`（Donagi–Ott）覆盖未紧化
+  范畴且门槛更窄（g≥5r+1）。
+
+  【⭐ 与既有卡的关系，明确声明】本节点**完全不依赖**
+  `math.supermoduli-ns-ramond-punctures-not-projected`（Wang，图中 status=physical-argument）
+  与 `math.supermoduli-ramond-punctures-not-projected`（Donagi–Ott）——这两张卡断言的是**未紧化**
+  范畴的投影性，与本节点的**紧化**范畴断言逻辑独立，互不包含。reviewer 在第二轮亲自 grep 全文
+  proof.md，确认对 Wang/Donagi-Ott 的唯一提及出现在自洽性检验章节（比较与独立性声明），无任何一步
+  引用其结论；故 depends_on 不挂这两张卡，本节点天花板不被压低到 physical-argument。也不修订
+  `math.supermoduli-space-not-projected`（Donagi–Witten，未紧化）——本节点只使用其一点障碍族
+  **构造**（作为图内 rigorous 节点被记账使用，非依赖其断言本身，因为本节点的对象是紧化叠而 DW
+  卡的对象是未紧化叠）；也不修订 Corrêa–Noja 三张紧化卡——本节点在 n=r=0 时**重现** CN 的 g≥3
+  结果（proof.md §6.1 自洽性检验），在 n+2r>0 时给出 CN 未断言的新范围，是 CN 论证骨架在更一般
+  粘接映射上的重新装配，不构成对 CN 卡的修订。
+
+  【FKP 法丛公式的推广——诚实标注，见 derivation 文件的 inferred:true 边】本证明的构造步骤
+  （proof.md §4 引理 4.4）需要把 `math.fkp-ns-boundary-gluing-normal-bundle-formula`（FKP-A
+  Theorem C，逐字陈述靶为**无穿孔**的 S̄_g）用于**带穿孔的靶** \overline{\mathfrak S}_{g;n,2r}。
+  这一步的合理性依据是该公式的证明路径（eq.(9.6) via Lemma 9.1）是关于节点形式邻域的**局部**
+  陈述，与靶空间是否带其他穿孔无关（proof.md §4.3 的详细讨论）——但 FKP-A 原文从未把该公式写成
+  对任意穿孔数成立的一般性结论。这是一条**依据节点奇点局部性的推断，不是 FKP 论文逐字陈述的
+  一般性结论**，已在对应 derivation 的 depends_on 边上诚实标 `inferred: true` 并附此说明。
+
+  【r≥1 时不断言连通分量的原因】`[GAP-COMP]`：r>0 时 \overline{\mathfrak S}_{g;n,2r} 的连通分量
+  分类本身是开放问题（本证明未涉及，也未见公开文献给出），故只能断言"整个叠非投影"而非"某个
+  具体分量非投影"。这与 r=0 时可以用 Mumford 意义下宇称局部常值这一标准事实指认分量形成对比。
+author: graph-curator
+created: "2026-09-20"
