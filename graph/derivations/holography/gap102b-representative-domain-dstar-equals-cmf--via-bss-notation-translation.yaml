@@ -1,0 +1,33 @@
+id: holography.gap102b-representative-domain-dstar-equals-cmf--via-bss-notation-translation
+target: holography.gap102b-representative-domain-dstar-equals-cmf
+kind: proof
+status: rigorous
+depends_on:
+  - id: holography.bss-theorem-5-4b
+    note: |
+      BSS Thm 5.4(b) 在 BSS 自己的记号约定下（m=Q²/2 电、n=P²/2 磁）已建立
+      d*(P²/2, Q·P, Q²/2) = (−1)^{Q·P+1} c_n^F(m,ℓ)（N=1 时）的关系。
+      本推导执行记号翻译把该关系改写到 Rosselló/DMZ 约定（m=P²/2 磁、n=Q²/2 电）下。
+sources:
+  - ref: bhand-sen-singh-2023
+    loc: "footnote 10（p.50）：BSS 明确声明'the roles of Q and P are interchanged compared to [9]'（[9]=DMZ 1208.4074），即 BSS 用 m_B=Q²/2(电)、n_B=P²/2(磁)，而 DMZ 用 m=P²/2(磁)、n=Q²/2(电)"
+    note: "记号翻译的文献依据：BSS 作者自己声明的电荷约定差异"
+summary: |
+  执行 BSS Thm 5.4(b) 从 BSS 记号到 Rosselló/DMZ 记号的翻译，得到代表元范围内的等式
+  d_*(m,n,ℓ) = (−1)^{ℓ+1} c_m^F(n,ℓ)（Rosselló 约定：m=P²/2 磁、n=Q²/2 电、ℓ=Q·P）。
+
+  **翻译路径**（proof.md §1 引理 1 + §3 引理 2）：
+  1. BSS 自己声明（footnote 10，p.50）其约定与 DMZ 的 Q↔P 互换：
+     BSS 取 (n_B,ℓ_B,m_B) 其中 n_B=P²/2(磁)、m_B=Q²/2(电)、ℓ_B=Q·P；
+     Rosselló/DMZ 取 (m,n,ℓ) 其中 m=P²/2(磁)、n=Q²/2(电)、ℓ=Q·P。
+  2. 变量对应（按傅里叶相位中 mρ+nσ+ℓv 的系数一一对应）：
+     n_B → m（磁荷）、m_B → n（电荷）、ℓ_B → ℓ（Q·P 两约定相同）。
+  3. BSS 代表元范围 "m_B≥n_B、0≤|ℓ_B|≤2n_B"（对 N=1）在 ℓ_B≥0 时等价于
+     "n_B≥m_B、0≤ℓ_B≤m_B"；翻译后即 Rosselló 代表元范围 "n≥m、0≤ℓ≤m"。
+  4. BSS 系数记号 c_n^F(m,ℓ)（指标 n、参数 m,ℓ）翻译为 Rosselló 记号 c_m^F(n,ℓ)
+     （指标 m、参数 n,ℓ）——指标字母与参数位置同时互换。
+
+  **纯记号翻译、无新数学内容**：本推导只是把 BSS 已有定理按其自己声明的约定差异
+  改写成另一套记号，全程无新物理或数学论证输入，属于 rigorous 状态的保持性翻译。
+author: graph-curator
+created: "2026-09-20"
