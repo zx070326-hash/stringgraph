@@ -1,0 +1,70 @@
+id: holography.phi10-order-two-in-v-on-ell-zero-contour
+kind: proposition
+title: "ℓ=0 吸引子围道上 Φ₁₀ 沿 v-方向的零点：平移窗口内只有 v=1/2 一个，且阶恰为 2（h₀ ≠ 0）"
+statement: |
+  记号同 holography.torsion-index-divisor-operator（定义 D）与
+  holography.ell-zero-contour-avoids-phi10-quadratic-wall：Φ₁₀ 是 Igusa 权 10 亏格 2
+  尖点形式，Ω = [[ρ,u],[u,σ]] ∈ ℍ₂；𝒢(ρ,σ,v) := −1/Φ₁₀(ρ,σ, v+1/2)，故 v 与平移坐标
+  u 的关系是 u = v + 1/2。
+
+  设整数 m, n ≥ 1，Λ > 1/(4√(mn))，并设 (ρ,σ) 取自 ℓ=0 吸引子围道的 (ρ,σ)-分量：
+    ρ = ρ₁ + 2inΛ，σ = σ₁ + 2imΛ，ρ₁, σ₁ ∈ [0,1]。
+  （此时对一切实 u 都有 Im ρ·Im σ − (Im u)² = 4mnΛ² > 0，故整条实 u-线落在 ℍ₂ 内，
+  单变量函数 u ↦ Φ₁₀(ρ,σ,u) 在含实轴的开带上全纯。）
+
+  **断言**：对**每一个**这样的 (ρ,σ)，
+  (a) u ↦ Φ₁₀(ρ,σ,u) 在实线段 { u ∈ ℝ : 1/2 ≤ u ≤ 3/2 }（等价地 v ∈ [0,1]）上
+      **恰有一个零点，即 u = 1（v = 1/2）**；
+  (b) 该零点的**阶恰为 2**，等价地
+        h₀(ρ,σ) := lim_{u→1} Φ₁₀(ρ,σ,u)/(u−1)² ≠ 0。
+  于是 v ↦ 𝒢(ρ,σ,v) 在 v ∈ [0,1] 上只有 v = 1/2 这一个极点，且是二阶极点。
+
+  【本卡存在的理由】(b) 正是 holography.phi10-shifted-pole-residue-proportional-to-ell
+  的显式前提。它**不能**由 holography.igusa-cusp-form-phi10-v2 的 Div(Φ₁₀) = 2H₁ 直接
+  得到：那只给出沿 H₁ **一般点**的重数为 2，而在 H₁ 与 Div(Φ₁₀) 其它分支的交点上，
+  限制到 u-直线的零点阶会 > 2（h₀ = 0），留数公式失效。按 graph/CLAUDE.md 2026-09-15
+  裁决（图外的实质承重命题必须立成节点，不得塞进 inferred 边或 notes），单独立卡。
+
+  【本卡明确不断言】Im u ≠ 0 的情形（把围道 v-虚部微扰到 ±εΛ 后的带内零点分布）。
+  那一步在 holography.dstar-well-defined-at-ell-zero 的推导里用紧致性单独处理。
+uses:
+  - holography.igusa-cusp-form-phi10-v2
+  - holography.phi10-periodic-in-v
+  - holography.sen-d19-family-is-igusa-phi10-divisor
+  - holography.attractor-contour-hits-phi10-zero-at-ell-zero
+  - holography.ell-zero-contour-avoids-phi10-quadratic-wall
+  - holography.ell-zero-contour-avoids-nontrivial-linear-walls
+uses_conventions: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/ell-zero-wall-degeneracy/proof.md §3.2–§3.3（零点在全体整数、平移后极点在 v∈ℤ−1/2）+ §6（[GAP-3.3] 的分支穷尽）；§2.2 对 h₀ ≠ 0 的使用"
+    note: |
+      本项目原创证明，非已发表文献，见 research/attempts/ell-zero-wall-degeneracy/proof.md。
+      status.yaml: state: verified，reviewer: graph-reviewer agent ell0rev（2026-09-20），
+      captain_confirmed: false。**§6 未经 graph-reviewer 审查**（status.yaml 逐字请求
+      lead 另派 reviewer）。此外，proof.md 只在 §2.2 顺带用一句「否则零点阶数 >2，与引理
+      1.1 矛盾」交代 h₀ ≠ 0，**未论证围道上每一点都如此**；本卡 (b) 把这一步补成显式命题，
+      并由分支排除（§6）给出论证（curator 自行补全，见推导 summary，标为待 reviewer 复核）。
+  - ref: gritsenko-nikulin-1996
+    loc: "Div(Φ₁₀) = 2H₁（经 holography.igusa-cusp-form-phi10-v2 转载；本卡用它把「点上只过一条分支」升级为「阶恰为 2」）"
+tags: [bh-entropy, mock-modular, n4-string-theory, siegel-modular-form]
+notes: |
+  【(b) 的关键一步不是「重数 2」，而是「该点上只过一条分支」】Div(Φ₁₀) = 2H₁ 说的是
+  每个分支的重数为 2；若某点同时落在两个分支上，限制到横截直线的阶就是各分支重数之和
+  （≥4），h₀ = 0。故 (b) 的承重输入是分支排除（本卡的两条 ell-zero-contour-avoids-* 依赖），
+  重数只在最后一步用。
+
+  【为什么 (a)(b) 合成一张卡】两者是同一个对象——单变量函数 u ↦ Φ₁₀(ρ,σ,u) 在该线段上的
+  零点除子——的两个方面（支集与重数），由同一次分支排除一次性给出，不拆。
+
+  【查重】`uv run stringgraph search` 查 `phi10` / `极点` / `零点` / `ell` / `围道`
+  （2026-09-20）：holography.attractor-contour-hits-phi10-zero-at-ell-zero（断言 v=0 是
+  围道上的零点，是本卡 (a) 的存在性一半，已接为依赖来源之一）、
+  holography.igusa-cusp-form-phi10-v2（重数）、holography.phi10-wall-crossing-poles-v2
+  （极点结构的一般描述，不含围道上的唯一性/阶数断言）为相关命中，无同内容卡。
+
+  【毕业记录】由 research/attempts/ell-zero-wall-degeneracy/（state: verified，
+  reviewer: ell0rev，captain_confirmed: false）毕业并补全，按 research/CLAUDE.md
+  生命周期第 4 步。proposition 禁止手填 status。
+author: graph-curator
+created: "2026-09-20"

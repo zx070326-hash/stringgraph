@@ -1,0 +1,65 @@
+id: holography.ell-zero-contour-avoids-nontrivial-linear-walls--via-imaginary-part-obstruction
+target: holography.ell-zero-contour-avoids-nontrivial-linear-walls
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: holography.igusa-cusp-form-phi10-v2
+    inferred: false
+    note: "Φ₁₀ 的定义与零点除子；本推导只用零点位置，不用重数。"
+  - id: holography.sen-d19-family-is-igusa-phi10-divisor
+    inferred: false
+    note: "承重：把「(D.19) 的非平凡线性子族不与围道相交」说成「Div(Φ₁₀) 的这些分支不与围道相交」需要该族穷尽 Div(Φ₁₀)。该卡 effective 为 physical-argument。"
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/ell-zero-wall-degeneracy/proof.md §6.2（子族 (a)(b)(c) 的分类排除）；约束 (I) 的来源：research/attempts/gap-102b-route-a/proof.md §2 Lemma 1"
+    note: |
+      本项目原创证明，非已发表文献。§6 整节未经 graph-reviewer 审查（见 gaps 第 1 条）。
+  - ref: sen-2008-precision-counting
+    loc: "arXiv:0708.1270v4 Appendix D, eq. (D.19)（p.168）"
+summary: |
+  **约束 (I)（必要条件）**。设点 Ω ∈ C_*(m,n,0;Λ) 落在某个 n₂=0 分支上，即
+  F = jv + n₁σ − m₁ρ + m₂ = 0。代入 ρ = ρ₁+2inΛ、σ = σ₁+2imΛ、v = v₁（ℓ=0 ⟹ Im v = 0）：
+    Im F = 2mn₁Λ − 2nm₁Λ = 2Λ(mn₁ − nm₁)。
+  F = 0 蕴含 Im F = 0，而 Λ > 0，故必有
+    **(I₀)  m n₁ = n m₁。**
+  （这正是 route-a Lemma 1 的 (I) 在 n₂=0、ℓ=0 处的退化形式：h = jℓ + 2(mn₁−nm₁) = 2(mn₁−nm₁)。
+  curator 亲自重算 Im F，与 Lemma 1 逐字一致。注意 (I₀) 不含 ρ₁, σ₁, v₁，故结论对
+  **一切实** Re ρ, Re σ, Re v 与一切 Λ>0 成立。）
+
+  **与判别式联立（三行穷尽）**。n₂=0 时判别式退化为 4m₁n₁ + j² = 1，j 奇。
+  - **m₁, n₁ 都非零**：由 (I₀) 得 n₁/m₁ = n/m > 0（m,n ≥ 1），故 m₁, n₁ **同号**，
+    从而 m₁n₁ ≥ 1，于是 j² = 1 − 4m₁n₁ ≤ −3 < 0——不可能。
+  - **恰好一个为零**：若 m₁ = 0、n₁ ≠ 0，(I₀) 给 m n₁ = 0，因 m ≥ 1 得 n₁ = 0，矛盾；
+    若 n₁ = 0、m₁ ≠ 0 同理由 n ≥ 1 得 m₁ = 0，矛盾。
+  - 故满足 (I₀) 与判别式的只剩 **m₁ = n₁ = 0**（此时 j² = 1，m₂ 自由，分支为 {v ∈ ℤ}），
+    而它按定义不属于「非平凡线性壁」。
+
+  **结论**：每个非平凡线性壁分支（n₂=0 且 (m₁,n₁)≠(0,0)）都不含 C_*(m,n,0;Λ) 的点，
+  对一切 Λ>0。最后把结论从 (D.19) 族搬到 Div(Φ₁₀)，用
+  holography.sen-d19-family-is-igusa-phi10-divisor（承重，显式接线）。
+
+  **与 proof.md §6.2 的关系**：proof.md 把同一件事拆成三个子族——(a) m₁=0,n₁≠0 与
+  (b) n₁=0,m₁≠0 用「零点处 Im v = ∓2mn₁Λ 或 2nm₁Λ ≠ 0，而围道要求 Im v = 0」排除；
+  (c) j²≥9 用「判别式要求 m₁n₁<0（异号）而 (I) 要求同号」排除。两条路线结论一致；
+  上面的版本是 curator 亲自重做后的合并写法（把 (a)(b) 也归到 (I₀)，并把 (c) 的符号
+  矛盾推广到**全部** m₁n₁≠0 的情形，因而不必单独讨论 j²≥9）。proof.md §6.2 的
+  子族 (a)(b) 用 Im v 计算独立复核了同一结论。
+gaps:
+  - "**§6.2 未经 graph-reviewer 审查**。ell-zero-wall-degeneracy 的 reviewer（ell0rev，
+    2026-09-20）在裁决第 4 条把 [GAP-3.3] 记为「CONFIRMED 承重缺口」；§6 是此后由
+    prover（gap33-ell-zero）补写的，status.yaml 逐字请求 lead 另派 reviewer 审 §6。
+    按 docs/STATUS_LEVELS.md 等级 4 例外条款（缺 reviewer-verified 记录者一律降），
+    本推导定 physical-argument。**升级路径**：reviewer 复核上面的三行整数论证后，
+    在本 notes 写 reviewer-verified、kind 改 proof、status 改 rigorous；届时本卡
+    effective 仍被 sen-d19-family（physical-argument）封顶。"
+  - "上游 [GAP-identify]：Sen 的 Φ̃ 坐标 = 标准 Φ₁₀ 坐标，非文献逐字断言；由
+    holography.sen-d19-family-is-igusa-phi10-divisor 显式承载。"
+notes: |
+  **不写 reviewer-verified**：§6.2 无 reviewer 复核记录（见 gaps 第 1 条）。论证本身是
+  有限步初等整数运算，前提已完整写出，reviewer 一旦签字即可按例外条款升 rigorous。
+
+  **curator 亲自核对了什么**：Read 了 proof.md §6 全文；亲自重算 Im F = 2Λ(mn₁−nm₁)
+  （步骤 1）与三行分类穷尽（步骤 2），两处都与 proof.md §6.2 的结论一致，且给出更短的
+  合并论证。未依赖任何脚本或数值验证。
+author: graph-curator
+created: "2026-09-20"
