@@ -54,5 +54,22 @@ gaps:
 notes: |
   同 math.so-usp-adjoint-fundamental-trace-identities--via-adjoint-decomposition 的说明：
   physical-argument 记的是**本图掌握的论证强度**，不是对结论的怀疑。
+
+  【2026-09-19 own status 评估（curator，e8-own-status 审计）】
+  本推导的 depends_on 只有一条约定边（conv.gauge-trace-normalization，不参与状态传播），没有任何
+  命题依赖——它不是「被弱依赖压低」的情况，因为根本没有可传播的依赖可压。own status 完全由本推导
+  **自己的组装步骤**决定，而那一步就是：直接引用 green-schwarz-1984 的三条断言，**无证明**；GS 自己
+  把群论输入（「E₈ 没有独立的四阶、六阶 Casimir 不变量」）归给 Chapline–Slansky 的**私人交流**
+  （文献里没有可引的证明文本）；antonelli-2015 只是转引 GSW Vol.2（本项目未核实）；bilal-2008、
+  van-ritbergen-1998 给同一组数但同样不给证明。summary 里已自陈「本图能独立说的部分……这一步本推导
+  没有做，本推导的来源也没有做」。这不是「有限初等计算、松弛全在依赖里」的情形——本推导自身的组装
+  步骤（=从来源里抄一句无证明的断言）就是全部内容，本身就是 physical-argument 的标准判据
+  （docs/STATUS_LEVELS.md：「路径积分操作、非严格渐近、形式操作、『标准推导』」一类；这里连推导都没有，
+  只有断言，比标准判据更弱但同一等级，没有更低的非猜想等级可用）。
+  **own status 维持 physical-argument，不变。** 没有任何来源支持把这条推导的组装步骤本身升级；
+  升级路径已经存在，就是 --via-root-power-sums（本图另一条独立推导，把「结构性事实 + 系数」拆开
+  分别用 math.e8-root-system-power-sums 的 Lean 幂和与两座桥补上），工具已经在两条推导中自动取
+  更强的那条（目前两条 own 都是 physical-argument，取更强等价的规则详见 STATUS_LEVELS.md「同级并列时
+  的打破规则」）。
 author: curator
 created: "2026-09-11"
