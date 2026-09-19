@@ -41,8 +41,40 @@
 - 文献列出的依赖：E1；DVV 1997；Cheng-Verlinde 2007（并行工作）。
 - 备注：这是 physical-argument 的核心内容，不是数学定理。图和模空间之间的精确识别依赖超引力语言。
 
+### E4（★核心补充，2026-09-20）：Sen 2007 关于墙穿越的核心陈述（从 arXiv PDF 逐字确认）
+
+- 位置：摘要 + §1（pp.1-5），arXiv:hep-th/0702141
+- 类型：proposition
+- 原文陈述（逐字）：
+  
+  **摘要，p.1**："The spectrum of quarter BPS dyons in N=4 supersymmetric string theories can change as the asymptotic moduli cross walls of marginal stability on which the dyon can break apart into a pair of half BPS states. … We argue that the dyon partition functions in different domains separated by marginal stability walls are the same, but the choice of integration contour needed for extracting the degeneracies from the partition function differ in these different regions. … **in the limit of large charges the change in the degeneracy is exponentially suppressed** compared to the leading contribution."
+
+  **§1，p.4**："We find that **the change in the degeneracy is proportional to the total degeneracy of the half-BPS electric and magnetic states** into which the original dyon can decay on this particular marginal stability wall."
+  
+- 文献自称的严格程度："we argue" / "we find"；基于围道变形与极点留数分析。
+- **判定（researcher，2026-09-20，逐字核对原文后）**：
+  - Sen 2007 讨论的是**跨墙跳变 Δd**，不是"单个围道在某个极点的留数"
+  - 原文**没有给出形如 `Res(1/Φ₁₀) = f·g` 的留数因子化公式**
+  - 只说"change is proportional to … half-BPS … degeneracy"（比例关系，未给精确系数结构）
+  - **Q·P 线性因子未在摘要或 §1-§3 中以公式形式出现**——需查阅 §4 或后续章节
+
+### E5（2026-09-20）：Sen 2007 未明确给出的内容（诚实记录）
+
+**在已读章节（摘要 + §1-§3，pp.1-15）中未找到**：
+1. 显式的 `Δd = (−1)^{Q·P+1} (Q·P) · d₁/₂(...) · d₁/₂(...)` 公式及其式号
+2. "1/Φ₁₀ 在二阶极点的留数因子化闭式"
+3. Q·P 线性因子的显式出现位置
+
+**原因分析**：
+- Sen 2007 的主要结果是**围道变形规则**与**跳变的定性结构**（正比于半-BPS 简并度之积）
+- 具体的留数计算细节可能在：
+  - §4"Duality Transformation"或更后面的章节
+  - 或在 Sen 的后续论文（如 Sen 2008 arXiv:0708.1270）中完善
+- 已有抽取记录 E1 的 `Δd = (−1)^{Q·P+1} (Q·P) · ...` 公式**来源待核实**（可能是从后续文献或 Sen 2010 综述转引）
+
 ## 未解决的疑问
 
-1. 壁穿越公式的精确形式（E1 中的系数 (−1)^{Q·P+1} Q·P）需对照原文式号核实；本抽取从综述转述，具体符号约定可能有细节差异。
+1. **（2026-09-20 更新）壁穿越公式 `Δd = (−1)^{Q·P+1} (Q·P) · d₁/₂(...) · d₁/₂(...)` 的精确出处**：已读章节（pp.1-15）未见此公式；需查阅 Sen 2007 §4 之后或 Sen 2008/2010 后续工作。
 2. "d_{1/2}(k) = 1/η²⁴ 傅里叶系数"与 Dabholkar-Harvey 的 1/2-BPS 计数的精确对应需核实（文献中有时用 Dedekind eta，有时用 K3 椭圆亏格）。
 3. E3 中围道与 chamber 的对应在后续 Banerjee-Sen 2007（arXiv:0708.1270）中有更系统化处理，节点应引用两篇。
+4. **（2026-09-20 新增）Sen 2007 未给出"1/Φ₁₀ 在极点的留数因子化闭式"**——只给出跳变的物理图像（正比于半-BPS 简并度）与围道变形规则；留数的精确数学表达式需从 Sen 2008 Appendix C/D 或数学文献补充。
