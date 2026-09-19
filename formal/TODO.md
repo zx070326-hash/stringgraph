@@ -2158,6 +2158,16 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
       要证 `S_N` 单射）。`LevelFourCount.lean` 的力矩机器与 `N` 无关，可直接复用。
       条件版组装见 `noghost-c5`；分片拼接见 `noghost-glue`
       （`ddfSpans_of_forall_antidiagonal_slice_int` 把它归约成「对每个 `N` 证反对角片 `(−N, N)`」）。
+      ⭐ **2026-09-19 订正：`N = 6` 已关闭，剩余缺口是 `N ≥ 7`。**
+      蓝图 §B⁗.7 的候选路线在 `N = 6` 上被兑现（`p_D(N−7) = 0`，所以只出现 `(x₄, y₃)`，
+      `S₆ : V_{−6,1} → V_{−6,5} × V_{−6,4}`）：`SixSliceInjective.lean` 证了整片单射性，
+      `SixBridge.lean` 走完维数挤压 + 种子判据，给出无条件的
+      `b26_six_of_D26` / `ddfSpans_bigrade_neg_six_six`（前件 `2 ≤ D`、标架、`(D : K) = 26`，
+      与 `N ≤ 5` 同形）。见下面的 `noghost-pr-d3`。
+      `N = 7` 仍未触及，且**这条路线在 `N = 7` 上不成立**：维数挤压要求
+      `κ_N` 与目标同量级，而 `κ₇ = p_D(2) + p_D(0)` 关于 `D` 是二次的，
+      必须先算出 `s = 7` 的 syzygy 对 `(x₆, y₅)` 把 `range S₇` 撑到
+      `dim(V_{j,2} × V_{j,0})`，或另找路。
 
 - [x] `noghost-pr9`（蓝图 **§B⁗**，2026-09-14）：**`N = 5` 关闭**。两个新文件：
       `StringFormal/NoGhost/DescendantKernel.lean`（PR9a，`N`-无关、`D`-无关、任意 rung：
@@ -2421,6 +2431,49 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
       这条线从未主张一般 `D` 上的 B26/无鬼，没有夹带），但要写清楚，
       免得后人误以为 N=6 的闭合完全不依赖 26。
       完整论证见 `research/attempts/s6-injectivity-level-six/status.yaml` 裁决要点 10。
+
+- [x] `noghost-pr-d3`（蓝图 **§B⁗.7 第 1–4 步**，**Form A ⟹ Form B 桥，`N = 6` 无条件关闭**，
+      2026-09-19）：`StringFormal/NoGhost/SixBridge.lean`（22 条声明，无 `sorry`、
+      无 `native_decide`，`check_axioms` 22/22 `ok`，只有 `propext Classical.choice Quot.sound`；
+      `StringFormal.lean` 加了一行 `import`，显式构建 `lake build StringFormal.NoGhost.SixBridge`
+      = 1831 jobs）。把 `SixSliceInjective.lean` 的 Form A 接成 `LevelSixClosure.lean` 的
+      Form B，于是后者的具名假设 `SixSeedKernelSharp` 被消去。
+      - 四步（与蓝图 §B⁗.7 逐条对应）：
+        (1) `sixTransfer_mem_ker_descPair` —— 由 syzygy `L_{−1}x₄ + 𝒟₂y₃ = 0`，
+            `S₆(V_{−6,1}) ⊆ ker(descPair η a b (−6) 6)`，无条件；
+        (2) `range_sixTransfer_eq_ker_descPair` —— **等号**。Form A ⇒ `S₆` 单射，
+            `finrank_towerBigrade_one` 给 `dim V_{j,1} = D`，
+            `LevelSixCount.finrank_ker_descPair_six_le` 给 `κ₆ = D`，
+            `Submodule.eq_of_le_of_finrank_le` 收口；
+        (3) `mem_towerSeed_one_of_sixTransfer_eq_seedInclusion` —— `S₆` 的种子原像仍是种子；
+        (4) `sixSeedKernelSharp_of_frame` —— `dim ker(seedPair (−6) 6) ≤ dim Q_{−6,1} = D − 1`。
+      - 顺带的可复用引理（**任意 rung**、`D = 26`-无关）：`finrank_towerBigrade_one`
+        （`dim V_{j,1} = D`）、`towerSeed_one_eq_map` + `finrank_towerSeed_one`
+        （`dim Q_{j,1} = D − 1`，当 `p_j·p_j ≠ 0`）、`oneSeedₗ_injective` / `range_oneSeedₗ`。
+      - 主交付：`b26_six_of_D26`、`ddfSpans_bigrade_neg_six_six`（前件 `2 ≤ D`、
+        `DDFLightConeFrame`、`(D : K) = 26`，与 `N ≤ 5` 的定理同形，**不再是条件式**），
+        另有 `finrank_ker_seedPair_six_eq : dim ker(seedPair η a b (−6) 6) = D − 1`。
+      - ⭐⭐ **订正上一条目里 lead 的补记（「(A)→(B) 桥接消耗 `D = 26`」）：桥接不消耗 26。**
+        原因：Form B 是核的**上界**，只需要包含 `ker(seedPair) ⊆ S₆(Q_{−6,1})`，
+        用的是 `mem_towerSeed_neg_six_one_iff` 的 `⟸` 半边
+        （`mem_towerSeed_neg_six_one_of_towerLop_one_apply_y3_eq_zero`，其 docstring 自己
+        声明与中心荷无关）。带 `hD26` 的 `⟹` 半边（`x4_y3_mem_towerSeed_neg_six_one`）
+        只在**反向**不等式里需要，即精确值 `finrank_ker_seedPair_six_eq`——而计数链条不用它。
+        故 `sixSeedKernelSharp_of_frame` 的前件只有 `2 ≤ D` 与一个 DDF 光锥标架。
+        lead 补记的**结论**（「N=6 的闭合并非完全不依赖 26」）仍然成立，但**位置错了**：
+        `b26_six_of_D26` 里的 `26` 是从**下游**进来的，入口与 `N = 2,…,5` 完全相同——
+        Type-2 零态 `LevelThreeCount.descTwo_mem_towerNullSubmodule_of_mem_towerBigrade`
+        （即 `NullSeedsTwo.towerLop_two_apply_descTwo`，`L_2𝒟₂φ = (D − 26)φ`），
+        经 `LevelSixClosure.le_finrank_towerNull_inf_towerBigrade_six_of_sixSeedKernelSharp`
+        进入。**`N = 6` 没有引入任何新的 `D = 26` 依赖。**
+      - 对图的建议（本轮未动 `graph/`，按任务书）：`worldsheet.ddf-spanning-hypothesis` /
+        `worldsheet.ddf-spanning-rank-inequality` 两张卡的 `formal.lean_decl` 目前占给了
+        定义 `DDFSpans` / `B26`；建议由 curator 新开「`ddf-spans` 在 `N ≤ 6` 上已形式化」
+        与「`N = 6` 的 syzygy 转移映射 `S₆` 是同构到 `ker(descPair)`」两张陈述卡，
+        分别挂 `ddfSpans_bigrade_neg_six_six` 与 `range_sixTransfer_eq_ker_descPair`。
+      - **未做**：`N ≥ 7`（见 `ddf-spans` 条目末尾的订正）；
+        `dim ker(descPair η a b j N) ≥ κ_N` 的反向不等式（BGG 那一半，同
+        `DescendantKernel.lean` 自报的缺口）。
 
 - [x] `no_ghost_theorem`：组装 —— **条件版已完成**（`no_ghost_of_spans`，见 `noghost-c5`）；
       无条件版等 `ddf-spans`。
