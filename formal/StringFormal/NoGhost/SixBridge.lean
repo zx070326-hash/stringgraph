@@ -235,4 +235,104 @@ theorem exists_sixTransfer_eq (hD : 2 ≤ D) (F : DDFLightConeFrame η a b)
 
 end Surjectivity
 
+/-! ### Steps 3 and 4: from the whole-slice kernel down to the seed kernel -/
+
+section Bridge
+
+variable {D : ℕ} {K : Type*} [Field K] [CharZero K] [Algebra ℚ K] {η a b : Fin D → K}
+
+/-- ⭐⭐ **Step 3 of the bridge**: an `S₆`-preimage of a *seed* pair is itself a seed.
+
+If `S₆ v = (φ, ψ)` with `ψ ∈ Q_{-6,4}` then `L_1(y₃v) = L_1ψ = 0`, and the converse half of
+`SeedCriterionSix.mem_towerSeed_neg_six_one_iff` puts `v` in `Q_{-6,1}`.
+
+⭐ **`(D : K) = 26` is not consumed here.**  Only the `←` direction of that criterion is used,
+namely `mem_towerSeed_neg_six_one_of_towerLop_one_apply_y3_eq_zero`, which its own docstring
+certifies to be central-charge free.  (The task roadmap expected *both* directions and therefore
+a `D = 26` hypothesis on the bridge; see this file's module docstring.) -/
+theorem mem_towerSeed_one_of_sixTransfer_eq_seedInclusion (F : DDFLightConeFrame η a b)
+    (haa : Fock.zeroModeSq η a = 2) {v : ↥(towerBigrade D K (-6) 1)}
+    {z : ↥(LinearMap.ker (seedPair η a b (-6) 6))}
+    (h : sixTransfer η a b v = seedInclusion η a b (-6) 6 z.val) :
+    (v : TowerFock D K) ∈ towerSeed η a b (-6) 1 := by
+  refine mem_towerSeed_neg_six_one_of_towerLop_one_apply_y3_eq_zero F.hη F.frame.isotropic
+    F.hba haa v.2 ?_
+  have h2 : y3 η a b (v : TowerFock D K) = ((z.val.2 : ↥(towerSeed η a b (-6) 4)) :
+      TowerFock D K) := by
+    have h3 := congrArg
+      (fun w : ↥(towerBigrade D K (-6) 5) × ↥(towerBigrade D K (-6) 4) =>
+        (w.2 : TowerFock D K)) h
+    simp only [sixTransfer_snd] at h3
+    exact h3
+  rw [h2]
+  exact (mem_towerSeed.1 (z.val.2 : ↥(towerSeed η a b (-6) 4)).2).1 1 (by norm_num)
+
+/-- ⭐⭐⭐ **The Form A ⟹ Form B bridge**: `LevelSixClosure.SixSeedKernelSharp η a b` holds for
+every `DDFLightConeFrame` in every dimension `D ≥ 2`,
+
+`dim ker (seedPair η a b (-6) 6) ≤ D - 1`.
+
+Step 4 of the roadmap.  `S₆` transports `ker (seedPair η a b (-6) 6)` injectively into
+`Q_{-6,1}`: the seed pair `z` sits in `ker (descPair …)` (`seedPair_eq_comp`), step 2b writes it
+as `S₆ v` for a unique `v ∈ V_{-6,1}`, and step 3 says that `v` is a seed.  Since
+`dim Q_{-6,1} ≤ D - 1` (`finrank_towerSeed_one_le`, using `p_{-6}·p_{-6} = -10 ≠ 0`), the claim
+follows.
+
+⭐ **No `(D : K) = 26`.**  Every ingredient — Form A, the count `κ₆ = D`, the seed criterion's
+`←` direction, and the level-one dimension count — is central-charge free. -/
+theorem sixSeedKernelSharp_of_frame (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) :
+    SixSeedKernelSharp η a b := by
+  classical
+  have haa : Fock.zeroModeSq η a = 2 := F.dotVec_self_eq_two hD
+  have hinj : Function.Injective (sixTransfer η a b) := sixTransfer_injective F.hη
+  have hincl : Function.Injective (seedInclusion η a b (-6) 6) := by
+    rintro ⟨u₁, u₂⟩ ⟨v₁, v₂⟩ hu
+    have h1 := congrArg (fun w => (w.1 : TowerFock D K)) hu
+    have h2 := congrArg (fun w => (w.2 : TowerFock D K)) hu
+    exact Prod.ext (Subtype.ext h1) (Subtype.ext h2)
+  have hmemrange : ∀ z : ↥(LinearMap.ker (seedPair η a b (-6) 6)),
+      ((seedInclusion η a b (-6) 6).comp
+          (LinearMap.ker (seedPair η a b (-6) 6)).subtype) z
+        ∈ LinearMap.range (sixTransfer η a b) := by
+    intro z
+    rw [range_sixTransfer_eq_ker_descPair hD F, LinearMap.mem_ker, LinearMap.comp_apply,
+      ← LinearMap.comp_apply, ← seedPair_eq_comp]
+    exact z.2
+  set ιmap : ↥(LinearMap.ker (seedPair η a b (-6) 6)) →ₗ[K]
+      ↥(LinearMap.range (sixTransfer η a b)) :=
+    LinearMap.codRestrict _ ((seedInclusion η a b (-6) 6).comp
+      (LinearMap.ker (seedPair η a b (-6) 6)).subtype) hmemrange with hιmap
+  set gmap : ↥(LinearMap.ker (seedPair η a b (-6) 6)) →ₗ[K] ↥(towerBigrade D K (-6) 1) :=
+    (LinearEquiv.ofInjective (sixTransfer η a b) hinj).symm.toLinearMap.comp ιmap with hgmap
+  have hgapply : ∀ z : ↥(LinearMap.ker (seedPair η a b (-6) 6)),
+      sixTransfer η a b (gmap z) = seedInclusion η a b (-6) 6 z.val := by
+    intro z
+    rw [hgmap]
+    simp [hιmap]
+  set fmap : ↥(LinearMap.ker (seedPair η a b (-6) 6)) →ₗ[K] ↥(towerSeed η a b (-6) 1) :=
+    LinearMap.codRestrict _ ((towerBigrade D K (-6) 1).subtype.comp gmap)
+      (fun z => mem_towerSeed_one_of_sixTransfer_eq_seedInclusion F haa (hgapply z)) with hfmap
+  have hfinj : Function.Injective fmap := by
+    intro z z' hz
+    have h1 : ((gmap z : TowerFock D K)) = ((gmap z' : TowerFock D K)) := by
+      have h0 : ((fmap z : ↥(towerSeed η a b (-6) 1)) : TowerFock D K)
+          = ((fmap z' : ↥(towerSeed η a b (-6) 1)) : TowerFock D K) := congrArg Subtype.val hz
+      rw [hfmap] at h0
+      exact h0
+    have h2 : gmap z = gmap z' := Subtype.ext h1
+    have h3 : seedInclusion η a b (-6) 6 z.val = seedInclusion η a b (-6) 6 z'.val := by
+      rw [← hgapply z, ← hgapply z', h2]
+    exact Subtype.ext (hincl h3)
+  have hfinseed : Module.Finite K ↥(towerSeed η a b (-6) 1) :=
+    Submodule.finiteDimensional_of_le (K := K) (V := TowerFock D K)
+      (S₁ := towerSeed η a b (-6) 1) (S₂ := towerBigrade D K (-6) 1) inf_le_right
+  have hpp : dotVec η (towerMomentum a b (-6)) (towerMomentum a b (-6)) ≠ 0 := by
+    rw [dotVec_towerMomentum_self F.frame.isotropic F.hba haa]
+    norm_num
+  show Module.finrank K ↥(LinearMap.ker (seedPair η a b (-6) 6)) ≤ D - 1
+  exact le_trans (LinearMap.finrank_le_finrank_of_injective (f := fmap) hfinj)
+    (finrank_towerSeed_one_le F.hη hpp)
+
+end Bridge
+
 end StringFormal.NoGhost
