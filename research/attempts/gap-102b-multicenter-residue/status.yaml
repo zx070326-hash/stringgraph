@@ -1,0 +1,79 @@
+state: draft
+reviewer: null
+verdict: null
+captain_confirmed: false
+notes: |
+  2026-09-20（theorem-prover，本轮完成）。
+
+  任务：攻 [GAP 10.2b]（`torsion-immortal-positivity-hecke/proof.md` §10.5.1，
+  "n≥m≥1,0≤ℓ≤m ⟹ d_*=(−1)^{ℓ+1}c_m^F"从数值观察升级为定理）。
+
+  **核心发现**：这个 GAP 并非"公开文献查无证明"——Bhand–Sen–Singh
+  arXiv:2311.16252（已发表、同行评审，Res. Math. Sci. 12 (2025) Paper 8）
+  Appendix B + Theorem 5.4 是一篇严格、非物理、已发表的证明，覆盖一个
+  包含本任务目标域的电荷集。`dmz-finite-part-scoping/claim.md` 与
+  `gap-102b-route-a/claim.md` 此前都点名过这篇论文，但都未曾逐字核实其内容
+  是否真的严格——本轮亲自下载并逐页读取了 BSS 与 Rosselló (arXiv:2403.19630)
+  两篇一手 PDF，完成了这一核实。
+
+  已完成（详见 proof.md）：
+  - prior-art.md：查证记录，含本人验证 vs 转述信任的逐条分级表。
+  - claim.md：精确目标命题 + 允许砖块清单 + 与其它 attempt 的关系说明。
+  - proof.md §1（引理1，域翻译）：完全独立、零风险的代数替换，证明目标域
+    ⊆ BSS 的电荷集 B₂ ⊆ B。
+  - proof.md §2：BSS Appendix B/Theorem 5.4 证明骨架复核 + 独立数值验证了
+    其中的完成配方不等式（`scripts/verify_A2B2_inequality.py`，纯 Python
+    + fractions 精确算术，1680+68880 组穷举无反例，另附一般 a 的符号论证）。
+  - proof.md §3（引理2，变量角色对应）：独立推导 BSS 的 (τ,σ,z) 与 Rosselló
+    的 (ρ,σ,v) 之间的对应关系，只用两文各自围道公式的字面标度信息，
+    确立 BSS 的 SET B 对象就是上游自己的 c_m^F 族（无需额外的 Jacobi
+    形式族层面翻译）。
+  - proof.md §4：整体符号确定——用权10 Sp(4,ℤ) 尖点形式空间一维这一经典事实
+    （引理3）把"符号是否吻合"归约为"在一个非零系数处检验"，用本项目已有、
+    已自测的 `torsion-immortal-positivity-hecke/scripts/coefficients.py`
+    独立算出对称代表元 (1,1,0) 处的值，与 Rosselló 和 BSS 各自论文里报告的
+    +50064 三方吻合，确定符号为"无额外差"。
+  - proof.md §5：组装定理，§6：诚实评估。
+
+  **诚实标注的唯一剩余 [GAP]**（proof.md §4/§6）：BSS"Φ̃₁ exactly the inverse
+  of Φ₁₀"一句是否严格到"权相同、零点除子相同"（引理3唯一性论证的前提），
+  本人依赖转述信任，未从 BSS 自己的一般乘积公式 (5.2) 出发独立算出 N=1
+  特化来做第一性原理确认。这是一个有界、具体、可机械验证的技术缺口，
+  不影响 §1-3 的任何独立结论，且已有强数值证据（三方吻合）支持其解决方向。
+
+  **本人验证 vs 转述信任**（完整清单见 prior-art.md §5）：Rosselló 与 BSS
+  两篇论文的全部被引用内容均为本人亲自读取一手 PDF 逐字核对，非转述；
+  `coefficients.py` 的算法正确性信任上游（已有多轮自测，未独立重新实现）；
+  BSS"Φ̃₁=Φ₁₀"是否连整体符号都精确一致，为转述信任（唯一未升格为独立验证
+  的一点，已明确标注为 [GAP]）。
+
+  **给 lead 的交叉任务发现**（本人无权限直接写入下列文件，特此记录供转达）：
+  1. `gap-102b-route-a`（state: verified，但仅其 §4 n₂=0 分支部分）的
+     proof.md §5 遗留的 n₂≠0 分支未闭合缺口，在 BSS 的 Prop B.1 框架下有
+     一个更简洁的统一处理（不按 n₂ 分支讨论，而是证明吸引子极限下 n₂ 系数
+     必须占主导）。建议 lead 评估是否让 route-a 的后续轮次改道复用本 attempt
+     的 BSS 翻译，而非继续独立攻 n₂≠0 分支的解析论证。
+  2. `dmz-finite-part-scoping/claim.md` §3 砖块表 B4 行写"证 d_*=c_m^F 的
+     那一步……尚未见就地严格的文献陈述"——本轮核查后这句话**不再准确**：
+     现在有 BSS Appendix B 这一具体、严格、已复核的文献陈述（覆盖比 B4
+     所指范围更宽的电荷集 B）。建议 lead 安排后续轮次更新该表格的措辞
+     （本人无 `dmz-finite-part-scoping/**` 写权限，未直接修改）。
+  3. 若这条路线通过 graph-reviewer 审查，建议后续也评估：BSS 论文本身
+     是否值得由 graph-curator 抽取进 `literature/extractions/` 并在图中
+     建立对应节点（`kind: proof`, `status: rigorous`）——这样以后其它
+     attempt 才能把它当作"图中 rigorous 节点"正式引用为砖块，而不是像
+     本 attempt 这样每次都要重新走一遍独立复核。这是一条**建议**，
+     不在本人权限范围内执行。
+
+  下一步（留给 graph-reviewer 或后续 prover 轮次）：
+  - 重点审查 proof.md §3（变量角色引理）——这是全文风险最高、最容易在
+    对抗性审查下暴露问题的一步，因为它依赖本人独立推导、非任一文献显式陈述。
+  - 评估 §4 的 [GAP]（一维性论证的第一性原理独立性）是否需要在下一轮中
+    通过直接展开 BSS eq (5.2) 的 N=1 特化来彻底关闭，或者三方数值吻合
+    这一证据本身是否已经足够让 reviewer 判定"可接受、留一条技术性 GAP
+    不影响主结论"。
+  - 若审查通过，讨论毕业路径：本证明的结论若要写回 `graph/`，需要先经
+    graph-curator 把 BSS 2311.16252 抽取为文献节点（见交叉发现 3），
+    否则本证明在 research/CLAUDE.md 的字面意义上仍缺"图中 rigorous 节点"
+    形式的砖块来源（当前砖块清单里的 BSS 引用是"复核过的外部文献"，
+    不是"图节点"，proof.md claim.md 已如实说明这一点，未回避）。
