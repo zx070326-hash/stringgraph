@@ -3633,3 +3633,15 @@ L_0(x₄u) = 0·(x₄u),   L_0(y₃u) = -(y₃u),   L_0(L_{-1}y₃u) = 0.
   `[GAP-N6-seed]` 正是用它的那一步。
 - **仍开着的账**：本节只解决 `N = 6` 的种子判据。`κ₆ = 26 → τ₆ = 25` 的完整链条还要接上
   §B⁗.3 的计数与 §B⁗.7 的组装；`N ≥ 7` 未触及。
+- ⭐ **2026-09-19 更新（formalizer）**：上面「下一步（Lean）」三块中 (a)(b) 已完成
+  （`StringFormal/NoGhost/LevelSixCount.lean`，`TODO.md` `noghost-pr-d2` 条目 (a)(b)(c0)）。
+  (c)「组装：把判据接成 `S_6` 单射，再走 `DescendantKernel` 的秩–零化度」——**`S_6`
+  在整片 `V_{-6,1}`（本节 §B⁗.7 第 1–2 步）上的单射性本身仍未证**，本轮判据（[GAP-N6-seed]，
+  本节已关闭）只覆盖了本节 §B⁗.7 第 3 步。这与本节第 1–2 步标记的
+  `⟨路线判断，未验证⟩` 完全对应：那正是尚未证明的部分。
+  `StringFormal/NoGhost/LevelSixClosure.lean` 把这个缺口收敛成单条具名假设
+  `SixSeedKernelSharp`（`dim ker(seedPair η a b (−6) 6) ≤ D − 1`，即直接把 `S_6`
+  单射性会给出的维数结论当作前提，而不是重新证明单射性本身），并在其上把
+  `b26_six` / `ddfSpans_bigrade_neg_six_six` 证到条件版
+  （`b26_six_of_sixSeedKernelSharp` / `ddfSpans_bigrade_neg_six_six_of_sixSeedKernelSharp`）。
+  **`S_6` 整片单射性、以及无条件的 `b26_six`，仍然是真正的新数学，未在本仓库任何地方证明**。
