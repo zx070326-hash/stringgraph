@@ -83,6 +83,64 @@ theorem range_sixTransfer_le_ker_descPair (hη : ∀ μ, η μ * η μ = 1) :
   rintro _ ⟨v, rfl⟩
   exact sixTransfer_mem_ker_descPair hη v
 
+/-- ⭐⭐ **Step 2a of the bridge — Form A, verbatim**: the transfer map is injective on the
+*whole* level-one slice (no seed condition, no `D = 26`).
+
+This is `SixSliceInjective.x4_eq_zero_of_mem_towerBigrade_one` applied to the difference of two
+vectors with the same image; only the `x₄` component is used. -/
+theorem sixTransfer_injective (hη : ∀ μ, η μ * η μ = 1) :
+    Function.Injective (sixTransfer η a b) := by
+  intro u v huv
+  have h1 : ((sixTransfer η a b u).1 : TowerFock D K)
+      = ((sixTransfer η a b v).1 : TowerFock D K) :=
+    congrArg (fun z : ↥(towerBigrade D K (-6) 5) × ↥(towerBigrade D K (-6) 4) =>
+      (z.1 : TowerFock D K)) huv
+  rw [sixTransfer_fst, sixTransfer_fst] at h1
+  have hmem : (u : TowerFock D K) - (v : TowerFock D K) ∈ towerBigrade D K (-6) 1 :=
+    Submodule.sub_mem _ u.2 v.2
+  have hx : x4 η a b ((u : TowerFock D K) - (v : TowerFock D K)) = 0 := by
+    rw [map_sub, h1, sub_self]
+  exact Subtype.ext (sub_eq_zero.1 (x4_eq_zero_of_mem_towerBigrade_one hη hmem hx))
+
 end Transfer
+
+/-! ### The two dimensions of the level-one slice: `dim V_{j,1} = D` and `dim Q_{j,1} ≤ D - 1` -/
+
+section LevelOneDimensions
+
+variable {D : ℕ} {K : Type*} [Field K] [CharZero K] [Algebra ℚ K] {η a b : Fin D → K}
+
+omit [CharZero K] [Algebra ℚ K] in
+/-- The level-one seed map `e ↦ (e·α_{-1})|0; p_j⟩` is injective as soon as the metric is
+invertible (`η_μ² = 1`). -/
+theorem oneSeedₗ_injective (hη : ∀ μ, η μ * η μ = 1) (j : ℤ) :
+    Function.Injective (oneSeedₗ (D := D) (K := K) η j) := by
+  refine (injective_iff_map_eq_zero _).2 fun e he => ?_
+  have h1 : Finsupp.single j (Fock.polState η e) = 0 := he
+  exact (Fock.polState_eq_zero_iff η hη).1 (Finsupp.single_eq_zero.1 h1)
+
+omit [CharZero K] [Algebra ℚ K] in
+/-- The level-one slice is exactly the range of the seed map: every level-one state is
+`(e · α_{-1})|0; p_j⟩` for a unique polarisation `e`. -/
+theorem range_oneSeedₗ (hη : ∀ μ, η μ * η μ = 1) (j : ℤ) :
+    LinearMap.range (oneSeedₗ (D := D) (K := K) η j) = towerBigrade D K j 1 := by
+  refine le_antisymm ?_ ?_
+  · rintro _ ⟨e, rfl⟩
+    exact oneSeed_mem_towerBigrade j e
+  · intro u hu
+    obtain ⟨hu1, hu2⟩ := mem_towerBigrade.1 hu
+    obtain ⟨e, he⟩ := Fock.exists_polState_of_mem_levelSubmodule_one hη hu2
+    refine ⟨e, ?_⟩
+    show oneSeed η j e = u
+    rw [oneSeed, ← he, ← hu1]
+
+omit [CharZero K] [Algebra ℚ K] in
+/-- ⭐ **`dim V_{j,1} = D`** on every rung: the level-one slice is the space of polarisations. -/
+theorem finrank_towerBigrade_one (hη : ∀ μ, η μ * η μ = 1) (j : ℤ) :
+    Module.finrank K ↥(towerBigrade D K j 1) = D := by
+  rw [← range_oneSeedₗ hη j,
+    LinearMap.finrank_range_of_inj (oneSeedₗ_injective hη j), Module.finrank_fin_fun]
+
+end LevelOneDimensions
 
 end StringFormal.NoGhost
