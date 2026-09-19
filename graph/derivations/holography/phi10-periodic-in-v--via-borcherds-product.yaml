@@ -1,0 +1,20 @@
+id: holography.phi10-periodic-in-v--via-borcherds-product
+target: holography.phi10-periodic-in-v
+kind: proof
+status: rigorous
+depends_on:
+  - id: holography.igusa-cusp-form-phi10-v2
+sources:
+  - ref: kawai-1997
+    loc: "§5, eq.(5.13) + §2, eq.(2.19)（Borcherds 乘积公式与变量定义）"
+summary: |
+  Borcherds 乘积公式 χ₁₀(Ω) = pqy ∏_{(k,l,r)>0} (1−p^k q^l y^r)^{c(4kl−r²)} 中，
+  每个因子的 y 指数 r 都是整数（乘积指标集 r∈ℤ），前因子 pqy 的 y 指数是 1。
+  因此 χ₁₀ 只含 y 的整数次幂。由 y = e^{2πiv}，在 v→v+1 下 y→y（因为 e^{2πi}=1），
+  故整体不变。
+notes: |
+  本推导纯代数，只用乘积公式的显式结构。kawai-1997 eq.(5.13) 给出的指标集是：
+  (k,l,r) 满足 k>0 且 l≥0；或 k≥0 且 l>0；或 k=l=0 且 r<0。
+  三个条件并集覆盖的 r 全是整数，无分数次幂。
+  【变量换名】kawai-1997 用 (τ,z,σ)，本项目用 (ρ,v,σ)，对应 τ↔ρ、z↔v、σ↔σ。
+author: curator

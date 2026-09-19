@@ -1,0 +1,22 @@
+id: holography.phi10-periodic-in-v
+kind: proposition
+title: Φ₁₀ 在椭圆变量 v 下的整周期性
+statement: |
+  Igusa 尖点形式 Φ₁₀(ρ, σ, v) 满足
+    Φ₁₀(ρ, σ, v+1) = Φ₁₀(ρ, σ, v)。
+  这里 (ρ, σ, v) 是 Siegel 上半空间 Ω = [[ρ,v],[v,σ]] 的参数化（对应 Kawai 1997 的 (τ,σ,z)
+  通过换名 τ↔ρ, z↔v, σ↔σ）。
+uses:
+  - holography.igusa-cusp-form-phi10-v2
+uses_conventions: []
+sources:
+  - ref: kawai-1997
+    loc: "§5, eq.(5.13)（Borcherds 乘积公式，其显式结构直接蕴含整周期性）"
+notes: |
+  本命题的证明只需 Borcherds 乘积公式的代数结构（y 的指数全是整数），无需诉诸
+  Sp(4,ℤ) 变换律。见推导 phi10-periodic-in-v--via-borcherds-product。
+  【变量换名】kawai-1997 用 (τ,z,σ)，本项目 holography 区用 (ρ,v,σ)，对应关系
+  τ↔ρ、z↔v、σ↔σ（见 literature/extractions/phi10-periodicity-and-product.md 未解决疑问 2）。
+author: curator
+created: "2026-09-20"
+tags: [bh-entropy, mock-modular]
