@@ -61,6 +61,15 @@ omit [CharZero K] in
 lemma sixTransfer_snd (v : ↥(towerBigrade D K (-6) 1)) :
     ((sixTransfer η a b v).2 : TowerFock D K) = y3 η a b (v : TowerFock D K) := rfl
 
+omit [CharZero K] in
+/-- The syzygy identity `SeedTransferSix.towerLop_neg_one_mul_x4_add_descTwo_mul_y3` evaluated on
+a vector: `L_{-1}(x₄u) + 𝒟₂(y₃u) = 0` for **every** `u`, on every rung and at every level. -/
+theorem towerLop_neg_one_x4_add_descTwo_y3 (hη : ∀ μ, η μ * η μ = 1) (u : TowerFock D K) :
+    towerLop η a b (-1) (x4 η a b u) + descTwo η a b (y3 η a b u) = 0 := by
+  have h := congrArg (fun T : Module.End K (TowerFock D K) => T u)
+    (towerLop_neg_one_mul_x4_add_descTwo_mul_y3 η a b hη)
+  simpa only [LinearMap.add_apply, Module.End.mul_apply, LinearMap.zero_apply] using h
+
 /-- ⭐⭐ **Step 1 of the bridge**: the image of the transfer map lands in the kernel of the
 whole-slice descendant map, for **every** `v` on the level-one slice and with **no** hypothesis
 beyond `hη`.
@@ -71,11 +80,8 @@ This is nothing but the syzygy identity `L_{-1}x₄ + 𝒟₂y₃ = 0` of
 theorem sixTransfer_mem_ker_descPair (hη : ∀ μ, η μ * η μ = 1)
     (v : ↥(towerBigrade D K (-6) 1)) :
     sixTransfer η a b v ∈ LinearMap.ker (descPair η a b (-6) 6) := by
-  have h := congrArg (fun T : Module.End K (TowerFock D K) => T (v : TowerFock D K))
-    (towerLop_neg_one_mul_x4_add_descTwo_mul_y3 η a b hη)
-  simp only [LinearMap.add_apply, Module.End.mul_apply, LinearMap.zero_apply] at h
   rw [LinearMap.mem_ker, descPair_apply]
-  simpa using h
+  exact towerLop_neg_one_x4_add_descTwo_y3 hη (v : TowerFock D K)
 
 /-- Step 1, packaged as a statement about submodules. -/
 theorem range_sixTransfer_le_ker_descPair (hη : ∀ μ, η μ * η μ = 1) :
@@ -344,6 +350,81 @@ theorem sixSeedKernelSharp_of_frame (hD : 2 ≤ D) (F : DDFLightConeFrame η a b
     (finrank_towerSeed_one_le F.hη hpp)
 
 end Bridge
+
+/-! ### The exact dimension of the level-six seed kernel (this half *does* use `D = 26`) -/
+
+section Equality
+
+variable {D : ℕ} {K : Type*} [Field K] [CharZero K] [Algebra ℚ K] {η a b : Fin D → K}
+
+/-- ⭐⭐ **`dim ker (seedPair η a b (-6) 6) = D - 1` in critical dimension.**
+
+`≤` is the bridge `sixSeedKernelSharp_of_frame` (no `D = 26`).  `≥` is the reverse transport:
+`S₆` maps `Q_{-6,1}` (dimension `D - 1` by `finrank_towerSeed_one`) injectively into
+`ker (seedPair η a b (-6) 6)`.
+
+⭐ **This is the direction that consumes `(D : K) = 26`**, through
+`SingularVectorsSixSlice.x4_y3_mem_towerSeed_neg_six_one` — the `→` half of blueprint §B⁗.9's
+criterion, i.e. the statement that `x₄v` and `y₃v` are singular vectors of `V(26, -4)`.  The
+inequality `≤` that the counting chain actually needs does **not** use it. -/
+theorem finrank_ker_seedPair_six_eq (hD : 2 ≤ D) (F : DDFLightConeFrame η a b)
+    (hD26 : (D : K) = 26) :
+    Module.finrank K ↥(LinearMap.ker (seedPair η a b (-6) 6)) = D - 1 := by
+  classical
+  have haa : Fock.zeroModeSq η a = 2 := F.dotVec_self_eq_two hD
+  have hle : Module.finrank K ↥(LinearMap.ker (seedPair η a b (-6) 6)) ≤ D - 1 :=
+    sixSeedKernelSharp_of_frame hD F
+  have hpp : dotVec η (towerMomentum a b (-6)) (towerMomentum a b (-6)) ≠ 0 := by
+    rw [dotVec_towerMomentum_self F.frame.isotropic F.hba haa]
+    norm_num
+  refine le_antisymm hle ?_
+  rw [← finrank_towerSeed_one F.hη hpp]
+  -- finiteness of the seed kernel, through the `Prod` instance-path detour
+  have hfin5 : FiniteDimensional K ↥(towerSeed η a b (-6) ((6 : ℕ) - 1)) :=
+    Submodule.finiteDimensional_of_le (K := K) (V := TowerFock D K)
+      (S₂ := towerBigrade D K (-6) ((6 : ℕ) - 1)) inf_le_right
+  have hfin4 : FiniteDimensional K ↥(towerSeed η a b (-6) ((6 : ℕ) - 2)) :=
+    Submodule.finiteDimensional_of_le (K := K) (V := TowerFock D K)
+      (S₂ := towerBigrade D K (-6) ((6 : ℕ) - 2)) inf_le_right
+  have hfinprod : FiniteDimensional K
+      (↥(towerSeed η a b (-6) ((6 : ℕ) - 1)) × ↥(towerSeed η a b (-6) ((6 : ℕ) - 2))) :=
+    inferInstanceAs (Module.Finite K
+      (↥(towerSeed η a b (-6) ((6 : ℕ) - 1)) × ↥(towerSeed η a b (-6) ((6 : ℕ) - 2))))
+  have hnoeth : IsNoetherian K
+      (↥(towerSeed η a b (-6) ((6 : ℕ) - 1)) × ↥(towerSeed η a b (-6) ((6 : ℕ) - 2))) :=
+    isNoetherian_of_isNoetherianRing_of_finite K
+      (↥(towerSeed η a b (-6) ((6 : ℕ) - 1)) × ↥(towerSeed η a b (-6) ((6 : ℕ) - 2)))
+  have hfinker : Module.Finite K ↥(LinearMap.ker (seedPair η a b (-6) 6)) := inferInstance
+  -- the seed-restricted transfer map
+  have hxy : ∀ v : ↥(towerSeed η a b (-6) 1),
+      x4 η a b (v : TowerFock D K) ∈ towerSeed η a b (-6) 5 ∧
+        y3 η a b (v : TowerFock D K) ∈ towerSeed η a b (-6) 4 := fun v =>
+    x4_y3_mem_towerSeed_neg_six_one η a b F.hη F.frame.isotropic F.hba haa hD26 v.2
+  set S : ↥(towerSeed η a b (-6) 1) →ₗ[K]
+      (↥(towerSeed η a b (-6) 5) × ↥(towerSeed η a b (-6) 4)) :=
+    (LinearMap.codRestrict _ ((x4 η a b).comp (towerSeed η a b (-6) 1).subtype)
+        (fun v => (hxy v).1)).prod
+      (LinearMap.codRestrict _ ((y3 η a b).comp (towerSeed η a b (-6) 1).subtype)
+        (fun v => (hxy v).2)) with hS
+  have hSker : ∀ v : ↥(towerSeed η a b (-6) 1),
+      S v ∈ LinearMap.ker (seedPair η a b (-6) 6) := by
+    intro v
+    rw [LinearMap.mem_ker, seedPair_apply]
+    exact towerLop_neg_one_x4_add_descTwo_y3 F.hη (v : TowerFock D K)
+  refine LinearMap.finrank_le_finrank_of_injective
+    (f := LinearMap.codRestrict _ S hSker) ?_
+  intro u v huv
+  have h1 : ((S u).1 : TowerFock D K) = ((S v).1 : TowerFock D K) :=
+    congrArg (fun w : ↥(towerSeed η a b (-6) 5) × ↥(towerSeed η a b (-6) 4) =>
+      (w.1 : TowerFock D K)) (congrArg Subtype.val huv)
+  have h1' : x4 η a b (u : TowerFock D K) = x4 η a b (v : TowerFock D K) := h1
+  have hmem : (u : TowerFock D K) - (v : TowerFock D K) ∈ towerBigrade D K (-6) 1 :=
+    Submodule.sub_mem _ (mem_towerSeed.1 u.2).2 (mem_towerSeed.1 v.2).2
+  have hx : x4 η a b ((u : TowerFock D K) - (v : TowerFock D K)) = 0 := by
+    rw [map_sub, h1', sub_self]
+  exact Subtype.ext (sub_eq_zero.1 (x4_eq_zero_of_mem_towerBigrade_one F.hη hmem hx))
+
+end Equality
 
 /-! ### `B26 6` and the level-six slice of `ddf-spans`, unconditionally -/
 
