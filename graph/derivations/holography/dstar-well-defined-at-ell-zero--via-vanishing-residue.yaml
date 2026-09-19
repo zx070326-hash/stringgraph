@@ -1,0 +1,114 @@
+id: holography.dstar-well-defined-at-ell-zero--via-vanishing-residue
+target: holography.dstar-well-defined-at-ell-zero
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: holography.torsion-index-divisor-operator
+    inferred: false
+    note: "定义 D：𝒢、吸引子围道 C_*、d_* 的定义与 R6′ 符号约定（接口边：供给被断言良定的对象本身）。"
+  - id: holography.attractor-contour-hits-phi10-zero-at-ell-zero
+    inferred: false
+    note: "(a) 的承重输入：ℓ=0 时围道对一切 Λ>0 恒经过 Φ₁₀ 的零点，故定义 D 的「围道避开全部极点」条款不可满足。"
+  - id: holography.phi10-periodic-in-v
+    inferred: false
+    note: "两处用到：把零点从 u=0 搬到 u=1（(a)）；矩形围道两条竖直边因被积函数 v-周期 1 而相消（步骤 2）。"
+  - id: holography.phi10-order-two-in-v-on-ell-zero-contour
+    inferred: false
+    note: "兑现留数卡的显式前提 h₀≠0，并给出「窗口内只有 v=1/2 一个极点」。"
+  - id: holography.phi10-shifted-pole-residue-proportional-to-ell
+    inferred: false
+    note: "核心：ℓ=0 时该二阶极点的留数 = (−1)^0·2πi·0/h₀ = 0。"
+  - id: holography.ell-zero-contour-avoids-phi10-quadratic-wall
+    inferred: false
+    note: "步骤 1 的紧致性论证需要整个紧致围道盒 K₀ 与「其它分支」不交，而不只是实 u-线上某点；n₂≠0 一半由本卡给。"
+  - id: holography.ell-zero-contour-avoids-nontrivial-linear-walls
+    inferred: false
+    note: "同上，n₂=0 且 (m₁,n₁)≠(0,0) 一半。"
+  - id: holography.sen-d19-family-is-igusa-phi10-divisor
+    inferred: false
+    note: "承重的穷尽性：「除 {u∈ℤ} 外的分支」这一集合要能穷尽 Div(Φ₁₀) 的其余部分，步骤 1 才成立。"
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/ell-zero-wall-degeneracy/proof.md §4.1（Proposition A 的证明）、§2.5（留数）、§3.3（围道穿过极点）、§6（分支排除）、§5.1（约定差一个整体负号）；claim.md §1（Proposition A 的量词级陈述）"
+    note: |
+      本项目原创证明，非已发表文献。attempt state: verified（reviewer ell0rev，
+      2026-09-20，天花板 rigorous），captain_confirmed: false。§6 未经 reviewer 审查；
+      带内（Im v≠0）极点排除 proof.md 未处理，见 gaps 第 2 条。
+  - ref: rossello-2024
+    loc: "§2 (2.22)–(2.23)；Corollary 1.1"
+summary: |
+  设 m,n ≥ 1，ℓ = 0，Λ > Λ₀ = 1/(4√(mn))。被积函数是
+  𝒢(ρ,σ,v)·e^{−2πi(mρ+nσ)}（ℓ=0 时指数核不含 v）。
+
+  **(a) 定义 D 在 ℓ=0 不可用**。holography.attractor-contour-hits-phi10-zero-at-ell-zero
+  给出：对一切 Λ>0，Φ₁₀ 在围道 (ρ,σ)-分量与 v=0 处为零；由 v-周期 1 同样在 u=1 处为零，
+  即 𝒢 在 v = 1/2 ∈ [0,1] 有极点。故「取 Λ 充分大使围道避开全部极点」对任何 Λ 都办不到。
+
+  **步骤 1（微扰围道无极点；带内只有 v=1/2 一个极点）**——本步骤的紧致性论证由
+  curator 补写，proof.md §4.1 只写了「极点在实轴上，ε 充分小即可避开」。
+  把被积函数的极点集写成 Φ₁₀ 的零点集在半周期平移下的原像：v 是极点 ⟺ u := v+1/2 使
+  (ρ, u; u, σ) ∈ Div(Φ₁₀)。记
+    K_t := { (ρ,u;u,σ) : Re ρ,Re σ∈[0,1], Re u∈[1/2,3/2], Im ρ=2nΛ, Im σ=2mΛ, Im u=tΛ }，
+  K₀ 紧致。由 holography.sen-d19-family-is-igusa-phi10-divisor（穷尽性）与两张
+  holography.ell-zero-contour-avoids-*（它们的 Re v 已放开到 ℝ，覆盖窗口 [1/2,3/2]）：
+  K₀ 与 Z' := Div(Φ₁₀) 中除 {u∈ℤ} 外全部分支之并 不相交。Div(Φ₁₀) 是 ℍ₂ 的闭解析子集，
+  其不可约分支族局部有限，故任何子族之并（特别是 Z'）是闭集；于是 δ := dist(K₀, Z') > 0。
+  取 ε₀ > 0 使 ε₀Λ < δ 且 ε₀ < 2√(mn)（后者保证 Im ρ·Im σ −(Im u)² = 4mnΛ² − ε²Λ² > 0，
+  即 K_t ⊂ ℍ₂）。则对 |t| ≤ ε₀：K_t ∩ Z' = ∅；又 {u∈ℤ} 要求 Im u = 0，故 t ≠ 0 时
+  K_t ∩ Div(Φ₁₀) = ∅。**结论**：0<ε<ε₀ 时 C_±(ε,Λ) 上被积函数处处正则（(b1)），
+  且闭带 |Im u| ≤ εΛ 内的极点只有 u=1，即 v=1/2。
+
+  **步骤 2（对 v 的矩形围道）**。固定 (ρ,σ)。被积函数关于 v 以 1 为周期
+  （𝒢 由 holography.phi10-periodic-in-v；ℓ=0 时指数核与 v 无关），故矩形
+  {Re v∈[0,1], Im v∈[−εΛ, +εΛ]} 的两条竖直边积分相消，
+    ∫_{C_−,v} − ∫_{C_+,v} = ± 2πi · Res_{v=1/2}[𝒢·e^{−2πi(mρ+nσ)}]（定向不影响下文）。
+
+  **步骤 3（留数为零）**。由 holography.phi10-order-two-in-v-on-ell-zero-contour，
+  该 (ρ,σ) 处 h₀(ρ,σ) ≠ 0（零点阶恰为 2），于是
+  holography.phi10-shifted-pole-residue-proportional-to-ell 的前提成立，给出
+    Res = (−1)^ℓ·2πiℓ/h₀ |_{ℓ=0} = 0。
+
+  **步骤 4（合起来）**。步骤 2+3 给出：对每个固定 (ρ,σ)，内层 v-积分在两侧相同。
+  被积函数在紧集上连续，把这个逐点相等的差沿 (ρ,σ)（紧致二维环面）积分即得 (b2)。
+  同理，同侧两个 0<ε<ε'<ε₀ 之间的带内无极点（步骤 1），两者积分相等，即 (b3)。
+  故公共值良定，d_*(m,n,0) 可无歧义地取为该值，不需要主值规定。∎
+
+  **符号说明**：以上全部用定义 D 的 𝒢（含整体负号）。d_*^{定义D} = −d_*^{Rosselló}
+  （proof.md §5.1，curator 亲自复核该换算），良定性与整体符号无关，故两套约定同时成立。
+gaps:
+  - "**effective 被三处压到 physical-argument**：(i) holography.sen-d19-family-is-igusa-phi10-divisor
+    是 physical-argument（[GAP-identify]：Sen 的 Φ̃ 坐标 = 标准 Φ₁₀ 坐标未获文献逐字断言）；
+    (ii) 两张 ell-zero-contour-avoids-* 的来源 §6 未经 graph-reviewer 审查；
+    (iii) 本推导步骤 1 是 curator 补写、未经复核。核心的留数计算本身
+    （holography.phi10-shifted-pole-residue-proportional-to-ell）是 rigorous，未被牵连。"
+  - "**步骤 1 是 curator 自行补上的**：proof.md §4.1 只说「极点在实轴 v∈ℝ 上，ε 充分小
+    即可避开」，而 §6 的分支排除只做在 **Im v = 0** 的围道上；从「两条微扰围道各自无极点」
+    到「两者之间的带内只有 v=1/2 一个极点」需要带内（Im v = ±tΛ ≠ 0）的排除，proof.md
+    未处理。本推导用「Div(Φ₁₀) 的分支族局部有限 ⟹ Z' 闭 ⟹ dist(K₀,Z')>0」的紧致性论证
+    补上。**建议 lead 在派 reviewer 审 §6 时一并审本步骤**；若该论证有误，(b) 的量词需要
+    重新讨论（(a) 与留数为零两条不受影响）。"
+  - "**ε₀ 依赖 Λ**：本推导只给出 ∀Λ>Λ₀ ∃ε₀(m,n,Λ)>0。上游 claim.md §1 的 Proposition A
+    写的是「存在 ε₀>0 与 Λ₀>0 使得对所有 0<ε<ε₀ 与 Λ>Λ₀」（ε₀ 与 Λ 一致），
+    那个更强的一致性**未被证明**，本卡不断言。"
+  - "**Λ-无关性未证**：本卡不断言公共值与 Λ 无关（目标卡「明确不断言」(i)）。这是 ℓ=0
+    情形与 holography.mock-jacobi-coefficient-positivity 所记 Λ-无关性论证的实质差别——
+    后者的前提是围道避开全部极点，ℓ=0 不满足。**留给后续 attempt。**"
+  - "本 attempt 未产生 formal/ 下无 sorry 的 Lean 证明；captain_confirmed: false。"
+notes: |
+  **不写 reviewer-verified**：上游 §6 与本推导步骤 1 均无 reviewer 复核记录。
+
+  **curator 亲自核对了什么**：Read 了 claim.md、proof.md、status.yaml 全文；亲自重算了
+  §2.5 的留数（含两处符号订正）、§5.1 的约定换算与 Rosselló-约定交叉验证、§6.2 的整数
+  分类、Im F 的表达式；亲自补写步骤 1 的紧致性论证并核对其每个前提都已接成图内的边。
+  未重跑 gap-102b-route-a 的 SymPy 脚本（转述信任）。
+
+  **本推导与 proof.md §4.1 的一处写法差异**：proof.md 把两侧之差写成
+  `2πi × ∫∫dρdσ · Res`，需要先交换积分次序；本推导改为「先对每个固定 (ρ,σ) 做内层
+  v-积分，逐点相等后再对 (ρ,σ) 积分」，避免了 Fubini 的额外可积性讨论。结论相同。
+
+  **与壁跨越的关系（诠释，不在断言内）**：同一个留数在 ℓ≠0 时非零并线性正比于 ℓ，
+  这正是 holography.dvv-wall-crossing-identification 的 Δd ∝ (−1)^{Q·P+1}(Q·P) 的
+  解析来源。结论层（Q·P=0 ⟹ Δd=0）已由 Denef–Moore 2007 确立，本项目**不作优先权主张**；
+  详见目标卡 notes 第一段（措辞取自 literature/notes/ell-zero-wall-residue-prior-art.md）。
+author: graph-curator
+created: "2026-09-20"

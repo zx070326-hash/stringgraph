@@ -1,0 +1,109 @@
+id: holography.dstar-well-defined-at-ell-zero
+kind: proposition
+title: "ℓ=0（Q·P=0）时 d_*(m,n,0) 自动良定：围道穿过二阶极点，但留数为零，微扰围道两侧给出同一值"
+statement: |
+  记号（Rosselló 2403.19630 / holography.torsion-index-divisor-operator 的定义 D，取 I=1）：
+    𝒢(ρ,σ,v) := −1/Φ₁₀(ρ,σ, v+1/2)，
+    C_*(m,n,ℓ;Λ) := { Ω=(ρ,v; v,σ) : Re ρ, Re σ, Re v ∈ [0,1],
+                      Im ρ = 2nΛ, Im σ = 2mΛ, Im v = ℓΛ }（ε=+1 约定），
+    d_*(m,n,ℓ) := ∫_{C_*(m,n,ℓ;Λ)} dρ dσ dv · 𝒢(ρ,σ,v) · e^{−2πi(mρ+nσ+ℓv)}。
+  **约定声明（承重，勿略）**：本卡用的是定义 D 的 d_*；它与 Rosselló (2.23) 的 d_* 差
+  一个整体负号，d_*^{定义D} = − d_*^{Rosselló}（半周期平移写在 𝒢 定义内并带整体负号 vs
+  写在指数内）。本卡断言的是**良定性**，与整体符号无关，故对两套约定同时成立；
+  但**正性**（Rosselló Cor 1.1 的 d_* > 0）说的是 d_*^{Rosselló}，不是本卡的 d_*。
+
+  设整数 m, n ≥ 1，**ℓ = 0**（故 Δ = 4mn > 0），Λ₀ := 1/(4√(mn))。
+
+  (a) **定义 D 的字面条件在 ℓ=0 处无法满足**：对一切 Λ > 0，围道 C_*(m,n,0;Λ) 上存在
+      𝒢 的极点（v = 1/2，二阶），故定义 D 括号里的「Λ 充分大（使围道避开 𝒢_I 的全部极点）」
+      在 ℓ=0 时对**任何** Λ 都不成立。ℓ=0 的 d_* 必须另行规定。
+
+  (b) **微扰围道给出的规定是无歧义的**：记
+        C_±(ε,Λ) := { Ω : Re ρ, Re σ, Re v ∈ [0,1], Im ρ = 2nΛ, Im σ = 2mΛ, Im v = ±εΛ }。
+      则对每个 Λ > Λ₀ 存在 ε₀ = ε₀(m,n,Λ) > 0，使得对一切 0 < ε < ε₀：
+      (b1) 被积函数在 C_+(ε,Λ) 与 C_−(ε,Λ) 上处处正则（两个积分都有定义）；
+      (b2) ∫_{C_+(ε,Λ)} dρ dσ dv · 𝒢 · e^{−2πi(mρ+nσ)} = ∫_{C_−(ε,Λ)} dρ dσ dv · 𝒢 · e^{−2πi(mρ+nσ)}；
+      (b3) 该公共值与 ε ∈ (0, ε₀) 无关。
+      因此可以把 d_*(m,n,0) 无歧义地定义为这个公共值：**不需要主值规定，也不需要在
+      「从哪一侧趋近壁」之间做选择**。
+
+  (c) **机制**：围道**确实**穿过极点（(a)），但该二阶极点在 ℓ=0 处的留数为零
+      （holography.phi10-shifted-pole-residue-proportional-to-ell：Res = (−1)^ℓ·2πiℓ/h₀，
+      ℓ=0 时为 0），故两侧之差 = 0。**这不是「问题不存在」，而是「问题自动解决」。**
+
+  【本卡明确不断言】
+  (i) **Λ-无关性**：公共值是否与 Λ > Λ₀ 无关，本卡不断言（上游 attempt 的 claim.md
+      写了「与 ε,Λ 无关」，但 ℓ=0 情形的 Λ-无关性在 proof.md 中未被证明；
+      holography.mock-jacobi-coefficient-positivity 记录的 Λ-无关性论证适用于围道避开
+      全部极点的情形，ℓ=0 不在其内）。
+  (ii) d_*(m,n,0) 的**正性**（Rosselló Cor 1.1）。本卡只证该量有定义，使 Cor 1.1 在
+      ℓ=0 处的断言**有意义**；正性本身见 holography.torsion-immortal-positivity /
+      holography.mock-jacobi-coefficient-positivity。
+  (iii) I ≥ 2 的挠指标 d_*^{(I)}（𝒢_I 有更多极点，本卡只处理 I=1）。
+uses:
+  - holography.torsion-index-divisor-operator
+  - holography.phi10-shifted-pole-residue-proportional-to-ell
+  - holography.phi10-order-two-in-v-on-ell-zero-contour
+  - holography.phi10-periodic-in-v
+  - holography.attractor-contour-hits-phi10-zero-at-ell-zero
+uses_conventions: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/ell-zero-wall-degeneracy/claim.md §1（Proposition A）；proof.md §4.1（证明）、§2.5（留数）、§3.3（围道穿过极点）、§5.1（与 Rosselló 约定差一个整体负号）、§6（其它极点的排除）"
+    note: |
+      本项目原创证明，非已发表文献，见 research/attempts/ell-zero-wall-degeneracy/proof.md。
+      status.yaml: state: verified，reviewer: graph-reviewer agent ell0rev（2026-09-20，
+      天花板 rigorous，对抗性反例搜索未构造出反例）；**captain_confirmed: false**
+      （尚未经船长确认）。毕业的硬前置 [EXT-Even]（v-偶性未在图内登记）已于 2026-09-20
+      解除（holography.phi10-even-in-v）。**§6 的分支排除写于该轮审查之后，未经
+      graph-reviewer 审查**；带内（Im v ≠ 0）的极点排除 proof.md 未处理，由本卡推导
+      用紧致性补上（见推导 gaps）。
+  - ref: rossello-2024
+    loc: "§2 (2.22)–(2.23)（吸引子围道与 d_* 的定义）；Corollary 1.1（断言 d_*(m,n,ℓ)>0 对一切 Δ=4mn−ℓ²>0，**未排除 ℓ=0、也未说明其良定性**）"
+    note: |
+      literature/notes/ell-zero-wall-residue-prior-art.md Q2/Q3：Rosselló 2024 在
+      Corollary 1.1 中使用 d_*(m,n,0)（ℓ=0, m,n≥1 ⟹ Δ=4mn>0 落在适用范围内），
+      但原文未就 ℓ=0 的良定性作任何说明（无主值规定、无围道歧义讨论、无留数注记）。
+      本项目不推测作者意图；可核的事实只有这两条。
+  - ref: denef-moore-2007
+    loc: "§2, §5（壁跨越公式 Δd ∝ ⟨γ₁,γ₂⟩；⟨Γ₁,Γ₂⟩ = Q·P = 0 ⟹ Δd = 0 是其直接推论）"
+    note: |
+      **优先权措辞（按 literature/notes/ell-zero-wall-residue-prior-art.md 的三档裁定）**：
+      结论层（Q·P=0 ⟹ 壁跨越跳变为零）**已由 Denef–Moore 2007 确立，本项目不作优先权主张**。
+tags: [bh-entropy, mock-modular, n4-string-theory, siegel-modular-form]
+notes: |
+  【先行工作——照 literature/notes/ell-zero-wall-residue-prior-art.md 第 189 行的建议措辞】
+  结论（ℓ=0 时壁跨越跳变为零，壁透明）与 Denef–Moore 2007 壁跨越公式一致。机制性推导
+  （从 Φ₁₀ 的 v-偶性与二阶零点通过留数演算得出 Res ∝ ℓ）在已检索文献中未找到
+  （Sen 2007/2008、Cheng–Verlinde 2007、DGM 2008、Rosselló 2024、BSS 2023；检索盲区见
+  literature/notes/ell-zero-wall-residue-prior-art.md）。本推导不依赖 Denef–Moore 的
+  多中心 BPS 分析，仅用 Φ₁₀ 的解析性质，在方法论上独立。**不作「首次」类主张**——
+  检索有明确盲区（Sen 2010 综述、Murthy–Pioline–Manschot 系列、纯数学 Siegel 模形式
+  文献、KS 2008、DMZ 2012 技术附录等，见该文件「未覆盖」一节）。
+
+  【物理读法（诠释，不是本卡的数学断言）】ℓ = Q·P = 0 的 dyon 落在边缘稳定壁上，
+  壁跨越跳变 Δd ∝ ⟨Γ₁,Γ₂⟩ = Q·P 退化为零，即这堵墙对指标是「透明」的。相应的数学
+  形式化记在 holography.dvv-wall-crossing-identification（physical-argument，
+  Δd = (−1)^{Q·P+1}(Q·P)·d_{1/2}(Q²/2)·d_{1/2}(P²/2)）。**本卡不断言这条物理识别**。
+
+  【与 holography.attractor-contour-hits-phi10-zero-at-ell-zero 的分工】那张卡断言
+  「ℓ=0 时围道恒经过 Φ₁₀ 的零点，原始『围道避开零点』命题在此边界不成立」，并明确
+  不处理 d_* 该如何定义（其 notes 逐字留了 [GAP-ℓ0]）。本卡正是补上那一步：
+  围道穿过极点，但留数为零，故 d_*(m,n,0) 自动良定。两卡互补，不冲突。
+
+  【为什么 (a) 也写进断言】(a) 不是背景说明而是承重的：没有它，读者会以为定义 D
+  在 ℓ=0 处照常适用，从而看不出 (b) 的必要性。(a) 的内容由上述姐妹卡 + v-周期性给出。
+
+  【查重】`uv run stringgraph search` 查 `ell` / `wall` / `residue` / `留数` / `围道` /
+  `良定` / `transparent`（2026-09-20）：无同内容卡；相关命中为
+  holography.attractor-contour-hits-phi10-zero-at-ell-zero（见上条）、
+  holography.torsion-index-divisor-operator（定义）、
+  holography.mock-jacobi-coefficient-positivity / holography.torsion-immortal-positivity
+  （正性，本卡不涉及）、holography.dvv-wall-crossing-identification（物理识别）。
+
+  【毕业记录】由 research/attempts/ell-zero-wall-degeneracy/（state: verified，
+  reviewer: graph-reviewer agent ell0rev 2026-09-20，captain_confirmed: **false**）毕业，
+  按 research/CLAUDE.md 生命周期第 4 步。本 attempt 未产生 formal/ 内容。
+  proposition 禁止手填 status，有效状态由推导决定。
+author: graph-curator
+created: "2026-09-20"
