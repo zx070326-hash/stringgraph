@@ -85,4 +85,5 @@ import StringFormal.NoGhost.SingularVectorsSix
 import StringFormal.NoGhost.SingularVectorsSixSlice
 import StringFormal.NoGhost.SeedCriterionSix
 import StringFormal.NoGhost.SixSliceInjective
+import StringFormal.NoGhost.SixBridge
 import StringFormal.NoGhost.Ghost
