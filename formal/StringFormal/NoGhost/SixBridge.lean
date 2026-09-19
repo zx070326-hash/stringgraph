@@ -12,9 +12,82 @@ import StringFormal.NoGhost.SixSliceInjective
 /-!
 # The Form A ⟹ Form B bridge at `N = 6`
 
-Graph nodes: `worldsheet.ddf-spanning-hypothesis`, `worldsheet.no-ghost-theorem-v4`.
-This file is **under construction**; the module docstring is finalised in the last commit of
-the branch.  What is in place so far is recorded below, declaration by declaration.
+Graph nodes: `worldsheet.ddf-spanning-hypothesis`, `worldsheet.ddf-spanning-rank-inequality`,
+`worldsheet.no-ghost-theorem-v4`.  Blueprint §B⁗.7 / §B⁗.9.
+
+`LevelSixClosure.lean` closed `B26 6` and the level-six slice of `ddf-spans` **conditionally** on
+a named hypothesis,
+
+`SixSeedKernelSharp η a b : dim ker (seedPair η a b (-6) 6) ≤ D - 1`  (Form B),
+
+and `SixSliceInjective.lean` proved, for every `D`, every rung `j` and the *whole* level-one
+slice (no seed condition),
+
+`x₄v = 0 ⟹ v = 0` and `y₃v = 0 ⟹ v = 0` for `v ∈ V_{j,1}`  (Form A).
+
+This file proves Form A ⟹ Form B, so `b26_six_of_D26` and `ddfSpans_bigrade_neg_six_six` are
+unconditional here: `ddf-spans` is now machine-checked on the six slices `N ≤ 6`, on the same
+footing (`2 ≤ D`, a DDF light-cone frame, `(D : K) = 26`) as `N ≤ 5`.
+
+## The four steps
+
+Write `S₆ : V_{-6,1} → V_{-6,5} × V_{-6,4}`, `v ↦ (x₄v, y₃v)` (`sixTransfer`); its codomain is
+exactly the domain of `DescendantKernel.descPair η a b (-6) 6`.
+
+1. `sixTransfer_mem_ker_descPair` — `S₆(V_{-6,1}) ⊆ ker (descPair η a b (-6) 6)`, unconditionally,
+   by the syzygy `L_{-1}x₄ + 𝒟₂y₃ = 0` (`SeedTransferSix`).
+2. `range_sixTransfer_eq_ker_descPair` — equality.  Form A makes `S₆` injective, and
+   `dim V_{-6,1} = D` (`finrank_towerBigrade_one`), so the image has dimension `D`; the generic
+   count `LevelSixCount.finrank_ker_descPair_six_le` says `dim ker (descPair) ≤ κ₆ = D`.  A
+   `D`-dimensional subspace of a space of dimension `≤ D` is everything.
+3. `mem_towerSeed_one_of_sixTransfer_eq_seedInclusion` — if `S₆v` is a *seed* pair then `v` is a
+   seed: `L_1(y₃v) = 0` and `SeedCriterionSix`'s criterion applies.
+4. `sixSeedKernelSharp_of_frame` — combining: `S₆` transports `ker (seedPair η a b (-6) 6)`
+   injectively into `Q_{-6,1}`, and `dim Q_{-6,1} = D - 1` (`finrank_towerSeed_one`).
+
+## ⭐ Where `D = 26` enters — a correction to the roadmap
+
+The route sketched in `LevelSixClosure.lean`'s docstring expects step 3 to use **both** directions
+of `SeedCriterionSix.mem_towerSeed_neg_six_one_iff`, which carries `(hD26 : (D : K) = 26)`, and
+therefore expects the bridge itself to consume the critical dimension.  It does not:
+
+* **`sixSeedKernelSharp_of_frame` has no `(D : K) = 26` hypothesis.**  Form B is an *upper* bound
+  on `dim ker (seedPair)`, so only the inclusion `ker (seedPair) ⊆ S₆(Q_{-6,1})` is needed, i.e.
+  only the `←` direction `mem_towerSeed_neg_six_one_of_towerLop_one_apply_y3_eq_zero`, which its
+  own docstring certifies to be central-charge free.  Every other ingredient (Form A, `κ₆ = D`,
+  `dim V_{j,1} = D`, `dim Q_{j,1} = D - 1`) is central-charge free as well.
+* The `→` direction (`SingularVectorsSixSlice.x4_y3_mem_towerSeed_neg_six_one`, "`x₄v` and `y₃v`
+  are the singular vectors of `V(26, -4)`") is needed only for the *reverse* inequality, i.e. for
+  the exact value `dim ker (seedPair η a b (-6) 6) = D - 1` (`finrank_ker_seedPair_six_eq`), which
+  the counting chain does not use.
+* `b26_six_of_D26` and `ddfSpans_bigrade_neg_six_six` still take `(D : K) = 26`, but it is
+  consumed downstream of the bridge, at the same single entry point as for `N = 2, …, 5`: the
+  Type-2 null state `LevelThreeCount.descTwo_mem_towerNullSubmodule_of_mem_towerBigrade`, i.e.
+  `NullSeedsTwo.towerLop_two_apply_descTwo` (`L_2 𝒟₂φ = (D - 26)φ`), which enters through
+  `LevelSixClosure.le_finrank_towerNull_inf_towerBigrade_six_of_sixSeedKernelSharp`.
+
+So `N = 6` does not add a new `D = 26` dependency; the bridge is pure linear algebra plus the
+`N = 6` syzygy.
+
+## Main results
+
+* `sixTransfer` — the transfer map `S₆`, and `sixTransfer_injective` (Form A, repackaged).
+* `finrank_towerBigrade_one` / `finrank_towerSeed_one` — `dim V_{j,1} = D`, `dim Q_{j,1} = D - 1`
+  on every rung with `p_j · p_j ≠ 0` (both `D = 26`-free, both valid for every rung).
+* `range_sixTransfer_eq_ker_descPair` — step 2, the heart of the bridge.
+* ⭐ `sixSeedKernelSharp_of_frame` — **Form B, unconditionally** (`2 ≤ D` and a frame only).
+* `finrank_ker_seedPair_six_eq` — the exact value `D - 1`, at `(D : K) = 26`.
+* ⭐ `b26_six_of_D26` / `ddfSpans_bigrade_neg_six_six` — the unconditional level-six closure.
+
+## Not done here
+
+* `N ≥ 7`: the generic count is `κ_N = p_D(N-5) + p_D(N-7) - p_D(N-12) - ⋯` (the pentagonal
+  expansion `E(q) = ∏(1-qⁿ)` against `P(q) = ∏(1-qⁿ)^{-D}`), so `κ₅ = 1`, `κ₆ = p_D(1) = D`, but
+  `κ₇ = p_D(2) + 1`, which is quadratic in `D` while the target stays `D - 1`.  Step 2 — the
+  dimension squeeze that makes `S₆` surject onto `ker (descPair)` — therefore has no analogue at
+  `N = 7`; a level-7 bridge needs new input, not this argument.
+* The reverse inequality `dim ker (descPair η a b j N) ≥ κ_N` (the BGG half) — still open, as in
+  `DescendantKernel.lean`.
 -/
 
 namespace StringFormal.NoGhost
