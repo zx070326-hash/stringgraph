@@ -3420,6 +3420,46 @@ B⁗.3 的 `dim ker T_N ≤ κ_N` 就是**等式**，`N ≥ 6` 不可能靠改�
 只有 `1` 维是新的；手算规模是 B⁗.2 的三倍左右，建议直接写脚本）。
 `N ≥ 12` 另有 §B‴.7 的新产生子问题，与本节无关。
 
+#### ⭐ B⁗.7 结算（2026-09-19，formalizer，`SixBridge.lean`）
+
+本节上面三步的 `⟨路线判断，未验证⟩` 在 `N = 6` 上**已全部验证**，见
+`StringFormal/NoGhost/SixBridge.lean`（22 条声明，无 `sorry`，`check_axioms` 全部只有标准三公理）。
+逐条对账：
+
+| 本节的步 | Lean 声明 | 是否需要 `D = 26` |
+|---|---|---|
+| 1. `range S_N ≤ ker T_N` | `sixTransfer_mem_ker_descPair` / `range_sixTransfer_le_ker_descPair` | 否（只要 `hη`） |
+| 2. `S_6` 单射 ⟹ `ker T_6 = range S_6` | `range_sixTransfer_eq_ker_descPair` | 否 |
+| 3. 「`S_6(u)` 落在种子里 ⟹ `u` 落在种子里」 | `mem_towerSeed_one_of_sixTransfer_eq_seedInclusion` | **否**（见下） |
+| 4. `τ₆ = p_{D−1}(1) = D − 1` | `sixSeedKernelSharp_of_frame` | 否 |
+
+第 2 步的维数挤压确实如本节预言：`dim V_{-6,1} = D`（`finrank_towerBigrade_one`）+ `S_6` 单射
+（`SixSliceInjective`，Form A）⟹ 像是 `D` 维；`κ₆ = p_D(1) = D`（`finrank_ker_descPair_six_le`）
+⟹ 像就是全部。**`p_D(N−7) = 0` 使 `s = 7` 那一对不出现**这条判断也被 Lean 逐字兑现：
+`SixBridge.lean` 里只出现 `(x₄, y₃)`。
+
+⭐ **订正本节第 3 步的一句话**：本节（以及 §B⁗.9）默认这一步要用判据的**双向**形式，因而
+要带 `(D : K) = 26`。实际上只需要 `⟸` 半边（`mem_towerSeed_neg_six_one_of_towerLop_one_apply_y3_eq_zero`，
+§B⁗.9 订正里已注明它与中心荷无关），因为 Form B 要的是核的**上界**，只需包含
+`ker(seedPair) ⊆ S_6(Q_{-6,1})`。于是
+
+- `sixSeedKernelSharp_of_frame`（Form B）**完全不含 `D = 26`**，前件只有 `2 ≤ D` 与一个 DDF 光锥标架；
+- `⟹` 半边（`x4_y3_mem_towerSeed_neg_six_one`，真正用 `c = 26` 的那半）只在**反向**不等式里需要，
+  即精确值 `dim ker(seedPair η a b (−6) 6) = D − 1`（`finrank_ker_seedPair_six_eq`），
+  而计数链条根本不用这个精确值；
+- `b26_six_of_D26` / `ddfSpans_bigrade_neg_six_six` 仍带 `(D : K) = 26`，但那个 `26`
+  是从**下游**进来的，入口与 `N = 2, …, 5` 完全相同：Type-2 零态
+  `LevelThreeCount.descTwo_mem_towerNullSubmodule_of_mem_towerBigrade`
+  （即 `NullSeedsTwo.towerLop_two_apply_descTwo`：`L_2𝒟₂φ = (D − 26)φ`），
+  经 `LevelSixClosure.le_finrank_towerNull_inf_towerBigrade_six_of_sixSeedKernelSharp` 进入。
+
+**一句话：`N = 6` 没有引入新的 `D = 26` 依赖，桥本身是纯线性代数 + `N = 6` 的 syzygy。**
+
+⚠ `N = 7` 的结论不变，且现在有了精确的理由：第 2 步的挤压在 `N = 7` 上不成立，因为
+`κ₇ = p_D(2) + p_D(0)` 关于 `D` 是二次的，而目标仍是 `D − 1` 量级。要么先算出 `s = 7` 的
+syzygy 对 `(x₆, y₅)` 把 `range S_7` 撑到 `dim(V_{j,2} × V_{j,0})`（本节第 1–2 步的原计划），
+要么另找路。
+
 ### B⁗.8 对图的建议（本节不碰 `graph/`）
 
 按重要性排序；节点 id 与行号都对照过当前 `graph/`。
@@ -3645,3 +3685,19 @@ L_0(x₄u) = 0·(x₄u),   L_0(y₃u) = -(y₃u),   L_0(L_{-1}y₃u) = 0.
   `b26_six` / `ddfSpans_bigrade_neg_six_six` 证到条件版
   （`b26_six_of_sixSeedKernelSharp` / `ddfSpans_bigrade_neg_six_six_of_sixSeedKernelSharp`）。
   **`S_6` 整片单射性、以及无条件的 `b26_six`，仍然是真正的新数学，未在本仓库任何地方证明**。
+- ⭐⭐⭐ **2026-09-19 第二次更新（formalizer）：上一条已过时，`N = 6` 全部关闭。**
+  `StringFormal/NoGhost/SixSliceInjective.lean` 证了 `S_6` 在整片 `V_{-6,1}` 上的单射性
+  （Form A：`x4_eq_zero_of_mem_towerBigrade_one` / `y3_eq_zero_of_mem_towerBigrade_one`，
+  每个 `D`、每个 rung、无种子条件），`StringFormal/NoGhost/SixBridge.lean` 把它接成
+  §B⁗.7 的四步（对账表见该节 “B⁗.7 结算”），于是
+  - `sixSeedKernelSharp_of_frame : SixSeedKernelSharp η a b`（前件只有 `2 ≤ D` + 标架，
+    **不含 `D = 26`**）——`LevelSixClosure` 的具名假设被消去；
+  - `b26_six_of_D26` 与 `ddfSpans_bigrade_neg_six_six`（前件 `2 ≤ D`、标架、`(D : K) = 26`）
+    与 `N ≤ 5` 的定理同形，**不再是条件式**。
+  另有 `finrank_ker_seedPair_six_eq : dim ker(seedPair η a b (−6) 6) = D − 1`
+  （这一半才用 `⟹` 半边，故带 `D = 26`）。
+  ⭐ 本条订正了本节上面「用到 `(D:K) = 26` 的只有 `⟹` 半边，也就是『转移映射 `S_6` 在
+  `Q_{-6,1}` 上有定义』这件事本身」的**下游影响判断**：那半边（以及 `S_6` 在种子上的良定义性）
+  在 Form B 的证明里根本不需要，因为 Form B 只是上界，走的是 `ker(seedPair) ⊆ S_6(Q_{-6,1})`
+  这一个包含。判据本身的表述不改，改的是「桥必须带 `D = 26`」这条预期。
+  至此 `ddf-spans` 在 `N ≤ 6` 六条反对角片上全部机检；`N ≥ 7` 仍未触及（见 §B⁗.7 结算末段）。
