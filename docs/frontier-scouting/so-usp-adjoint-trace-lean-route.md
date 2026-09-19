@@ -14,11 +14,12 @@
 （E₈ 式的根系路线）上；lead 指出 Λ² 框架后 scout 自行改判，并按要求明确表态
 「这是真实修正，不是顺着说」（照录见下）。
 
-**估工时：650–1100 行**（lead 修订；scout 原估 400–700 行未计入
-「Mathlib 里 so/sp 根本没有基」这一项，见 §2.5）。定性不变，数字上调。
+**估工时：400–700 行**（scout 原估，**经两轮核查后维持**）。
+lead 曾在 `ce23adf` 里上调到 650–1100，理由是「Mathlib 没给 so/sp 基」——
+**那条理由是 lead 自己的错误，已用 Lean 探针推翻并撤回，见 §2.5.2。**
 
 ⚠ **本文件不构成派工决定。** 这 +3 **不命中任何里程碑**（全部落在 `math.*` 反常区），
-是否值得投 650–1100 行是船长的资源判断，不是 lead 能单方面认领的。
+是否值得投 400–700 行是船长的资源判断，不是 lead 能单方面认领的。
 
 ---
 
@@ -97,7 +98,7 @@ scout 的修订裁决**明确附带一条未 derisk 的条件**（照录）：
 
 ---
 
-## 2.5 ⭐ Mathlib 侧的实测（lead，2026-09-19）：伴随作用是好消息，**真正的瓶颈在别处**
+## 2.5 ⭐ Mathlib 侧的实测（lead，2026-09-19）：伴随作用是 `rfl`；lead 一度误报的「瓶颈」已自行推翻
 
 scout 在交回修订裁决时点名了「投人之前该查的下一件事」（照录）：
 
@@ -106,7 +107,9 @@ scout 在交回修订裁决时点名了「投人之前该查的下一件事」�
 > how that's phrased there … **That would be the next concrete thing to check before
 > committing formalizer time.**"
 
-lead 已查。结论分两半，方向相反。
+lead 已查，**分两轮**：第一轮用 grep，得出一个利好（§2.5.1）与一个「阻断」（§2.5.2）；
+第二轮用 Lean 探针，**证伪了自己第一轮的那条阻断**。两轮都照实记在下面，
+因为第二轮的教训（§2.5.2 末）比结论本身更值得留。
 
 ### 2.5.1 伴随作用：**比 scout 期望的还顺**（利好）
 
@@ -125,36 +128,85 @@ lead 已查。结论分两半，方向相反。
 ⇒ **scout 担心的「Mathlib 可能用别的方式陈述括号，导致基匹配变难」不成立。** 这一层
 预计 ~2 行，不是一个翻译层。
 
-### 2.5.2 ⚠ 但 lead 顺手查出一条 scout **没查、也没预料到**的真瓶颈：**so/sp 在 Mathlib 里没有基**
+### 2.5.2 ⚠ lead 曾在此报过一个「真瓶颈」，**随后用 Lean 实测推翻了自己**
 
-    grep "Module.Free|Module.Finite|FiniteDimensional"  SkewAdjoint.lean Classical.lean  -> 空
-    grep "Basis|finrank"                                 SkewAdjoint.lean               -> 空
-    Classical.lean 的 `section ElementaryBasis` (101-141) **只服务 sl n R**
-      （`single` / `singleSubSingle`，docstring 逐字说 "a natural basis of `sl n R`"），
-      与 so / sp 无关。
-    全 Mathlib 提到 `skewAdjointMatrices` 的文件只有 4 个，其中 2 个是双线性型文件。
+**先说结论：下面这条 lead 一度写进 `ce23adf` 提交的论断是错的，已撤回。**
+错误论断（照录，供后人对照）：
 
-为什么这条是**阻断性**的而不是装修问题：`Tr((ad F)^k)` 在 Lean 里要经 `LinearMap.trace`，
-而 `LinearMap.trace` 要求底模是 **f.g. 投射/自由**。`↥(so n R)` 是 `Matrix n n R` 的一个
-子模，Mathlib **没有给它 `Module.Free` / `Module.Finite` 实例，也没有基**。
-⇒ **在把基造出来之前，本卡的目标陈述连「写得出来」都做不到**，谈不上证。
+> 「so/sp 在 Mathlib 里没有基、没有 `Module.Free`/`Module.Finite`，而 `LinearMap.trace`
+> 要求自由模 ⇒ **在把基造出来之前，本卡的目标陈述连「写得出来」都做不到**。」
 
-要造的东西 §2 的脚本其实已经写过一遍（Python 版）：
-`so_basis`（`E_ij − E_ji`，`i<j`）与 `sp_basis`（`J·S`，`S` 对称）。Lean 侧要把它们做成
-真正的 `Basis`（带线性无关 + 张成），再挂 `Module.Free`/`Module.Finite` 实例。
+grep 的**事实**部分是对的：`SkewAdjoint.lean` / `Classical.lean` 里确实没有任何
+`Basis` / `Module.Free` / `finrank`，`section ElementaryBasis` (101–141) 的 docstring
+逐字只说 "a natural basis of `sl n R`"，与 so/sp 无关。**错的是从事实推出的结论。**
 
-### 2.5.3 对估工时的影响：**上调，但不改「MODERATE 而非 EXPENSIVE」的定性**
+**推翻它的实测**（10 行 Lean，`lake env lean`，**零错误通过**）：
 
-- **性质不变**：这是常规线性代数（构造显式基并证两条性质），**不是缺定理**——
-  与 §3 讲的根系路线缺 Chevalley 限制**根本不同**。它有确定的完成路径。
-- **量变**：scout 的 400–700 行是在「基匹配是 bookkeeping」的假设下给的，而实际要从零造两族基。
-  lead 的修正估计：**基与实例约 250–400 行（且这部分本质是 Mathlib 上游工作），
-  加原路线 400–700 行，合计 650–1100 行。**
-- ⚠ **诚实标注**：这个上调**推翻了 scout 估计的前提，但不是推翻它的裁决**。
-  scout 把风险押在「张量公式是否等于 `Tr(ad F)^k`」（§2 已数值排除、§2.5.1 已确认 Lean 侧顺），
-  真正的成本却在它没查的「子模有没有基」上。**风险定位错了，方向判断（可做）仍对。**
+```lean
+-- 都由实例搜索直接找到，无需造任何基：
+example (n K) [Fintype n] [DecidableEq n] [Field K] :
+    Module.Free K ↥(LieAlgebra.Orthogonal.so n K) := by infer_instance     -- ✓
+example … : Module.Finite K ↥(LieAlgebra.Orthogonal.so n K) := by infer_instance  -- ✓
+example … : Module.Free K ↥(LieAlgebra.Symplectic.sp l K) := by infer_instance    -- ✓
 
-⇒ 交给船长的数字按 **650–1100 行**算，不按 400–700。
+-- 目标陈述确实写得出来：
+noncomputable example (F : LieAlgebra.Orthogonal.so n K) (k : ℕ) : K :=
+  LinearMap.trace K _ ((LieAlgebra.ad K ↥(LieAlgebra.Orthogonal.so n K) F) ^ k)   -- ✓
+
+-- 而且伴随作用是 rfl，不只是「近乎定义性」：
+example (F X : LieAlgebra.Orthogonal.so n K) :
+    (LieAlgebra.ad K _ F X : Matrix n n K) = F * X - X * F := rfl               -- ✓
+```
+
+**为什么原论断错**：本卡的系数里有 `½`（投影子 `½(1∓swap)`），所以底环必须是
+**域**（至少 char ≠ 2），而不是一般交换环。域上
+`FiniteDimensional/Defs.lean:132` 的 `instance finiteDimensional_submodule` 让
+f.d. 空间的**任何**子模自动有限维，`Module.Free` 对向量空间自动成立——
+**两个实例都由 typeclass 推断白送**。lead 是在「一般交换环」的默认脑内设定下 grep 的，
+没注意到本卡的适用域把这个问题消掉了。
+
+⚠ **方法论教训（比这条结论本身更值得记）**：lead 是**靠 grep 推理**得出「阻断」的，
+而一个 10 行的 `lake env lean` 探针**一次编译**就把它证伪了。
+本轮 lead 正确地纠了 scout 一次（§3 的图机制），又**自己犯了同类错误**：
+**对 Lean 的断言要用 Lean 验，不要用 grep 验。** 探针的成本远低于它挡掉的返工。
+
+⇒ **订正后的事实**：基**不是**先决条件，目标陈述今天就写得出来，
+`ad(F)(X) = F*X − X*F` 是 `rfl`。
+
+📌 **命名订正**：本文件与 `ce23adf` 提交信息此前写的 `Classical.so` / `Classical.sp`
+是**错的**——`Classical.lean` 只是**文件名**，真实命名空间是
+`LieAlgebra.Orthogonal.so` 与 `LieAlgebra.Symplectic.sp`。
+（`open LieAlgebra` 下写 `Classical.so` 会与 `Classical` 命名空间冲突，探针第一次就是这样挂的。）
+
+### 2.5.2b 那么真正剩下的是什么？——**计算，不是可陈述性**
+
+基的问题消失了，但 §2 的张量公式与 `Tr((ad F)^k)` 之间的**识别**仍要在 Lean 里兑现：
+把 so(N) ≅ Λ²V、usp(N) ≅ Sym²V 作为伴随模接起来。这才是真实工作量所在。
+
+scout 在收到 §2.5.2 的（错误）报告后提出了一条**绕开基的办法**，
+而它对付的恰好是这个**仍然真实**的识别问题，所以**不因原报告出错而作废**：
+
+> 永远不要把 `↥(so n R)` 当作取迹的对象。改为在**自由的环境模** `Matrix N N R`
+> （`Matrix.stdBasis`，显然 free+finite）上工作，用幂等投影子 `P := ½(1 ∓ swap)`，
+> 计算 `Tr_{V⊗V}(D^k ∘ P)`。依据是「幂等元的迹 = 限制到像上的迹」：
+> 对幂等 `e` 与保持 `range e` 的 `f`，`Tr_M(f ∘ e) = Tr_{range e}(f|_{range e})`。
+> scout 估计：若 Mathlib 无此引理，自造约 **30–60 行**，与 N 无关，两支共用。
+
+⚠ scout **自报未验证**：它没在 Lean 里试过，也没 grep 过 Mathlib 是否已有幂等迹引理
+（它猜在 `LinearMap.IsProj` / `Module.Projective` / `CategoryTheory.Idempotents` 一带）。
+**lead 亦未查**——按上一条的教训，这条应当用探针验而不是用 grep 猜，留给真正动手的人。
+
+### 2.5.3 对估工时的影响：**撤回上调，回到 scout 的量级**
+
+- **§2.5.1 成立且更强**：`ad(F)(X) = F*X − X*F` 经实测是 `rfl`。这一层 ~2 行。
+- **§2.5.2 的 250–400 行基构造：撤回**。域上不需要。
+- **修正后的估计：回到 scout 原本的 400–700 行**，其中识别步骤是主要不确定性；
+  若幂等迹路线成立，可能落在区间下沿。
+- ⚠ **诚实记账**：`ce23adf` 提交里写的 **650–1100 行是错的**，不要再引用。
+  本节与 `docs/LEVERAGE-ANALYSIS.md` §9.4 已同步订正。
+
+⇒ 交给船长的数字按 **400–700 行**算。scout 的原估**没有被推翻**；
+lead 中途的上调是基于一个自己的错误，已撤回。
 
 ---
 
@@ -245,10 +297,30 @@ E₈ 这张卡暴露的是一个更窄、更值得单独记的**误用**形态�
 图数据判断（要判断这一步自身论证到底有多严），lead 不在调研途中单方面改。
 过时的 note（§3 末）与 own status 该不该动，建议一并派 curator 处理。
 
-⚠ **本节的定性已被 §3.1 挑战，转为待定。** scout 后来论证：那个 own status 可能诚实地
-在追踪本推导自身装配里的 Cartan → 一般 F 轨迹延拓（即缺 Chevalley 限制这条**真定理**），
-若如此则**不是**本节所说的「误用」。已派 `e8statusfix`（curator）裁定，**以它的结论为准**；
-上面第 1、2 条作为**一般机制**的描述仍然成立，只是 E₈ 这张卡未必是它的实例。
+⚠ **本节的定性已被 §3.1 挑战，并由 curator 于同日裁定——lead 与 scout 的假设都不对。**
+
+`e8statusfix`（graph-curator，已合并到 main）的结论：**两条推导的 own 都维持
+physical-argument，但理由与我们俩说的都不同**。
+
+1. **lead 的假设（本节原文）错**：`--via-casimir-structure` **一条陈述依赖都没有**
+   （只有一条 convention 边），所以它的 own **根本无从「镜像弱依赖」**。
+   它是教科书式的 physical-argument：整步就是转引 Green–Schwarz 1984 的三条无证明断言
+   （GS 自己把群论输入归给 Chapline–Slansky 的**未发表私人通信**）。**没有计算可升。**
+2. **scout 的假设（§3.1）也错**：Cartan → 一般 F 的延拓**不在**本推导的装配里。
+   curator 查到该机制（半单元共轭进 Cartan + 正则半单元的 Zariski 稠密性 + 多项式在稠密集上
+   为零则处处为零）住在 `chevalley-restriction-theorem--via-conjugacy-and-density` **自己**那条
+   推导里；本推导第 (5) 步只引用依赖的**结论**，外加一行平凡的迹共轭不变性。
+3. ⭐ **真实理由是第三条，我们俩都没想到**：`--via-root-power-sums` 第 (2) 步要把
+   Φ(𝔢₈,𝔥) 与 Humphreys 的 240 元列表**认同**，这需要 Serre 存在定理 + ADE 根系唯一性，
+   而**本图没有任何节点承载这个前提**——`math.e8-root-system` 第 28 行逐字写着
+   「**本卡不断言** (b) 任何关于李代数 𝔢₈ 的事」。（lead 已逐字复核该行再合并。）
+   第 (1)(3-尾)(4)(5)(6) 步都是有限/初等且已 reviewer-verified，但第 (2) 步单独
+   卡住 `STATUS_LEVELS.md` 的 rigorous 例外条款（「前提已完整写出」），
+   **在那个认同步骤拿到自己的卡之前，抬 own 就是不诚实。**
+
+⇒ **本节第 1、2 条作为一般机制的描述仍然成立，但 E₈ 这张卡不是它的实例。**
+curator 同时把真正封顶 `effective` 的 Chevalley 缺口从 own 的叙述里**隔离干净**了，
+好处是将来谁关掉那个缺口，`effective` 会经正常传播自动解锁，不必再有人动 own。
 
 ---
 

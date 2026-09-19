@@ -521,7 +521,7 @@ uv run stringgraph counterfactual <id>
 
 全文见 **`docs/frontier-scouting/so-usp-adjoint-trace-lean-route.md`**。要点：
 
-- **约 650–1100 行 Lean，不是「新造无穷秩根系理论」。** 存在一条自足路线：
+- **约 400–700 行 Lean，不是「新造无穷秩根系理论」。** 存在一条自足路线：
   `D := F⊗1 + 1⊗F` 在 `V⊗V` 上二项展开，配 `tr(A⊗B) = tr A·tr B` 与
   `tr((A⊗B)∘swap) = tr(AB)`，投到 `½(1∓swap)` 得
   `Tr(Λ²F)^k = ½[Σ_m C(k,m)tr(F^m)tr(F^{k−m}) ∓ 2^k tr(F^k)]`。
@@ -533,14 +533,18 @@ uv run stringgraph counterfactual <id>
   精确整数运算，在显式基上组装 `ad(F)` 矩阵直接比较——
   **so(N) N=3..8 与 sp(2n) N=2,4,6,8，k=2,4,6，60 项检查全部精确相等，0 例外。**
   ⇒ 剩下的是纯 Lean 工程量，不是未知数学。（边界：验的是小 `N` 实例，不是一般 `N` 的证明。）
-- 🔴 **lead 实测 Mathlib 接口，查出 scout 未列的真瓶颈**（该文件 §2.5）：好消息是
-  `Classical.so`/`sp` 都是 `LieSubalgebra R (Matrix n n R)`，括号即环commutator，
-  `ad(F)(X) = F*X − X*F` 近乎定义性；**坏消息是 Mathlib 给 so/sp 既没有基、
-  也没有 `Module.Free`/`Module.Finite`**（`ElementaryBasis` 节只服务 `sl n R`），
-  而 `LinearMap.trace` 要求自由模 ⇒ **目标陈述在造出基之前连写都写不出来**。
-  scout 的 400–700 行未计此项，故 lead 上调至 **650–1100 行**；
-  **风险定位错了，「可做」的定性仍对。**
-- ⚠ **裁决不含派工。** 这 +3 **不命中任何里程碑**，投不投 650–1100 行是船长的资源判断。
+- 🔴 **lead 实测 Mathlib 接口**（该文件 §2.5），**两轮，第二轮推翻了第一轮**：
+  `LieAlgebra.Orthogonal.so` / `LieAlgebra.Symplectic.sp`（注意：`Classical` 只是文件名，
+  不是命名空间）都是 `LieSubalgebra R (Matrix n n R)`，括号即环 commutator，
+  **`ad(F)(X) = F*X − X*F` 经 Lean 探针实测是 `rfl`**。
+  lead 第一轮靠 grep 得出「Mathlib 没给 so/sp 基 ⇒ 目标陈述写不出来」并据此上调到 650–1100，
+  **该论断已被一个 10 行 `lake env lean` 探针零错误证伪并撤回**：本卡系数含 `½` ⇒ 底环是**域**，
+  而域上 `finiteDimensional_submodule` 是 instance、向量空间的 `Module.Free` 自动，
+  **两个实例白送，无需造基**。
+  ⇒ **估工时回到 scout 原本的 400–700 行**；650–1100 是错的，不要再引用。
+  ⚠ **方法论**：lead 本轮正确纠了 scout 一次（下面 E₈ 那条），又**自己犯了同类错误**——
+  **对 Lean 的断言要用 Lean 验，不要用 grep 验**；探针成本远低于它挡掉的返工。
+- ⚠ **裁决不含派工。** 这 +3 **不命中任何里程碑**，投不投 400–700 行是船长的资源判断。
   若决定投，建议**先派 researcher** 做该文件 §5 最后一条（是否存在覆盖两支的一般 N
   完整证明）——那是清单里唯一能把「自己发明证明」降成「照抄大纲」的一条。
 - ⚠ **另一条方法论发现**（详见该文件 §4）：E₈ 那张卡暴露了自封顶的一个**误用**形态——
@@ -549,13 +553,17 @@ uv run stringgraph counterfactual <id>
   （实测强制 `math.chevalley-restriction-theorem` 移动 0 张卡，而它确实是真实待办）。
   与 §9.1 的打平盲点**不是同一件事**：打平盲点的解药正是 `counterfactual`，
   本形态把解药也挡住了。**未修**，属 curator + reviewer 领域。
-  ⚠ **E₈ 是否真是本形态的实例已转为待定**（该文件 §3.1）：scout 论证那个 own 可能诚实地
-  在追踪「Cartan → 一般 F」的轨迹延拓（= 缺 Chevalley 限制这条**真定理**）。
-  一般机制的描述不变，E₈ 这个实例以 curator（`e8statusfix`）裁定为准。
+  ⚠ **E₈ 并不是本形态的实例——已由 curator（`e8statusfix`）裁定并合并**：
+  lead 的假设（own 镜像弱依赖）与 scout 的假设（Cartan→一般 F 延拓藏在 own 里）**都错**。
+  `--via-casimir-structure` 一条陈述依赖都没有，无从镜像；Chevalley 的机制住在它自己那条推导里。
+  **真实理由是第三条**：`--via-root-power-sums` 第 (2) 步把 Φ(𝔢₈,𝔥) 认同为 Humphreys 的
+  240 元列表，需要 Serre 存在定理 + ADE 唯一性，而**本图没有节点承载这个前提**
+  （`math.e8-root-system:28` 逐字「本卡不断言 (b)」，lead 已复核）。
+  ⇒ **一般机制的描述仍成立，但要另找实例**；E₈ 的 own 是诚实的。
 - ⭐ **本轮最该留下的区分**（该文件 §3.1）：两条路线都"缺一步"，但**缺的种类不同**——
   根系路线缺的是**定理**（Chevalley 限制，Mathlib 没有），做完也只能停在 physical-argument；
   Λ² 路线缺的是**计算**（无特殊轨迹，对任意交换环任意矩阵一致成立），做完能正当升到
-  rigorous/formalized。**值得投的理由是后者能升 status，不是它更短——它其实更长。**
+  rigorous/formalized。**值得投的理由是后者能升 status，不是它更短。**
 
 ## 命令一览
 
