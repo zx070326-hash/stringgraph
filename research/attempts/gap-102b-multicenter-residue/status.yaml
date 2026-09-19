@@ -1,6 +1,88 @@
-state: draft
-reviewer: null
-verdict: null
+state: verified
+reviewer: graph-reviewer (2026-09-20, agent g102brev, lead 派，只读；reviewer 无 Write 工具，由 lead 代为记入)
+verdict: |
+  === 裁决（2026-09-20，agent g102brev）===
+
+  **VERIFIED。天花板 `rigorous`。**
+
+  **理由**：BSS Appendix B + Theorem 5.4(b) 是严格的（非物理的）围道形变 + 完成配方证明。
+  本 attempt 独立核实了域包含（§1）、变量对应（§3）、数值交叉检验（§4）。
+  §4 的剩余 [GAP] 不使结论失效——数值证据强（三方 +50064 吻合），缺口有界且已显式标注。
+
+  ### 分项裁决（每条标注亲自核实 / 转述信任）
+
+  1. **§1 引理 1（域翻译）——VERIFIED，零风险**（亲自核实）。纯代数的荷标签替换：
+     Rosselló 取 m=P²/2(磁)、n=Q²/2(电)；BSS(N=1) 取 m_B=Q²/2(电)、n_B=P²/2(磁)，
+     故 n_B = m_Rosselló、m_B = n_Rosselló。目标域 `n≥m≥1, 0≤ℓ≤m`（Rosselló 记号）
+     译为 `m_B≥n_B≥1, 0≤ℓ_B≤n_B`（BSS 记号），**⊆ B₂（BSS eq 5.65）**。
+     🔴 **即：确实落在 B₂ / Thm 5.4(b) 支，不是 A₂ / 5.4(a) 支——lead 复核所担心的
+     「镜像重写」不需要发生。** 此结论在裁决 (c) 下不受影响。
+
+  2. **§2（BSS 证明骨架复核 + 数值验证）——VERIFIED**（亲自核实，**reviewer 实跑了脚本**）。
+     跑 `scripts/verify_A2B2_inequality.py` 确认：(A) 1680 组奇偶性论证无反例；
+     (B) 68880 组三元组精确 Fraction 算术无反例；(C) 符号归约确认不等式对一切实 a∈[−1,1] 成立。
+     该脚本独立验证了 BSS §B.4 的完成配方 + 奇偶性论证给出的 B₂⊆B 包含。
+
+  3. **§3 引理 2（变量角色对应）——SUPPORT，数学上正确**（亲自核实，**且用了与原稿不同的独立标准**）。
+     reviewer 不采用原稿的围道虚部标度，改用**傅里叶相位系数**标准，直接从两文的积分定义读出：
+       - Rosselló (2.23)：ρ 的相位系数 = m = P²/2（磁）；σ 的相位系数 = n = Q²/2（电）
+       - BSS (5.13)：τ 的相位系数 = NQ²/2 →(N=1) Q²/2（电）；σ 的相位系数 = P²/2N →(N=1) P²/2（磁）
+     按相位系数配对得 `ρ_R ↔ σ_BSS`、`σ_R ↔ τ_BSS`、`v ↔ z`，与原稿引理 2 **逐字吻合**。
+     🔴 **关键澄清（回答 lead 复核 §4 的疑虑）**：围道虚部标度里的「交叉配对」
+     （Rosselló 的 Im ρ = 2nΛ、Im σ = 2mΛ，而指标 m 共轭于 ρ）**是吸引子围道 adj(T) 性质的
+     真实特征，不是谁看反了**。变量对应的**决定性标准是相位系数，不是围道标度**。
+     原稿走对了；lead 担心的是一个真实存在的陷阱，但原稿恰好没有掉进去。
+
+  4. **§4 的 [GAP]（Φ̃₁ "exactly" = Φ₁₀）——PLAUSIBLE，缺口保留但不阻塞毕业**。
+     已验证（亲自核实）：(i) (m,n,ℓ)=(1,1,0) 处三方（本项目 coefficients.py、Rosselló Table 1、
+     BSS §5.3）均报 +50064，**只与 c=−1 相容**；(ii) 一维性论证成立——若 Φ̃₁ = c·Φ₁₀ 有全局常数 c，
+     则在**一个**非零系数处定出 c 即对一切 (m,n,ℓ) 成立。
+     仍为转述信任（未亲自核实）：未从 BSS 一般乘积公式 (5.2) 独立算出 N=1 特化的**权与零点结构**，
+     即「exactly the inverse」是否严格到「权相同、零点除子相同」而不只是「差一个符号的函数逆」。
+     **裁定**：这是一个**有界、具体、可机械验证**的技术缺口，数值证据强，**可接受为剩余 [GAP]，
+     不阻塞毕业**，但进图时**必须显式写出**（见下方硬约束 2）。
+
+  === 毕业进图时的硬约束（reviewer 逐条指定，curator 必须遵守）===
+
+  **可写的范围**——记号约定：**Rosselló/DMZ 家族约定（m = P²/2 磁荷，n = Q²/2 电荷）**。
+  量词：整数 m,n,ℓ；m≥1；n≥1；**n≥m**；**0≤ℓ≤m**；Δ = 4mn−ℓ² > 0。
+  结论：**d_*(m,n,ℓ) = (−1)^{ℓ+1} c_m^F(n,ℓ)**。status：**rigorous**。
+
+  **必须排除，不得写进图**：
+  - 不得声称"本项目原创证明"——这是对 **BSS 已发表证明**的独立复核与记号翻译。
+  - 不得声称符号关系 c=−1 是"第一性原理证明"——仅由数值交叉验证确立。
+  - 不得使用超出上述量词范围的任何 (m,n,ℓ)。
+  - 不得省略 BSS footnote 10 关于 m/n 约定互换的说明。
+
+  **必须写进 note 的三条**：
+  1. **来源与复核**："本证明依赖 Bhand–Sen–Singh arXiv:2311.16252 (Res. Math. Sci. 12 (2025)
+     Paper 8) Appendix B + Theorem 5.4(b)，经本项目独立复核其证明骨架（Prop B.1/B.2 围道形变论证
+     + §B.4 完成配方不等式，均为纯数学、非物理论证）。独立数值验证：verify_A2B2_inequality.py
+     （1680+68880 组无反例）。"
+  2. **[GAP] 转述信任**："Φ̃₁ 与 Φ₁₀ 的整体符号关系 (c=−1) 由数值交叉验证确立（本项目
+     coefficients.py、Rosselló Table 1、BSS §5.3 三方在 (1,1,0) 处均为 +50064，只有 c=−1 一致），
+     但未从 BSS 一般乘积公式 (5.2) 独立推导 N=1 特化的权与零点结构来做第一性原理确认。
+     权 10 Sp(4,ℤ) 尖点形式空间一维性（Igusa 1962/1964）支持此论证，数值证据强，
+     但仍为转述信任而非独立计算。"
+  3. **记号翻译**："BSS 与 Rosselló/DMZ 使用不同 m/n 电荷约定：BSS(N=1) 取 m=Q²/2(电)、
+     n=P²/2(磁)；Rosselló/DMZ 取 m=P²/2(磁)、n=Q²/2(电)。BSS footnote 10 (p.50) 明确声明此差异
+     ('the roles of Q and P are interchanged compared to [9]'，[9]=DMZ)。本证明 proof.md §1 引理 1
+     给出翻译，§3 引理 2 建立变量对应（按**傅里叶相位系数**标准核验）。文献记号冲突裁决见
+     literature/notes/mn-convention-adjudication.md（2026-09-20, verdict (c)：两文献约定不同但均正确）。"
+
+  === 程序性裁决：BSS 必须先立成图节点（lead 追问，reviewer 回答）===
+
+  **判断：必须先立成图节点，不能只靠 `sources` 指向 extraction。**
+  理由：(1) `research/CLAUDE.md` 明确要求"证明只能引用图里 effective status 为 rigorous/formalized
+  的节点作为砖块"；(2) extraction 是中间产物，不是图节点；(3) 推导的 `depends_on` 必须指向
+  `graph/` 的节点 id，`sources[].ref` 指向的是 sources.bib 的 key，两者不可互替；
+  (4) 若不立节点，BSS 的 rigorous 状态**无法沿边传播**到本推导——这正是
+  graph/CLAUDE.md 2026-09-15「不得用 inferred 藏命题、承重命题必须是图上一等公民」的同一条原则。
+  reviewer 建议的节点（由 curator 依 extraction E3/E4/E6 创建）：
+  `holography.bss-charge-set-b-definition`（定义）、`holography.bss-theorem-5-4b`（命题, rigorous）、
+  `holography.bss-prop-b1-b2`（命题, rigorous）。**具体 id 与拆法由 curator 按 graph/CLAUDE.md 定夺。**
+
+  `captain_confirmed` 保持 `false`——reviewer 明确拒绝代填，留船长确认。
 captain_confirmed: false
 notes: |
   2026-09-20（theorem-prover，本轮完成）。
@@ -81,6 +163,19 @@ notes: |
   ---
 
   ## 🔴 lead 复核（2026-09-20，合并本分支时写入）——记号指派与本项目图卡冲突
+
+  > ✅ **本节提出的 P0 已于 2026-09-20 当日结案，保留作为过程记录。**
+  > **结论：三选一中的 (c)——两篇文献的约定本来就不同，两边都没错。** 决定性证据是 BSS 自己
+  > p.50 脚注 10 的逐字句：「Also the roles of Q and P are interchanged compared to [9]
+  > since we have Q²/2 = m, P²/2 = n.」完整裁决见
+  > `literature/notes/mn-convention-adjudication.md` 与 `literature/extractions/bhand-sen-singh-2023.md`。
+  >
+  > **本节以下的「路线可能要镜像」担忧已被证否**：graph-reviewer 2026-09-20 独立核算确认，
+  > 目标域在 BSS 记号下落进的是 **B₂（Thm 5.4(b) 支）**，正是本 attempt 所用的那一支，
+  > §3/§4 **不需要镜像重写**。
+  > 另，本节 §4 提出的「交叉配对容易看反」也已澄清：交叉配对是吸引子围道 adj(T) 性质的真实特征，
+  > 变量对应的决定性标准是**傅里叶相位系数**而非围道虚部标度；按该标准复核，原稿引理 2 正确。
+  > 正式裁决见本文件 `verdict` 字段。
 
   合并入 main，但**不得据此判定 [GAP 10.2b] 已关闭**，直到下述冲突被裁决。
 
