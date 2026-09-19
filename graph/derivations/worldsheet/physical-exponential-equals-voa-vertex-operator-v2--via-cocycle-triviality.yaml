@@ -32,6 +32,20 @@ depends_on:
       物理侧的零模那一半：塔上的移位算子 e^{i n k_0·x}（该卡 (1) 的 S_n），
       与 VOA 侧 𝒴(e^{nk}, z) 的零模给出的移位 j ↦ j + n 相对应
       （free-boson 塔卡 (3)(iii) 逐字指出这两个移位是同一个）。
+  - id: worldsheet.tower-zero-mode-monodromy-factor
+    inferred: false
+    note: |
+      **单值因子那一半，此前只活在本推导的 notes 订正 (2) 里，现已有节点承载。**
+      本推导 summary 把洛朗指标移位 K ↦ K − nν 的来源记为 Δ̄(α, ±x) 的零模算子
+      x^{α(0)}（α = n k_0 在 U 上的本征值 ⟨nk, p̃⟩ = nν，ν := 2α'(k_0·p)，**不含层号 N**；
+      层号只经 x^{⟨α,β⟩} = x^{nN⟨k,k⟩} 进入，而 ⟨k,k⟩ = 0 使其恒为 1）。
+      该卡正是这个标量因子 Z_n(z) = z^{2α'n k_0·p̂} 的定义节点，并逐字给出"层无关、
+      值为 z^{nν}"这两条本推导实际用到的性质。
+      ⚠ 按 graph/CLAUDE.md 末节的判例（inferred 不是降级开关，实质命题必须立卡）：
+      这条边此前是"论证活在 note 里、图上无节点"的状态，现补成显式边。
+      该卡 effective = rigorous，且其唯一依赖 momentum-tower-fock-space 已在本推导的
+      依赖表中，故本边**不改变**本推导的 effective（仍 physical-argument，
+      由 (H-anchor) 那一半封顶），是记号来源的显式化，不是状态变更。
 sources:
   - ref: gebert-nicolai-1995
     loc: "§3.1 'DDF vertex operators', 刊 p.593, eq. (3.1)（ε(mk, nk) = 1）"
