@@ -66,27 +66,78 @@ notes: |
   第 2 条排除了 proof-too-much，第 3 条闭合了系数/词序），故裁决不因此改动；
   但**不应据此认为 reviewer 已对 D = 26 限定发表过意见**——那条是 lead 自己的发现。
 
-  ### 裁决要点 7：reviewer 自写的对抗性数值测试——无反例（2026-09-19 补录）
+  ### 裁决要点 7：对抗性数值测试——结论成立，但 reviewer 的产物不可复现（lead 2026-09-19 重做）
 
-  **这是本轮审查中价值最高的一条：它是对本 claim 最独特强度的唯一独立复算。**
-  本 claim 的强度在于「对**每个**动量 p 成立，对 p 毫无约束」；而 prover 的三个脚本
-  **只实例化写死的 p_{-6} = a − 6b**（a、b 取定的光锥标架向量）。
-  也就是说：若 Lemma A/B 的论证暗中依赖光锥标架的某条性质（如 p·p = −10、
-  或 a、b 的类光结构）而未言明，prover 的自测**测不出来**。
+  **动机（成立，且是本轮最有价值的一条观察）**：prover 的三个脚本**全部**调用
+  `build(D)`，而 `build` 写死了 Lorentz 号差 eta = diag(-1,1,…,1) **与**单个动量
+  p_{-6} = a − 6b（它甚至 `assert p·p == -10`）。而 claim.md 的定理量词是
+  「对**每个** eta（只要 eta_mu² = 1）、**每个** p，对 p 毫无约束」。
+  也就是说：若 Lemma A/B 暗中依赖光锥标架的某条未言明性质，prover 的自测**结构上测不出来**。
 
-  reviewer 另写脚本（只复用 prover 引擎的底层原语 `make_ops` / `make_L` / `addd` /
-  `scale`，**不**复用那两个派生脚本，故不继承其代码路径），在 prover 从未测过的动量上
-  把 x4、y3 按 Sugawara 双重和 + 原始 CCR 展开成算子词，用 `fractions.Fraction`
-  精确有理数算术在 level-1 片上取系数矩阵求秩：
-    · D=4，五个随机有理动量向量（与光锥标架无任何关系）；
-    · D=4，p = 0（退化情形）；
-    · D=6，p = 0。
-  **八个用例（5 随机 + 2 个 p=0，各测 x4 与 y3）全部满秩 ⇒ 单射，与定理一致，无反例。**
+  ⚠ **reviewer 报告的 `/tmp/adv_test.py` 不可复现，lead 已重做。**
+  reviewer 只读，脚本写在仓库外，经聊天逐字回传。lead 保存并运行后**不能执行**：
+  它调用 `make_ops(D)` 并解包 `(alpha, ladder)`，而 `verify_s6_injectivity.py` 实际导出的是
+  `make_ops(D, eta, p) -> (creat, dot)` 与 `make_L(dot)`，**没有 `ladder`**。
+  故 reviewer 贴出的「verbatim 输出」**不可能由它贴出的源码产生**
+  （reviewer 自己也承认随机数位是凭记忆重述、未存终端日志）。
+  **这不推翻它的结论，但它的证据不可复核**，故按本项目纪律不得当作已完成的独立复算记账。
+
+  ✅ **lead 按真实 API 从头重写并实跑**（`scripts/adv_test.py`，署名 lead，
+  provenance 写在文件头），覆盖面**比 reviewer 所述更宽**：
+    · D = 4,5,6 各三组与光锥标架无关的随机有理动量（Lorentz 号差）；
+    · D = 4,6 的 p = 0（p·p = 0，正是 `build()` 的 assert 明令排除的退化情形）；
+    · **三种非 Lorentz 号差**（全正 Euclidean、双类时、全负）在 D = 4,6——
+      定理允许任何 eta_mu² = 1 的号差，而本目录此前**只测过一种**。
+  x4 与 y3 **分开**测（定理主张每个各自单射；S₆ 联合单射是更弱的推论），
+  `Fraction` 精确有理算术求秩。**34 项检查全部满秩 ⇒ 单射，无反例。**
   与证明预期吻合：Lemma A/B 的推导从头到尾不碰 p，常数 −408 / 30 是词结构的纯组合量。
 
-  ⚠ **该脚本当时写在 `/tmp/adv_test.py`（仓库外，reviewer 只读故无法写进 repo），
-  不会存活。** lead 已请 reviewer 把源码逐字贴回，准备署名保存到本目录
-  `scripts/` 下；**未收到前本条只是转述，repo 内无可复跑的对应物**。
+  ⚠ **一条继承的局限（reviewer 第 8 条第 7 项，lead 确认并同样适用于自己这版）**：
+  本脚本复用 `verify_s6_injectivity.py` 的引擎，是**同一个引擎的第四次不同输入演练**，
+  **不是**独立实现。proof.md §7 的「三个独立脚本」措辞按「独立于手证」讲是准确的，
+  按「三份独立实现」讲则**不准确**。**引擎本身若有 bug，四次演练全都看不见**——
+  与 `verify_s6_injectivity.py` 不共享一行代码的从零符号 Fock 模拟器，
+  prover 与 reviewer **都没有写过**。
+
+  ### 裁决要点 9：docstring 与 reviewer 独立重建的交叉核对——完全一致
+
+  reviewer 读了 `LevelSixClosure.lean` docstring 第 30–76 行两遍，其四步 A⟹B 推导与
+  reviewer 在**该文件合并之前**（round 1，直接读 `seedPair_eq_comp`、合冲恒等式、
+  `mem_towerSeed_neg_six_one_iff`）独立重建的版本**逐步骤、逐引用完全一致**，
+  与 claim.md §4 亦无出入。故这是**收敛性确认**，不是把 docstring 复述回来。
+
+  ### 裁决要点 10：D = 26 的精确定位（reviewer 独立确认，与 lead 上面的记录一致）
+
+  `mem_towerSeed_neg_six_one_iff` 的 `(hD26 : (D : K) = 26)` **只用于 `→` 方向**
+  （其自身 docstring 如此声明），而桥接第 3 步要的正是 `→` 方向——
+  它排除「非种子向量混进交集」，即 `S₆(V)⊓(Q×Q) ⊆ S₆(Q)` 这半个包含。
+  形式 A 本身对每个 D、每个 eta、每个 p 成立，**真正与 D 无关**。
+  ⇒ **形式 A（D-无关）+ D = 26 ⟹ 形式 B**；形式 A 单独在一般 D 上**不**给出形式 B
+  （不需要 D=26 的 `←` 方向只给反向的弱包含，不足以合上维数账）。
+
+  **这不是缺陷**：`b26_six_of_sixSeedKernelSharp` 在调用处本来就带 `hD26`，
+  这条线从未主张一般 D 上的 B26/无鬼，没有夹带。
+  ⚠ reviewer 对「为什么那一步必须 26」的机制解释（猜测与 c=26 的奇异向量结构有关）
+  **自报为未经核实**——它只读了签名与 docstring，**没有读 `→` 方向的证明体**。
+  **应记录的结论**：「S₆ 对每个 D、每个 p 单射」**不**蕴含 `SixSeedKernelSharp`
+  在一般 D 上成立；它消掉的是「种子 vs 整片」这个**与 D 无关**的那半障碍。
+
+  ### 裁决要点 11：明确的是/否回答——是（附工程层面保留）
+
+  **问**：形式 A 在 Lean 里证出后，是否仅凭 HEAD 上已有且无 sorry 的引理即可兑现形式 B？
+  **答：是。** 四步各自的支撑全部已存在且 check_axioms 干净：
+  第 1 步 `towerLop_neg_one_mul_x4_add_descTwo_mul_y3` + `descPair_apply`；
+  第 2 步 `finrank_ker_descPair_six_le` + Mathlib `Submodule.eq_of_le_of_finrank_le`
+  （有限维实例经 `Submodule.finiteDimensional_of_le`，`LevelSixClosure.lean:196-216`
+  已是这个用法）；第 3 步 `seedPair_eq_comp`（定义性）+ `mem_towerSeed_neg_six_one_iff`
+  （两个方向，消费 `hD26`）；第 4 步平凡。**唯一尚不存在的就是形式 A 本身。**
+
+  ⚠ **reviewer 对这个「是」的保留（照录）**：它核对的是四步的**签名与引用**
+  （类型对得上、假设可得、蕴含方向正确），**没有**亲自写出并编译这四步的合成证明项。
+  故这个「是」的含义是「数学上不缺任何引理」，**不是**「我编译过且类型检查通过」。
+  组装时仍可能遇到 Lean 工程层面的摩擦（finrank 的 coercion、universe、
+  `Submodule.map`/`comap` 的 rewrite 别扭），预期属工程问题而非缺数学事实。
+  **⇒ s6lean 回来时 lead 必须实际验证编译，不得以本条代替。**
 
   ### 裁决要点 8：reviewer 自报的保留事项（照录，部分因传输截断未收全）
 
@@ -101,12 +152,15 @@ notes: |
      Brower / Thorn / Gebert–Nicolai / FLM 原文），是接受了 prior-art.md 自报的保留。
   6. N≥12 的 proof-too-much 问题（第 2 条）是**论证推理，非计算**——未真造 N=12
      合冲对去测试该技术是否会在那里给出错误结论。
-  7. 及其后各条：**传输截断，未收到**（截在「verify_leading_coefficient.py 与 veri…」）。
+  7. **三个脚本共用同一引擎**：`verify_leading_coefficient.py` 与
+     `verify_single_operator_injectivity.py` 都 import `verify_s6_injectivity.py` 的
+     `make_ops`/`make_L`/…。proof.md §7「三个独立脚本」按「独立于手证」讲准确，
+     按「三份独立实现」讲**不准确**。详见裁决要点 7 末段。
+     reviewer 确认第 1–7 项即其全部保留事项，无保留未报。
 
-  ⚠ **本文件仍缺 reviewer 的 Finding 9、Finding 10 全文，以及一个明确的是/否回答**：
-  形式 A 在 Lean 里证出后，是否**仅凭 HEAD 上已有且无 sorry 的引理**即可兑现形式 B，
-  还是桥接至少还缺一条尚不存在的引理。lead 已去信索取（分四条短消息，因该 agent
-  的报告已两次被截断）。**在收到之前，不得把「A ⟹ B 无需新引理」当作已核实结论。**
+  ⚠ **本文件此前记录的三项待收内容（Finding 9、Finding 10、明确的是/否回答）
+  已于同日收到并写入上面的裁决要点 9/10/11。** 唯一未闭合项转为：reviewer 的
+  finding-7 产物不可复现，已由 lead 重做替代（见裁决要点 7）。
 
   ### lead 的独立补充核查（2026-09-19，闭合 prover 自报的唯一未决 caveat）
 
