@@ -10,12 +10,15 @@
 ## 结论
 
 **MODERATE（可做），不是 EXPENSIVE。** 存在一条自足的、不经过根系/权论/Chevalley 限制的
-初等路线，估计 **400–700 行 Lean**。scout 的初版裁决是 EXPENSIVE，锚定在**错误的路线**
+初等路线。scout 的初版裁决是 EXPENSIVE，锚定在**错误的路线**
 （E₈ 式的根系路线）上；lead 指出 Λ² 框架后 scout 自行改判，并按要求明确表态
 「这是真实修正，不是顺着说」（照录见下）。
 
+**估工时：650–1100 行**（lead 修订；scout 原估 400–700 行未计入
+「Mathlib 里 so/sp 根本没有基」这一项，见 §2.5）。定性不变，数字上调。
+
 ⚠ **本文件不构成派工决定。** 这 +3 **不命中任何里程碑**（全部落在 `math.*` 反常区），
-是否值得投 400–700 行是船长的资源判断，不是 lead 能单方面认领的。
+是否值得投 650–1100 行是船长的资源判断，不是 lead 能单方面认领的。
 
 ---
 
@@ -94,6 +97,67 @@ scout 的修订裁决**明确附带一条未 derisk 的条件**（照录）：
 
 ---
 
+## 2.5 ⭐ Mathlib 侧的实测（lead，2026-09-19）：伴随作用是好消息，**真正的瓶颈在别处**
+
+scout 在交回修订裁决时点名了「投人之前该查的下一件事」（照录）：
+
+> "whether Mathlib's `LieAlgebra.Classical.so`/`sp` come with an existing
+> `LieModule.toEnd`-based adjoint action and whether `ad(F)(X) = FX − XF` is already
+> how that's phrased there … **That would be the next concrete thing to check before
+> committing formalizer time.**"
+
+lead 已查。结论分两半，方向相反。
+
+### 2.5.1 伴随作用：**比 scout 期望的还顺**（利好）
+
+    Classical.lean:168  def so n R := skewAdjointMatricesLieSubalgebra (1 : Matrix n n R)
+    Classical.lean:159  def sp l R := skewAdjointMatricesLieSubalgebra (Matrix.J l R)
+    SkewAdjoint.lean:114  def skewAdjointMatricesLieSubalgebra : LieSubalgebra R (Matrix n n R)
+
+两支**都**是 `Matrix n n R` 的 `LieSubalgebra`，括号从环境矩阵代数继承；而环境括号就是
+`LieRing.ofAssociativeRing`，且该实例带 `@[instance_reducible]`，`Ring.lie_def` 即
+`⁅A,B⁆ = A*B − B*A`。配 `OfAssociative.lean:206` 的 `LieAlgebra.ad_apply : ad R L x y = ⁅x,y⁆`，
+得 `ad(F)(X) = F*X − X*F` —— **正是 §2 数值脚本里 `ad_matrix` 组装的那个式子，逐字相同**。
+
+佐证这不是纸面等式而是真能 unfold：`SkewAdjoint.lean:95` 的 `Matrix.lie_transpose`
+证明体直接写 `show (A * B − B * A)ᵀ = …`，即 Mathlib 自己就在靠定义性展开吃这个括号。
+
+⇒ **scout 担心的「Mathlib 可能用别的方式陈述括号，导致基匹配变难」不成立。** 这一层
+预计 ~2 行，不是一个翻译层。
+
+### 2.5.2 ⚠ 但 lead 顺手查出一条 scout **没查、也没预料到**的真瓶颈：**so/sp 在 Mathlib 里没有基**
+
+    grep "Module.Free|Module.Finite|FiniteDimensional"  SkewAdjoint.lean Classical.lean  -> 空
+    grep "Basis|finrank"                                 SkewAdjoint.lean               -> 空
+    Classical.lean 的 `section ElementaryBasis` (101-141) **只服务 sl n R**
+      （`single` / `singleSubSingle`，docstring 逐字说 "a natural basis of `sl n R`"），
+      与 so / sp 无关。
+    全 Mathlib 提到 `skewAdjointMatrices` 的文件只有 4 个，其中 2 个是双线性型文件。
+
+为什么这条是**阻断性**的而不是装修问题：`Tr((ad F)^k)` 在 Lean 里要经 `LinearMap.trace`，
+而 `LinearMap.trace` 要求底模是 **f.g. 投射/自由**。`↥(so n R)` 是 `Matrix n n R` 的一个
+子模，Mathlib **没有给它 `Module.Free` / `Module.Finite` 实例，也没有基**。
+⇒ **在把基造出来之前，本卡的目标陈述连「写得出来」都做不到**，谈不上证。
+
+要造的东西 §2 的脚本其实已经写过一遍（Python 版）：
+`so_basis`（`E_ij − E_ji`，`i<j`）与 `sp_basis`（`J·S`，`S` 对称）。Lean 侧要把它们做成
+真正的 `Basis`（带线性无关 + 张成），再挂 `Module.Free`/`Module.Finite` 实例。
+
+### 2.5.3 对估工时的影响：**上调，但不改「MODERATE 而非 EXPENSIVE」的定性**
+
+- **性质不变**：这是常规线性代数（构造显式基并证两条性质），**不是缺定理**——
+  与 §3 讲的根系路线缺 Chevalley 限制**根本不同**。它有确定的完成路径。
+- **量变**：scout 的 400–700 行是在「基匹配是 bookkeeping」的假设下给的，而实际要从零造两族基。
+  lead 的修正估计：**基与实例约 250–400 行（且这部分本质是 Mathlib 上游工作），
+  加原路线 400–700 行，合计 650–1100 行。**
+- ⚠ **诚实标注**：这个上调**推翻了 scout 估计的前提，但不是推翻它的裁决**。
+  scout 把风险押在「张量公式是否等于 `Tr(ad F)^k`」（§2 已数值排除、§2.5.1 已确认 Lean 侧顺），
+  真正的成本却在它没查的「子模有没有基」上。**风险定位错了，方向判断（可做）仍对。**
+
+⇒ 交给船长的数字按 **650–1100 行**算，不按 400–700。
+
+---
+
 ## 3. 关于 E₈ 先例：scout 的结论对，给出的机制在图上不成立
 
 scout 用 E₈ 卡做先例，论证「把根系形式化买不到升级」：即便 `Math/E8Roots.lean`
@@ -133,6 +197,31 @@ effective:  rigorous
 
 两者都真，但只有后者支持 scout 的建议（别去投根系家族的形式化）。**该建议照收。**
 
+### 3.1 scout 的反驳与 lead 的接受：「缺定理」vs「缺计算」
+
+lead 把上面的实测发回后，scout **接受了机制更正**，但补了一条**部分平反它原判**、
+且比 lead 原框架更锋利的区分（lead 认为这条对，照收）：
+
+| | 根系路线（E₈ 卡） | Λ² 路线（本卡） |
+|---|---|---|
+| 要把 `Tr_ad(F)^k = Σ_α α(H)^k` 从 **Cartan 的 H** 推到 **一般的 F** | **需要** | **不需要** |
+| 那一步是什么 | 就是 **Chevalley 限制**（Ad-不变多项式在与每个共轭类相交的 Cartan 上相等 ⟹ 处处相等） | 无此步：公式对**任意**交换环上的**任意**矩阵一致成立 |
+| Mathlib 里有吗 | **没有** | 不适用 |
+| 缺口的类型 | **缺定理**（missing theorem） | **缺计算**（missing computation） |
+| 诚实的终点 status | 只能停在 `physical-argument` | 可以正当地走到 `rigorous` / `formalized` |
+
+⭐ **这条区分才是本次调研最该留下的东西**：两条路线都"缺一步"，但缺的**种类**不同，
+而种类决定了 status 的天花板。Λ² 路线之所以值得考虑，不是因为它更短
+（§2.5.3 表明它其实更长），而是因为它**没有特殊轨迹**（no special locus）——
+所以把它做完是真的能升 status 的，而根系路线做完了也升不动。
+
+⚠ **这同时部分平反了 §4 对 own status 的指控**：若 `--via-root-power-sums` 的
+own = physical-argument 实际上是在追踪**它自己装配里那一步未言明的轨迹延拓**，
+那这个 own 就是**诚实的**，不是 §4 说的"把依赖的弱重复记一遍"。
+lead 已把这条**反对自己简报框架**的证据原样转给 `e8statusfix`，并明确告诉它
+「『不改，理由如下』比改更有价值，若你查出是这样请直说，那是在纠正我」。
+**§4 的定性因此转为待定，以 curator 的裁定为准。**
+
 ---
 
 ## 4. 方法论副产品：自封顶的一个**误用**形态
@@ -155,6 +244,11 @@ E₈ 这张卡暴露的是一个更窄、更值得单独记的**误用**形态�
 **未修，待定**：改 `--via-root-power-sums` 的 own status 属于 curator + reviewer 领域的实质
 图数据判断（要判断这一步自身论证到底有多严），lead 不在调研途中单方面改。
 过时的 note（§3 末）与 own status 该不该动，建议一并派 curator 处理。
+
+⚠ **本节的定性已被 §3.1 挑战，转为待定。** scout 后来论证：那个 own status 可能诚实地
+在追踪本推导自身装配里的 Cartan → 一般 F 轨迹延拓（即缺 Chevalley 限制这条**真定理**），
+若如此则**不是**本节所说的「误用」。已派 `e8statusfix`（curator）裁定，**以它的结论为准**；
+上面第 1、2 条作为**一般机制**的描述仍然成立，只是 E₈ 这张卡未必是它的实例。
 
 ---
 
@@ -181,6 +275,21 @@ Bilal「without proof」、GSW「it is easy to show」、Polchinski 留作 Exerc
 这既是该卡 status 只能是 physical-argument 的原因，也意味着**没有现成大纲可抄**——
 除非上面最后一条的文献搜索找到东西。
 
+**本节的闭合情况（lead，2026-09-19）**：
+
+- ✅ **已闭合**：scout 在交回时另提的「Mathlib 怎么陈述伴随作用」——见 §2.5.1，
+  `ad(F)(X) = F*X − X*F` 近乎定义性，**利好**。
+- ✅ **已闭合（连带）**：第 4 条「整条 Λ² 路线没在 Lean 里试过任何一步」的**风险部分**——
+  §2 的数值验证覆盖基匹配桥，§2.5 覆盖 Mathlib 接口。**工程量本身仍未试。**
+- ⚠ **查出一条 scout 未列、也未预料的未查项**：so/sp 在 Mathlib 里**没有基、没有
+  `Module.Free`/`Module.Finite`**（§2.5.2）。这条不在 scout 的自报清单里——
+  **值得记的教训是：scout 的"未查项清单"本身也不是完备的**，
+  它只能列出它意识到的盲点。lead 的复核价值主要在这里，不在复述它已列的那几条。
+- ❌ **仍未闭合**（原样保留，无人认领）：Killing/Serre 未逐行读；antonelli-2015 原文未复核；
+  对称函数机器未广搜；无 shortcut 节点检查；**未做那条"是否存在覆盖两支的一般 N 完整证明"的
+  文献搜索**——最后这条是本清单里**唯一能显著降成本**的（找到就从"自己发明证明"降成"照抄大纲"），
+  若船长决定投这条路线，建议**先派 researcher 做这一条**再派 formalizer。
+
 ---
 
 ## 6. 复现
@@ -190,4 +299,15 @@ python docs/frontier-scouting/so-usp-adjoint-trace-check.py    # 60/60，见 §2
 uv run stringgraph counterfactual math.so-usp-adjoint-fundamental-trace-identities   # +3
 uv run stringgraph counterfactual math.chevalley-restriction-theorem                 # 0
 uv run stringgraph status math.adjoint-weights-are-roots-and-zero                    # rigorous
+```
+
+§2.5 的 Mathlib 实测（路径相对仓库根）：
+
+```bash
+M=formal/.lake/packages/mathlib/Mathlib
+sed -n '155,175p' $M/Algebra/Lie/Classical.lean          # so / sp = skewAdjointMatricesLieSubalgebra
+sed -n '110,120p' $M/Algebra/Lie/SkewAdjoint.lean        # 它是 LieSubalgebra R (Matrix n n R)
+grep -n "ad_apply" $M/Algebra/Lie/OfAssociative.lean     # ad R L x y = ⁅x,y⁆
+grep -n "Basis\|finrank\|Module.Free" $M/Algebra/Lie/SkewAdjoint.lean   # 空 ⇒ §2.5.2 的瓶颈
+sed -n '101,141p' $M/Algebra/Lie/Classical.lean          # ElementaryBasis 只服务 sl n R
 ```
