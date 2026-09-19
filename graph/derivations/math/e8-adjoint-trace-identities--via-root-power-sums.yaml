@@ -17,14 +17,24 @@ depends_on:
     inferred: false
     note: |
       第一座桥：对 Cartan 元 H，Tr_248 (ad H)^k = Σ_{α ∈ Φ} α(H)^k（k ≥ 1；8 个零权不贡献）。
-      E8Roots.lean docstring 逐字列为前提。physical-argument（来源 L0）。
+      E8Roots.lean docstring 逐字列为前提。**2026-09-19 更正（curator，e8-own-status 审计）**：这条边的
+      note 曾写「physical-argument（来源 L0）」，已过时——该卡已于 2026-09-13 升级（推导
+      --via-root-space-decomposition：kirillov-2008 preliminary version pp. 84–89 L1 页图 + humphreys-1972
+      §8.2/§8.4 L1⁻ 逐字 OCR），现在 `own_status: rigorous`、`effective: rigorous`
+      （`uv run stringgraph status math.adjoint-weights-are-roots-and-zero` 核实）。
+      本推导现在只被下一条桥（math.chevalley-restriction-theorem，仍 physical-argument/L0）从依赖侧
+      单独压低 effective；own status 是否也该跟着降，见本文件 notes 的「own status 评估」一节
+      ——结论是 own 仍留在 physical-argument，但理由与这两座桥的强弱**无关**。
   - id: math.chevalley-restriction-theorem
     inferred: false
     note: |
       第二座桥（只用单射方向）：两个 Ad-不变多项式在 𝔥 上相等 ⇒ 在整个 𝔢₈ 上相等。
       E8Roots.lean docstring 逐字列为前提（「if one wants the identity for all F rather than only for F
       in a Cartan subalgebra, the Chevalley restriction theorem」）。physical-argument（来源 L0）。
-      **本推导的有效状态被它与上一条桥压在 physical-argument。**
+      **2026-09-19 更正**：上一条桥（math.adjoint-weights-are-roots-and-zero）已升级为 rigorous，
+      所以从依赖侧看，现在只剩本座桥把 effective 压在 physical-argument（`uv run stringgraph
+      counterfactual math.chevalley-restriction-theorem` 仍报 forced(1)/moved(0)，因为 own 另有独立
+      的封顶，见下）。
   - id: conv.gauge-trace-normalization
     note: 固定 tr = Tr（E₈ 最低维表示即伴随）、F 为偶次形式、Ω_{4n} := Tr F^{2n}。约定不参与状态传播。
 sources:
