@@ -57,8 +57,64 @@ worldsheet.ddf-contour-equals-mode-sum: 1 bottleneck root(s)
   worldsheet.ddf-contour-equals-mode-sum
 ```
 
-（这张卡自己就是自己的瓶颈根——它没有推导，`kind: proposition` 且
-`best_derivation is None`。）
+（这张卡自己就是自己的瓶颈根。）
+
+> 🔴 **2026-09-19 lead 订正。** 本节初稿把这个结果的**理由**写成「它没有推导，`kind: proposition`
+> 且 `best_derivation is None`」。**那是错的**，且在本文自己声明的 HEAD `3424943` 上就已经是错的：
+> 这张卡当时已经有**两条**推导，两条都早于 `3424943`（实测 `git merge-base --is-ancestor`：
+> `940ec47` 2026-09-11 建 `--via-laurent-coefficient-extraction`，`d62829f` 2026-09-18
+> 最后一次改 `--via-voa-residue`，两者均为 `3424943` 的祖先）。
+>
+> **结论不变，机制完全不同，而且更有意思**：
+>
+> | 推导 | own | effective | 瓶颈在哪 |
+> |---|---|---|---|
+> | `--via-laurent-coefficient-extraction` | physical-argument | physical-argument | **自封顶**（它自己的 status） |
+> | `--via-voa-residue` | rigorous | physical-argument | **桥卡** `worldsheet.physical-exponential-equals-voa-vertex-operator-v2` |
+>
+> `--via-laurent-coefficient-extraction` 的三条依赖（`ddf-operators-v6`、
+> `exponential-vertex-operator-modes`、`momentum-tower-fock-space`）**全部是 `formalized`**
+> ——所以沿这条推导下降时，这张卡确实纯粹自封顶，`roots` 返回它自己是对的。
+>
+> ⚠ **但这掩盖了一半事实。** 两条推导的 effective **打平**在 physical-argument，
+> `bottleneck_roots` 只沿 `best_derivation` 下降，平局时只跟其中一条，于是
+> `roots worldsheet.ddf-contour-equals-mode-sum` 完全**看不见**另一条推导的瓶颈是桥卡。
+> 这对第 2 节的反事实数字没有影响（`counterfactual` 是真强制+重算，不走 `roots`），
+> 但它意味着：**`roots` 的输出在「一张卡挂多条 effective 打平的推导」时是不完整的**，
+> 只讲了一个故事。读第 3–5 节的贪心/自封顶统计时要记住这条限制——那些统计全部建立在
+> `bottleneck_roots` 上。
+>
+> **这条订正的实质后果**（🔴 比订正本身重要）：本文「结论先行」第 3 条把这张卡称为全图唯一的
+> 真级联点，据此建议优先形式化它。但按上表，沿 `--via-voa-residue` 这条**已经 own=rigorous**
+> 的路走时，真正的障碍是桥卡，而桥卡的瓶颈是 `[GAP-anchor]`——按
+> `research/attempts/physical-exponential-equals-lattice-voa/status.yaml`，
+> (H-anchor-1) 在图现状下**不可能成为定理**（X^μ(z) 含 ln z 与 x^μ，不是塔上良定义的形式
+> 洛朗级数；`formal/StringFormal/NoGhost/DDF.lean` 的「What is NOT here」第 3 条逐字：x^μ 不是算子）。
+> ⇒ **全图唯一的级联点，挂在一个当前图结构下无法兑现的前提上。**
+> 已派 graph-reviewer 专门核查「该依赖是承重还是可消」，**裁决：承重**（2026-09-19）。
+> 关键证据不是推导里的某条边，而是**目标卡陈述正文本身**：
+> `ddf-contour-equals-mode-sum` 的【文献侧的对象】段逐字抄了 goddard-2008 (5.1)–(5.3)，
+> 左端的 `V(n k_0, z) = :exp{i α·Q(z)}:` 里 `Q^μ(z) = q^μ − i p^μ log z + …` **含 q^μ 与 log z**。
+> 而 `ms.no-ghost-theorem` 的 `canonical_text` (1)(b) 又把等距同构的靶空间定义成
+> 「由 24 个横向 DDF 算子 A^i_{−n} 生成」的 Fock 空间——A^i_n 正是由那个围道积分定义的。
+> ⇒ 这条翻译**位于被审计的链条内部**，不是链条旁边的解释性边。
+> 把依赖边改指一张只承载 track (iii) 已证数学命题 (A′-a) 的新卡**不可行**：那只会把
+> (H-anchor) 从一条显式依赖边挪进推导里一处未列出的隐含步骤，比
+> `graph/CLAUDE.md` 判例里的 `inferred` 误用更隐蔽（inferred 至少在 validate/report 里留痕）。
+>
+> **⚠ 但"永远不可能"这个说法要收窄**（lead 2026-09-19，与 reviewer 的措辞有别）：
+> 准确的陈述是「在**图与 Lean 当前的塔构造**下不可能」——`DDF.lean` 是**刻意**不把 x^μ 作为算子的。
+> 这不是数学上的不可能：格点 VOA 的标准处理恰恰能容纳 e^{ikx}（群代数移位算子）与 z^{p}，
+> track (iii) 的 (A′-a)(A′-b)(A′-c) 已经是这个方向上的真定理。
+> 所以这是一条**成本与范围**的判断，不是一堵墙：兑现它等价于重做
+> `formal/StringFormal/NoGhost` 的基础对象。把它记成"不可能"会让未来的 agent 停止思考，
+> 记成"很贵"才是如实的。
+>
+> **对本文行动建议的后果**：「结论先行」第 3 条的**测量结果**（强制该卡 ⟹ +4 卡 + 命中里程碑）
+> 完全不受影响，那是真实的反事实。但它的**行动含义**必须改写：这不是一个
+> 「啃一小撮卡就拿下里程碑」的便宜目标，而是全图最贵的目标之一。
+> 🔴 **⇒ 在当前图结构下，`ms.no-ghost-theorem` 达到 rigorous 的路径尚未打通，且不便宜。
+> 这是一个需要船长裁决的范围问题，不是可以由 agent 顺手推进的工程任务。**
 
 ## 2. 反事实：形式化哪张卡收益最大？
 
