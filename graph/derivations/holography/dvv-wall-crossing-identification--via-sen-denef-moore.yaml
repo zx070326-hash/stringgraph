@@ -3,10 +3,18 @@ target: holography.dvv-wall-crossing-identification
 kind: physical-argument
 status: physical-argument
 depends_on:
-  - id: holography.igusa-cusp-form-phi10
+  - id: holography.igusa-cusp-form-phi10-v2
     inferred: false
-  - id: holography.phi10-wall-crossing-poles
+    note: |
+      **2026-09-20：本边由 holography.igusa-cusp-form-phi10 改指其接替者
+      holography.igusa-cusp-form-phi10-v2**（唯一差别是零点重数由"单零点"订正为
+      "二重零点"，见该卡 notes）。
+  - id: holography.phi10-wall-crossing-poles-v2
     inferred: false
+    note: |
+      **2026-09-20：本边由 holography.phi10-wall-crossing-poles 改指其接替者
+      holography.phi10-wall-crossing-poles-v2**（(a) 重数由"单零点/单极点"订正为
+      "二重零点/二阶极点"）。
   - id: holography.dvv-dyon-index-generating-function
     inferred: false
 sources:
@@ -28,3 +36,12 @@ summary: |
   两步物理论证均依赖超引力 BPS 解的分析和 S-对偶，不是纯数学推论。
 author: lead
 created: "2026-09-14"
+notes: |
+  【2026-09-20 curator：depends_on 重定向】原指向 holography.igusa-cusp-form-phi10 /
+  holography.phi10-wall-crossing-poles（重数"单零点"）的两条边已改指其接替者
+  holography.igusa-cusp-form-phi10-v2 / holography.phi10-wall-crossing-poles-v2
+  （重数"二重零点"）。summary 正文对 "phi10-wall-crossing-poles" 的字面提及未改写
+  （derivation summary 不含错误的重数断言，只是泛指该节点，不受订正影响；按
+  graph/CLAUDE.md「换代时陈述正文内嵌 id 的处理」的精神，仅改依赖边，不就地改文字）。
+  完整背景见 docs/reviews/phi10-zero-multiplicity-defect-2026-09-20.md 与
+  docs/reviews/phi10-multiplicity-normalization-2026-09-20.md。

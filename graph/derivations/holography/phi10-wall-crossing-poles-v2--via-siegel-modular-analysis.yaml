@@ -1,0 +1,48 @@
+id: holography.phi10-wall-crossing-poles-v2--via-siegel-modular-analysis
+target: holography.phi10-wall-crossing-poles-v2
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: holography.igusa-cusp-form-phi10-v2
+    inferred: false
+sources:
+  - ref: dijkgraaf-verlinde-verlinde-1997
+    loc: "§4, 1/Φ₁₀ 的极点超平面族和留数结构"
+  - ref: sen-2007-wall-crossing
+    loc: "§2, Φ₁₀ 极点位置和留数因子化的明确计算"
+  - ref: gritsenko-nikulin-1996
+    loc: "p.7（χ₁₀=Φ₁₀=Δ₅² 恒等式）+ 几何结果段（Div(Δ₅)=H₁）；Div(Φ₁₀)=2H₁ 由此代数推出"
+summary: |
+  从 Φ₁₀ 作为权 10 Sp(4,ℤ) 尖点形式的性质，结合已订正的重数结果，推出：
+  1. GN1996 的代数恒等式 χ₁₀=Φ₁₀=Δ₅² 与 Div(Δ₅)=H₁ 直接给出 Div(Φ₁₀)=2H₁：
+     Borcherds 乘积公式描述的零点超曲面 {mρ+nσ+lv∈ℤ，4mn−l²=1} 上 Φ₁₀ 为**二重**零点，
+     故 1/Φ₁₀ 在此为**二阶极点**（此前旧版推导误写"单零点"，已订正）；
+  2. 在 {ρ=0} 附近展开：由 1. 的二重零点结构，1/Φ₁₀ 的 Laurent 展开形如
+     1/Φ₁₀ = h(σ,v)/ρ² + O(1/ρ)（h 在 ρ=0 上非零解析）。对二阶极点，围道跳变
+     （"留数"）一般应包含 h 的一阶导数项，而不是单纯的系数乘积。目标卡 (b) 所写
+     "Res_{ρ=0}(1/Φ₁₀) = f(σ,v)·g(σ,v)" 字面上是简单极点写法，是否仍在二阶极点下
+     成立、需要如何修正为含导数项的正确形式，本项目尚未从原文（DVV 1997 §4 /
+     Sen 2007 §2）独立核实——**记为 gap，不在本次订正中编造闭式表达式**；
+  3. Sp(4,ℤ) 对称性将 {ρ=0} 的计算搬到所有极点超平面（该步不受重数订正影响）。
+  第 1、3 步在 Siegel 模形式的代数框架内严格进行；第 2 步的精确留数闭式表达式待核实，
+  这也是本推导仍为 physical-argument（而非 proof）的原因之一。
+gaps:
+  - "(b) 的 Res_{ρ=0}(1/Φ₁₀)=f(σ,v)·g(σ,v) 是简单极点写法，与本次订正后的二阶极点
+     结构不自洽（二阶极点的围道跳变一般应含一阶导数项，而非单纯乘积）；正确形式需
+     回 DVV 1997 §4 或 Sen 2007 §2 原文逐字核对，本项目尚未完成这一核实
+     （physics-auditor 2026-09-20 发现，见
+     docs/reviews/phi10-multiplicity-normalization-2026-09-20.md §0.3/§1.2；
+     curator 2026-09-20 落地时确认无法从本项目已登记来源独立核实，如实留空）。"
+notes: |
+  【2026-09-20 curator 换代记录】本卡取代旧卡
+  holography.phi10-wall-crossing-poles--via-siegel-modular-analysis（target 已随主卡
+  换代改指 v2，故随之改名并删除旧文件）。改动：depends_on 由
+  holography.igusa-cusp-form-phi10 改指 holography.igusa-cusp-form-phi10-v2；
+  summary 步骤 1、2 按订正后的二重零点/二阶极点结构重写（旧版写"单零点"与隐含
+  简单极点逻辑的留数论证语言，是 physics-auditor 发现的第四处错误位置）；新增
+  gaps 字段显式记录 (b) 的公式与二阶极点结构不自洽、且本项目尚未核实正确形式
+  这一诚实缺口。完整背景见
+  docs/reviews/phi10-zero-multiplicity-defect-2026-09-20.md §7.3 与
+  docs/reviews/phi10-multiplicity-normalization-2026-09-20.md §0.3/§1.2。
+author: lead
+created: "2026-09-14"
