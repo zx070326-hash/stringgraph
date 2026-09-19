@@ -1,0 +1,47 @@
+id: holography.bss-rossello-dstar-normalization-constant--via-definition-alignment-and-numerical-anchor
+target: holography.bss-rossello-dstar-normalization-constant
+kind: proof
+status: rigorous
+depends_on:
+  - id: holography.bss-phi-tilde-proportional-to-igusa-phi10
+    note: "c := Φ̃₁/Φ₁₀ 的存在性与唯一性（至符号）"
+sources:
+  - ref: bhand-sen-singh-2023
+    loc: "eq (5.13)：d* 定义式包含 (−1)^{Q·P+1} 因子与被积函数 1/Φ̃_k（N=1 时 Φ̃₁）"
+  - ref: bhand-sen-singh-2023
+    loc: "eq (5.14)：围道虚部 Im τ=P²/(Nε)、Im σ=NQ²/ε、Im z=−ℓ/ε，实部 [0,1)³×[0,N)"
+  - ref: bhand-sen-singh-2023
+    loc: "eq (5.69)：数值 d*(10,14,5) = d*(1,0,1) = 50064（BSS 用 S-对偶联系两组；BSS 记号 (n_B,ℓ_B,m_B)=(1,0,1) 对应 Rosselló (m,n,ℓ)=(1,1,0)）"
+  - ref: rossello-2024
+    loc: "eq (2.22)：围道虚部 ρ₂=2nΛ、σ₂=2mΛ、v₂=−ℓΛ，实部 [0,1]³"
+  - ref: rossello-2024
+    loc: "eq (2.23)：d_* 定义式半周期平移在指数内 e^{−2πi(mρ+nσ+ℓ(v+1/2))}，被积函数 1/Φ₁₀"
+  - ref: rossello-2024
+    loc: "Appendix C eq (C.2)：数值 c_1^F(1,0)=−50064（Rosselló 记号，(m,n,ℓ)=(1,1,0)）；结合 eq (2.26) 关系式得 d_*(1,1,0)=+50064"
+summary: |
+  通过逐字对齐 BSS (5.13)/(5.14) 与 Rosselló (2.22)/(2.23) 的围道积分定义，建立
+  坐标字典（由指数配对与围道虚部双重确定，互相印证）与微分次序定向因子 η。
+  数值锚点 (M,E,ℓ)=(1,1,0) 给出 d*(1,1,0)=+50064（两文一致），确定 c·η = −1。
+  由 η²=1 恒成立，推出两个分支（η=+1 或 η=−1）给出同一结论 d*_BSS = d_*^R。
+
+  **推导步骤**：
+  1. **坐标字典**：由 BSS (5.13) 指数 `e^{−2πi(Eτ + Mσ_B + ℓz)}` 与 Rosselló (2.23)
+     指数 `e^{−2πi(Mρ + Eσ + ℓv)}` 逐项配对（E := Q²/2、M := P²/2），得
+     τ ↔ σ_R、σ_B ↔ ρ、z ↔ v。
+  2. **围道虚部验证**：BSS (5.14) 给 Im τ = 2M/ε、Im σ_B = 2E/ε、Im z = −ℓ/ε；
+     Rosselló (2.22) 给 ρ₂ = 2nΛ = 2EΛ、σ₂ = 2mΛ = 2MΛ、v₂ = −ℓΛ。取 Λ = 1/ε，
+     三个虚部逐项完全吻合（连 v/z 虚部的负号都一致）；实部都是单位立方体
+     （BSS 的 0 ≤ Re σ < N 在 N=1 即 [0,1)）。字典由两条独立路径确认，互为印证。
+  3. **微分次序差异**：两个积分是同一个积分，只差微分的书写次序：BSS 写
+     dτ dσ_B dz = dσ_R dρ dv，Rosselló 写 dρ dσ_R dv——差一次对换。
+  4. **定向因子**：令 η := +1（若按 Fubini 迭代积分理解，次序无关）或 η := −1
+     （若按定向 3-形式/楔积理解，对换变号）。结合 Φ̃₁ = c·Φ₁₀，得
+     d*_BSS = (−1)^{ℓ+1}·(1/c)·η·I，d_*^R = (−1)^ℓ·I，
+     其中 I 是共同的裸积分。
+  5. **数值锚点**：(M,E,ℓ)=(1,1,0) 时两文各自报告 d*(1,1,0)=+50064。代入
+     d*_BSS / d_*^R = (−1)·(η/c) = 1，得 c·η = −1。
+  6. **两支等价性**：从 η/c = −1 代入 c·η = −1（即 1/c = −η），得
+     η/c = η·(−η) = −η² = −1，故 d*_BSS / d_*^R = +1。
+     因 η²=1 恒成立，η 取 +1 或 −1 都给出 d*_BSS = d_*^R。
+author: graph-curator
+created: "2026-09-20"
