@@ -30,6 +30,9 @@ import sys
 
 
 def build(D):
+    assert D >= 3, "this script's hardcoded light-cone frame a=(0,1,1,0,...) needs D >= 3 " \
+        "(D=2 is outside this script's test range; the hand proof in proof.md itself " \
+        "needs no such restriction and no frame at all -- it holds for arbitrary p)"
     eta = [F(-1)] + [F(1)] * (D - 1)
     a = [F(0)] * D
     a[1] = F(1)
@@ -178,7 +181,7 @@ def run(D, verbose=False):
 
 
 if __name__ == "__main__":
-    ds = [int(x) for x in sys.argv[1:]] or [2, 3, 4, 5, 10, 25, 26, 27, 30, 50]
+    ds = [int(x) for x in sys.argv[1:]] or [3, 4, 5, 10, 25, 26, 27, 30, 50]
     results = {d: run(d, verbose=True) for d in ds}
     print("\nSummary: D -> nullity(ker S6)")
     for d, n in results.items():
