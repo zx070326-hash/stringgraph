@@ -180,4 +180,59 @@ theorem finrank_towerSeed_one_le (hη : ∀ μ, η μ * η μ = 1) {j : ℤ}
 
 end LevelOneDimensions
 
+/-! ### Step 2b: the transfer map exhausts the whole-slice kernel -/
+
+section Surjectivity
+
+variable {D : ℕ} {K : Type*} [Field K] [CharZero K] [Algebra ℚ K] {η a b : Fin D → K}
+
+/-- ⭐⭐⭐ **Step 2b of the bridge**: the syzygy transfer map is *onto* the whole-slice kernel,
+
+`S₆(V_{-6,1}) = ker (descPair η a b (-6) 6)`.
+
+A `D`-dimensional subspace (step 2a: `S₆` is injective and `dim V_{-6,1} = D`) sitting inside a
+space of dimension at most `D` (the generic count `LevelSixCount.finrank_ker_descPair_six_le`,
+which is `κ₆ = p_D(1) = D`) must be the whole thing.
+
+⭐ **No `(D : K) = 26` here.**  Both inputs are central-charge free: Form A holds for every `D`,
+and `κ₆ = D` is an Euler-pentagonal count valid for every `D`.
+
+⚠ The `IsNoetherian` detour is the `Prod` instance-path problem documented in
+`DescendantKernel.finrank_ker_seedPair_le`: `AddCommGroup ↥(ker (descPair …))` is not found by
+instance search on its own. -/
+theorem range_sixTransfer_eq_ker_descPair (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) :
+    LinearMap.range (sixTransfer η a b) = LinearMap.ker (descPair η a b (-6) 6) := by
+  classical
+  have hfin1 : FiniteDimensional K ↥(towerBigrade D K (-6) ((6 : ℕ) - 1)) :=
+    towerBigrade_finite _ _
+  have hfin2 : FiniteDimensional K ↥(towerBigrade D K (-6) ((6 : ℕ) - 2)) :=
+    towerBigrade_finite _ _
+  have hfinprod : FiniteDimensional K
+      (↥(towerBigrade D K (-6) ((6 : ℕ) - 1)) × ↥(towerBigrade D K (-6) ((6 : ℕ) - 2))) :=
+    inferInstanceAs (Module.Finite K
+      (↥(towerBigrade D K (-6) ((6 : ℕ) - 1)) × ↥(towerBigrade D K (-6) ((6 : ℕ) - 2))))
+  have hnoeth : IsNoetherian K
+      (↥(towerBigrade D K (-6) ((6 : ℕ) - 1)) × ↥(towerBigrade D K (-6) ((6 : ℕ) - 2))) :=
+    isNoetherian_of_isNoetherianRing_of_finite K
+      (↥(towerBigrade D K (-6) ((6 : ℕ) - 1)) × ↥(towerBigrade D K (-6) ((6 : ℕ) - 2)))
+  have h1 : Module.finrank K ↥(LinearMap.range (sixTransfer η a b)) = D := by
+    rw [LinearMap.finrank_range_of_inj (sixTransfer_injective F.hη),
+      finrank_towerBigrade_one F.hη]
+  refine Submodule.eq_of_le_of_finrank_le
+    (V := ↥(towerBigrade D K (-6) ((6 : ℕ) - 1)) × ↥(towerBigrade D K (-6) ((6 : ℕ) - 2)))
+    (range_sixTransfer_le_ker_descPair F.hη) ?_
+  rw [h1]
+  exact finrank_ker_descPair_six_le hD F (-6)
+
+/-- Step 2b in the form actually used below: every element of `ker (descPair η a b (-6) 6)` is
+`S₆ v` for some `v` on the level-one slice. -/
+theorem exists_sixTransfer_eq (hD : 2 ≤ D) (F : DDFLightConeFrame η a b)
+    {w : ↥(towerBigrade D K (-6) 5) × ↥(towerBigrade D K (-6) 4)}
+    (hw : w ∈ LinearMap.ker (descPair η a b (-6) 6)) :
+    ∃ v : ↥(towerBigrade D K (-6) 1), sixTransfer η a b v = w := by
+  have h := (range_sixTransfer_eq_ker_descPair hD F).ge hw
+  exact h
+
+end Surjectivity
+
 end StringFormal.NoGhost
