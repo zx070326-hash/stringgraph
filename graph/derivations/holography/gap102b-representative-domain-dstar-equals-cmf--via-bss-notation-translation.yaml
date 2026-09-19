@@ -5,8 +5,8 @@ status: rigorous
 depends_on:
   - id: holography.bss-theorem-5-4b
     note: |
-      BSS Thm 5.4(b) 在 BSS 自己的记号约定下（m=Q²/2 电、n=P²/2 磁）已建立
-      d*(P²/2, Q·P, Q²/2) = c_n^F(m,ℓ)（N=1 时）的关系。
+      BSS Thm 5.4(b) 在 BSS 自己的记号约定下（n_B=P²/2 磁、m_B=Q²/2 电）已建立
+      d*(n_B, ℓ_B, m_B) = c_n^F(m,ℓ)（N=1 时）的关系。
       本推导执行记号翻译并计算两篇文献 d* 定义式的符号差。
   - id: holography.bss-rossello-dstar-normalization-constant
     note: |
