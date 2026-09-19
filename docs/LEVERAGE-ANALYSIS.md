@@ -84,6 +84,20 @@ worldsheet.ddf-contour-equals-mode-sum: 1 bottleneck root(s)
 > 只讲了一个故事。读第 3–5 节的贪心/自封顶统计时要记住这条限制——那些统计全部建立在
 > `bottleneck_roots` 上。
 >
+> ✅ **工具侧已修（2026-09-19）**：`roots` 与 `why` 现在会在原输出之后**追加**打平的其它推导
+> 及它们各自的瓶颈根，并明确标出哪一条才是喂给统计的那条。`report` 列出全图处于此状态的卡。
+> 🔴 **统计口径刻意未改**（全部以新增函数实现，未动 `bottleneck_roots` /
+> `hitting_set_report` / `greedy_root_cover` / `is_self_capped` 任何既有函数体），
+> `hitting-set` 输出经 diff 验证与修改前**逐字节相同**——本文第 1、3、4、5 节的数字
+> 全部继续有效，无需重测。
+>
+> ⚠ **实测发现：全图有 20 张 active proposition 处于"多条推导 effective 打平"状态**（673 张中约 3%）。
+> 也就是说，除了本节这张卡之外**还有 19 张卡的隐藏瓶颈从未被看过**。本文的统计对它们
+> 同样只讲了一个故事。逐张查看：`uv run stringgraph report` 的 `tied effective derivations` 段，
+> 再对每个 id 跑 `uv run stringgraph roots <id>`。**这 19 张是一份现成的待查清单**，
+> 本文未逐张核查，不宜假定它们的隐藏瓶颈都无关紧要——这张卡的隐藏瓶颈恰恰是
+> 整条无鬼定理关键路径的真实障碍。
+>
 > **这条订正的实质后果**（🔴 比订正本身重要）：本文「结论先行」第 3 条把这张卡称为全图唯一的
 > 真级联点，据此建议优先形式化它。但按上表，沿 `--via-voa-residue` 这条**已经 own=rigorous**
 > 的路走时，真正的障碍是桥卡，而桥卡的瓶颈是 `[GAP-anchor]`——按
