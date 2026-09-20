@@ -115,3 +115,176 @@
 2. **"Im ρ ≥ Im σ 避开零点"完全未在本文出现**——如上节，需要查物理文献（建议：Sen 2008 review "Black Hole Entropy Function, Attractors and Precision Counting of Microstates", arXiv:0708.1270，或 Shih-Strominger-Yin hep-th/0505094，那里讨论 Φ₁₀ 零点与黑洞晕分解的收敛域）。
 
 3. **f(4nm-l²) 的判别式对应表**：本文公式 (1.9) 定义 f(N)（N=4n-l² 对单变量 Jacobi 形式 φ₀,₁），但 Δ₅ 的三变量乘积用的是 f(4nm-l²)（注意是 nm 乘积，不是单个 n）——这与 GN1998 抽取记录 E5 中 f₁(nm,l) 记号一致。f(0)=10, f(-1)=1 列在 (1.9) 后，但 f(1)（对应 discriminant -1，即 H₁ 判别式）的值本文未直接列出数值，只能从 Cohen 数公式或 φ₀,₁ 的展开 (1.8) 反推：φ₀,₁ = (r⁻¹+10+r)+q(10r⁻²-64r⁻¹+108-64r+10r²)+...，对应 f(0,±1)=10（n=0,l=±1，N=4·0-1=-1），与 "f(-1)=1" 矛盾——**需要仔细核对 (1.8)/(1.9) 的 N 定义是否为 N=4n-l² 还是 l²-4n，此处本文用词有潜在正负号混淆，标记为潜在印刷/符号陷阱，留给 curator 或后续核对者注意**。
+
+---
+
+# 【2026-09-20 追加，researcher，task：Φ₁₀ 在 v=0 附近领头行为路线的目标 2「收敛域」】
+
+- 本轮原文获取方式与上文不同：**arXiv 官方 PDF**（`https://arxiv.org/pdf/alg-geom/9603010`，curl HTTP 200），
+  **PyMuPDF** 取文本 + p.11 / p.12 200 dpi 渲染成图逐字目视核对。**未用 pdftotext。**
+- 上文（2026-09-16 那轮）自述用的是 "WebFetch 下载后用 Read 工具逐页读取（图像 OCR）"。
+  本轮对 p.5 / p.11 / p.12 / p.36 / p.37 做了 PDF 原生文本复核，结论见下（含对上文一处误读的更正，见 H10）。
+
+## H8 【★★ 目标 2：Siegel 坐标下的绝对收敛逐字来源】
+
+### H8a 本文对 ℍ₂ 的定义——确立 ">" 是矩阵序
+
+- 位置：§1 开头，PDF p.5（逐字）：
+
+  "A Siegel modular form of weight k with respect to Sp₄(ℤ) is, by definition, a holomorphic
+  function F(Z) on the Siegel upper half-plane
+
+  ```
+  H₂ = { Z = ( z₁  z₂ ; z₂  z₃ ) ∈ M₂(C) | Im (Z) > 0 },
+  ```
+  "
+
+- 类型：definition
+- **为什么记这一条**：本文**唯一一处**给 `Im(Z)` 配 ">" 号的地方，含义是
+  **矩阵 Im(Z) 正定**（Siegel 上半空间的标准定义）。这为 H8c 里 `Im(Z) > C` 的读法定锚。
+  ⚠ 本文**从未显式定义** `Im(Z) > C`（C 是标量）这一记号。
+
+### H8b Δ₅ 的无穷乘积 (1.10) 与 (n,l,m)>0 的显式含义
+
+- 位置：§1，PDF p.11 末 – p.12 初
+- 类型：proposition（本文自称引自 [GN1, Theorem 4.1]）
+- 原文陈述（逐字）：
+
+  p.11："In [GN1, Theorem 4.1] we proved that the modular form ∆₅(Z) is the denominator
+  function of a generalized Lorentzian Kac–Moody superalgebra and the product formula
+
+  ```
+                    1/2     ___
+  ∆₅(Z) = (q r s)          |   |  ( 1 − qⁿ rˡ sᵐ )^{f(4nm−l²)}                    (1.10)
+                            n, l, m ∈ Z
+                            (n,l,m) > 0
+  ```
+  "
+
+  p.12（紧接 (1.10)）："is valid where q = exp(2πiz₁), r = exp(2πiz₂), s = exp(2πiz₃).
+  The condition (n, l, m) > 0 in the product means that n ≥ 0, m ≥ 0, l is an arbitrary
+  integer if n + m > 0, and l < 0 if n = m = 0."
+
+- **坐标对照（本项目路线的记号 ↔ 本文记号）**：`ρ = z₁`, `v = z₂`, `σ = z₃`；
+  `q = e^{2πiρ}`, `r = e^{2πiv}`, `s = e^{2πiσ}`。**与 Kawai 1997 eq.(2.19) 的 p ↔ s 对调**，
+  但 (1.10) 的指数 `f(4nm−l²)` 与 Kawai eq.(5.13) 的 `c(4kl−r²)` 结构相同（`c = 2f`）。
+
+### H8c 【★★ 承重逐字】绝对收敛的陈述
+
+- 位置：§1，PDF p.12，**紧跟在 (n,l,m)>0 的解释之后、∆₃₅ 的定义之前**，以括注形式出现
+- 类型：remark（本文用 "We remark that"，**无证明、无引用**）
+- 原文陈述（逐字，200 dpi 渲染图目视核对）：
+
+  "(We remark that the infinite product **absolutely converges** for all Im(Z) > C for a
+  large C > 0.)"
+
+- **逐字要点**：
+  1. 用的是 "**absolutely converges**"——**比 borcherds-1995 Theorem 5.1 的 "converges" 更强**
+     （见 `extractions/borcherds-1995.md` B2）。这正是路线所需的"可重排为三块"的那种收敛。
+  2. 这句话**直接挂在 (1.10) 上**，即挂在 **Δ₅ 的乘积**上，而本文 p.7 逐字断言
+     "χ₁₀(Z) is the square of the form ∆₅(Z) of weight 5"（见本文件开头「关键澄清」）。
+  3. **量词形式是「Im(Z) > C for a large C > 0」，不是 Weyl chamber 形式，没有任何 chamber 条件。**
+  4. 本文**未给出 C 的任何显式界，也未给证明**。
+
+- 同页另一处相容表述（逐字，PDF p.12）：Corollary 1.6 的开头
+  "The following identity is valid for **Z with a large imaginary part**"。
+
+### H8d 附录 B 的平行陈述（不同对象，仅作旁证）
+
+- 位置：Appendix B，Theorem B.1 i)，PDF p.37（逐字）：
+  "i) The given infinite product absolutely converges for all Im(Z) > C for a large C > 0
+  and can be continued to a multi-valued analytic function on H₂."
+- ⚠ **对象是 F⁽⁵⁾(Z)（weight 24，除子 H₅），不是 Δ₅/χ₁₀**。措辞与 H8c 逐字相同，
+  说明这是作者的固定表述模板。本文件上文（2026-09-16 那轮）第 105 行引的就是这一条，
+  **但那是附录里的另一个函数**；H8c 才是挂在 Δ₅ 上的那一条。
+- 同页证明开头逐字（PDF p.36）："One can easily proof this theorem using the method we used
+  in [GN1, Theorem 4.1] (see also **[B5, Theorem 5.1]**)."
+  ⇒ 本文引 Borcherds 1995 用的标签是 **[B5]**，与本文文献表一致
+  （对比 GN1998 正文用 "[Bo6]"，与其文献表 [B1]–[B6] 不自洽，见 `extractions/borcherds-1995.md` 疑点 2）。
+
+## H9 【我的推断，非原文】H8c 是否蕴含任务的验收标准
+
+**任务验收标准（lead 给定）**：存在 `C > 0` 与 `δ > 0`，使乘积在
+`{ Ω = [[ρ,v],[v,σ]] ∈ ℍ₂ : Im ρ > C, Im σ > C, |Im v| < δ }` 上绝对收敛，
+且该区域是 ℍ₂ 的开子集、对每个固定的 (ρ,σ) 含 `v` 的一个邻域（特别地含 `v=0`）。
+
+**以下每一步都是我的推导，GN1996 没有写。**
+
+**第 0 步（记号读法）**：把 H8c 的 `Im(Z) > C` 按 H8a 确立的矩阵序读作
+`Im(Z) − C·E₂ > 0`（正定），其中 `E₂` 是 2×2 单位阵。
+理由：(a) 本文 p.5 定义 ℍ₂ 时 `Im(Z) > 0` 就是矩阵正定；(b) 逐元素读法在此处无意义——
+`Im z₂` 在 ℍ₂ 上可正可负，要求 `Im z₂ > C > 0` 会把收敛域缩成一个不对称的怪集合，
+而本文同页 Corollary 1.6 只说 "a large imaginary part"。
+⚠ **这仍是推断：本文从未定义 `Im(Z) > C`。**
+
+**第 1 步（展开矩阵不等式）**：设 `Y = Im Z = [[y₁, y₂],[y₂, y₃]]`（`y₁=Im ρ, y₂=Im v, y₃=Im σ`）。
+`Y − C·E₂ > 0` ⟺ `y₁ − C > 0` 且 `(y₁−C)(y₃−C) − y₂² > 0`。
+
+**第 2 步（造出验收标准的方盒）**：取 `C' := 2C`、`δ := C`。若 `y₁ > C'`, `y₃ > C'`, `|y₂| < δ`，则
+`y₁ − C > C > 0`，`y₃ − C > C > 0`，故 `(y₁−C)(y₃−C) > C² > y₂²`。
+⇒ `{y₁ > 2C, y₃ > 2C, |y₂| < C} ⊆ {Im(Z) > C·E₂}`，乘积在其上绝对收敛。
+
+**第 3 步（开性与 v-邻域）**：该集合由**严格不等式**定义、且 `Im` 与乘法连续，故是 ℂ³ 的开集，
+与 ℍ₂ 交后是 ℍ₂ 的开子集（第 2 步已保证含于 ℍ₂：`Y > C·E₂ > 0`）。
+对固定的 (ρ, σ)，条件只限制 `|Im v| < δ`、**不限制 `Re v`**，故 v 的允许集是带形
+`{v ∈ ℂ : |Im v| < δ}`，它是 ℂ 的开集且含 `v = 0`。✔
+
+**结论（我的推断）：H8c 蕴含任务的验收标准，取 `C_验收 = 2C`、`δ = C`。**
+
+**第 4 步（从 Δ₅ 到 Φ₁₀ = χ₁₀ = Δ₅²）**：绝对收敛的无穷乘积平方后仍绝对收敛
+（指数逐项翻倍：`∏(1−u_i)^{2a_i} = (∏(1−u_i)^{a_i})²`，Σ|2a_i u_i| = 2Σ|a_i u_i| < ∞）。
+故 Φ₁₀ 的乘积在同一区域绝对收敛。**这一步 GN1996 也没写**（它从不把 χ₁₀ 单独展成乘积，
+见本文件开头「关键澄清」与「未解决的疑问 1」）。
+
+**旁证（我的验算，解释为什么这个域不需要 Weyl chamber 条件）**：(1.10) 的第 (n,l,m) 个因子的模是
+`|qⁿrˡsᵐ| = exp(−2π(n y₁ + l y₂ + m y₃))`。指数 `f(4nm−l²)` 非零要求 `4nm − l² ≥ −1`，
+即 `|l| ≤ √(4nm+1)`——**对每个 (n,m) 只有有限个 l**。于是
+`n y₁ + l y₂ + m y₃ ≥ n y₁ + m y₃ − √(4nm+1)·|y₂|`，而 `Y > C·E₂` 给出
+`n y₁ + m y₃ ≥ 2√(nm y₁ y₃) > 2√(nm)·|y₂|`（由 `y₁y₃ > y₂²`）并留有正裕量。
+这正是 `det Y > 0` 的作用，与 `y₂` 的**符号无关**——所以作者能给出一个关于 `Im v ↔ −Im v` 对称、
+不带 chamber 条件的域。**这段是我的验算，不是原文论证。**
+
+## H10 对本文件上文「未解决的疑问 3」的更正
+
+上文第 117 行称：由 (1.8) 读出 "f(0,±1)=10"，与 (1.9) 后的 "f(−1)=1" 矛盾。
+**本轮官方 PDF 复核表明：这是上一轮的误读，(1.8) 与 (1.9) 之间没有矛盾。**
+
+- (1.8) 逐字（PDF p.11）：
+  `φ₀,₁(z₁,z₂) = φ₁₂,₁(z₁,z₂)/∆₁₂(z₁) = Σ_{n≥0, l∈Z} f(n,l) exp(2πi(n z₁ + l z₂))`
+  `= (r⁻¹ + 10 + r) + q(10r⁻² − 64r⁻¹ + 108 − 64r + 10r²) + …`
+- 读法：`(r⁻¹ + 10 + r)` 里 `r⁻¹` 与 `r` 的**系数是 1**（不是 10），常数项系数才是 10。
+  故 `f(0,0) = 10`、`f(0,±1) = 1`。
+- 代入 `N = 4n − l²`：`f(0) = f(0,0) = 10` ✔，`f(−1) = f(0,±1) = 1` ✔。
+  与 (1.9) 后逐字的 "In particular, we have f(0) = 10, f(−1) = 1 and f(n) = 0 if n < −1" **完全一致**。
+- 连带：本文的 `f` 与 Kawai 1997 的 `c` 之间是 `c = 2f`（`c(0)=20=2·10`，`c(−1)=2=2·1`，
+  见 `extractions/kawai-1997-k3-genus-z0.md` E4）——因为 K3 椭圆亏格 `Z = 2φ̃_{0,1}`（Kawai eq.(4.6)），
+  而本文的 `φ₀,₁` 就是 Kawai 的 `φ̃_{0,1}`（两者都 `= φ₁₂,₁/η²⁴`）。
+  ⇒ Φ₁₀ = Δ₅² 的指数是 `2f = c`，与 Kawai eq.(5.13) 的 `c(4kl−r²)` **自洽**。（这段是我的对照，非原文。）
+
+## 本轮新发现的原文疑点
+
+1. **GN1996 PDF p.11 的印刷错误**：φ₁₂,₁ 的 q² 系数逐字印作
+   `(10r−2 − 88r−1 − 132 − 88r + 10r−2)q²`，**最后一项的指数应为 +2**（即 `10r²`）。
+   我的验算：`φ₁₂,₁ = φ₀,₁·∆₁₂`，`∆₁₂ = q(1 − 24q + …)`，故 q² 项
+   `= (10r⁻² − 64r⁻¹ + 108 − 64r + 10r²) − 24(r⁻¹ + 10 + r)`
+   `= 10r⁻² − 88r⁻¹ − 132 − 88r + 10r²`——数值系数（−88, −132）全部对上，只有末项指数排错。
+   **这是纯排印错误，不影响任何结论。**（同页 (1.8) 里 φ₀,₁ 的对应项印的是 `10r2`，是对的。）
+2. `Im(Z) > C` 这个记号**全文未定义**（见 H9 第 0 步）。
+3. 本文件上文第 105 行把 Appendix B Theorem B.1 i) 当成"本文关于收敛性的唯一相关陈述"——
+   **不准确**：p.12 还有一条（H8c），而且那一条才是挂在 Δ₅ 上的。上文那次检索漏了 p.12。
+
+## 本轮：我亲自逐字核过的 / 我转述或推断的
+
+**亲自逐字核过（arXiv 官方 PDF + PyMuPDF；p.11、p.12 另经 200 dpi 渲染图目视）**：
+- PDF p.5：ℍ₂ 的定义（含 `Im (Z) > 0`）、Siegel 模形式的函数方程 (1.1)
+- PDF p.7：`χ₁₀(Z) is the square of the form ∆₅(Z) of weight 5`、环生成元列表
+- PDF p.11：φ₁₂,₁ 的展开、(1.8)、(1.9)、`f(0)=10, f(−1)=1, f(n)=0 if n<−1`、(1.10)
+- PDF p.12：(n,l,m)>0 的解释、**绝对收敛括注（H8c）**、∆₃₅ 的定义、Theorem 1.5、Corollary 1.6
+- PDF p.36：Theorem B.1 的陈述与证明首句（含 `[B5, Theorem 5.1]`）
+- PDF p.37：Theorem B.1 i)–iii)
+
+**我转述或推断的（非原文）**：
+- H9 全部五步（`Im(Z) > C` 的矩阵序读法、方盒构造、开性、Δ₅→Δ₅² 的平方、以及无需 chamber 的旁证验算）。
+- H10 里 `c = 2f` 的对照。
+- 「本轮疑点 1」里 φ₁₂,₁ q² 系数的验算。
+- 坐标对照 `ρ=z₁, v=z₂, σ=z₃`（本文不用 ρ/σ/v 这套记号，见上文第 103 行）。
