@@ -5189,7 +5189,27 @@
              根重数 f₁(nm,l) = φ_{0,1} 的 Fourier 系数（只依赖判别式 4nm-l²）。
              广义 Cartan 矩阵 A_{1,II} 的具体数值在 Part I (alg-geom/9610022) 中，本文只作引用。
              **H_r 存在性**：本文未显式陈述；属间接推断（见 extractions/gritsenko-nikulin-1998-bkm.md H_r 节）。
-             抽取记录：extractions/gritsenko-nikulin-1998-bkm.md（E1–E8，2026-09-15）。}
+             抽取记录：extractions/gritsenko-nikulin-1998-bkm.md（E1–E8，2026-09-15）。
+             ——2026-09-20 researcher 追加（第二轮，改用 **arXiv 官方 PDF** + PyMuPDF；**未用 pdftotext**）：
+             **（1）目标 2「Borcherds 乘积收敛域」的 Siegel 坐标翻译在本文 PDF p.31**，
+             即 Theorem 2.1 的**证明第一句**，逐字："The product (2.3) is a particular case of automorphic
+             products considered in [Bo6, Theorem 5.1]. **It converges for det (Im(Z)) > c, where c is
+             sufficiently large**, and it can be extended to a multi-valued meromorphic function on H₂
+             whose singularities, including zeros, lie on rational quadratic divisors H_ℓ of type (1.22)."
+             注意：只写 "converges"（不是 absolutely，那条在 gritsenko-nikulin-1996）；**无 Weyl chamber 条件**；
+             **该句在证明里而非定理陈述里**，作者以"是 [Bo6, Thm 5.1] 的特例"带过未重证。
+             取 C=√(2c), δ=√c 可得 {Im ρ>C, Im σ>C, |Im v|<δ} ⊆ {det Im Z > c}（含 v=0 邻域）——**此构造为本项目推断**。
+             Theorem 2.1 (2.3) 在 t=1, φ=φ_{0,1} 时 A=B=C=1/2、权 =f(0,0)/2=5，与 (2.16) 的
+             ∆₅ = (qrs)^{1/2}∏(1−qⁿrˡsᵐ)^{f₁(nm,l)} ∈ N₅(Γ₁,χ₂) 逐项吻合（此对号入座为本项目验算，原文未写 "∆₅ = Exp-Lift(φ_{0,1})"）。
+             证明中的 (2.6)/(2.7) 是作者自己做的**两块分解**（第一块 = theta/eta 的显式乘积），为路线的"分块重排"提供文献先例。
+             **（2）更正 2026-09-15 那轮记录的系统性符号错误**（该轮用 pdftotext）：本文用 **∆**（不是 ψ）命名
+             ∆_{1/2}, ∆₁, ∆₂, ∆₅, ∆₃₅；分母函数族记作 **Φ_{t,j,µ}**（p.56 逐字 "Φ_{1,II,0} = ∆₅"）；
+             第三个 Siegel 变量是 **ω** 不是 σ（p.2 逐字 "Z = (τ z; z ω) … s = exp (2πi ω)"）；
+             该轮标注的 "§2.2（p.35）" 实际在 **p.33**。数学内容不受影响，仅字母/页码需订正。
+             **（3）引用标签错误**：正文 p.3/p.30/p.31/p.33 写 "[Bo6, Theorem 10.1 / Theorem 5.1 / Lemma 9.2]"，
+             但文献表（p.67–68）标号是 [B1]–[B6]，[B5] 才是 Borcherds Invent. Math. 120 (1995)——
+             经逐字核实该文同时含 Theorem 5.1 / Theorem 10.1 / Lemma 9.2，故正文 "[Bo6]" 应读作 **[B5]**（本项目认定）。
+             追加抽取记录：extractions/gritsenko-nikulin-1998-bkm.md（E9–E10 节）。}
 }
 
 @article{gritsenko-nikulin-1996,
@@ -5210,7 +5230,25 @@
              Siegel 形式使其零点恰为 Humbert 曲面 H_D。
              **未找到** "Im ρ ≥ Im σ 避开零点"型陈述——本文不用 ρ 记 Siegel 变量，且没有此类
              收敛域几何论证；疑似物理文献（Sen 黑洞晕分解）自己的论证，需另查。
-             抽取记录：extractions/gritsenko-nikulin-1996-phi10.md（H1–H7，2026-09-16）。}
+             抽取记录：extractions/gritsenko-nikulin-1996-phi10.md（H1–H7，2026-09-16）。
+             ——2026-09-20 researcher 追加（第二轮，改用 **arXiv 官方 PDF** + PyMuPDF + p.11/p.12
+             200 dpi 渲染图目视；未用 pdftotext）：
+             **（1）目标 2「Borcherds 乘积收敛域」的最佳逐字来源在本文 PDF p.12**，
+             紧跟 (1.10) 的 (n,l,m)>0 解释之后，以括注出现，逐字：
+             "(We remark that the infinite product **absolutely converges** for all Im(Z) > C for a large C > 0.)"
+             ——注意是 "absolutely converges"（比 borcherds-1995 Theorem 5.1 的 "converges" 强），
+             **直接挂在 Δ₅ 的乘积 (1.10) 上**，而本文 p.7 逐字给 χ₁₀ = Δ₅²，**且无任何 Weyl chamber 条件**。
+             本文 p.5 定义 ℍ₂ 时用 `Im (Z) > 0` 表矩阵正定，据此把 `Im(Z) > C` 读作 Im(Z) − C·E₂ 正定，
+             即可导出 {Im ρ > 2C, Im σ > 2C, |Im v| < C} 上绝对收敛（含 v=0 的邻域）——**此读法与导出为本项目推断，
+             本文从未定义 `Im(Z) > C` 这一记号**。
+             **（2）更正本项目早前记录的一处误读**：φ₀,₁ 的 (1.8) 展开 `(r⁻¹+10+r)+q(...)` 中 r^{±1} 的系数是 **1**
+             （不是 10），故 f(0,0)=10、f(0,±1)=1，与 (1.9) 后的 "f(0)=10, f(−1)=1" **无矛盾**；
+             连带 c = 2f（c(0)=20, c(−1)=2，见 kawai-1997）。
+             **（3）本文 PDF p.11 印刷错误**：φ₁₂,₁ 的 q² 系数印作 (10r^{−2} −88r^{−1} −132 −88r + 10r^{−2})q²，
+             末项指数应为 +2；数值系数 −88/−132 经本项目验算无误，纯排印错。
+             **（4）** 附录 B Theorem B.1 i) 有逐字相同的收敛语句，但对象是 F^{(5)}（weight 24），**不是 Δ₅**；
+             其证明首句引 Borcherds 用的是 **[B5, Theorem 5.1]**（与本文文献表一致，对比 GN1998 正文误用 [Bo6]）。
+             追加抽取记录：extractions/gritsenko-nikulin-1996-phi10.md（H8–H10 节）。}
 }
 
 @article{dabholkar-gomes-murthy-2008,
@@ -5285,7 +5323,47 @@
                eq.(4.32) c(0)=20, c(−1)=2, c(N)=0 for N<−1。
                **用于坐实两条 GAP-前提：(1) 乘积因子只含 y 的整数指数 r ⇒ Φ₁₀ 椭圆变量整周期性；
                (2) c(−1)=2≠0 ⇒ 奇 ℓ 项系数非零**。抽取记录 extractions/phi10-periodicity-and-product.md。
-               注意：原始严格来源为 gritsenko-nikulin-1998（alg-geom/9611028），本条目为其物理综述转述。}
+               注意：原始严格来源为 gritsenko-nikulin-1998（alg-geom/9611028），本条目为其物理综述转述。
+               ——2026-09-20 researcher 补充（第二轮抽取，改用 **arXiv 官方 PDF** + PyMuPDF +
+               p.11/p.13 200 dpi 渲染图目视；未用 pdftotext）：官方 PDF 式号与前一轮经 ar5iv HTML 所记
+               **完全一致**（(4.31)/(4.32)/(5.13) 均对上），**c(0)=20 经官方 PDF 复核确认**。
+               新逐字核到（PDF p.11，§4）：
+               eq.(4.21) Z(τ,z) = 24{(ϑ_{ν+1}(z)/ϑ_{ν+1}(0))² + e_ν K(z)²}, (ν=1,2,3)；
+               eq.(4.22) Z(τ,z) = 8 Σ_{ν=1}^{3} (ϑ_{ν+1}(z)/ϑ_{ν+1}(0))²；
+               脚注 †："The formula given in [KYY] corresponds to the choice ν = 2."
+               **(4.22) 在 z=0 逐项化为 1，给出 Z(τ,0)=8·3=24 对一切 τ**（代入这一步是本项目所加，非原文）。
+               另：eq.(4.6) Z = 2φ̃_{0,1}；eq.(4.2) Z = 2y⁻¹+20+2y+O(q)（仅 q⁰ 阶）。
+               ⚠ **本文全文无任何收敛性陈述**（正则检索 converge|Weyl chamber|sufficiently large|absolutely
+               零命中）；§5 给乘积公式但不说收敛域。补充抽取记录 extractions/kawai-1997-k3-genus-z0.md。}
+}
+
+@article{kawai-yamada-yang-1994,
+  author    = {Kawai, Toshiya and Yamada, Yasuhiko and Yang, Sung-Kil},
+  title     = {Elliptic genera and {$N=2$} superconformal field theory},
+  journal   = {Nuclear Physics B},
+  volume    = {414},
+  pages     = {191--212},
+  year      = {1994},
+  doi       = {10.1016/0550-3213(94)90428-6},
+  note      = {arXiv:hep-th/9306096v2 (28 Jun 1993)；KEK-TH-362。由 researcher 于 2026-09-20 登记。
+               **正文已取得**（arXiv 官方 PDF，PyMuPDF 抽文本 + 承重页 200 dpi 渲染图逐字目视核对；
+               未用 pdftotext）。**式号取自 arXiv v2 PDF，Nucl. Phys. 刊出版编号未核。**
+               本项目逐字核到（均在 PDF p.15 = 印刷 p.14，§5.2 "ĉ = 2 Models"）：
+               eq.(5.3) K3 椭圆亏格显式 θ 表达式
+                 Z(τ,z) = 24(ϑ₃(τ,z)/ϑ₃)² − 2((ϑ₄⁴−ϑ₂⁴)/η⁴)(ϑ₁(τ,z)/η)²，其中 ϑ_a := ϑ_a(τ,z=0)；
+               eq.(5.4) **χ = 24**（同式中 Â、σ 各带无穷 q-级数，唯独 χ 是裸常数）；
+               eq.(5.5) (q,y) 双重展开系数表（q⁰ 行 2,20,2；q¹ 行 20,−128,216,−128,20；
+                 q² 行 2,216,−1026,1616,−1026,216,2——逐行求和 = 24, 0, 0）。
+               另核：§5 eq.(5.1) **χ = Z(τ,0)**（连同 Â = q^{ĉ/8}Z(τ,(τ+1)/2), σ = Z(τ,1/2)）；
+               §2 eq.(2.1) 椭圆亏格定义、eq.(2.3) Z(τ,0)=Tr(−1)^F（措辞是 "may yield the Euler
+               characteristic … if the theory admits a sigma model interpretation"，**带条件**）；
+               §5.3 eq.(5.7) Z(τ,0)=Tr(−1)^F=2(h^{1,1}−h^{2,1})=χ(M)（**CY3 情形，非 K3**）。
+               **用途：这是本项目为 `χ_{K3}(τ,0) = 24 对一切 τ` 取到的最强逐字来源**
+               （(5.1)+(5.4)）；它是 Φ₁₀ Borcherds 乘积在 v=0 附近领头行为
+               Φ₁₀ = −4π²v²η(ρ)²⁴η(σ)²⁴ + O(v⁴) 的承重前提。
+               脚注 8 逐字："In eq.(3.6) of [10] the coefficient 34 should read 32."
+               （[10] = Eguchi–Ooguri–Taormina–Yang, Nucl. Phys. B315 (1989) 193，本项目未取得该文正文）。
+               抽取记录 extractions/kawai-yamada-yang-1994.md（E1–E8）。}
 }
 
 @article{borcherds-1988,
@@ -5315,12 +5393,30 @@
   pages   = {161--213},
   year    = {1995},
   doi     = {10.1007/BF01241126},
-  note    = {由 researcher 于 2026-09-17 登记（task GAP-BKM 候选文献）。**正文未取得**（L0）。
-             本文标题明确提到 infinite products 与自守形式，可能比 borcherds-1992 更直接相关于
-             ψ₅(z+½) 的模形式解释及扭转分母恒等式（research/attempts/bkm-shift-explanation [GAP-S3-扭转公式]）。
-             待验证是否包含：(1) 一般 BKM 代数在有限阶自同构下的扭转分母恒等式定理；
-             (2) 对内自同构 ω = exp(πi·ad H_r) 的适用性；(3) 和式侧扭转形式的显式陈述。
-             见 extractions/borcherds-1992-twisted.md 建议后续行动。}
+  note    = {由 researcher 于 2026-09-17 登记（task GAP-BKM 候选文献）。
+             ——2026-09-20 researcher 更新：**正文已取得**（L0 → 全文）。来源为作者主页公开 PDF
+             `https://math.berkeley.edu/~reb/papers/on2/on2.pdf`（curl HTTP 200，339060 字节，50 页，
+             页眉自标 "Invent. Math. 120, p. 161-213 (1995)"）；PyMuPDF 取文本 + p.16 200 dpi 渲染图目视核对，未用 pdftotext。
+             ⚠ 以下页码为**作者版 PDF 页码**，非刊印页码；刊印版定理编号未核。
+             逐字核到：§5 "Analytic continuation"（p.16）modular product 的定义
+               Φ(y) = e^{−2πi(ρ,y)} ∏_{x∈L, x>0}(1 − e^{−2πi(x,y)})^{c(x)}，y∈L⊗ℂ, ℑ(y)∈C；
+             **Theorem 5.1**（p.16）："Any modular product Φ(y) converges to a holomorphic function
+               whenever ℑ(y) is in C and has sufficiently large norm. This function can be analytically
+               continued to a multivalued meromorphic function for all y with ℑ(y) ∈ C all of whose
+               singularities and zeros lie on rational quadratic divisors."
+               ⚠ 原文是 "converges"，**不是 "absolutely converges"**（绝对收敛要引 gritsenko-nikulin-1996）；
+               ⚠ C 是**负**范数向量锥，故 "large norm" 字面与意图相反，实指 |(ℑy,ℑy)| 大（此解读为本项目推断）；
+               ⚠ 此处**无任何 Weyl chamber 条件**。
+             p.16 末段：若输入模形式是全纯的则乘积在整个 ℑ(y)∈C 上收敛——**Φ₁₀ 不属于此情形**
+               （其输入是 nearly holomorphic，c(−1)=2≠0），故只能用 Theorem 5.1 的"norm 充分大"域。
+             **Theorem 10.1**（p.29，§10 "The zero weight case"）给出 Φ(v)=e^{−2πi(ρ,v)}∏_{r>0}(1−e^{−2πi(r,v)})^{c(−(r,r)/2)}
+               是 O_M(ℤ)⁺ 的亚纯自守形式，权 c(0)/2——**其陈述中不含收敛域**，证明（p.30）把收敛域外包给 Theorem 5.1。
+             另核 Lemma 9.2（p.28）。**本文同时含 Lemma 9.2 / Theorem 5.1 / Theorem 10.1 三个编号，
+             因此 gritsenko-nikulin-1998 正文所引的 "[Bo6, …]" 即本文**（该文文献表里本文标为 [B5]，
+             正文标签 [Bo6] 与文献表不自洽；gritsenko-nikulin-1996 引同一定理时用的是与其文献表一致的 [B5]）。
+             **用途：Φ₁₀ Borcherds 乘积收敛域的上游来源**（Siegel 坐标翻译见 gritsenko-nikulin-1998 定理 2.1 证明）。
+             抽取记录 extractions/borcherds-1995.md（B1–B6）。
+             仍未核：本文是否含扭转分母恒等式（GAP-S3-扭转公式 的原问题）——本轮任务未涉及。}
 }
 
 @article{scheithauer-2000,

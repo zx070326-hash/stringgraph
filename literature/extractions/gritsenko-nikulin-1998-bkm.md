@@ -189,3 +189,207 @@
 4. **H_r 的显式代数陈述**：本文完全没有给出。最近的来源可能是 [GN1] §6 或 Borcherds (1992) "Monstrous moonshine and monstrous Lie superalgebras"，后者给出了一般 BKM 代数的 Cartan 元素构造。
 
 5. **与物理文献的符号差异**：物理文献（如 DVV (1997)、Sen (2007)）中 Φ₁₀ 的变量约定通常是 (τ,z,σ) 或 (σ,v,ρ)，而本文用 Z = [[τ,z],[z,σ]]。需要核对变量对应关系。
+
+---
+
+# 【2026-09-20 追加，researcher，task：Φ₁₀ 在 v=0 附近领头行为路线的目标 2「收敛域」】
+
+- 本轮原文获取方式：**arXiv 官方 PDF**（`https://arxiv.org/pdf/alg-geom/9611028`，curl HTTP 200，69 页），
+  **PyMuPDF** 取文本。**未用 pdftotext**（上文 2026-09-15 那轮自述用的是 pdftotext，见第 7 行；
+  本轮发现该轮记录存在系统性符号替换，见下方「对上文的更正」——这与 pdftotext 的已知失真一致）。
+
+## E9 【★★ 目标 2：Siegel 坐标下收敛域的逐字来源】Theorem 2.1 及其证明首句
+
+### E9a Theorem 2.1（Borcherds 指数提升，Siegel/paramodular 坐标）
+
+- 位置：§2.1「Borcherds lifting」，PDF p.30
+- 类型：theorem
+- 原文陈述（逐字，节选与本任务相关的部分）：
+
+  "**Theorem 2.1.** Assume that the Fourier coefficients of Jacobi form φ_{0,t} from (2.1) are
+  integral. Then the product
+
+  ```
+                                            ___
+  Exp-Lift(φ_{0,t})(Z) = B_φ(Z) = q^A r^B s^C |   |  (1 − qⁿ rˡ s^{tm})^{f(nm,l)} ,     (2.3)
+                                              n,l,m ∈ Z
+                                              (n,l,m) > 0
+  ```
+
+  where
+
+  ```
+  A = (1/24) Σ_l f(0,l) ,   B = (1/2) Σ_{l>0} l f(0,l) ,   C = (1/4) Σ_l l² f(0,l) ,
+  ```
+
+  and (n, l, m) > 0 means that if m > 0, then l and n are arbitrary integers, if m = 0, then
+  n > 0 and l ∈ Z or l < 0 if n = m = 0, defines a meromorphic modular form of weight
+  f(0,0)/2 with respect to Γ⁺_t with a character (or a multiplier system if the weight is
+  half-integral) induced by v^{24A}_η × v^{2B}_H."
+
+  其中 (2.1) 逐字：`φ_{0,t}(τ, z) = Σ_{n,l∈Z} f(n,l) qⁿ rˡ ∈ J^{nh}_{0,t}`，
+  紧接一句逐字："be a nearly holomorphic Jacobi form of weight 0 and index t
+  (i.e. n might be negative in the Fourier expansion)."
+
+- 文献自称的严格程度：**定理**，自称是 Borcherds 构造的变体（p.30 逐字：
+  "We prove below a variant of the Borcherds construction of automorphic forms as infinite
+  products (see [Bo6, Theorem 10.1]). We remark that Theorem 10.1 in [Bo6] was formulated
+  only for an unimodular lattice."）。
+
+### E9b 【★★ 承重逐字】收敛域的那一句
+
+- 位置：§2.1，**Theorem 2.1 的证明第一句**，PDF p.31
+- 类型：proof step（**不是定理陈述的一部分**——这一点很重要，见下方裁定）
+- 原文陈述（逐字）：
+
+  "*Proof.* The product (2.3) is a particular case of automorphic products considered in
+  [Bo6, Theorem 5.1]. **It converges for det (Im(Z)) > c, where c is sufficiently large**, and
+  it can be extended to a multi-valued meromorphic function on H₂ whose singularities,
+  including zeros, lie on rational quadratic divisors H_ℓ of type (1.22)."
+
+- **逐字要点**：
+  1. 收敛域被写成 **`det (Im(Z)) > c`**——这是**行列式**形式，不是矩阵序，也**不是 Weyl chamber 形式**。
+  2. 原文只写 "converges"，**未写 "absolutely"**（要绝对收敛请引 GN1996 p.12，
+     见 `extractions/gritsenko-nikulin-1996-phi10.md` H8c）。
+  3. `c` 无显式界。
+  4. 这句话**位于证明中**，是把 Borcherds Theorem 5.1 的锥语言**翻译到 Siegel 坐标**的那一步
+     ——本项目目标 2 所缺的正是这一步翻译，**GN1998 在这里替我们做了**。
+  5. 全文另有两处限定语（PDF p.31、p.32，逐字）："whenever the product converges"，
+     说明作者自觉地把所有 Γ∞-不变性论证都限制在收敛域内。
+
+### E9c Theorem 2.1 在 t=1、φ = φ_{0,1} 时就是 Δ₅（⇒ Φ₁₀ = Δ₅²）
+
+- 位置：§2.2 Example 2.4「The modular form ∆₅(Z)」，PDF p.35
+- 类型：proposition（本文自称引自 [GN1]）
+- 原文陈述（逐字）：
+
+  "(2.15)  `φ_{0,1}(τ, z) = φ_{12,1}(τ,z)/η(τ)²⁴ = (r+10+r⁻¹) + q(10r⁻² − 64r⁻¹ + 108 − 64r + 10r²) + q²(…)`"
+
+  "The function φ_{0,1} gives the following result from [GN1] about the product of even
+  theta-constants:
+
+  ```
+  ∆₅(Z) = Σ_{n,l,m≡1 mod 2, n,m>0} Σ_{a|(n,l,m)} (−1)^{(l+a+2)/2} a⁴ τ₉((4nm−l²)/a²) q^{n/2} r^{l/2} s^{m/2}
+                    ___
+        = (qrs)^{1/2} |   |  (1 − qⁿ rˡ sᵐ)^{f₁(nm,l)}  ∈ N₅(Γ₁, χ₂)                     (2.16)
+                       n,l,m∈Z
+                       (n,l,m)>0
+  ```
+
+  where f₁(n, l) are the Fourier coefficients of φ_{0,1}(τ, z)."
+
+- **我的验算（非原文）**：把 t=1、`f = f₁` 代入 Theorem 2.1 的 A/B/C：
+  由 (2.15) 的 q⁰ 项 `(r + 10 + r⁻¹)` 得 `f₁(0,0)=10`, `f₁(0,±1)=1`，其余 `f₁(0,l)=0`。于是
+  `A = (1/24)(1+10+1) = 1/2`，`B = (1/2)(1·1) = 1/2`，`C = (1/4)(1²·1 + (−1)²·1) = 1/2`，
+  故 (2.3) 的前因子 `q^A r^B s^C = (qrs)^{1/2}`，**与 (2.16) 逐字吻合**；
+  权 `f₁(0,0)/2 = 10/2 = 5`，**与 (2.16) 的 `∈ N₅(Γ₁, χ₂)` 逐字吻合**。
+  ⇒ **(2.16) 就是 (2.3) 在 t=1, φ=φ_{0,1} 的实例，故 E9b 的收敛域对 Δ₅ 成立。**
+  （本文**没有**写 "∆₅ = Exp-Lift(φ_{0,1})" 这句话；上面的对号入座是我做的。）
+  再由 GN1996 p.7 的 `χ₁₀ = ∆₅²`，Φ₁₀ 的乘积在同一域收敛（平方不改变收敛域）。**这一步也是我的推断。**
+
+### E9d 【对路线"分块重排"有用】(2.6)/(2.7)：乘积的两块分解
+
+- 位置：§2.1 Theorem 2.1 的证明，PDF p.31
+- 类型：proof step
+- 原文陈述（逐字）：
+
+  "Let us decompose the product of Theorem 2.1 in two factors
+
+  ```
+  B_φ(Z) = q^A r^B s^C ∏_{(n,l,0)>0} (1 − qⁿrˡ)^{f(0,l)}  ×  ∏_{n,l,m∈Z, m>0} (1 − qⁿrˡs^{tm})^{f(nm,l)}    (2.6)
+  ```
+  "
+
+  以及（逐字）："It is easy to see that the first factor in (2.6) is equal to a product of
+  Jacobi theta-series and Dedekind eta-functions
+
+  ```
+  q^A r^B s^C ∏_{(n,l,0)>0} (1 − qⁿrˡ)^{f(0,l)} = η(τ)^{f(0,0)} ∏_{l>0} ( ϑ(τ, lz) e^{πil²ω} / η(τ) )^{f(0,l)} .
+  ```
+  "
+
+- **对本项目路线的意义（我的注记）**：路线要把 Φ₁₀ 的乘积重排成「m=n=0 块 / 只含一个变量的块 /
+  m,n≥1 块」再取 v 的 Taylor 系数。**GN1998 (2.6)–(2.7) 正是作者自己做的同类重排**，
+  且明确写出第一块等于 theta/eta 的显式乘积——这为「重排合法」提供了文献先例
+  （但作者做重排的**前提**是 E9b 的收敛域；(2.6) 的两块分解本身也只在该域内有意义）。
+  ⚠ 作者**没有**把 m,n≥1 块单独算成 1，也**没有**做 v → 0 的展开。路线的那一步在本文中无对应。
+
+## E10 对上文（2026-09-15 那轮）的更正：符号与页码
+
+本轮用官方 PDF 复核，发现上文若干"逐字"引文**在符号上并非逐字**。上文自述来源是
+**pdftotext**（第 7 行）。按本项目纪律，逐字记录必须逐符号对：
+
+| 上文写的 | 官方 PDF 实际写的 | 位置 |
+|---|---|---|
+| `ψ₅`, `ψ₁`, `ψ₂`, `ψ_{1/2}`, `ψ₃₅` | **`∆₅`, `∆₁`, `∆₂`, `∆_{1/2}`, `∆₃₅`** | 全文 |
+| `ψ_{1,II,0} = ψ₅` | **`Φ_{1,II,0} = ∆₅`** | PDF p.56 |
+| `Z = [[τ,z],[z,σ]]`（第 13 行"verbatim"） | **`Z = ( τ  z ; z  ω )`**，`s = exp(2πi ω)` | PDF p.2 |
+| "§2.2（p.35）"引文 | 该段实际在 **PDF p.33** | — |
+| "§5.1.1 导言，p.56" | p.56 正确 ✔ | — |
+
+- PDF p.2 逐字（本轮核）："(For matrix Z = ( τ z ; z ω ) ∈ H₂ we use three formal variables
+  q = exp (2πi τ), r = exp (2πi z) and s = exp (2πi ω).)"
+- PDF p.33 逐字（本轮核）："… we consider the most fundamental examples of Siegel modular forms
+  ∆_{1/2}(Z), ∆₁(Z), ∆₂(Z) and ∆₅(Z) with the divisor equals to Humbert modular surface H₁ …
+  These modular forms define the automorphic corrections of the most important Lorentzian
+  Kac–Moody algebras of signature (2, 1). …"
+- PDF p.56 逐字（本轮核）："Φ_{1,II,0} = ∆₅ (formula (2.16) and [GN1], [GN2]);
+  Φ_{2,II,0} = ∆₂ (formula (2.21) and [GN1]); Φ_{3,II,0} = ∆₁ (formula (2.20));
+  Φ_{4,II,0} = ∆_{1/2} (formula (2.11));"
+
+**影响评估（我的判断）**：上文的**数学内容全部正确**（形式的权、乘积公式、除子都对得上），
+受影响的只是**字母**：本文用 `∆` 命名模形式、用 `Φ_{t,j,µ}` 命名分母函数族、第三个 Siegel
+变量叫 `ω` 不叫 `σ`。但既然上文标了"逐字"，这里必须更正。
+**上文第 14 行"论文行文全部用 ψ_k(Z) 命名其构造的形式"这句话是错的。**
+（⚠ 不排除 Int. J. Math. 刊印版改用了 ψ；本项目**未取得刊印版**，无法核。arXiv v2 用的是 ∆。）
+
+## 本轮对目标 2 的裁定
+
+| 问 | 答 |
+|---|---|
+| 是否给出 Siegel 坐标下的收敛域？ | **是**：`det (Im(Z)) > c`，c 充分大（PDF p.31） |
+| 是不是"绝对收敛"？ | **否**，原文只写 "converges"（绝对收敛见 GN1996 p.12） |
+| 是不是 Weyl chamber 形式？ | **否** |
+| 是否在定理陈述里？ | **否，在证明的第一句**（严格性降一档：作者以"是 [Bo6, Thm 5.1] 的特例"一句带过，未重证） |
+| 是否蕴含任务的验收标准？ | **是（我的推断）**，见下 |
+
+**我的推断（非原文）**：取 `C := √(2c)`、`δ := √c`。若 `Im ρ > C`, `Im σ > C`, `|Im v| < δ`，则
+`det Im Z = Im ρ · Im σ − (Im v)² > 2c − c = c`。
+故 `{Im ρ > √(2c), Im σ > √(2c), |Im v| < √c} ⊆ {det(Im Z) > c}`，且该集合由严格不等式定义
+（开集）、对固定 (ρ,σ) 含带形 `{|Im v| < √c}`（含 `v = 0`）。✔ 验收标准满足。
+（注：这里把 `det(Im Z) > c` 与 `Z ∈ ℍ₂` 一起用；`Z ∈ ℍ₂` 保证 `Im Z` 正定，
+所以 `det Im Z = Imρ·Imσ − (Im v)²`。）
+
+## 本轮新发现的原文疑点
+
+1. **引用标签 [Bo6] 与文献表 [B1]–[B6] 不自洽**。正文 p.3、p.30、p.31、p.33 引 "[Bo6, Theorem 10.1]"、
+   "[Bo6, Theorem 5.1]"、"[Bo6, Lemma 9.2]"，p.33 还写 "[Bo1]–[Bo5]"；但 PDF p.67–68 的文献表标号是
+   **[B1]–[B6]**，其中 [B5] = Borcherds, Invent. Math. **120** (1995) 161–213，
+   [B6] = Enriques surfaces / Topology 35 (1996)。
+   **实际含有 Theorem 5.1 / Theorem 10.1 / Lemma 9.2 三个编号的是 [B5]**（本项目已逐字核，
+   见 `extractions/borcherds-1995.md` B2/B5/B6）。⇒ 正文的 "[Bo6]" 应读作文献表的 **[B5]**。
+   **这是我的认定**（三个编号同时命中），但标签本身确实排错了。
+   姊妹论文 GN1996 引同一定理时用的是与其文献表一致的 "[B5, Theorem 5.1]"。
+2. **(n,l,m) > 0 的措辞在两篇之间不同**：GN1998 Theorem 2.1 写
+   "if m > 0, then l and n are **arbitrary integers**"（允许 n < 0，因为 φ 是 nearly holomorphic），
+   GN1996 (1.10) 写 "n ≥ 0, m ≥ 0"。对**弱** Jacobi 形式 φ_{0,1}（f(n,l)=0 当 n<0）两者等价。
+   （这一等价判断是我的推断。）
+
+## 本轮：我亲自逐字核过的 / 我转述或推断的
+
+**亲自逐字核过（arXiv 官方 PDF + PyMuPDF）**：
+- PDF p.2：Z、q、r、s 的约定
+- PDF p.30：(2.1)、(2.2)、Theorem 2.1 陈述与 A/B/C、§2.1 开头对 [Bo6, Theorem 10.1] 的说明
+- PDF p.31：**Theorem 2.1 证明首句（E9b 的收敛域）**、(2.6)、(2.7) 前的 theta/eta 分解
+- PDF p.32、p.33：两处 "whenever the product converges"、§2.2 开头
+- PDF p.33（Lemma 引 [Bo6, Lemma 9.2]）、p.35（(2.15)、(2.16)、Example 2.4）
+- PDF p.56、p.65：Φ_{1,II,0} = ∆₅
+- PDF p.67–68：文献表 [B1]–[B6]
+
+**我转述或推断的（非原文）**：
+- E9c 的 A/B/C 验算与"(2.16) = (2.3)|_{t=1}"的对号入座；以及 Φ₁₀ = Δ₅² 的平方步骤。
+- 「本轮对目标 2 的裁定」里 `C=√(2c), δ=√c` 的构造。
+- E9d 里「(2.6) 为路线的分块重排提供先例」这一评价。
+- 疑点 1 的 "[Bo6] = [B5]" 认定；疑点 2 的等价性判断。
+- E10 的「影响评估」。
+- **未核**：Int. J. Math. 9 (1998) 201–275 刊印版是否改用 ψ 记号、页码与式号是否漂移。
