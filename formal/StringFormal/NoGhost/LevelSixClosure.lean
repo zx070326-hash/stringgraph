@@ -106,8 +106,15 @@ Goddard–Thorn argument. A separate proof attempt lives in
 
 * The hypothesis `SixSeedKernelSharp` itself is not proved (see above) — that is out of scope for
   this file by design.
+  **⚠ SUPERSEDED (2026-09-21).**  `SixBridge.lean` proves it: `sixSeedKernelSharp_of_frame`
+  discharges `SixSeedKernelSharp` for every `DDFLightConeFrame` in every dimension `D ≥ 2`, with
+  **no** `(D : K) = 26`.  `b26_six_of_D26` and `ddfSpans_bigrade_neg_six_six` (also in
+  `SixBridge.lean`) are therefore unconditional.  This bullet, and the word "conditionally" in the
+  overview above, describe only what *this file* does, not the current state of `N = 6`.
 * Form (A) (literal `S₆`-injectivity) is not stated or related to form (B) in Lean; only the
   prose derivation above records the relationship.
+  **⚠ SUPERSEDED (2026-09-21).**  Form (A) is `SixSliceInjective.lean`; the (A) ⟹ (B) bridge is
+  `SixBridge.lean`.
 * `N ≥ 7`: blueprint §B⁗.7 explains the pattern generalises (`κ_N` outgrows `τ_N` further, and a
   second syzygy pair `(x₆, y₅)` enters at `N = 7`), but nothing about that is attempted here.
 
