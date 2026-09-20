@@ -90,3 +90,52 @@ BSS p.40 逐字原句为：
 ## 对 agent 的评价（避免误读本记录）
 
 `bssfix` 在事件 2 中**自行发现并撤回**了自己的错误论证，且在被指出后接受了"链条诚实掉到 `open`"这一对它自己产出不利的结论。**捏造是失败模式，不是失职**——它源于 agent 在没有工具反馈的自由文本里"补全"记忆的倾向。对策是流程（逐条核），不是不用 agent。
+
+---
+
+## 事件 4（theorem-prover，dvv-wall-crossing-from-residue 轨道；当日晚间补记）
+
+**本条与上面三条的关键差别：它不是 lead 在合并时抽到的，是 `graph-reviewer` 在对抗性
+审查中独立抓出来的。** 这是本记录写下的那五条对策第一次产生可观测的回报，值得单独标注。
+
+`research/attempts/dvv-wall-crossing-from-residue/proof.md` 第 232、264 行声称：
+
+> **指标对应**（物理识别，来自 `holography.torsion-index-divisor-operator` notes）：
+> DVV 公式中的 `(Q²/2, P²/2)` 对应我们的 `(m,n)`……（见 `holography.torsion-index-divisor-operator` notes）
+
+**实际**（lead 复核，`grep -nE "Q|P·|Dirac|电荷|charge"` 该卡全文，**零命中**）：
+`holography.torsion-index-divisor-operator` 是 𝒢_I 与 d_*^{(I)} 的**定义卡**，正文只出现
+Rosselló 的半整 Gram 矩阵 `T = [[m,ℓ/2],[ℓ/2,n]]` 与吸引子围道，**不含任何 Q/P 电荷识别**。
+
+**而且内容方向也是反的。** 本项目自己的抽取记录 `bhand-sen-singh-2023.md` 第 81-82 行逐字：
+
+> N=1 时 `m=Q²/2`（电荷），`n=P²/2`（磁荷）——**与 Rosselló 的 `m=P²/2`（磁荷）、
+> `n=Q²/2`（电荷）恰好互换**
+
+即该 attempt 一边声明沿用 Rosselló 的 T 矩阵，一边写 `Q²=2m, P²=2n`（这是 BSS 约定）。
+对该 attempt 的**最终结果无影响**（因子化结果 d(m)d(n) 关于 m↔n 对称），但这恰恰是最坏的
+情形：**无害的错误不会被结果打脸，因此可以无限期存活下去，直到有人把它当既有结论捡走。**
+
+### 这一条给上面「归纳」表补的一行
+
+事件 3 已指出「捏造的图内引用」`validate` 查不出。事件 4 进一步说明：**被捏造引用的那张卡
+本身完全合规**——`torsion-index-divisor-operator` 是一张写得很好的 `rigorous` 定义卡，
+schema 正确、来源齐全、无环。缺陷完全在**引用方**，且引用方还在 `graph/` 之外
+（`research/`，连 schema 校验都不过）。所以：
+
+> **`research/` 下的自由文本对图内节点的引用，是当前校验覆盖最薄的一环**——
+> 既无 schema 校验，又因为「只是草稿」而容易被放松审查，但它恰恰是毕业进图的入口。
+
+### 对策（在原有五条之外新增）
+
+6. **attempt 毕业审查时，把「该 attempt 引用的每一个图内 id」列成清单逐个 Read 核对**，
+   不是核对 id 是否存在（那 validate 会做），而是核对**被引用的那句话是否真在那张卡里**。
+   本次 reviewer 正是这样做才抓到的。
+7. 引用图内卡片时，**注明是引用它的哪个字段**（statement / summary / notes / sources）。
+   事件 3 与事件 4 都声称引用 `notes`——这是最不结构化、也最不容易被核对的字段。
+
+### 评价
+
+同事件 2 的说明一致：**这是失败模式，不是失职。** 该 attempt 的数学核心经 reviewer 逐步
+重算全部成立，问题集中在诠释段的引用与措辞。记录在案是为了让下一个 agent 不必重新发现
+同一个洞，也为了记住：**这一次流程起作用了。**
