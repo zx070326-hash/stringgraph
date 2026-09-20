@@ -27,7 +27,10 @@ research/attempts/<slug>/
 
 ## 纪律
 
-- `claim.md` 必须先于 `proof.md` 写清楚：没有精确到量词的命题表述，不算开始证明。
-- 证明只能引用图里 `effective status` 为 `rigorous`/`formalized` 的节点作为砖块；引用 `conjecture`/`physical-argument` 节点等于在猜想上叠猜想，必须标红。
+（只对 `research/attempts/**` 生效。`research/sandbox/**` 无任何规则——不校验、不需要 `claim.md`、不需要 `status.yaml`、不进生命周期、想删就删。开 attempt 之前先去 sandbox 乱算是推荐做法。）
+
+- `claim.md` 要有精确到量词的命题表述，**但它的到期点是 `under-review`，不是开工**。先算、先试，等你确信有东西了再回头把命题写准。「没写 claim 就不算开始证明」这条规则挡住的是开始。
+- **允许在猜想上施工。** 引用 `conjecture` / `physical-argument` 节点作砖块是正当研究——理论物理本来就是这么做的。工具会自动把结论的 `effective` 压到最弱砖块的档位（`propagate.py` 的 `_combine_deps`），**不需要你额外自律，也不需要标红**。唯一禁止的是毕业时把结论**标高**。
 - `[GAP]` 标注是诚实记录，不是失败——宁可卡住也不要用含糊语言掩盖跳步。
+- **放弃一条路只需一行**「此路不通，因为 X」，`state: abandoned`。不需要 post-mortem、不需要写进 ROADMAP。负面结果保留目录不删，省得后人重踩。
 - 没有 pre-commit schema 校验（这里不是 YAML 图节点），但毕业进图前必须过一次正常的 `uv run stringgraph validate`。
