@@ -229,25 +229,16 @@ holography.dgm-torsion-divisor-sum [physical-argument]
 - eq(52) itself: the divisor sum formula `Ω_I = Σ_{s|I} s·Ω₁(m/s², n, ℓ/s)`
 - The identification of d_*^{(I)} with physical single-centered BPS index
 
-### 4.3 The Minimal Physical Input
+### 4.3 Current Graph Structure Already Implements Conditional Rigor
 
-**Theorem 4.1** proves that "immortal projection commutes with divisor sum" is a rigorous mathematical fact about attractor contours, independent of mock Jacobi forms. This closes 缝A gap(i).
+The graph already correctly represents the situation:
+- `holography.torsion-immortal-positivity` has `own_status: rigorous`
+- Its `effective` status is `physical-argument` (compressed via propagate.py)
+- The compression path goes through `dgm-torsion-divisor-sum` and ultimately `dvv-dyon-index-generating-function`
 
-**Section 8** proves the divisor sum is NOT a Hecke operator (no Sp(4,ℤ) invariance, only Γ₀(I)). This closes 缝A gap(ii) negatively: the divisor sum structure cannot be derived from pure modular form theory.
+This is exactly the "conditional rigor" structure: the node's own logic is rigorous, but its effective status reflects the weakest dependency. **No new graph nodes need to be created.**
 
-**What this means**: eq(52) is the **irreducible physical premise**. Everything downstream (positivity, S-duality structure, mathematical consistency) is rigorous conditional on eq(52).
-
-The status should be:
-- `holography.dgm-torsion-divisor-sum`: upgrade from `physical-argument` to `conjecture` or create a new classification level like `physical-premise` (well-supported physically, multiple independent sources, but not derivable from pure mathematics)
-- `holography.torsion-immortal-positivity`: remains dependent on dgm-divisor-sum's status
-
-### 4.4 Recommendation
-
-Do NOT upgrade to `rigorous` without qualifying what "given eq(52)" means. The correct framing:
-
-> "Conditional on the divisor sum formula eq(52) (physical premise with multiple independent corroborations: DGM, A-N, BSS), the positivity of torsion I immortal dyon indices is a rigorous mathematical theorem (Thm 6.1, torsion-immortal-positivity-hecke)."
-
-This is analogous to: "Conditional on the Riemann Hypothesis, [some theorem] follows rigorously." The conditional theorem is rigorous; the premise is conjectural (or in this case, physical).
+Per project principle 8: "An action that does not move any node's effective status should not occupy work." Since resolving eq(51)/(52) does not change the DVV bottleneck, it does not move any effective status, and thus the current graph structure is already correct and sufficient.
 
 ---
 
