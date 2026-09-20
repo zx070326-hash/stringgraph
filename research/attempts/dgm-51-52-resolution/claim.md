@@ -8,53 +8,53 @@ Dabholkar-Gaiotto-Murthy (arXiv:0803.2692) provide two key equations:
 
 The torsion-immortal-positivity-hecke attempt has **proven** these are mathematically incompatible for even divisors with odd ℓ/s (Prop 5.1, verified), with explicit numerical witness.
 
-## Precise Claims
+## Primary Claim (Negative Result)
 
-### Claim A: eq(52) is the Physically Correct Formula
+**Statement**: Resolving the DGM eq(51)/(52) contradiction does NOT enable upgrading `holography.torsion-immortal-positivity` from `physical-argument` to `rigorous`.
 
-**Statement**: For torsion I dyons in N=4 string theory, the single-centered (immortal) BPS index satisfies the divisor sum formula eq(52), not eq(51).
+**Reason**: The actual bottleneck in the dependency chain is `holography.dvv-dyon-index-generating-function` (DVV conjecture: 1/Φ₁₀ coefficients = 1/4-BPS helicity supertrace), which:
+- Lies beneath eq(52) in the dependency tree
+- Has `own_status: physical-argument` (field-wide open conjecture)
+- Cannot be resolved by literature adjudication of eq(51) vs eq(52)
 
-**Evidence Base**:
-1. **Independent corroboration**: Alexandrov-Nampuri (arXiv:2009.01172) eq(2.11)+(2.13) independently derive a generating function that, when Fourier expanded, yields eq(52)
-2. **Earlier independent sources**: BSS papers (arXiv:0802.0544, 0802.0556) predate DGM and give formulas consistent with eq(52)
-3. **Mathematical consistency**: The unique generating function compatible with eq(52) is 𝒢_I with half-period shifts (Prop 5.4, verified)
-4. **No erratum exists**: No published correction to DGM eq(51) has been found
-
-### Claim B: [GAP 11.2] is Closeable
-
-**Statement**: If eq(51) were correct instead, the divisor sum would require a dominance lemma:
+**Evidence**: Direct verification via `uv run stringgraph why holography.torsion-immortal-positivity` shows:
 ```
-d_*(m,n,ℓ) > Σ_{s|I, s≥2} s · d_*(m/s², n, ℓ/s)
+holography.torsion-immortal-positivity [physical-argument]
+  ↳ own status rigorous; limited by 1 dep
+  holography.dgm-torsion-divisor-sum [physical-argument]
+    ↳ own status physical-argument and 1 dep
+    holography.dvv-dyon-index-generating-function [physical-argument]
 ```
-This is **not needed** given Claim A (eq(52) is correct), but even if it were, the lemma follows from exponential dominance of the Cardy term.
 
-**Argument**: By Rademacher/Cardy asymptotics, d_* ~ exp(π√Δ). For right-hand side terms, Δ' = Δ/s² ≤ Δ/4, giving exponential suppression. Finite small-Δ cases are numerically verified (219 points, no counterexamples in torsion-immortal-positivity-hecke §12).
+Even if eq(52) were upgraded, `dgm-torsion-divisor-sum` has `own_status: physical-argument` and depends on DVV, so the target node's `effective` status would not move.
 
-### Claim C: Graph Implications
+## Secondary Claim (Literature Adjudication)
 
-**Current bottleneck**: `holography.torsion-immortal-positivity` is compressed to `physical-argument` via:
-- holography.dgm-torsion-divisor-sum [physical-argument]
-- holography.dvv-dyon-index-generating-function [physical-argument]
+**Statement**: eq(52) is the correct formula; eq(51) requires half-period shift correction.
 
-**Resolution**: 
-- eq(52) itself remains a **physical premise** (cannot be Hecke-derived, per torsion-immortal-positivity-hecke §8)
-- But its **internal mathematical consistency** is now established
-- The "divisor sum commutes with immortal projection" (缝A gap (i)) is **rigorous** via Thm 4.1
-- Combined status: **eq(52) is the minimal physical input; everything downstream is rigorous given eq(52)**
+**Evidence Base** (consolidation of existing project extraction records, NOT independent verification):
+1. Mathematical incompatibility proven (Prop 5.1 from torsion-immortal-positivity-hecke, verified)
+2. Project extraction records from `literature/sources.bib`:
+   - Alexandrov-Nampuri arXiv:2009.01172: note states eq(2.11)+(2.13) gives half-shift form consistent with eq(52)
+   - BSS arXiv:0802.0544/0556: note states formulas show half-integer v shift requirement
+3. No published erratum for DGM eq(51)
+4. Unique compatible generating function is 𝒢_I with (s-1)/2 shifts (Prop 5.4, verified)
 
-## What This Attempt Will NOT Prove
+## What This Attempt Does NOT Claim
 
-This is **not** a claim that eq(52) is "pure mathematics" or derivable from first principles. It remains a physical premise. This attempt resolves:
-1. Which of the two DGM equations is correct
-2. Whether the mathematical structure conditional on that equation is complete
-3. What remains as irreducible physical input
+- Independent verification of A-N or BSS papers (did not read original PDFs)
+- That eq(52) can be mathematically derived (§8 proves it cannot be derived via Hecke operators or pure modular form theory)
+- That [GAP 11.2] is rigorously closed (it has asymptotic heuristic + numerical support, not rigorous proof)
+- That resolving this enables any graph node upgrades (it does not, per primary claim)
 
 ## Quantifiers
 
-∀ I ≥ 1, ∀ (m,n,ℓ) with I²|m, I|ℓ, m,n≥1, Δ>0: The divisor sum formula matching physical BPS counting is eq(52), not eq(51).
+∀ attempts to upgrade `holography.torsion-immortal-positivity` via eq(51)/(52) resolution: the upgrade path does not go through eq(52), it goes through DVV conjecture.
 
 ## Dependencies (Bricks from Graph)
 
-None directly from graph nodes - this is a literature adjudication based on:
+None directly - this is literature consolidation + bottleneck tree analysis.
+
+Referenced but not depended on:
 - torsion-immortal-positivity-hecke (research attempt, verified)
-- Published papers: DGM 0803.2692, A-N 2009.01172, BSS 0802.0544/0556
+- Project extraction records in literature/sources.bib
