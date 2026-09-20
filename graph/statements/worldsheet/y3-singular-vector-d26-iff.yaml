@@ -1,0 +1,57 @@
+id: worldsheet.y3-singular-vector-d26-iff
+kind: proposition
+title: "y3 给出奇异向量当且仅当 D=26（必要性，h=−4 时）"
+statement: |
+  设 R 是 NoZeroDivisors 且 CharZero 的 ℚ-代数、η : Fin D → R 满足 hη : ∀ μ, η μ * η μ = 1。
+  设 φ : TowerFock D R 是共形权 h = −4 的种子态（满足 L_0 φ = h • φ、L_n φ = 0 对所有 n > 0），
+  且满足 towerLop η a b (−1) φ ≠ 0。
+
+  定义 level-3 算子
+    y3 := 12 L_{−3} + 6 L_{−2}L_{−1} + L_{−1}³  : TowerFock D R → TowerFock D R。
+
+  则 L_2(y3 φ) = 0 当且仅当 (D : R) = 26，即
+    towerLop η a b 2 (y3 η a b φ) = 0  ⟺  (D : R) = 26。
+
+  换言之，在 NoZeroDivisors + CharZero + L_{−1}φ ≠ 0 的条件下，临界维度 D=26
+  不仅是 y3φ 成为奇异向量的充分条件（见姐妹卡 worldsheet.y3-singular-vector-d26-h-neg4），
+  也是必要条件——该值由 L_2 的计算直接产出。
+uses:
+  - worldsheet.virasoro-generators-free-boson
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.virasoro-standard
+formal:
+  lean_decl: StringFormal.NoGhost.towerLop_two_apply_y3_eq_zero_iff
+  lean_file: StringFormal/NoGhost/SingularVectorsSix.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/SingularVectorsSix.lean :: StringFormal.NoGhost.towerLop_two_apply_y3_eq_zero_iff"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1；合并提交 db5b53d（PR-D2，noghost-pr-d2 分支，
+      2026-09-18 合入 main）。curator 亲自 Read SingularVectorsSix.lean lines 482-494
+      确认无 sorry。定理签名中的前件 [NoZeroDivisors R] [CharZero R] 与 hne（L_{−1}φ≠0）
+      对应本卡陈述的三条必要性条件；h=−4 是显式前件 hh。
+tags: [virasoro, singular-vector, no-ghost, formalized, critical-dimension, necessary-condition]
+notes: |
+  【与 TODO.md 的对应，逐字核对】formal/TODO.md lines 2267-2269 的散文描述
+  「over a domain with characteristic zero, for a seed of weight h = −4 with L_{−1}φ ≠ 0,
+  L_2(y₃φ) = 0 iff (D : R) = 26」与本卡对应；该条目注明
+  「Blueprint §B⁗.2, SingularVectorsSix.lean」。
+
+  【与充分性卡的关系】本卡与 worldsheet.y3-singular-vector-d26-h-neg4 承载同一定理的
+  两个方向：那张卡是「D=26 且 h=−4 ⟹ y3φ 奇异」（充分性），本卡是「h=−4 且
+  L_{−1}φ≠0 时，L_2(y3φ)=0 ⟺ D=26」（必要性）。Lean 侧把两者分成独立定理
+  （y3_mem_towerPositiveModeSubmodule 只断言蕴含，towerLop_two_apply_y3_eq_zero_iff
+  断言等价），图侧也拆成两张卡。必要性需要额外的 NoZeroDivisors + CharZero +
+  L_{−1}φ≠0 三条前件（整环上才能由 (D−26)·(...) = 0 推出 D=26，且分母非零才能
+  消去因子），这些前件在充分性那边不出现。
+
+  【只涉及 L_2，不涉及所有正模】本卡只断言 L_2(y3φ) = 0 ⟺ D=26，没有断言「所有
+  正模湮灭 ⟺ D=26」——L_1(y3φ) = 0 由 h=−4 给出（与 D 无关），L_2 是唯一检测 D=26
+  的模。Lean 侧 docstring 写明「the transverse half of [GAP-N6-seed] is an equivalence」，
+  指的就是这条 L_2 的等价性。
+
+  【毕业记录】本节点由 formal/TODO.md 的 noghost-pr-d2 条目（state: merged，
+  2026-09-18）毕业，按 formal/CLAUDE.md 形式化岛与图的关系。
+author: graph-curator
+created: "2026-09-20"
