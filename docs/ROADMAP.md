@@ -113,15 +113,25 @@
   - ⚠ **`phi10-order-two-in-v-on-ell-zero-contour--via-branch-exclusion` 刻意不随行升档**：它的步骤 3（围道上每点 `h₀≠0`）是 curator 自行补全、至今无逐步复核记录。
   - 📌 **复核次数如实记在卡里**：(P7) 的独立重算只有 **一次**（ell0s6rev 用自己写的 sympy 脚本从 `g(t)` 定义重推）；ell0f5rev 自报它没重推 (P7)、没重做 §6.2、没执行 prover 的内联脚本、没回 Sen PDF、没自己 grep route-a 画引用图。两份一致的报告**不等于两次独立验证**，卡面必须区分。
 
+- ✅ **PR-D2 的四条 Lean 定理毕业进图**（`2b416fd`，与 ℓ=0 线并行的形式化线）：`y3-singular-vector-d26-h-neg4`、`x4-singular-vector-d26-h-neg4`、`y3-singular-vector-d26-iff`、`seed-criterion-bigrade-neg-six-one`，各配 `--via-lean` 推导，全部 `formalized`。合并前 `check-axioms` 118 条声明全过（只用 propext / Classical.choice / Quot.sound）。
+  - ⚠ **lead 在合并里订正了两处与 Lean 签名不忠实的地方**，用 `git merge --no-ff --no-commit` 使初稿文本从未进入 `main`（故不触发换代）。两处错在**相反方向**，值得记住：
+    - y3/x4 两卡把前提写强了（「CharZero 域」，实际 Lean 只要 `[CommRing R] [Algebra ℚ R]`）——**少说**，安全但不忠实；
+    - seed-criterion 卡**漏掉三条经 `include` 进入签名的光锥基底条件** `hbb/hba/haa`——**多说**，等于把机检背书扩大到机器没证的 `(a,b)` 范围。**这是 `formalized` 卡最危险的一类错误。**
+  - 📌 教训：agent 自称「逐字核对」不足为凭。这两处是 lead 亲自读 Lean 源码发现的，而**卡自己的 sources note 与自己的 statement 就已互相矛盾**——交叉读同一张卡的不同字段即可发现。
+
 **本轮新开、留给后续的缺口与待办**（船长指令「写进 ROADMAP 和卡里，不派工」，故以下**均未派 agent**）：
 
 1. 🔴 **[GAP-Λ]（本轮主动收回，不是修复的副作用）**。claim.md 与 proof.md §4.1 原先都写「两侧公共值与 ε、Λ 无关」。**ε-无关可证**（两条同侧围道之间的闭带无极点）；**Λ-无关证不出来**——ℓ=0 时围道**穿过**极点，「在无极点区域内连续形变」这个标准论证的**前提不成立**。且 `ε₀` 源自 `δ := dist(K₀, Z')`，而 `K₀` 的虚部 `Im ρ = 2nΛ`、`Im σ = 2mΛ` 随 Λ 移动，故 `δ = δ(Λ)`。全文承重位置已改写为 `d_*(m,n,0;Λ)`。
    - **图卡从一开始就没有断言 Λ-无关**（`dstar-well-defined-at-ell-zero--via-vanishing-residue` 的 gaps 逐字写着不断言）——**这是上游向图对齐，不是图让步**。本轮第二例（第一例是 F-4 的不等式写法）。
    - **下一轮的起点**：prover 判断 [GAP-Λ] 在本路线**内**可推进，起点是 §6 已给出的「Λ > 1/(4√(mn)) 时非平凡分支全部避开围道」。
 2. 🔴 **Borcherds 路线 + `igusa-cusp-form-phi10-v3`（`c(0)` 由 24 改 20）**。缺陷已裁定并记在 `docs/reviews/phi10-borcherds-exponent-c0-defect-2026-09-20.md`；换代涉及下游边重指，是完整的 curator 工作。该路线同时是 `h₀ ≠ 0` 升 `rigorous` 的**唯一**已知通道，且其前置全在 ℓ=0 attempt **之外**——不要把它和 attempt 的审查捆在一起等。
+   - ✅ **`c(0)=20` 已由本轮 k3conv 独立证实，且是两条互不相交的路线**：(i) Kawai 1997 eq.(4.32) 直接从 arXiv PDF 用 PyMuPDF 复核，逐字 `c(0) = 20, c(−1) = 2, c(N) = 0 if N < −1`；(ii) 独立地，GN1996 p.11/p.12 确认 φ_{0,1} 的 (1.8) 展开中 `r^{±1}` 系数是 **1**（本项目早前误读为 10），故 `f(0,0)=10, f(0,±1)=1`，经 `c = 2f` 同样给出 `c(0)=20, c(−1)=2`。**不同论文、不同推导，故这次的一致不是回声**（判据见下条）。缺陷本身不再有疑问，剩下的纯粹是换代工程。
    - ⚠ 本轮还留下一份**反面教材**必须先读：`docs/reviews/reviewer-contamination-borcherds-2026-09-20.md`。一句话：**一致不等于佐证**。收到两份一致的结果时先问「它们的输入有没有交集？交集是谁给的？」——交集若来自 lead，一致性就是自己的回声。
 3. 🔴 **桥卡 `V^{(n)}_K` 指标移位换代 v2**。裁决见 `docs/reviews/bridge-card-index-shift-2026-09-18.md`，上一轮已列为"下一轮第一件事"，**本轮仍未动**（收官轮不动承重卡）。状态不变：修的是记号错误，断言 (2) 的实质缺口分毫未动。
-4. ⚪ **[GAP-identify] 仍是 ℓ=0 全家卡 `effective` 的唯一天花板**：Sen 的 Φ̃ 坐标 = 标准 Φ₁₀ 坐标，非文献逐字断言。已查明 route-a §1.3 携带 Sen 2008 p.168 的**逐字块引用**（与下游判别式 ×4 一致），故这是**单源抽取**，不是 Borcherds 那种互相回声的伪佐证——但单源仍是单源。
+4. 🟡 **pdftotext 产出的抽取需要一次系统复查**（k3conv 本轮坐实，**非推测**）。`literature/extractions/gritsenko-nikulin-1998-bkm.md`（2026-09-15 那轮，用 pdftotext）里**有标为「逐字」但并非逐字的引文**：`∆` 印成 `ψ`、`Φ_{t,j,µ}` 印成 `ψ_{t,j,µ}`、第三个 Siegel 变量 `ω` 印成 `σ`、`p.33` 标成 `p.35`。k3conv 改用 arXiv 官方 PDF + **PyMuPDF**（外加 200 dpi 渲染图目视）重取后已在同一文件内订正。数学内容不受影响，但**「逐字」这个标签本身被证伪过一次**，其余 pdftotext 时期的抽取同样可疑。**工具纪律：抽取一律用 PyMuPDF，不用 pdftotext。**
+5. ⚪ **`χ_{K3}(τ,0) = 24` 的 `∀τ` 量词无逐字来源**。k3conv 给出两个独立来源支撑该数值（KYY 1994 eq.(5.4) 裸印 `χ = 24`；Kawai 1997 eq.(4.22) 在 z=0 给 8·3=24），但**两篇都没写全称量词**——常数性要靠读者从 Jacobi 形式的权/指标自行读出。更要紧的是：下游真正要用的 `Σ_l c(4N−l²) = 24 δ_{N,0}` **在任何检索到的来源里都无逐字对应**。谁要用它，得先立卡或自证。
+6. ⚪ **Borcherds 乘积收敛域：三级引用链，每级掉一点强度**（k3conv 本轮查清，供 2 号待办的 Borcherds 路线直接取用）。Borcherds 1995 Thm 5.1 只写 "converges"（非 absolutely）、无 Weyl chamber；GN1998 的 Siegel 坐标翻译 `det(Im Z) > c` **写在证明里不是定理陈述里**，作者以「是 [B5, Thm 5.1] 的特例」带过；GN1996 的 "absolutely converges" 是**无证明、无引用、记号未定义**的括注。另有一条**负向边界 B4**：Φ₁₀ 的输入 φ_{0,1} 是 nearly holomorphic（`c(−1)=2≠0`），故 Borcherds 定理中「整个锥」那一情形**不适用**——想把收敛域放宽到全锥的路已被堵死，不必再试。
+7. ⚪ **[GAP-identify] 仍是 ℓ=0 全家卡 `effective` 的唯一天花板**：Sen 的 Φ̃ 坐标 = 标准 Φ₁₀ 坐标，非文献逐字断言。已查明 route-a §1.3 携带 Sen 2008 p.168 的**逐字块引用**（与下游判别式 ×4 一致），故这是**单源抽取**，不是 Borcherds 那种互相回声的伪佐证——但单源仍是单源。
 
 **仍然专属船长、本项目任何 agent 与 lead 都不得代填**：`bh-entropy-cartography` 的重新签字；定理 M、GAP 10.2b、route-a、ell0wall 与两个 attempt 的 `captain_confirmed`（全部仍为 `false`）。`verified` 是 agent 级裁决，不是船长确认。
 
