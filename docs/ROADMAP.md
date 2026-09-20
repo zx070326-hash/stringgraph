@@ -6,11 +6,13 @@
 
 | # | 项 | 做成了意味着 | 现状 |
 |---|---|---|---|
-| 1 | `worldsheet.ddf-contour-equals-mode-sum` | **一条 1972 年的定理完全机器验证**，可对外发表 | 未认领。整条无鬼定理的缺口**收敛到这唯一一个节点**，且其依赖已全部 `formalized`（在 `report` 的 formalization frontier 名单上）。缺口内容：文献写围道积分 `(1/2πi)∮ε·P(z)V(nk₀,z)dz`，我们写模态和 `Σ_m α^ε_m V^{(n)}_m`，"这俩是同一个算子"此前**图里无任何节点承载**。卡已立，读作形式留数，`physical-argument`。 |
-| 2 | DGM 0803.2692 eq(51)/(52) 矛盾 | `holography.torsion-immortal-positivity` 由 `physical-argument` 升 `rigorous`——**本项目第一个真正升档的黑洞熵结果** | 未认领。显式整数见证已有（I=2,(4,1,2)）。⚠ 这是对外声明，船长确认前不得公开宣称。 |
+| 1 | `worldsheet.ddf-contour-equals-mode-sum` | **一条 1972 年的定理完全机器验证**，可对外发表 | 未认领。整条无鬼定理的缺口**收敛到这唯一一个节点**，且其依赖已全部 `formalized`（在 `report` 的 formalization frontier 名单上）。缺口内容：文献写围道积分 `(1/2πi)∮ε·P(z)V(nk₀,z)dz`，我们写模态和 `Σ_m α^ε_m V^{(n)}_m`，"这俩是同一个算子"此前**图里无任何节点承载**。卡已立，读作形式留数，`physical-argument`。**2026-09-20 进展**：已拆成 Layer 2（`worldsheet.ddf-mode-sum-as-formal-residue`，纯数学：模态和 = 形式留数，当前 `open`，无推导）+ Layer 3（`worldsheet.ddf-contour-interpretation`，`physical-argument`：「文献的 ∮ 应读作形式留数」，**解释性断言，原则上不可形式化**）。缺口结构第一次说清楚了，但 `effective` **零移动**，**Lean 一行没写**。真正要做的仍是：在 Lean 里定义算子值形式级数及其留数，证 `ddfOp = residue (P · V)`。⚠ Layer 2 卡曾被错标 `formalized`（`lean_decl` 指向左端定义 `ddfOp`，而右端在 Lean 中根本不存在），已由 lead 撤销（`15c8605`）。 |
+| 2 | ~~DGM 0803.2692 eq(51)/(52) 矛盾~~ **已判定：此路不通，见右栏** | ~~`holography.torsion-immortal-positivity` 由 `physical-argument` 升 `rigorous`~~ —— **这个「做成了意味着」是错的** | ❌ **2026-09-20 结项（负面）**。跑 `why` 才发现：瓶颈树的地板是 `holography.dvv-dyon-index-generating-function`（DVV dyon 计数猜想，全领域公认未证），它在 eq(52) **下面一层**。eq(52) 即便彻底证明，`dgm-torsion-divisor-sum` 自身仍是 `physical-argument`，目标卡 `effective` **一动不动**。本条目当初是没跑 `why` 就写下的，**立项前提本身不成立**。文献裁决（eq(52) 对、eq(51) 需半周期平移）仍成立，记在 `research/attempts/dgm-51-52-resolution/`（`under-review`）。⚠ 仍是对外声明，船长确认前不得公开宣称。 |
 | 3 | `d10-anomaly-full-classification` 成文投稿 | **对外产出从零变成一** | 未认领。已完整、已 `captain_confirmed`、有明确先例错误（antonelli-2015 迹系数算错、F₄ 支方法无效）可对照。GSW 1987 §13.5.3 只是裸断言。 |
 
 **反面基线（2026-09-20 量得，用于判断是否又滑回去）**：最近 40 提交中 `formal:` 仅 1 个；`docs/reviews/` 11 份；19 个 attempt 中 10 个停在 `verified`、7 个既未结项也未被建设。审计自身在生产文档，文档再生产 ROADMAP 条目——**这个循环是要修的对象，不是成绩。**
+
+**⚠ 立项前先跑 `why`（2026-09-20 的教训，代价是一整轮三个 agent）**：本表第 2 项写着「解决 eq(51)/(52) = 目标卡升 rigorous」，派工后 agent 跑 `why` 才发现地板在**下面一层**的 DVV 猜想上，eq(52) 怎么解都不动 `effective`。**任何形如「做成 X 就能让 Y 升档」的条目，写进本表之前必须先跑 `uv run stringgraph why Y` 确认 X 真的在瓶颈链上**，否则就是在给 agent 派不可能完成的任务，而且他们会为了交差把结论说圆。同轮另外两个 agent 各自把 `[GAP]` 和「左端有定义」包装成了 `formalized` / 摘要级指控——**三个 agent 三种虚高，共同点是任务书暗示了「应该做成」**。
 
 ## 当前活跃（2026-09-19）
 
