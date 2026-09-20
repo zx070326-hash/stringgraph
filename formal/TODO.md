@@ -2595,3 +2595,19 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
   需要按 `E8Roots.lean` 的分块/程序化构造路线重做，本轮未做；E₈ 已在 `E8Roots.lean` 完成。
   此文件与对应 `graph/` 节点尚未建立 `formal.lean_decl` 链接（未发现引用该文件的图节点），
   留给 curator/lead 判断是否要新建陈述卡。
+
+  - **已毕业至 graph/**（curator，2026-09-20）：本 TODO 条目 `noghost-pr-d2` lines 2259-2278
+    描述的四条形式化定理已登记为独立图节点，每条一对 statement+derivation YAML 文件：
+    (1) `worldsheet.y3-singular-vector-d26-h-neg4` / `--via-lean`
+        （`StringFormal.NoGhost.y3_mem_towerPositiveModeSubmodule`）
+    (2) `worldsheet.x4-singular-vector-d26-h-neg4` / `--via-lean`
+        （`StringFormal.NoGhost.x4_mem_towerPositiveModeSubmodule`）
+    (3) `worldsheet.y3-singular-vector-d26-iff` / `--via-lean`
+        （`StringFormal.NoGhost.towerLop_two_apply_y3_eq_zero_iff`，必要性）
+    (4) `worldsheet.seed-criterion-bigrade-neg-six-one` / `--via-lean`
+        （`StringFormal.NoGhost.mem_towerSeed_neg_six_one_iff`，`[GAP-N6-seed]` 判据本身）。
+    全部 status: formalized，每条 derivation 都有 `depends_on` 边指向
+    `worldsheet.virasoro-generators-free-boson`，第 (4) 条额外依赖 (1)(2)。
+    形式化验证完成：无 sorry、公理集合只有 propext/Classical.choice/Quot.sound
+    （由 lead 在 PR-D2 合并前检查，见本 TODO 条目 line 2217）。
+    curator 逐字核对了 Lean 源码与 TODO 散文描述的对应关系，全部记录在各卡的 notes 字段。

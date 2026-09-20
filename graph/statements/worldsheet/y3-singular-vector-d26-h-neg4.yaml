@@ -1,0 +1,68 @@
+id: worldsheet.y3-singular-vector-d26-h-neg4
+kind: proposition
+title: "y3 在 D=26、h=−4 时给出奇异向量（正模湮灭）"
+statement: |
+  设 D : ℕ、R 是交换环且 Algebra ℚ R（**不需要**域、不需要 CharZero、不需要 NoZeroDivisors）、
+  η : Fin D → R 满足 hη : ∀ μ, η μ * η μ = 1。
+  设 φ : TowerFock D R 是共形权 h : R 的种子态（seed state），即满足
+    (i)  towerLop η a b 0 φ = h • φ    （L_0 本征态）
+    (ii) towerLop η a b n φ = 0  对所有 n > 0  （正模湮灭）。
+
+  定义 level-3 算子
+    y3 := 12 L_{−3} + 6 L_{−2}L_{−1} + L_{−1}³  : TowerFock D R → TowerFock D R。
+
+  则在临界维度 (D : R) = 26 与共形权 h = −4 的条件下，
+    y3 η a b φ ∈ towerPositiveModeSubmodule η a b，
+
+  即 y3φ 满足 towerLop η a b m (y3 η a b φ) = 0 对所有 m > 0——y3φ 是 Virasoro
+  表示 V(26, −4) 的奇异向量（singular vector）。
+uses:
+  - worldsheet.virasoro-generators-free-boson
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.virasoro-standard
+formal:
+  lean_decl: StringFormal.NoGhost.y3_mem_towerPositiveModeSubmodule
+  lean_file: StringFormal/NoGhost/SingularVectorsSix.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/SingularVectorsSix.lean :: StringFormal.NoGhost.y3_mem_towerPositiveModeSubmodule"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1；合并提交 db5b53d（PR-D2，noghost-pr-d2 分支，
+      2026-09-18 合入 main）。curator 亲自 Read SingularVectorsSix.lean lines 455-462
+      确认无 sorry。定理签名中 section 变量 D/R/η/a/b 均无下界或特殊值约束，
+      除了 hη（度规归一化）；D=26 与 h=−4 是显式前件 hD26/hh，不是 section 假设。
+      种子条件 hpos/h0 对应本卡陈述的 (i)(ii)。
+tags: [virasoro, singular-vector, no-ghost, formalized, critical-dimension]
+notes: |
+  【与 TODO.md 的对应，逐字核对】formal/TODO.md lines 2259-2261 的散文描述
+  「y₃φ is annihilated by all positive Virasoro modes L_n (n > 0)」与本卡对应；
+  该条目注明「Blueprint §B⁗.2, SingularVectorsSix.lean」。
+
+  【D = 26 与 h = −4 是必要条件】本卡只断言「D=26 且 h=−4 ⟹ y3φ 奇异」（充分性）；
+  必要性由姐妹卡 worldsheet.y3-singular-vector-d26-iff（对应 Lean 的
+  towerLop_two_apply_y3_eq_zero_iff）承载——那里证明「NoZeroDivisors + CharZero +
+  L_{−1}φ ≠ 0 时，L_2(y3φ) = 0 ⟺ (D:R) = 26」。本卡不涉及必要性，h=−4 的必要性
+  也不在本卡范围内（Lean 侧有 towerLop_one_apply_y3_of_eq_neg_four 给 L_1(y3φ)=0
+  当且仅当 h=−4，但那不是本卡的断言）。
+
+  【y3 的定义】与姐妹卡 worldsheet.y3-injective-on-level-one-slice 共享同一个 y3
+  算子定义，但那张卡的论证无关 D=26 或 h=−4，作用在任意动量的 level-1 切片上。
+  本卡是 y3 的第二条用途——在特定 (c,h) 处给出奇异向量，核心是无鬼定理的种子构造。
+
+  【毕业记录】本节点由 formal/TODO.md 的 noghost-pr-d2 条目（state: merged，
+  2026-09-18）毕业，按 formal/CLAUDE.md 形式化岛与图的关系。
+  **【lead 合并前订正，2026-09-20 —— 前提写强了】**
+  本卡 statement 初稿写「R 是 CharZero 域且 Algebra ℚ R」。**Lean 不要求这些**：
+  `SingularVectorsSix.lean` 的 Singular section 变量逐字是 `[CommRing R] [Algebra ℚ R]`，
+  既不要 Field、不要 CharZero、也不要 NoZeroDivisors（那三条只出现在姐妹卡
+  worldsheet.y3-singular-vector-d26-iff 所对应的 `towerLop_two_apply_y3_eq_zero_iff`
+  的额外方括号前件里）。初稿方向上是**少说**（断言在更窄的环类上成立），不构成虚高，
+  但对 formalized 卡而言仍是回译不忠实：它会让下游误以为必须先有 CharZero 域。
+  已按 Lean 签名改回。**本卡从未以初稿文本进入 main**（合并用 `--no-ff --no-commit`，
+  在同一个合并提交里改正），故不触发原则 1 的换代要求。
+  卡内 sources note 那句「section 变量……均无下界或特殊值约束，除了 hη」**本来就是对的**
+  ——curator 的 note 与自己的 statement 互相矛盾，statement 那半边错。
+
+author: graph-curator
+created: "2026-09-20"

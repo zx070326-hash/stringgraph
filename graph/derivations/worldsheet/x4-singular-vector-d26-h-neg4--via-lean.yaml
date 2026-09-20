@@ -1,0 +1,21 @@
+id: worldsheet.x4-singular-vector-d26-h-neg4--via-lean
+target: worldsheet.x4-singular-vector-d26-h-neg4
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.virasoro-generators-free-boson
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/SingularVectorsSix.lean :: StringFormal.NoGhost.x4_mem_towerPositiveModeSubmodule"
+    note: |
+      Lean 4 + Mathlib v4.33.1 形式化证明。合并提交 db5b53d（PR-D2，noghost-pr-d2，
+      2026-09-18）。证明策略与 y3 版本完全相同：L_1(x4φ) = 0 与 L_2(x4φ) = 0 经
+      towerLop_eq_zero_of_pos_of_one_two 推出所有正模湮灭；前者由 h=−4 得到
+      （towerLop_one_apply_x4_of_eq_neg_four），后者由 D=26 得到
+      （towerLop_two_apply_x4_of_eq_neg_four）。无 sorry，公理集合为
+      {propext, Classical.choice, Quot.sound}（已由 lead 在合并前检查）。
+summary: |
+  Lean 直接计算 L_1(x4φ) 与 L_2(x4φ)，证明在 D=26 且 h=−4 时两者均为零，
+  由 Virasoro 代数关系推出 x4φ 被所有正模湮灭。
+author: graph-curator
+created: "2026-09-20"

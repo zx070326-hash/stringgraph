@@ -1,0 +1,76 @@
+id: worldsheet.seed-criterion-bigrade-neg-six-one
+kind: proposition
+title: "种子判据（bigrade (−6,1)，D=26）：towerSeed 等价于 x4/y3 像在 towerSeed"
+statement: |
+  设 K 是 CharZero 域且 Algebra ℚ K、η : Fin D → K 满足 hη : ∀ μ, η μ * η μ = 1。
+  **另设三条光锥基底条件**（Lean section 变量，经 `include` 进入定理，承重）：
+    hbb : dotVec η b b = 0      （b 是零矢）
+    hba : dotVec η b a = 1      （a 与 b 的配对归一）
+    haa : Fock.zeroModeSq η a = 2
+  在临界维度 (D : K) = 26 下，对 bigrade (−6, 1) 片上的任意态
+  u ∈ towerBigrade D K (−6) 1，有
+
+    u ∈ towerSeed η a b (−6) 1  ⟺
+      x4 η a b u ∈ towerSeed η a b (−6) 5  ∧  y3 η a b u ∈ towerSeed η a b (−6) 4，
+
+  其中 towerSeed η a b j M := towerPositiveModeSubmodule η a b ⊓ towerBigrade D K j M
+  是正模湮灭条件（L_n·ψ = 0 对所有 n > 0）与 bigrade (j, M) 的交。
+
+  换言之，在 D=26 时，判断 bigrade (−6,1) 上的态 u 是否满足正模湮灭条件，
+  等价于检查其 x4 与 y3 像是否各自满足正模湮灭条件（在各自的目标 bigrade 上）——
+  这是无鬼定理种子构造的核心判据。
+uses:
+  - worldsheet.virasoro-generators-free-boson
+  - worldsheet.y3-singular-vector-d26-h-neg4
+  - worldsheet.x4-singular-vector-d26-h-neg4
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.virasoro-standard
+formal:
+  lean_decl: StringFormal.NoGhost.mem_towerSeed_neg_six_one_iff
+  lean_file: StringFormal/NoGhost/SeedCriterionSix.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/SeedCriterionSix.lean :: StringFormal.NoGhost.mem_towerSeed_neg_six_one_iff"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1；合并提交 db5b53d（PR-D2，noghost-pr-d2 分支，
+      2026-09-18 合入 main）。curator 亲自 Read SeedCriterionSix.lean lines 301-307
+      确认无 sorry。定理签名中的前件 hD26 : (D : K) = 26 是 (⟹) 方向的必要条件；
+      (⟸) 方向对任意 D 成立（见文件内 docstring line 298-299 与
+      mem_towerSeed_neg_six_one_of_towerLop_one_apply_y3_eq_zero，只用 y3 半边）。
+tags: [virasoro, no-ghost, seed-criterion, formalized, critical-dimension]
+notes: |
+  【与 TODO.md 的对应，逐字核对】formal/TODO.md lines 2271-2278 的散文描述
+  「for u in bigrade (-6,1), u ∈ seed(-6,1) iff x₄u ∈ seed(-6,5) and y₃u ∈ seed(-6,4)」
+  与本卡对应；该条目注明「Blueprint §B⁗.2, SeedCriterionSix.lean」。
+
+  【(⟹) 需要 D=26，(⟸) 不需要】Lean 侧 docstring（lines 296-299）明确指出：
+  (⟹) 方向用到 D=26（经 SingularVectorsSixSlice.y3_mem_towerSeed，即 y3/x4 的
+  奇异向量性质）；(⟸) 方向只用 y3 半边且对每个 D 成立
+  （mem_towerSeed_neg_six_one_of_towerLop_one_apply_y3_eq_zero）。本卡陈述写成等价式，
+  D=26 作为整个定理的前件，这是 (⟹) 半边的要求。
+
+  【bigrade (−6,1) 的特殊性】本判据只在 bigrade (−6,1) 上成立，不推广到其他 (j,M)。
+  该 bigrade 对应共形权 h = −4（质壳关系 α'k² + j + M = a₀ 取 a₀ = 1 时给出
+  j = −(M+1) = −(1+1) = −2，但 towerMomentum 机制使 L_0 本征值是 α'k² + j = −4，
+  见 LightCone.massShell_of_mem_towerBigrade）。x4 与 y3 在该 bigrade 上的作用
+  分别送到 bigrade (−6,5) 与 (−6,4)（保持 rung，提升 level）。
+
+  【与无鬼定理的关系】本判据是无鬼定理种子构造的核心一步：它把「直接检查 L_n·u = 0
+  对所有 n > 0」的无穷条件压缩成「检查两个有限算子 x4/y3 的像」，使种子空间的刻画
+  变为可计算。该判据在蓝图 §B⁗.2 被称为「[GAP-N6-seed] 的闭合」。
+
+  【毕业记录】本节点由 formal/TODO.md 的 noghost-pr-d2 条目（state: merged，
+  2026-09-18）毕业，按 formal/CLAUDE.md 形式化岛与图的关系。
+  **【lead 合并前订正，2026-09-20 —— 漏了三条承重前提】**
+  本卡 statement 初稿只列了 `hη`，**漏掉 `hbb` / `hba` / `haa`**。这三条是
+  `SeedCriterionSix.lean` 的 Criterion section 变量，并由 `include hη hbb hba haa in`
+  显式进入 `mem_towerSeed_neg_six_one_iff` 的签名——即它们**承重**。
+  漏掉它们方向上是**多说**：初稿等于断言该等价对任意 (a,b) 成立，而 Lean 只对
+  「b 零矢、⟨b,a⟩=1、a 的零模平方 = 2」这组光锥基底证了它。**这是对 formalized 卡
+  最危险的一类错误**（机检背书被扩大到机器没证的范围），已补齐。
+  **本卡从未以初稿文本进入 main**（合并用 `--no-ff --no-commit`），故不触发换代。
+  📌 这三条正是 DDF 构造的光锥基底约定；图内若日后为它们立卡，本卡的 `uses` 应改指。
+
+author: graph-curator
+created: "2026-09-20"

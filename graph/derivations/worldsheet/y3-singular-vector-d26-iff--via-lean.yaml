@@ -1,0 +1,22 @@
+id: worldsheet.y3-singular-vector-d26-iff--via-lean
+target: worldsheet.y3-singular-vector-d26-iff
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.virasoro-generators-free-boson
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/SingularVectorsSix.lean :: StringFormal.NoGhost.towerLop_two_apply_y3_eq_zero_iff"
+    note: |
+      Lean 4 + Mathlib v4.33.1 形式化证明。合并提交 db5b53d（PR-D2，noghost-pr-d2，
+      2026-09-18）。证明策略：计算 L_2(y3φ) 得到形式
+      (D−26)·(...)·(towerLop η a b (−1) φ)（towerLop_two_apply_y3_of_eq_neg_four），
+      在 NoZeroDivisors 与 CharZero 下由 smul_eq_zero 与 mul_eq_zero 逐层分解：
+      (⟹) (D−26)·(...) = 0 且 hne 推出第二因子非零（by norm_num），故 D−26 = 0；
+      (⟸) D=26 直接代入使整个表达式为零。无 sorry，公理集合为
+      {propext, Classical.choice, Quot.sound}（已由 lead 在合并前检查）。
+summary: |
+  Lean 直接计算 L_2(y3φ) 为 (D−26)·(非零因子)·(L_{−1}φ) 的形式，在整环上
+  由因式分解证明 L_2(y3φ) = 0 ⟺ D=26。
+author: graph-curator
+created: "2026-09-20"
