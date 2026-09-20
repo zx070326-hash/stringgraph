@@ -7,7 +7,7 @@ from pathlib import Path
 
 import jsonschema
 
-from .model import DEFINITION_STATUSES, Graph
+from .model import DEFINITION_STATUSES, FORMAL_KEYS, Graph
 from .propagate import compute_all
 
 
@@ -83,9 +83,33 @@ def validate(g: Graph) -> list[Problem]:
         if st.kind == "proposition":
             if st.status is not None:
                 err(where, "propositions must not declare `status`; it is computed from derivations")
+            # `formal.lean_decl` means "this Lean declaration PROVES this card", so it must be
+            # backed by a formalized derivation. Together with the reverse check below
+            # ("status formalized requires target.formal.lean_decl") this makes lean_decl and
+            # a formalized derivation a biconditional. A Lean declaration that merely states the
+            # card, or covers only part of it, belongs in `lean_related` + `lean_note`.
+            # Superseded cards are exempt: they are frozen history, and principle 1 forbids
+            # editing a card that other nodes may already build on.
+            if st.formal and st.formal.get("lean_decl") and not st.superseded_by:
+                if not any(d.status == "formalized" for d in g.derivations_for(st.id)):
+                    err(
+                        where,
+                        f"formal.lean_decl '{st.formal['lean_decl']}' claims a machine-checked "
+                        f"proof of this card, but no derivation has status formalized. Either add "
+                        f"the formalized derivation, or — if the declaration only states the card "
+                        f"or covers only part of it — move it to formal.lean_related + lean_note",
+                    )
         else:
             if st.status not in DEFINITION_STATUSES:
                 err(where, f"{st.kind} must declare `status` in {DEFINITION_STATUSES}")
+            # Symmetric gate: claiming `formalized` requires naming the Lean declaration that
+            # backs the claim. Propositions get this via the derivation check below.
+            if st.status == "formalized" and not (st.formal and st.formal.get("lean_decl")):
+                err(
+                    where,
+                    f"{st.kind} has status formalized but no formal.lean_decl; add the "
+                    f"declaration that backs the claim, or downgrade status",
+                )
         for u in st.uses:
             if u not in g.statements and u not in g.conventions:
                 err(where, f"uses: unknown id '{u}'")
@@ -103,6 +127,31 @@ def validate(g: Graph) -> list[Problem]:
             lf = root / "formal" / st.formal["lean_file"]
             if not lf.exists():
                 err(where, f"formal.lean_file does not exist: {st.formal['lean_file']}")
+        if st.formal:
+            unknown = set(st.formal) - FORMAL_KEYS
+            if unknown:
+                err(
+                    where,
+                    f"formal: unknown key(s) {sorted(unknown)}; allowed: {sorted(FORMAL_KEYS)}",
+                )
+            if st.formal.get("lean_decl") and st.formal.get("lean_related"):
+                err(
+                    where,
+                    "formal: lean_decl and lean_related are mutually exclusive — lean_decl says "
+                    "the declaration proves the card, lean_related says it does not",
+                )
+            if st.formal.get("lean_related") and not str(st.formal.get("lean_note") or "").strip():
+                err(
+                    where,
+                    "formal: lean_related requires lean_note saying how the declaration relates "
+                    "to the card (states it only / covers only part of it, and which part)",
+                )
+            if st.formal.get("lean_note") and not st.formal.get("lean_related"):
+                err(where, "formal: lean_note is only meaningful alongside lean_related")
+            if (
+                st.formal.get("lean_decl") or st.formal.get("lean_related")
+            ) and not st.formal.get("lean_file"):
+                err(where, "formal: lean_decl/lean_related requires formal.lean_file")
 
     # ---- conventions ------------------------------------------------------
     for c in g.conventions.values():

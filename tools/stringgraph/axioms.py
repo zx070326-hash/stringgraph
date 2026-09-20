@@ -61,19 +61,26 @@ def _rel(root: Path, p: Path) -> str:
 
 
 def collect_decls(g: Graph, formalized_only: bool = False) -> list[DeclUse]:
-    """Every `formal.lean_decl` in the graph, with the nodes that reference it.
+    """Every Lean declaration named by the graph, with the nodes that reference it.
+
+    Both `formal.lean_decl` (the declaration that proves a card) and `formal.lean_related`
+    (a declaration that only states a card, or covers part of it) are collected: auditing a
+    declaration's axiom set is meaningful whether or not it backs an epistemic claim, and a
+    `lean_related` pointer that turns out to rest on `sorryAx` is still worth knowing about.
 
     `formalized_only` keeps just the declarations that back a `status: formalized` derivation,
-    i.e. the ones whose axiom set the graph's epistemic claims actually rest on.
+    i.e. the ones whose axiom set the graph's epistemic claims actually rest on. Since
+    `lean_related` never backs a formalized derivation, it is filtered out by that flag.
     """
     uses: dict[str, DeclUse] = {}
     for st in g.statements.values():
-        decl = (st.formal or {}).get("lean_decl")
+        formal = st.formal or {}
+        decl = formal.get("lean_decl") or formal.get("lean_related")
         if not decl:
             continue
         use = uses.setdefault(decl, DeclUse(decl=decl))
         use.statements.append(st.id)
-        lean_file = (st.formal or {}).get("lean_file")
+        lean_file = formal.get("lean_file")
         if lean_file and lean_file not in use.lean_files:
             use.lean_files.append(lean_file)
     for d in g.derivations.values():

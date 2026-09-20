@@ -18,6 +18,19 @@
 - `convention`：约定（号差、归一化）。永远不降级任何东西。
 - `axiom`：本项目明确接受为出发点的假设（如"存在自洽的二维 CFT"）。有效状态记为 `assumed`，并在报告中单列。
 
+## `formal:` 块的两种指针（2026-09-21）
+
+一张卡的 `formal:` 块可以指向 Lean，但**指向不等于背书**。两个字段互斥：
+
+| 字段 | 含义 | 与 `formalized` 的关系 |
+|---|---|---|
+| `lean_decl` | 该声明**逐句证明本卡** | 这是 `formalized` 唯一的机检背书。`validate` 双向强制：有 `lean_decl` 就必须有 `formalized` 推导，反之亦然（superseded 卡豁免，它们是冻结的历史） |
+| `lean_related` + `lean_note` | 该声明与本卡相关但**不机检本卡**：或只**陈述**本卡（典型：Prop 值的 `def`），或只覆盖本卡的**一部分** | 永不支撑任何状态。`lean_note` 必填，一句话说明是哪一种关系、覆盖哪一部分 |
+
+两者都会被 `check-axioms` 审计（审一个声明的公理集合本身总是有意义的，与它是否承担认识论声称无关），但 `--formalized-only` 只看 `lean_decl`。
+
+**为什么要分**（2026-09-20 的事故）：`worldsheet.ddf-mode-sum-as-formal-residue` 的 `formal.lean_decl` 指向 `StringFormal.NoGhost.ddfOp`——一个 `def`——卡上没有任何 `formalized` 推导，那个指针却被读成了"这张卡已机检"。`formalized` 在本项目的含义是**本卡所断言的命题有机检背书**，不是"本卡提到的某个对象在 Lean 里出现过"。一个字段同时承担"证明本卡"和"与本卡有关"两种意思，事故就会重演，所以把后者拆出来并强制写明关系。
+
 ## 有效状态
 
 ```

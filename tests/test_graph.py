@@ -2077,3 +2077,151 @@ def test_validate_cli_json_carries_kind(mini_history: Path, capsys) -> None:
     rep2 = _json.loads(capsys.readouterr().out)
     assert {p["kind"] for p in rep2["problems"]} == {"live"}
     assert rep2["counts"]["history"] == 2
+
+
+# ------------------------------------------------- formal: lean_decl / lean_related gates
+#
+# Guards the 2026-09-20 incident: a proposition carried `formal.lean_decl` pointing at a
+# Prop-valued `def` with no formalized derivation, and that pointer got read as a machine
+# endorsement. The fix is a biconditional (`lean_decl` <-> a formalized derivation) plus an
+# explicit, annotated escape hatch (`lean_related` + `lean_note`) for declarations that only
+# state a card or cover part of it.
+
+
+def _with_lean_file(root: Path, rel: str = "Fake/Decl.lean") -> str:
+    """Create a file under formal/ so the lean_file existence check passes; return its rel path."""
+    p = root / "formal" / rel
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text("-- fixture\n", encoding="utf-8")
+    return rel
+
+
+def _prop_with_formal(root: Path, slug: str, formal_body: str, *, extra: str = "") -> None:
+    _write(
+        root,
+        f"graph/statements/worldsheet/{slug}.yaml",
+        f"""
+        id: worldsheet.{slug}
+        kind: proposition
+        title: T
+        statement: t
+        sources: [{{ref: ref-a, loc: "1"}}]
+        {extra}formal:
+        {formal_body}
+        """,
+    )
+
+
+def test_lean_decl_without_formalized_derivation_is_error(mini: Path) -> None:
+    lf = _with_lean_file(mini)
+    _prop_with_formal(mini, "gated", f"  lean_decl: Fake.thm\n          lean_file: {lf}")
+    assert any("claims a machine-checked proof" in e for e in _errors(mini))
+
+
+def test_lean_decl_with_formalized_derivation_is_ok(mini: Path) -> None:
+    lf = _with_lean_file(mini)
+    _prop_with_formal(mini, "gated", f"  lean_decl: Fake.thm\n          lean_file: {lf}")
+    _write(
+        mini,
+        "graph/derivations/worldsheet/gated--via-lean.yaml",
+        """
+        id: worldsheet.gated--via-lean
+        target: worldsheet.gated
+        kind: proof
+        status: formalized
+        depends_on: [{id: worldsheet.def-a}]
+        sources: [{ref: ref-a, loc: "1"}]
+        summary: machine checked
+        """,
+    )
+    assert not [e for e in _errors(mini) if "claims a machine-checked proof" in e]
+
+
+def test_lean_decl_gate_exempts_superseded_cards(mini: Path) -> None:
+    """Superseded cards are frozen history; principle 1 forbids editing them to satisfy a gate."""
+    lf = _with_lean_file(mini)
+    _prop_with_formal(
+        mini,
+        "gated",
+        f"  lean_decl: Fake.thm\n          lean_file: {lf}",
+        extra="superseded_by: worldsheet.prop-b\n        ",
+    )
+    assert not [e for e in _errors(mini) if "claims a machine-checked proof" in e]
+
+
+def test_lean_related_with_note_is_the_escape_hatch(mini: Path) -> None:
+    lf = _with_lean_file(mini)
+    _prop_with_formal(
+        mini,
+        "gated",
+        f"  lean_related: Fake.someDef\n          lean_file: {lf}\n"
+        f"          lean_note: states the card only; it is a Prop-valued def",
+    )
+    assert not _errors(mini)
+
+
+def test_lean_related_without_note_is_error(mini: Path) -> None:
+    lf = _with_lean_file(mini)
+    _prop_with_formal(mini, "gated", f"  lean_related: Fake.someDef\n          lean_file: {lf}")
+    assert any("lean_related requires lean_note" in e for e in _errors(mini))
+
+
+def test_lean_decl_and_lean_related_are_mutually_exclusive(mini: Path) -> None:
+    lf = _with_lean_file(mini)
+    _prop_with_formal(
+        mini,
+        "gated",
+        f"  lean_decl: Fake.thm\n          lean_related: Fake.someDef\n"
+        f"          lean_file: {lf}\n          lean_note: n",
+    )
+    assert any("mutually exclusive" in e for e in _errors(mini))
+
+
+def test_lean_note_without_lean_related_is_error(mini: Path) -> None:
+    lf = _with_lean_file(mini)
+    _prop_with_formal(
+        mini, "gated", f"  lean_note: dangling\n          lean_file: {lf}"
+    )
+    assert any("lean_note is only meaningful" in e for e in _errors(mini))
+
+
+def test_lean_pointer_requires_lean_file(mini: Path) -> None:
+    _prop_with_formal(mini, "gated", "  lean_decl: Fake.thm")
+    assert any("requires formal.lean_file" in e for e in _errors(mini))
+
+
+def test_unknown_formal_key_is_error(mini: Path) -> None:
+    lf = _with_lean_file(mini)
+    _prop_with_formal(mini, "gated", f"  lean_dec: Fake.thm\n          lean_file: {lf}")
+    errs = _errors(mini)
+    # caught by the JSON schema's additionalProperties, before the FORMAL_KEYS check
+    assert any("Additional properties are not allowed" in e and "'lean_dec'" in e for e in errs)
+
+
+def test_definition_formalized_requires_lean_decl(mini: Path) -> None:
+    _write(
+        mini,
+        "graph/statements/worldsheet/def-formalized.yaml",
+        """
+        id: worldsheet.def-formalized
+        kind: definition
+        status: formalized
+        title: F
+        statement: f
+        sources: [{ref: ref-a, loc: "1"}]
+        """,
+    )
+    assert any("status formalized but no formal.lean_decl" in e for e in _errors(mini))
+
+
+def test_collect_decls_covers_lean_related_but_formalized_only_excludes_it(mini: Path) -> None:
+    """Axiom auditing should still reach lean_related; epistemic filtering should not."""
+    lf = _with_lean_file(mini)
+    _prop_with_formal(
+        mini,
+        "gated",
+        f"  lean_related: Fake.someDef\n          lean_file: {lf}\n          lean_note: partial",
+    )
+    g = load_graph(mini)
+    assert "Fake.someDef" in {u.decl for u in collect_decls(g)}
+    assert "Fake.someDef" not in {u.decl for u in collect_decls(g, formalized_only=True)}

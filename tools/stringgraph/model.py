@@ -12,6 +12,18 @@ from typing import Any
 DERIVATION_STATUSES = ("formalized", "rigorous", "physical-argument", "conjecture", "speculation")
 DEFINITION_STATUSES = ("formalized", "rigorous", "physical-argument")
 
+# Keys allowed under a statement's `formal:` block.
+#   lean_decl    — this declaration PROVES this card, sentence for sentence. It is the machine
+#                  endorsement `formalized` rests on, so validate.py requires a formalized
+#                  derivation alongside it (and vice versa).
+#   lean_related — a Lean declaration relevant to this card that does NOT machine-check it:
+#                  it may only *state* the card (a Prop-valued `def`), or cover only *part* of
+#                  it. Asserts nothing about status and can never back `formalized`.
+#                  Requires `lean_note` saying which relationship holds.
+#   lean_note    — one line explaining how `lean_related` relates to the card.
+#   lean_file    — the file the declaration lives in; required when either pointer is present.
+FORMAL_KEYS = frozenset({"lean_decl", "lean_related", "lean_note", "lean_file"})
+
 # Effective statuses (computed). "refuted" and "open" are only ever computed.
 LEVEL: dict[str, int] = {
     "formalized": 5,
