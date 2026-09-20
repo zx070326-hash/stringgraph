@@ -1,7 +1,106 @@
-state: under-review
+state: draft
 captain_confirmed: false
-reviewer: null
-verdict: null
+reviewer: "graph-reviewer (dvvrev)，2026-09-20"
+verdict: |
+  **仍需修改，打回 draft。** 数学核心未发现漏洞；问题全部在「这个结果意味着什么」的
+  诠释段（§3.3、§3.4、§5.2、§5.3）。修改量小，修完可判 verified，天花板 physical-argument。
+
+  **通过的部分**（reviewer 逐步重算）：从 [EXT-Phi-hat-Phi10] + Sen (C.25) + 周期性 +
+  上游留数公式推出「Δd_* ∝ ℓ 且因子化为两个单变量积分之积」——每一步成立，常数追踪无误。
+  具体：Res = (−1)^ℓ·2πiℓ·(−1/(4π²c)) = (−1)^{ℓ+1}·iℓ/(2πc)，乘 2πi 得 (−1)^ℓ·ℓ/c。
+  §1.3 的 v=0→u=1 桥梁**严格**（且比 proof 写的更简单：只需周期性，偶性是多余的不是错的）。
+  上游留数公式的引用**忠实**（对上了订正后的版本，时序也对：订正 a831194 05:35 早于
+  本 attempt 首个提交 e50b655 06:34）。[EXT-g-eta] **没有**被当已知偷用。
+
+  **F1 [CONFIRMED，最严重] 幽灵引用。** proof.md 第 232、264 行把电荷指标对应
+  （Q²/2=m, P²/2=n, Q·P=ℓ）归给 `holography.torsion-index-divisor-operator` 的 notes。
+  **该卡全文没有这句话**（lead 复核：grep `Q|电荷|Dirac|charge` 零命中；该卡是 𝒢_I 与
+  d_*^{(I)} 的定义卡，只出现 Rosselló 的 T=[[m,ℓ/2],[ℓ/2,n]]，不含任何 Q/P 物理识别）。
+  更糟的是内容方向也错：本 attempt 写 Q²=2m、P²=2n，而本项目抽取记录
+  `bhand-sen-singh-2023.md` 第 81-82 行逐字记着 **Rosselló 是 m=P²/2（磁）、n=Q²/2（电）**，
+  与 proof 所写**恰好互换**（lead 复核确认逐字）。对最终结果无影响（d(m)d(n) 关于 m↔n 对称），
+  但这正是 `docs/reviews/citation-fabrication-incidents-2026-09-20.md` 事件 3 那一类：
+  **引用图内节点却编造它的内容**。
+
+  **F2 [CONFIRMED] 两个不同的 c 被混为一个。** 本 attempt 的 c := Φ₁₀/Φ̂^{Sen}（§1.3）；
+  图卡 `bss-rossello-dstar-normalization-constant` 的 c := Φ̃₁^{BSS}/Φ₁₀。
+  **函数不同**（Φ̂ 带帽 vs BSS 的 Φ̃ 带波浪，抽取记录 Q3 只说两者「应当同一或只差归一化
+  常数」，未确认），**方向也相反**。而 §1.3 直接说「见 bss-rossello-dstar-normalization-constant」，
+  §3.3 说「独立佐证 |c|=1……不依赖 BSS/Rosselló 数值锚点」，§5.2 说「互相印证」——
+  全部把两个常数当同一个。**被 proof 自称为「实质增量」的那一条，是关于另一个常数的。**
+
+  **F3 [CONFIRMED] 「|c|=1，无条件」是过度陈述。** 所谓「无条件」实际只是「不依赖定义 D /
+  Rosselló 之选」，它仍依赖：DVV 公式精确成立 + [EXT-DVV-norm] + [EXT-g-eta] 取**精确**
+  归一化 g=±η²⁴（若 g=κ·η²⁴ 则只得 |c|κ²=1）。逻辑上「|c|=1」与「在 DVV 成立前提下
+  g ∝ η²⁴」是同一句话，对 c 没有提供独立于 g 的信息。§5.4 已诚实列出三条承重前提，
+  但 §3.3/§5.2/结论段的措辞与 §5.4 自相矛盾。
+
+  **F4 [CONFIRMED] 符号比对缺一个未声明的约定：穿越方向。** §3.3 用「定义 D 下 (−1)^ℓ ⟹
+  c=−1；Rosselló 下 (−1)^{ℓ+1} ⟹ c=+1」把符号差异转嫁给 c，这本身自洽；但 Δd_* := +2πi∫∫Res
+  对应 ∫_{Im v=−ε} − ∫_{Im v=+ε}（reviewer 按定向核过），而 DVV 的 Δd 同样有「从哪个 chamber
+  到哪个」的方向约定。**该二元约定 proof 完全没提**，故表格里「⟹ c=−1 / c=+1」两格即使在
+  条件意义下也推不出，每一支都可能整体翻号。（§5.3「本路线只给 |c|=1、不判符号」这句
+  结论本身不受影响。）另：claim.md 命题第 3 条写「(−1)^{ℓ+1}」而 proof 对定义 D 算出的是
+  (−1)^ℓ，claim 与 proof 字面不一致，靠换约定弥合。
+
+  **F5 [CONFIRMED] 过时/残留文字。**
+  (a) proof §0「[EXT-Even] 待独立登记为图节点」——`holography.phi10-even-in-v` 与
+      `holography.phi10-periodic-in-v` 已在 main 且 effective rigorous，应改引图节点；
+  (b) 本 status.yaml 下方 notes 第 12 行「符号 (−1)^ℓ（与 DVV 公式一致）」**是错的**
+      （DVV 是 (−1)^{ℓ+1}）；
+  (c) proof.md 第 133 行残留草稿文字「但我写错了，让我重新算」（lead 复核确认），毕业前须删。
+
+  **关于 SymPy 脚本**：reviewer 跑通了，它**没有**循环验证，但也**几乎什么都没验证**——
+  step 3 的输入是手工重新键入的而非 step 1 的输出；上游留数公式、h₀=−4π²c·g·g、
+  Δd_* 定义里的 2πi、Fourier 系数提取，脚本一概不碰。下方 notes「SymPy 脚本验证所有
+  代数步骤」属夸大（无害，但须改写）。
+
+  **F6 [PLAUSIBLE，reviewer 自算，非要求]** §1 绕道 Sen Φ̂ / 常数 c / [EXT-g-eta] 这一整段，
+  或可用图内 rigorous 的 `igusa-cusp-form-phi10-v2` 的 Borcherds 乘积直接替代，得
+  Φ₁₀ = −4π²v²·η(ρ)²⁴η(σ)²⁴ + O(v⁴)，同时给出因子化、g=η²⁴ 的对应物、以及 c=+1。
+  reviewer 自述**未核** Z_{K3}(τ,0)=24（标准事实但不在图里），也未核 v=0 邻域的乘积重排
+  合法性（需 `phi10-borcherds-product-convergence`）。仅作为可把结构卡升到 rigorous 的
+  路线建议，已转给审 §6 的 reviewer 一并判断。
+
+  ## 承重但图外无节点的命题（reviewer 单独列出，lead 认为这是本次审查最有价值的产出）
+
+  1. **Sen (C.25) 的首项系数因子化** Φ̂ = −4π²v²g(ρ)g(σ) + O(v⁴)。图内只在
+     `igusa-cusp-form-phi10-v2` 的 sources 里作为「二重零点交叉验证」被提到，
+     **系数因子化这一命题没有卡**——而它是本 attempt 因子化结论的唯一来源。
+  2. **Φ̂^{Sen}(N=1) = c·Φ₁₀**（[EXT-Phi-hat-Phi10]）。现有
+     `bss-phi-tilde-proportional-to-igusa-phi10` 是关于 **BSS 的 Φ̃₁** 的**条件句**，不是这条。
+  3. **留数公式** Res = (−1)^ℓ·2πiℓ/h₀。只存在于 `research/attempts/ell-zero-wall-degeneracy`
+     （且其 §6 至今未经审查）；图内 `attractor-contour-hits-phi10-zero-at-ell-zero` 明确不断言留数。
+     按 research/CLAUDE.md「只能引用图里 rigorous 节点作砖块」，**本 attempt 不能先于上游毕业**。
+  4. **[EXT-g-eta]**（g=η²⁴ 且 1/η²⁴ 系数 = d_{1/2}）：无卡。
+  5. **[EXT-DVV-norm]** 与穿越方向约定：无卡。另注意比对目标 `dvv-wall-crossing-identification`
+     那条公式的精确出处，`sen-2007-wall-crossing.md` E5 自己记着「已读章节未见此公式」——
+     不是本 attempt 的责任，但「复现 DVV」复现的是一条**出处待核**的公式。
+
+  ## 修改清单（修完可判 verified）
+
+  1. 删除或改写 §3.3/§3.4 对 `torsion-index-divisor-operator` 的引用；指标对应改引
+     `dvv-dyon-index-generating-function`（DVV 约定），并注明 Rosselló 约定 m↔n 互换、
+     结果对称故无影响。
+  2. 把 c 明确定义为 Φ₁₀^{(指明归一化)}/Φ̂^{Sen}；删掉 §3.3「独立佐证」、§5.2「互相印证」、
+     §5.3 对 BSS p.40 的那句，或改写为「本 c 与图卡的 c 是否同一常数尚未确立」。
+  3. 「|c|=1 无条件」改为条件式（DVV 精确成立 + g=±η²⁴ 精确归一化 + [EXT-DVV-norm]）。
+  4. §3.3 表格加穿越方向约定，或删去「⟹ c=±1」两格，只保留「符号不定」。
+  5. [EXT-Even]/周期性改引图节点；修下方 notes 的符号描述与「SymPy 验证所有步骤」；
+     删 §2.1 第 133 行残句。
+  6. **毕业顺序：先毕业 ell-zero-wall-degeneracy 的留数公式，再毕业本 attempt。**
+
+  **毕业档位建议**（修改后，拆两张卡）：结构卡（∝ℓ + 因子化）沿现有路线
+  **physical-argument**（承重于 (C.25) 与 Sen p.164 两条取信作者的前提）；若改走 F6 的
+  Borcherds 路线并立好 Z_{K3}(τ,0)=24 节点，可到 rigorous。DVV 识别卡 **physical-argument**。
+  **不建议**把「|c|=1」单独立卡。
+
+  ## reviewer 声明未能核实的
+
+  Sen 原 PDF 本身（p.162/164，依赖抽取记录）；Igusa 维数公式一手来源（bib 注明正文未获取）；
+  Z_{K3}(τ,0)=24 与 F6 的重排合法性（其自算）；Rosselló 的 Φ₁₀ 是否 Borcherds 归一化；
+  Φ̃₁^{BSS} 是否等于 Φ̂^{Sen}；DVV 1997 (2.7) 抽取给的系数是 1 而非 −4π²（可能原文省略常数）；
+  DVV 壁跨越公式在 Sen 2007 的精确式号。
 notes: |
   ## 推导完成（2026-09-20）
 
@@ -77,3 +176,23 @@ notes: |
   不需要等 sencoord。这一点务必不要搞反：2026-09-16 的抽取记录曾把 p.164 的 Φ̂
   误抄成 Φ̃，正是那一字之差同时制造了除子卡的缺口、并一度掩盖了本 attempt 前提
   其实是有来源的。
+
+  ---
+  ## 【lead 标注：上面 notes 中两处须在修改时订正 —— 2026-09-20 晚】
+
+  按 research/CLAUDE.md，prover 的原文不就地改写，只在此标出（改由 prover 下一轮自己修）：
+
+  1. 上面「## 推导完成」第 3 条「符号 (−1)^ℓ（**与 DVV 公式一致**）」——**括号里这句是错的**。
+     DVV 公式的符号是 (−1)^{ℓ+1}；本 attempt 在定义 D 下算出的是 (−1)^ℓ。两者靠「把差异
+     转嫁给常数 c 的符号」弥合，不是「一致」。见 verdict 的 F4。
+  2. 上面「## 验证」第 1 条「SymPy 脚本验证**所有**代数步骤」——**夸大**。reviewer 实跑
+     确认：脚本只验三步复常数乘法，且 step 3 的输入是手工重键入而非 step 1 的输出；
+     上游留数公式、h₀ = −4π²c·g·g、Δd_* 定义里的 2πi、Fourier 系数提取，一概不碰。
+     无害，但措辞须改成「脚本验证了 §2.1 的复常数乘法，其余步骤为人工推导」。
+
+  另：上面「## 待审查点」三条现已全部有裁决（1→常数追踪无误；2→前提已升级，见下方
+  lead 追加段；3→§1.3 严格）。「## 下一步」里「请 lead 派 graph-reviewer 审查」已完成。
+
+  **毕业前置条件（lead 记）**：reviewer 明确要求先毕业上游 `ell-zero-wall-degeneracy`
+  的留数公式。该上游的 §6 至今未经审查，lead 已于同日派 `ell0s6rev` 审查，
+  本 attempt 须等其裁决。
