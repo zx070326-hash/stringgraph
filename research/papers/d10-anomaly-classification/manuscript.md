@@ -20,7 +20,7 @@ as a polynomial identity in `F ∈ 𝔤`, where `Tr` is the adjoint trace, and
 
 Green, Schwarz, and Witten (1987, Vol. 2, §13.5.3) state the solutions are `SO(32)`, `E₈×E₈`, `E₈×U(1)²⁴⁸`, and `U(1)⁴⁹⁶`, verifying `SO(n)` and `E₈` explicitly but leaving the general classification unproven. They write "These are the only candidates" without justification.
 
-The only subsequent work claiming a complete proof is Antonelli (2015, arXiv:1507.08642). While correctly identifying the Killing–Cartan classification as the natural framework, that work contains computational errors in trace coefficients for several Lie algebra types (§8).
+The only subsequent work claiming a complete proof is Antonelli (2015, arXiv:1507.08642), which correctly identifies the Killing–Cartan classification as the natural framework. Our proof provides an independent derivation with all trace coefficients computed from root data and internally cross-validated (§8).
 
 **Main Theorem.** Let 𝔤 be a compact Lie algebra with `dim 𝔤 = 496` satisfying (i) as a polynomial identity. Then 𝔤 is isomorphic to exactly one of: (1) `so(32)`, (2) `e₈⊕e₈`, (3) `e₈⊕u(1)²⁴⁸`, (4) `u(1)⁴⁹⁶`.
 
@@ -39,7 +39,7 @@ Computational verification: `scripts/root_power_sums.py` (~300 lines, stdlib onl
 ### Prior work
 
 - **GSW (1987), §13.5.3:** Four-algebra list with `SO(n)` and `E₈` verified; completeness argument missing.
-- **Antonelli (2015):** Correct framework, flawed execution. Trace coefficient errors for `SU(3)`, `SU(4)`, `SU(5)`, `E₆`; invalid `F₄` method (§8).
+- **Antonelli (2015):** Correct candidate-set framework (Killing–Cartan classification). Our §8 provides independent trace coefficient derivation.
 - **Adams–DeWolfe–Taylor (2010):** Observe abelian factors cannot participate in Green–Schwarz cancellation (our Remark 2.2).
 
 ---
@@ -362,31 +362,26 @@ Expected output excerpts shown in §5.1 and §5.6.
 
 ---
 
-## 8. Comparison with Antonelli (2015)
+## 8. Relation to prior work and independent verification
 
-Antonelli (2015, arXiv:1507.08642) is the only prior work claiming a complete proof. The candidate-set framework (Killing–Cartan classification) is correct and is reproduced here as Corollary 3.2. However, the execution contains errors.
+Antonelli (2015, arXiv:1507.08642) is the only prior work claiming a complete proof. The candidate-set framework (Killing–Cartan classification) is correct and is reproduced here as Corollary 3.2.
 
-### 8.1 Structural issues
+Our proof provides an independent derivation with all trace coefficients computed directly from root data via the Chevalley restriction theorem. We have not performed a line-by-line comparison with Antonelli's coefficient tables; such a comparison would be a separate verification task requiring detailed access to that work's computational methods.
 
-**F₄ method (invalid).** Antonelli's `F₄` argument reportedly attempts to use a primitive degree-4 invariant. But `F₄` has no such invariant: the Weyl-invariant polynomial ring has generators of degrees `(2,6,8,12)` (Bourbaki Planche VI). The only degree-4 polynomial is `S₂²`, up to scalar. Our §5.6 shows `F₄` needs no special method: `S₄ = (5/108)S₂²` automatically, and `F₄` is excluded by one evaluation point `h=(1,0,0,0)`: `S₆ = 57/4 = 14.25` while RHS `= 261/50 = 5.22`.
+### 8.1 Independent validation of our results
 
-### 8.2 Trace coefficient discrepancies
+Our trace coefficient values are internally cross-checked by:
+1. **Dimension check:** `|Φ| + rank = dim 𝔤` for all 66 algebras (passes).
+2. **Dual Coxeter number check:** `S₂ = 2h^∨ · |projection|²` passes exactly for 18 sampled algebras across all nine types, simultaneously validating coordinates, multiplicities, and power-sum code.
+3. **Agreement with Newton identity formulas:** Closed forms for classical families (§5.3–§5.5) derived independently from binomial expansion agree with explicit root calculations.
+4. **Two independent scripts:** `root_power_sums.py` and `closed_forms_and_witnesses.py` reproduce all exclusions via different code paths.
 
-Our root-system calculation disagrees with Antonelli's tables for `SU(3)`, `SU(4)`, `SU(5)`, `E₆`. We have not line-by-line diffed the tables (that would be a separate verification task), but our values are internally cross-checked by:
-1. Dimension check `|Φ| + rank = dim` for all 66 (passes).
-2. Dual Coxeter number check `S₂ = 2h^∨ · projection` (passes exactly for 18 sampled algebras across all types).
-3. Agreement with closed Newton-identity formulas for classical families (§5.3–§5.5).
-4. Independent code in `closed_forms_and_witnesses.py` reproducing all exclusions.
+### 8.2 What this paper adds
 
-The specific numerical disagreements would require access to Antonelli's computational methods, which are not detailed in that preprint.
-
-### 8.3 What this paper adds
-
-- **Complete, independent derivation** from root data, avoiding secondary invariant-theory sources.
-- **Hand-checkable exclusions**: closed forms for 61 classical algebras, single-point witnesses for 5 exceptional.
-- **Cross-validation**: dual Coxeter check, Newton identity agreement, two independent scripts.
-- **Trap documentation**: su(30) slice pathology (§5.3), so(32) non-(P) status (§5.4).
-- **Reproducible code**: stdlib-only Python, ~300 lines, included.
+- **Complete, independent derivation** from root data, requiring no secondary invariant-theory sources beyond Bourbaki root coordinates.
+- **Hand-checkable exclusions:** Closed forms for 61 classical algebras, single-point witnesses for 5 exceptional algebras.
+- **Trap documentation:** su(30) slice pathology (§5.3 Warning), so(32) non-(P) status (§5.4).
+- **Reproducible computational core:** stdlib-only Python (~300 lines), included with manuscript.
 
 ---
 
@@ -399,7 +394,7 @@ We have proven that the four gauge algebras `so(32)`, `e₈⊕e₈`, `e₈⊕u(1
 
 The mathematical techniques are elementary—polynomial algebra, root combinatorics, Chevalley restriction—with no deep modular form theory or string-theoretic physics beyond the initial problem statement. Every exclusion can be verified by hand or with ~300 lines of stdlib Python.
 
-The result confirms Green–Schwarz–Witten's 1987 assertion and corrects the computational errors in Antonelli 2015. It provides a complete, rigorous foundation for discussions of anomaly cancellation in ten-dimensional string theory.
+The result confirms Green–Schwarz–Witten's 1987 assertion and provides a complete, rigorous foundation for discussions of anomaly cancellation in ten-dimensional string theory.
 
 ---
 
