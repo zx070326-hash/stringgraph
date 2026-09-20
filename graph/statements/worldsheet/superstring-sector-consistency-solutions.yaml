@@ -50,8 +50,17 @@ statement: |
         或时空超对称；
     (5) 不断言 type 0 两解的模不变性（原书断言，本图无节点）。
 formal:
-  lean_decl: StringFormal.Math.SuperstringSectors.mem_maximalSpectra_iff
+  lean_related: StringFormal.Math.SuperstringSectors.mem_maximalSpectra_iff
   lean_file: StringFormal/Math/FiniteCounts.lean
+  lean_note: |
+    Covers only *part* of this card: the finite (Z₂)⁴ enumeration under (a)(b)(c)(d), machine-checked
+    by `decide`. It does **not** cover the two items this card's notes list under
+    【为什么本卡不标 formalized】 — the modular invariance of the two type 0 solutions (a bare
+    assertion of the source) and the physical content of the sector labels / level matching. So the
+    declaration cannot back `formalized` for this card, and the derivation stays `rigorous`.
+    Was `lean_decl` until 2026-09-21, which read as a full machine endorsement. The split suggested
+    in the notes (peel off the Lean half as its own card) would turn that half into a real
+    `lean_decl`; nobody has done it.
 uses_conventions:
   - conv.metric-mostly-plus
   - conv.alpha-prime-regge

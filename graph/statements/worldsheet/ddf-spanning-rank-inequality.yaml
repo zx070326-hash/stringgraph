@@ -34,8 +34,16 @@ statement: |
       这一方向时才用到（`ddf_span_pos`），不进入本卡陈述本身（见 sources 的 §B′ 订正说明）。
 uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.virasoro-standard, conv.intercept-sign-a]
 formal:
-  lean_decl: StringFormal.NoGhost.B26
+  lean_related: StringFormal.NoGhost.B26
   lean_file: StringFormal/NoGhost/SliceRank.lean
+  lean_note: |
+    `B26` is a Prop-valued `def` — the Lean *formulation* of this card's rank inequality, not a
+    proof of it. It states, per antidiagonal slice,
+    `dim(H_phys ⊓ V_N) ≤ dim(ddfSpan ⊓ V_N) + dim(H_null ⊓ V_N)`, and is the hypothesis consumed
+    by `ddfSpansOn_bigrade_of_b26` / `ddfSpans_of_forall_b26`. Individual slices are discharged
+    elsewhere (`b26_two_of_D26` … `b26_six_of_D26`); the card as stated, quantified over all `N`,
+    is not proved anywhere. Was `lean_decl` until 2026-09-21, which read as a machine endorsement
+    the declaration does not provide.
 sources:
   - ref: stringformal-2026
     loc: "formal/StringFormal/NoGhost/SliceRank.lean :: StringFormal.NoGhost.B26（本卡 formal.lean_decl，第 156 行；section B26 起于第 140 行）"

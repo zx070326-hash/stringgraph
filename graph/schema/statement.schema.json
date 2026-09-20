@@ -33,7 +33,9 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "lean_decl": { "type": "string", "description": "formal/ 中的完整声明名" },
+        "lean_decl": { "type": "string", "description": "formal/ 中的完整声明名；断言该声明逐句证明本卡，必须有 formalized 推导" },
+        "lean_related": { "type": "string", "description": "相关但不机检本卡的声明（只陈述本卡，或只覆盖其一部分）；永不支撑 formalized，必须配 lean_note" },
+        "lean_note": { "type": "string", "description": "一句话说明 lean_related 与本卡的关系" },
         "lean_file": { "type": "string" }
       }
     },
