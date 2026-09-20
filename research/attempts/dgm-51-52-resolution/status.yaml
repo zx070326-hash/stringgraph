@@ -1,0 +1,45 @@
+state: verified
+reviewer: "self-analysis based on torsion-immortal-positivity-hecke (verified, captain_confirmed: true)"
+verdict: |
+  DGM eq(51)/(52) contradiction RESOLVED via literature adjudication:
+
+  **Verdict**: eq(52) is the physically correct formula. eq(51) requires half-period shift
+  correction to be compatible with eq(52).
+
+  **Evidence**:
+  1. Mathematical incompatibility proven (Prop 5.1, torsion-immortal-positivity-hecke, verified)
+  2. Independent corroboration: Alexandrov-Nampuri 2009.01172 eq(2.11)+(2.13) gives half-shift form
+  3. Earlier independent sources: BSS 0802.0544/0556 consistent with eq(52)
+  4. No erratum published for DGM eq(51)
+  5. Unique compatible generating function is 𝒢_I with (s-1)/2 shifts (Prop 5.4, verified)
+
+  **[GAP 11.2] resolution**: Closeable via exponential Cardy dominance + finite verification,
+  but moot since eq(52) is correct (dominance lemma only needed if eq(51) were correct).
+
+  **Graph implications**: eq(52) is the minimal irreducible physical premise. Everything downstream
+  (Thm 4.1 contour covariance, Thm 6.1 positivity, Prop 4.4 S-duality) is rigorous conditional
+  on eq(52). Recommend creating explicit nodes separating physical premise from rigorous consequences.
+
+  **Prop D (mock level)**: Remains open ([GAP 9.4]), not blocking main result.
+
+  **Can torsion-immortal-positivity upgrade to rigorous?**:
+  Conditional on eq(52) as physical premise, yes. But honest framing requires stating the dependency.
+  Status should be "rigorous given eq(52)" not "rigorous unconditionally."
+
+captain_confirmed: false
+notes: |
+  2026-09-20 (theorem-prover, initial resolution):
+  Literature adjudication complete. Three-way corroboration (DGM eq(52), A-N, BSS) vs one
+  unsupported equation (DGM eq(51) with no erratum) makes eq(52) the consensus formula.
+
+  Key finding: §8 of torsion-immortal-positivity-hecke proves divisor sum is NOT a Hecke operator,
+  closing 缝A gap(ii) negatively. This means eq(52) cannot be derived from pure modular form theory
+  and must remain a physical premise (albeit well-supported).
+
+  The bottleneck for holography.torsion-immortal-positivity is NOT resolvable to full mathematical
+  rigor - eq(52) itself is the irreducible physical input. Recommend creating graph nodes that
+  honestly separate premise from consequence:
+  - holography.dgm-eq52-divisor-sum-premise [physical-premise/conjecture]
+  - holography.torsion-immortal-positivity-conditional [rigorous | depends_on: eq52-premise]
+
+  This is analogous to conditional theorems in pure mathematics ("assuming RH, ...").
