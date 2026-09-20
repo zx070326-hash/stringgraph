@@ -98,7 +98,34 @@
 - **超模空间可投影性 post-2024 入图**：六篇 post-2024 文献已登记（commit 303d6d5），curator 正把 Donagi–Noja 2608.24996 / Corrêa–Noja 2606.06733 / FKP 2408.11136 / Donagi–Ott / Wang / DBFS 转成图节点（分支 `agent/curator/supermoduli-post-2024`，只写 `graph/statements/math/**` 与 `graph/derivations/math/**`）。**五条红线**（researcher 逐字核出，写进了派工书）：(1) Donagi–Noja 只覆盖 **𝔐₄^+（偶自旋）**，ω₂(𝔐₄^+)≠0，整个 𝔐₄ 是平凡的无交并推论；(2) Corrêa–Noja 三项拆三张卡，**FKP 边只挂在第 (2) 项、绝不挂第 (3) 项**；(3) FKP Thm 6.3 只到亏格 2，与他们的任意亏格**正则性**结果是两回事；(4) 不得写"Wang 严格改进 Donagi–Ott"（n=0 处 Wang 的界更严），且 Wang 自标"preliminary draft"；(5) DBFS 对 CDvG 的批评是**条件排除论证**，不是断言 CDvG 错，其 `[20]` 的 arXiv 编号仍待核。既有卡 `math.supermoduli-space-not-projected` 的五条红线里，**红线 (4)「不考虑 DM 紧化」仍然成立**（Corrêa–Noja 是紧化空间上的正交补充，不是对该卡的更正），红线 (1)「只到 g≥5」仅**部分**被超越（g=4 只有偶自旋半边，**g=3 未紧化情形至今开放**——Donagi–Noja 自述"work in progress"）；故该卡只准改 `notes:` 加交叉引用，不准动 `statement:`/`sources:`/`status`。
 - **协调总线已拆除**（2026-09-18，船长指令"走 2"）：`CLAUDE.md` 的 Agora 小节、`.claude/settings.json` 的 8 条 `mcp__agora__*` 权限、六个 agent 定义里的 agora 工具与散文全部移除，改为「无协调总线，靠分工不重叠 + worktree 隔离」——派工书必须逐字写明允许写入的路径，并行 agent 路径不得相交。图节点 `notes` 与 agent `status.yaml` 里"已 agora_send 通报 lead"之类的**历史审计记录按不可变卡纪律原样保留**，只有 `formal/BLUEPRINT-noghost.md:383` 那一条**活的**指令改成了"必须先停下来问 lead"。
 
-## Phase 0：骨架与种子数据（已完成）
+### 本轮结项（2026-09-20，船长指令「这轮结束后停下」）
+
+**本轮完成的事**（ℓ=0 壁退化 attempt 的第三轮审查与收尾）：
+
+- ✅ **F-5（量词覆盖缺口）已关闭**。`research/attempts/ell-zero-wall-degeneracy/proof.md` §6.1 的引理 6.1 原逐字只证 `n ≥ m ≥ 1`，而 claim.md 的 Proposition A 与六张图卡都设 `m, n ≥ 1`，故 **`m > n` 一度无论证**。prover 放开量词（主证直接放开 + ρ↔σ 对称性旁证，重组为 5 步），graph-reviewer **ell0f5rev** 独立复审，**任务书刻意不写出前一轮的结论**、且要求它不以 prover 自列的范围审计表为据。裁决 **6/7 CLEAR**，唯一 DEFECT 为形式性（第 1 步未显式说"分母不含 m"），lead 已补。attempt 回到 **`state: verified`**，`captain_confirmed` 仍为 `false`。
+  - **关键的一行数学**：ℓ=0 时约束 (I) 解出 `σ₁ = [−n₂mρ₁ − mn₁ + nm₁]/(n·n₂)`，**分母 `n·n₂` 不含 `m`**——`m` 只进分子，分子取值不影响除法合法性。这就是放开量词免费的原因。
+  - 同轮一并关闭 F-4（不等式误写成等号）、F-6（ε₀ 依赖 Λ 的量词）、F-7（§3 的重复块，删的那份丢了承重的"重数 2"）、F-10（砖块清单过时）。
+
+- ✅ **两张 ℓ=0 壁避开卡的推导升 `rigorous`**（`kind: proof`），依 `docs/STATUS_LEVELS.md` 等级 4 例外条款：
+  - §6.1 → `ell-zero-contour-avoids-phi10-quadratic-wall--via-vertex-height-bound-at-ell-zero`（两轮：ell0s6rev + ell0f5rev）
+  - §6.2 → `ell-zero-contour-avoids-nontrivial-linear-walls--via-imaginary-part-obstruction`（一轮：ell0s6rev，外加 curator 落地时亲自重算 Im F）
+  - ⚠ **两处升档对下游零影响**：`effective` 仍被 `sen-d19-family-is-igusa-phi10-divisor` 的 **[GAP-identify]** 封在 `physical-argument`。升的是推导自身论证的严格程度。**「没有收益」不是「应当写低」的理由**——status 字段的定义就是本推导的严格程度。
+  - ⚠ **`phi10-order-two-in-v-on-ell-zero-contour--via-branch-exclusion` 刻意不随行升档**：它的步骤 3（围道上每点 `h₀≠0`）是 curator 自行补全、至今无逐步复核记录。
+  - 📌 **复核次数如实记在卡里**：(P7) 的独立重算只有 **一次**（ell0s6rev 用自己写的 sympy 脚本从 `g(t)` 定义重推）；ell0f5rev 自报它没重推 (P7)、没重做 §6.2、没执行 prover 的内联脚本、没回 Sen PDF、没自己 grep route-a 画引用图。两份一致的报告**不等于两次独立验证**，卡面必须区分。
+
+**本轮新开、留给后续的缺口与待办**（船长指令「写进 ROADMAP 和卡里，不派工」，故以下**均未派 agent**）：
+
+1. 🔴 **[GAP-Λ]（本轮主动收回，不是修复的副作用）**。claim.md 与 proof.md §4.1 原先都写「两侧公共值与 ε、Λ 无关」。**ε-无关可证**（两条同侧围道之间的闭带无极点）；**Λ-无关证不出来**——ℓ=0 时围道**穿过**极点，「在无极点区域内连续形变」这个标准论证的**前提不成立**。且 `ε₀` 源自 `δ := dist(K₀, Z')`，而 `K₀` 的虚部 `Im ρ = 2nΛ`、`Im σ = 2mΛ` 随 Λ 移动，故 `δ = δ(Λ)`。全文承重位置已改写为 `d_*(m,n,0;Λ)`。
+   - **图卡从一开始就没有断言 Λ-无关**（`dstar-well-defined-at-ell-zero--via-vanishing-residue` 的 gaps 逐字写着不断言）——**这是上游向图对齐，不是图让步**。本轮第二例（第一例是 F-4 的不等式写法）。
+   - **下一轮的起点**：prover 判断 [GAP-Λ] 在本路线**内**可推进，起点是 §6 已给出的「Λ > 1/(4√(mn)) 时非平凡分支全部避开围道」。
+2. 🔴 **Borcherds 路线 + `igusa-cusp-form-phi10-v3`（`c(0)` 由 24 改 20）**。缺陷已裁定并记在 `docs/reviews/phi10-borcherds-exponent-c0-defect-2026-09-20.md`；换代涉及下游边重指，是完整的 curator 工作。该路线同时是 `h₀ ≠ 0` 升 `rigorous` 的**唯一**已知通道，且其前置全在 ℓ=0 attempt **之外**——不要把它和 attempt 的审查捆在一起等。
+   - ⚠ 本轮还留下一份**反面教材**必须先读：`docs/reviews/reviewer-contamination-borcherds-2026-09-20.md`。一句话：**一致不等于佐证**。收到两份一致的结果时先问「它们的输入有没有交集？交集是谁给的？」——交集若来自 lead，一致性就是自己的回声。
+3. 🔴 **桥卡 `V^{(n)}_K` 指标移位换代 v2**。裁决见 `docs/reviews/bridge-card-index-shift-2026-09-18.md`，上一轮已列为"下一轮第一件事"，**本轮仍未动**（收官轮不动承重卡）。状态不变：修的是记号错误，断言 (2) 的实质缺口分毫未动。
+4. ⚪ **[GAP-identify] 仍是 ℓ=0 全家卡 `effective` 的唯一天花板**：Sen 的 Φ̃ 坐标 = 标准 Φ₁₀ 坐标，非文献逐字断言。已查明 route-a §1.3 携带 Sen 2008 p.168 的**逐字块引用**（与下游判别式 ×4 一致），故这是**单源抽取**，不是 Borcherds 那种互相回声的伪佐证——但单源仍是单源。
+
+**仍然专属船长、本项目任何 agent 与 lead 都不得代填**：`bh-entropy-cartography` 的重新签字；定理 M、GAP 10.2b、route-a、ell0wall 与两个 attempt 的 `captain_confirmed`（全部仍为 `false`）。`verified` 是 agent 级裁决，不是船长确认。
+
+
 
 - [x] 目录结构、CLAUDE.md、agent 角色、skill
 - [x] 节点/边/里程碑 schema
