@@ -63,22 +63,53 @@ lim_{ε→0+} ∫_{C_+(ε,Λ)} dρ dσ dv · 𝒢(ρ,σ,v)·e^{−2πi(mρ+nσ)}
 
 ## §2. 允许使用的砖块（图内已有的 rigorous/formalized 节点）
 
-以下节点来自 `graph/statements/`，按其 `effective status` 分类：
+以下节点来自 `graph/statements/`。**2026-09-20 更新（第二轮审查 F-10）**：本清单首版写于
+[EXT-Div]/[EXT-Even] 尚未立卡、Φ₁₀ 定义卡尚未换代之时，已过时；下列 `effective status`
+全部用 `uv run stringgraph status <id>` 于 2026-09-20 当场亲查，不照抄卡里手写的字。
 
 **Formalized（可直接使用）**：
 - （本命题不涉及已形式化节点，待续）
 
 **Rigorous（可直接使用）**：
-- `holography.igusa-cusp-form-phi10`（定义）：Φ₁₀ 是亏格 2 Siegel 尖点形式，权 10。
-- `holography.torsion-index-divisor-operator`（定义 D）：`d_*` 的定义，包括 `𝒢 := −1/Φ₁₀(ρ,σ,v+1/2)` 与吸引子围道。
+- `holography.igusa-cusp-form-phi10-v2`（定义，effective **rigorous**）：Φ₁₀ 是权 10 亏格 2
+  Siegel 尖点形式，含 `Div(Φ₁₀) = 2H₁`（零点重数订正为二重）。
+  ⚠ **换代提示**：首版清单列的是 `holography.igusa-cusp-form-phi10`（v1），该卡已带
+  `superseded_by: holography.igusa-cusp-form-phi10-v2`，**不得再引用 v1**。
+  ⚠ **使用限制**：本 attempt 只用 v2 的「Φ₁₀ 是 Sp(4,ℤ) 权 10 尖点形式」与
+  「Div(Φ₁₀) = 2H₁」两条，**不使用**该卡 statement 里的 Borcherds 指数 `c(k)` 的具体数值
+  （该处的 `c(0)` 取值已知有缺陷，见 `docs/reviews/phi10-borcherds-exponent-c0-defect-2026-09-20.md`；
+  本证明的任何一步都不需要 c(k) 的数值）。
+- `holography.torsion-index-divisor-operator`（定义 D，effective **rigorous**）：`d_*` 的定义，包括 `𝒢 := −1/Φ₁₀(ρ,σ,v+1/2)` 与吸引子围道。
+- `holography.phi10-even-in-v`（命题，effective **rigorous**）：`Φ₁₀(ρ,σ,−v) = Φ₁₀(ρ,σ,v)`。
+  **这就是下文 [EXT-Even] 所需的那条事实，现已是图节点**，本 attempt 可直接当砖块用。
+- `holography.phi10-periodic-in-v`（命题，effective **rigorous**）：`Φ₁₀(ρ,σ,v+1) = Φ₁₀(ρ,σ,v)`。
+  对应 proof.md §3.1 的引理 3.1（本 attempt 另给了一份从 Fourier 展开出发的独立论证）。
 
-**Physical-argument（需要额外警告才能使用，或者本证明降级到 physical-argument）**：
-- `holography.torsion-immortal-positivity-thm6-1`（Rosselló Cor 1.1 的正性）：`d_*^{(I)}(m,n,ℓ) > 0` 对 Δ=4mn−ℓ²>0。此卡 effective status 是 physical-argument（依赖未闭合的 GAP 10.2b）。
+**Physical-argument（引用时必须标红；引用它不会压低本 attempt 的结论，因为本证明不以它为前提）**：
+- `holography.torsion-immortal-positivity`（Rosselló Thm 6.1 / Cor 1.1 的正性）：
+  `d_*^{(I)}(m,n,ℓ) > 0` 对 Δ=4mn−ℓ²>0。亲查：`own_status: rigorous`，
+  **`effective: physical-argument`**（被上游未闭合缺口压低）。
+  ⚠ **id 订正**：首版清单写的是 `holography.torsion-immortal-positivity-thm6-1`，
+  **图里没有这个 id**（`uv run stringgraph search torsion-immortal` 只返回
+  `holography.torsion-immortal-positivity`）。
+  ⚠ 本 attempt **只把它当作旁证**（§5「相容性」），主证明链不依赖它——这一点很重要，
+  否则会构成循环：该卡的严格性本身部分地依赖 `d_*` 在 ℓ=0 良定。
 
-**外部前提（本轮新确立，尚未登记为图节点，标为待确认依赖）**：
-- **[EXT-Div]**：`Div(Φ₁₀) = 2H₁`，即 Φ₁₀ 在 `v=0` 是二阶零点。来源：Gritsenko–Nikulin 1996（`Φ₁₀ = Δ₅²`，`Div(Δ₅) = H₁`），文献登记见 `literature/extractions/gritsenko-nikulin-1996-phi10.md`；Sen 2008 (C.25)/(C.26) 展开 `Φ̂ = −4π²v²g(ρ)g(σ) + O(v⁴)` 独立佐证。**注意**：另有 researcher agent 正在从 PDF 独立复核二阶留数公式，其结论尚未回来；本证明把此项当作**显式外部前提**，不自己去改 `literature/`。
-
-- **[EXT-Even]**：Φ₁₀ 是 v 的偶函数，即 `Φ₁₀(ρ,σ,−v) = Φ₁₀(ρ,σ,v)`。这是 Siegel 尖点形式的标准性质（v 对应 period matrix 的越对角元 Ω₁₂，翻转它等价于 Sp(4,ℤ) 变换 `Ω ↦ JΩJ` 其中 J=[[0,1],[-1,0]]，权 k 的尖点形式在此变换下乘以 det(J)^k = (−1)^k；k=10 偶数故不变）。来源：标准模形式理论，待本轮 literature agent 核实后登记。
+**外部前提的现状（2026-09-20 更新）**：
+- **[EXT-Even]**：**已毕业为图节点 `holography.phi10-even-in-v`（effective rigorous）**，
+  见上。proof.md §2.1 引理 2.1 里那段「`Ω ↦ JΩJ` + 权 10 偶」的手写论证因此降级为
+  *启发性说明*，承重引用改为该图节点（其图内推导走的是 Borcherds 乘积 + 恒等定理延拓，
+  与手写论证是两条独立路径）。
+- **[EXT-Div]**：`Div(Φ₁₀) = 2H₁`（Φ₁₀ 沿 H₁ 的**一般点**为二阶零点）**已在
+  `holography.igusa-cusp-form-phi10-v2` 内**（effective rigorous）。来源：Gritsenko–Nikulin 1996
+  （`Φ₁₀ = Δ₅²`，`Div(Δ₅) = H₁`），文献登记见 `literature/extractions/gritsenko-nikulin-1996-phi10.md`；
+  Sen 2008 (C.25)/(C.26) 展开 `Φ̂ = −4π²v²g(ρ)g(σ) + O(v⁴)` 独立佐证。
+  ⚠ **但这不够**：本证明真正需要的是「**围道上每一点**处，限制到 u-直线的零点阶**恰为** 2」
+  （即 `h₀ ≠ 0`）。`Div(Φ₁₀)=2H₁` 只给一般点的重数；若某点同时落在 H₁ 与 Div(Φ₁₀) 的
+  另一分支上，限制阶会 ≥4、`h₀ = 0`、留数公式失效。这一步由 proof.md §6 的分支排除提供，
+  并已单独立卡为 `holography.phi10-order-two-in-v-on-ell-zero-contour`
+  （亲查 **effective: physical-argument**——被上游 `sen-d19-family-is-igusa-phi10-divisor`
+  的 [GAP-identify] 压低，与本 attempt 的论证质量无关）。
 
 ## §3. 核心机制（非正式陈述，精确证明在 proof.md）
 
