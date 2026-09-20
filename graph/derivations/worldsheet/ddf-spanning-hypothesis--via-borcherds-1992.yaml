@@ -13,25 +13,33 @@ depends_on:
       见 borcherds-1992 §5 Lemma 5.1 前的子空间定义段）。
       **非 inferred**：本边只是「把 v6 定义的对象装进目标陈述的 D(Ε)」，不涉及任何跨语言的等同
       （跨语言的等同在同名推导第 2、3 两条边上，那两条标 inferred）。
-  - id: worldsheet.free-boson-vertex-algebra-with-lightlike-momentum-tower
-    inferred: true
+  - id: worldsheet.momentum-tower-is-borcherds-no-ghost-instance
+    inferred: false
     note: |
       **桥接边（VOA 模结构 ↔ 本项目的动量塔）。** Borcherds Thm 5.1 / Lemmas 5.1–5.5 全部
       在顶点代数语言里做：工作空间是 V ⊗ V_{II_{1,1}}，物理态是其中 L_0 本征值为 1、
       被所有 L_{i>0} 湮灭的向量（P¹），横向空间 T¹ 由 K_i (i>0) 的零化条件定义。
       本项目的工作空间是动量塔 T(p; k_0) = ⊕_{j∈Z} F(p + j k_0)，物理子模由 Sugawara L_m 定义。
-      **「V_{II_{1,1}} 的 VOA 模结构与本项目的动量塔是同一个对象」这句话在一手文献里不成文**：
-      Borcherds 的 II_{1,1} 是二维偶自 unimodular 洛伦兹格（Gram 矩阵 ((0,−1),(−1,0))），
-      本图最接近的对应物是这条边指向的卡（Li–Wang Theorem 3.6 在退化格 L = Z k 上给出
-      V_{(𝔥,Zk)}-模 ⊕_j e^{jk} ⊗ M(1)，该卡 (3)(iii) 逐层识别到 F(p + j k_0)），
-      但**没有一篇文献逐字写下「它就是 Borcherds 的 V ⊗ V_{II_{1,1}} 的叶层」**。
-      ⚠ 该卡边界 (N2)(N4)(N5)(N6) 明写：不断言塔上的双线性型/伴随/正定性，
-      不建立不同塔之间的关系，不断言顶点算子 𝒴 与物理写法 :e^{i j k_0·X}: 的逐字对应，
-      不断言 DDF 算子的任何性质。**该卡确实不断言本条边需要的那句等同**。
-      ⇒ 按项目原则 5 标 `inferred: true`，桥接的两条具体缺口列入本推导 gaps 第 3 条
-      （格的维数 1 vs 2；塔上型是约定式定义而 Borcherds 的形式是构造出来的）。
-      **这条边不压低 effective**（该卡 effective = formalized）：它压低的是「本推导结论能否
-      逐字回译到 Borcherds 的 VOA 表述」的可信度，由 gaps 承担。
+      「这两套三空间逐对同一」正是这条边指向的卡的**卡面断言**（断言 (1)(2)(3)），
+      故本边 `inferred: false`：需要的那句话由该节点完整承载。
+
+      **⚠ 2026-09-21 修正（lead）。** 本边此前指向
+      worldsheet.free-boson-vertex-algebra-with-lightlike-momentum-tower 并标 `inferred: true`，
+      note 里自陈「没有一篇文献逐字写下『它就是 Borcherds 的 V ⊗ V_{II_{1,1}} 的叶层』」，
+      而那张卡的边界 (N2)(N4)(N5)(N6) 逐字拒绝这句话。按 graph/CLAUDE.md 的 2026-09-15 裁决
+      （`inferred: true` 不压低传播状态，propagate.py 根本不读该字段；判据是
+      「去掉 inferred 后，被指向的节点是否完整承载我需要的那句话？」），
+      那是在用 flag 藏一条承重命题。修正办法是立节点，不是加说明。
+      被藏的那条命题现在是
+      worldsheet.momentum-tower-is-borcherds-no-ghost-instance（own = physical-argument），
+      其三条缺口（Thm 5.1 的 L_0 本征空间有限维假设在塔上为假、II_{1,1} 秩 2 vs Z k_0 秩 1、
+      塔上的型是约定而 Borcherds 的是构造）写在那张卡的边界 (a)(c)(d) 与其推导 gaps 里。
+      先例同型：worldsheet.physical-exponential-equals-voa-vertex-operator（同一裁决第一例）。
+      ⚠ 本修正**不移动**任何节点的 effective：新卡与本推导既有的瓶颈
+      worldsheet.ddf-contour-equals-mode-sum 同为 physical-argument。
+      变化是 `why` 的瓶颈树由一枝变两枝——对象识别缺口此前完全不可见。
+      本推导 gaps 第 3 条（格维数 1 vs 2、塔上型的约定性）与第 5 条（有限维假设不满足）
+      的**内容仍然成立**，现在由那张卡承载并正常沿图传播；保留在此作历史与交叉索引。
   - id: worldsheet.ddf-contour-equals-mode-sum
     inferred: true
     note: |
@@ -227,12 +235,18 @@ summary: |
   完整长文未获取）。
 
   **本推导真正未闭合的缺口（见 gaps）**
-  算子字典：**从 Borcherds 的 K_i / 文献的围道 A^i_n 到本项目 v6 的模态和 A^ε_n 的等价**。
-  两条边标 `inferred`（VOA 模结构 ↔ 动量塔；K_i ↔ 围道 ↔ 模态和），其中
-  worldsheet.ddf-contour-equals-mode-sum 自身 effective = physical-argument，
-  **把本推导的 effective 压到 physical-argument**——这是预期且刻意正确的记账（见 gaps 第 1 条）。
-  **不要**为抬高 effective 而删这些 inferred 边：那会把「Borcherds 用 VOA 语言证的、
-  本项目用模态和语言写的，两者之间差一部未成文的算子字典」这个真实缺口抹掉。
+  两条，**并列**，都停在 physical-argument：
+  (1) **对象识别**：Borcherds 的 V ⊗ V_{II_{1,1}} 与本项目的动量塔是同一个对象吗——由
+      worldsheet.momentum-tower-is-borcherds-no-ghost-instance 承载（2026-09-21 从一条
+      `inferred: true` 边提成节点，见该边 note）。
+  (2) **算子字典**：从 Borcherds 的 K_i / 文献的围道 A^i_n 到本项目 v6 的模态和 A^ε_n 的等价——
+      由 worldsheet.ddf-contour-equals-mode-sum 承载，该边仍标 `inferred: true`
+      （理由是**那条边的论证**在来源里找不到，而命题本身已是图内节点；
+      这正是 `inferred` 的唯一正确用法）。
+  两者**共同**把本推导的 effective 压到 physical-argument——这是预期且刻意正确的记账。
+  **不要**为抬高 effective 而删这两条边或把它们降回 flag：那会把「Borcherds 用 VOA 语言证的、
+  本项目用模态和语言写的，两者之间差一部未成文的对象字典和一部未成文的算子字典」
+  这个真实缺口抹掉。
 gaps:
   - |
     **【本推导 effective 正确地是 physical-argument——这是记账，不是缺陷】**
