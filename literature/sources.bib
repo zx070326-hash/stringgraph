@@ -5355,12 +5355,30 @@
   pages   = {161--213},
   year    = {1995},
   doi     = {10.1007/BF01241126},
-  note    = {由 researcher 于 2026-09-17 登记（task GAP-BKM 候选文献）。**正文未取得**（L0）。
-             本文标题明确提到 infinite products 与自守形式，可能比 borcherds-1992 更直接相关于
-             ψ₅(z+½) 的模形式解释及扭转分母恒等式（research/attempts/bkm-shift-explanation [GAP-S3-扭转公式]）。
-             待验证是否包含：(1) 一般 BKM 代数在有限阶自同构下的扭转分母恒等式定理；
-             (2) 对内自同构 ω = exp(πi·ad H_r) 的适用性；(3) 和式侧扭转形式的显式陈述。
-             见 extractions/borcherds-1992-twisted.md 建议后续行动。}
+  note    = {由 researcher 于 2026-09-17 登记（task GAP-BKM 候选文献）。
+             ——2026-09-20 researcher 更新：**正文已取得**（L0 → 全文）。来源为作者主页公开 PDF
+             `https://math.berkeley.edu/~reb/papers/on2/on2.pdf`（curl HTTP 200，339060 字节，50 页，
+             页眉自标 "Invent. Math. 120, p. 161-213 (1995)"）；PyMuPDF 取文本 + p.16 200 dpi 渲染图目视核对，未用 pdftotext。
+             ⚠ 以下页码为**作者版 PDF 页码**，非刊印页码；刊印版定理编号未核。
+             逐字核到：§5 "Analytic continuation"（p.16）modular product 的定义
+               Φ(y) = e^{−2πi(ρ,y)} ∏_{x∈L, x>0}(1 − e^{−2πi(x,y)})^{c(x)}，y∈L⊗ℂ, ℑ(y)∈C；
+             **Theorem 5.1**（p.16）："Any modular product Φ(y) converges to a holomorphic function
+               whenever ℑ(y) is in C and has sufficiently large norm. This function can be analytically
+               continued to a multivalued meromorphic function for all y with ℑ(y) ∈ C all of whose
+               singularities and zeros lie on rational quadratic divisors."
+               ⚠ 原文是 "converges"，**不是 "absolutely converges"**（绝对收敛要引 gritsenko-nikulin-1996）；
+               ⚠ C 是**负**范数向量锥，故 "large norm" 字面与意图相反，实指 |(ℑy,ℑy)| 大（此解读为本项目推断）；
+               ⚠ 此处**无任何 Weyl chamber 条件**。
+             p.16 末段：若输入模形式是全纯的则乘积在整个 ℑ(y)∈C 上收敛——**Φ₁₀ 不属于此情形**
+               （其输入是 nearly holomorphic，c(−1)=2≠0），故只能用 Theorem 5.1 的"norm 充分大"域。
+             **Theorem 10.1**（p.29，§10 "The zero weight case"）给出 Φ(v)=e^{−2πi(ρ,v)}∏_{r>0}(1−e^{−2πi(r,v)})^{c(−(r,r)/2)}
+               是 O_M(ℤ)⁺ 的亚纯自守形式，权 c(0)/2——**其陈述中不含收敛域**，证明（p.30）把收敛域外包给 Theorem 5.1。
+             另核 Lemma 9.2（p.28）。**本文同时含 Lemma 9.2 / Theorem 5.1 / Theorem 10.1 三个编号，
+             因此 gritsenko-nikulin-1998 正文所引的 "[Bo6, …]" 即本文**（该文文献表里本文标为 [B5]，
+             正文标签 [Bo6] 与文献表不自洽；gritsenko-nikulin-1996 引同一定理时用的是与其文献表一致的 [B5]）。
+             **用途：Φ₁₀ Borcherds 乘积收敛域的上游来源**（Siegel 坐标翻译见 gritsenko-nikulin-1998 定理 2.1 证明）。
+             抽取记录 extractions/borcherds-1995.md（B1–B6）。
+             仍未核：本文是否含扭转分母恒等式（GAP-S3-扭转公式 的原问题）——本轮任务未涉及。}
 }
 
 @article{scheithauer-2000,
