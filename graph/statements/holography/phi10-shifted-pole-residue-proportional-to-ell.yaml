@@ -38,10 +38,11 @@ sources:
     loc: "research/attempts/ell-zero-wall-degeneracy/proof.md §2.1–§2.5（引理 2.1 偶性、引理 2.4 整数点偶性、§2.5 留数公式与【订正记录】）+ §5.1（与 Rosselló (2.23) 的约定换算与独立交叉验证）"
     note: |
       本项目原创证明，非已发表文献，见 research/attempts/ell-zero-wall-degeneracy/proof.md。
-      research/attempts/ell-zero-wall-degeneracy/status.yaml: **state: draft**
-      （2026-09-20 晚由 lead 从 verified 退回；退回理由是 §6.1 的量词缺口 F-5，
+      research/attempts/ell-zero-wall-degeneracy/status.yaml: **state: verified**
+      （2026-09-20 晚一度由 lead 从 verified 退回 draft；退回理由是 §6.1 的量词缺口 F-5，
       **与本卡所据的 §2 留数推导无关**——F-5 只影响吸引子围道上的分支排除，
-      本卡是条件命题，把 h₀≠0 写作显式假设，不依赖 §6）。
+      本卡是条件命题，把 h₀≠0 写作显式假设，不依赖 §6。F-5 已于同日经
+      graph-reviewer ell0f5rev 独立复审关闭，attempt 随即回到 verified）。
       reviewer: graph-reviewer agent ell0rev（2026-09-20，天花板 rigorous；逐步亲自核实
       「周期性 ⇒ 极点定位 ⇒ v-偶性 ⇒ h 只含偶次项 ⇒ Laurent 乘积 ⇒ Res ∝ ℓ」6 步）；
       **captain_confirmed: false**（尚未经船长确认，按 research/CLAUDE.md 生命周期第 3 步）。

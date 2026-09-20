@@ -27,8 +27,8 @@ sources:
     note: |
       本项目原创证明，非已发表文献。
       **§6 已于 2026-09-20 晚由 graph-reviewer ell0s6rev 审查，数学判 VERIFIED**——
-      本行原写「§6 未经 graph-reviewer 审查」，已过时（但 §6.1 有量词缺口 F-5，
-      见 gaps 第 1 条）。proof.md 对「围道上每一点 h₀≠0」仍只有 §2.2 的一句话，
+      本行原写「§6 未经 graph-reviewer 审查」，已过时（§6.1 的量词缺口 F-5 亦已于
+      同日经 ell0f5rev 复审关闭，见 gaps 第 1 条）。proof.md 对「围道上每一点 h₀≠0」仍只有 §2.2 的一句话，
       未把它接到 §6 的分支排除上——本推导的步骤 3 是 curator 自行补全的那一步
       （见 gaps 第 2 条）。**注意**：ell0s6rev 本轮逐步重推的是 §6.1/§6.2 的数学，
       以及 `dstar-well-defined-at-ell-zero--via-vanishing-residue` 步骤 1 的紧性论证；
@@ -71,11 +71,16 @@ gaps:
     holography.ell-zero-contour-avoids-phi10-quadratic-wall 排除」这一句**在 `m > n` 时
     目前无论证**（已派 prover 修，落地后不需换代）。
     【2026-09-20 晚续报】prover 的修复**已合并进 main**，引理 6.1 现对 `m, n ≥ 1` 陈述；
-    **但新文本未经任何复核**，已派 graph-reviewer ell0f5rev 独立复审，复审 CLEAR 前
-    本条不删。
+    **复审已完成、F-5 已关闭**——graph-reviewer ell0f5rev 从 route-a §2 Lemma 1 的
+    原始定义独立重推 ℓ=0 的 σ₁ 解，确认分母 `n·n₂` 与 `m` 无关，裁决 6/7 CLEAR，
+    唯一 DEFECT 为形式性且已补；上游 attempt 同日回到 `state: verified`。
+    故步骤 1 引用的排除卡现在对 `m, n ≥ 1` 全覆盖，**不需要给任何卡换代**。
     此外 holography.sen-d19-family-is-igusa-phi10-divisor 仍是 physical-argument
     （[GAP-identify]）。本推导 status 因此维持 physical-argument；**即使 §6 全部签字，
-    本卡 effective 仍被穷尽性那条边封顶在 physical-argument**。"
+    本卡 effective 仍被穷尽性那条边封顶在 physical-argument**。
+    **本卡不随两张 ell-zero-contour-avoids-* 卡一起升 rigorous**：那两张升档的依据是
+    reviewer 对 §6.1/§6.2 的逐步复核，而本推导的**步骤 3 是 curator 自行补全、
+    至今无逐步复核记录**（见下一条），故本卡的 own status 诚实留在 physical-argument。"
   - "**步骤 3 是 curator 自行补全的一步，proof.md 没有**。proof.md §2.2 只用一句
     「否则零点阶数 >2，与引理 1.1 矛盾」带过 h₀≠0，并未讨论「围道上某点同时落在两个
     分支上时阶会 >2」这一真实可能。本推导把它接到 §6 的分支排除上。

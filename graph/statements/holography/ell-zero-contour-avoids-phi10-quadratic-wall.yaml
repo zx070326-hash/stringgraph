@@ -40,17 +40,19 @@ sources:
       把它搬到 ℓ=0 的那一步（§6.1）**已于 2026-09-20 晚由 graph-reviewer ell0s6rev 审查**
       ——本行原写「至今未经 graph-reviewer 审查」，已过时。审查结论分两半：
       **三步核对的数学判 VERIFIED**；但发现**量词覆盖缺口 F-5**——§6.1 逐字只对
-      `n ≥ m ≥ 1` 陈述，而本卡 statement 设 `m, n ≥ 1`，故 **`m > n` 的情形目前无论证**。
-      已派 theorem-prover 放开量词（reviewer 已独立验证两条修法均成立）。
-      ell-zero-wall-degeneracy 现为 `state: draft`（正因 F-5）；两个 attempt 的
-      captain_confirmed 均为 false。推导仍按 docs/STATUS_LEVELS.md 等级 4 例外条款
-      （F-5 未修复前不签 reviewer-verified）诚实定为 physical-argument。
-      **F-5 修复落地后不需要给本卡换代**——量词放开只增不减，不改变本卡断言。
-      【2026-09-20 晚续报】修复**已合并进 main**：引理 6.1 现逐字对 `m, n ≥ 1`
-      （不假设 n≥m）陈述。**但这份新文本尚无任何复核**——ell0s6rev 当初判的是
-      「两条修法可行」，不等于「这份修订写对了」。已派 graph-reviewer ell0f5rev
-      独立复审（要求它自己回 route-a 逐处查 `n≥m`，而非核 prover 自列的审计表）。
-      **复审 CLEAR 前 status 不动、reviewer-verified 不签。**
+      `n ≥ m ≥ 1` 陈述，而本卡 statement 设 `m, n ≥ 1`，故 **`m > n` 的情形一度无论证**。
+      **F-5 已于同日关闭**：prover 放开量词（引理 6.1 现逐字对 `m, n ≥ 1` 陈述，
+      证明重组为 5 步，另附 ρ↔σ 对称性旁证），graph-reviewer **ell0f5rev** 独立复审
+      （**不**核 prover 自列的范围审计表，而是自己回 route-a 逐处查 `n≥m` 的出现、
+      并从 §2 Lemma 1 的 (I) 原始定义重推 ℓ=0 的解，确认**分母 `n·n₂` 与 `m` 无关**），
+      裁决 6/7 CLEAR，唯一 DEFECT 为形式性且已由 lead 补上。
+      ell-zero-wall-degeneracy 现回到 `state: verified`；两个 attempt 的
+      captain_confirmed 均为 false。
+      **量词放开只增不减，本卡不需换代、断言未变。**
+      推导 status 因此于本轮按 docs/STATUS_LEVELS.md 等级 4 例外条款升为 **rigorous**
+      （两轮 reviewer-verified 写入推导 notes）；**本卡 effective 不变**，仍被
+      holography.sen-d19-family-is-igusa-phi10-divisor 的 [GAP-identify] 封顶在
+      physical-argument。
   - ref: sen-2008-precision-counting
     loc: "arXiv:0708.1270v4 Appendix D, eq. (D.19)（p.168，逐字核对见 gap-102b-route-a/proof.md §1.3）"
     note: "D.19 的五参数零点族；本卡的「n₂≠0 分支」即其中 n₂≠0 的子族。"
@@ -84,8 +86,8 @@ notes: |
 
   【毕业记录】本节点由 research/attempts/ell-zero-wall-degeneracy/ 的 §6.1 毕业，按
   research/CLAUDE.md 生命周期第 4 步。proposition 禁止手填 status，有效状态由推导决定。
-  【2026-09-20 晚更新】该 attempt 现为 `state: draft`（此前写 verified，reviewer ell0rev
-  2026-09-20），退回理由正是本卡所据 §6.1 的量词缺口 F-5，详见 sources note。
+  【2026-09-20 晚更新】该 attempt 一度退回 `state: draft`，退回理由正是本卡所据 §6.1 的
+  量词缺口 F-5；F-5 同日关闭后已回到 `state: verified`，详见 sources note。
   captain_confirmed 仍为 false。
 author: graph-curator
 created: "2026-09-20"

@@ -48,15 +48,20 @@ sources:
       **未论证围道上每一点都如此**；本卡 (b) 把这一步补成显式命题，并由分支排除（§6）
       给出论证（curator 自行补全，见推导 summary）。
 
-      ⚠ **量词缺口（F-5，2026-09-20 晚由 ell0s6rev 发现，尚未修复）**：本卡 statement
-      设 `m, n ≥ 1`，而它援引的 proof.md §6.1（引理 6.1）逐字只证了 **`n ≥ m ≥ 1`**。
-      按字面，**`m > n` 时 (a)(b) 的 n₂≠0 分支排除目前无论证**。ell0s6rev 判定这是可修的
+      ⚠ **量词缺口（F-5，2026-09-20 晚由 ell0s6rev 发现；同日修复并复审关闭）**：本卡 statement
+      设 `m, n ≥ 1`，而它援引的 proof.md §6.1（引理 6.1）原逐字只证了 **`n ≥ m ≥ 1`**。
+      按字面，**`m > n` 时 (a)(b) 的 n₂≠0 分支排除一度无论证**。ell0s6rev 判定这是可修的
       形式缺口而非实质错误（route-a Prop 7 的推导全程不用 `n≥m`；另有 (ρ,σ) 互换的 WLOG
-      对称性备选修法），已派 theorem-prover 放开 §6.1。**修复落地前，本卡对 `m > n` 的
-      支撑不完整**；落地后本段删除，且**不需要换代**（量词放开只增不减，不改变本卡断言）。
+      对称性备选修法），已派 theorem-prover 放开 §6.1。
       【2026-09-20 晚续报】修复**已合并进 main**（引理 6.1 现对 `m, n ≥ 1` 陈述，
-      证明重组为 5 步，另附 ρ↔σ 对称性旁证）。**但新文本尚无任何复核**，
-      已派 graph-reviewer ell0f5rev 独立复审；**复审 CLEAR 前本段不删**。
+      证明重组为 5 步，另附 ρ↔σ 对称性旁证）。**复审已完成、缺口已关闭**：
+      graph-reviewer **ell0f5rev** 独立复审，**不**以 prover 自列的范围审计表为据，
+      从 route-a §2 Lemma 1 的 (I) 原始定义重推 ℓ=0 的解
+      `σ₁ = [−n₂mρ₁ − mn₁ + nm₁]/(nn₂)`，确认**分母 `n·n₂` 不含 m**，故对一切
+      `m ≥ 1` 无退化；另独立手验了 (P7)→(★) 的每个不等号与 ρ↔σ 旁证的辛条件、
+      判别式不变性。裁决 6/7 CLEAR，唯一 DEFECT 为形式性（第 1 步未显式说「分母不含 m」），
+      lead 已补。上游 attempt 同日回到 `state: verified`。
+      **本卡断言未变、不需换代**（量词放开只增不减）。
   - ref: gritsenko-nikulin-1996
     loc: "Div(Φ₁₀) = 2H₁（经 holography.igusa-cusp-form-phi10-v2 转载；本卡用它把「点上只过一条分支」升级为「阶恰为 2」）"
 tags: [bh-entropy, mock-modular, n4-string-theory, siegel-modular-form]
@@ -77,11 +82,14 @@ notes: |
 
   【毕业记录】由 research/attempts/ell-zero-wall-degeneracy/ 毕业并补全，按
   research/CLAUDE.md 生命周期第 4 步。proposition 禁止手填 status。
-  【2026-09-20 晚更新】该 attempt 现为 `state: draft`（此前写 verified），原因是
-  §6.1 的量词缺口 F-5，详见上方 sources note 的 ⚠ 段。**attempt 的 state 与本卡的
-  status 是解耦的两件事**：ell0s6rev 明确裁定本卡档位本来就是对的，§6 通过审查不会让
-  它升档（天花板来自 holography.sen-d19-family-is-igusa-phi10-divisor 的 [GAP-identify]），
-  attempt 退回 draft 也不使它降档（F-5 是覆盖缺口，已如实记在 sources note 里）。
+  【2026-09-20 晚更新】该 attempt 一度退回 `state: draft`（原因是 §6.1 的量词缺口 F-5，
+  详见上方 sources note 的 ⚠ 段），F-5 关闭后已回到 `state: verified`。
+  **attempt 的 state 与本卡的 status 是解耦的两件事**：ell0s6rev 明确裁定本卡档位本来
+  就是对的，§6 通过审查不会让它升档（天花板来自
+  holography.sen-d19-family-is-igusa-phi10-divisor 的 [GAP-identify]），当初退回 draft
+  也没有使它降档。**本卡也不随两张 ell-zero-contour-avoids-* 卡一起升 rigorous**：
+  那两张的依据是 reviewer 对 §6.1/§6.2 的逐步复核，而本卡推导的步骤 3（围道上每点
+  h₀≠0）是 curator 自行补全、至今无逐步复核记录。
   captain_confirmed 仍为 false。
 author: graph-curator
 created: "2026-09-20"

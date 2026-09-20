@@ -61,11 +61,14 @@ sources:
       （holography.phi10-even-in-v）。带内（Im v ≠ 0）的极点排除 proof.md 未处理，
       由本卡推导用紧致性补上（已复核）。
 
-      ⚠ **退回 draft 的理由不是 §6 有误，而是量词缺口（F-5）**：proof.md §6.1 逐字只证
-      `n ≥ m ≥ 1`，而本卡 statement 设 `m, n ≥ 1`，故 **`m > n` 的 n₂≠0 分支排除目前
-      无论证**。已派 theorem-prover 放开 §6.1（ell0s6rev 已验证两条修法均成立）。
-      修复落地前本卡对 `m > n` 的支撑不完整；落地后**不需换代**（量词放开只增不减）。
-      详见推导 holography.dstar-well-defined-at-ell-zero--via-vanishing-residue 的 gaps。
+      ⚠ **曾退回 draft 的理由不是 §6 有误，而是量词缺口（F-5）——该缺口已于同日关闭**：
+      proof.md §6.1 原逐字只证 `n ≥ m ≥ 1`，而本卡 statement 设 `m, n ≥ 1`，故
+      **`m > n` 的 n₂≠0 分支排除一度无论证**。prover 已把引理 6.1 放开到 `m, n ≥ 1`，
+      graph-reviewer **ell0f5rev** 独立复审（从 route-a Lemma 1 的原始定义重推 ℓ=0 的
+      σ₁ 解，确认分母 `n·n₂` 不含 m）裁决 6/7 CLEAR，唯一 DEFECT 为形式性且已补；
+      上游 attempt 现回到 **`state: verified`**。**本卡断言未变、不需换代**
+      （量词放开只增不减）。详见推导
+      holography.dstar-well-defined-at-ell-zero--via-vanishing-residue 的 gaps。
   - ref: rossello-2024
     loc: "§2 (2.22)–(2.23)（吸引子围道与 d_* 的定义）；Corollary 1.1（断言 d_*(m,n,ℓ)>0 对一切 Δ=4mn−ℓ²>0，**未排除 ℓ=0、也未说明其良定性**）"
     note: |
@@ -112,11 +115,12 @@ notes: |
   【毕业记录】由 research/attempts/ell-zero-wall-degeneracy/ 毕业，按 research/CLAUDE.md
   生命周期第 4 步。本 attempt 未产生 formal/ 内容。proposition 禁止手填 status，
   有效状态由推导决定。
-  【2026-09-20 晚更新】该 attempt 现为 `state: draft`（此前写 verified，
-  reviewer ell0rev 2026-09-20），原因见上方 sources note 的 ⚠ 段（量词缺口 F-5）。
+  【2026-09-20 晚更新】该 attempt 一度退回 `state: draft`（量词缺口 F-5，见上方 sources
+  note 的 ⚠ 段），F-5 同日关闭后**已回到 `state: verified`**。
   **attempt 的 state 与本卡的 effective status 解耦**：ell0s6rev 明确裁定，§6 通过审查
   不会让本卡升档（天花板是 holography.sen-d19-family-is-igusa-phi10-divisor 的
-  [GAP-identify]），attempt 退回 draft 也不使它降档（F-5 已如实记入推导 gaps）。
-  captain_confirmed 仍为 **false**。
+  [GAP-identify]），当初退回 draft 也没有使它降档。两次进出 draft 都没有改动本卡一个字，
+  这正是「陈述不可变、状态由推导算」应有的表现。
+  captain_confirmed 仍为 **false**——`verified` 是 agent 级裁决，不是船长确认。
 author: graph-curator
 created: "2026-09-20"

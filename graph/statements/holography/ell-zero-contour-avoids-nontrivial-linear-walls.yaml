@@ -36,11 +36,14 @@ sources:
       **审查状态（2026-09-20 晚更新）**：§6.2 **已由 graph-reviewer ell0s6rev 审查，
       判 VERIFIED**（那三行整数论证经逐步重推，无漏洞）——本行原写「至今未经
       graph-reviewer 审查」，已过时。
-      上游 attempt 现为 `state: draft`（退回理由是 **§6.1** 的量词缺口 F-5，
-      **不涉及本卡所据的 §6.2**）；captain_confirmed: false。
-      推导 status 仍维持 physical-argument：升级条件形式上已满足，但 lead 刻意保留，
-      理由见推导 notes 的【为什么此刻不升 rigorous】（关键一条：本卡 effective 被
-      sen-d19-family 的 [GAP-identify] 封顶，升了对下游零影响）。
+      上游 attempt 一度退回 `state: draft`（理由是 **§6.1** 的量词缺口 F-5，
+      **不涉及本卡所据的 §6.2**），F-5 同日关闭后已回到 `state: verified`；
+      captain_confirmed: false。
+      **推导 status 于 2026-09-20 晚升为 rigorous**（kind 改 proof），依据 ell0s6rev 对
+      §6.2 的逐步复核 + docs/STATUS_LEVELS.md 等级 4 例外条款。此前刻意保留的三条理由
+      已逐条失效或被判定不构成理由，见推导 notes 的【升档裁决】。
+      **本卡 effective 不变**：仍被 sen-d19-family 的 [GAP-identify] 封顶在
+      physical-argument，升的只是推导自身论证的严格程度。
   - ref: sen-2008-precision-counting
     loc: "arXiv:0708.1270v4 Appendix D, eq. (D.19)（p.168）"
     note: "D.19 的五参数零点族；本卡的「线性壁」即 n₂=0 子族（此时 F 关于 (ρ,σ,v) 是线性的）。"
@@ -64,8 +67,8 @@ notes: |
 
   【毕业记录】由 research/attempts/ell-zero-wall-degeneracy/ 的 §6.2 毕业，按
   research/CLAUDE.md 生命周期第 4 步。proposition 禁止手填 status。
-  【2026-09-20 晚更新】该 attempt 现为 `state: draft`（此前写 verified，reviewer ell0rev
-  2026-09-20），退回理由是 §6.1 的量词缺口 F-5，**与本卡所据的 §6.2 无关**——
-  §6.2 经 ell0s6rev 审查判 VERIFIED。captain_confirmed 仍为 false。
+  【2026-09-20 晚更新】该 attempt 一度退回 `state: draft`，退回理由是 §6.1 的量词缺口
+  F-5，**与本卡所据的 §6.2 无关**——§6.2 经 ell0s6rev 审查判 VERIFIED。F-5 已于同日
+  经 ell0f5rev 复审关闭，attempt 回到 `state: verified`。captain_confirmed 仍为 false。
 author: graph-curator
 created: "2026-09-20"
