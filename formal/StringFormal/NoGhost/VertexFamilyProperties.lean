@@ -5,7 +5,7 @@ Authors: stringgraph lean-formalizer
 
 Written from scratch against Mathlib `v4.33.1`; not a port of any existing formalisation.
 -/
-import StringFormal.NoGhost.DDF
+import StringFormal.NoGhost.DDFOperator
 
 /-!
 # Vertex family characterization properties (C1), (C2), (C3)
@@ -33,19 +33,31 @@ the family {𝒫_{n,K}}_{K∈ℤ} where 𝒫_{n,K} = S_n ∘ V^{(b_n)}_{K-nν}, 
 ## Main results
 
 * `towerVertex_property_C1` — Property (C1): layer shift and exact level raising
-* `towerVertex_property_C2` — Property (C2): oscillator commutator
+* `towerVertex_property_C2` — Property (C2): oscillator commutator, for every `h ∈ 𝔥`
+* `towerVertex_property_C2_coord` — the coordinate-direction special case of (C2)
 * `towerVertex_property_C3` — Property (C3): vacuum normalization
 
-## Notes
+## What this file is and is not
 
-- Property (C1) is directly provided by the existing `towerVertex_single_mem_levelSubmodule`.
-- Property (C2) is directly provided by the existing `lie_towerMode_towerVertex`.
-- Property (C3) requires a new proof using `Fock.vertexOsc_apply_one` and the fact that
-  `creaExp η b 0 = 1`.
+It is a **repackaging**, not new mathematics. (C1) is `towerVertex_single_mem_levelSubmodule`
+and (C2) is `lie_towerModeVec_towerVertex`, both pre-existing; only (C3) is new, and it is a
+one-line `rw`. The point of the file is to state the three properties **against proof.md §3.3's
+wording**, so that the hypotheses of that document's Theorem 3.5 (absolute uniqueness of the
+n-type vertex family) can be checked against Lean objects rather than against prose.
 
-The DDF normalization condition 2α'k₀·p = 1 (i.e., ν=1 in the proof document) is built into
-Lean's indexing: `towerVertex η b n K` uses index `K - n` for the oscillator part, where
-`n` plays the role of `nν` with ν=1.
+It does **not** establish Theorem 3.5 itself, which lives in an `under-review` attempt and has
+not been audited. Nothing here licenses any graph node to move status.
+
+## Two scope caveats
+
+1. **ν = 1 is hardcoded.** proof.md carries a general `ν := 2α'(k₀·p)`; `towerVertex η b n K`
+   uses the oscillator index `K - n`, i.e. `nν` with `ν = 1`. That matches the normalization
+   `2α' k₀·p = 1` declared by the graph card `worldsheet.ddf-operators-v6`, so the Lean family
+   is proof.md's family **at ν = 1** and nowhere else.
+2. **(C1) is stated as the exact single-rung computation** (`towerVertex` on `Finsupp.single`
+   plus the level membership), which is what `towerVertex_single_mem_levelSubmodule` gives;
+   proof.md phrases it as a subspace inclusion. The former implies the latter by linearity,
+   but that implication is not written down here.
 -/
 
 namespace StringFormal.NoGhost
@@ -72,16 +84,31 @@ theorem towerVertex_property_C1 (η b : Fin D → R) (n K : ℤ) (j : ℤ) {N M 
 
 /-- **Property (C2): Oscillator commutator.**
 
-For all μ ∈ Fin D and all p ∈ ℤ:
-  [α^μ_p, V^{(n)}_K] = (n b^μ) V^{(n)}_{K-p}
+For every `h ∈ 𝔥` (here: every vector `ε : Fin D → R`) and every `p ∈ ℤ`:
+  [h·α_p, V^{(n)}_K] = ⟨h, n k₀⟩ · V^{(n)}_{K-p}
 
-With h = e_μ (the μ-th coordinate vector), this is property (C2) from proof.md §3.3:
-  [h·α_m, A_K] = ⟨h, nk⟩ · A_{K-m}
+This is property (C2) from proof.md §3.3 **verbatim**, including its quantifier over all of `𝔥`:
+`towerModeVec η a b ε p = Σ_μ η_μ ε^μ α^μ_p` is the metric contraction `h·α_p`, and the
+right-hand coefficient `n · dotVec η ε b = Σ_μ η_μ ε^μ (n b)^μ` is `⟨h, n k₀⟩` — the metric
+factor `η_μ` is carried on **both** sides, so nothing is dropped.
 
-where ⟨h, nk⟩ = η_μ·h^μ·(nk)^μ = n·b^μ (since b = k in rescaled units and h^μ = δ^μ_ν).
+This is directly `lie_towerModeVec_towerVertex` (`NoGhost/DDFOperator.lean`).
 
-This is directly `lie_towerMode_towerVertex`. -/
-theorem towerVertex_property_C2 (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+⚠ The coordinate-direction version `towerVertex_property_C2_coord` below is the special case
+`ε = e_ν`; it reads `[α^ν_p, V] = (n b^ν) V` with **no** `η_ν`, because the `η_ν` produced by
+the contraction on the left cancels the one on the right. It is *not* a faithful rendering of
+(C2) on its own — (C2) quantifies over all of `𝔥`, and recovering that from the coordinate
+version needs the linearity step that `lie_towerModeVec_towerVertex` already performs. -/
+theorem towerVertex_property_C2 (η a b ε : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (n K p : ℤ) :
+    ⁅towerModeVec η a b ε p, towerVertex η b n K⁆
+      = ((n : R) * dotVec η ε b) • towerVertex η b n (K - p) :=
+  lie_towerModeVec_towerVertex η a b ε hη n K p
+
+/-- The coordinate-direction special case of `towerVertex_property_C2` (`ε = e_ν`, with the
+`η_ν` cancelled off both sides). Recorded for use against the single-index form of the moment
+machinery; see the warning in `towerVertex_property_C2`'s docstring. -/
+theorem towerVertex_property_C2_coord (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
     (μ : Fin D) (n K p : ℤ) :
     ⁅towerMode η a b μ p, towerVertex η b n K⁆ = ((n : R) * b μ) • towerVertex η b n (K - p) :=
   lie_towerMode_towerVertex η a b hη μ n K p
