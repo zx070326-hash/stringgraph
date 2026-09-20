@@ -21,8 +21,8 @@ research/attempts/<slug>/
 
 1. **draft**：`theorem-prover` agent 起草/推进，claim.md + proof.md 逐步填充。
 2. **under-review**：prover 自认为完成，请求 `graph-reviewer` 做对抗性审查（检查证明每一步是否严格跟随前提、是否有跳跃、边界情形是否遗漏）。
-3. **verified** / **refuted**：graph-reviewer 裁定并写入 `status.yaml`，附具体理由。`verified` 仍建议加 `captain_confirmed: false`，等人类船长最终确认后改 `true`（效仿里程碑 `audit.status: approved` 专属船长的先例）。
-4. **毕业**：只有 `verified`（且最好 `captain_confirmed: true`）的尝试，才允许 `graph-curator` 按正常 `add-statement` 流程把结论写回 `graph/statements/`。此时 `sources` 指向本目录下的 `proof.md`，并在 `note` 里显式声明"本项目原创证明，非已发表文献，见 research/attempts/<slug>/proof.md"。`kind: proof`，`status` 按证明严格程度定（通常 `rigorous`；若已过 Lean 形式化验证走正常 `formal/` 流程升 `formalized`）。
+3. **verified** / **refuted**：graph-reviewer 裁定并写入 `status.yaml`，附具体理由。**判 `verified` 即结项**——除非根 CLAUDE.md 原则 8 的四种"必须审"情形出现，否则**不再回头复审**。想继续投入就去开新命题。`captain_confirmed` 仍记在卡上，但它**只在里程碑签字与对外发表两处是真门**，不阻塞毕业、不阻塞被建设（见根 CLAUDE.md「图是仪器，不是产品」）。
+4. **毕业**：`verified` 的尝试即允许 `graph-curator` 按正常 `add-statement` 流程把结论写回 `graph/statements/`，**不必等 `captain_confirmed`**。此时 `sources` 指向本目录下的 `proof.md`，并在 `note` 里显式声明"本项目原创证明，非已发表文献，见 research/attempts/<slug>/proof.md"。`kind: proof`，`status` 按证明严格程度定（通常 `rigorous`；若已过 Lean 形式化验证走正常 `formal/` 流程升 `formalized`）。
 5. **abandoned**：此路不通或被证伪，如实记录，不要删除（负面结果也是结果，省得后人重复踩坑）。
 
 ## 纪律
