@@ -1,0 +1,128 @@
+id: worldsheet.momentum-tower-is-borcherds-no-ghost-instance
+kind: proposition
+title: "本项目的类光动量塔是 Borcherds 1992 Thm 5.1 的一个实例，且三空间字典 (P¹, T¹, N¹) ↔ (H_phys, D(Ε), H_null) 成立——**一手文献不成文的跨语言对象识别**"
+statement: |
+  【本卡要接的是哪一条缝】
+  worldsheet.ddf-spanning-hypothesis--via-borcherds-1992 把 borcherds-1992 §5
+  （Thm 5.1 + Lemmas 5.1–5.5）的证明接进本项目，其成立**必须**先有一句话：
+  「Borcherds 在顶点代数 V ⊗ V_{II_{1,1}} 上说的那三个空间，就是本项目在动量塔
+  T(p; k_0) 上说的那三个空间」。该推导原把这句话藏在一条指向
+  worldsheet.free-boson-vertex-algebra-with-lightlike-momentum-tower 的 `inferred: true` 边里，
+  而那张卡的边界 (N2)(N4)(N5)(N6) **逐字拒绝**这句话（不断言塔上的型、不断言共形向量与
+  Virasoro 生成元、不建立不同塔之间的关系、不断言顶点算子与物理写法的对应、
+  不断言 DDF 算子的任何性质），该边的 note 自己也逐字承认
+  「**没有一篇文献逐字写下「它就是 Borcherds 的 V ⊗ V_{II_{1,1}} 的叶层」**」。
+  按 graph/CLAUDE.md 的 2026-09-15 裁决（「若那条边实际携带一条图外的、尚无节点的实质命题，
+  必须把那条命题立成节点并给它诚实 status，不得塞进 flag 蒙混」），**本卡就是那张卡**。
+  先例同型：worldsheet.physical-exponential-equals-voa-vertex-operator（同一裁决的第一例）。
+
+  【Borcherds 侧的设定（borcherds-1992 §5，Lemma 5.1 前的子空间定义段，L1）】
+  V 是带非退化双线性形式、被 Virasoro 代数作用（L_i 的伴随是 L_{−i}、中心元作用为乘 24、
+  L_0 本征值非负整数且**各本征空间有限维**）的空间；V_{II_{1,1}} 是二维偶自对偶洛伦兹格
+  II_{1,1}（Gram 矩阵 ((0,−1),(−1,0))）的顶点代数；H := V ⊗ V_{II_{1,1}}，按 II_{1,1}-度数
+  r ∈ II_{1,1} 分片为 H_r。令
+    P¹ := { v ∈ H : L_0 v = v, L_i v = 0 ∀ i > 0 },   P¹_r := P¹ ∩ H_r,
+    K_i := v_{i−1}（v = e^{−w}_{−2} e^{w}，w ∈ II_{1,1} 类光），
+    T¹ := { v ∈ P¹ : K_i v = 0 ∀ i > 0 }（横向空间），
+    N¹ := P¹ 的双线性形式的根（radical）。
+
+  【本项目侧的设定】
+  worldsheet.momentum-tower-fock-space 的动量塔 T(p; k_0) = ⊕_{j ∈ Z} F(p + j k_0)
+  （conv.metric-mostly-plus、conv.alpha-prime-regge；k_0 类光、2α' k_0·p ∈ Z），
+  其上层间正交的 R-双线性型 ⟨·,·⟩_T、逐层 Sugawara 生成元 L_m；
+  worldsheet.tower-physical-quotient-form 的 H_phys(a₀)、H_null(a₀) = H_phys ∩ H_phys^⊥；
+  worldsheet.ddf-operators-v6 的模态和 DDF 算子张成的 D(Ε)。
+
+  **【断言 (1)：工作空间的识别】** 存在一个线性同构
+    Φ : T(p; k_0) ⟶ ⊕_{r} (V ⊗ V_{II_{1,1}})_r 的一个叶层（固定横向/纵向动量、只沿一条类光方向分片者），
+  它把塔的层指标 j 映为 II_{1,1}-度数 r，并把 Borcherds 造 K_i 用的那条**额外类光方向 w**
+  取为本项目的 **k_0**；Φ 逐层把 F(p + j k_0) 的振子结构映到 V ⊗ V_{II_{1,1}} 的相应齐次片。
+
+  **【断言 (2)：三空间字典】** 在 Φ 之下
+    Φ(H_phys(a₀)) 是 ⊕_r P¹_r 的对应部分,   Φ(D(Ε)) = T¹,   Φ(H_null(a₀)) = N¹ ,
+  即 (Borcherds P¹, T¹, N¹) 与 (本项目 H_phys, D(Ε), H_null) 三对**逐对同一**。
+
+  **【断言 (3)：逐度数结论可以求和回塔上】** Borcherds 的 Thm 5.1 / Lemma 5.5 是**对每个固定
+  度数 r 分别**成立的（P¹_r 模零空间自然同构于 V^{1−(r,r)/2}；P¹ = T¹ ⊕ N¹）。
+  本卡断言：这些逐度数结论在 Φ 下对 j ∈ Z 求和后，给出塔上同一形状的结论；
+  特别地 Lemma 5.5 读作 H_phys(a₀) = D(Ε) ⊕ H_null(a₀)（比 ddf-spanning 的 ⊆ 更强）。
+
+  【本卡明确不断言 —— 诚实登记这一步真正承载了什么】
+  (a) **不断言 Thm 5.1 的假设在塔上逐字成立。相反，其中一条在塔上为假。**
+      Thm 5.1 假设逐字含「all the eigenspaces of L_0 are finite dimensional」；
+      worldsheet.free-boson-vertex-algebra-with-lightlike-momentum-tower 的边界 (N3)(b) 逐字：
+      「每个 L_0 本征空间含全部 j ∈ Z，故**无限维**」。断言 (3) 的「逐度数 + 求和」读法正是
+      为绕开这条而设（Borcherds 每个 P¹_r 固定 r 故有限维，本项目把全部 rung 同时放进一个空间），
+      但**「逐度数成立 ⇒ 塔上成立」这一步本身本图无来源、无节点**，由本卡一并承担，
+      并计入本卡的 physical-argument 档位。
+  (b) **不断言算子字典 K_i ↔ 围道 A^i_n ↔ 模态和 A^ε_n。** 那条缝由
+      worldsheet.ddf-contour-equals-mode-sum（effective = physical-argument）承载，
+      是 ddf-spanning--via-borcherds-1992 的**另一条**依赖边。本卡断言 (2) 的
+      「Φ(D(Ε)) = T¹」只在**已给定**那条算子字典的前提下才有内容；
+      本卡不重复承载它，也不因此免除它。
+  (c) **不断言两侧双线性型是同一个型。** 本项目塔上的层间正交是
+      worldsheet.momentum-tower-fock-space (2) 的**约定式定义**（该卡逐字：
+      「⚠ **层间正交是本定义规定的，不是被证明的。**」，对应连续动量的 δ^D(p − p') 归一化，
+      而本图**无任何节点**承载 δ 归一化）；Borcherds 的 H 上的形式由顶点代数结构
+      **构造**而来。断言 (2) 里 N¹ ↔ H_null 的那一对**需要**两型相容，本卡按需取用而不证明。
+  (d) **不断言 w ↔ k_0 这一取法已被辨明。** II_{1,1} 是**二维**格（两条类光方向），
+      本项目的塔只沿**一条**类光方向 k_0 分片，Borcherds 造 K_i 用的 w 在本项目记号里
+      没有独立对应物。断言 (1) 取 w = k_0（这是 K_i 与 A^ε_n 同族的标准读法），
+      「另一条类光方向去了哪里」本卡**不回答**。
+  (e) **不断言反向。** 不断言 Borcherds 的任一实例都来自某个动量塔，也不断言 Φ 的唯一性、
+      自然性或与任何群作用的相容性（Thm 5.1 的结论是「as a G module」，本卡不涉及 G）。
+  (f) **不断言 D = 26 在本卡里进入。** 26 经 Borcherds 的 Lemma 5.4 进入其证明体，
+      本卡只做对象识别，不复述该证明；worldsheet.ddf-spanning-hypothesis 边界 (c)
+      「D = 26 在无鬼定理链条上唯一进入本卡」不因本卡改变。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+sources:
+  - ref: borcherds-1992
+    loc: "§5 'The no-ghost theorem'，Lemma 5.1 前的子空间定义段（H = V ⊗ V_{II_{1,1}}、P、S、N = S∩P、T、K = K_i 生成的空间、Ve^r）与 Theorem 5.1 的假设段"
+    note: |
+      **只承载本卡的 Borcherds 侧设定（三个空间与 K_i 的定义、Thm 5.1 的假设逐字），
+      不承载本卡的任何断言。L1**（researcher 2026-09-14 逐页读图；
+      literature/extractions/borcherds-1992.md §E1/E2）。
+      ⚠ **引用陷阱**（该抽取记录首部逐字警告）：作者主页重排本页码与期刊
+      Invent. Math. 109, 405–444 **不对应**，故 loc 只写节号/定理号、不写页码。
+      ⚠ **全篇不出现 A^ε_n、不出现动量塔、不出现 α'**（该抽取记录逐字）。
+      本卡断言 (1)(2)(3) 中**没有一条**是 Borcherds 写下的；他写下的是这些空间在**他自己的**
+      工作空间里的定义与定理。本图**不得**把本条来源当成「Borcherds 逐字做了本卡的识别」来引用。
+  - ref: li-wang-2008
+    loc: "Theorem 3.6, p. 13（模结构）；Definition 3.5（Condition C_L）, p. 13；(3.17)（L° 的定义）, p. 16；§4 标题「A characterization of vertex algebras V_{(𝔥,L)} with ⟨·,·⟩|_L = 0」, p. 20（arXiv:0802.0173v1）"
+    note: |
+      **只承载本项目侧的 VOA 结构（经 worldsheet.free-boson-vertex-algebra-with-lightlike-momentum-tower
+      已入图），不承载跨语言识别。L1**（researcher 2026-09-11；math-sources.md §36.3）。
+      列它是为把本卡断言 (1) 的「塔确实是某个格点顶点代数的模」这一半定位到已有来源：
+      Li–Wang 给的是 **秩 1 退化格 L = Z k** 上的模结构，而 Borcherds 的 II_{1,1} 是
+      **秩 2 非退化**格——两者**不是同一个格**，这正是本卡边界 (d) 登记的缺口。
+tags: [bosonic-string, vertex-algebra, lattice, momentum-tower, lightlike, no-ghost, cross-language-dictionary]
+notes: |
+  【为什么立这张卡（记账动机，不是新物理）】
+  立卡前，worldsheet.ddf-spanning-hypothesis--via-borcherds-1992 的第 2 条边是
+  `inferred: true` 指向 free-boson 塔卡。按 graph/CLAUDE.md 的 2026-09-15 裁决，
+  `inferred: true` **不压低传播的有效状态**（propagate.py 的 `_combine_deps` 根本不读该字段），
+  故一条「承重但被 flag 藏起来」的命题对状态传播、对 `why` 瓶颈树、对 conjectures 集合
+  **零影响**——命题既承重又隐形。该裁决的判据逐字：「问『这条边如果去掉 inferred，
+  它指向的节点是否就完整承载了我需要的那句话？』若否，就是在用 flag 藏命题，立卡。」
+  free-boson 塔卡的 (N2)(N4)(N5)(N6) 逐字给出「否」。
+
+  【本卡的 status 为什么是 physical-argument 而不是 conjecture】
+  按 docs/STATUS_LEVELS.md 的 2026-09-11 裁决：「『论证不完整』与『结论可能为假』是两个不同的轴，
+  前者用 gaps 记录；conjecture 保留给来源本身把它当猜想提出、或结论真伪在文献中未定的命题」。
+  本卡属前者：三空间字典是无鬼定理文献里的**标准读法**（Borcherds 自己逐字说 §5 是
+  Goddard–Thorn 1972 原始证明的复述，而 GT 正是在 DDF 框架里工作的），其真伪不在争议中；
+  未成文的是**逐字论证**，且本图能指出三处具体缺口（边界 (a)(c)(d)）。
+  ⇒ physical-argument，三处缺口写进边界而非压成 conjecture。
+  ⚠ 若将来发现边界 (d) 的「另一条类光方向」实际不可吸收（即 w ≠ k_0 且秩 2 不可约化到秩 1），
+  本卡应降级并重估 --via-borcherds-1992 的全部记账，**不是**修补本卡文本。
+
+  【本轮 effective 记账（ROADMAP 常设规则：报进展必须报前后两个 effective）】
+  worldsheet.ddf-spanning-hypothesis：立卡前 physical-argument，立卡后 physical-argument。
+  worldsheet.ddf-spanning-hypothesis--via-borcherds-1992：立卡前 own=rigorous / effective=physical-argument，
+  立卡后同。**本轮 effective 零移动。**
+  原因：本卡诚实档位 physical-argument 与该推导既有的瓶颈
+  （worldsheet.ddf-contour-equals-mode-sum，同为 physical-argument）同级。
+  **本轮的实质产出不是抬高或压低任何数，而是让 `why` 的瓶颈树从一枝变两枝**：
+  在此之前瓶颈树只显示算子字典缺口，对象识别缺口完全不可见。
+author: lead
+created: "2026-09-21"
