@@ -208,7 +208,11 @@ The right-hand side is exponentially suppressed.
 
 No counterexamples found in the finite regime.
 
-**Conclusion**: [GAP 11.2] is **closeable** via asymptotic dominance + finite verification. However, this is **moot** because eq(52) is correct, making the dominance lemma unnecessary.
+**Conclusion**: [GAP 11.2] has **asymptotic heuristic (Cardy dominance) + finite numerical support (219 points, no counterexamples)**, but is **not rigorously closed**. 
+
+As noted in task instructions: "数值符合不等于证明". The asymptotic statement is correct (exponential dominance for large Δ), and the finite verification found no counterexamples, but together these do not constitute a strict proof for all finite (m,n,ℓ) satisfying the constraints.
+
+**[GAP 11.2] remains open** with strong evidence supporting it. However, this is **moot** because eq(52) is correct, making the dominance lemma unnecessary.
 
 ---
 
@@ -319,10 +323,10 @@ This honestly separates the physical input from the rigorous mathematical conseq
 
 | Item | Status | Impact |
 |------|--------|--------|
-| DGM eq(51) vs eq(52) | **RESOLVED** (eq(52) correct) | Primary task complete |
-| [GAP 11.2] dominance | **CLOSEABLE** (but moot) | Not needed given eq(52) |
+| DGM eq(51) vs eq(52) | **RESOLVED** (eq(52) correct) | Secondary finding |
+| [GAP 11.2] dominance | **Asymptotic heuristic + finite support, not rigorously closed** | Moot given eq(52) |
 | [GAP 9.4] Prop D | **OPEN** (needs DMZ text) | Not blocking main result |
-| eq(52) mathematical derivation | **IMPOSSIBLE** (proven in §8) | Accepted as physical premise |
+| eq(52) mathematical derivation | **Cannot be derived via Hecke operators or pure modular form theory** (§8 of torsion-immortal-positivity-hecke) | Remains physical premise |
 
 ### 7.1 No Further Action Required
 
