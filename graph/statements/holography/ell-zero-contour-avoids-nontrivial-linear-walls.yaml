@@ -33,10 +33,14 @@ sources:
     loc: "research/attempts/ell-zero-wall-degeneracy/proof.md §6.2（n₂=0 分支的完整分类：子族 (a)(b)(c)）；约束 (I) 取自 research/attempts/gap-102b-route-a/proof.md §2 Lemma 1"
     note: |
       本项目原创证明，非已发表文献，见 research/attempts/ell-zero-wall-degeneracy/proof.md §6.2。
-      status.yaml: state: verified，reviewer: graph-reviewer agent ell0rev（2026-09-20），
-      captain_confirmed: false。**但 §6 整节（含 §6.2）写于该轮审查之后，至今未经
-      graph-reviewer 审查**——status.yaml 逐字写着「请 lead 派 graph-reviewer 审查 §6」。
-      故本卡推导诚实定为 physical-argument（见推导的 gaps）。
+      **审查状态（2026-09-20 晚更新）**：§6.2 **已由 graph-reviewer ell0s6rev 审查，
+      判 VERIFIED**（那三行整数论证经逐步重推，无漏洞）——本行原写「至今未经
+      graph-reviewer 审查」，已过时。
+      上游 attempt 现为 `state: draft`（退回理由是 **§6.1** 的量词缺口 F-5，
+      **不涉及本卡所据的 §6.2**）；captain_confirmed: false。
+      推导 status 仍维持 physical-argument：升级条件形式上已满足，但 lead 刻意保留，
+      理由见推导 notes 的【为什么此刻不升 rigorous】（关键一条：本卡 effective 被
+      sen-d19-family 的 [GAP-identify] 封顶，升了对下游零影响）。
   - ref: sen-2008-precision-counting
     loc: "arXiv:0708.1270v4 Appendix D, eq. (D.19)（p.168）"
     note: "D.19 的五参数零点族；本卡的「线性壁」即 n₂=0 子族（此时 F 关于 (ρ,σ,v) 是线性的）。"
@@ -58,8 +62,10 @@ notes: |
   holography.attractor-contour-hits-phi10-zero-at-ell-zero（断言 m₁=n₁=0 子族命中）
   为仅有的相关命中；三卡互补不重叠，无同内容卡。
 
-  【毕业记录】由 research/attempts/ell-zero-wall-degeneracy/（state: verified，
-  reviewer: ell0rev，captain_confirmed: false）的 §6.2 毕业，按 research/CLAUDE.md
-  生命周期第 4 步。proposition 禁止手填 status。
+  【毕业记录】由 research/attempts/ell-zero-wall-degeneracy/ 的 §6.2 毕业，按
+  research/CLAUDE.md 生命周期第 4 步。proposition 禁止手填 status。
+  【2026-09-20 晚更新】该 attempt 现为 `state: draft`（此前写 verified，reviewer ell0rev
+  2026-09-20），退回理由是 §6.1 的量词缺口 F-5，**与本卡所据的 §6.2 无关**——
+  §6.2 经 ell0s6rev 审查判 VERIFIED。captain_confirmed 仍为 false。
 author: graph-curator
 created: "2026-09-20"

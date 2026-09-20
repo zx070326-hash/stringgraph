@@ -35,13 +35,17 @@ sources:
     note: |
       本项目原创证明，非已发表文献，见 research/attempts/ell-zero-wall-degeneracy/proof.md §6.1
       与 research/attempts/gap-102b-route-a/proof.md §5.7。
-      **审查状态（要害，务必读）**：被引的 Theorem 9 本身（0<ℓ≤m）已经 graph-reviewer
-      agent n2rev（2026-09-20）对抗性审查裁定 verified、天花板 rigorous；但**把它搬到
-      ℓ=0 的那一步（§6.1）写于该轮审查之后，至今未经 graph-reviewer 审查**——
-      research/attempts/ell-zero-wall-degeneracy/status.yaml 在记录 [GAP-3.3] CLOSED 时
-      逐字写着「**请 lead 派 graph-reviewer 审查 §6**」。两个 attempt 的
-      captain_confirmed 均为 false。故本卡的推导按 docs/STATUS_LEVELS.md 等级 4 例外
-      条款（缺 reviewer-verified 记录者一律降）诚实定为 physical-argument。
+      **审查状态（要害，务必读；2026-09-20 晚更新）**：被引的 Theorem 9 本身（0<ℓ≤m）
+      已经 graph-reviewer agent n2rev（2026-09-20）对抗性审查裁定 verified、天花板 rigorous。
+      把它搬到 ℓ=0 的那一步（§6.1）**已于 2026-09-20 晚由 graph-reviewer ell0s6rev 审查**
+      ——本行原写「至今未经 graph-reviewer 审查」，已过时。审查结论分两半：
+      **三步核对的数学判 VERIFIED**；但发现**量词覆盖缺口 F-5**——§6.1 逐字只对
+      `n ≥ m ≥ 1` 陈述，而本卡 statement 设 `m, n ≥ 1`，故 **`m > n` 的情形目前无论证**。
+      已派 theorem-prover 放开量词（reviewer 已独立验证两条修法均成立）。
+      ell-zero-wall-degeneracy 现为 `state: draft`（正因 F-5）；两个 attempt 的
+      captain_confirmed 均为 false。推导仍按 docs/STATUS_LEVELS.md 等级 4 例外条款
+      （F-5 未修复前不签 reviewer-verified）诚实定为 physical-argument。
+      **F-5 修复落地后不需要给本卡换代**——量词放开只增不减，不改变本卡断言。
   - ref: sen-2008-precision-counting
     loc: "arXiv:0708.1270v4 Appendix D, eq. (D.19)（p.168，逐字核对见 gap-102b-route-a/proof.md §1.3）"
     note: "D.19 的五参数零点族；本卡的「n₂≠0 分支」即其中 n₂≠0 的子族。"
@@ -73,8 +77,10 @@ notes: |
   见上条）、holography.attractor-contour-hits-phi10-zero-at-ell-zero（ℓ=0 但断言的是
   **命中**线性分支 v=0，互补不重叠）为仅有的相关命中，无同内容卡。
 
-  【毕业记录】本节点由 research/attempts/ell-zero-wall-degeneracy/（state: verified，
-  reviewer: ell0rev，captain_confirmed: false）的 §6.1 毕业，按 research/CLAUDE.md
-  生命周期第 4 步。proposition 禁止手填 status，有效状态由推导决定。
+  【毕业记录】本节点由 research/attempts/ell-zero-wall-degeneracy/ 的 §6.1 毕业，按
+  research/CLAUDE.md 生命周期第 4 步。proposition 禁止手填 status，有效状态由推导决定。
+  【2026-09-20 晚更新】该 attempt 现为 `state: draft`（此前写 verified，reviewer ell0rev
+  2026-09-20），退回理由正是本卡所据 §6.1 的量词缺口 F-5，详见 sources note。
+  captain_confirmed 仍为 false。
 author: graph-curator
 created: "2026-09-20"

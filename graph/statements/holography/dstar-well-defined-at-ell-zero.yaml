@@ -52,12 +52,20 @@ sources:
     loc: "research/attempts/ell-zero-wall-degeneracy/claim.md §1（Proposition A）；proof.md §4.1（证明）、§2.5（留数）、§3.3（围道穿过极点）、§5.1（与 Rosselló 约定差一个整体负号）、§6（其它极点的排除）"
     note: |
       本项目原创证明，非已发表文献，见 research/attempts/ell-zero-wall-degeneracy/proof.md。
-      status.yaml: state: verified，reviewer: graph-reviewer agent ell0rev（2026-09-20，
-      天花板 rigorous，对抗性反例搜索未构造出反例）；**captain_confirmed: false**
-      （尚未经船长确认）。毕业的硬前置 [EXT-Even]（v-偶性未在图内登记）已于 2026-09-20
-      解除（holography.phi10-even-in-v）。**§6 的分支排除写于该轮审查之后，未经
-      graph-reviewer 审查**；带内（Im v ≠ 0）的极点排除 proof.md 未处理，由本卡推导
-      用紧致性补上（见推导 gaps）。
+      **attempt 当前 state: draft**（2026-09-20 晚由 lead 从 verified 退回），
+      captain_confirmed: false（尚未经船长确认）。
+      审查历史：ell0rev（2026-09-20）审 §1–§5，判 verified，天花板 rigorous，对抗性
+      反例搜索未构造出反例；**ell0s6rev（2026-09-20 晚）审 §6 与本卡推导的步骤 1，
+      两者均判 VERIFIED**——本卡此前写的「§6 未经 graph-reviewer 审查」已过时。
+      毕业的硬前置 [EXT-Even]（v-偶性未在图内登记）已于 2026-09-20 解除
+      （holography.phi10-even-in-v）。带内（Im v ≠ 0）的极点排除 proof.md 未处理，
+      由本卡推导用紧致性补上（已复核）。
+
+      ⚠ **退回 draft 的理由不是 §6 有误，而是量词缺口（F-5）**：proof.md §6.1 逐字只证
+      `n ≥ m ≥ 1`，而本卡 statement 设 `m, n ≥ 1`，故 **`m > n` 的 n₂≠0 分支排除目前
+      无论证**。已派 theorem-prover 放开 §6.1（ell0s6rev 已验证两条修法均成立）。
+      修复落地前本卡对 `m > n` 的支撑不完整；落地后**不需换代**（量词放开只增不减）。
+      详见推导 holography.dstar-well-defined-at-ell-zero--via-vanishing-residue 的 gaps。
   - ref: rossello-2024
     loc: "§2 (2.22)–(2.23)（吸引子围道与 d_* 的定义）；Corollary 1.1（断言 d_*(m,n,ℓ)>0 对一切 Δ=4mn−ℓ²>0，**未排除 ℓ=0、也未说明其良定性**）"
     note: |
@@ -101,9 +109,14 @@ notes: |
   holography.mock-jacobi-coefficient-positivity / holography.torsion-immortal-positivity
   （正性，本卡不涉及）、holography.dvv-wall-crossing-identification（物理识别）。
 
-  【毕业记录】由 research/attempts/ell-zero-wall-degeneracy/（state: verified，
-  reviewer: graph-reviewer agent ell0rev 2026-09-20，captain_confirmed: **false**）毕业，
-  按 research/CLAUDE.md 生命周期第 4 步。本 attempt 未产生 formal/ 内容。
-  proposition 禁止手填 status，有效状态由推导决定。
+  【毕业记录】由 research/attempts/ell-zero-wall-degeneracy/ 毕业，按 research/CLAUDE.md
+  生命周期第 4 步。本 attempt 未产生 formal/ 内容。proposition 禁止手填 status，
+  有效状态由推导决定。
+  【2026-09-20 晚更新】该 attempt 现为 `state: draft`（此前写 verified，
+  reviewer ell0rev 2026-09-20），原因见上方 sources note 的 ⚠ 段（量词缺口 F-5）。
+  **attempt 的 state 与本卡的 effective status 解耦**：ell0s6rev 明确裁定，§6 通过审查
+  不会让本卡升档（天花板是 holography.sen-d19-family-is-igusa-phi10-divisor 的
+  [GAP-identify]），attempt 退回 draft 也不使它降档（F-5 已如实记入推导 gaps）。
+  captain_confirmed 仍为 **false**。
 author: graph-curator
 created: "2026-09-20"

@@ -13,9 +13,12 @@ sources:
   - ref: stringgraph-research-2026
     loc: "research/attempts/ell-zero-wall-degeneracy/proof.md §6.1（引理 6.1，三步核对）；research/attempts/gap-102b-route-a/proof.md §5.7（Proposition 7、Corollary 8、Theorem 9 的原始推导与 SymPy 验证脚本 scripts/verify_correct_B.py）"
     note: |
-      本项目原创证明，非已发表文献。两个 attempt 的 status.yaml 均 state: verified、
-      captain_confirmed: false；但 **ℓ=0 搬运这一步（§6.1）本身未经 graph-reviewer 审查**
-      （ell-zero-wall-degeneracy/status.yaml 逐字：「请 lead 派 graph-reviewer 审查 §6」）。
+      本项目原创证明，非已发表文献。gap-102b-route-a 的 status.yaml 为 state: verified；
+      **ell-zero-wall-degeneracy 现为 state: draft**（2026-09-20 晚退回）；两者
+      captain_confirmed 均为 false。
+      **§6.1 已于 2026-09-20 晚由 graph-reviewer（ell0s6rev）审查**——本行原写
+      「§6.1 本身未经 graph-reviewer 审查」，已过时。审查结论分两半：
+      **三步核对的数学判 VERIFIED**，但发现一个**量词覆盖缺口（F-5）**，见 gaps 第 1 条。
   - ref: sen-2008-precision-counting
     loc: "arXiv:0708.1270v4 Appendix D, eq. (D.19)（p.168）"
 summary: |
@@ -45,23 +48,50 @@ summary: |
   「Div(Φ₁₀) 的 n₂≠0 分支」，需要该族穷尽 Div(Φ₁₀)，即
   holography.sen-d19-family-is-igusa-phi10-divisor（physical-argument）。
 gaps:
-  - "**§6.1 未经 graph-reviewer 审查**。被搬运的 Theorem 9（0<ℓ≤m）已由 n2rev 裁定 rigorous，但
-    「搬到 ℓ=0 合法」这一步只有 prover（gap33-ell-zero）与 lead 的核对，attempt 的 status.yaml
-    明确请求 lead 另派 reviewer 审 §6。按 docs/STATUS_LEVELS.md 等级 4 例外条款（缺
-    reviewer-verified 记录者一律降），本推导定 physical-argument，而非 rigorous。
-    **升级路径**：reviewer 审过 §6.1 后，在本 notes 写 reviewer-verified 并把 kind 改 proof、
-    status 改 rigorous；届时本卡 effective 仍被 sen-d19-family（physical-argument）封顶。"
+  - "⚠ **【承重，2026-09-20 晚新增】§6.1 的量词比本推导的结论窄（F-5 覆盖缺口）**。
+    graph-reviewer ell0s6rev 审 §6.1 时发现：proof.md §6.1（引理 6.1）逐字只对
+    **`n ≥ m ≥ 1`** 陈述并证明，而本推导与目标卡都设 **`m, n ≥ 1`**。
+    **按字面，`m > n` 的情形 n₂≠0 分支的排除目前没有论证**，本推导上面的三步在该区域
+    悬空。ell0s6rev 判定这是**可修的形式缺口而非实质错误**，并独立验证了两条修法：
+    (a) 直接放开——它用独立 sympy 脚本从 g(t) 定义重推 route-a Proposition 7 的顶点高度
+    闭式 `Λ²(t*) = 1/(4n₂²Δ) − (j−2n₂v₁)²/(16mnn₂²)`，对一般 ℓ 恒等成立，`A = −mn/n₂`
+    与 `B` 全部对上，**全程未使用 `n ≥ m`**（`n≥m` 只进过 route-a §5.4 的 (M) 式，
+    而 Theorem 9 不走那条路）；(b) WLOG 对称性——`Ω=[[ρ,v],[v,σ]] ↦ [[σ,v],[v,ρ]]` 保 Φ₁₀，
+    (D.19) 的 F 变为同族中 `(m₁,n₁)↦(−n₁,−m₁)` 的成员，判别式不变，ℓ=0 围道恰映到
+    (m,n) 互换后的围道。已派 theorem-prover 放开 §6.1 的量词。
+    **修复落地前本推导对 `m > n` 的支撑不完整；落地后此条删除，且不需要给任何卡换代**
+    （量词放开只增不减，不改变任何卡的断言）。"
+  - "**§6.1 的审查状态（2026-09-20 晚更新）**：本条原写「§6.1 未经 graph-reviewer 审查」，
+    **已过时**——ell0s6rev 已审，三步核对的**数学判 VERIFIED**（被搬运的 Theorem 9
+    本身此前已由 n2rev 裁定 rigorous）。但 `reviewer-verified` **暂不写入、status 维持
+    physical-argument**，因为上一条的 F-5 尚未修复：在覆盖缺口仍在时签字升 rigorous
+    是不诚实的。**升级路径**：F-5 修复落地后，写
+    `reviewer-verified: ell0s6rev, 2026-09-20`、kind 改 proof、status 改 rigorous；
+    **届时本卡 effective 仍被 sen-d19-family（physical-argument）封顶，下游无变化**。"
   - "route-a §5.7 的核心恒等式由 SymPy 符号化简 + 100 组 Fraction 数值验证支持（脚本
-    scripts/verify_correct_B.py），curator 未重跑脚本，此项为转述信任。"
+    scripts/verify_correct_B.py），curator 未重跑脚本，此项为转述信任。
+    【2026-09-20 晚补：ell0s6rev 用**自己独立写的** sympy 脚本从 g(t) 的定义重推了
+    Proposition 7 的顶点高度闭式并对上，故该闭式现在有了一次独立复算，不再是单点信任。】"
   - "上游 [GAP-identify]：Sen 的 Φ̃ 坐标 = 标准 Φ₁₀ 坐标，非文献逐字断言；已由
     holography.sen-d19-family-is-igusa-phi10-divisor 显式承载，不藏在 inferred 边里。"
 notes: |
-  **不写 reviewer-verified**：§6.1 无 reviewer 复核记录（见 gaps 第 1 条）。
+  **不写 reviewer-verified**：§6.1 已经 ell0s6rev 审查且数学判 VERIFIED，但 F-5 覆盖缺口
+  未修复前不签字（见 gaps 前两条）。
+
+  **【本推导的不等式写法比上游 proof.md 更正确 —— lead 2026-09-20 晚记】**
+  上面 summary 步骤 2 写的是
+    `Λ²(t*) ≤ 1/(4n₂²Δ) ≤ 1/(4Δ) = 1/(16mn)`（因 n₂² ≥ 1），
+  **两个 ≤ 都在，是对的**。而上游 `proof.md:438` 逐字写成
+    `Λ²(t*) ≤ 1/(16mnn₂²) = 1/(4Δ)`，
+  那个 `=` **只在 |n₂|=1 时成立**（ell0s6rev 的 F-4）。即本推导落地时 curator 已经
+  （有意或无意地）写对了这一步，上游的形式错误**没有传进图里**。已派 prover 回填
+  proof.md。记在此处是为了留痕：不要在同步上下游时反过来把图里正确的式子「改回」去。
 
   **curator 亲自核对了什么**：Read 了 research/attempts/ell-zero-wall-degeneracy/proof.md
   §6 全文与 research/attempts/gap-102b-route-a 的两张已毕业卡（linear/quadratic wall）
   及其推导；亲自重算了 Im F = Λ·h（步骤 1）与 (D.19) 的 v↦v+1 不变性（Re v 放开的理由
-  (ii)）。未重跑 SymPy 脚本，未独立重推 Proposition 7 的顶点闭式（转述信任，见 gaps）。
+  (ii)）。未重跑 SymPy 脚本，未独立重推 Proposition 7 的顶点闭式（转述信任，见 gaps；
+  **ell0s6rev 已于 2026-09-20 晚独立重推该闭式并对上**）。
 
   **为什么不把姐妹卡 holography.attractor-contour-avoids-phi10-quadratic-wall 接成依赖**：
   它的 statement 对 0<ℓ≤m 全称量化，ℓ=0 的结论不是它的逻辑后承；接上去会制造一条

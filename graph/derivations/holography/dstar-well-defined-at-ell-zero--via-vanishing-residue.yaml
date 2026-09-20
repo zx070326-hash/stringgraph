@@ -31,9 +31,13 @@ sources:
   - ref: stringgraph-research-2026
     loc: "research/attempts/ell-zero-wall-degeneracy/proof.md §4.1（Proposition A 的证明）、§2.5（留数）、§3.3（围道穿过极点）、§6（分支排除）、§5.1（约定差一个整体负号）；claim.md §1（Proposition A 的量词级陈述）"
     note: |
-      本项目原创证明，非已发表文献。attempt state: verified（reviewer ell0rev，
-      2026-09-20，天花板 rigorous），captain_confirmed: false。§6 未经 reviewer 审查；
-      带内（Im v≠0）极点排除 proof.md 未处理，见 gaps 第 2 条。
+      本项目原创证明，非已发表文献。**attempt 当前 state: draft**（2026-09-20 晚由 lead
+      从 verified 退回，见下）；captain_confirmed: false。
+      审查历史：ell0rev（2026-09-20）审 §1–§5，判 verified，天花板 rigorous；
+      ell0s6rev（2026-09-20 晚）审 §6 与本推导步骤 1，**§6 的数学与步骤 1 的紧致性论证
+      均判 VERIFIED**。attempt 退回 draft 的理由**不是 §6 有误**，而是 §6.1 的量词
+      写成 `n ≥ m ≥ 1` 而其 claim.md 断言 `m, n ≥ 1`（覆盖缺口，见 gaps 末条）。
+      带内（Im v≠0）极点排除 proof.md 未处理，由本推导步骤 1 补上（已复核）。
   - ref: rossello-2024
     loc: "§2 (2.22)–(2.23)；Corollary 1.1"
 summary: |
@@ -46,6 +50,9 @@ summary: |
 
   **步骤 1（微扰围道无极点；带内只有 v=1/2 一个极点）**——本步骤的紧致性论证由
   curator 补写，proof.md §4.1 只写了「极点在实轴上，ε 充分小即可避开」。
+  【2026-09-20 晚：该补写已经 graph-reviewer（ell0s6rev）复核，判 **VERIFIED**。
+  下方 gaps 第 2 条原本写「若该论证有误，(b) 的量词需要重新讨论」——**该悬置已关闭，
+  量词不需要重议**。】
   把被积函数的极点集写成 Φ₁₀ 的零点集在半周期平移下的原像：v 是极点 ⟺ u := v+1/2 使
   (ρ, u; u, σ) ∈ Div(Φ₁₀)。记
     K_t := { (ρ,u;u,σ) : Re ρ,Re σ∈[0,1], Re u∈[1/2,3/2], Im ρ=2nΛ, Im σ=2mΛ, Im u=tΛ }，
@@ -76,26 +83,42 @@ summary: |
   **符号说明**：以上全部用定义 D 的 𝒢（含整体负号）。d_*^{定义D} = −d_*^{Rosselló}
   （proof.md §5.1，curator 亲自复核该换算），良定性与整体符号无关，故两套约定同时成立。
 gaps:
-  - "**effective 被三处压到 physical-argument**：(i) holography.sen-d19-family-is-igusa-phi10-divisor
-    是 physical-argument（[GAP-identify]：Sen 的 Φ̃ 坐标 = 标准 Φ₁₀ 坐标未获文献逐字断言）；
-    (ii) 两张 ell-zero-contour-avoids-* 的来源 §6 未经 graph-reviewer 审查；
-    (iii) 本推导步骤 1 是 curator 补写、未经复核。核心的留数计算本身
-    （holography.phi10-shifted-pole-residue-proportional-to-ell）是 rigorous，未被牵连。"
+  - "**effective 仍被压到 physical-argument，但压低它的只剩一条**（2026-09-20 晚更新）：
+    (i) **仍然开放** —— holography.sen-d19-family-is-igusa-phi10-divisor 是 physical-argument
+    （[GAP-identify]：Sen 的 Φ̃ 坐标 = 标准 Φ₁₀ 坐标未获文献逐字断言）。**这是当前唯一的
+    天花板**。 (ii) **已关闭** —— 两张 ell-zero-contour-avoids-* 的来源 §6 已由
+    graph-reviewer ell0s6rev（2026-09-20 晚）审查，判 VERIFIED。 (iii) **已关闭** ——
+    本推导步骤 1 的紧致性论证同轮经 ell0s6rev 复核，判 VERIFIED。
+    核心留数计算（holography.phi10-shifted-pole-residue-proportional-to-ell）一直是
+    rigorous，从未被牵连。**注意：(ii)(iii) 关闭不上调本推导的 status**，因为 (i) 未动。"
   - "**步骤 1 是 curator 自行补上的**：proof.md §4.1 只说「极点在实轴 v∈ℝ 上，ε 充分小
     即可避开」，而 §6 的分支排除只做在 **Im v = 0** 的围道上；从「两条微扰围道各自无极点」
     到「两者之间的带内只有 v=1/2 一个极点」需要带内（Im v = ±tΛ ≠ 0）的排除，proof.md
     未处理。本推导用「Div(Φ₁₀) 的分支族局部有限 ⟹ Z' 闭 ⟹ dist(K₀,Z')>0」的紧致性论证
-    补上。**建议 lead 在派 reviewer 审 §6 时一并审本步骤**；若该论证有误，(b) 的量词需要
-    重新讨论（(a) 与留数为零两条不受影响）。"
+    补上。**【已复核，2026-09-20 晚】** graph-reviewer ell0s6rev 逐步重推该论证，判
+    VERIFIED。本条原写「若该论证有误，(b) 的量词需要重新讨论」——**该悬置已关闭，
+    (b) 的量词维持原样，不需重议**。"
   - "**ε₀ 依赖 Λ**：本推导只给出 ∀Λ>Λ₀ ∃ε₀(m,n,Λ)>0。上游 claim.md §1 的 Proposition A
     写的是「存在 ε₀>0 与 Λ₀>0 使得对所有 0<ε<ε₀ 与 Λ>Λ₀」（ε₀ 与 Λ 一致），
-    那个更强的一致性**未被证明**，本卡不断言。"
+    那个更强的一致性**未被证明**，本卡不断言。（ell0s6rev 同轮确认：**图内这一点是对的，
+    要改的是上游 claim.md**，已列为该 attempt 的待改项 F-6。）"
+  - "**【新增，2026-09-20 晚】上游 §6 的量词比本推导用到的窄（F-5 覆盖缺口）**：
+    本推导经 holography.ell-zero-contour-avoids-* 两卡用到 §6 的分支排除，而
+    proof.md §6.1（引理 6.1）逐字只证了 **`n ≥ m ≥ 1`**，本推导与目标卡都设 **`m, n ≥ 1`**。
+    按字面，**`m > n` 的情形 n₂≠0 分支的排除目前无论证**。
+    ell0s6rev 判断这是可修的形式缺口而非实质错误（route-a Prop 7 的顶点高度推导全程
+    不使用 `n≥m`；另有 `Ω=[[ρ,v],[v,σ]] ↦ [[σ,v],[v,ρ]]` 的 WLOG 对称性备选修法），
+    已派 theorem-prover 放开 §6.1 的量词。**修复落地前，本推导对 `m > n` 的支撑是不完整的。**
+    修复落地后此条删除，**不需要给任何卡换代**（量词放开只增不减）。"
   - "**Λ-无关性未证**：本卡不断言公共值与 Λ 无关（目标卡「明确不断言」(i)）。这是 ℓ=0
     情形与 holography.mock-jacobi-coefficient-positivity 所记 Λ-无关性论证的实质差别——
     后者的前提是围道避开全部极点，ℓ=0 不满足。**留给后续 attempt。**"
   - "本 attempt 未产生 formal/ 下无 sorry 的 Lean 证明；captain_confirmed: false。"
 notes: |
   **不写 reviewer-verified**：上游 §6 与本推导步骤 1 均无 reviewer 复核记录。
+  【2026-09-20 晚：本行已过时，两者均已由 ell0s6rev 复核并判 VERIFIED，见 gaps 前两条。
+  但 status 仍不上调——天花板来自 sen-d19-family-is-igusa-phi10-divisor 的 [GAP-identify]，
+  与 §6 无关。保留原句以存档，不就地抹去。】
 
   **curator 亲自核对了什么**：Read 了 claim.md、proof.md、status.yaml 全文；亲自重算了
   §2.5 的留数（含两处符号订正）、§5.1 的约定换算与 Rosselló-约定交叉验证、§6.2 的整数

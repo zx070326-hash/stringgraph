@@ -25,9 +25,15 @@ sources:
   - ref: stringgraph-research-2026
     loc: "research/attempts/ell-zero-wall-degeneracy/proof.md §3.2–§3.3（零点在 v∈ℤ、平移后极点在 v∈ℤ−1/2）、§6.1–§6.3（分支穷尽与 [GAP-3.3] 闭合声明）、§2.2（h₀≠0 的使用）"
     note: |
-      本项目原创证明，非已发表文献。**§6 未经 graph-reviewer 审查**；且 proof.md 对
-      「围道上每一点 h₀≠0」只有 §2.2 的一句话，未把它接到 §6 的分支排除上——
-      本推导的步骤 3 是 curator 自行补全的那一步（见 gaps 第 2 条）。
+      本项目原创证明，非已发表文献。
+      **§6 已于 2026-09-20 晚由 graph-reviewer ell0s6rev 审查，数学判 VERIFIED**——
+      本行原写「§6 未经 graph-reviewer 审查」，已过时（但 §6.1 有量词缺口 F-5，
+      见 gaps 第 1 条）。proof.md 对「围道上每一点 h₀≠0」仍只有 §2.2 的一句话，
+      未把它接到 §6 的分支排除上——本推导的步骤 3 是 curator 自行补全的那一步
+      （见 gaps 第 2 条）。**注意**：ell0s6rev 本轮逐步重推的是 §6.1/§6.2 的数学，
+      以及 `dstar-well-defined-at-ell-zero--via-vanishing-residue` 步骤 1 的紧性论证；
+      它对 5+5 张毕业卡作了整体审查（未发现虚高、未发现幽灵依赖边），但**本推导步骤 3
+      没有单独的逐步 VERIFIED 记录**，故本卡仍不写 reviewer-verified。
   - ref: gritsenko-nikulin-1996
     loc: "Div(Φ₁₀)=2H₁（经 holography.igusa-cusp-form-phi10-v2）"
 summary: |
@@ -58,14 +64,21 @@ summary: |
   **接口说明**：步骤 3 的结论正是
   holography.phi10-shifted-pole-residue-proportional-to-ell 的显式前提，两卡由此对接。
 gaps:
-  - "上游 §6（两条 ell-zero-contour-avoids-* 卡）未经 graph-reviewer 审查，且
-    holography.sen-d19-family-is-igusa-phi10-divisor 是 physical-argument（[GAP-identify]）。
-    本推导 status 因此定 physical-argument；即使 §6 日后被 reviewer 签字，本卡 effective
-    仍被穷尽性那条边封顶在 physical-argument。"
+  - "**上游 §6 的审查状态（2026-09-20 晚更新）**：本条原写「上游 §6（两条
+    ell-zero-contour-avoids-* 卡）未经 graph-reviewer 审查」，**已过时**——ell0s6rev
+    已审，§6.1/§6.2 的数学均判 VERIFIED。**但 §6.1 有量词覆盖缺口 F-5**：它逐字只证
+    `n ≥ m ≥ 1`，而本推导与目标卡都设 `m, n ≥ 1`，故步骤 1 里「n₂≠0 的分支被
+    holography.ell-zero-contour-avoids-phi10-quadratic-wall 排除」这一句**在 `m > n` 时
+    目前无论证**（已派 prover 修，落地后不需换代）。
+    此外 holography.sen-d19-family-is-igusa-phi10-divisor 仍是 physical-argument
+    （[GAP-identify]）。本推导 status 因此维持 physical-argument；**即使 §6 全部签字，
+    本卡 effective 仍被穷尽性那条边封顶在 physical-argument**。"
   - "**步骤 3 是 curator 自行补全的一步，proof.md 没有**。proof.md §2.2 只用一句
     「否则零点阶数 >2，与引理 1.1 矛盾」带过 h₀≠0，并未讨论「围道上某点同时落在两个
-    分支上时阶会 >2」这一真实可能。本推导把它接到 §6 的分支排除上。该补全未经 reviewer
-    复核，**建议 lead 在派 reviewer 审 §6 时一并审本步骤**。"
+    分支上时阶会 >2」这一真实可能。本推导把它接到 §6 的分支排除上。
+    **该补全至今无逐步 reviewer 复核记录**：ell0s6rev 本轮审的是 §6 本身与
+    dstar 推导的紧性论证，对本步骤只作了整体卡审（未发现虚高/幽灵边），
+    不构成对这三行的逐步签字。**下次派 reviewer 时建议一并审本步骤。**"
   - "步骤 3 用到「除子局部等于 2·{u=1} ⟹ Φ₁₀/(u−1)² 局部全纯且非零」这一标准复分析事实
     （解析集的局部分解），未单独立卡，与 holography.phi10-even-in-v--via-borcherds-product
     把恒等定理留在推导内的做法一致。"
