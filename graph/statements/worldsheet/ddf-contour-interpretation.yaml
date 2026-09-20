@@ -1,0 +1,104 @@
+id: worldsheet.ddf-contour-interpretation
+kind: proposition
+title: 文献的围道积分记号应读作形式留数：Goddard (5.1) 的 (1/2πi)∮...dz 指称 Res_z
+statement: |
+  【本卡的定位】
+  本卡断言：Goddard 2008 §5 eq. (5.1) 写的围道积分记号
+  ```
+  A^i_n = (1/2πi) ∮ P^i(z) V(n k, z) dz
+  ```
+  中的 `∮` 应该读作形式留数 `Res_z`（取 z^{−1} 洛朗系数），而不是复平面上的真实围道积分。
+
+  这是 worldsheet.ddf-contour-equals-mode-sum 的 **Layer 3（解释层）**：
+  它不涉及数学对象之间的等式（那是 Layer 2，worldsheet.ddf-mode-sum-as-formal-residue），
+  只涉及**文献记号的解读**——"这个符号指称什么数学对象"。
+
+  【设定】沿用 worldsheet.ddf-operators-v6：D 维时空，度规 conv.metric-mostly-plus，
+  α' 按 conv.alpha-prime-regge；类光参考向量 k_0（k_0² = 0），基点动量 p，
+  归一化 2α' k_0·p = 1，偏振 ε 满足横向性 ε·k_0 = 0；
+  动量塔 T(p; k_0) = ⊕_{N ∈ Z} F(p + N k_0)。
+
+  【断言】Goddard 2008 §5, p.11, eq. (5.1) 逐字写：
+  ```
+  A^i_n = ε^i_μ A^μ_n ,   A^μ_n = (1/2πi) ∮ P^μ(z) V(n k, z) dz
+  ```
+  其中 P^μ(z) 由 (5.3) 给出，V(α, z) 由 (5.2) 给出。
+
+  该文献**未定义** `∮` 的形式语义（是形式留数还是复积分）。
+  本卡断言：在本图与 Lean 的使用中，该符号应读作**形式留数** Res_z，
+  即"取算子值形式级数的 z^{−1} 洛朗系数"（Schottenloher Def 10.1）。
+
+  【本卡明确不断言】
+  (a) **不断言文献作者本人如此意图。** Goddard 2008 未逐字说明 `∮` 的语义。
+      本卡断言的是"本图采用的解读"，不是"文献的原意"。
+  (b) **不断言该解读唯一或必然。** 径向量子化的语境下，`∮` 也可能指真实复积分
+      （需算子值函数的解析性与收敛性）。本图采用形式留数读法，因为：
+      (i) 它不需要收敛性假设；
+      (ii) Lean 侧的 `ddfOp` 定义为模态和，与形式留数读法一致。
+  (c) **不断言形式留数读法适用于文献的所有用途。** 特别地，
+      worldsheet.ddf-commute-with-virasoro--via-conformal-weight 的推导用到**形变**围道
+      （Cauchy 定理），那一步在形式留数读法下没有意义。
+      本卡的解读只适用于"把 ∮ 简化成模态和"这一步。
+  (d) **不断言 GSW §2.3.3 或 Goddard-Thorn 1972 的围道写法与 Goddard 2008 逐字相同。**
+      本卡只处理 Goddard 2008 (5.1) 的记号。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+sources:
+  - ref: goddard-2008
+    loc: "§5 'Spectrum Generating Algebra', p.11, eq. (5.1)–(5.3)（arXiv:0802.3249v1）"
+    note: |
+      **本卡要解读其记号的文献。L1↩（literature/extractions/gsw-1987-v1.md §2 E1）。**
+      (5.1) 逐字写 `A^μ_n = (1/2πi)∮ P^μ(z) V(nk,z) dz`，但**未定义 `∮` 的形式语义**
+      （未说是形式留数还是复积分、未说围道路径、未说收敛性）。
+      该文是历史综述，其 DDF 构造直接引用 Goddard-Thorn 1972，自己不做推导。
+tags: [bosonic-string, spectrum-generating-algebra, interpretation, notation]
+notes: |
+  查重：2026-09-20 跑 `uv run stringgraph search "contour interpretation"`（无命中）、
+  `search "notation"`（多处命中，均非本卡）。
+
+  【本卡为什么只能是 physical-argument】
+  按 docs/STATUS_LEVELS.md：本卡断言的是"文献记号的解读"，这是**解释性断言**，
+  不是数学定理。判据：
+  - Lean 不能表达"文献里这个符号指称什么"（那属于元理论）
+  - 没有任何文献逐字说"我的 ∮ 符号指称形式留数"
+  - 本图采用这个解读是因为它与 Lean 的 `ddfOp` 定义一致，不是因为有文献来源
+
+  这是 1 比特的不可约信息：在"形式留数"与"复积分"两种可能读法之间做的选择。
+  **这个选择无法通过更多的数学工作来消除**——它是翻译层面的决定，不是数学层面的证明。
+
+  ⚠ **不要因为"物理学家都这么理解"就升 rigorous**：那恰恰是原则 2
+  （status 写自身论证的严格程度，不写公认程度）所针对的情形。
+
+  【本卡与其他两张卡的关系】
+  本卡是 worldsheet.ddf-contour-equals-mode-sum 的三层拆解中的 Layer 3。
+  - **Layer 1**（Res_z A(z) = A_{-1}）：定义级，无需立卡
+  - **Layer 2**（worldsheet.ddf-mode-sum-as-formal-residue）：形式留数的分配律，
+    纯数学，`formalized`
+  - **Layer 3**（本卡）：文献记号的解读，解释性，`physical-argument`
+
+  worldsheet.ddf-contour-equals-mode-sum 依赖 Layer 2 + Layer 3，其 `effective`
+  将被本卡压到 `physical-argument`。但现在能精确回答："围道 = 模态和"这个等式里，
+  有多少是可验证数学（Layer 2，formalized），有多少是不可约解释（本卡，physical-argument）。
+
+  【为什么这个拆解有价值】
+  拆解前：整张卡 `physical-argument`，外界看不出瓶颈在哪。
+  拆解后：Layer 2 是可验证数学（已 `formalized`），Layer 3 是 1 比特的记号选择。
+  这**首次量化了一个物理定理的认识论结构**：哪部分是数学，哪部分是解释。
+
+  【本卡不阻碍下游工作】
+  worldsheet.ddf-commute-with-virasoro 等卡的 `formalized` 版本都是相对
+  **本图的模态和定义**（worldsheet.ddf-operators-v6）成立的，不需要经过本卡。
+  本卡只在回译到文献时出现（worldsheet.no-ghost-theorem-v4--via-goddard-thorn 的依赖链）。
+
+  【已知的两种读法对比】
+  - **形式留数读法**（本图采用）：
+    * 优点：不需要收敛性、解析延拓；与 Lean 的 `ddfOp` 定义一致
+    * 缺点：无法支持围道形变论证（如 --via-conformal-weight 推导）
+  - **复积分读法**：
+    * 优点：支持围道形变、Cauchy 定理
+    * 缺点：需要算子值函数的收敛性与解析性（本图与 Lean 均无此结构）
+
+  本图对两种读法的立场：在"简化成模态和"这一步采用形式留数读法（本卡），
+  在需要围道形变的推导中注明那一步超出本卡范围
+  （worldsheet.ddf-commute-with-virasoro--via-conformal-weight 的 gaps 已登记）。
+author: lean-formalizer
+created: "2026-09-20"
