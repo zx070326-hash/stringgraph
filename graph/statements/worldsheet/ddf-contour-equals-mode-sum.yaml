@@ -32,6 +32,17 @@ statement: |
   右端即 worldsheet.ddf-operators-v6 定义的 A^ε_n。
   换言之：**文献的 A^i_n 与本图/Lean 的 A^ε_n 是同一个算子**（取 ε = e_i 时逐字同一）。
 
+  【2026-09-20 三层拆解：本卡现分解为 Layer 2（数学）+ Layer 3（解释）】
+  本卡断言"文献的围道 = 本图的模态和"可拆成三层：
+  - **Layer 1**（Res_z A(z) = A_{-1}）：定义级，无需立卡；
+  - **Layer 2**（worldsheet.ddf-mode-sum-as-formal-residue）：算子值形式级数的留数分配律，
+    纯数学，`formalized`；
+  - **Layer 3**（worldsheet.ddf-contour-interpretation）：文献记号 `∮` 应读作形式留数，
+    解释性断言，`physical-argument`。
+  本卡 `uses` 这两张卡，故 `effective` 被 Layer 3 压到 `physical-argument`（预期中）。
+  **拆解的价值**：首次量化了"围道 = 模态和"这个等式里，有多少是可验证数学（Layer 2），
+  有多少是不可约解释（Layer 3）。详见 research/sandbox/ddf-residue/three-layer-split.md。
+
   【本卡明确不断言】
   (a) **不断言围道积分本身有解析意义**。本卡把 (1/2πi)∮ … dz 读作「取总 z^{−1} 系数」
       （形式留数）。若要把它读成复平面上的真实积分，需要算子值函数的收敛性，
@@ -45,6 +56,9 @@ statement: |
       GSW 与 GT 1972 的式号至今未核实（L0）。
   (e) **不断言 n = 0 的情形有文献意义**（Goddard (5.1) 写 n is an integer，未排除 0；
       本卡对一切 n ∈ Z 陈述，与 v6 一致）。
+uses:
+  - worldsheet.ddf-mode-sum-as-formal-residue
+  - worldsheet.ddf-contour-interpretation
 uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
 sources:
   - ref: goddard-2008
