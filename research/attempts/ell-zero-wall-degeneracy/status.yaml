@@ -1,5 +1,5 @@
-state: draft
-reviewer: graph-reviewer (2026-09-20, agent ell0rev 审 §1–§5；agent ell0s6rev 审 §6 + 毕业卡，二者均只读，由 lead 代为记入)
+state: verified
+reviewer: graph-reviewer (2026-09-20, agent ell0rev 审 §1–§5；agent ell0s6rev 审 §6 + 毕业卡；agent ell0f5rev 审放开量词后的 §6.1 与本轮全部改动；三者均只读，由 lead 代为记入)
 verdict: |
   === 裁决（2026-09-20，agent ell0rev）===
 
@@ -168,3 +168,32 @@ notes: |
      判别式验算 ⇒ v∈ℤ−1/2）？
   3. [GAP-3.3] 是否需要在本 attempt 内部闭合，还是可以依赖 gap-102b 完整闭合后的结果？
   4. 首版错误的记录是否如实且足够警示（避免后人重复误解周期性）？
+
+# === 第三轮：state 由 draft 回到 verified（lead，2026-09-20 晚）===
+#
+# 退回 draft 的唯一理由是 F-5（§6.1 逐字只证 `n ≥ m ≥ 1`，而 claim.md 断言 `m, n ≥ 1`）。
+# 该缺口本轮已关闭：
+#   - prover 把引理 6.1 放开到 `m, n ≥ 1`，证明重组为 5 步（主证直接放开，旁证走 ρ↔σ 对称）；
+#   - graph-reviewer ell0f5rev 做独立对抗性复审，**不以 prover 自列的范围审计表为据**，
+#     自己回 gap-102b-route-a 逐处查 `n≥m` 的出现，并从 route-a §2 Lemma 1 的 (I) 原始
+#     定义重推 ℓ=0 的解 σ₁ = [−n₂mρ₁ − mn₁ + nm₁]/(nn₂)：分母 `n·n₂` 与 m 无关。
+#     裁决 6/7 CLEAR，唯一 DEFECT 为形式性（第 1 步没显式说「分母不含 m」），lead 已补。
+#
+# 同轮一并关闭：F-4（不等式误写成等号）、F-6（ε₀ 依赖 Λ 的量词）、
+# F-7（§3 的重复块，删的那份缺「重数 2」与「每个都是二阶极点」，ell0f5rev 逐字比对确认
+# 被删内容严格弱于保留内容）、F-10（砖块清单过时）。
+#
+# 本轮**新开**一条缺口，不是修复的副作用而是主动收回：
+#   [GAP-Λ]  claim.md 与 proof.md §4.1 原先都写「两侧值与 ε、Λ 无关」。ε-无关可证
+#            （两条同侧围道之间的闭带无极点）；**Λ-无关证不出来**——ℓ=0 时围道穿过极点，
+#            「在无极点区域内连续形变」的前提不成立。全文承重位置的 d_*(m,n,0) 已改写为
+#            d_*(m,n,0;Λ)。ell0f5rev 独立确认该收回正确（ε₀ 源自 δ := dist(K₀,Z')，
+#            而 K₀ 的虚部 Im ρ=2nΛ、Im σ=2mΛ 随 Λ 移动），且逐处 grep 未发现漏网的
+#            Λ-无关断言。**图卡 dstar-well-defined-at-ell-zero 从一开始就没有断言
+#            Λ-无关**——这是上游向图对齐，不是图让步。
+#
+# 仍然开放（与本轮无关，继承自上游）：
+#   [GAP-identify]  Sen 的 Φ̃ 坐标 = 标准 Φ₁₀ 坐标，非文献逐字断言。
+#                   这是下游全部毕业卡 effective 被封在 physical-argument 的**唯一**原因。
+#
+# captain_confirmed 仍为 false。verified 是 agent 级裁决，不是船长确认。
