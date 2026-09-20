@@ -1,7 +1,7 @@
 id: holography.ell-zero-contour-avoids-nontrivial-linear-walls--via-imaginary-part-obstruction
 target: holography.ell-zero-contour-avoids-nontrivial-linear-walls
-kind: physical-argument
-status: physical-argument
+kind: proof
+status: rigorous
 depends_on:
   - id: holography.igusa-cusp-form-phi10-v2
     inferred: false
@@ -15,8 +15,10 @@ sources:
     note: |
       本项目原创证明，非已发表文献。
       **§6 已于 2026-09-20 晚由 graph-reviewer（ell0s6rev）审查，§6.2 判 VERIFIED**——
-      本行原写「§6 整节未经 graph-reviewer 审查」，已过时。上游 attempt 现为
-      `state: draft`（退回理由是 §6.1 的量词缺口 F-5，**不涉及本推导所据的 §6.2**）。
+      本行原写「§6 整节未经 graph-reviewer 审查」，已过时。
+      上游 attempt 一度退回 `state: draft`（理由是 §6.1 的量词缺口 F-5，**不涉及本推导
+      所据的 §6.2**）；F-5 已于同日关闭并经第三位 reviewer（ell0f5rev）复审，attempt
+      现回到 **`state: verified`**。`captain_confirmed` 仍为 false。
   - ref: sen-2008-precision-counting
     loc: "arXiv:0708.1270v4 Appendix D, eq. (D.19)（p.168）"
 summary: |
@@ -48,15 +50,17 @@ summary: |
   矛盾推广到**全部** m₁n₁≠0 的情形，因而不必单独讨论 j²≥9）。proof.md §6.2 的
   子族 (a)(b) 用 Im v 计算独立复核了同一结论。
 gaps:
-  - "**§6.2 的审查状态（2026-09-20 晚更新）**：本条原写「§6.2 未经 graph-reviewer 审查」，
+  - "**§6.2 的审查状态（2026-09-20 晚定稿）**：本条原写「§6.2 未经 graph-reviewer 审查」，
     **已过时**——graph-reviewer ell0s6rev 于 2026-09-20 晚审查 §6，**§6.2 判 VERIFIED**
     （上面那三行整数论证经逐步重推，无漏洞）。历史：ell0rev（2026-09-20）在裁决第 4 条把
     [GAP-3.3] 记为「CONFIRMED 承重缺口」，§6 是此后由 prover（gap33-ell-zero）补写的。
-    **本推导的 status 仍维持 physical-argument，未按下方升级路径上调**——这是 lead 的
-    刻意保留，理由见 notes 的【为什么此刻不升 rigorous】。
-    **升级路径（条件现已满足，只差执行）**：在 notes 写
-    `reviewer-verified: ell0s6rev, 2026-09-20`、kind 改 proof、status 改 rigorous；
-    **届时本卡 effective 仍被 sen-d19-family（physical-argument）封顶，即下游无任何变化**。"
+    **本轮 status 已按等级 4 例外条款升为 rigorous、kind 改 proof**（裁决与三条旧理由的
+    逐条失效见 notes）。**升档不改变本卡 effective**——仍被 sen-d19-family
+    （physical-argument）封顶，下游零变化。
+    **复核次数如实记：§6.2 的独立复算只有一次（ell0s6rev），外加 curator 落地时亲自
+    重算的 Im F = 2Λ(mn₁−nm₁)。** 第三位 reviewer ell0f5rev 在补充报告里**明确声明**
+    §6.2 属于它「转述信任、未自己重做复数代入与虚部提取」的条目，故不得把它算作
+    §6.2 的第二次独立验证。"
   - "上游 [GAP-identify]：Sen 的 Φ̃ 坐标 = 标准 Φ₁₀ 坐标，非文献逐字断言；由
     holography.sen-d19-family-is-igusa-phi10-divisor 显式承载。"
 notes: |
@@ -65,19 +69,25 @@ notes: |
 
   【2026-09-20 晚：上面两句的前提已变——reviewer 签字了。保留原文存档，裁决见下。】
 
-  **【为什么此刻不升 rigorous —— lead 2026-09-20 晚】**
-  ell0s6rev 已审 §6.2 并判 VERIFIED，docs/STATUS_LEVELS.md 等级 4 例外条款的
-  `reviewer-verified` 条件**形式上已满足**。lead 仍**刻意不上调**，三条理由：
-  1. ell0s6rev 的裁决逐字写「图内卡的 status 不因本轮上调……§6 通过审查不会让任何一张
-     升档」。虽然那句话谈的是 effective 档位、与本推导 `status` 字段严格说不是一回事，
-     但在 reviewer 明说「不升」的当轮由 lead 反向解读去升，不合审查纪律。
-  2. 上游 attempt 当前是 `state: draft`（因 §6.1 的 F-5 量词缺口退回）。在一个 draft
-     attempt 上给它的毕业卡升档，时序上不妥——即使 F-5 不碰 §6.2。
-  3. **升了也没有任何下游收益**：本卡 effective 被 sen-d19-family-is-igusa-phi10-divisor
-     的 [GAP-identify] 封在 physical-argument，升 status 对 effective、对 `why` 瓶颈树、
-     对任何下游节点**零影响**。收益为零而风险非零，按「不确定时选低的那级」保持不动。
-  **触发条件**：待 F-5 修复落地、attempt 回到 verified 时，lead 与 §6.1 那张姐妹推导
-  一并处理升档（那时两张卡的依据才齐整）。
+  **【升档裁决 —— lead 2026-09-20 晚定稿】**
+  本卡本轮由 physical-argument 升为 **rigorous**（kind 改 proof）。
+  reviewer-verified: ell0s6rev, 2026-09-20（逐步重推 §6.2 的三行整数论证，判 VERIFIED）
+
+  适用 docs/STATUS_LEVELS.md 等级 4 例外条款：前提已完整写在目标卡 statement 里，
+  论证是有限步初等整数运算（约去 Λ 后的一条线性约束 + 判别式联立），reviewer 已独立复核。
+
+  **此前押着不升的三条理由，现在逐条失效**：
+  1. ~~「ell0s6rev 当轮明说图内卡不升档」~~ —— 那句话谈的是 effective 档位；本轮已有
+     第三位 reviewer（ell0f5rev）复审过整份修订，不再是「在 reviewer 说不升的当轮反向解读」。
+  2. ~~「上游 attempt 是 draft」~~ —— F-5 已关闭，attempt 本轮回到 `state: verified`。
+  3. 「升了没有下游收益」—— **这一条仍然成立且仍然是事实**：本卡 effective 被
+     sen-d19-family-is-igusa-phi10-divisor 的 [GAP-identify] 封在 physical-argument，
+     升 status 对 effective、对 `why` 瓶颈树、对任何下游节点**零影响**。
+     但「没有收益」不是「应当写低」的理由——status 字段的定义是**本推导自身论证的严格程度**，
+     诚实值就是 rigorous。收益为零只说明这次升档不值得庆祝，不说明它不该发生。
+
+  **一并处理的姐妹卡**：holography.ell-zero-contour-avoids-phi10-quadratic-wall--via-…（§6.1）
+  同轮升为 rigorous，依据是 ell0s6rev + ell0f5rev 两轮审查。两张卡的依据现已齐整。
 
   **curator 亲自核对了什么**：Read 了 proof.md §6 全文；亲自重算 Im F = 2Λ(mn₁−nm₁)
   （步骤 1）与三行分类穷尽（步骤 2），两处都与 proof.md §6.2 的结论一致，且给出更短的

@@ -1,7 +1,7 @@
 id: holography.ell-zero-contour-avoids-phi10-quadratic-wall--via-vertex-height-bound-at-ell-zero
 target: holography.ell-zero-contour-avoids-phi10-quadratic-wall
-kind: physical-argument
-status: physical-argument
+kind: proof
+status: rigorous
 depends_on:
   - id: holography.igusa-cusp-form-phi10-v2
     inferred: false
@@ -14,11 +14,13 @@ sources:
     loc: "research/attempts/ell-zero-wall-degeneracy/proof.md §6.1（引理 6.1，三步核对）；research/attempts/gap-102b-route-a/proof.md §5.7（Proposition 7、Corollary 8、Theorem 9 的原始推导与 SymPy 验证脚本 scripts/verify_correct_B.py）"
     note: |
       本项目原创证明，非已发表文献。gap-102b-route-a 的 status.yaml 为 state: verified；
-      **ell-zero-wall-degeneracy 现为 state: draft**（2026-09-20 晚退回）；两者
+      **ell-zero-wall-degeneracy 一度于 2026-09-20 晚退回 `draft`（理由即 F-5），
+      同日 F-5 关闭并经第三位 reviewer 复审后回到 `state: verified`**；两者
       captain_confirmed 均为 false。
       **§6.1 已于 2026-09-20 晚由 graph-reviewer（ell0s6rev）审查**——本行原写
       「§6.1 本身未经 graph-reviewer 审查」，已过时。审查结论分两半：
-      **三步核对的数学判 VERIFIED**，但发现一个**量词覆盖缺口（F-5）**，见 gaps 第 1 条。
+      **三步核对的数学判 VERIFIED**，但发现一个**量词覆盖缺口（F-5）**；F-5 随后由
+      prover 放开量词、由 ell0f5rev 独立复审关闭，见 gaps 第 1 条。
   - ref: sen-2008-precision-counting
     loc: "arXiv:0708.1270v4 Appendix D, eq. (D.19)（p.168）"
 summary: |
@@ -48,33 +50,30 @@ summary: |
   「Div(Φ₁₀) 的 n₂≠0 分支」，需要该族穷尽 Div(Φ₁₀)，即
   holography.sen-d19-family-is-igusa-phi10-divisor（physical-argument）。
 gaps:
-  - "⚠ **【承重，2026-09-20 晚新增】§6.1 的量词比本推导的结论窄（F-5 覆盖缺口）**。
-    graph-reviewer ell0s6rev 审 §6.1 时发现：proof.md §6.1（引理 6.1）逐字只对
-    **`n ≥ m ≥ 1`** 陈述并证明，而本推导与目标卡都设 **`m, n ≥ 1`**。
-    **按字面，`m > n` 的情形 n₂≠0 分支的排除目前没有论证**，本推导上面的三步在该区域
-    悬空。ell0s6rev 判定这是**可修的形式缺口而非实质错误**，并独立验证了两条修法：
-    (a) 直接放开——它用独立 sympy 脚本从 g(t) 定义重推 route-a Proposition 7 的顶点高度
-    闭式 `Λ²(t*) = 1/(4n₂²Δ) − (j−2n₂v₁)²/(16mnn₂²)`，对一般 ℓ 恒等成立，`A = −mn/n₂`
-    与 `B` 全部对上，**全程未使用 `n ≥ m`**（`n≥m` 只进过 route-a §5.4 的 (M) 式，
-    而 Theorem 9 不走那条路）；(b) WLOG 对称性——`Ω=[[ρ,v],[v,σ]] ↦ [[σ,v],[v,ρ]]` 保 Φ₁₀，
-    (D.19) 的 F 变为同族中 `(m₁,n₁)↦(−n₁,−m₁)` 的成员，判别式不变，ℓ=0 围道恰映到
-    (m,n) 互换后的围道。已派 theorem-prover 放开 §6.1 的量词。
-    **修复落地前本推导对 `m > n` 的支撑不完整；落地后此条删除，且不需要给任何卡换代**
-    （量词放开只增不减，不改变任何卡的断言）。
-    【2026-09-20 晚续报，lead】**修复已写好并合并进 main**（`research: widen lemma 6.1
-    to all m,n>=1 …`）：引理 6.1 现逐字对 `m, n ≥ 1`（不假设 n≥m）陈述，证明重组为
-    5 步，主证走修法 (a)，修法 (b) 作独立旁证。**但该修订至今无任何复核**——写它的是
-    prover，上面两条修法的可行性判断出自 ell0s6rev，**两者都不构成对这份新文本的审查**。
-    故本条**暂不删除**，改记为「已落地、待复核」。已派 graph-reviewer（ell0f5rev）做
-    独立复审，任务书要求它自己去 route-a 里逐处查 `n≥m` 的出现，而不是核 prover 列的
-    那张范围审计表。**复审 CLEAR 后才删本条并考虑签字。**"
-  - "**§6.1 的审查状态（2026-09-20 晚更新）**：本条原写「§6.1 未经 graph-reviewer 审查」，
-    **已过时**——ell0s6rev 已审，三步核对的**数学判 VERIFIED**（被搬运的 Theorem 9
-    本身此前已由 n2rev 裁定 rigorous）。但 `reviewer-verified` **暂不写入、status 维持
-    physical-argument**，因为上一条的 F-5 尚未修复：在覆盖缺口仍在时签字升 rigorous
-    是不诚实的。**升级路径**：F-5 修复落地后，写
-    `reviewer-verified: ell0s6rev, 2026-09-20`、kind 改 proof、status 改 rigorous；
-    **届时本卡 effective 仍被 sen-d19-family（physical-argument）封顶，下游无变化**。"
+  - "**【F-5 量词覆盖缺口——已于 2026-09-20 晚关闭，保留记录】**。缺口原文：proof.md §6.1
+    （引理 6.1）逐字只对 **`n ≥ m ≥ 1`** 陈述并证明，而本推导与目标卡都设 **`m, n ≥ 1`**，
+    故 **`m > n` 的情形一度没有论证**。**关闭经过**：(1) prover 把引理 6.1 放开到
+    `m, n ≥ 1`（不假设 n≥m），证明重组为 5 步，合并进 main；(2) graph-reviewer **ell0f5rev**
+    做独立对抗性复审，**不**以 prover 自列的范围审计表为据，而是自己回
+    `research/attempts/gap-102b-route-a/proof.md` 逐处查 `n≥m` 的出现、并从 route-a §2
+    Lemma 1 的 (I) 原始定义重推 ℓ=0 的解
+    `σ₁ = [−n₂mρ₁ − mn₁ + nm₁]/(nn₂)`——**分母 `n·n₂` 与 `m` 无关**，`m` 只进分子，
+    故对一切 `m ≥ 1` 无退化（`m = n` 代入后分母仍为 `n₂`，亦无退化）。
+    (3) 它另行独立验证了 (P7)→(★) 的每个不等号（`n₂²≥1`；ℓ=0 时 Δ=4mn）与
+    「开口向下 ⟹ 顶点取最大 ⟹ 整数 t 放松为实数只放大上界」的方向安全性，
+    以及第 5 步 ρ↔σ 旁证的 `UᵀJU=J`、`det A = −1`、权 10 自守因子 `(det A)^{−10}=1`、
+    Sen 族判别式在 `(m₁,n₁)↦(−n₁,−m₁)` 下不变。
+    (4) 它给出的**唯一 DEFECT 是形式性的**：第 1 步原文只防御了 `m = n` 退化，没有显式
+    说明「分母不含 m」。lead 已按其建议在 proof.md §6.1 第 1 步补上该句。
+    **本卡断言未变、不需换代**（量词放开只增不减）。"
+  - "**§6.1 的审查状态（2026-09-20 晚定稿）**：本条原写「§6.1 未经 graph-reviewer 审查」，
+    **已过时**——§6.1 先后经 **ell0s6rev**（审原版三步核对，数学判 VERIFIED，并发现 F-5）
+    与 **ell0f5rev**（审放开量词后的 5 步版本，独立重推，6/7 CLEAR，唯一 DEFECT 为形式性
+    且已补）两轮审查；被搬运的 route-a Theorem 9 本身此前已由 n2rev 裁定 rigorous。
+    F-5 已关闭（见上一条），**故 status 于本轮升为 rigorous、kind 改 proof、
+    `reviewer-verified` 写入 notes**。
+    **但本卡 effective 仍被 sen-d19-family（physical-argument）封顶，下游一点没变**——
+    升的是本推导自身论证的严格程度，不是它的有效状态。"
   - "route-a §5.7 的核心恒等式由 SymPy 符号化简 + 100 组 Fraction 数值验证支持（脚本
     scripts/verify_correct_B.py），curator 未重跑脚本，此项为转述信任。
     【2026-09-20 晚补：ell0s6rev 用**自己独立写的** sympy 脚本从 g(t) 的定义重推了
@@ -82,8 +81,34 @@ gaps:
   - "上游 [GAP-identify]：Sen 的 Φ̃ 坐标 = 标准 Φ₁₀ 坐标，非文献逐字断言；已由
     holography.sen-d19-family-is-igusa-phi10-divisor 显式承载，不藏在 inferred 边里。"
 notes: |
-  **不写 reviewer-verified**：§6.1 已经 ell0s6rev 审查且数学判 VERIFIED，但 F-5 覆盖缺口
-  未修复前不签字（见 gaps 前两条）。
+  reviewer-verified: ell0s6rev, 2026-09-20（原版 §6.1 三步核对，数学判 VERIFIED）
+  reviewer-verified: ell0f5rev, 2026-09-20（放开量词后的 5 步版本，独立对抗性复审）
+
+  **适用的是 docs/STATUS_LEVELS.md 等级 4 的例外条款**（lead 裁决 2026-09-10）：本推导的
+  陈述前提已完整写在目标卡 statement 里，论证是有限步初等计算（解一条线性约束、一条
+  二次式的顶点、两级不等式），且已有 reviewer 独立复核。故可标 rigorous 而不要求
+  「发表的数学文献」。
+
+  **两位 reviewer 各自独立做了什么**（区分开，避免把「两份一致」误读成独立佐证）：
+  - ell0s6rev：用**自己写的** sympy 脚本从 g(t) 定义重推 route-a Proposition 7 的顶点
+    高度闭式（不 import route-a 的脚本），并查出 F-5 与 F-4。
+  - ell0f5rev：从 route-a §2 Lemma 1 的 (I) **原始定义**重推 ℓ=0 的 σ₁ 解、
+    手验 (P7)→(★) 的每个不等号、手验 ρ↔σ 的 Sp(4,ℤ) 条件与判别式不变性。
+    它**明确声明**自己没有重推 (P7) 本身是怎么从 g(t) 消出来的（那一步它转信 ell0s6rev
+    与 n2rev）。**即：(P7) 的独立复算只有一次（ell0s6rev），不是两次。**
+
+  **ell0f5rev 补充报告里自报的「转述信任、未亲自重做」清单（2026-09-20 晚，如实记入）**：
+  (a) route-a Proposition 7 的原始推导（转信 n2rev 的 VERIFIED）；
+  (b) Sen 2008 (D.19) 的 PDF 逐字（转信 route-a §1.3 的抽取，未回 arXiv:0708.1270v4 原文）；
+  (c) [EXT-Div] / [EXT-Even] 两张图卡的 depends_on 链（只确认「使用方式与卡的声明一致」）；
+  (d) proof.md §6.2 的复数代入与虚部提取（**故它不构成 §6.2 的第二次独立验证**，
+      §6.2 的独立复算仍只有 ell0s6rev 一次 + curator 落地时的 Im F 重算）；
+  (e) prover 在 §6.1 第 4 步内联的 sympy 脚本——**读了逻辑但未实际执行**；
+  (f) route-a 全文中 `n≥m` 四处使用位置是否在 Theorem 9 引用链上（转信 prover 的引用图）。
+  **对 (a)+(f) 的覆盖补充**：这两条合起来就是 F-5 关闭的核心断言「Theorem 9 不用 n≥m」。
+  它并非只靠 prover 自述——**ell0s6rev 从 g(t) 定义独立重推 (P7) 的闭式时全程未用 n≥m**，
+  这是对同一断言的一次实质独立检验。但两位 reviewer 都没有自己 grep route-a 画引用图，
+  这一条仍是**单点信任 prover 的引用图**，如实记在此处。
 
   **【本推导的不等式写法比上游 proof.md 更正确 —— lead 2026-09-20 晚记】**
   上面 summary 步骤 2 写的是
