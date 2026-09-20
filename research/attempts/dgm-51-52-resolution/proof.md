@@ -108,36 +108,40 @@ For odd s, the shift (s−1)/2 ∈ ℤ is trivial by periodicity. For even s, it
 
 ## 2. Literature Adjudication: Which Formula is Correct?
 
-### 2.1 Independent Corroboration for eq(52)
+### 2.1 Consolidation of Existing Extraction Records
+
+**This section consolidates and cross-checks existing literature extraction records from the project, NOT independent verification by this attempt.**
 
 **Source A**: Alexandrov-Nampuri, *Refinement and modularity of immortal dyons*, arXiv:2009.01172
 
-Their eq(2.11) defines:
-`Z_I^{(4|4)} = Σ (−1)^ℓ Ω_I q^n y^ℓ p^m`
+From `literature/sources.bib` (alexandrov-nampuri-2020 note):
+> **联立 eq(2.11)+(2.13) 解出 Z_I 的闭式为 Σ_{d|I} d/Φ₁₀(...,dv+(d−1)/2,...)（含半整平移），与 DGM eq(51) 不同、与半整平移版一致**
 
-with eq(2.13):
-`Ω_I(n,m,ℓ) = Σ_{d|I} d Ω_1(n,m/d²,ℓ/d)`
+This extraction record (by project researcher agent, not this attempt) indicates their eq(2.11)+(2.13) gives the half-shift form consistent with eq(52), not eq(51).
 
-(Note: their (n,m,ℓ) ordering differs from DGM's (m,n,ℓ), but the divisor sum structure is identical.)
+**Source B**: BSS papers (arXiv:0802.0544, arXiv:0802.0556)
 
-**Cross-check**: Solving eq(2.11)+(2.13) for the generating function Z_I yields exactly the half-shift form:
-`Z_I = Σ_{d|I} d/Φ₁₀(d²σ, τ, dz + (d−1)/2)`
+From `literature/sources.bib` (banerjee-sen-srivastava-2008a note):
+> 8 项第三自变量（v）出现 0,0,1/4,1/4,1/2,1/2,3/4,3/4 平移；其中第 6 项 Φ₁₀(ρ̌,σ̌,v̌+1/2) 是纯半整 v 平移（ρ,σ 不动），**独立佐证挠 I=2 计数需要半整 v 平移**
 
-This is **identical** to Prop 5.4's 𝒵_I^{corr}, supporting eq(52).
-
-**Source B**: BSS papers (arXiv:0802.0544, arXiv:0802.0556, both v1 dated Feb 2008)
-
-These predate DGM (v1 March 2008) and are independent. From literature extraction records in `research/attempts/torsion-immortal-positivity-hecke/status.yaml` notes (2026-09-15):
-
+And from torsion-immortal-positivity-hecke/status.yaml notes (2026-09-15):
 > BSS 0802.0544/0802.1556 两篇独立、均早于 DGM 且互不引用的间接佐证
 
-The BSS formulas are consistent with eq(52), not eq(51).
+These extraction records indicate BSS formulas are consistent with half-shift requirement.
 
 **Source C**: No erratum for DGM
 
-Despite the numerical discrepancy being easily checkable, no published erratum correcting eq(51) has been found. This suggests:
-1. The literature may not have widely implemented eq(51) computationally, or
-2. The half-shift correction was implicitly adopted without formal retraction
+No published erratum correcting DGM eq(51) has been found in literature records.
+
+### 2.2 Attribution and Verification Status
+
+**What this attempt did**: Consolidated existing extraction records and cross-checked their consistency.
+
+**What this attempt did NOT do**: Independent reading and verification of the original papers (arXiv:2009.01172, arXiv:0802.0544 PDFs). The conclusions above are based on project's existing extraction records, not fresh independent verification.
+
+**To make this independent** would require: Reading the original PDFs with PyMuPDF (not pdftotext), extracting verbatim text of eq(2.11), eq(2.13), eq(1.23), verifying the half-shift claim by direct calculation, and recording the extraction following project extraction methodology.
+
+**Current status**: The evidence is likely correct (extracted by project researcher agents from original sources), but this represents consolidation, not independent three-way corroboration.
 
 ### 2.2 Physical Consistency Check
 
