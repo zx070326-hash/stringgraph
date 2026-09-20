@@ -70,6 +70,9 @@ gaps:
     `n ≥ m ≥ 1`，而本推导与目标卡都设 `m, n ≥ 1`，故步骤 1 里「n₂≠0 的分支被
     holography.ell-zero-contour-avoids-phi10-quadratic-wall 排除」这一句**在 `m > n` 时
     目前无论证**（已派 prover 修，落地后不需换代）。
+    【2026-09-20 晚续报】prover 的修复**已合并进 main**，引理 6.1 现对 `m, n ≥ 1` 陈述；
+    **但新文本未经任何复核**，已派 graph-reviewer ell0f5rev 独立复审，复审 CLEAR 前
+    本条不删。
     此外 holography.sen-d19-family-is-igusa-phi10-divisor 仍是 physical-argument
     （[GAP-identify]）。本推导 status 因此维持 physical-argument；**即使 §6 全部签字，
     本卡 effective 仍被穷尽性那条边封顶在 physical-argument**。"

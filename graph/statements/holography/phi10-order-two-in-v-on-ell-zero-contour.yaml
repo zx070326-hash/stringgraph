@@ -54,6 +54,9 @@ sources:
       形式缺口而非实质错误（route-a Prop 7 的推导全程不用 `n≥m`；另有 (ρ,σ) 互换的 WLOG
       对称性备选修法），已派 theorem-prover 放开 §6.1。**修复落地前，本卡对 `m > n` 的
       支撑不完整**；落地后本段删除，且**不需要换代**（量词放开只增不减，不改变本卡断言）。
+      【2026-09-20 晚续报】修复**已合并进 main**（引理 6.1 现对 `m, n ≥ 1` 陈述，
+      证明重组为 5 步，另附 ρ↔σ 对称性旁证）。**但新文本尚无任何复核**，
+      已派 graph-reviewer ell0f5rev 独立复审；**复审 CLEAR 前本段不删**。
   - ref: gritsenko-nikulin-1996
     loc: "Div(Φ₁₀) = 2H₁（经 holography.igusa-cusp-form-phi10-v2 转载；本卡用它把「点上只过一条分支」升级为「阶恰为 2」）"
 tags: [bh-entropy, mock-modular, n4-string-theory, siegel-modular-form]
