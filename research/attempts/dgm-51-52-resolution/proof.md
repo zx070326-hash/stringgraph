@@ -2,12 +2,71 @@
 
 ## Summary
 
-DGM (arXiv:0803.2692) eq(51) and eq(52) are mathematically incompatible. This document adjudicates which is correct based on:
-1. The verified mathematical proof of incompatibility (Prop 5.1 from torsion-immortal-positivity-hecke)
-2. Independent corroborations from literature
-3. Closure analysis of [GAP 11.2]
+**Primary Finding (Negative Result)**: Resolving the DGM eq(51)/(52) contradiction **does not** enable upgrading `holography.torsion-immortal-positivity` from `physical-argument` to `rigorous`. The actual bottleneck is the **DVV dyon index generating function conjecture** (`holography.dvv-dyon-index-generating-function`), which lies beneath eq(52) in the dependency chain and is itself `physical-argument` (field-wide open conjecture).
 
-**Verdict**: eq(52) is the physically correct formula; eq(51) requires a half-period shift correction to be compatible with eq(52).
+**Secondary Finding (Literature Adjudication)**: DGM eq(52) is the correct formula; eq(51) requires half-period shift correction. This is based on:
+1. Verified mathematical proof of incompatibility (Prop 5.1 from torsion-immortal-positivity-hecke)
+2. Consolidation of existing literature extraction records (not independent verification by this attempt)
+3. Analysis of [GAP 11.2]
+
+The original task premise ("解决 eq(51)/(52) 矛盾 = torsion-immortal-positivity 升 rigorous") was incorrect. This negative result is this attempt's most valuable output.
+
+---
+
+## 0. Primary Finding: The Real Bottleneck is DVV, Not eq(52)
+
+### 0.1 The Task Premise Was Incorrect
+
+The original task (ROADMAP item #2) stated: "解决 DGM eq(51)/(52) 矛盾 = `holography.torsion-immortal-positivity` 从 physical-argument 升 rigorous".
+
+This is **false**. Verified by running `uv run stringgraph why holography.torsion-immortal-positivity`:
+
+```
+holography.torsion-immortal-positivity [physical-argument]
+  ↳ own status rigorous; limited by 1 dep(s)
+  holography.dgm-torsion-divisor-sum [physical-argument]
+    ↳ own status physical-argument and 1 dep(s)
+    holography.dvv-dyon-index-generating-function [physical-argument]
+      ↳ own status physical-argument
+```
+
+**The floor is `holography.dvv-dyon-index-generating-function`**, not eq(52).
+
+### 0.2 What DVV Is
+
+The DVV conjecture (Dijkgraaf-Verlinde-Verlinde proposal) asserts that Fourier coefficients of 1/Φ₁₀ equal 1/4-BPS helicity supertrace degeneracies in N=4 string theory. This is:
+- A **field-wide open conjecture** (physical-argument status)
+- **Beneath eq(52) in the dependency chain**: even if eq(52) were proven rigorously, `dgm-torsion-divisor-sum` itself has `own_status: physical-argument` and depends on DVV
+- The actual bottleneck for upgrading `torsion-immortal-positivity`
+
+### 0.3 What This Means
+
+Even if we:
+1. Definitively prove eq(52) is correct (literature adjudication below)
+2. Close all mathematical gaps in torsion-immortal-positivity-hecke
+3. Upgrade eq(52) from "physical premise" to "rigorous"
+
+The target node `holography.torsion-immortal-positivity` **would not move**. Its `effective` status remains `physical-argument` because:
+- `dgm-torsion-divisor-sum` has `own_status: physical-argument` (not just inherited)
+- `dgm-torsion-divisor-sum` depends on `dvv-dyon-index-generating-function` which is `physical-argument`
+- `propagate.py` compresses the effective status to the weakest link
+
+### 0.4 The Correct Upgrade Path
+
+To actually upgrade `torsion-immortal-positivity` to `rigorous` would require:
+1. Proving the DVV conjecture (that 1/Φ₁₀ coefficients = BPS indices)
+2. OR, finding an alternative mathematical route that bypasses DVV entirely
+
+Neither is addressed by resolving the eq(51)/(52) contradiction.
+
+### 0.5 Why This Negative Result Matters
+
+Per project principle "图是仪器，不是产品" and principle 8 ("审计由后果触发"):
+- An action that **does not move any node's effective status** should not occupy a work round
+- This finding prevents future wasted effort on the wrong upgrade path
+- It clarifies what the real open problem is (DVV, not eq(52))
+
+**This is the primary output of this attempt.** The literature adjudication below (eq(52) vs eq(51)) remains valid but is now correctly framed as **not sufficient for the upgrade goal**.
 
 ---
 
