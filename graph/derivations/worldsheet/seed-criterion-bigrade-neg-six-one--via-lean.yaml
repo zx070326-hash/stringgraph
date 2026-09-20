@@ -1,0 +1,26 @@
+id: worldsheet.seed-criterion-bigrade-neg-six-one--via-lean
+target: worldsheet.seed-criterion-bigrade-neg-six-one
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.virasoro-generators-free-boson
+  - id: worldsheet.y3-singular-vector-d26-h-neg4
+  - id: worldsheet.x4-singular-vector-d26-h-neg4
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/SeedCriterionSix.lean :: StringFormal.NoGhost.mem_towerSeed_neg_six_one_iff"
+    note: |
+      Lean 4 + Mathlib v4.33.1 形式化证明。合并提交 db5b53d（PR-D2，noghost-pr-d2，
+      2026-09-18）。证明策略分两个方向：
+      (⟹) 调用 x4_y3_mem_towerSeed_neg_six_one（SingularVectorsSixSlice.lean），
+      该引理使用 y3_mem_towerSeed 与 x4_mem_towerSeed（它们需要 D=26，来自
+      SingularVectorsSix.lean 的奇异向量定理）；
+      (⟸) 调用 mem_towerSeed_neg_six_one_of_towerLop_one_apply_y3_eq_zero，
+      只需从 y3 u ∈ seed 中提取 L_1(y3 u) = 0，不需要 D=26。
+      无 sorry，公理集合为 {propext, Classical.choice, Quot.sound}
+      （已由 lead 在合并前检查）。
+summary: |
+  Lean 把判据拆成两个方向：(⟹) 经奇异向量定理（需 D=26），(⟸) 只用 y3 半边
+  且对任意 D 成立。两个方向合成等价式，D=26 是整体前件。
+author: graph-curator
+created: "2026-09-20"
