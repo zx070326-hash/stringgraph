@@ -1,30 +1,27 @@
-state: verified
-reviewer: "self-analysis based on torsion-immortal-positivity-hecke (verified, captain_confirmed: true)"
+state: under-review
+reviewer: "awaiting graph-reviewer assignment"
 verdict: |
-  DGM eq(51)/(52) contradiction RESOLVED via literature adjudication:
+  DGM eq(51)/(52) contradiction analyzed with literature consolidation.
 
-  **Verdict**: eq(52) is the physically correct formula. eq(51) requires half-period shift
-  correction to be compatible with eq(52).
+  **Primary Finding (Negative Result)**: Resolving eq(51)/(52) does NOT enable upgrading
+  holography.torsion-immortal-positivity to rigorous. The actual bottleneck is DVV
+  dyon index generating function conjecture, which lies beneath eq(52) in dependency chain.
+  Original task premise was incorrect. This negative result is the most valuable output.
 
-  **Evidence**:
+  **Secondary Finding (Literature Adjudication)**: eq(52) is correct based on:
   1. Mathematical incompatibility proven (Prop 5.1, torsion-immortal-positivity-hecke, verified)
-  2. Independent corroboration: Alexandrov-Nampuri 2009.01172 eq(2.11)+(2.13) gives half-shift form
-  3. Earlier independent sources: BSS 0802.0544/0556 consistent with eq(52)
-  4. No erratum published for DGM eq(51)
-  5. Unique compatible generating function is 𝒢_I with (s-1)/2 shifts (Prop 5.4, verified)
+  2. Consolidation of existing project extraction records (A-N, BSS) - NOT independent verification
+  3. Analysis of [GAP 11.2]: asymptotic heuristic + finite numerical support, not rigorously closed
 
-  **[GAP 11.2] resolution**: Closeable via exponential Cardy dominance + finite verification,
-  but moot since eq(52) is correct (dominance lemma only needed if eq(51) were correct).
+  **Four corrections applied per coordinator feedback**:
+  1. Primary finding rewritten prominently: DVV is the floor, not eq(52)
+  2. Removed redundant graph structure suggestion (current structure already correct)
+  3. Fixed false corroboration loop: correctly attributed to existing extraction records
+  4. Fixed two overclaims: "IMPOSSIBLE" → "cannot derive via Hecke/modular forms";
+     [GAP 11.2] "closeable" → "heuristic + numerical support, not rigorously closed"
 
-  **Graph implications**: eq(52) is the minimal irreducible physical premise. Everything downstream
-  (Thm 4.1 contour covariance, Thm 6.1 positivity, Prop 4.4 S-duality) is rigorous conditional
-  on eq(52). Recommend creating explicit nodes separating physical premise from rigorous consequences.
-
-  **Prop D (mock level)**: Remains open ([GAP 9.4]), not blocking main result.
-
-  **Can torsion-immortal-positivity upgrade to rigorous?**:
-  Conditional on eq(52) as physical premise, yes. But honest framing requires stating the dependency.
-  Status should be "rigorous given eq(52)" not "rigorous unconditionally."
+  Ready for graph-reviewer to assess whether this literature consolidation + negative
+  finding (upgrade path identification) constitutes valid contribution.
 
 captain_confirmed: false
 notes: |
