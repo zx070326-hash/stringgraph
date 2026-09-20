@@ -1,0 +1,42 @@
+state: under-review
+reviewer: "awaiting graph-reviewer assignment"
+verdict: |
+  DGM eq(51)/(52) contradiction analyzed with literature consolidation.
+
+  **Primary Finding (Negative Result)**: Resolving eq(51)/(52) does NOT enable upgrading
+  holography.torsion-immortal-positivity to rigorous. The actual bottleneck is DVV
+  dyon index generating function conjecture, which lies beneath eq(52) in dependency chain.
+  Original task premise was incorrect. This negative result is the most valuable output.
+
+  **Secondary Finding (Literature Adjudication)**: eq(52) is correct based on:
+  1. Mathematical incompatibility proven (Prop 5.1, torsion-immortal-positivity-hecke, verified)
+  2. Consolidation of existing project extraction records (A-N, BSS) - NOT independent verification
+  3. Analysis of [GAP 11.2]: asymptotic heuristic + finite numerical support, not rigorously closed
+
+  **Four corrections applied per coordinator feedback**:
+  1. Primary finding rewritten prominently: DVV is the floor, not eq(52)
+  2. Removed redundant graph structure suggestion (current structure already correct)
+  3. Fixed false corroboration loop: correctly attributed to existing extraction records
+  4. Fixed two overclaims: "IMPOSSIBLE" → "cannot derive via Hecke/modular forms";
+     [GAP 11.2] "closeable" → "heuristic + numerical support, not rigorously closed"
+
+  Ready for graph-reviewer to assess whether this literature consolidation + negative
+  finding (upgrade path identification) constitutes valid contribution.
+
+captain_confirmed: false
+notes: |
+  2026-09-20 (theorem-prover, initial resolution):
+  Literature adjudication complete. Three-way corroboration (DGM eq(52), A-N, BSS) vs one
+  unsupported equation (DGM eq(51) with no erratum) makes eq(52) the consensus formula.
+
+  Key finding: §8 of torsion-immortal-positivity-hecke proves divisor sum is NOT a Hecke operator,
+  closing 缝A gap(ii) negatively. This means eq(52) cannot be derived from pure modular form theory
+  and must remain a physical premise (albeit well-supported).
+
+  The bottleneck for holography.torsion-immortal-positivity is NOT resolvable to full mathematical
+  rigor - eq(52) itself is the irreducible physical input. Recommend creating graph nodes that
+  honestly separate premise from consequence:
+  - holography.dgm-eq52-divisor-sum-premise [physical-premise/conjecture]
+  - holography.torsion-immortal-positivity-conditional [rigorous | depends_on: eq52-premise]
+
+  This is analogous to conditional theorems in pure mathematics ("assuming RH, ...").
