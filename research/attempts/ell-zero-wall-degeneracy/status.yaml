@@ -1,5 +1,5 @@
-state: verified
-reviewer: graph-reviewer (2026-09-20, agent ell0rev, lead 派，只读；reviewer 无 Write 工具，由 lead 代为记入)
+state: draft
+reviewer: graph-reviewer (2026-09-20, agent ell0rev 审 §1–§5；agent ell0s6rev 审 §6 + 毕业卡，二者均只读，由 lead 代为记入)
 verdict: |
   === 裁决（2026-09-20，agent ell0rev）===
 
@@ -37,6 +37,64 @@ verdict: |
 
   **(2) 原创性主张已删除。** proof.md §4.2 与本文件的「可能是首次」改为明确的
   「先行工作未核查，不作优先权主张」。[GAP-4.2] 以疑问句形式保留（那是诚实的待办，不是主张）。
+
+  === 第二轮裁决（2026-09-20 晚，agent ell0s6rev，审 §6 与已毕业的 5+5 张卡）===
+
+  **背景**：上面那份裁决只覆盖到 §5。§6 是此后由 prover 补写以回应 [GAP-3.3] 的，
+  本文件此前逐字写着「请 lead 派 graph-reviewer 审查 §6」，一直没派。
+  下游 attempt `dvv-wall-crossing-from-residue` 的 reviewer 同日明确要求
+  「先毕业本 attempt 的留数公式，再毕业下游」，本轮因此在关键路径上。
+
+  **§6 的数学：VERIFIED。** §6.1 与 §6.2 逐步重推，未发现漏洞。
+  `ell0card` 毕业时自行补写的紧性论证（带内极点排除）**也 VERIFIED**，其自报的
+  「若该步有误，(b) 的量词要重议」**可以关闭，量词不用重议**。
+  5+5 张卡总体诚实、不虚高；未发现幽灵依赖边（8 条 depends_on 逐条在 summary 里找到使用位置）。
+
+  **但 attempt 整体退回 `draft`，因为存在一个真实的覆盖缺口（F-5）**：
+    claim.md 的 Proposition A 断言 `m, n ≥ 1`，
+    而 proof.md §6.1（引理 6.1）只证了 `n ≥ m ≥ 1`。
+  按字面，`m > n` 的情形 §6 没有给出 n₂≠0 分支的排除。这不是 §5 那一轮该发现的事
+  （§6 那时还不存在），也不是 `ell0card` 的过失（它把图内卡定档定得是对的）。
+
+  **判 verified 的三项必改**（reviewer 已验证两条修法均成立）：
+  1. **F-5（实质）**：§6.1 放开到 `m,n≥1`。推荐写法：直接放开，附一句「route-a Prop 7 的
+     推导不使用 n≥m」（reviewer 用独立 sympy 脚本从 g(t) 定义重推了顶点高度闭式，
+     对一般 ℓ 恒等成立，A=−mn/n₂、B 全部对上，全程未用 n≥m；`n≥m` 只进过 route-a §5.4
+     的 (M) 式，而 Theorem 9 不走那条路）。备选写法：补 WLOG 对称性段——
+     `Ω=[[ρ,v],[v,σ]] ↦ [[σ,v],[v,ρ]]` 保 Φ₁₀，(D.19) 的 F 变为同族中 `(m₁,n₁)↦(−n₁,−m₁)`
+     的成员，判别式不变，ℓ=0 围道恰映到 (m,n) 互换后的围道。
+  2. **F-7（承重信息丢失）**：proof.md 第 261–299 行是 §3.2/§3.3 的**重复副本，且第二份更弱**——
+     第一份（:235）写 `Div(Φ₁₀) ⊇ ⋃_k 2·{v=k}`（含重数 2）与「每个都是二阶极点」（:253），
+     第二份（:283、:293）**把重数 2 丢了**。而重数 2 正是整条留数论证的承重输入
+     （k=2 才有 Res ∝ ℓ；k=1 则留数与 ℓ 无关，结论全垮）。**删第二份，保留第一份。**
+  3. **F-4（形式性）**：proof.md 第 438 行 `Λ²(t*) ≤ 1/(16mnn₂²) = 1/(4Δ)`，
+     该等号只在 |n₂|=1 时成立，应为 `≤ 1/(16mnn₂²) ≤ 1/(16mn) = 1/(4Δ)`（用 n₂²≥1）。
+     **方向安全故不影响结论**（这一步只需上界，误写把界放大了）。
+     同 attempt 的底稿 `gap33_analysis.md:48` 这一步是对的，照底稿回填即可。
+
+  **不阻塞 verified、但建议一并改**：
+  - **F-6**：claim.md:31 把 ε₀ 写在 Λ 的量词之外，即断言了一个**对 Λ 一致的** ε₀，
+    而论证给不出（ε₀ 源自 δ:=dist(K₀,Z')>0，K₀ 随 Λ 移动）。
+    **图内卡这一点是对的**——`dstar-well-defined-at-ell-zero--via-vanishing-residue` 的 gaps
+    逐字写了「ε₀ 依赖 Λ……更强的一致性未被证明，本卡不断言」。要改的是 claim.md 不是卡。
+  - **F-10（过时文字）**：claim.md:53 砖块清单仍列 v1（应 v2）；claim.md:98、:111 仍写
+    [GAP-3.3] 待闭合（proof.md §6.3 与本文件都已记 CLOSED）；claim.md:60 的 [EXT-Even]/[EXT-Div]
+    仍写「尚未登记为图节点」，而 `phi10-even-in-v` / `phi10-periodic-in-v` 现已在 main
+    且 effective rigorous——**这同时意味着上面第 3 条设的硬性毕业前置条件已经满足**。
+
+  **图内卡的 status 不因本轮上调**（与 attempt 的 state 解耦）：
+  这 5+5 张卡现在的档位已经是对的。§6 通过审查**不会**让任何一张升档——天花板来自
+  `sen-d19-family-is-igusa-phi10-divisor` 的 [GAP-identify]，与 §6 无关。
+  唯一能升档的是 Borcherds 路线（见下），它的前置全在本 attempt 之外，
+  故「attempt 判 verified」与「h₀≠0 升 rigorous」是两条独立的路，不要捆在一起等。
+
+  **reviewer 自报的一处失误（记录在案）**：它在 F-1 中使用 `c(0)=20`，
+  而它同时引用的图卡 `igusa-cusp-form-phi10-v2` 写的是 `c(0)=24`——
+  **手里的数与被引卡写的数不一致而未报**。该卡确实错了（见
+  docs/reviews/phi10-borcherds-exponent-c0-defect-2026-09-20.md），
+  但「卡逐字说 X、我算出非 X」本身就是必须报的一类，它认了这条。
+
+  `captain_confirmed` 维持 `false`，reviewer 再次明确拒绝代填。
 captain_confirmed: false
 notes: |
   **结论（2026-09-20，修正版）**：Proposition A **已证明**。围道**确实穿过**极点 v=1/2
