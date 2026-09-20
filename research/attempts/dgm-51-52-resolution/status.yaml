@@ -25,7 +25,20 @@ verdict: |
 
 captain_confirmed: false
 notes: |
-  2026-09-20 (theorem-prover, initial resolution):
+  ⚠【以下 2026-09-20 初版记录的三处说法已被同日的更正推翻，保留原文仅作过程留痕。
+     当前结论以上面的 `verdict` 为准，不要引用本段。—— lead】
+  被推翻的三处：
+  (1)「Three-way corroboration」——A-N 与 BSS 两条并非本 attempt 的独立核实，
+      而是本项目早先 researcher 写入 sources.bib 的抽取记录，其结论已逐字写在
+      bib note 里。把它读回来报告成独立佐证，是假佐证回路。
+  (2)「eq(52) itself is the irreducible physical input」——错。瓶颈树的地板是
+      holography.dvv-dyon-index-generating-function（DVV 猜想），在 eq(52) 下面一层。
+  (3)「Recommend creating graph nodes ... -conditional」——图里已经是这个结构了
+      （目标卡 own=rigorous / effective=physical-argument，由 propagate.py 自动给出）。
+      新建卡会是零 effective 移动的工作，按原则 8 不该做。
+
+  ---
+  2026-09-20 (theorem-prover, initial resolution) 原文：
   Literature adjudication complete. Three-way corroboration (DGM eq(52), A-N, BSS) vs one
   unsupported equation (DGM eq(51) with no erratum) makes eq(52) the consensus formula.
 
