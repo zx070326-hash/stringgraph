@@ -17,6 +17,15 @@ research/attempts/<slug>/
   scratch.lean  # 可选：Lean 草稿实验，不受 formal/ 的 sorry 约束
 ```
 
+## sandbox/ 的真实用法（不是偷懒）
+
+想开 attempt 前先在 `sandbox/` 乱算，**推荐做法**，不是偷懒。写得进去的：
+- 一个 .md 文件，想到哪写到哪；
+- 能跑就跑的代码/Lean 片段（不要求编译通过）；
+- 「此路不通，因为 X」一句话，然后就可以扔那儿。
+
+毕业标准：**有一个能立成图节点的命题**。在那之前全是草稿，零规则、零校验、零生命周期。
+
 ## 生命周期
 
 1. **draft**：`theorem-prover` agent 起草/推进，claim.md + proof.md 逐步填充。

@@ -38,6 +38,11 @@
 - **草稿可以是错的、脏的、半途而废的。** `research/sandbox/` 无任何规则：不校验、不需要 `claim.md`、不需要 `status.yaml`、不需要 reviewer、不进生命周期。乱写。
 - **失败的尝试不欠解释。** 放弃一条路只需一行「此路不通，因为 X」。不需要 post-mortem，不需要写进 ROADMAP。
 
+**探索阶段的具体豁免（这些是放宽，不是建议违反）**：
+- **立卡前不要求查重。** `uv run stringgraph search` 的到期点是**要进 graph/ 或要对外**的时候，不是想到一个命题的时候。先算，立卡时再查。
+- **`research/sandbox/` 真正零规则。** 想开 attempt 前在这儿乱算是推荐做法：一个 .md 想到哪写到哪、能跑就跑的代码片段、"此路不通因为 X"一句话——都行。不需要 claim.md、status.yaml、reviewer、不进生命周期。毕业标准：有一个能立成图节点的命题。
+- **来源/约定/uses 可以晚补，validate 只 warn。** 见下面 validate 调整的四条。到期点统一是：**进 `graph/milestones/` 或被里程碑依赖**。
+
 ## 不可违背的原则
 
 （在 `graph/` / `formal/` / 对外的范围内生效；`research/sandbox/` 一律不适用）

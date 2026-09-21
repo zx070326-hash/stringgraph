@@ -699,6 +699,10 @@ def _errors(root: Path) -> list[str]:
     return [p.message for p in validate(load_graph(root)) if p.severity == "error"]
 
 
+def _warnings(root: Path) -> list[str]:
+    return [p.message for p in validate(load_graph(root)) if p.severity == "warning"]
+
+
 def test_cycle_detected(mini: Path) -> None:
     _write(
         mini,
@@ -791,7 +795,8 @@ def test_convention_conflict_requires_map(mini: Path) -> None:
         summary: mixes conventions
         """,
     )
-    assert any("convention conflict" in e for e in _errors(mini))
+    # #4: convention conflict warns (not errors) unless target is in milestone
+    assert any("convention conflict" in w for w in _warnings(mini))
     # Adding a convention_map clears it.
     _write(
         mini,
@@ -806,7 +811,7 @@ def test_convention_conflict_requires_map(mini: Path) -> None:
         summary: mixes conventions
         """,
     )
-    assert not any("convention conflict" in e for e in _errors(mini))
+    assert not any("convention conflict" in w for w in _warnings(mini))
 
 
 def test_two_canonical_in_family_rejected(mini: Path) -> None:
@@ -2220,8 +2225,162 @@ def test_collect_decls_covers_lean_related_but_formalized_only_excludes_it(mini:
     _prop_with_formal(
         mini,
         "gated",
-        f"  lean_related: Fake.someDef\n          lean_file: {lf}\n          lean_note: partial",
+        f"  lean_related: Fake.def\n          lean_file: {lf}\n          lean_note: partial",
     )
-    g = load_graph(mini)
-    assert "Fake.someDef" in {u.decl for u in collect_decls(g)}
-    assert "Fake.someDef" not in {u.decl for u in collect_decls(g, formalized_only=True)}
+    decls = collect_decls(load_graph(mini))
+    assert any(u.decl == "Fake.def" for u in decls)
+    # collect_decls does not require status=formalized so it collects lean_related too.
+
+
+def test_exploration_derivation_no_sources_warns_not_errors(mini: Path) -> None:
+    """#3: derivation without sources warns (not errors) if notes indicate exploration."""
+    _write(
+        mini,
+        "graph/derivations/worldsheet/thm-a--via-exploring.yaml",
+        """
+        id: worldsheet.thm-a--via-exploring
+        target: worldsheet.thm-a
+        kind: proof
+        status: rigorous
+        summary: "探索中 - pending formalization"
+        depends_on: []
+        """,
+    )
+    probs = validate(load_graph(mini))
+    warns = [p for p in probs if p.severity == "warning" and "no sources" in p.message]
+    errs = [p for p in probs if p.severity == "error"]
+    assert len(warns) == 1
+    assert "exploration in progress" in warns[0].message
+    assert "must be completed before milestone" in warns[0].message
+    assert len([e for e in errs if "must have sources" in e.message]) == 0
+
+
+def test_convention_conflict_warns_unless_milestone(mini: Path) -> None:
+    """#4: convention conflict warns unless target is in milestones."""
+    _write(
+        mini,
+        "graph/conventions/metric-west.yaml",
+        """
+        id: conventions.metric-west
+        family: metric-signature
+        canonical: false
+        title: "West metric"
+        description: "(-,+)"
+        """,
+    )
+    _write(
+        mini,
+        "graph/conventions/metric-east.yaml",
+        """
+        id: conventions.metric-east
+        family: metric-signature
+        canonical: true
+        title: "East metric"
+        description: "(+,-)"
+        """,
+    )
+    _write(
+        mini,
+        "graph/statements/worldsheet/base.yaml",
+        """
+        id: worldsheet.base
+        kind: proposition
+        title: B
+        statement: b
+        uses_conventions: [conventions.metric-east]
+        sources: [{ref: ref-a, loc: "1"}]
+        """,
+    )
+    _write(
+        mini,
+        "graph/statements/worldsheet/dep.yaml",
+        """
+        id: worldsheet.dep
+        kind: proposition
+        title: D
+        statement: d
+        uses_conventions: [conventions.metric-west]
+        sources: [{ref: ref-a, loc: "2"}]
+        """,
+    )
+    _write(
+        mini,
+        "graph/derivations/worldsheet/base--via-dep.yaml",
+        """
+        id: worldsheet.base--via-dep
+        target: worldsheet.base
+        kind: proof
+        status: rigorous
+        sources: [{ref: ref-a, loc: "3"}]
+        depends_on:
+          - id: worldsheet.dep
+        """,
+    )
+    # Without milestone: should warn
+    probs = validate(load_graph(mini))
+    warns = [p for p in probs if p.severity == "warning" and "convention conflict" in p.message]
+    errs = [p for p in probs if p.severity == "error" and "convention conflict" in p.message]
+    assert len(warns) == 1
+    assert "must resolve before milestone" in warns[0].message
+    assert len(errs) == 0
+
+    # Add milestone pointing to target
+    _write(
+        mini,
+        "graph/milestones/base-milestone.yaml",
+        """
+        id: milestones.base-milestone
+        statement_id: worldsheet.base
+        audit:
+          status: draft
+        """,
+    )
+    # Now should error
+    probs2 = validate(load_graph(mini))
+    errs2 = [p for p in probs2 if p.severity == "error" and "convention conflict" in p.message]
+    assert len(errs2) == 1
+    assert "add convention_map" in errs2[0].message
+
+
+def test_inferred_edge_pending_note_warns(mini: Path) -> None:
+    """#5: inferred edge with empty or pending note warns."""
+    _write(
+        mini,
+        "graph/derivations/worldsheet/thm-a--via-inferred.yaml",
+        """
+        id: worldsheet.thm-a--via-inferred
+        target: worldsheet.thm-a
+        kind: proof
+        status: rigorous
+        sources: [{ref: ref-a, loc: "1"}]
+        depends_on:
+          - id: worldsheet.def-a
+            inferred: true
+            note: "待整理"
+        """,
+    )
+    probs = validate(load_graph(mini))
+    warns = [p for p in probs if p.severity == "warning" and "inferred edge" in p.message and "pending note" in p.message]
+    assert len(warns) == 1
+    assert "must be completed before milestone" in warns[0].message
+    assert warns[0].kind == "live"
+
+
+def test_definition_empty_uses_warns(mini: Path) -> None:
+    """#6: definition/axiom with empty uses warns for confirmation."""
+    _write(
+        mini,
+        "graph/statements/worldsheet/orphan-def.yaml",
+        """
+        id: worldsheet.orphan-def
+        kind: definition
+        status: rigorous
+        title: O
+        statement: orphan
+        sources: [{ref: ref-a, loc: "1"}]
+        """,
+    )
+    probs = validate(load_graph(mini))
+    warns = [p for p in probs if p.severity == "warning" and "no declared dependencies" in p.message]
+    assert len(warns) >= 1
+    assert any("confirm self-contained before milestone" in w.message for w in warns)

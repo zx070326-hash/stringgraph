@@ -113,6 +113,9 @@ def validate(g: Graph) -> list[Problem]:
         for u in st.uses:
             if u not in g.statements and u not in g.conventions:
                 err(where, f"uses: unknown id '{u}'")
+        # #6: definition/axiom with empty uses should warn for confirmation
+        if st.kind in ("definition", "axiom") and not st.uses:
+            warn(where, f"{st.kind} with no declared dependencies; confirm self-contained before milestone inclusion")
         for c in st.uses_conventions:
             if c not in g.conventions:
                 err(where, f"uses_conventions: unknown convention '{c}'")
@@ -203,6 +206,15 @@ def validate(g: Graph) -> list[Problem]:
         if d.status == "formalized":
             if not (tgt and tgt.formal and tgt.formal.get("lean_decl")):
                 err(where, "status formalized requires target.formal.lean_decl")
+
+        # #3: sources may be deferred during exploration; warn if notes indicate work in progress
+        if not d.sources and not any(dep.inferred for dep in d.depends_on):
+            summary_lower = (d.summary or "").lower()
+            if "探索中" in summary_lower or "exploration in progress" in summary_lower:
+                warn(where, "derivation has no sources (exploration in progress); must be completed before milestone inclusion or external publication")
+            else:
+                err(where, "derivation must have sources (or mark edges as inferred: true with note)")
+
         for s in d.sources:
             if s.ref not in g.bib_keys:
                 err(where, f"source ref '{s.ref}' not in literature/sources.bib")
@@ -229,11 +241,21 @@ def validate(g: Graph) -> list[Problem]:
                 else:
                     warn(where, f"depends on superseded statement '{dep.id}' (use {node.superseded_by})",
                          "history" if tgt_is_history else "live")
-            # convention conflict: same family, different convention, no map
+            # #5: inferred edges may have pending notes during exploration
+            if dep.inferred:
+                note_lower = (dep.note or "").lower()
+                if not dep.note or "待整理" in note_lower or "pending" in note_lower:
+                    warn(where, f"inferred edge to '{dep.id}' has pending note; must be completed before milestone inclusion or external publication", kind="live")
+            # #4: convention conflict warns unless target is in milestones
             for c in node.uses_conventions:
                 fam = conv_family(c)
                 if fam in tgt_fams and tgt_fams[fam] != c and not dep.convention_map:
-                    err(where, f"convention conflict on family '{fam}': target uses {tgt_fams[fam]}, dep {dep.id} uses {c}; add convention_map")
+                    # Check if target is in any milestone
+                    target_in_milestone = any(m.statement_id == d.target for m in g.milestones.values())
+                    if target_in_milestone:
+                        err(where, f"convention conflict on family '{fam}': target uses {tgt_fams[fam]}, dep {dep.id} uses {c}; add convention_map")
+                    else:
+                        warn(where, f"convention conflict on family '{fam}': target uses {tgt_fams[fam]}, dep {dep.id} uses {c}; must resolve before milestone inclusion")
         if not d.depends_on:
             warn(where, "derivation has no dependencies (is it really self-contained?)")
 
