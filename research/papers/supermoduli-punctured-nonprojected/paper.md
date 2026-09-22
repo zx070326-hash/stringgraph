@@ -82,7 +82,7 @@ $g$ with $n$ NS punctures and $2r$ Ramond punctures, constructed and proved to b
 Deligne–Mumford superstack in [FKP, Theorem A]. (Our subscript convention is fixed in §2.1; it
 differs from [FKP]'s own letters, which are overloaded — see the warning in §2.3.) We write
 $\omega_2(\mathfrak X)\in H^1(X,\mathcal T_X\otimes\Lambda^2\mathcal T_-^\vee\mathfrak X)$ for Green's
-primary obstruction class, whose non-vanishing obstructs projectedness [CN, Proposition 2.2].
+primary obstruction class [G], whose non-vanishing obstructs projectedness [CN, Proposition 2.2].
 
 > **Theorem M.** Let $h,a,n,r$ be integers with
 > $$\textbf{(P1)}\quad h\ge 2, \qquad\qquad \textbf{(P2)}\quad 2a-2+(n+1)+2r>0 ,$$
@@ -227,7 +227,8 @@ one-point obstruction family. §5 constructs the test morphism and computes the 
 the argument. §6 proves Theorem M. §7 proves Proposition N and its two corollaries. §8 derives the
 parity refinement, Corollaries A and B, and the threshold in closed form, and records the machine
 verification of the threshold arithmetic. §9 collects four consistency checks, one of which is a
-deliberate attempt to make the method contradict a known theorem. §10 lists the open ends.
+deliberate attempt to make the method contradict a known theorem. §10 lists the open ends, and §11
+concludes.
 
 ---
 
@@ -448,9 +449,10 @@ even bases.
 On the other hand [FKP, §2.6] states verbatim that *"if we only consider even bases, the functor of
 (stable) supercurves with punctures coincides with the functor of stable curves with punctures
 equipped with generalized spin structures"*, and that the latter functor is represented by
-$\overline S_{g,n_{\rm NS},n_{\rm R}}$, which *"was studied in [Jarvis] … In particular, it is shown
-to be a smooth proper Deligne–Mumford stack."* Two stacks representing the same functor on purely
-even bases are canonically isomorphic. $\square$
+$\overline S_{g,n_{\rm NS},n_{\rm R}}$, which *"was studied in [22], [23], as a particular case of the
+stack of stable $r$-spin curves. In particular, it [is] shown to be a smooth proper Deligne–Mumford
+stack."* (In [FKP]'s numbering, [22] and [23] are Jarvis's papers on moduli of higher spin curves.)
+Two stacks representing the same functor on purely even bases are canonically isomorphic. $\square$
 
 *(For $m=n=0$ this is asserted, without proof, in [CN, §3.1]; Lemma 5.1 is the punctured version with
 the argument written out.)*
@@ -993,4 +995,216 @@ comparisons with the literature thresholds quoted in §1.4, including that $(g,n
 
 ---
 
-<!-- SECTION-MARKER -->
+## 9. Consistency checks
+
+The checks in §9.1 and §9.2 were designed to *break* the argument: each has a known answer that the
+method must reproduce, and §9.2 in particular would expose an error by producing a contradiction with
+a published theorem. Both pass.
+
+### 9.1 Degeneration to [CN]: $n=r=0$
+
+When $n=r=0$, (P2) forces $a\ge1$; taking $a=1$, the tail is a one-NS-pointed elliptic spin curve
+$(E,M,q)$ and
+$$\mathcal B=\mathfrak S^+_{h;1,0}\times\mathfrak S_{1;1,0},$$
+which is literally [CN]'s $\mathcal B^{\varepsilon}$. Theorem 6.4 degenerates verbatim into [CN,
+Thm. 1.1(3)]: $g\ge3$, both parities. The construction therefore **reproduces [CN] on [CN]'s own
+range**.
+
+### 9.2 The method structurally cannot reach $\overline{\mathfrak M}{}^{-}_2$
+
+[CN, Thm. 1.1(1)] proves that $\overline{\mathfrak M}{}^{-}_2=\overline{\mathfrak S}{}^-_{2;0,0}$ is
+**split**, hence has $\omega_2=0$. If our construction could reach that object, we would contradict a
+published theorem, and the error would be ours. Check $(g,n,r)=(2,0,0)$:
+
+- $a=1\Rightarrow h=1$, violating (P1);
+- $a=0\Rightarrow n+2r=0<2$, violating (P2).
+
+Both routes are blocked. Going further: even when punctures are allowed ($g=2$, $n\ge2$), $a$ must
+be $0$, and then the tail's spin structure is forced to be $\mathcal O_{\mathbb P^1}(-1)$, which is
+**even**; so $\varepsilon=\mathrm{par}(L)+\mathrm{par}(N)=+$. **At $g=2$ the method can reach only the
+even component, and structurally cannot reach the odd one.** This is fully compatible with [CN,
+Thm. 1.1(1)] and is strong evidence that no hidden error is inflating our range.
+
+A heuristic for *why* this is the right behaviour, which we state as such and do not claim to have
+proved: [CN]'s splitting proof for $\overline{\mathfrak M}{}^{-}_2$ relies on features special to
+unpunctured genus $2$ (every genus-$2$ curve is hyperelliptic and carries a distinguished odd theta
+characteristic), none of which survives the addition of $n\ge2$ marked points.
+
+### 9.3 No conflict with Donagi–Ott or Wang
+
+Corollary 8.4 gives $g\ge2$ where [DO] requires $g\ge5r+1$ and [W] requires $g\ge n+5r+3$. The gap is
+large and must be explained rather than advertised. **The assertions are about different objects.**
+[DO] and [W] assert non-projectedness of the **uncompactified** $\mathfrak S_{g;n,2r}$; we assert
+non-projectedness of the **compactified** $\overline{\mathfrak S}_{g;n,2r}$, and our non-zero class is
+detected on a boundary test curve $i(C)\subset\Delta_{\rm NS}$. **Non-projectedness of the
+compactification does not imply non-projectedness of the smooth locus.** Exactly the same relation
+holds between [CN]'s $g\ge3$ and [DW]'s $g\ge5$: [CN] can do better precisely because it works on the
+boundary. There is no contradiction, and no claim of improvement on [DO] or [W] as statements about
+$\mathfrak S_{g;n,2r}$.
+
+### 9.4 The forgetful-morphism objection, answered
+
+**Objection.** [CN] already proves $\overline{\mathfrak S}{}^\varepsilon_{g;0,0}$ non-projected for
+$g\ge3$. Take the puncture-forgetting morphism
+$\pi\colon\overline{\mathfrak S}_{g;n,0}\to\overline{\mathfrak S}_{g;0,0}$; Lemma 4.2 gives
+$j_\pi(\omega_2(\overline{\mathfrak S}_{g;n,0}))=\iota_\pi(\omega_2(\overline{\mathfrak S}_{g;0,0}))$,
+and if the right-hand side is non-zero, Corollary A follows immediately. Is Corollary A free?
+
+**Answer: no — the route has two gaps we cannot close.**
+
+1. **The forgetful morphism on compactified supermoduli stacks has no support in the literature.** We
+   searched [FKP] and [CN] for "forget": in [FKP] both occurrences are prose ("forget about the
+   punctures") inside local computations and construct no morphism; in [CN] all three occurrences
+   refer to forgetting the **spin structure** ($\overline S_g\to\overline M_g$), not punctures. The
+   compactified case is genuinely non-trivial: when a marking collides with a node one must stabilise
+   by inserting a rational bridge, and how a generalized spin structure is to be specified on that
+   bridge in the supergeometric setting is, as far as we know, not treated anywhere.
+2. **Even granting the morphism, non-vanishing of $\iota_\pi$ is the problem itself.** The map
+   $\iota_\pi$ is "pull back by $\pi_0^*$", then "precompose with $\Lambda^2 d\pi_-$". The first half
+   is injective ($\pi_0$ proper with connected fibres and $\pi_{0*}\mathcal O=\mathcal O$, so the
+   Leray edge map is injective). The second half is induced by the sheaf **injection**
+   $$\mathrm{Hom}(\pi^*\Lambda^2\mathcal T_-,\pi^*\mathcal T_+)\hookrightarrow
+   \mathrm{Hom}(\Lambda^2\mathcal T_-,\pi^*\mathcal T_+),$$
+   and **an injection of sheaves does not imply injectivity on $H^1$** — that would require surjectivity
+   on $H^0$ of the cokernel, a global statement about the whole moduli stack which we can neither
+   prove nor disprove. (For completeness: $d\pi_-$ on the odd tangent space of the Donagi–Witten
+   family is $H^1(C,L^{-1}(-\sum p_i))\to H^1(C,L^{-1})$, which is surjective with $n$-dimensional
+   kernel, the cokernel being a skyscraper with vanishing $H^1$; so $\Lambda^2 d\pi_-$ is indeed
+   surjective and the composite is a sheaf injection. The obstruction is purely at the level of
+   passing to $H^1$.)
+
+**Conclusion.** The trivialisation route does not currently go through. Our construction is
+unconditional and, in addition, locates the obstruction (Remark 6.5). But we state the value risk
+plainly: **if someone closes both gaps, Corollary A becomes a corollary of [CN]** and its novelty
+drops. **Corollary B is untouched by this**, because forgetting a Ramond puncture is not a morphism at
+all — Ramond punctures are the branch locus of the superconformal structure, not marked points, a
+point emphasised verbatim in [DO] ("Ramond punctures are not marked points!"). For this reason
+**Corollary B is the most robust and least replaceable output of this paper**, and it is where we
+would ask a reader to place the paper's weight.
+
+---
+
+## 10. Honest boundaries and open problems
+
+### 10.1 [GAP-FKP-RAMOND]: an omission in an external proof
+
+The **proof text** of [FKP, Lemma 7.9, p. 48] checks the generalized spin structures by writing, in
+the source's own notation, *"Note that $L$ and $L'$ are generalized spin-structures, i.e., we have an
+isomorphism $L\xrightarrow{\ \sim\ }\mathrm{Hom}(L,\omega_C)$…"* — i.e. **without the Ramond twist
+$\omega_C(R)$** — although the *statement* (7.8) permits $n_1,n_2>0$ Ramond punctures. We judge this
+a harmless omission: the gluing is a local operation in a neighbourhood of the NS node, which may be
+taken disjoint from the Ramond divisor, and replacing $\omega_C$ by $\omega_C(R)$ is a verbatim
+substitution there. **We have not independently rewritten that local computation, and we do not claim
+to have done so.** The affected statement is Corollary 8.4 ($r\ge1$).
+
+It should be recorded that the footprint of this gap is wider than the single lemma: [FKP, Lemma 8.7]
+and [FKP, Cor. 8.8] are also stated for NS punctures only, and the proof of [FKP, Lemma 9.1(i)] cites
+Cor. 8.8 ("we use the canonical trivializations … see Corollary 8.8"). So the entire derivation chain
+leading to (9.6) runs on NS-only lemmas. This is **consistent with the design of this paper** — we
+glue only at NS nodes, and all Ramond complexity is quarantined on the constant factor — and it is
+**not a gap of this paper**. But anyone extending the method to Ramond-node gluing must complete that
+whole chain, not merely Lemma 7.9.
+
+### 10.2 The shortcut we refuse
+
+[FKP, §9.3] formulates the Ramond-node analogue of the normal-line computation as a **conjecture**
+(verbatim: *"We conjecture that the following diagram is commutative (up to a sign)"*), with no
+proof. Gluing at Ramond nodes could give a shorter derivation and possibly a lower threshold, but the
+resulting theorem would be conditional on an unproved conjecture. We therefore glue only at NS nodes
+throughout. If that conjecture is later proved, new and possibly better constructions become
+available.
+
+### 10.3 [GAP-COMP]: no component refinement when $r>0$
+
+For $r>0$ the generalized spin structure satisfies $L^{\otimes2}\cong\omega(R)$ and Mumford's parity
+invariance no longer applies; we do not know whether $\overline S_{g;n,2r}$ is connected, nor which
+discrete invariants label its components. Theorem 6.4 therefore asserts only that the **whole stack**
+$\overline{\mathfrak S}_{g;n,2r}$ is non-projected — which is logically complete, since
+$\omega_2\neq0$ suffices — and identifies no component. Refining to the component level requires a
+classification of the connected components of $\overline S_{g;n,2r}$.
+
+### 10.4 [GAP-ALT]: a value risk, not a mathematical gap
+
+As explained in §9.4: if the compactified puncture-forgetting morphism is constructed and
+$\iota_\pi\neq0$ is proved, Corollary A degenerates into a corollary of [CN]. Corollary B is
+unaffected. This is a risk to the paper's novelty, not to its correctness.
+
+### 10.5 Standard facts used without reproof
+
+- **[GAP-STD]** The identifications $\mathcal T_+\mathfrak X|_X\cong\mathcal T_X$ and
+  $\mathcal T\mathfrak X/\mathcal J\mathcal T\mathfrak X=\mathcal T_+\oplus\mathcal T_-$ are standard
+  supergeometry (Manin; [DW, §2]; [CN, §2]) and are used without reproof.
+- **[GAP-DW]** The construction of the Donagi–Witten one-point family and the identity
+  $\omega_2(X_\eta)=\eta$ [DW, Prop. 3.4] are used as quoted verbatim in [CN, §5]; we did not
+  independently re-derive them.
+
+### 10.6 Not addressed
+
+- Nothing is asserted about the **uncompactified** $\mathfrak S_{g;n,2r}$.
+- Nothing is asserted in the **positive** direction (splitness or projectedness), in contrast with
+  [CN, Thm. 1.1(1)].
+- $(g,n,r)=(2,1,0)$ and the **odd**-parity punctured components at $g=2$ are completely open here;
+  by §9.2 the method cannot reach them, and for the odd component at $g=2$ that is structurally
+  required rather than accidental.
+- Gluing at Ramond nodes is deliberately avoided (§10.2).
+
+---
+
+## 11. Conclusion
+
+Reassembling the Corrêa–Noja elliptic-tail argument on the general punctured separating NS gluing
+morphism of Felder–Kazhdan–Polishchuk, with all spectator punctures mounted on a **constant** tail,
+shows that the compactified punctured supermoduli stack $\overline{\mathfrak S}_{g;n,2r}$ is
+non-projected for $g\ge3$ (any $n$, any $r$) and for $g=2$ whenever $n+2r\ge2$; and, for $r=0$, that
+both parity components are non-projected for $g\ge3$ and every $n\ge0$. The Donagi–Witten restriction
+$n\le g-1$ disappears entirely, and the Ramond thresholds of Donagi–Ott and Wang are replaced by
+$g\ge2$ in the compactified category, without using either of those results.
+
+The complementary negative result is, in our view, the more structural of the two: mounting the
+spectator punctures on the moving component degenerates the test base to an affine curve, Serre
+vanishing annihilates the value group of the obstruction, and the route returns zero for every one of
+the $2h-2+n$ available odd tangent vectors — more than in the unpunctured case, and all of them
+invisible. Separating gluing with a constant tail is therefore forced, not chosen.
+
+All external inputs are rigorous (§3); none is a conjecture or a physics-level argument. The
+deliberately refused shortcut — Ramond-node gluing, which rests on an explicit conjecture in [FKP,
+§9.3] — is recorded in §10.2 rather than taken.
+
+---
+
+## References
+
+- **[CN]** M. Corrêa, S. Noja, *Compactified Supermoduli Space is Almost Never Projected*,
+  arXiv:2606.06733 [math.AG] (2026).
+- **[DN]** R. Donagi, S. Noja, *Genus 4 Supermoduli Space Is Not Projected*, arXiv:2608.24996
+  [math.AG] (2026).
+- **[DO]** R. Donagi, N. Ott, *Supermoduli Space with Ramond punctures is not projected*,
+  arXiv:2308.07957 [math.AG] (2023).
+- **[DW]** R. Donagi, E. Witten, *Supermoduli Space Is Not Projected*, arXiv:1304.7798 [hep-th]
+  (2013); in: String-Math 2012, Proc. Sympos. Pure Math. **90**, Amer. Math. Soc. (2015), 19–71.
+- **[FKP]** G. Felder, D. Kazhdan, A. Polishchuk, *The Moduli Space of Stable Supercurves and Its
+  Canonical Line Bundle*, Amer. J. Math. **145** (2023), no. 6, 1777–1886; DOI
+  `10.1353/ajm.2023.a913296`; arXiv:2006.13271 [math.AG].
+- **[FKP2]** G. Felder, D. Kazhdan, A. Polishchuk, *Superperiods and Superstring Measure Near the
+  Boundary of the Moduli Space of Supercurves*, arXiv:2408.11136 [math.AG] (2024). *(Source of the
+  first proof that the compactified genus-two even component is non-projected, recalled as [CN,
+  Thm. 1.1(2)]; not used in this paper.)*
+- **[G]** P. Green, *On holomorphic graded manifolds*, Proc. Amer. Math. Soc. **85** (1982), no. 4,
+  587–590.
+- **[W]** T. Wang, *On the Nonprojectedness of Supermoduli with Neveu-Schwarz and Ramond Punctures*,
+  arXiv:2512.15727 [math.AG] (2025). *Not used in any proof of this paper; the arXiv comment field
+  describes it as a preliminary draft.*
+- Mumford, D., *Theta characteristics of an algebraic curve*, Ann. Sci. École Norm. Sup. (4) **4**
+  (1971), 181–192.
+- Cornalba, M., *Moduli of curves and theta-characteristics*, in: Lectures on Riemann Surfaces
+  (Trieste, 1987), World Scientific (1989), 560–589.
+- Jarvis, T. J., *Geometry of the moduli of higher spin curves*, Internat. J. Math. **11** (2000),
+  637–663. *(Cited via [FKP, §2.6] — where the relevant references are numbered [22], [23] — for
+  smoothness and properness of the stack of stable spin curves with punctures. ⚠ [FKP] cites two
+  papers of Jarvis; only one is listed here, and the pair must be completed before submission.)*
+- Serre, J.-P., *Faisceaux algébriques cohérents*, Ann. of Math. **61** (1955), 197–278. *(Vanishing
+  of higher coherent cohomology on affine schemes; used only in §7.)*
+
+---
+
+*Manuscript prepared: 2026-09-22. Draft — not submitted, not circulated.*
