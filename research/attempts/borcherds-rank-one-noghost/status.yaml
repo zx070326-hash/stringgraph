@@ -1,0 +1,49 @@
+state: draft
+reviewer: null
+verdict: null
+captain_confirmed: false
+notes: |
+  【本 attempt 是什么】不是一条原创命题的证明尝试，是一次 **scoping**：判定 Borcherds 1992
+  Thm 5.1（无鬼定理）能否推广到本项目动量塔所在的设定（秩 1 退化格 ℤk + 连续横动量），
+  由 lead 派工（任务书要求三问 Q1/Q2/Q3 + 三档裁定 + §5 证明正文逐字抽取）。
+
+  【产出】
+  - `scoping.md` —— Q1/Q2/Q3 逐条回答（每条带证据等级）+ 裁定 + 待证命题清单。
+  - `claim.md` —— 裁定 (i) 那一半要求写出的「正确的假设该怎么写」，写成一条精确到量词的
+    候选定理（Thm 5.1′）。**它是本 attempt 未来若继续要证的东西，现在没有证明。**
+  - `literature/extractions/borcherds-1992.md` 追加节 E4–E8 —— §5 证明正文 + §3 形式定义的
+    逐字抽取（本轮最有复用价值的产出；原有 89 行一字未动）。
+  - `scripts/extract_pdf.py` —— PyMuPDF 抽取 + 200 dpi 渲染脚本（项目纪律禁用 pdftotext）。
+
+  【本轮的裁定（详见 scoping.md 第 5 节）】
+  - 秩 1 退化格这一项：**(i) 只需重述假设**。§5 全部论证在单一度数片内部进行，秩 2 只做两件事
+    （供给 (r,w)≠0 的 w；给中心荷贡献 2），两件在本项目设定里都由 𝔥 内的双曲平面 span(k_0,k_0′)
+    完成，与格的秩无关。自对偶性在 §5 不被使用。
+  - 连续横动量这一项：**(i) 只需重述假设**（把「非负整数本征值」改成「谱 ⊆ c + Z_{≥0}」）。
+  - **但整体转移是 (ii)**：§5 是 Borcherds 自称的 "quick sketch"，承重步（Lemma 5.2 首句
+    「单项式构成 H 的基」）**没有任何论证**，所以"哪条假设被用在哪"无法从 §5 读出，
+    "只需重述假设"这个判断**不能以 §5 为依据**。要真推广必须自己证那一步（或取得 GT 1972 /
+    Frenkel 1985 全文）。
+
+  【给 lead 的三条跨任务发现（本 attempt 不写 graph/，请 lead 自行处置）】
+  1. **`worldsheet.ddf-spanning-hypothesis` 按字面很可能为假**：a₀ ≠ 1 时在 (rung −1, 能级 1)
+     一片上就有反例（scoping.md §5.4 给出显式反例：D ≥ 3、η=diag(−1,+1,…)、b=(1,1,0,…)、
+     a=(3/2,5/2,0,…)，满足 (N)(S)，a₀ = 2；物理片维数 D−1，DDF 片维数 D−2，零态为 0）。
+     该卡缺 `a₀ = 1`（等价 η(a,a) = 2）这条前件。
+  2. **本项目已形式化的 level-one 卡里，`a₀ = 1` 是隐藏前件**：
+     `worldsheet.ddf-spans-physical-states-level-one-modulo-null` 自称「不需要 a₀ = 1」，
+     但它的前件 (C)（Ε 在 v^⊥ 上完备，v = a − b）连同 (T)(T′)(O) 蕴含 η(v,v) = 2(a₀−1) = 0。
+     `worldsheet.transverse-frame-spans-orthogonal-complement` 的显式见证 a=(1/2,3/2,0,…)
+     算出来正是 a₀ = 1。故两张卡其实一致，只是那句「不需要 a₀ = 1」误导。
+  3. **`literature/extractions/borcherds-1992.md` 第 54 行与疑问 2 有一处事实错误**：
+     Borcherds 的 K_i **不是** DDF 算子族，它是沿 w 的 Heisenberg 模 w(i)（v = e^{−w}_{−2}e^w
+     = ±w(−1)·1，计算见 scoping.md D1），**保持格度数**；本项目的 A^ε_n **移动层指标**。
+     两者的真实关系是包含 D(Ε) ⊆ T，不是记号翻译。原 89 行按任务书未动，纠正写在追加节疑问 4/7。
+     这条直接影响 `worldsheet.momentum-tower-is-borcherds-no-ghost-instance` 的断言 (2)
+     与 `--via-borcherds-1992` 的 depends_on 注 3。
+
+  【effective 记账】本轮纯 scoping，不进图：`worldsheet.ddf-spanning-hypothesis` 的
+  effective 前后均为 `physical-argument`（瓶颈 `--via-borcherds-1992` 分支）——**零移动**。
+
+  【下一步（给 lead 的建议，不是承诺）】见 scoping.md 第 6 节的待证命题清单 P1–P5；
+  其中 P1（Lemma 5.2 首句的计数）是唯一真正困难的一条，其余四条是簿记。
