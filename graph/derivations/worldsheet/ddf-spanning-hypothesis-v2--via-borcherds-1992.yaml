@@ -1,5 +1,5 @@
-id: worldsheet.ddf-spanning-hypothesis--via-borcherds-1992
-target: worldsheet.ddf-spanning-hypothesis
+id: worldsheet.ddf-spanning-hypothesis-v2--via-borcherds-1992
+target: worldsheet.ddf-spanning-hypothesis-v2
 kind: proof
 status: rigorous
 depends_on:
@@ -425,5 +425,26 @@ notes: |
   而非定理（目标卡 sources 第二条 ⚠ 逐字已记录），本推导不能借用它。
   ⚠ 本推导**没有**在 Lean 里做任何事，故不涉及 `lake build` / `check-axioms`；
   合并前由 lead 按项目纪律决定是否额外跑。
+
+  【2026-09-22（curator，分支 agent/curator/ddf-spanning-intercept-premise）：target 改指
+  worldsheet.ddf-spanning-hypothesis-v2；**这是一次实质修复，不是记账搬迁**】
+  旧目标卡 worldsheet.ddf-spanning-hypothesis 缺一条前件 η(v, v) = 0（v := a − b；
+  在 (N) η(b,b)=0 与 (S) η(b,a)=1 之下即截距 a₀ = 1），因而逐字为假（反例见 v2 卡 notes）。
+  **本推导从来证的就是带前件的那一版**：Borcherds §5 的 P¹ 按**定义**是
+  `P¹ = {v : L_0 v = v, L_i v = 0 (i > 0)}`（见上面 summary 的论证骨架段），
+  `L_0 v = v` 逐字就是截距 1；Thm 5.1 的右端 `V^{1−(r,r)/2}` 里的指数也正是由这个
+  本征值条件定出的。⇒ **截距前件此前隐含在 Borcherds 的 P¹ = {L_0 = 1} 里，
+  现由卡面承担。** 这条缝**已经闭合**，不是本推导新增的第 6 条缺口：
+  本推导的 gaps（五条）与 depends_on（六条）一字未改，own status 仍是 rigorous，
+  effective 仍被 worldsheet.ddf-contour-equals-mode-sum 与
+  worldsheet.momentum-tower-is-borcherds-no-ghost-instance 两枝压在 physical-argument。
+  ⚠ **本文件的 id 与文件名同时由 `…ddf-spanning-hypothesis--via-borcherds-1992` 改成
+  `…ddf-spanning-hypothesis-v2--via-borcherds-1992`**：`validate` 强制推导 id 以
+  `<target>--via-` 开头，改 target 就必须同时改 id 与文件路径。旧 id 在
+  `docs/ROADMAP.md`、`formal/BLUEPRINT-moonshine-bridge.md`、`research/attempts/**`
+  与几张图卡正文里被引用，那些散文引用现在悬空；curator 的写入范围不含
+  docs/formal/research，已在交付报告里列清单交 lead。
+  上面各段里出现的「目标卡」一律指 v2 卡；其中【2026-09-15 追加】等历史段落引用的是
+  旧卡当时的 notes，内容仍然有效（旧卡 notes 一字未删，只在开头加了换代说明）。
 author: curator
 created: "2026-09-15"
