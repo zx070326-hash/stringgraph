@@ -1095,6 +1095,19 @@ holds between [CN]'s $g\ge3$ and [DW]'s $g\ge5$: [CN] can do better precisely be
 boundary. There is no contradiction, and no claim of improvement on [DO] or [W] as statements about
 $\mathfrak S_{g;n,2r}$.
 
+The same remark settles a question a reader with a physics background will ask first: does Theorem 8.4
+obstruct any existing construction of the superstring measure? It does not, and cannot. Any open
+substack of a projected stack is projected — the retraction restricts — so non-projectedness of
+$\overline{\mathfrak S}_{g;n,2r}$ implies nothing whatsoever about $\mathfrak S_{g;n,2r}$ or about any
+coordinate patch inside it. Concretely, the most complete explicit computation in the literature,
+D'Hoker–Phong's two-loop program [DP], constructs a gauge-slice-independent chiral measure by local
+slice-based gauge fixing and then analyses degeneration only *after* integration over the odd moduli
+has reduced the object to a bosonic quantity on the genus-two period-matrix domain; no retraction of a
+compactified supermoduli stack — indeed no compactified supermoduli stack — appears anywhere in it.
+(Where [DP IV, p. 29] writes "(compactified) moduli space" the reference is to the classical
+Deligne–Mumford/Satake compactification of ordinary curve moduli, on which the relevant
+$\theta$-constants are holomorphic Siegel modular forms; it is not the supermoduli stack.)
+
 ### 9.4 The forgetful-morphism objection, answered
 
 **Objection.** [CN] already proves $\overline{\mathfrak S}{}^\varepsilon_{g;0,0}$ non-projected for
@@ -1236,8 +1249,9 @@ deliberately refused shortcut — Ramond-node gluing, which rests on an explicit
   arXiv:2308.07957 [math.AG] (2023).
 - **[DW]** R. Donagi, E. Witten, *Supermoduli Space Is Not Projected*, arXiv:1304.7798 [hep-th]
   (2013, v2 2023); in: String-Math 2012, Proc. Sympos. Pure Math. **90**, Amer. Math. Soc. (2015),
-  19–72. *(⚠ The bibliography of [CN] prints the page range as 19–71; INSPIRE gives 19–72. The
-  discrepancy is unresolved here and must be settled against the AMS volume before submission.)*
+  19–71. *(The page range is printed as 19–72 by INSPIRE; we follow the publisher's own Crossref
+  record for DOI `10.1090/pspum/090/01525`, which gives 19–71, in agreement with the bibliography of
+  [CN].)*
 - **[FKP]** G. Felder, D. Kazhdan, A. Polishchuk, *The Moduli Space of Stable Supercurves and Its
   Canonical Line Bundle*, Amer. J. Math. **145** (2023), no. 6, 1777–1886; DOI
   `10.1353/ajm.2023.a913296`; arXiv:2006.13271 [math.AG].
@@ -1251,15 +1265,22 @@ deliberately refused shortcut — Ramond-node gluing, which rests on an explicit
   arXiv:2512.15727 [math.AG] (2025). *Not used in any proof of this paper; the arXiv comment field
   describes it as a preliminary draft.*
 - Mumford, D., *Theta characteristics of an algebraic curve*, Ann. Sci. École Norm. Sup. (4) **4**
-  (1971), 181–192.
+  (1971), no. 2, 181–192.
 - Cornalba, M., *Moduli of curves and theta-characteristics*, in: Lectures on Riemann Surfaces
-  (Trieste, 1987), World Scientific (1989), 560–589.
+  (Trieste, 1987), World Sci. Publ., Teaneck, NJ (1989), 560–589.
 - Jarvis, T. J., *Geometry of the moduli of higher spin curves*, Internat. J. Math. **11** (2000),
-  637–663. *(Cited via [FKP, §2.6] — where the relevant references are numbered [22], [23] — for
-  smoothness and properness of the stack of stable spin curves with punctures. ⚠ [FKP] cites two
-  papers of Jarvis; only one is listed here, and the pair must be completed before submission.)*
-- Serre, J.-P., *Faisceaux algébriques cohérents*, Ann. of Math. **61** (1955), 197–278. *(Vanishing
-  of higher coherent cohomology on affine schemes; used only in §7.)*
+  no. 5, 637–663.
+- Jarvis, T. J., Kimura, T., Vaintrob, A., *Moduli spaces of higher spin curves and integrable
+  hierarchies*, Compositio Math. **126** (2001), no. 2, 157–212; arXiv:math/9905034. *(The previous
+  entry and this one are [FKP]'s [22] and [23] respectively, cited together in [FKP, §2.6] for
+  smoothness and properness of the stack of stable spin curves with punctures.)*
+- **[DP]** E. D'Hoker, D. H. Phong, *Two-loop superstrings* I–VI: I, Phys. Lett. B **529** (2002)
+  241–255, hep-th/0110247; II, Nucl. Phys. B **636** (2002) 3–60, hep-th/0110283; III, Nucl. Phys. B
+  **636** (2002) 61–79, hep-th/0111016; IV, Nucl. Phys. B **639** (2002) 129–181, hep-th/0111040;
+  V, Nucl. Phys. B **715** (2005) 91–119, hep-th/0501196; VI, Nucl. Phys. B **715** (2005) 3–90,
+  hep-th/0501197. *(Discussed in §9.3; not used in any proof of this paper.)*
+- Serre, J.-P., *Faisceaux algébriques cohérents*, Ann. of Math. (2) **61** (1955), no. 2, 197–278.
+  *(Vanishing of higher coherent cohomology on affine schemes; used only in §7.)*
 
 ---
 

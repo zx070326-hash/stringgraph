@@ -73,8 +73,8 @@ an elliptic curve is precisely the "边界清晰、一定做得完、做完能�
 principle 8 names.
 
 ⚠ This adjudication covers **only** I1. It is **not** a pre-submission review of `paper.md`, and it
-does not touch `captain_confirmed`. I2–I6 remain open and are production blockers listed in
-`NOTES-for-captain.md` §4.
+does not touch `captain_confirmed`. I5–I6 remain open and are production blockers listed in
+`NOTES-for-captain.md` §4. (I2–I4 were closed on 2026-09-23; see below.)
 
 **Incidental**: the source's parenthetical "$h^0(E,L^{-1})=0$" is true but irrelevant (the quantity
 needed is $h^0(E,L)$, which Serre duality converts $h^1(E,L^{-1})$ into). Dropped in the paper; no
@@ -82,7 +82,7 @@ consequence.
 
 ---
 
-## I2. The bibliography needs two Jarvis papers, not one (citation)
+## I2. The bibliography needs two Jarvis papers, not one (citation) — **RESOLVED 2026-09-23**
 
 **Severity**: low, but it is a real defect in the reference list.
 
@@ -95,14 +95,23 @@ Neither [22] nor [23] has been resolved against [FKP]'s actual bibliography by t
 `literature/` extraction record for [FKP] notes explicitly that the two entries were **not
 individually verified** ("[22]、[23]（Jarvis 的两篇文章，本条目未逐一核实完整书目）").
 
-**Handling**: the paper's reference entry now carries a ⚠ note saying the pair must be completed
-before submission; the verbatim quote retains [FKP]'s own numbers "[22], [23]" rather than
-substituting an invented key. Resolving the two entries requires reading [FKP]'s bibliography, which
-is `literature/` work and out of this round's write scope.
+**Resolution (2026-09-23, researcher round `lit-blockers`)**: [FKP]'s own References page was read
+at **L1** (arXiv:2006.13271v3 PDF p. 73, page image). [22] is the Jarvis paper already listed, with
+the issue number "no. 5" that our entry was missing; [23] is a different, three-author paper —
+Jarvis, Kimura, Vaintrob, *Moduli spaces of higher spin curves and integrable hierarchies*,
+Compositio Math. **126** (2001), no. 2, 157–212, arXiv:math/9905034. Both are now registered in
+`literature/sources.bib` (`jarvis-2000`, `jarvis-kimura-vaintrob-2001`) and both appear in the
+paper's reference list; the ⚠ note is removed and the verbatim quote still carries [FKP]'s own
+numbers.
+
+**Noted, no change made**: [FKP]'s §5.4 — the actual proof of its Theorem A — cites only [22].
+This does not affect the paper, which cites §2.6 for the *spin-curve* stack (exactly what §2.6
+asserts, citing both) and cites [FKP, Thm. A] separately for $\overline{\mathfrak S}$ itself. Which
+of its own references [FKP] leans on inside its own proof is not a citation this paper makes.
 
 ---
 
-## I3. Five references are not registered in `literature/` (citation hygiene)
+## I3. Five references are not registered in `literature/` (citation hygiene) — **RESOLVED 2026-09-23**
 
 Mumford (1971), Cornalba (1989), Jarvis (2000), Serre (1955) and Green (1982) are cited in the paper
 but have **no entry in `literature/sources.bib`** and therefore have never passed this project's own
@@ -113,9 +122,24 @@ By contrast [CN], [DN], [DO], [DW], [FKP], [FKP2] and [W] **are** registered, an
 arXiv numbers and (for [FKP]) journal data were cross-checked against `literature/sources.bib` and
 the extraction records while writing this draft.
 
+**Resolution (2026-09-23, researcher round `lit-blockers`)**: all five are now registered. Verification
+level, stated honestly per entry:
+
+| ref | level reached | corrections fed back into `paper.md` |
+|---|---|---|
+| Jarvis (2000) | **L1** ([FKP] References page image) | added "no. 5" |
+| Cornalba (1989) | **L1** (same page, [FKP]'s [11]) | publisher address → "World Sci. Publ., Teaneck, NJ" |
+| Green (1982) | two independent paths (WebSearch + [DW]'s own Crossref reference array) | none needed |
+| Mumford (1971) | multi-source cross-check (Numdam journal page + DOI `10.24033/asens.1209`) | added "no. 2" |
+| Serre (1955) | multi-source cross-check | added "(2)" series and "no. 2" |
+
+**None of the five had its full text retrieved**, and three of them did not reach L1. That is
+adequate for background citations that carry no load in any proof — which is what all five are — and
+it is recorded here rather than quietly upgraded.
+
 ---
 
-## I4. Two sources disagree on the page range of [DW] (citation)
+## I4. Two sources disagree on the page range of [DW] (citation) — **RESOLVED 2026-09-23**
 
 `literature/sources.bib` (entry `donagi-witten-2013`, sourced from INSPIRE recid 1231519 and a
 verbatim cross-reference) gives **Proc. Sympos. Pure Math. 90 (2015) 19–72**. The bibliography of
@@ -123,8 +147,12 @@ verbatim cross-reference) gives **Proc. Sympos. Pure Math. 90 (2015) 19–72**. 
 **19–71**. Neither has been checked against the AMS volume itself — the project's own bib note says
 so explicitly ("均未与 AMS 直证").
 
-The paper's reference entry currently gives 19–72 with a ⚠ note recording the conflict. One page
-number, zero mathematical consequence, but it must be settled before submission.
+**Resolution (2026-09-23, researcher round `lit-blockers`)**: settled in favour of **19–71**. The
+publisher's own machine-readable record — AMS's Crossref entry for DOI `10.1090/pspum/090/01525` —
+gives 19–71, agreeing with [CN]'s independently L1-verified bibliography. INSPIRE is the sole
+dissenting source. The AMS endmatter PDF itself remains unread (Cloudflare-blocked), so this is a
+publisher-record decision rather than a page-image verification, and the reference entry in
+`paper.md` says so. One page number, zero mathematical consequence.
 
 ---
 

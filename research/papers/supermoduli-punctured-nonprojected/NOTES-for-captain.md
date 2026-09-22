@@ -173,16 +173,21 @@ These are real blockers for a *submission*, not for the draft:
 2. **Authors and affiliation** — the title block currently reads
    `[To be determined by project lead]`. This is the captain's decision, and it is coupled to how the
    project wants to describe agent-assisted work.
-3. **Bibliography verification.** [CN], [DN], [DO], [DW], [FKP], [FKP2], [W] are all registered in
-   `literature/sources.bib` and were cross-checked there (titles/arXiv numbers verified against the
-   bib and the extraction records while writing). **Not registered in `literature/`, and therefore
-   not verified by this project's own machinery**: Mumford (1971), Cornalba (1989), Jarvis (2000),
-   Serre (1955), Green (1982). Their bibliographic details in the reference list were written from
-   standard knowledge and **must be checked against the actual articles** before submission.
-   ⚠ Specifically: [FKP, §2.6] cites **two** Jarvis papers ([22] and [23] in FKP's numbering); our
-   reference list gives only one, and the pair must be completed (`ISSUES.md` I2).
-   ⚠ Also: the project registry and [CN]'s bibliography disagree on [DW]'s page range (19–72 vs
-   19–71), and neither was checked against the AMS volume (`ISSUES.md` I4).
+3. **Bibliography verification — ~~blocker~~ cleared 2026-09-23.** All twelve reference entries are
+   now registered in `literature/sources.bib`. [CN], [DN], [DO], [DW], [FKP], [FKP2], [W] were
+   already registered and cross-checked. Mumford (1971), Cornalba (1989), Jarvis (2000), Serre
+   (1955), Green (1982) were registered in the `lit-blockers` researcher round, which also fed five
+   corrections back into the reference list (missing issue numbers on Mumford, Serre, Jarvis; the
+   Annals series designation on Serre; Cornalba's publisher address). **None of the five had its
+   full text retrieved and three did not reach L1** — adequate for background citations that carry
+   no load in any proof, which is what all five are, and recorded as such in `ISSUES.md` I3.
+   ✔ [FKP, §2.6]'s second Jarvis reference ([23]) is resolved and added: Jarvis–Kimura–Vaintrob,
+   Compositio Math. **126** (2001), no. 2, 157–212 (`ISSUES.md` I2, closed at L1 off [FKP]'s own
+   References page image).
+   ✔ [DW]'s page range settled as **19–71** on AMS's own Crossref record, agreeing with [CN];
+   INSPIRE's 19–72 is the sole dissent and is named in the reference entry (`ISSUES.md` I4).
+   Remaining: nothing blocking. The AMS endmatter PDF is Cloudflare-blocked and was not read, so
+   19–71 rests on the publisher's machine-readable record rather than a page image.
 4. **Translate the bundled script.** `scripts/thresholds.py` is a byte-identical copy of the
    attempt's verification script and has **Chinese comments and Chinese console output**. It was
    copied verbatim on purpose, so that it remains checkable against the source attempt. If it is to
