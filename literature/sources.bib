@@ -6132,3 +6132,132 @@
                  解决，供 lead/theorem-prover 决定是否更新 paper.md 的引用列表——本 researcher 不改
                  `research/**`）。}
 }
+
+@article{dhoker-phong-2002-i,
+  author       = {D'Hoker, Eric and Phong, Duong H.},
+  title        = {Two-Loop Superstrings {I}: Main Formulas},
+  journal      = {Physics Letters B},
+  volume       = {529},
+  pages        = {241--255},
+  year         = {2002},
+  eprint       = {hep-th/0110247},
+  archivePrefix= {arXiv},
+  primaryClass = {hep-th},
+  note         = {登记理由：`research/attempts/supermoduli-measure-consequence/claim.md` 的"强制自查"
+                 环节（该原创证明尝试判断 Theorem M 是否与 D'Hoker--Phong 亏格 2 已完成计算矛盾）需要
+                 核实此六篇论文的构造方法之定义域，此前只有 WebSearch 摘要级证据
+                 （`research/attempts/supermoduli-measure-consequence/scratch/websearch-log.md`），
+                 本轮由 researcher 升级到 L1（arXiv PDF 页图直读，`Read` 工具，**禁用 pdftotext 承载
+                 陈述**，仅用 pdftotext 定位关键词所在页码，2026-09-23）。
+                 **摘要逐字**（v1 p.1）："An unambiguous and slice-independent formula for the two-loop
+                 superstring measure on moduli space for even spin structure is constructed from first
+                 principles... for fixed spin structure, the measure exhibits **the expected behavior
+                 under degenerations of the surface**."
+                 **p.12（§8）逐字**："the asymptotic behavior of the measure as Ω approaches **the
+                 boundary of moduli space** for a separating degeneration... is obtained by decomposing
+                 the period matrix and the spin structure consistently with the separation" —— 用
+                 τ→0（分离退化）经典 θ 函数展开公式直接算出边界渐近，**没有出现任何"紧化超模叠的
+                 整体收缩/retraction"式构造**；"moduli space" 在此上下文是**已完成奇模空间积分之后
+                 的纯玻色周期矩阵空间**（经典 DM 型 $\overline{M}_2$ 边界），与 Theorem M 讨论的
+                 **超**模叠 $\overline{\mathfrak S}_{g;n,2r}$ 是不同对象。详见
+                 `literature/extractions/dhoker-phong-two-loop-i-vi.md`。}
+}
+
+@article{dhoker-phong-2002-ii,
+  author       = {D'Hoker, Eric and Phong, Duong H.},
+  title        = {Two-Loop Superstrings {II}: The Chiral Measure on Moduli Space},
+  journal      = {Nuclear Physics B},
+  volume       = {636},
+  pages        = {3--60},
+  year         = {2002},
+  eprint       = {hep-th/0110283},
+  archivePrefix= {arXiv},
+  primaryClass = {hep-th},
+  note         = {登记理由同 `dhoker-phong-2002-i`。**摘要逐字**（v1 p.1）："...describes how
+                 supergeometries are projected onto their super period matrices, and the integration
+                 over odd supermoduli is performed by integrating over the fibers of this projection."
+                 引言（p.3 附近）解释旧投影 $E_M{}^A\to e_m{}^a$（"玻色几何"）为何病态定义，新投影
+                 $E_M{}^A\to\hat\Omega_{IJ}$（超周期矩阵）"is well defined for any genus $h$"。
+                 **全文（pdftotext 关键词扫描定位辅助，非承重）未出现任何 "degenerat"/"compactif"/
+                 "smooth"/"Deligne" 字样**——本文只做局部/切片式的规范固定构造，完全不触及边界/
+                 退化/紧化问题，这些留给系列的第 IV 篇处理。详见
+                 `literature/extractions/dhoker-phong-two-loop-i-vi.md`。}
+}
+
+@article{dhoker-phong-2002-iii,
+  author       = {D'Hoker, Eric and Phong, Duong H.},
+  title        = {Two-Loop Superstrings {III}: Slice Independence and Absence of Ambiguities},
+  journal      = {Nuclear Physics B},
+  volume       = {636},
+  pages        = {61--79},
+  year         = {2002},
+  eprint       = {hep-th/0111016},
+  archivePrefix= {arXiv},
+  primaryClass = {hep-th},
+  note         = {登记理由同 `dhoker-phong-2002-i`。**摘要+引言逐字**（v1 pp.1--2，L1 页图核实，
+                 2026-09-23）：证明测度公式对两点支撑的 gravitino 切片 $\chi_{\bar z}^+ =
+                 \zeta^1\delta(z,x_1)+\zeta^2\delta(z,x_2)$ **局部且整体**独立于 $x_\alpha, q_\alpha,
+                 p_a$；方法用亏格 2 黎曼曲面上的亚纯 Green 函数与全纯微分显式表达，是逐点在（未紧化的）
+                 模空间上做的构造。未出现紧化/边界语言（该系列此步骤仍不涉及边界）。详见
+                 `literature/extractions/dhoker-phong-two-loop-i-vi.md`。}
+}
+
+@article{dhoker-phong-2002-iv,
+  author       = {D'Hoker, Eric and Phong, Duong H.},
+  title        = {Two-Loop Superstrings {IV}: The Cosmological Constant and Modular Forms},
+  journal      = {Nuclear Physics B},
+  volume       = {639},
+  pages        = {129--181},
+  year         = {2002},
+  eprint       = {hep-th/0111040},
+  archivePrefix= {arXiv},
+  primaryClass = {hep-th},
+  note         = {登记理由同 `dhoker-phong-2002-i`。**这是六篇中唯一明确处理"退化/边界"的一篇**
+                 （§5 "Degenerations -- Proofs of ϑ-constant Relations"，p.32 起，L1 页图核实，
+                 2026-09-23）。**p.29 逐字**："the factor of proportionality must be a modular function
+                 holomorphic on **(compactified) moduli space** and thus constant." —— ⚠ **这里的
+                 "(compactified) moduli space" 是经典（玻色）亏格 2 黎曼曲面模空间的 Deligne--Mumford
+                 紧化 $\overline{M}_2$（θ-constant 作为经典 Siegel 模形式在其上全纯），不是 Theorem M
+                 讨论的**超**模叠 $\overline{\mathfrak S}_{g;n,2r}$ 的紧化——两者是完全不同层级的对象，
+                 混淆会是一个真实的引用错误。**p.32 §5.1 逐字**："There are two possible degenerations
+                 (up to the action of the modular group): the separating degeneration, τ→0... and the
+                 non-separating degeneration, τ₂→+i∞..." —— 用经典亏格 2 周期矩阵 Ω 的退化极限（分离/
+                 非分离）配合 θ 函数渐近展开公式完成，**全文未出现任何超几何紧化叠、任何超模叠上的
+                 整体收缩/retraction 构造**。详见 `literature/extractions/
+                 dhoker-phong-two-loop-i-vi.md`（含逐字核实过程与对 Proposition C 的裁定）。}
+}
+
+@article{dhoker-phong-2005-v,
+  author       = {D'Hoker, Eric and Phong, Duong H.},
+  title        = {Two-Loop Superstrings {V}: Gauge Slice Independence of the N-Point Function},
+  journal      = {Nuclear Physics B},
+  volume       = {715},
+  pages        = {91--119},
+  year         = {2005},
+  eprint       = {hep-th/0501196},
+  archivePrefix= {arXiv},
+  primaryClass = {hep-th},
+  note         = {登记理由同 `dhoker-phong-2002-i`。**摘要逐字**（L1 页图核实，2026-09-23）："A
+                 systematic construction of superstring scattering amplitudes for N massless NS bosons
+                 to two loop order is given, based on **the projection of supermoduli space onto super
+                 period matrices used earlier for the superstring measure in the first four papers of
+                 this series**." —— 与 I--IV 同一套投影方法的推广到 N 点函数，未涉及紧化/边界。详见
+                 `literature/extractions/dhoker-phong-two-loop-i-vi.md`。}
+}
+
+@article{dhoker-phong-2005-vi,
+  author       = {D'Hoker, Eric and Phong, Duong H.},
+  title        = {Two-Loop Superstrings {VI}: Non-Renormalization Theorems and the 4-Point Function},
+  journal      = {Nuclear Physics B},
+  volume       = {715},
+  pages        = {3--90},
+  year         = {2005},
+  eprint       = {hep-th/0501197},
+  archivePrefix= {arXiv},
+  primaryClass = {hep-th},
+  note         = {登记理由同 `dhoker-phong-2002-i`。**摘要逐字**（L1 页图核实，2026-09-23）："The
+                 N-point amplitudes... are evaluated explicitly from first principles, using **the
+                 method of projection onto super period matrices introduced and developed in the first
+                 five papers of this series**." $N\le4$ 显式 4 点计算，同一投影方法，未涉及紧化/边界。
+                 详见 `literature/extractions/dhoker-phong-two-loop-i-vi.md`。}
+}
