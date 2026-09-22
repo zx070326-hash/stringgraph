@@ -931,11 +931,20 @@ $\omega_2(\overline{\mathfrak S}{}^{\varepsilon}_{g;n,0})\neq0$. $\square$
 **Lemma 8.2.** *(i) $h\ge2$ cannot be weakened within this method. (ii) Tails of genus $a\ge2$ give
 nothing beyond $a\in\{0,1\}$.*
 
-*Proof.* (i) For $h=1$, $\deg L^{-1}=0$ and $L$ is a theta characteristic on an elliptic curve $E$;
-if $L$ is even (a non-trivial $2$-torsion point) then $h^0(E,L^{-1})=0$ and, by Serre duality with
-$\omega_E=\mathcal O_E$, $h^1(E,L^{-1})=h^0(E,L)^\vee=0$. So $H^1(C,L^{-1})=0$ and **no non-zero
-$\eta$ exists at all**. For $h=0$, $L=\mathcal O(-1)$ and $h^1(\mathbb P^1,\mathcal O(1))=0$,
-likewise. Hence (P1) is a genuine threshold of this technical route, not an oversight.
+*Proof.* (i) Recall the standing hypothesis on the genus-$h$ factor (I8, §4): $L$ is an **ineffective
+even** theta characteristic, $L^{\otimes2}\cong\omega_C$ and $H^0(C,L)=0$; this is what the
+Donagi–Witten family requires, and it is why the first factor of $\mathcal B$ is the *even* component
+$\mathfrak S^+_{h;1,0}$.
+
+For $h=1$ we have $\deg L=0$. An even theta characteristic on an elliptic curve $E$ is a non-trivial
+$2$-torsion point, so $h^0(E,L)=0$ and, by Serre duality with $\omega_E=\mathcal O_E$,
+$$h^1(E,L^{-1})=h^0(E,\omega_E\otimes L)^\vee=h^0(E,L)^\vee=0 .$$
+Hence $H^1(C,L^{-1})=0$: **there is no non-zero $\eta$ to feed into the construction.** The remaining
+theta characteristic on $E$, namely $L=\mathcal O_E$, does have $H^1(E,\mathcal O_E)\cong\mathbb C\ne0$,
+but it is **effective** ($h^0=1$, the odd one), so it violates the standing hypothesis $H^0(C,L)=0$
+and is unavailable here. For $h=0$ the unique theta characteristic is $L=\mathcal O(-1)$, and
+$h^1(\mathbb P^1,\mathcal O(1))=0$, likewise. Hence (P1) is a genuine threshold of this technical
+route, not an oversight.
 
 (ii) For $a\ge2$, (P2) holds automatically, but $g=h+a\ge2+a\ge4$, which is a worse threshold than
 the one obtained from $a\in\{0,1\}$; and no new parity arises, since both parities are already

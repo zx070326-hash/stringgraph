@@ -184,8 +184,15 @@ reference metadata against `literature/sources.bib` and the extraction records.
 `research/attempts/**`, touch `graph/**`, `formal/**` or `literature/**`, or release anything
 anywhere.
 
-**No new mathematical errors were found during transcription.** See `ISSUES.md` for the small number
-of production-level items that came up.
+**No new mathematical errors were found during transcription.** One expository incompleteness in a
+*subsidiary* lemma did surface and is recorded as `ISSUES.md` I1: `proof.md` §5.2 establishes the
+$h\ge2$ threshold only for the even theta characteristics the method actually uses, while stating
+the conclusion unconditionally. The conclusion is correct — the odd theta characteristic on an
+elliptic curve is effective and therefore excluded by the standing hypothesis — but the paper adds
+one sentence to say so, and that sentence is the only line of reasoning in the draft that is not
+already in `proof.md`. **It should be checked by a reviewer.** Nothing in Theorem M, Proposition N,
+or any corollary is affected. The remaining `ISSUES.md` entries are bibliographic or production
+items.
 
 ---
 
