@@ -230,6 +230,59 @@ def test_level(M, x_values):
     return dim, len(gens), results
 
 
+# ---------------------------------------------------------------------------
+# T_j^hl check: dim of {physical (L_m=0, m>=1) AND K-primary (K_i=0, i>0)}
+# at each level, i.e. the kernel of ALL raising operators {L_1,...,L_M,K_1,...,K_M}
+# acting within the level-M subspace.  Theorem A (proof.md) only needs |0> in T_j,
+# but Borcherds' Lemma 5.3 picture (T ~= Ve^r) predicts this kernel is EXACTLY
+# 1-dimensional (= R|0>) in this pure light-cone (D=2) case.  Verified here for
+# M=0..4 and several x -- NOT proven by hand in proof.md (marked [GAP]).
+# ---------------------------------------------------------------------------
+
+def L_plus(m, v, x):
+    """Apply the RAISING operator L_m (m >= 1) to level-homogeneous v."""
+    if not v:
+        return {}
+    Mp = level_of(next(iter(v)))
+    out = {}
+    for n in range(-(Mp + abs(m) + 2), Mp + abs(m) + 3):
+        a = m - n
+        term = apply_bilinear(a, n, v, x)
+        for mono, c in term.items():
+            out[mono] = out.get(mono, Q(0)) + c
+    return {mm: c for mm, c in out.items() if c != 0}
+
+
+def Tj_hl_dimension(M, x):
+    """dim of ker(L_1,...,L_M, K_1,...,K_M) restricted to level M of F_hl(v_j)."""
+    basis = two_colored_partitions(M)
+    dim = len(basis)
+    if dim == 0:
+        return 0
+    big = [[] for _ in basis]
+    for m in range(1, M + 1):
+        target_basis = two_colored_partitions(M - m)
+        tindex = {b: j for j, b in enumerate(target_basis)}
+        for bi, mono in enumerate(basis):
+            img = L_plus(m, {mono: Q(1)}, x)
+            col = [Q(0)] * len(target_basis)
+            for tm, c in img.items():
+                col[tindex[tm]] = c
+            big[bi].extend(col)
+    for i in range(1, M + 1):
+        target_basis = two_colored_partitions(M - i)
+        tindex = {b: j for j, b in enumerate(target_basis)}
+        for bi, mono in enumerate(basis):
+            img = apply_K(i, {mono: Q(1)})
+            col = [Q(0)] * len(target_basis)
+            for tm, c in img.items():
+                col[tindex[tm]] = c
+            big[bi].extend(col)
+    ncols = len(big[0]) if big and big[0] else 0
+    r = rank_over_Q(big, ncols)
+    return dim - r
+
+
 if __name__ == '__main__':
     print("=" * 78)
     print("Rank-2 core check: do {L_{-m}, K_{-n}} monomials span F_hl(v_j) at each level?")
@@ -243,5 +296,16 @@ if __name__ == '__main__':
             flag = "OK" if r == dim else "**RANK DEFICIENT**"
             print(f"    x = {str(x):>6}  rank = {r:3d} / {dim:3d}   {flag}")
         print(f"  ==> {'FULL RANK for all tested x' if all_full else 'FAILS for some x!'}")
+    print()
+    print("=" * 78)
+    print("T_j^hl dimension check: is ker(L_{m>0}, K_{i>0}) exactly R|0> at level M>=1?")
+    print("(Borcherds Lemma 5.3 picture predicts YES -- 1-dim'l per momentum, T~=Ve^r.)")
+    print("=" * 78)
+    for x in (Q(0), Q(1), Q(-2), Q(1, 2)):
+        print(f"\n  x = {x}:")
+        for M in range(1, 5):
+            d = Tj_hl_dimension(M, x)
+            flag = "OK (= C|0>)" if d == 0 else "**EXTRA T_j ELEMENTS FOUND**"
+            print(f"    level M = {M}:  dim T_j^hl = {d}   {flag}")
     print()
     print("=" * 78)
