@@ -899,4 +899,98 @@ Lemma 6.1.* $\square$
 
 ---
 
+## 8. Parity, corollaries, and the threshold in closed form
+
+### The parity refinement
+
+**Proposition 8.1 (parity refinement, $r=0$).** *Assume $r=0$. Then the test curve $i(C)$ lies in the
+parity component $\overline S{}^{\varepsilon}_{g;n,0}$ with $\varepsilon=\mathrm{par}(N)$, and
+consequently*
+$$\omega_2\big(\overline{\mathfrak S}{}^{\varepsilon}_{g;n,0}\big)\neq0 .$$
+
+*Proof.* For $r=0$ the generalized spin structure satisfies $L^{\otimes2}\cong\omega$ with no Ramond
+twist ([FKP, §2.6]), so the parity $h^0\bmod2$ is locally constant on $\overline S_{g;n,0}$
+(Mumford; Cornalba for stable spin curves) and
+$\overline S_{g;n,0}=\overline S{}^+_{g;n,0}\sqcup\overline S{}^-_{g;n,0}$.
+
+The tested curve $Z=C\cup_{p=q}F$ is of compact type with a single NS node. Its generalized spin
+sheaf is given in the proof of [FKP, Lemma 7.9], verbatim
+"$\mathcal O_Z\cong\mathcal O_{Z_0}\oplus j_*L\oplus j'_*L'$" — at an NS node the spin sheaf is not
+locally free, and equals the sum of the direct images from the two branches. Hence
+$$h^0\big(Z,\ j_*L\oplus j'_*N\big)=h^0(C,L)+h^0(F,N),\qquad
+\mathrm{par}(Z)=\mathrm{par}(L)+\mathrm{par}(N)=\mathrm{par}(N),$$
+the last step because $L$ is even. So the whole curve $i(C)$ lies in the component of parity
+$\varepsilon=\mathrm{par}(N)$. Since $H^1$ of a disjoint union decomposes as a direct sum, the
+non-zero class produced in Step 3 of Theorem 6.4 lives in the $H^1$ of that component, giving
+$\omega_2(\overline{\mathfrak S}{}^{\varepsilon}_{g;n,0})\neq0$. $\square$
+
+### Eliminating $h$ and $a$
+
+**Lemma 8.2.** *(i) $h\ge2$ cannot be weakened within this method. (ii) Tails of genus $a\ge2$ give
+nothing beyond $a\in\{0,1\}$.*
+
+*Proof.* (i) For $h=1$, $\deg L^{-1}=0$ and $L$ is a theta characteristic on an elliptic curve $E$;
+if $L$ is even (a non-trivial $2$-torsion point) then $h^0(E,L^{-1})=0$ and, by Serre duality with
+$\omega_E=\mathcal O_E$, $h^1(E,L^{-1})=h^0(E,L)^\vee=0$. So $H^1(C,L^{-1})=0$ and **no non-zero
+$\eta$ exists at all**. For $h=0$, $L=\mathcal O(-1)$ and $h^1(\mathbb P^1,\mathcal O(1))=0$,
+likewise. Hence (P1) is a genuine threshold of this technical route, not an oversight.
+
+(ii) For $a\ge2$, (P2) holds automatically, but $g=h+a\ge2+a\ge4$, which is a worse threshold than
+the one obtained from $a\in\{0,1\}$; and no new parity arises, since both parities are already
+reached at $a=1$ (Lemma 5.2). $\square$
+
+Now specialise Theorem 6.4 and Proposition 8.1.
+
+- **$a=1$.** (P2) becomes $n+1+2r>0$, always true; $h=g-1\ge2\iff g\ge3$. For $r=0$ the tail is a
+  genus-$1$ spin curve with $n+1$ NS markings, so $N^{\otimes2}\cong\mathcal O_E$ — *NS punctures do
+  not twist $\omega$* — and **both parities occur** (Lemma 5.2).
+- **$a=0$.** (P2) becomes $n+2r\ge2$; $h=g\ge2$. For $r=0$ (hence $n\ge2$) the tail's spin structure
+  is forced to be $N=\mathcal O_{\mathbb P^1}(-1)$, with $h^0=0$, i.e. **even**.
+
+**Corollary 8.3 (= Corollary A; pure NS punctures).**
+*(A1) For every $g\ge3$, every $n\ge0$ and **both** parities $\varepsilon\in\{+,-\}$, the component
+$\overline{\mathfrak S}{}^{\varepsilon}_{g;n,0}$ is non-projected. (Take $a=1$, $h=g-1\ge2$.)*
+*(A2) For every $g\ge2$ and every $n\ge2$, the even component $\overline{\mathfrak S}{}^{+}_{g;n,0}$
+is non-projected. (Take $a=0$, $h=g\ge2$.)*
+
+**Corollary 8.4 (= Corollary B; Ramond punctures present).** *For every $g\ge2$, every $n\ge0$ and
+every $r\ge1$, the stack $\overline{\mathfrak S}_{g;n,2r}$ is non-projected. (Take $a=0$, $h=g\ge2$;
+(P2) holds automatically because $2r\ge2$.) Moreover, for every $g\ge3$, every $n\ge0$ and every
+$r\ge0$, $\overline{\mathfrak S}_{g;n,2r}$ is non-projected (take $a=1$). No connected-component
+refinement is claimed when $r>0$; see §10.3.*
+
+**Corollary 8.5 (threshold, closed form).**
+$$\boxed{\ \overline{\mathfrak S}_{g;n,2r}\ \text{is non-projected whenever}\quad g\ge 3,\ \ \text{or}
+\ \ \big(g=2\ \text{and}\ n+2r\ge 2\big).\ }$$
+
+*Proof.* Immediate from Corollaries 8.3, 8.4 and Lemma 8.2(ii): the union of the region reachable
+with $a=1$ ($g\ge3$, any $n,r$) and the region reachable with $a=0$ ($g\ge2$ and $n+2r\ge2$) is
+exactly the stated set, and $a\ge2$ adds nothing. $\square$
+
+### Machine verification of the threshold arithmetic
+
+The passage from (P1)–(P2) to Corollary 8.5, and the statement that $a\in\{0,1\}$ already suffices,
+are pure integer arithmetic and have been verified by exhaustive enumeration.
+
+- **Script:** `scripts/thresholds.py` (accompanying this manuscript).
+- **Dependencies:** Python 3, standard library only.
+- **How to run:** `python -X utf8 scripts/thresholds.py` (the `-X utf8` flag is only needed on
+  Windows consoles with a non-UTF-8 code page).
+- **Range enumerated:** $g\le8$, $n\le6$, $r\le4$, $a\le6$.
+- **Runtime:** well under one second. **Exit code:** $0$.
+
+The script checks five things: (1) the closed form of Corollary 8.5 agrees pointwise with the
+enumeration of $(h,a)$ satisfying (P1)–(P2); (2) $(g,n,r)=(2,0,0)$ is **not** reachable (§9.2);
+(3) at $g=2$ only the even parity component is reachable (§9.2); (4) for $n=r=0$ the reachable set is
+exactly $g\ge3$, with $g=3$ forcing $a=1$, i.e. [CN]'s theorem is recovered (§9.1); (5) the
+comparisons with the literature thresholds quoted in §1.4, including that $(g,n,r)=(2,1,0)$ is indeed
+**not** covered.
+
+> ⚠ **What the script does not do.** It checks *integer arithmetic only*. The structural assertions of
+> §9.1 (that the construction degenerates to [CN]) and §9.2 (that the odd component at $g=2$ is
+> structurally out of reach) are **not** machine-checkable by it; the script supplies only the
+> arithmetic consistency that those assertions require. Those two were verified by hand.
+
+---
+
 <!-- SECTION-MARKER -->
