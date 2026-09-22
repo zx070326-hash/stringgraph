@@ -3985,7 +3985,26 @@
             低亏格（含 g=2 的 D'Hoker--Phong 计算）不受影响：witten-2012-superstring-perturbation §3.3.2 p.35
             逐字承认「Supermoduli space is holomorphically projected in low orders」。
             后续：arXiv:1404.6257（Donagi--Witten, *Super Atiyah classes …*, PAMQ 9 (2013) no.4, 739--788）
-            自陈给出 Theorem 1.2 的新证明，**不扩展 Theorem 1.1 的亏格范围**（摘要级，L2，本项目未登记为独立 key）。}
+            自陈给出 Theorem 1.2 的新证明，**不扩展 Theorem 1.1 的亏格范围**（摘要级，L2，本项目未登记为独立 key）。
+            **2026-09-23 追加（researcher，供 `research/papers/supermoduli-punctured-nonprojected/
+            ISSUES.md` I4 核查）：页码冲突，两个机器可读来源互相矛盾，均非对 AMS 印刷卷本身的直证。**
+            (i) INSPIRE recid 1231519（`curl https://inspirehep.net/api/literature/1231519`，
+            2026-09-23 重新拉取，与上面 2026-09-11 的记录一致）：`publication_info` 字段给出
+            `page_start: "19", page_end: "72", journal_volume: "90", year: 2015`——即 **19--72**。
+            (ii) AMS 自己在 Crossref 登记的书目元数据（`curl https://api.crossref.org/works/
+            10.1090/pspum/090/01525`，2026-09-23）：`page: "19-71"`，`container-title:
+            ["Proceedings of Symposia in Pure Mathematics", "String-Math 2012"]`，
+            `publisher: "American Mathematical Society"`——即 **19--71**，与 [CN] 自己参考文献页的
+            逐字抄录一致（`literature/extractions/correa-noja-2026.md` E8，L1 页图核实：「Proc.
+            Sympos. Pure Math. 90 (2015) 19–71」）。**两条独立信源（AMS 自己的 DOI 元数据 + [CN] 的
+            L1 抄录）都指向 19--71**，而 19--72 目前只有 INSPIRE 一家支持。倾向性判断（非最终裁定，
+            未直证 AMS 印刷卷）：**19--71 更可能正确**，INSPIRE 的 "72" 疑为该平台自己的数据录入
+            误差（INSPIRE 的会议论文集页码字段历史上确有已知的录入错误案例，但本条目未去核实这一
+            具体猜测本身，只陈述证据分布）。**AMS 官方期刊页面**（`www.ams.org` 的 pspum/090 目录页
+            与 endmatter PDF）本轮曾尝试直接核对但被 Cloudflare 机器人验证拦截（`curl` 返回
+            "Just a moment..." 挑战页而非真实内容），**未能直证印刷卷**。**如实记录：证据倾向 19--71，
+            但本条目不把这当作已解决的定论——留给 lead/theorem-prover 决定 paper.md 是否采用
+            19--71，或保留双源冲突的 ⚠ 注记直到有人拿到印刷卷或 AMS 官网页面。**}
 }
 
 @misc{correa-noja-2026,
