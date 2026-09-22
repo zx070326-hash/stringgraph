@@ -1169,3 +1169,44 @@ A/B 的地基性依赖（紧化 + 任意穿孔数超模叠的存在性，即 The
    **无付费墙问题**。仍未核实的是参考文献表的完整书目（[7]、[11]、[22]、[23]、[27]、[32]、[29]、
    [15]、[25] 等，承接第一轮"未解决的疑问"第 4、5 条）；以及 AJM 145 (2023) 正式发表版与 v3 是否
    逐字一致（本项目一律以 arXiv v3 为准，页码按 v3 PDF 页眉）。
+   **[11]、[22]、[23] 的完整书目已在第四轮（见下）核实并登记入 `literature/sources.bib`。**
+
+## 陈述（第四轮，2026-09-23）
+
+任务来源：`research/papers/supermoduli-punctured-nonprojected/paper.md` 投稿前阻塞项核查
+（researcher 任务，见 `ISSUES.md` I2）。E4/E5（第一轮）已发现 §2.6 引用 [22]、[23] 两篇 Jarvis
+文献，但当时"本条目未逐一核实完整书目"。本轮补齐。
+
+### E16 References 页 [11]、[22]、[23] 的完整书目 —— 解决 I2（两篇 Jarvis 文献的身份）
+- 位置：p.73，"References" 一节，条目 [11]、[22]、[23]（`Read` 工具直接渲染 PDF 第 73 页原始图像
+  核实，**非 `pdftotext`**，2026-09-23 重新核实一次，与本轮之前的核实结果一致）。
+- 类型：书目条目（非陈述，供 `sources.bib` 登记核对）
+- 原文逐字（照抄标点、斜体范围、出版地）：
+  > [11] M. Cornalba, *Moduli of curves and theta-characteristics*, in Lectures on Riemann surfaces
+  > (Trieste, 1987), 560–589, World Sci. Publ., Teaneck, NJ, 1989.
+  >
+  > [22] T. Jarvis, *Geometry of the moduli of higher spin curves*, Internat. J. Math. 11 (2000),
+  > no. 5, 637–663.
+  >
+  > [23] T. Jarvis, T. Kimura, A. Vaintrob, *Moduli spaces of higher spin curves and integrable
+  > hierarchies*, Compositio Math. 126 (2001), no. 2, 157–212.
+- 严格程度：书目条目本身，不是陈述，无"严格程度"可言。
+- 依赖：无（References 页不依赖其他条目）。
+- 备注：
+  - **[22] 与 E4/E5 已引用的单篇 Jarvis 文献是同一篇**（"Internat. J. Math. 11 (2000), 637–663"），
+    E4/E5 抽取时只是遗漏了 "no. 5" 这一细节，现已通过本条目补全。
+  - **[23] 是一篇此前本项目完全未识别的独立三作者文献**（Jarvis, Kimura, Vaintrob，*Compositio
+    Math.*），与 [22] 无作者重叠之外的关联（仅 T. Jarvis 本人重复）。**E4（§2.6，p.13–14）逐字引用
+    了 [22] 与 [23] 两者**，共同支撑"$S_{g,n_{NS},n_R}$（经典自旋曲线模叠，$n_R$ 必为偶数）已被
+    研究过"这一陈述；但 **E5（§5.4，p.31–32，Theorem A 证明落点）逐字只引用了 [22]**（"due to works
+    of Cornalba [11] and Jarvis [22]"），**未引用 [23]**。换言之：[23] 只出现在 E4 的背景性陈述中，
+    Theorem A 的 properness 证明链条本身（E5）不依赖 [23]，只依赖 [11]、[22]。这个区分对
+    `research/papers/supermoduli-punctured-nonprojected/paper.md` 有直接意义——该文引用 FKP §2.6
+    时若只是复述 [22]/[23] 并列出现的事实（E4 的陈述本身），两篇都要列；若引用的是 Theorem A 证明
+    本身的依赖链（E5），只需 [22]。
+  - 三条书目均已交叉核实并登记：`literature/sources.bib` 的 `cornalba-1989`、`jarvis-2000`、
+    `jarvis-kimura-vaintrob-2001` 三个条目，note 中记录了本条目为其 L1 依据。
+  - 附带发现：References 页另有 [21] T. Jarvis, *Torsion-free sheaves and moduli of generalized
+    spin curves*, Compositio Math. 110 (1998), no. 3, 291–333 —— **第三篇 Jarvis 独著文献**，本文
+    §2.6/§5.4 均未引用 [21]（只引 [22]/[23]），故不属于 I2 的核实范围，此处仅记录以防后续引用者
+    与 [22]/[23] 混淆。未登记入 `sources.bib`（未被本项目任何节点引用）。

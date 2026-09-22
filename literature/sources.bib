@@ -3985,7 +3985,26 @@
             低亏格（含 g=2 的 D'Hoker--Phong 计算）不受影响：witten-2012-superstring-perturbation §3.3.2 p.35
             逐字承认「Supermoduli space is holomorphically projected in low orders」。
             后续：arXiv:1404.6257（Donagi--Witten, *Super Atiyah classes …*, PAMQ 9 (2013) no.4, 739--788）
-            自陈给出 Theorem 1.2 的新证明，**不扩展 Theorem 1.1 的亏格范围**（摘要级，L2，本项目未登记为独立 key）。}
+            自陈给出 Theorem 1.2 的新证明，**不扩展 Theorem 1.1 的亏格范围**（摘要级，L2，本项目未登记为独立 key）。
+            **2026-09-23 追加（researcher，供 `research/papers/supermoduli-punctured-nonprojected/
+            ISSUES.md` I4 核查）：页码冲突，两个机器可读来源互相矛盾，均非对 AMS 印刷卷本身的直证。**
+            (i) INSPIRE recid 1231519（`curl https://inspirehep.net/api/literature/1231519`，
+            2026-09-23 重新拉取，与上面 2026-09-11 的记录一致）：`publication_info` 字段给出
+            `page_start: "19", page_end: "72", journal_volume: "90", year: 2015`——即 **19--72**。
+            (ii) AMS 自己在 Crossref 登记的书目元数据（`curl https://api.crossref.org/works/
+            10.1090/pspum/090/01525`，2026-09-23）：`page: "19-71"`，`container-title:
+            ["Proceedings of Symposia in Pure Mathematics", "String-Math 2012"]`，
+            `publisher: "American Mathematical Society"`——即 **19--71**，与 [CN] 自己参考文献页的
+            逐字抄录一致（`literature/extractions/correa-noja-2026.md` E8，L1 页图核实：「Proc.
+            Sympos. Pure Math. 90 (2015) 19–71」）。**两条独立信源（AMS 自己的 DOI 元数据 + [CN] 的
+            L1 抄录）都指向 19--71**，而 19--72 目前只有 INSPIRE 一家支持。倾向性判断（非最终裁定，
+            未直证 AMS 印刷卷）：**19--71 更可能正确**，INSPIRE 的 "72" 疑为该平台自己的数据录入
+            误差（INSPIRE 的会议论文集页码字段历史上确有已知的录入错误案例，但本条目未去核实这一
+            具体猜测本身，只陈述证据分布）。**AMS 官方期刊页面**（`www.ams.org` 的 pspum/090 目录页
+            与 endmatter PDF）本轮曾尝试直接核对但被 Cloudflare 机器人验证拦截（`curl` 返回
+            "Just a moment..." 挑战页而非真实内容），**未能直证印刷卷**。**如实记录：证据倾向 19--71，
+            但本条目不把这当作已解决的定论——留给 lead/theorem-prover 决定 paper.md 是否采用
+            19--71，或保留双源冲突的 ⚠ 注记直到有人拿到印刷卷或 AMS 官网页面。**}
 }
 
 @misc{correa-noja-2026,
@@ -5977,4 +5996,293 @@
                  与本卡所处的「类光格 / 物理态 / 无鬼定理」语境高度同源。
                  researcher 只建议不动手：lead 可考虑派 curator 评估是否挂到
                  `worldsheet.no-ghost-theorem-v4` 或 Borcherds 代数一线。}
+}
+
+@article{mumford-1971,
+  author       = {Mumford, David},
+  title        = {Theta characteristics of an algebraic curve},
+  journal      = {Annales Scientifiques de l'\'{E}cole Normale Sup\'{e}rieure},
+  series       = {4e s\'{e}rie},
+  volume       = {4},
+  number       = {2},
+  pages        = {181--192},
+  year         = {1971},
+  doi          = {10.24033/asens.1209},
+  note         = {登记理由：`research/papers/supermoduli-punctured-nonprojected/paper.md` 引用
+                 （References 末段，无出版社/编号，"标准常识"写法），`NOTES-for-captain.md` §4.3 与
+                 `ISSUES.md` I3 将其列为投稿前必须核实的五条未登记文献之一。**未获取全文 PDF，仅做书目
+                 核实**（WebSearch，跨多个独立来源交叉核对：Numdam 期刊页面给出完整卷期页码
+                 "t. 4, no 2 (1971), p. 181-192" 及 DOI `10.24033/asens.1209`；多个二次引用源一致）。
+                 paper.md 现有条目遗漏 "no. 2"（issue number），仅写 "4 (1971), 181–192"——本条目补全。
+                 内容核实：本文首次系统定义代数曲线上的 theta characteristic 概念，是 [DW]/[CN] 等全
+                 篇论文中 "theta characteristic" 记号的原始出处；本项目未做逐字陈述级抽取（论文本身未
+                 索取具体陈述，只是背景引用），故不建 `literature/extractions/mumford-1971.md`。
+                 **未达到 L1（未获取 PDF/页图）；书目信息达到"多源交叉核实"档位，非"标准常识蒙的"。**}
+}
+
+@article{serre-1955,
+  author       = {Serre, Jean-Pierre},
+  title        = {Faisceaux alg\'{e}briques coh\'{e}rents},
+  journal      = {Annals of Mathematics},
+  series       = {2nd Series},
+  volume       = {61},
+  number       = {2},
+  pages        = {197--278},
+  year         = {1955},
+  note         = {登记理由：同 `mumford-1971`，见 `ISSUES.md` I3。paper.md 引用（§7，仿射概形上高阶
+                 凝聚上同调消失）现有条目写 "Ann. of Math. **61** (1955), 197–278"，遗漏 "no. 2"——
+                 本条目补全为 vol. 61, no. 2 (1955)。**核实方式**：WebSearch 多个独立来源（数学史/
+                 参考文献数据库）一致给出 "Annals of Mathematics, Second Series, Vol. 61, No. 2
+                 (Mar., 1955), pp. 197-278"。此文是代数几何中著名的 FAC（"Faisceaux Algébriques
+                 Cohérents"）论文，凝聚层理论奠基之作，书目信息高度公开且被海量引用，交叉核实一致性
+                 很高。**未获取全文 PDF；未达到 L1，书目信息达到多源交叉核实档位。**}
+}
+
+@incollection{green-1982,
+  author       = {Green, Paul},
+  title        = {On holomorphic graded manifolds},
+  booktitle    = {Proceedings of the American Mathematical Society},
+  journal      = {Proceedings of the American Mathematical Society},
+  volume       = {85},
+  number       = {4},
+  pages        = {587--590},
+  year         = {1982},
+  doi          = {10.1090/S0002-9939-1982-0660609-6},
+  note         = {登记理由：同 `mumford-1971`，见 `ISSUES.md` I3。paper.md [G] 条目已给出与此条目一致
+                 的完整书目（title/vol/no/pages），**本条目独立交叉核实**：(a) WebSearch 多个独立来源
+                 一致；(b) 通过 Donagi–Witten 自己在 Crossref 上登记的参考文献列表（本 researcher 轮
+                 curl 下载 `api.crossref.org/works/10.1090/pspum/090/01525` 的 reference 数组，[DW] 的
+                 参考文献 [1] 正是本文，Crossref 记录 DOI `10.2307/2044071`——这是 JSTOR 的旧 DOI，与
+                 AMS 现行 DOI `10.1090/S0002-9939-1982-0660609-6` 指向同一篇文章，两者并存属正常现象，
+                 AMS 于其官方数字化后补发了自己的 DOI）。两条独立路径（直接 WebSearch + [DW] 自己的
+                 Crossref 参考文献表）互相印证，书目信息可信度高。**未获取全文 PDF；未达到 L1。**
+                 "graded manifold" 的 "projected"/split 概念的最早系统来源之一，是 [DW] 等全篇论文中
+                 "projected supermanifold" 定义的历史源头。}
+}
+
+@incollection{cornalba-1989,
+  author       = {Cornalba, Maurizio},
+  title        = {Moduli of curves and theta-characteristics},
+  booktitle    = {Lectures on Riemann Surfaces (Trieste, 1987)},
+  publisher    = {World Scientific},
+  address      = {Singapore},
+  pages        = {560--589},
+  year         = {1989},
+  note         = {登记理由：同 `mumford-1971`，见 `ISSUES.md` I3。paper.md 现有条目书目与本条目一致。
+                 **双路径独立核实**：(a) WebSearch 多个独立来源一致给出 "Lectures on Riemann surfaces
+                 (Trieste, 1987), World Sci. Publ., Teaneck, NJ (1989), 560–589"；(b) 通过 [FKP] 自己的
+                 References（arXiv:2006.13271v3 PDF p.73，**L1 页图核实**，见下）第 [11] 条独立确认同一
+                 篇文献的书目细节一致。此文亦是 [FKP, §2.6]（引用 [FKP] 自己编号 [11]、[22]、[23] 三篇
+                 文献，本轮同时核实了后两篇 Jarvis 文献，见 `jarvis-2000` 与
+                 `jarvis-kimura-vaintrob-2001` 条目及 `literature/extractions/
+                 felder-kazhdan-polishchuk-2020.md` 新增记录）证明带标记点的稳定 spin curve 栈光滑性/
+                 properness 的三篇既有文献之一。**FKP 自己的 References 页（L1）对 [11] 的完整原文**：
+                 "M. Cornalba, Moduli of curves and theta-characteristics, in Lectures on Riemann
+                 surfaces (Trieste, 1987), 560–589, World Sci. Publ., Teaneck, NJ, 1989."
+                 （出版地 "Teaneck, NJ" 是 paper.md 与本条目均未写出的细节，World Scientific 早期在
+                 Teaneck, NJ 设有办公室，此为出版商登记地址，不影响文献本身唯一性）。
+                 **未获取本文全文 PDF；书目信息本身已达 L1（直接读取 [FKP] 参考文献页原文核实）。**}
+}
+
+@article{jarvis-2000,
+  author       = {Jarvis, Tyler J.},
+  title        = {Geometry of the moduli of higher spin curves},
+  journal      = {International Journal of Mathematics},
+  volume       = {11},
+  number       = {5},
+  pages        = {637--663},
+  year         = {2000},
+  doi          = {10.1142/S0129167X00000325},
+  note         = {登记理由：`ISSUES.md` I2 + I3。paper.md 现有条目遗漏 "no. 5"，本条目补全。
+                 **FKP 自己 References 页原文（arXiv:2006.13271v3 PDF p.73，L1 页图核实，2026-09-23）**：
+                 "[22] T. J. Jarvis, Geometry of the moduli of higher spin curves, Internat. J. Math.
+                 11 (2000), no. 5, 637–663." —— 这就是 [FKP, §2.6] 引用的 [22]，与 paper.md 现有单条
+                 Jarvis 引用是**同一篇文章**，仅缺 "no. 5"。
+                 ⚠ **[FKP, §2.6] 还引用了 [23]，是另一篇完全不同的三人合著文章**（Jarvis, Kimura,
+                 Vaintrob），本项目此前从未登记，现已作为独立条目 `jarvis-kimura-vaintrob-2001` 登记，
+                 详见该条目 note 与 `literature/extractions/felder-kazhdan-polishchuk-2020.md` 新增
+                 记录（`ISSUES.md` I2 就此解决：两篇 Jarvis 相关文献均已核实登记，非同一篇文章）。}
+}
+
+@article{jarvis-kimura-vaintrob-2001,
+  author       = {Jarvis, Tyler J. and Kimura, Takashi and Vaintrob, Arkady},
+  title        = {Moduli spaces of higher spin curves and integrable hierarchies},
+  journal      = {Compositio Mathematica},
+  volume       = {126},
+  number       = {2},
+  pages        = {157--212},
+  year         = {2001},
+  eprint       = {math/9905034},
+  archivePrefix= {arXiv},
+  primaryClass = {math.AG},
+  doi          = {10.1023/A:1017528003622},
+  note         = {登记理由：`ISSUES.md` I2 —— [FKP, §2.6] 将带标记点的稳定 spin curve 栈之光滑性/
+                 properness 归约到**两篇** Jarvis 相关文献（FKP 自己编号 [22]、[23]），但本项目此前
+                 `literature/sources.bib` 与 paper.md 均只登记了 [22]（单作者 `jarvis-2000`），[23] 从
+                 未被识别，`literature/extractions/felder-kazhdan-polishchuk-2020.md` 明确记录此缺口
+                 （"[22]、[23]（Jarvis 的两篇文章，本条目未逐一核实完整书目）"）。
+                 **本轮解决**：FKP 自己 References 页原文（arXiv:2006.13271v3 PDF p.73，L1 页图核实，
+                 2026-09-23）：[23] "T. J. Jarvis, T. Kimura, A. Vaintrob, Moduli spaces of
+                 higher spin curves and integrable hierarchies, Compositio Math. 126 (2001), no. 2,
+                 157–212." —— 是一篇**三作者**、发表于 *Compositio Mathematica* 的独立文章，与 [22]
+                 （`jarvis-2000`，单作者，*Internat. J. Math.*）是完全不同的两篇文献，此前从未在本项目
+                 任何地方出现过。arXiv 编号 (math/9905034) 与 Compositio DOI 经 WebSearch 交叉核实一致。
+                 **书目信息达 L1（FKP 参考文献页原文直读）；本文自身全文 PDF 未获取，未做逐字抽取。**
+                 这是 paper.md 投稿前必须补全到参考文献列表的第二篇 Jarvis 文献（`ISSUES.md` I2 由此
+                 解决，供 lead/theorem-prover 决定是否更新 paper.md 的引用列表——本 researcher 不改
+                 `research/**`）。}
+}
+
+@article{dhoker-phong-2002-i,
+  author       = {D'Hoker, Eric and Phong, Duong H.},
+  title        = {Two-Loop Superstrings {I}: Main Formulas},
+  journal      = {Physics Letters B},
+  volume       = {529},
+  pages        = {241--255},
+  year         = {2002},
+  eprint       = {hep-th/0110247},
+  archivePrefix= {arXiv},
+  primaryClass = {hep-th},
+  note         = {登记理由：`research/attempts/supermoduli-measure-consequence/claim.md` 的"强制自查"
+                 环节（该原创证明尝试判断 Theorem M 是否与 D'Hoker--Phong 亏格 2 已完成计算矛盾）需要
+                 核实此六篇论文的构造方法之定义域，此前只有 WebSearch 摘要级证据
+                 （`research/attempts/supermoduli-measure-consequence/scratch/websearch-log.md`），
+                 本轮由 researcher 升级到 L1（arXiv PDF 页图直读，`Read` 工具，**禁用 pdftotext 承载
+                 陈述**，仅用 pdftotext 定位关键词所在页码，2026-09-23）。
+                 **摘要逐字**（v1 p.1）："An unambiguous and slice-independent formula for the two-loop
+                 superstring measure on moduli space for even spin structure is constructed from first
+                 principles... for fixed spin structure, the measure exhibits **the expected behavior
+                 under degenerations of the surface**."
+                 **p.12（§8）逐字**："the asymptotic behavior of the measure as Ω approaches **the
+                 boundary of moduli space** for a separating degeneration... is obtained by decomposing
+                 the period matrix and the spin structure consistently with the separation" —— 用
+                 τ→0（分离退化）经典 θ 函数展开公式直接算出边界渐近，**没有出现任何"紧化超模叠的
+                 整体收缩/retraction"式构造**；"moduli space" 在此上下文是**已完成奇模空间积分之后
+                 的纯玻色周期矩阵空间**（经典 DM 型 $\overline{M}_2$ 边界），与 Theorem M 讨论的
+                 **超**模叠 $\overline{\mathfrak S}_{g;n,2r}$ 是不同对象。详见
+                 `literature/extractions/dhoker-phong-two-loop-i-vi.md`。}
+}
+
+@article{dhoker-phong-2002-ii,
+  author       = {D'Hoker, Eric and Phong, Duong H.},
+  title        = {Two-Loop Superstrings {II}: The Chiral Measure on Moduli Space},
+  journal      = {Nuclear Physics B},
+  volume       = {636},
+  pages        = {3--60},
+  year         = {2002},
+  eprint       = {hep-th/0110283},
+  archivePrefix= {arXiv},
+  primaryClass = {hep-th},
+  note         = {登记理由同 `dhoker-phong-2002-i`。**摘要逐字**（v1 p.1）："...describes how
+                 supergeometries are projected onto their super period matrices, and the integration
+                 over odd supermoduli is performed by integrating over the fibers of this projection."
+                 引言（p.3 附近）解释旧投影 $E_M{}^A\to e_m{}^a$（"玻色几何"）为何病态定义，新投影
+                 $E_M{}^A\to\hat\Omega_{IJ}$（超周期矩阵）"is well defined for any genus $h$"。
+                 **全文（pdftotext 关键词扫描定位辅助，非承重）未出现任何 "degenerat"/"compactif"/
+                 "smooth"/"Deligne" 字样**——本文只做局部/切片式的规范固定构造，完全不触及边界/
+                 退化/紧化问题，这些留给系列的第 IV 篇处理。详见
+                 `literature/extractions/dhoker-phong-two-loop-i-vi.md`。}
+}
+
+@article{dhoker-phong-2002-iii,
+  author       = {D'Hoker, Eric and Phong, Duong H.},
+  title        = {Two-Loop Superstrings {III}: Slice Independence and Absence of Ambiguities},
+  journal      = {Nuclear Physics B},
+  volume       = {636},
+  pages        = {61--79},
+  year         = {2002},
+  eprint       = {hep-th/0111016},
+  archivePrefix= {arXiv},
+  primaryClass = {hep-th},
+  note         = {登记理由同 `dhoker-phong-2002-i`。**摘要+引言逐字**（v1 pp.1--2，L1 页图核实，
+                 2026-09-23）：证明测度公式对两点支撑的 gravitino 切片 $\chi_{\bar z}^+ =
+                 \zeta^1\delta(z,x_1)+\zeta^2\delta(z,x_2)$ **局部且整体**独立于 $x_\alpha, q_\alpha,
+                 p_a$；方法用亏格 2 黎曼曲面上的亚纯 Green 函数与全纯微分显式表达，是逐点在（未紧化的）
+                 模空间上做的构造。未出现紧化/边界语言（该系列此步骤仍不涉及边界）。详见
+                 `literature/extractions/dhoker-phong-two-loop-i-vi.md`。}
+}
+
+@article{dhoker-phong-2002-iv,
+  author       = {D'Hoker, Eric and Phong, Duong H.},
+  title        = {Two-Loop Superstrings {IV}: The Cosmological Constant and Modular Forms},
+  journal      = {Nuclear Physics B},
+  volume       = {639},
+  pages        = {129--181},
+  year         = {2002},
+  eprint       = {hep-th/0111040},
+  archivePrefix= {arXiv},
+  primaryClass = {hep-th},
+  note         = {登记理由同 `dhoker-phong-2002-i`。**这是六篇中唯一明确处理"退化/边界"的一篇**
+                 （§5 "Degenerations -- Proofs of ϑ-constant Relations"，p.32 起，L1 页图核实，
+                 2026-09-23）。**p.29 逐字**："the factor of proportionality must be a modular function
+                 holomorphic on **(compactified) moduli space** and thus constant." —— ⚠ **这里的
+                 "(compactified) moduli space" 是经典（玻色）亏格 2 黎曼曲面模空间的 Deligne--Mumford
+                 紧化 $\overline{M}_2$（θ-constant 作为经典 Siegel 模形式在其上全纯），不是 Theorem M
+                 讨论的**超**模叠 $\overline{\mathfrak S}_{g;n,2r}$ 的紧化——两者是完全不同层级的对象，
+                 混淆会是一个真实的引用错误。**p.32 §5.1 逐字**："There are two possible degenerations
+                 (up to the action of the modular group): the separating degeneration, τ→0... and the
+                 non-separating degeneration, τ₂→+i∞..." —— 用经典亏格 2 周期矩阵 Ω 的退化极限（分离/
+                 非分离）配合 θ 函数渐近展开公式完成，**全文未出现任何超几何紧化叠、任何超模叠上的
+                 整体收缩/retraction 构造**。详见 `literature/extractions/
+                 dhoker-phong-two-loop-i-vi.md`（含逐字核实过程与对 Proposition C 的裁定）。}
+}
+
+@article{dhoker-phong-2005-v,
+  author       = {D'Hoker, Eric and Phong, Duong H.},
+  title        = {Two-Loop Superstrings {V}: Gauge Slice Independence of the N-Point Function},
+  journal      = {Nuclear Physics B},
+  volume       = {715},
+  pages        = {91--119},
+  year         = {2005},
+  eprint       = {hep-th/0501196},
+  archivePrefix= {arXiv},
+  primaryClass = {hep-th},
+  note         = {登记理由同 `dhoker-phong-2002-i`。**摘要逐字**（L1 页图核实，2026-09-23）："A
+                 systematic construction of superstring scattering amplitudes for N massless NS bosons
+                 to two loop order is given, based on **the projection of supermoduli space onto super
+                 period matrices used earlier for the superstring measure in the first four papers of
+                 this series**." —— 与 I--IV 同一套投影方法的推广到 N 点函数，未涉及紧化/边界。详见
+                 `literature/extractions/dhoker-phong-two-loop-i-vi.md`。}
+}
+
+@article{dhoker-phong-2005-vi,
+  author       = {D'Hoker, Eric and Phong, Duong H.},
+  title        = {Two-Loop Superstrings {VI}: Non-Renormalization Theorems and the 4-Point Function},
+  journal      = {Nuclear Physics B},
+  volume       = {715},
+  pages        = {3--90},
+  year         = {2005},
+  eprint       = {hep-th/0501197},
+  archivePrefix= {arXiv},
+  primaryClass = {hep-th},
+  note         = {登记理由同 `dhoker-phong-2002-i`。**摘要逐字**（L1 页图核实，2026-09-23）："The
+                 N-point amplitudes... are evaluated explicitly from first principles, using **the
+                 method of projection onto super period matrices introduced and developed in the first
+                 five papers of this series**." $N\le4$ 显式 4 点计算，同一投影方法，未涉及紧化/边界。
+                 详见 `literature/extractions/dhoker-phong-two-loop-i-vi.md`。}
+}
+
+@misc{dhoker-phong-2002-lectures,
+  author       = {D'Hoker, Eric and Phong, Duong H.},
+  title        = {Lectures on Two-Loop Superstrings},
+  year         = {2002},
+  eprint       = {hep-th/0211111},
+  archivePrefix= {arXiv},
+  primaryClass = {hep-th},
+  note         = {登记理由：`research/attempts/supermoduli-measure-consequence/draft-section.md`（只读，
+                 未毕业草稿）把本文与 `dhoker-phong-2002-i`..`dhoker-phong-2005-vi` 六篇一起定义为其
+                 引用键 [DP]（"the six-paper *Two-Loop Superstrings* series ... together with its
+                 review, *Lectures on Two-Loop Superstrings*, hep-th/0211111"）。**核实档位：仅
+                 书目层面**（经 `WebSearch` 交叉核对，未 `Read` 渲染 PDF 页图，未达 L1）——WebSearch
+                 结果显示标题、作者、arXiv 编号、摘要一致（"lecture notes in Hangzhou, Beijing 2002"，
+                 UCLA/02/TEP/28、Columbia/Math/02），内容是对
+                 `dhoker-phong-2002-i`--`dhoker-phong-2002-iv` 已发表结果的综述（同一投影方法，无新
+                 结果）。发表状态存在歧义：部分来源标注为"unpublished lecture notes (2002)"，另一些
+                 标注为会议录 "Conf. Proc. C 0208124, 85 (2002)"——两者均未独立核实，`journal` /
+                 `booktitle` 字段留空以免编造，仅登记为 `@misc` + arXiv eprint。DOI 未找到，未填写。
+                 draft-section.md 本身诚实标注这篇（连同六篇正文论文）"none... has been individually
+                 extracted by this project"、"used WebSearch-level verification only"——本条目忠实
+                 反映这一核实档位，未升级。未见本文被 `research/attempts/supermoduli-measure-consequence/`
+                 的 `argument.md` 正文当作论证前提引用（只在 `draft-section.md` 的 [DP] 键定义与
+                 welding notes 中提及）。}
 }
