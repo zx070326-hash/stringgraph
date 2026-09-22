@@ -48,6 +48,34 @@ completion rather than a new argument. If it is judged a new argument, the alter
 Lemma 8.2(i) to "within this method, and for the even theta characteristics the method requires,
 $h\ge2$ cannot be weakened", which is what `proof.md` actually establishes.
 
+**✅ ADJUDICATED (lead, 2026-09-22): keep the strong version. No reviewer round dispatched.**
+
+Verdict: (c) is an **expository completion**, not a new argument, and Lemma 8.2(i) stands as drafted.
+
+Reasoning. The standing hypothesis was checked against the source: `claim.md` I8 reads verbatim
+"$h\ge2$ 的光滑曲线上存在**无效偶** theta 特征" — *ineffective even*, both adjectives present in the
+input the construction has been running on since §4. The theta characteristics of an elliptic curve
+are a **completely classified finite set**: $L^{\otimes2}\cong\omega_E=\mathcal O_E$ makes $L$ a
+$2$-torsion point of $\mathrm{Pic}^0(E)$, of which there are exactly four — $\mathcal O_E$ with
+$h^0=1$ (odd, effective) and three non-trivial ones with $h^0=0$ (even). Checking a stated hypothesis
+against an exhaustively classified four-element set is verification of a premise already in force,
+not the introduction of a new one. The arithmetic was re-derived independently: for even $L$, Serre
+duality gives $h^1(E,L^{-1})=h^0(E,\omega_E\otimes L)^\vee=h^0(E,L)^\vee=0$; for $L=\mathcal O_E$,
+$h^1(E,\mathcal O_E)=h^0(E,\mathcal O_E)=1\ne0$; and at $h=0$ the unique theta characteristic
+$L=\mathcal O(-1)$ gives $h^1(\mathbb P^1,\mathcal O(1))=0$. All three agree with the draft.
+
+Why no reviewer agent was dispatched. Root `CLAUDE.md` principle 8 fixes the audit trigger at
+consequence, and forbids spending a round on a check that moves nothing. This paper is not in
+`graph/`, so no node's `effective` moves; the external-release trigger 8(c) is live **but fires at
+submission**, where the object of review is the whole manuscript, not one sentence of textbook
+algebraic geometry. Dispatching an agent to re-derive the classification of theta characteristics on
+an elliptic curve is precisely the "边界清晰、一定做得完、做完能写一段漂亮记录" failure mode that
+principle 8 names.
+
+⚠ This adjudication covers **only** I1. It is **not** a pre-submission review of `paper.md`, and it
+does not touch `captain_confirmed`. I2–I6 remain open and are production blockers listed in
+`NOTES-for-captain.md` §4.
+
 **Incidental**: the source's parenthetical "$h^0(E,L^{-1})=0$" is true but irrelevant (the quantity
 needed is $h^0(E,L)$, which Serre duality converts $h^1(E,L^{-1})$ into). Dropped in the paper; no
 consequence.
