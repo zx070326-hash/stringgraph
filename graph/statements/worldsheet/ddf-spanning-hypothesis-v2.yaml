@@ -93,24 +93,35 @@ sources:
       即截距 1。故 --via-borcherds-1992 那条推导一直证的就是带前件的版本，旧卡只是写宽了。
       详见 worldsheet.ddf-spanning-hypothesis--via-borcherds-1992 的 notes。
   - ref: stringformal-2026
-    loc: "formal/StringFormal/NoGhost/Assembly.lean :: StringFormal.NoGhost.DDFSpans（本卡的 formal.lean_decl，是一个 `def … : Prop`，**不是定理**）；分片版 DDFSpansOn；拼装 Glue.lean :: ddfSpans_of_forall_slice；前件的来源 LightConeFrame.lean :: DDFLightConeFrame.dotVec_self_eq_two"
+    loc: "formal/StringFormal/NoGhost/Assembly.lean :: StringFormal.NoGhost.DDFSpansAtIntercept（2026-09-23 起是本卡的 formal.lean_decl，是一个 `def … : Prop`，**不是定理**）；无前件版 DDFSpans（已不再是本卡的 lean_decl）；分片版 DDFSpansOn；拼装 Glue.lean :: ddfSpans_of_forall_slice；SliceRank.lean :: ddfSpansAtIntercept_of_forall_b26；前件的来源 LightConeFrame.lean :: DDFLightConeFrame.dotVec_self_eq_two"
     note: |
       **Lean 侧没有这条命题的证明，只有它的陈述**。`DDFSpans` 逐字是
         `towerPhysSubmodule η a b (invTwo R * Fock.zeroModeSq η a)`
           `≤ ddfSpan η a b hη Ε ⊔ towerNullSubmodule η a b (invTwo R * Fock.zeroModeSq η a)`，
       它在 Assembly.lean 里**只作为假设出现**（`no_ghost_of_spans (hspan : DDFSpans …)`）。
-      ⚠ 本卡**不能**标 formalized：`formal.lean_decl` 指向的是一个 `Prop` 的定义，不是一条
-      无 sorry 的定理。列出它是为了给卡面的**结论**一个逐字的机器可读对应物，不是 status 的依据。
-      ⚠⚠ **Lean 的 `DDFSpans` 不含本卡的前件**（也不含 `hbb : b·b = 0` 与 `hba : b·a = 1`）。
-      后果与处置：
-        (i) `DDFSpans` 作为一个对 (η, a, b, hη, Ε) 全称量化的 `Prop`，**逐字地是假的**
-            （notes 的反例即其否证），但 Lean 里**从未有人证明它**——它只以假设身份出现，
+      ⚠ 本卡**仍然不能**标 formalized：`formal.lean_decl` 指向的是一个 `Prop` 的定义，不是一条
+      无 sorry 的定理（`DDFSpansAtIntercept` 同样是 `def`，2026-09-23 的改动没有动这一点）。
+      列出它是为了给卡面的**结论**一个逐字的机器可读对应物，不是 status 的依据。
+      ⚠⚠ **前件缺口已于 2026-09-23 处置**（formalizer；本卡 lean_decl 随之改指）。历史与处置：
+        (i) `DDFSpans` 不含本卡的前件（也不含 `hbb : b·b = 0` 与 `hba : b·a = 1`）。它作为一个
+            对 (η, a, b, hη, Ε) 全称量化的 `Prop`，**逐字地是假的**（notes 的反例即其否证），
+            但 Lean 里**从未有人证明它**——它只以假设身份出现（`no_ghost_of_spans (hspan : …)`），
             故本项目的机检背书**没有超额声称**（check-axioms 不受影响）。
         (ii) 每一处消费它的定理都另行携带足以蕴含本前件的数据：`DDFLightConeFrame` 在域上
             经 `dotVec_self_eq_two` 强制 η(a,a) = 2（其证明的中间步正是 η(v,v) = 0）。
-        (iii) 前件的组合是平凡的：`fun hv => ddfSpans_of_forall_b26 (h hv)` 一类改写即可，
-            **本轮 Lean 一行未改**，也不需要改。
-      **curator 未自行跑 `lake build`**；本卡不标 formalized，故也不依赖 check-axioms。
+        (iii) 2026-09-23 新增 `DDFSpansAtIntercept`，逐字是
+            `dotVec η (towerMomentum a b (-1)) (towerMomentum a b (-1)) = 0 → DDFSpans η a b hη Ε`，
+            即本卡的蕴含形（`towerMomentum a b j = a + j·b`，故 `j = -1` 处正是 v = a − b）。
+            同时新增 `ddfSpansAtIntercept_of_forall_b26 : (∀ N, B26 …) → DDFSpansAtIntercept …`，
+            其证明是 `fun _ => ddfSpans_of_forall_b26 …`——**前件被直接丢弃**，因为既有归约
+            `ddfSpans_of_forall_b26` 对任意 a₀ 都成立。换言之本轮没有新增数学内容，
+            只是给卡面配了一个逐字对应的 Lean 对象。
+        (iv) **`DDFSpans` 与 `no_ghost_of_spans` 一字未动**（故对已标 formalized 的
+            worldsheet.no-ghost-theorem-conditional-on-ddf-spanning 零风险）。理由：把前件折进
+            `DDFSpans` 本身会迫使 `no_ghost_of_spans` 多带一条**顶层**截距假设，那将违反该卡
+            【不断言】(b) 逐字写的「D = 26 与 a = 1 的全部内容都在前件里」。
+      2026-09-23 已跑：`lake build` 无 sorry、`check-axioms` 119/119 ok、validate 0 errors、pytest 101 passed。
+      本卡 `effective` 前后均为 physical-argument（best_derivation 仍是 --via-borcherds-1992），零移动。
   - ref: goddard-thorn-1972
     loc: "无编号定理；摘要末句 'absence of ghosts for d ⩽ 26'（**正文本项目未获取**）"
     note: |
