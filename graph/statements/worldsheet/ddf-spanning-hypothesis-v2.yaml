@@ -75,7 +75,7 @@ uses_conventions:
   - conv.virasoro-standard
   - conv.intercept-sign-a
 formal:
-  lean_decl: StringFormal.NoGhost.DDFSpans
+  lean_decl: StringFormal.NoGhost.DDFSpansAtIntercept
   lean_file: StringFormal/NoGhost/Assembly.lean
 sources:
   - ref: goddard-2008
