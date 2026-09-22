@@ -42,6 +42,10 @@ from the §B.6 result of `StringFormal/NoGhost/LightCone.lean`.
   `H_phys ≤ ddfSpan ⊔ H_null` at the ground-state intercept `a₀ = α' k²`.
 * `DDFSpansOn η a b hη Ε W` — its restriction to a subspace `W` of the tower, used to state
   the graded increments of §B.6.
+* `DDFSpansAtIntercept η a b hη Ε` — `DDFSpans`, conditioned on the intercept premise
+  `η(a - b, a - b) = 0` of graph card `worldsheet.ddf-spanning-hypothesis-v2` (that card's
+  literal implication form; `DDFSpans` itself carries no such premise and is a strictly
+  stronger, in general false, statement).
 
 ## Main results
 
@@ -69,7 +73,10 @@ parameter.  The ordered-field hypotheses (`LinearOrder`, `IsStrictOrderedRing`) 
 * `DDFSpans` itself is unproved in general (blueprint §B; this is the `ddf-spans` gap of
   `worldsheet.no-ghost-theorem-v4--via-goddard-thorn`).  Only the `(-1, 1)` bigrade is
   discharged, and even that needs the two extra hypotheses `hεa` and `FrameSpansOrthogonal`
-  recorded in `LightCone.lean`.
+  recorded in `LightCone.lean`.  The same is true of `DDFSpansAtIntercept` when its premise
+  holds: proving the implication's conclusion in that case is exactly the same open content
+  (`ddfSpansAtIntercept_of_forall_b26` in `SliceRank.lean` reduces it to `B26`, unconditionally
+  in the premise, but `B26` itself is open — same gap, different name).
 * No isometry `ddfSpan ≃ₗ H_phys ⧸ H_null` is constructed (blueprint's `noGhostEquiv`).
   Injectivity of `ddfSpan → H_phys ⧸ H_null` does follow from `ddf_span_pos`, but surjectivity
   is exactly `DDFSpans` again, so the equivalence would carry no information beyond the
@@ -104,6 +111,25 @@ def DDFSpansOn (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1) (Ε : Tr
     (W : Submodule R (TowerFock D R)) : Prop :=
   towerPhysSubmodule η a b (invTwo R * Fock.zeroModeSq η a) ⊓ W
     ≤ ddfSpan η a b hη Ε ⊔ towerNullSubmodule η a b (invTwo R * Fock.zeroModeSq η a)
+
+/-- **`DDFSpans`, conditioned on the critical intercept** — graph card
+`worldsheet.ddf-spanning-hypothesis-v2`.
+
+That card's sole premise is written `η(v, v) = 0` with `v := a - b` (Lean `towerMomentum a b
+(-1)`), *not* as `dotVec η a a = 2`: this is deliberate on the card's part, since it lets the
+premise be stated without assuming the normalisation `(S) : η(b, a) = 1` (`hba`); the two forms
+agree only once `(N) : η(b, b) = 0` and `(S)` both hold (card notes). This definition mirrors
+that choice: it takes no `hbb`/`hba` hypotheses.
+
+Unlike `DDFSpans`, this `Prop` is **not** falsified by the `D = 26, a₀ = 2` counter-example
+recorded on the graph card: when the premise fails the implication holds vacuously, and when it
+holds the conclusion is exactly `DDFSpans`. It remains unproved in general — proving it when the
+premise holds is exactly the same open mathematical content as `DDFSpans` restricted to `a₀ = 1`
+(see `ddfSpansAtIntercept_of_forall_b26` in `SliceRank.lean` for the reduction to `B26`, which is
+unconditional in the premise and simply discards it). -/
+def DDFSpansAtIntercept (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (Ε : TransverseFrame η b) : Prop :=
+  dotVec η (towerMomentum a b (-1)) (towerMomentum a b (-1)) = 0 → DDFSpans η a b hη Ε
 
 variable {η a b : Fin D → R} {hη : ∀ μ, η μ * η μ = 1} {Ε : TransverseFrame η b}
 

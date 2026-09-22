@@ -201,6 +201,15 @@ theorem ddfSpans_of_forall_b26 (h : ∀ N : ℕ, B26 η a b hη Ε N) : DDFSpans
   ddfSpans_of_forall_antidiagonal_slice_int hbb hba fun N =>
     ddfSpansOn_bigrade_of_b26 hbb hba (h N)
 
+include hη hbb hba in
+/-- **`(B-26)` for every `N` implies `DDFSpansAtIntercept`.**  Graph card
+`worldsheet.ddf-spanning-hypothesis-v2`: the reduction `ddfSpans_of_forall_b26` above carries no
+condition on the intercept at all (it is valid for every `a₀`), so discharging the card's
+implication form is immediate — the intercept hypothesis is simply unused. -/
+theorem ddfSpansAtIntercept_of_forall_b26 (h : ∀ N : ℕ, B26 η a b hη Ε N) :
+    DDFSpansAtIntercept η a b hη Ε :=
+  fun _ => ddfSpans_of_forall_b26 hbb hba h
+
 end B26
 
 end StringFormal.NoGhost
