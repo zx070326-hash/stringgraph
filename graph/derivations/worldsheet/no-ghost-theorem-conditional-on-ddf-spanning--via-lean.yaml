@@ -3,7 +3,7 @@ target: worldsheet.no-ghost-theorem-conditional-on-ddf-spanning
 kind: proof
 status: formalized
 depends_on:
-  - id: worldsheet.ddf-spanning-hypothesis
+  - id: worldsheet.ddf-spanning-hypothesis-v2
     inferred: false
     note: |
       **条件命题的前件，不是证明步骤。** 这是 Lean 声明 `no_ghost_of_spans (hspan : DDFSpans η a b hη Ε)`
@@ -14,6 +14,14 @@ depends_on:
       条件版的有效状态就该由前件决定。本推导自身 status 仍是 formalized（Lean 无 sorry），
       工具会同时显示 own=formalized / effective=open，两者都对，读卡时请都看。
       **不要**为抬高 effective 而删这条边或给前件挂弱推导。
+      ⚠ **2026-09-22（curator，分支 agent/curator/ddf-spanning-intercept-premise）：本边由
+      worldsheet.ddf-spanning-hypothesis 改指 worldsheet.ddf-spanning-hypothesis-v2。**
+      旧卡缺一条前件 η(v,v) = 0（v := a − b；在 (N)(S) 下即 a₀ = 1）因而逐字为假，已换代。
+      **本推导的证明体一步未动**：前件在这里是被当黑箱整体传入 Lean 参数 `hspan` 的，
+      把前件文字收窄不触及证明的任何一步；目标卡 worldsheet.no-ghost-theorem-conditional-on-ddf-spanning
+      的【本卡明确不断言】(b) 逐字写「D = 26 与 a = 1 的全部内容都在前件里」——
+      换代后这句话第一次真的成立（此前前件卡面根本没写 a = 1）。
+      本推导 own=formalized / effective 均不变。
   - id: worldsheet.transverse-ddf-fock-gram-matrix
     inferred: false
     note: |

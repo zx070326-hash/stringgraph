@@ -87,7 +87,49 @@ sources:
       文献侧论证的原始出处，**本项目未读到**。Goddard 2008 §6 把 (6.4) 归给它。
       登记它是为了标明「若要给本卡补一条推导，第一站在哪里」，不是论证来源。
 tags: [bosonic-string, no-ghost, ddf-spans, spectrum-generating-algebra, gap, bottleneck, open]
+superseded_by: worldsheet.ddf-spanning-hypothesis-v2
 notes: |
+  【2026-09-22：本卡已换代，被 worldsheet.ddf-spanning-hypothesis-v2 取代（curator，
+  分支 agent/curator/ddf-spanning-intercept-premise）。原因：**本卡如字面所写为假**——
+  它漏了一条前件 η(v, v) = 0（v := a − b；在 (N) η(b,b)=0 与 (S) η(b,a)=1 之下即 a₀ = 1）。
+  下面各段是换代前的历史记账，**一字未删**，但读时须带上这条订正。】
+
+  **反例**（conv.metric-mostly-plus 的 η = diag(−1,+1,…,+1)，D = 26）：
+    a = (3/2, 5/2, 0, …) ⇒ η(a,a) = 4 ⇒ a₀ = 2；b = (1,1,0,…) ⇒ η(b,b) = 0、η(b,a) = 1；
+    v = a − b ⇒ η(v,v) = 2 ≠ 0。
+  在片 (rung −1, level 1) 上：a₀ = 1 时 dim H_phys 25、dim D(Ε) 24、dim H_null 1（25 ≤ 24+1 ✔）；
+  a₀ = 2 时 dim H_phys 25、dim D(Ε) 24、dim H_null 0（25 > 24+0 ✘）。
+  该片上 dim D(Ε) ≤ D − 2 是无条件的（DDF 单项式双分次齐次，该片只有 A^{ε_i}_{−1}|0;a⟩），
+  故反例不依赖 worldsheet.ddf-contour-equals-mode-sum 那条未闭合的算子字典。
+  **第二条、不经任何脚本的证据**：同参数下取 ζ = (3,1,0,…) ∈ v^⊥，η(ζ,ζ) = −8，
+  则 ζ·α_{−1}|0;v⟩ ∈ H_phys 而自配对 = −8 < 0；但本仓库已 formalized 的
+  `StringFormal.NoGhost.no_ghost_of_spans` 给出「DDFSpans ⇒ 物理态自配对 ≥ 0」
+  （任意有序域、任意 D），取逆否即得本卡在该参数处为假。
+
+  **本卡不是「猜错了」，而是卡面内部矛盾**：【断言（本卡的全部内容）】一行无条件写出包含式，
+  而边界 (c) 逐字写「不断言本卡在哪些 (D, a₀) 上为真」。全称读法被上面的反例否证；
+  边界优先读法则使本卡什么都没断言，于是挂在它上面的两条推导与
+  worldsheet.no-ghost-theorem-conditional-on-ddf-spanning 的前件全部失去指称对象。
+  两种读法都不可接受，故换代而非就地改文本。
+  **选择换代而非就地改的另一个理由**：ms.no-ghost-theorem 的 R8-3/R9-4/R10-1 三条审计记录
+  逐字指称本卡 id；就地改文本会在不动一个字符的情况下改变已签字审计条目的含义。
+  保持那三条继续指向本卡是正确的。
+
+  **本项目自己的两处文字早已默认该前件**：(i) 下面【为什么 26 只在这里】一节逐字写
+  「两者只有在 D = 26、a₀ = 1 时相等」；(ii) worldsheet.no-ghost-theorem-conditional-on-ddf-spanning
+  的【本卡明确不断言】(b) 逐字写「D = 26 与 a = 1 的全部内容都在前件里」。
+  **然而本卡从头到尾没有任何一处写下 a = 1。** 这道缝正是换代修补的对象。
+
+  **两条推导已搬到 v2 卡**（`--via-borcherds-1992`、`--via-rank-inequalities`，id 与文件名
+  各加 `-v2`，因 validate 强制推导 id 以 target 开头），故本卡现在无推导、effective = open。
+  这是换代的记账影子，不是下游变化：本卡已被 superseded，无任何节点依赖它。
+  ⚠ 旧 id `worldsheet.ddf-spanning-hypothesis--via-borcherds-1992` /
+  `--via-rank-inequalities` 在 docs/、formal/、research/ 的散文里有引用，现已悬空，
+  按 graph/CLAUDE.md 2026-09-12 裁决 curator 不就地改别处正文，已交 lead 处理。
+
+  ──────────────────────────────────────────────────────────────────────
+  （以下为换代前的原始 notes，一字未删）
+
   【本卡无推导、effective = open，这是刻意的】
   与 worldsheet.string-cft-is-a-vertex-algebra-v2 同型：它是一条**已知的承重假设**，
   本图拒绝用「大家都相信」把它抬到 physical-argument。理由有二：

@@ -1,0 +1,144 @@
+id: worldsheet.ddf-spanning-rank-inequality-v2
+kind: proposition
+title: (B-26) 的秩不等式改写，**带 η(v, v) = 0 前件**：每个反对角片 (rung −N, level N) 上 dim H_N ≤ dim D_N + dim Z_N——换代自 worldsheet.ddf-spanning-rank-inequality（旧卡缺此前件，N = 1 片即反例）
+statement: |
+  记号沿用 worldsheet.ddf-spanning-hypothesis-v2（同一张塔 T(k;k_0)、同一横向标架 Ε、
+  同一截距 a₀ := α'k² = ½η(a,a)）与 worldsheet.transverse-ddf-fock-gram-matrix
+  的双分次 towerBigrade（rung, level）。系数环这里换成一个域 K（交换 Q-代数的特殊情形，
+  finrank 需要域）。
+
+  【前件（本卡与 worldsheet.ddf-spanning-rank-inequality 的**唯一**差别）】
+  记 **v := a − b**（第 −1 层的动量）。本卡假设 **η(v, v) = 0**。
+  与 worldsheet.ddf-spanning-hypothesis-v2 的前件逐字同一条：在 (N) η(b,b) = 0 与
+  (S) η(b,a) = 1 之下它即 a₀ = 1；本卡与那张卡一样，设定里有 (N) 而没有 (S)，
+  故卡面取不依赖 (S) 的形式 η(v,v) = 0。
+
+  【记号：反对角片与三个片内子空间】对每个 N ∈ N，令
+    V_N  := towerBigrade(−N, N)  （rung −N、振子能级 N 的双分次片，K-有限维）
+    H_N  := H_phys ∩ V_N
+    D_N  := D(Ε) ∩ V_N
+    Z_N  := H_null ∩ V_N
+  （H_phys、D(Ε)、H_null 三者的定义逐字取自 worldsheet.ddf-spanning-hypothesis-v2）。
+
+  【断言（本卡的全部内容，即 (B-26)）】若 **η(v, v) = 0**，则对**一切** N ∈ N：
+
+      dim_K H_N  ≤  dim_K D_N + dim_K Z_N 。
+
+  【本卡明确不断言】
+  (a) **不断言存在性构造**：本卡不提供任何造出 D_N 或 Z_N 里具体向量的方法，
+      只陈述维数比较。
+  (b) **不断言这条不等式对哪些 D 为真**——与 worldsheet.ddf-spanning-hypothesis-v2 边界 (c)
+      同型：本卡是一条逐 (D, N, k, k_0, Ε) 的条件断言，D = 26 在此**首次也是唯一一次**
+      进入无鬼定理链条（见 notes【D = 26 在哪里进入】）。
+      ⚠ 与旧卡 (b) 的差别：旧卡把 D 与 a₀ 一起推给「不断言」，而卡面断言又写「对一切 N」，
+      两者不相容（见 notes【旧卡为什么必须换代】）；本卡把 a₀ 那一半提成前件，
+      (b) 只剩 D 这一半。
+  (c) **不断言反向不等式**。反向 dim_K H_N ≥ dim_K D_N + dim_K Z_N **恒成立**且不需要
+      D 的任何取值（D_N、Z_N 都是 H_N 的子空间且只交于零），
+      故合起来才是「H_N = D_N ⊕ Z_N」；本卡只承担困难的那一半。
+  (d) **不断言「逐 N 成立 ⇒ worldsheet.ddf-spanning-hypothesis-v2」**；那是本卡与另外三张
+      formalized 卡拼起来才能给出的结论，见 worldsheet.ddf-spanning-hypothesis--via-rank-inequalities。
+  (e) **不断言 K 上有序结构**。本卡的陈述本身（finrank 不等式）只需要 K 是域且
+      2α'k₀·k = 1 等标度式良定义所需的 ℚ-代数结构；序仅在**证明**「(B-26) ⇒ 张成」
+      这一方向时才用到（`ddf_span_pos`），不进入本卡陈述本身。
+  (f) **不断言前件可以去掉**。前件是**必要**的：N = 1 这一片就是反例，见 notes。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.virasoro-standard, conv.intercept-sign-a]
+formal:
+  lean_related: StringFormal.NoGhost.B26
+  lean_file: StringFormal/NoGhost/SliceRank.lean
+  lean_note: |
+    `B26` is a Prop-valued `def` — the Lean *formulation* of this card's rank inequality, not a
+    proof of it, and it does **not** carry this card's premise `η(v,v) = 0` (nor `hbb`/`hba`).
+    It states, per antidiagonal slice,
+    `dim(H_phys ⊓ V_N) ≤ dim(ddfSpan ⊓ V_N) + dim(H_null ⊓ V_N)`, and is the hypothesis consumed
+    by `ddfSpansOn_bigrade_of_b26` / `ddfSpans_of_forall_b26`. Individual slices are discharged
+    elsewhere (`b26_two_of_D26` … `b26_six_of_D26`), all of them under `dotVec η a a = 2`
+    (equivalently `η(v,v) = 0`), so the premise is present in every proved instance; it is only
+    the unquantified `def` that omits it. The card as stated, quantified over all `N`, is not
+    proved anywhere. (Was `lean_decl` on the superseded card until 2026-09-21, which read as a
+    machine endorsement the declaration does not provide.)
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/SliceRank.lean :: StringFormal.NoGhost.B26（第 156 行；section B26 起于第 140 行）；逐片实例 b26_two_of_D26 … b26_six_of_D26"
+    note: |
+      **本条不是一条定理，是一个 `Prop` 的定义**——与 worldsheet.ddf-spanning-hypothesis-v2 的
+      `DDFSpans` 同型。逐字：
+        `def B26 (η a b : Fin D → K) (hη : ∀ μ, η μ * η μ = 1) (Ε : TransverseFrame η b)
+           (N : ℕ) : Prop :=
+           finrank K ↥(towerPhysSubmodule η a b (invTwo K * Fock.zeroModeSq η a)
+                         ⊓ towerBigrade D K (-(N:ℤ)) N)
+             ≤ finrank K ↥(ddfSpan η a b hη Ε ⊓ towerBigrade D K (-(N:ℤ)) N)
+               + finrank K ↥(towerNullSubmodule η a b (invTwo K * Fock.zeroModeSq η a)
+                               ⊓ towerBigrade D K (-(N:ℤ)) N)`
+      与本卡**结论**逐字一致（H_N/D_N/Z_N 分别是三个 `finrank` 项里的子模）；
+      ⚠ 本卡的**前件**不在 `B26` 里，与 worldsheet.ddf-spanning-hypothesis-v2 的
+      sources 第三条 ⚠⚠ 完全同型：`B26` 作为全称 `Prop` 逐字为假（N = 1 片即反例），
+      但 Lean 里从未有人证明全称版本，每个被证出的具体片都另行携带 `dotVec η a a = 2`，
+      故机检背书没有超额声称。
+      **类型类比封闭 `section` 的 `variable` 行窄**：该 section 的 `variable` 声明写了
+      `[Field K] [LinearOrder K] [IsStrictOrderedRing K] [Algebra ℚ K]`，但 `B26` 的陈述里
+      不出现任何序结构，Lean 的 `variable` 自动包含机制只拉入陈述**类型**真正用到的实例，
+      故 `B26` 实际 elaborate 出来的签名只有 `[Field K] [Algebra ℚ K]`——由
+      `formal/BLUEPRINT-noghost.md`「B′ 订正（2026-09-12）」第 4 条明文确认。
+      注：`B26` 是**等价改写**而非加强或减弱——`ddfSpansOn_bigrade_iff_b26`（SliceDim.lean）
+      证明 `DDFSpansOn η a b hη Ε (towerBigrade D K (-N) N) ↔ B26 η a b hη Ε N`。
+      **curator 未自行重跑 `lake build`**；本卡不标 formalized（`B26` 是定义不是定理）。
+  - ref: goddard-2008
+    loc: "§6 'No-Ghost Theorem', p.15，(6.4) 上下文；文献不含分片/秩不等式的表述"
+    note: |
+      **不承载论证**。文献直接断言整塔上的张成（worldsheet.ddf-spanning-hypothesis-v2 的表述），
+      不经过逐片秩不等式这一中间步骤；秩改写是本项目（`formal/BLUEPRINT-noghost.md` §B′）
+      为形式化引入的等价重述，登记此条只为给本卡一个文献方位。文献侧的 DDF 构造全程
+      把基态放在 α'k² = 1 的质量壳上，本卡的前件正是把这一点显式化。
+tags: [bosonic-string, no-ghost, ddf-spans, critical-dimension, gap, bottleneck, open]
+notes: |
+  【本卡与 worldsheet.ddf-spanning-rank-inequality 的关系】
+  本卡是旧卡的换代（旧卡 `superseded_by` 指向本卡）。**唯一实质改动**是把前件
+  η(v, v) = 0（在 (N)(S) 下即 a₀ = 1）写上卡面。旧卡 notes 里三百余行的技术记账
+  （D = 26 在哪里进入、Kac 退化点、两族零态、Euler 五边形数重叠、三角性路线被证伪、
+  PR6′、N = 1…6 逐片关闭的全部记录）**全部仍然有效，不在此重复**：那些记账全程在
+  a₀ = 1 上做（Lean 侧每个 `b26_*_of_D26` 都带 `dotVec η a a = 2`），本卡的前件只是
+  把那个一直默认的设定显式化。要查历史请读 worldsheet.ddf-spanning-rank-inequality。
+
+  【旧卡为什么必须换代】
+  旧卡的断言一行写「对**一切** N ∈ N：dim H_N ≤ dim D_N + dim Z_N」，其记号一节把截距写成
+  「同一截距 a₀ := α'k² = ½η(a,a)」（一个**自由**参数，随 a 变），而其边界 (b) 只把
+  **D** 推给「不断言」，没有触及 a₀。于是「对一切 N」这句全称量化在 a₀ 上也是自由的，
+  卡面读作对一切 (D, a₀, N) 断言——**这被下面的反例在 N = 1 处否证**。
+  与 worldsheet.ddf-spanning-hypothesis 旧卡是同一种病：卡面把一个一直默认的前件漏在外面。
+
+  【反例（就是 N = 1 这一片）】
+  取 conv.metric-mostly-plus 的 η = diag(−1, +1, …, +1)，D = 26，
+    a = (3/2, 5/2, 0, …, 0)  ⇒ η(a,a) = 4 ⇒ a₀ = 2；
+    b = (1, 1, 0, …, 0)      ⇒ η(b,b) = 0、η(b,a) = 1（(N)(S) 都成立）；
+    v = a − b                ⇒ η(v,v) = 2 ≠ 0（**本卡前件不成立**）。
+  片 V_1 = towerBigrade(−1, 1) 上（有理数精确算术）：
+      a₀ = 1 :  dim H_1 25   dim D_1 24   dim Z_1 1   ⇒ 25 ≤ 24 + 1  ✔
+      a₀ = 2 :  dim H_1 25   dim D_1 24   dim Z_1 0   ⇒ 25 >  24 + 0  ✘
+  **dim D_1 ≤ D − 2 是无条件的**：DDF 单项式双分次齐次，该片上只有 A^{ε_i}_{−1}|0;a⟩ 这
+  D − 2 个，**与 A^ε_n 究竟展开成什么无关**（故反例不依赖 worldsheet.ddf-contour-equals-mode-sum
+  那条尚未闭合的算子字典）。
+  Z_1 的那一个态是 L_{−1}|0;v⟩ = (v·α_{−1})|0;v⟩：它满足
+  L_1 L_{−1}|0;v⟩ = 2L_0|0;v⟩ = η(v,v)|0;v⟩，故物理当且仅当 η(v,v) = 0，
+  而此时它自动是零态（⟨v·α_{−1}, v·α_{−1}⟩ = η(v,v) = 0）。上表两行的 1 与 0 正是它。
+  ⚠ 这也订正了旧卡上文各处「N ≤ 4 两族计数**恰好相等**」一类记述的适用范围：那些账
+  全是在 a₀ = 1 上算的，脱离前件不成立。
+
+  【D = 26 在哪里进入】
+  与旧卡 notes 同一节所载，逐字仍然有效，此处只留指针：`dim D_N = p_{D−2}(N)`
+  （formalized，`finrank_ddfSpan_inf_towerBigrade`）、`dim H_N ≤ p_{D−1}(N)`
+  （formalized，`finrank_towerPhys_inf_towerBigrade_le`，对一切 D），故本卡的开放内容
+  精确等于零态维数下界 `dim Z_N ≥ p_{D−1}(N) − p_{D−2}(N)`，只在 D = 26 处期望成立。
+  两族零态（Type-1 = L_{−1}Q_{N−1}，Type-2 = 𝒟₂Q_{N−2}，𝒟₂ := 2L_{−2} + 3L_{−1}²）、
+  N ≥ 6 的重叠上界、N ≥ 12 需要新奇异向量族——全部细节见旧卡 notes，本次换代不改动其中任何一条。
+
+  【本卡与 worldsheet.ddf-spanning-hypothesis-v2 的关系】
+  本卡逐 N 成立当且仅当那张卡在对应反对角片上的分片版 `DDFSpansOn` 成立
+  （`ddfSpansOn_bigrade_iff_b26`，等价不是加强）；配合 `Glue.lean` 的拼装引理
+  （`ddfSpans_of_forall_b26`），「本卡对一切 N 成立」与那张卡的结论**逐字等价**。
+  ⚠ 那条拼装引理 `ddfSpans_of_forall_b26` 本身**不带任何 a₀ 条件**——它是一条对任意 a₀
+  都成立的归约（把整塔张成归约到逐片秩不等式），不是被偷偷塞进去的前件。它只是把一条
+  （脱离前件为假的）结论归约到一条（脱离前件同样为假的）前提；两端同时加上本前件后，
+  归约依旧逐字成立，Lean 一行未改。
+author: curator
+created: "2026-09-22"

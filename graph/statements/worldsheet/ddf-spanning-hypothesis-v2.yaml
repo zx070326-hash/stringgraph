@@ -1,0 +1,182 @@
+id: worldsheet.ddf-spanning-hypothesis-v2
+kind: proposition
+title: DDF 张成假设（Goddard–Thorn 的困难一半），**带 η(v, v) = 0 前件**：在 v := a − b 类光的动量塔上 H_phys ⊆ D(Ε) + H_null——换代自 worldsheet.ddf-spanning-hypothesis（旧卡缺此前件，已被反例证伪）
+statement: |
+  【设定】记号逐字沿用 worldsheet.momentum-tower-fock-space、worldsheet.ddf-operators-v6、
+  worldsheet.ddf-operators-preserve-physical-states 与 worldsheet.tower-physical-quotient-form：
+  D ∈ N；系数环 R 是交换 Q-代数；对角度规分量 η_μ 满足 η_μ² = 1（conv.metric-mostly-plus）；
+  η(x, y) = Σ_μ η_μ x^μ y^μ；基点动量 k 与类光参考向量 k_0，重标度
+  a^μ := (2α')^{1/2} k^μ、b^μ := (2α')^{1/2} k_0^μ（conv.alpha-prime-regge）；
+  动量塔 T(k; k_0) = ⊕_{j ∈ Z} F(k + j k_0)（代数直和），其上有层间正交的 R-双线性型 ⟨·,·⟩_T；
+  L_m 是逐层用该层动量的 Sugawara 生成元（worldsheet.virasoro-generators-free-boson），不移动层指标。
+  Ε = (ε_1, …, ε_{D−2}) 是一组横向标架：η(ε_i, b) = 0（横向性）与 η(ε_i, ε_j) = δ_{ij}（正交归一）。
+
+  【前件（本卡与 worldsheet.ddf-spanning-hypothesis 的**唯一**差别）】
+
+      记 **v := a − b**（第 −1 层的动量，Lean `towerMomentum a b (-1)`）。本卡假设
+
+          **η(v, v) = 0** 。
+
+  · 写成 η(v,v) = 0 而**不是** a₀ = 1，是因为本卡【设定】里**没有标度条件 (S) 2α' k_0·k = 1**
+    （即 η(b, a) = 1）。展开 η(v,v) = η(a,a) − 2η(a,b) + η(b,b)：只有再补上 (N) η(b,b) = 0
+    （本卡设定里写了 k_0 类光，故 (N) 成立）与 (S) η(b,a) = 1，才有 η(v,v) = 2a₀ − 2，
+    此时「η(v,v) = 0」⟺「a₀ = 1」。**在 (N)(S) 下本前件即 a₀ = 1（快子壳/截距 1）**；
+    脱离 (S) 两者不等价，故卡面取 η(v,v) = 0 这一不依赖 (S) 的形式。
+  · 这条前件不是本卡凭空加严：它**逐字就是** Lean 侧 `DDFLightConeFrame.dotVec_self_eq_two`
+    的证明中间步（该定理在域上由 (F6)(F7)(F8) 推出 η(v,v) = 0，再经 (F2)(F3) 得 η(a,a) = 2）。
+    本项目所有消费 DDF 张成的 Lean 定理都通过 `DDFLightConeFrame` 携带它。
+
+  【三个子空间】
+    · **物理子空间**（截距**逐字取基态值**）
+        a₀ := α' k² = ½ η(a, a)，
+        H_phys := { Ψ ∈ T(k;k_0) : (L_0 − a₀)Ψ = 0 且 L_mΨ = 0 ∀ m ≥ 1 }
+      （worldsheet.ddf-operators-preserve-physical-states 的 H_phys(k;k_0;a₀)；截距记号按
+      conv.intercept-sign-a。**a₀ 不是自由参数**：它被「|0;k⟩ 是物理态」这一条钉死）。
+    · **DDF 张成** D(Ε) := span_R { A^{ε_{i_1}}_{−n_1} ⋯ A^{ε_{i_r}}_{−n_r} |0; k⟩ : r ≥ 0, i_j ∈ {1..D−2}, n_j ≥ 1 }
+      （r = 0 给 |0;k⟩；A^ε_n 是 worldsheet.ddf-operators-v6 的模态和算子）。
+    · **零态** H_null := H_phys ∩ H_phys^⊥ = { Χ ∈ H_phys : ⟨Χ, Ψ⟩_T = 0 ∀ Ψ ∈ H_phys }
+      （worldsheet.tower-physical-quotient-form 的 H_null(a₀)）。
+
+  【断言（本卡的全部内容）】
+
+      若 **η(v, v) = 0**，则 **H_phys  ⊆  D(Ε) + H_null** 。
+
+  即：在该前件下，塔上的每个物理态都可写成「一个 DDF 态加一个零态」。
+
+  【本卡的四条边界】
+  (a) **不断言反包含**。D(Ε) ⊆ H_phys 是 worldsheet.ddf-operators-preserve-physical-states 那一支
+      （已 formalized，Lean 侧 `ddfSpan_le_towerPhysSubmodule`）；H_null ⊆ H_phys 按定义。
+      两个方向合起来才给「H_phys = D(Ε) + H_null」，本卡只断言困难的那一个方向。
+  (b) **不断言和是直和**，不断言 D(Ε) ∩ H_null = 0，也不断言 D(Ε) → H_phys/H_null 是同构。
+      （单射性由 worldsheet.transverse-ddf-fock-gram-matrix 的 `ddf_span_pos` 在有序域上给出，
+      满射性**逐字就是本卡**；故「等距同构」这句话不比本卡多给任何东西。）
+  (c) **不断言本卡在哪些 D 上为真**。本卡是一条**逐 (D, k, k_0, Ε) 的条件断言**，
+      文献（Goddard 2008 (6.4)，转引 Goddard–Thorn 1972）在 **D = 26** 上断言它；
+      本图不为任何 D 断言它，也不断言它在 D ≠ 26 时为假。**D = 26 在无鬼定理链条上
+      唯一进入的地方就是本卡**。
+      ⚠ 与旧卡边界 (c) 的差别：旧卡把 **(D, a₀) 两个参数一起**推给「不断言」，
+      结果它的【断言】一行读起来对一切 a₀ 成立而边界又说不断言——本卡把 a₀ 这一半
+      提到卡面当前件，(c) 只剩 D 这一半（见 notes 的【旧卡为什么必须换代】）。
+  (d) **不断言前件可以去掉**。前件是**必要**的：去掉它本卡为假（notes 给出 D = 26、a₀ = 2
+      的显式反例）。本卡也**不**断言 η(v,v) = 0 是充分条件的最弱形式。
+
+  【已被证明的片（不构成本卡的推导）】
+  · (rung −1, 振子能级 1) 这一片：worldsheet.ddf-spans-physical-states-level-one-modulo-null
+    （formalized，Lean `ddfSpans_bigrade_neg_one_one`），且**对一切 D 成立**；
+    它把本卡的 H_phys 换成 H_phys ∩ T_{−1,1}，并额外要求两条前件（见那张卡）。
+    ⚠ 那张卡携带完备性条件 (C)（`FrameSpansOrthogonal`），在 (N)(S) 下 (C) 已蕴含本卡前件，
+    故它与本卡不冲突；它标注的「不需要 a₀ = 1」说的是不需要**额外**假设 a₀ = 1，不是说
+    该片在 a₀ ≠ 1 时也成立。
+  · 一片一片地证出来的拼装引理见 worldsheet.ddf-spanning-hypothesis 的 notes
+    【2026-09-11 更新】一节（`ddfSpans_of_forall_slice` 等，均与本前件无关，逐字沿用）。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.virasoro-standard
+  - conv.intercept-sign-a
+formal:
+  lean_decl: StringFormal.NoGhost.DDFSpans
+  lean_file: StringFormal/NoGhost/Assembly.lean
+sources:
+  - ref: goddard-2008
+    loc: "§6 'No-Ghost Theorem', p.15, eq. (6.4)（arXiv:0802.3249v1）：逐字 'For D = 26, if |ψ⟩ is a physical state … it can be written in the form |ψ⟩ = |f⟩ + |n⟩'（|f⟩ 为 DDF 态、|n⟩ 为零模态）"
+    note: |
+      **本条不承载论证**：该文是作者本人的历史综述，(6.4) 无证明，转引 goddard-thorn-1972 [45]，
+      **正文本项目未获取**。与本卡的措辞差别：(i) 原文在 D = 26 上断言，本卡按边界 (c)
+      不为任何 D 断言；(ii) 原文的 |ψ⟩ 处在 α'k² = 1 的质量壳上（该文全篇的 DDF 构造把基态
+      取在快子壳），这一点**原文未单独列为条件**，本卡把它提成显式前件 η(v,v) = 0，
+      这是本卡相对 worldsheet.ddf-spanning-hypothesis 的唯一实质改动。
+  - ref: borcherds-1992
+    loc: "Invent. Math. 109, 405–444，§5 Theorem 5.1 与 Lemmas 5.1–5.5；特别是 P¹ 的定义"
+    note: |
+      本卡前件在这条来源里是**定义性的**：Borcherds §5 的 P¹_r 按定义是 {v : L_0 v = v}，
+      即截距 1。故 --via-borcherds-1992 那条推导一直证的就是带前件的版本，旧卡只是写宽了。
+      详见 worldsheet.ddf-spanning-hypothesis--via-borcherds-1992 的 notes。
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/Assembly.lean :: StringFormal.NoGhost.DDFSpans（本卡的 formal.lean_decl，是一个 `def … : Prop`，**不是定理**）；分片版 DDFSpansOn；拼装 Glue.lean :: ddfSpans_of_forall_slice；前件的来源 LightConeFrame.lean :: DDFLightConeFrame.dotVec_self_eq_two"
+    note: |
+      **Lean 侧没有这条命题的证明，只有它的陈述**。`DDFSpans` 逐字是
+        `towerPhysSubmodule η a b (invTwo R * Fock.zeroModeSq η a)`
+          `≤ ddfSpan η a b hη Ε ⊔ towerNullSubmodule η a b (invTwo R * Fock.zeroModeSq η a)`，
+      它在 Assembly.lean 里**只作为假设出现**（`no_ghost_of_spans (hspan : DDFSpans …)`）。
+      ⚠ 本卡**不能**标 formalized：`formal.lean_decl` 指向的是一个 `Prop` 的定义，不是一条
+      无 sorry 的定理。列出它是为了给卡面的**结论**一个逐字的机器可读对应物，不是 status 的依据。
+      ⚠⚠ **Lean 的 `DDFSpans` 不含本卡的前件**（也不含 `hbb : b·b = 0` 与 `hba : b·a = 1`）。
+      后果与处置：
+        (i) `DDFSpans` 作为一个对 (η, a, b, hη, Ε) 全称量化的 `Prop`，**逐字地是假的**
+            （notes 的反例即其否证），但 Lean 里**从未有人证明它**——它只以假设身份出现，
+            故本项目的机检背书**没有超额声称**（check-axioms 不受影响）。
+        (ii) 每一处消费它的定理都另行携带足以蕴含本前件的数据：`DDFLightConeFrame` 在域上
+            经 `dotVec_self_eq_two` 强制 η(a,a) = 2（其证明的中间步正是 η(v,v) = 0）。
+        (iii) 前件的组合是平凡的：`fun hv => ddfSpans_of_forall_b26 (h hv)` 一类改写即可，
+            **本轮 Lean 一行未改**，也不需要改。
+      **curator 未自行跑 `lake build`**；本卡不标 formalized，故也不依赖 check-axioms。
+  - ref: goddard-thorn-1972
+    loc: "无编号定理；摘要末句 'absence of ghosts for d ⩽ 26'（**正文本项目未获取**）"
+    note: |
+      文献侧论证的原始出处，**本项目未读到**。Goddard 2008 §6 把 (6.4) 归给它。
+      登记它是为了标明「若要独立核验本卡，第一站在哪里」，不是论证来源。
+tags: [bosonic-string, no-ghost, ddf-spans, spectrum-generating-algebra, gap, bottleneck]
+notes: |
+  【本卡与 worldsheet.ddf-spanning-hypothesis 的关系】
+  本卡是旧卡的换代（旧卡 `superseded_by` 指向本卡）。**唯一实质改动**是把前件
+  η(v, v) = 0（在 (N)(S) 下即 a₀ = 1）写上卡面；三个子空间的定义、断言的包含式、
+  边界 (a)(b)、已证片一节全部逐字沿用。旧卡 notes 里长达三百行的历史记账
+  （N ≤ 5 逐片关闭、三角性路线被证伪、三种等价写法、为什么 26 只在这里、
+  等距同构不多给东西、逐句字典）**全部仍然有效，不在此重复**；它们讨论的对象都是
+  D = 26、a₀ = 1 的情形，本卡的前件只是把那个一直默认的设定显式化。
+
+  【旧卡为什么必须换代（不是「猜错了」，而是卡面内部矛盾）】
+  旧卡的【断言（本卡的全部内容）】一行无条件地写 H_phys ⊆ D(Ε) + H_null，而其边界 (c)
+  逐字写「**不断言本卡在哪些 (D, a₀) 上为真**」。两种读法不能同时成立：
+    · 读法一（全称）：断言对一切 (D, a₀) 成立 —— **这被下面的反例否证**；
+    · 读法二（边界优先）：卡面不对任何 (D, a₀) 断言任何事 —— 那么这张卡**什么都没断言**，
+      于是挂在它上面的两条推导、以及 worldsheet.no-ghost-theorem-conditional-on-ddf-spanning
+      的前件，全都失去指称对象。
+  两种读法都不可接受，故换代而非就地改。**这也是本轮选择换代而不是就地改文本的理由**：
+  ms.no-ghost-theorem 的 R8-3/R9-4/R10-1 三条审计记录逐字指称旧 id，就地改文本会在
+  不动一个字符的情况下悄悄改变已签字审计条目的含义；换代让那三条继续正确地指向旧卡。
+
+  【反例（任意 D ≥ 2 都有，此处取 D = 26）】
+  取 conv.metric-mostly-plus 的 η = diag(−1, +1, …, +1)，
+    a = (3/2, 5/2, 0, …, 0)  ⇒ η(a,a) = −9/4 + 25/4 = 4 ⇒ a₀ = ½η(a,a) = 2；
+    b = (1, 1, 0, …, 0)      ⇒ η(b,b) = 0（(N) 成立）、η(b,a) = −3/2 + 5/2 = 1（(S) 成立）；
+    v = a − b = (1/2, 3/2, 0, …, 0) ⇒ η(v,v) = −1/4 + 9/4 = 2 ≠ 0（**本卡前件不成立**）。
+  在双分次片 (rung −1, level 1) 上逐维数点算（有理数精确算术）：
+      D = 26, a₀ = 1 :  dim H_phys 25   dim D(Ε) 24   dim H_null 1   ⇒ 25 ≤ 24 + 1  ✔
+      D = 26, a₀ = 2 :  dim H_phys 25   dim D(Ε) 24   dim H_null 0   ⇒ 25 >  24 + 0  ✘
+  其中 **dim(D(Ε) ∩ 该片) ≤ D − 2 是无条件的**：DDF 单项式是双分次齐次的，该片上只有
+  D − 2 个（A^{ε_i}_{−1}|0;a⟩），**与 A^ε_n 究竟展开成什么无关**——这一点使反例不依赖
+  worldsheet.ddf-contour-equals-mode-sum 那条尚未闭合的算子字典。
+  结构上的解释：L_{−1}|0;v⟩ = (v·α_{−1})|0;v⟩ 满足 L_1 L_{−1}|0;v⟩ = 2L_0|0;v⟩ = η(v,v)|0;v⟩，
+  故它是物理态当且仅当 η(v,v) = 0，而此时它自动是零态（⟨v·α_{−1}, v·α_{−1}⟩ = η(v,v) = 0）。
+  上表 dim H_null 的 1 与 0 正是这一个态的存在与消失。
+
+  【独立于任何脚本的第二条证据（用本项目自己的机检定理否证旧卡）】
+  同一组参数（D = 26, a = (3/2,5/2,0,…), b = (1,1,0,…), η(v,v) = 2）下取
+  ζ = (3, 1, 0, …, 0) ∈ v^⊥（η(ζ,v) = −3/2 + 3/2 = 0），有 η(ζ,ζ) = −9 + 1 = −8。
+  则 Ψ := ζ·α_{−1}|0;v⟩ ∈ H_phys 而 ⟨Ψ, Ψ⟩_T = η(ζ,ζ) = −8 < 0（一个真正的鬼）。
+  但本仓库**已 formalized** 的 `StringFormal.NoGhost.no_ghost_of_spans`
+  （经 `towerPairing_self_nonneg_of_mem_towerPhys_of_spans`）给出：
+  **DDFSpans ⟹ 对一切 Ψ ∈ H_phys, ⟨Ψ,Ψ⟩ ≥ 0**，对任意有序域、任意 D 成立。
+  取逆否即得：在上述参数处 `DDFSpans` 为假。⇒ **图自己的机检定理否证了图自己的旧卡**。
+  这条证据不经过任何 Python 脚本，也不经过 research/ 的任何草稿。
+
+  【本项目自己的两处文字早已默认了这条前件】
+  (i) 旧卡 worldsheet.ddf-spanning-hypothesis 的 notes【为什么 26 只在这里】逐字写：
+      「物理态模零态的特征标是协变的 …… **两者只有在 D = 26、a₀ = 1 时相等**」——
+      即特征标计数从一开始就是在 a₀ = 1 上做的。
+  (ii) worldsheet.no-ghost-theorem-conditional-on-ddf-spanning 的【本卡明确不断言】(b) 逐字写：
+      「不含 D = 26，也不含 a₀ = 1 …… **D = 26 与 a = 1 的全部内容都在前件里**」——
+      即条件版明确把 a = 1 记在前件（= 旧卡）账上。
+  **然而旧卡从头到尾没有任何一处写下 a = 1。** 两处文字与旧卡卡面之间的这道缝，正是
+  本次换代修补的对象：a₀ = 1 的内容现在真的在前件里了。
+
+  【本轮不做、留给后续的两件事】
+  (1) **没有建 kind: refutation 边**。建一条否证边需要来源，而目前唯一成文的来源在
+      research/ 膜内；按项目规则那要求反例本身先毕业成一张卡。本轮走 superseded_by + notes。
+      若后续要做，建议先立「(rung −1, level 1) 片上 dim D(Ε) ≤ D − 2 且 a₀ ≠ 1 时 dim H_null = 0」
+      这条可机检的卡，再据它建否证边。
+  (2) **没有动 Lean**。见 sources 第三条 ⚠⚠ 的三点。
+author: curator
+created: "2026-09-22"

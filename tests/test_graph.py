@@ -247,6 +247,14 @@ def test_seed_no_ghost_v4_drops_to_physical_argument_after_ddf_split() -> None:
     **physical-argument**，瓶颈链 = ddf-spanning-hypothesis → ddf-contour-equals-mode-sum。
     **这不是论证退步，也不是推翻第七轮撤围道边的裁决**（那条仍然只走溯源记账）：
     本边接入的是另一条此前只在 gaps 文字里的承重假设，里程碑 R8-3/R9-4 早已写明它就是猜想负担所在。
+
+    【2026-09-22 更新（分支 agent/curator/ddf-spanning-intercept-premise）——承重卡换代到
+    worldsheet.ddf-spanning-hypothesis-v2】旧卡 worldsheet.ddf-spanning-hypothesis 漏写了
+    前件 η(v,v) = 0（v := a − b；在 (N)(S) 下即截距 a₀ = 1），因而逐字为假（D = 26, a₀ = 2
+    的 (rung −1, level 1) 片上 dim H_phys 25 > dim D(Ε) 24 + dim H_null 0）。旧卡已 superseded，
+    两条推导随 target 搬到 v2（validate 强制推导 id 以 target 开头，故 id 与文件名同时加 -v2）。
+    本用例的断言随之改指 v2 卡：**v4 的 effective 与瓶颈链一字不变**，唯一移动的是旧卡自身
+    掉到 open（换代的记账影子，旧卡已无节点依赖）。
     """
     g = load_graph(ROOT)
     effs = compute_all(g)
@@ -254,7 +262,10 @@ def test_seed_no_ghost_v4_drops_to_physical_argument_after_ddf_split() -> None:
     assert effs["worldsheet.no-ghost-theorem-v4"].name == "physical-argument"
     assert effs["worldsheet.no-ghost-theorem-v4"].conjectures == set()
     # 承接猜想负担的节点其 effective 也是 physical-argument（最强推导被围道字典封顶）
-    assert effs["worldsheet.ddf-spanning-hypothesis"].name == "physical-argument"
+    # 2026-09-22：该节点换代为 -v2（旧卡缺截距前件、逐字为假）；effective 不变。
+    assert effs["worldsheet.ddf-spanning-hypothesis-v2"].name == "physical-argument"
+    # 换代后旧卡无推导，诚实落到 open；它已 superseded 且无任何节点依赖，故对下游零影响。
+    assert effs["worldsheet.ddf-spanning-hypothesis"].name == "open"
     # 2026-09-11 第八轮：K_n 代数卡经 Longitudinal.lean 为 formalized，不压低 v4（见 docstring 末段）
     assert effs["worldsheet.gt-longitudinal-k-algebra"].name == "formalized"
     gt8 = g.derivations["worldsheet.no-ghost-theorem-v4--via-goddard-thorn"]
