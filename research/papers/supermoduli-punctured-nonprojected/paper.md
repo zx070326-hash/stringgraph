@@ -40,9 +40,9 @@ We state explicitly what is not proved: nothing is claimed about the uncompactif
 $\mathfrak S_{g;n,2r}$, nothing in the positive (split/projected) direction, nothing about
 $(g,n,r)=(2,1,0)$ or about odd-parity punctured components at $g=2$, and no connected-component
 refinement when $r>0$. We deliberately avoid gluing at Ramond nodes, since the Ramond analogue of the
-normal-bundle computation is only conjectural in Felder–Kazhdan–Polishchuk (§9.3, verbatim "We
-conjecture that…"); taking that shortcut would have lowered the epistemic status of the conclusion
-from *proved* to *conditional on a conjecture*.
+normal-bundle computation is only conjectural in Felder–Kazhdan–Polishchuk ([FKP, §9.3], verbatim
+"We conjecture that…"); taking that shortcut would have lowered the epistemic status of the
+conclusion from *proved* to *conditional on a conjecture*.
 
 ---
 
@@ -337,6 +337,83 @@ physics-level argument**, so the conclusion inherits no such ceiling.
 > would be conditional on that conjecture. **We therefore glue only at NS nodes.** Every use of
 > Ramond punctures in this paper is as a *spectator* on the constant tail, where no formula is
 > required.
+
+---
+
+## 4. Preliminaries
+
+This section recalls, without proof, the three imported ingredients I1–I3 in the exact form in which
+we use them. Nothing here is new; we state them carefully because the *shape* of Lemma 4.2 governs
+the whole strategy, and because the affineness phenomenon of §7 is invisible unless one knows
+exactly which space the cohomology is computed on.
+
+### The primary obstruction
+
+**Proposition 4.1** ([CN, Prop. 2.2]). *Let $\mathfrak X$ be a smooth Deligne–Mumford superstack over
+$\mathbb C$ and $X=\mathfrak X_{\rm bos}$. There is a canonical primary obstruction class*
+$$\omega_2(\mathfrak X)\in H^1\big(X,\ \mathcal T_X\otimes\Lambda^2\mathcal T_-^\vee\mathfrak X\big)
+= H^1\big(X,\ \mathcal F^{\rm obs}_{\mathfrak X}\big),$$
+*compatible with étale pullback. If $\omega_2(\mathfrak X)\neq0$ then $\mathfrak X$ is not projected.
+If $\mathcal T_-\mathfrak X$ has rank two, then $\mathfrak X$ is split if and only if
+$\omega_2(\mathfrak X)=0$.*
+
+### Functoriality: a cospan, not a map
+
+**Lemma 4.2** ([CN, Lemma 2.6]). *Let $f:\mathfrak Y\to\mathfrak X$ be a morphism of smooth DM
+superstacks, $f_0:Y\to X$ the induced morphism of bosonic truncations, and*
+$$df_+:\mathcal T_+\mathfrak Y\to f_0^*\mathcal T_+\mathfrak X,\qquad
+df_-:\mathcal T_-\mathfrak Y\to f_0^*\mathcal T_-\mathfrak X$$
+*the even and odd components of the differential restricted to $Y$. Put*
+$$\mathcal G_f:=\mathrm{Hom}\big(\Lambda^2\mathcal T_-\mathfrak Y,\ f_0^*\mathcal T_+\mathfrak X\big)
+\qquad\text{(a sheaf on $Y$).}$$
+*Pullback followed by precomposition with $\Lambda^2df_-$ gives
+$\iota_f:H^1(X,\mathcal F^{\rm obs}_{\mathfrak X})\to H^1(Y,\mathcal G_f)$, and postcomposition with
+$df_+$ gives $j_f:H^1(Y,\mathcal F^{\rm obs}_{\mathfrak Y})\to H^1(Y,\mathcal G_f)$. Then*
+$$j_f\big(\omega_2(\mathfrak Y)\big)\ =\ \iota_f\big(\omega_2(\mathfrak X)\big)
+\qquad\text{in } H^1(Y,\mathcal G_f).$$
+*In particular, if $j_f(\omega_2(\mathfrak Y))\neq0$ then $\omega_2(\mathfrak X)\neq0$.*
+
+> **Remark 4.3 (the shape matters).** Lemma 4.2 does **not** produce a map between the two obstruction
+> groups. It places the images of both classes into the *same* group $H^1(Y,\mathcal G_f)$ — a cospan.
+> Consequently **all cohomology in the entire argument is computed on $Y=\mathfrak Y_{\rm bos}$**, the
+> bosonic truncation of the *test* object. What $Y$ is — projective or affine — therefore decides
+> whether the method can say anything at all. This is the single observation that produces
+> Proposition N in §7.
+
+### The Donagi–Witten one-point obstruction family
+
+Let $h\ge2$, let $C$ be a smooth curve of genus $h$, and let $L$ be an **ineffective even theta
+characteristic**:
+$$L^{\otimes2}\cong\omega_C,\qquad H^0(C,L)=0 .$$
+Such pairs exist for every $h\ge2$ (I8: a general even theta characteristic is ineffective; Mumford,
+Cornalba). The odd tangent space to the even supermoduli component at the split super Riemann surface
+attached to $(C,L)$ is $H^1(C,L^{-1})$.
+
+For $\eta\in H^1(C,L^{-1})$, Donagi and Witten construct a $(1|2)$-dimensional supermanifold $X_\eta$
+by pulling back the universal one-NS-pointed supercurve along the odd tangent line determined by
+$\eta$ [DW, §3.5]. We use the following three properties (I3), all recorded verbatim in [CN, §5]:
+
+**(DW1)** The reduced space of $X_\eta$ is the curve $C$ itself, viewed as the moving NS marking in
+the universal pointed curve over the *fixed* spin curve $(C,L)$; in particular $X_\eta$ carries a
+natural morphism $u_\eta:X_\eta\to\mathfrak M^+_{h,1}=\mathfrak S^+_{h;1,0}$.
+
+**(DW2)** There is an exact sequence $0\to L^{-1}\to\mathcal T_-X_\eta\to\mathcal O_C\cdot\eta\to0$;
+after trivialising the odd base line by the generator $\eta$ one gets
+$\Lambda^2\mathcal T_-X_\eta\cong L^{-1}$, and moreover
+$\mathcal T_+X_\eta\cong\mathcal T_C\cong L^{-2}$. Hence
+$\mathcal F^{\rm obs}_{X_\eta}\cong\mathrm{Hom}(L^{-1},L^{-2})\cong L^{-1}$.
+
+**(DW3)** Under these identifications $\omega_2(X_\eta)=\eta$ in $H^1(C,L^{-1})$ [DW, Prop. 3.4].
+
+Three consequences are used repeatedly and are worth isolating:
+
+- The parameter space of the construction is $H^1(C,L^{-1})$, which is non-zero **only because $C$ is
+  projective**; on an affine curve it vanishes.
+- $\mathcal T_+X_\eta\cong\mathcal T_C$ holds because the even direction of $X_\eta$ is exactly
+  "move the NS marking".
+- $\Lambda^2\mathcal T_-X_\eta\cong L^{-1}$ uses $L^{\otimes2}\cong\omega_C$ **without twist**, i.e.
+  it requires that the genus-$h$ side carry **no Ramond punctures**. This is one of the two reasons
+  (the other is §7) why Ramond punctures must live on the tail.
 
 ---
 
