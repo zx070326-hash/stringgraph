@@ -1,0 +1,134 @@
+state: under-review
+reviewer: (none yet — requesting graph-reviewer dispatch, see notes)
+verdict: |
+  (pending — no reviewer round has occurred yet. Self-assessment by the authoring prover below.)
+captain_confirmed: false
+notes: |
+  === Task ===
+  Asked by the dispatching lead: does Theorem M of
+  `research/papers/supermoduli-punctured-nonprojected/paper.md` (draft, unsubmitted,
+  `captain_confirmed: false`) have any consequence for the measure used in superstring
+  perturbation theory? Write scope for this attempt was exclusively
+  `research/attempts/supermoduli-measure-consequence/**`; forbidden to write `research/papers/**`
+  or any other attempt directory. No external publication of any kind is authorised — this is an
+  internal research note.
+
+  === One-line conclusion ===
+  **Outcome type 2** (of the three the lead offered as equally valuable): a real, correctly
+  quantified, but narrow and conditional consequence. Theorem M rigorously forecloses a
+  hypothetical strategy (a single global compactified retraction) that no completed or currently
+  used rigorous construction of the superstring measure has ever relied on; it says nothing about,
+  and cannot conflict with, constructions that work on the uncompactified/smooth locus, including
+  every completed low-genus explicit computation checked.
+
+  === Deliverables produced this round ===
+  - claim.md: precise statement of Proposition C, split into (C1) safety part (rigorous, proved) and
+    (C2) bite part (correct math, physical-argument-level interpretive framing), plus a one-paragraph
+    summary of the mandatory self-check and its resolution.
+  - argument.md: full argument body.
+    §1 — restriction lemma (open substacks of a projected superstack are projected), proved from
+    first principles (elementary sheaf theory), independently corroborated by Donagi-Witten's own
+    Remark 1.4 (already `L1`-verified in this project at
+    `literature/extractions/witten-2012-superstring-perturbation.md:601-604`).
+    §2 — confirms, by reading paper.md's own proof, that Theorem M's obstruction class is literally
+    detected on a boundary test curve inside $\Delta_{\rm NS}$, so the restriction lemma's conclusion
+    matches the actual geometry of the proof, not just the abstract definitions.
+    §3 — the mandatory D'Hoker-Phong self-check, executed in full (see below).
+    §4 — the positive content of (C2): what is actually ruled out, why its physical bite is narrow
+    (Witten's own "validity does not depend on a projection" quote, `L1`-verified), and a sharper
+    citable point — Theorem M can be read as rigorously confirming, for the compactified stack and
+    with no bound on puncture count, an expectation Donagi-Witten themselves record but do not prove
+    (Remark 1.5, `L1`-verified: "we would expect the compactification of $\mathfrak M_{g,n}$ to be
+    non-split" even where many punctures on the uncompactified side "very likely kills the
+    obstructions to splitness").
+    §5 — five explicit [GAP]s, none of which affects Proposition C itself; §6 — verdict.
+  - draft-section.md: a weldable English paragraph set (candidate §9.5 of paper.md), matching
+    paper.md's register and citation style, with explicit notes for whoever might weld it in about
+    two missing `literature/` registrations ([EW]=Witten 1209.5461, already extracted but not yet a
+    bib key; [DP]=D'Hoker-Phong series, not registered at all) and one unsupported-by-this-project
+    sentence (the ansatz-program-failure remark) that would need either a proper citation or removal
+    before any external use.
+
+  === The mandatory self-check (explicit result) ===
+  Performed in full, in argument.md §3. Question: do D'Hoker-Phong's completed genus-2 computations
+  fall inside Theorem M's quantifier range ($g=2$, $n+2r\ge2$)? **Answer: yes, numerically** —
+  $(g,n,r)=(2,4,0)$ (the four-point computation, Papers V-VI, 2005) sits inside Theorem M's own
+  Corollary A2 ($g=2$, $n\ge2$, even component); the $(g,n,r)=(2,0,0)$ vacuum case (Papers I-IV,
+  2001-2002) sits inside the *predecessor* theorem [CN, Thm 1.1(2)] already cited in paper.md's own
+  comparison table.
+
+  This did **not** require rewriting Proposition C. Resolution: D'Hoker-Phong's construction is a
+  statement about, and exploits properties of, the *uncompactified* locus $\mathfrak S_{2;n,0}$
+  (confirmed independently three ways: (i) the restriction-lemma corollary proved in §1 makes
+  compactified non-projectedness logically silent about any open substack including the smooth
+  locus; (ii) Donagi-Witten's own Remark 1.4, `L1`-verified, states the same fact in the converse
+  direction ("asking for the compactification to be projected would only be a stronger condition");
+  (iii) Witten's own attribution, `L1`-verified, that D'Hoker-Phong's method "exploited" projectedness
+  of supermoduli space specifically "in low orders" — i.e. the uncompactified locus, whose
+  definition in that section of Witten's paper carries no reference to any compactification). Theorem
+  M's own proof geometry (§2 of argument.md) independently confirms the obstruction is boundary-only,
+  so there was never a live tension to begin with — the self-check's value, as the lead predicted, was
+  in making that "why" explicit and citable rather than merely asserted.
+
+  === Verification-level honesty note ===
+  The (g,n) scope of D'Hoker-Phong's six-paper series (which paper covers n=0 vs n=4, exact arXiv
+  IDs/journal citations) was confirmed via `WebSearch` (2 calls) and, for Paper II's abstract
+  specifically ("integration ... by integrating over the fibers of this projection"), a further
+  `WebSearch` call — not by page-image `Read` of the PDFs, since `WebFetch` to arxiv.org was blocked
+  by a network policy in this environment (attempted first, both calls failed with "unable to verify
+  domain" errors, not content errors). This is flagged explicitly in argument.md §3.1 and is judged
+  acceptable because: (a) no formula or numeric value from any D'Hoker-Phong paper is used as a
+  premise anywhere in the argument, only the (g,n,r) scope and the qualitative fact that the method
+  uses a projection; (b) both of those are independently and more strongly corroborated by `L1`-
+  verified Witten/Donagi-Witten quotations already on record in this project's `literature/`; (c) the
+  arXiv IDs/titles/journal citations are uncontested bibliographic metadata, cross-confirmed across
+  two independent WebSearch calls and consistent with Witten's own citation [14]/[16] to the same
+  program. If this material is ever welded into paper.md for external use, draft-section.md's own
+  notes flag that D'Hoker-Phong should first receive a proper `literature/` extraction.
+
+  === Open [GAP]s (full list in argument.md §5) ===
+  1. [GAP] Uncompactified projectedness of $\mathfrak S_{2;4,0}$ itself is not a theorem in either
+     direction anywhere in the literature surveyed — not needed for Proposition C (the restriction
+     lemma makes Theorem M silent about it regardless of the true answer), but worth flagging as a
+     genuinely open mathematical question adjacent to this attempt.
+  2. [GAP] The claim (§4.2 of argument.md) that Witten's patch-based "vertical integration" machinery
+     is *strictly necessary* (not merely sufficient) in the Theorem-M regime rests on the working
+     assumption that no third method (neither global retraction nor patchwork) is known — a
+     reasonable but not exhaustively surveyed premise.
+  3. No claim made about $r\ge1$ connected-component structure (inherits paper.md's own
+     `[GAP-COMP]`); not needed for Proposition C.
+  4. draft-section.md's closing remark about the ansatz-program's genus-$\ge5$ failure being
+     unrelated to projectedness is *not* independently re-verified by this attempt; it reuses a
+     finding already on record from `research/attempts/genus-five-supermeasure/proof.md` §2.1
+     (itself labelled `⟨analysis 2026-09-18⟩`, i.e. that prior attempt's own synthesis, not a
+     first-hand literature check by either attempt). Flagged in draft-section.md's own welding notes
+     as needing a proper citation or removal before external use.
+
+  === What this attempt did not do, and why ===
+  Did not touch `research/papers/supermoduli-punctured-nonprojected/**` (out of write scope; any
+  merge decision belongs to the lead). Did not touch `graph/**`, `formal/**`, `literature/**`, or any
+  other `research/attempts/**` directory. Did not attempt to independently re-derive or verify any
+  D'Hoker-Phong formula (not needed; see verification-level note above). Did not propose or attempt
+  any resolution of paper.md's own open items ([GAP-ALT], [GAP-COMP], the priority risk in
+  NOTES-for-captain.md §3.1) — those are out of scope for this task, which is specifically about
+  physical consequences, not about the paper's own mathematical completeness (already adjudicated
+  elsewhere).
+
+  === Self-assessment: is the route viable? ===
+  Yes, and it reached a stable, well-sourced conclusion within one round — no dead end, no
+  abandonment. The central logical device (the restriction lemma) is elementary enough to be fully
+  proved rather than merely argued, which is what allows (C1) to carry `rigorous`-level confidence
+  despite the overall attempt being labelled physical-argument for its interpretive framing (C2). The
+  mandatory self-check was the single most valuable piece of work in this round, exactly as the lead
+  predicted, and it resolved cleanly rather than forcing a rewrite — which is itself informative: it
+  means the "danger" the lead flagged was real as a check to perform, but the answer came out
+  negative (no contradiction found), which is a legitimate and fully acceptable outcome of a
+  mandatory check, not a sign the check was performed carelessly.
+
+  Requesting: lead dispatch a `graph-reviewer` round. Suggested points of attack, in decreasing order
+  of how much they'd matter if they failed: (a) the restriction lemma's proof (§1 of argument.md) —
+  is the "open substack" formalism used standard enough, and does the restriction-of-sheaf-morphisms
+  step actually need any properness/separatedness hypothesis this attempt omitted; (b) whether the
+  D'Hoker-Phong (g,n,r) scope claims are accurate despite being WebSearch-sourced rather than
+  page-image-verified; (c) whether §4.3's "Theorem M confirms a DW expectation" framing overstates
+  what Remark 1.5 (a heuristic about a different asymptotic regime, $n\gg g$) actually supports.
