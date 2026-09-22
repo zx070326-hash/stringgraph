@@ -3,7 +3,9 @@
 **Subject**: `research/papers/supermoduli-punctured-nonprojected/paper.md`
 **Source attempt**: `research/attempts/supermoduli-elliptic-tail-punctured/` (`state: verified`,
 two adversarial graph-reviewer rounds: 2026-09-18 lead-dispatched, 2026-09-20 agent `smreview`)
-**Written by**: theorem-prover, branch `agent/prover/supermoduli-punctured-nonprojected`, 2026-09-22
+**Written by**: theorem-prover, branch `agent/prover/supermoduli-punctured-nonprojected`, 2026-09-22;
+restructured (Ramond case elevated to title level, §5.1) by a second theorem-prover round, same
+branch, 2026-09-23
 **Current external-release status**: 🔴 **none, and none is permitted.** `captain_confirmed: false`.
 
 This file is the decision sheet the captain needs before anything leaves the repository. It is *not*
@@ -43,20 +45,27 @@ makes no positive (splitness/projectedness) claim.
 
 ## 2. Target journal — three candidates, with reasons
 
-The content is pure algebraic geometry (supergeometry / moduli of curves). It is a *generalisation
-plus a structural negative result*, not a foundational breakthrough. Length as drafted: ~1200 lines
-of markdown, which is roughly 25–30 journal pages in LaTeX.
+The content is pure algebraic geometry (supergeometry / moduli of curves). As of this round the paper
+is *not* framed as "a generalisation of [CN] plus a structural negative result" — that framing has
+been demoted to describe Corollary A only. The title-level claim (Theorem B, Ramond punctures
+present) is now presented as standing on its own: §9.4 shows forgetting a Ramond puncture is not a
+morphism of supermoduli stacks at all, so Theorem B cannot be reduced to [CN] by any construction
+known or foreseeable. This changes the pitch to a referee from "we extended a
+recent theorem" to "we prove a case [CN]'s method cannot reach, and we show why it cannot." Length as
+drafted: ~1200 lines of markdown, which is roughly 25–30 journal pages in LaTeX.
 
 | Candidate | Why it fits | Why it might not |
 |---|---|---|
-| **Communications in Mathematical Physics** | [DW] is the ancestor of the whole line and sits in the string-math world; CMP routinely publishes supergeometry with this flavour; referees who know both the physics motivation and the stack technology exist there | CMP referees may ask for the physical payoff (superstring measure) which this paper deliberately does not supply |
+| **Communications in Mathematical Physics** | [DW] is the ancestor of the whole line and sits in the string-math world; CMP routinely publishes supergeometry with this flavour; referees who know both the physics motivation and the stack technology exist there; a title foregrounding Ramond punctures (the physically loaded case, tied to worldsheet fermion boundary conditions) reads naturally to this audience | CMP referees may ask for the physical payoff (superstring measure) which this paper deliberately does not supply |
 | **Journal of Geometry and Physics** / **Letters in Mathematical Physics** | Correct length, correct audience, faster turnaround; LMP would suit if the paper were cut to the two main theorems | Lower visibility; a result that removes the $n\le g-1$ restriction deserves better than a venue where it will be missed |
-| **International Mathematics Research Notices (IMRN)** or **Mathematische Zeitschrift** | Pure-AG venues where "moduli stack $X$ is non-projected, here is the obstruction class" is a normal paper; no pressure to supply physics | Referees will be stricter about the one inference flagged as `[INF-NORMAL]` (§5, Remark 5.8) and may demand that FKP (9.6) be re-derived for punctured targets rather than inferred |
+| **International Mathematics Research Notices (IMRN)** or **Mathematische Zeitschrift** | Pure-AG venues where "moduli stack $X$ is non-projected, here is the obstruction class" is a normal paper; no pressure to supply physics; a title-level theorem plus a structural immunity argument (rather than "corollary of a recent paper") is a stronger pure-AG pitch than the previous framing was | Referees will be stricter about the one inference flagged as `[INF-NORMAL]` (§5, Remark 5.8) and may demand that FKP (9.6) be re-derived for punctured targets rather than inferred |
 
 **Recommendation, weakly held**: a math-physics venue (CMP first choice) is the best match for the
 *framing*, because the honest-boundaries section (§10) reads naturally there and would look unusual
-in a pure-AG journal. But see §3.1 — the priority situation may decide the venue for us by deciding
-the timeline.
+in a pure-AG journal, and because Theorem B's title-level billing is a Ramond-puncture (i.e.
+worldsheet-fermion-boundary-condition) result, which is intrinsically closer to CMP's readership than
+a pure-NS statement would have been. But see §3.1 — the priority situation may decide the venue for
+us by deciding the timeline.
 
 **A real alternative worth considering**: post to arXiv first (math.AG) and submit afterwards. The
 priority risk in §3.1 is a timing risk, and arXiv is the standard instrument for that. **This is
@@ -92,7 +101,7 @@ work generalises, plus Donagi.
 **Captain's call**: this is the strongest argument for moving quickly (arXiv), and it is the kind of
 judgement — external timing — that the rules reserve for the captain.
 
-### 3.2 Value risk `[GAP-ALT]` — Corollary A could be demoted, Corollary B cannot
+### 3.2 Value risk `[GAP-ALT]` — Corollary A could be demoted, Theorem B cannot
 
 Written out in the paper at §9.4 and §10.4, and it must stay there:
 
@@ -101,12 +110,26 @@ Written out in the paper at §9.4 and §10.4, and it must stay there:
   three all refer to forgetting the *spin structure*) **and** proves $\iota_\pi\ne0$ (an injection of
   sheaves does not give injectivity on $H^1$), then **Corollary A (pure NS) becomes a corollary of
   [CN]**.
-- **Corollary B (with Ramond punctures) is unaffected**, because forgetting a Ramond puncture is not
+- **Theorem B (with Ramond punctures) is unaffected**, because forgetting a Ramond puncture is not
   a morphism at all — Ramond punctures are the branch locus of the superconformal structure, not
   marked points.
-- Consequence for how the paper is sold: **the selling point is Corollary B**, and the introduction
-  is written that way. If a referee pushes back on Corollary A's novelty, the correct response is to
-  agree and point at Corollary B, not to defend Corollary A.
+- **This round's structural change**: this risk is no longer something the introduction merely
+  gestures at while the formal statement sits in corollary position. The paper's title, abstract and
+  §1.2 "main results" box now name the Ramond case **Theorem B** and place it *first*, precisely
+  *because* of this asymmetry — §1.2 states outright that Corollary A "is not structurally immune to
+  future erosion" while Theorem B is. The risk to Corollary A's novelty is therefore no longer merely
+  disclosed; it is the paper's stated reason for its own title and its own theorem-numbering choice.
+  A referee who reads only the abstract will already see the asymmetry, not just a reader who reaches
+  §9.4.
+- Consequence for how the paper is sold: **the headline result is Theorem B**, both in title and in
+  the body of the introduction. If a referee pushes back on Corollary A's novelty, the correct
+  response is to agree and point at Theorem B, which is now literally the title-level claim, not a
+  fallback buried three sections deep.
+- **One thing that did *not* change and must not be allowed to**: elevating Theorem B was done by
+  *raising* it, not by *lowering or hiding* Corollary A's own risk. §10 ("Honest boundaries") is
+  reproduced in full, unedited beyond the label rename, including `[GAP-ALT]` itself. A referee
+  cannot discover an asymmetry that is undisclosed anywhere in the paper — that is not what happened
+  here; the asymmetry is now disclosed *earlier and more prominently* than before.
 
 ### 3.3 The one inference beyond [FKP]'s literal statements — `[INF-NORMAL]`
 
@@ -195,6 +218,36 @@ one sentence to say so, and that sentence is the only line of reasoning in the d
 already in `proof.md`. **It should be checked by a reviewer.** Nothing in Theorem M, Proposition N,
 or any corollary is affected. The remaining `ISSUES.md` entries are bibliographic or production
 items.
+
+### 5.1 Addendum (2026-09-23): structural elevation of the Ramond case to title level
+
+A second theorem-prover round restructured the paper's presentation to put the Ramond-puncture case
+at title level. This was **pure relayout, not new mathematics**: the renamed result (Corollary B →
+Theorem B; the underlying statement is unchanged, Theorem 8.4 in §8) is, and was already, a direct
+one-line specialisation of Theorem M (`status.yaml` of the source attempt records this explicitly).
+No quantifier, threshold, or hypothesis was touched anywhere in the paper.
+
+**Did**: rename "Corollary B" → "Theorem B" and "Corollary 8.4" → "Theorem 8.4" throughout (title,
+abstract, §1.2 "main results" — reordered so Theorem B's box comes before Corollary A's, each box's
+own text is byte-identical to before apart from the label — §1.3–§1.6, §2.3, §5, §8, §9.3, §9.4,
+§10.1, §10.4); added one new abstract paragraph and one new §1.4 caveat (iii) explaining, without
+claiming unpublished priority, why the Ramond case is the structurally more robust one; fixed a
+naming collision discovered in the process ([FKP]'s own paper independently has an unrelated theorem
+it calls "Theorem B" — disambiguated at both occurrences, §2.3 and §5 Remark 5.6, by parenthetical,
+not by renaming our own result again); updated this file's §2 and §3.2 to match.
+
+**Did not**: change any theorem, lemma, quantifier, or threshold; touch `research/attempts/**`,
+`graph/**`, `formal/**`, or `literature/**`; weaken, shorten, or relocate any part of §10 ("Honest
+boundaries") — all six `[GAP-*]` labels are reproduced in full, and one (`[GAP-ALT]`) was
+strengthened in wording, not softened; touch `captain_confirmed` or the external-release status
+(§6, unchanged).
+
+**Priority-claim decision, made explicitly rather than by default**: the same unresolved signal
+recorded in §3.1 (Simone Noja's "In preparation: Supermoduli spaces (with M. Corrêa, R. Donagi)",
+still with zero scope disclosed as of a fresh check this round) was re-verified via web search before
+drafting the new abstract paragraph. Because that signal cannot be ruled out, the paper makes **no**
+claim to priority anywhere — the new abstract paragraph and the new §1.4 caveat (iii) both say so
+explicitly, rather than asserting "first" and leaving the caveat only in this captain-facing file.
 
 ---
 

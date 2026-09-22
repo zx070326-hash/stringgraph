@@ -1,4 +1,4 @@
-# Compactified supermoduli spaces with punctures are non-projected
+# Compactified supermoduli spaces with Neveu–Schwarz and Ramond punctures are non-projected
 
 **Authors:** [To be determined by project lead]
 
@@ -25,6 +25,20 @@ a one-dimensional constant line, neither of whose sizes the argument is sensitiv
 the generalisation costs nothing, and why the genus threshold *drops* rather than rises when
 punctures are added (a rational tail is unstable without punctures but stable with them, so one
 genus is saved).
+
+The headline case is the one with **Ramond punctures present**: for every $g\ge2$, every $n\ge0$
+and every $r\ge1$, $\overline{\mathfrak S}_{g;n,2r}$ is non-projected (Theorem B below). We give it
+top billing over the pure-NS case ($r=0$; Corollary A) for a structural reason, not a cosmetic one:
+forgetting a Ramond puncture is not a morphism of supermoduli stacks at all — a Ramond puncture is a
+branch point of the superconformal structure, not a marked point that can be dropped — so Theorem B
+cannot be reduced to Corrêa–Noja's unpunctured theorem by any known construction. Corollary A carries
+no such immunity: we show in §9.4 that *if* a forgetful morphism on compactified punctured supermoduli
+stacks is one day constructed *and* shown to act non-trivially on the primary obstruction class,
+Corollary A becomes a formal corollary of Corrêa–Noja's theorem. We record this openly (§9.4, §10.4)
+rather than let it stand unexamined, and it is the reason Theorem B, not Corollary A, is this paper's
+most robust and least replaceable output. (§1.4 situates both results against the prior literature
+in a comparison table, none of whose entries combine compactification with Ramond punctures; we make
+no claim about unpublished work in progress by other authors — see the caveats gathered there.)
 
 We prove a second, negative result of equal weight. If the spectator punctures are instead carried by
 the moving component — the naive generalisation — then the reduced space of the Donagi–Witten
@@ -90,13 +104,17 @@ primary obstruction class [G], whose non-vanishing obstructs projectedness [CN, 
 > $$\omega_2\big(\overline{\mathfrak S}_{g;n,2r}\big)\ \neq\ 0 ,$$
 > and hence $\overline{\mathfrak S}_{g;n,2r}$ is non-projected, in particular non-split.
 
-Eliminating $h$ and $a$ (Corollary 8.5 below) turns (P1)–(P2) into a closed criterion in the
-invariants of the target:
+Theorem M specialises to two consequences of unequal robustness, and we present the more robust one
+first. §9.4 shows that forgetting a Ramond puncture is not a morphism of compactified supermoduli
+stacks — Ramond punctures are branch points of the superconformal structure, not markings that can be
+dropped — so there is no route, known or foreseeable, by which the Ramond-punctured case could be
+reduced to Corrêa–Noja's unpunctured theorem. It therefore stands on its own:
 
-> **Corollary (threshold).**
-> $$\boxed{\ \overline{\mathfrak S}_{g;n,2r}\ \text{is non-projected whenever}\quad g\ge 3,\ \ \text{or}\ \ \big(g=2\ \text{and}\ n+2r\ge 2\big).\ }$$
+> **Theorem B (Ramond punctures present).** For every $g\ge2$, every $n\ge0$ and every $r\ge1$,
+> the stack $\overline{\mathfrak S}_{g;n,2r}$ is non-projected. (No component refinement is claimed
+> when $r>0$; see §10.3.) Proved as Theorem 8.4 in §8.
 
-For $r=0$ the target splits by parity, and the construction reaches components:
+For $r=0$ the target splits by parity, and the same construction also reaches components:
 
 > **Corollary A (pure NS punctures).**
 > **(A1)** For every $g\ge 3$, every $n\ge0$ and **both** parities $\varepsilon\in\{+,-\}$, the
@@ -104,9 +122,18 @@ For $r=0$ the target splits by parity, and the construction reaches components:
 > **(A2)** For every $g\ge2$ and every $n\ge2$, the **even** component
 > $\overline{\mathfrak S}{}^{+}_{g;n,0}$ is non-projected.
 
-> **Corollary B (Ramond punctures present).** For every $g\ge2$, every $n\ge0$ and every $r\ge1$,
-> the stack $\overline{\mathfrak S}_{g;n,2r}$ is non-projected. (No component refinement is claimed
-> when $r>0$; see §10.3.)
+Corollary A is proved by exactly the same method as Theorem B — indeed the two share every lemma in
+§§5–6 — but, unlike Theorem B, it is not structurally immune to future erosion: §9.4 shows that *if*
+someone later constructs a puncture-forgetting morphism on compactified supermoduli stacks *and*
+proves it acts non-trivially on the primary obstruction class, Corollary A would follow formally from
+[CN] alone, whereas Theorem B would not. Both routes are open problems today, neither is closed by
+this paper, and we flag the asymmetry here rather than let a reader discover it unassisted.
+
+Eliminating $h$ and $a$ (Corollary 8.5 below) turns (P1)–(P2) into a closed criterion in the
+invariants of the target, valid uniformly across both Theorem B and Corollary A:
+
+> **Corollary (threshold).**
+> $$\boxed{\ \overline{\mathfrak S}_{g;n,2r}\ \text{is non-projected whenever}\quad g\ge 3,\ \ \text{or}\ \ \big(g=2\ \text{and}\ n+2r\ge 2\big).\ }$$
 
 The second main result is negative and, we believe, structurally the more informative of the two.
 
@@ -156,7 +183,7 @@ $g=2$ becomes accessible exactly when $n+2r\ge2$.
 
 The technical reward of the constant-tail placement is separate and equally important: every
 difficulty specific to Ramond punctures is confined to the constant factor, and **no formula is ever
-needed on the constant factor**. This is why Corollary B costs no more than Corollary A
+needed on the constant factor**. This is why Theorem B costs no more than Corollary A
 (Remark 5.7).
 
 ### 1.4 Precise comparison with the literature
@@ -178,11 +205,11 @@ Read off from the table, the three concrete gains are:
 - **The restriction $n\le g-1$ of [DW, Thm 1.3] disappears.** Corollary A holds for *every* $n\ge0$
   with no coupling to $g$. In particular the whole region $n\ge g$, invisible to [DW], is covered.
 - **The Ramond thresholds $g\ge5r+1$ of [DO] and $g\ge n+5r+3$ of [W] are replaced by $g\ge2$**,
-  uniformly in $n$ and $r$ (Corollary B).
+  uniformly in $n$ and $r$ (Theorem B).
 - **Parity coverage is complete for $g\ge3$**: both $\varepsilon=\pm$ for every $n$, whereas
   [DW, Thm 1.3] reaches the odd component only for odd $g$.
 
-**Two caveats, stated here rather than buried.**
+**Three caveats, stated here rather than buried.**
 
 *(i) The objects are not the same.* [DW], [DO] and [W] concern the **uncompactified** stacks; this
 paper, like [CN], concerns the **compactified** ones. Our non-vanishing class is detected on a test
@@ -197,6 +224,16 @@ was previously no threshold at all, and there now is one, namely $g\ge2$.*
 "preliminary draft". No step of any proof in this paper invokes [W], nor [DO]; both appear only in
 this comparison and in §9.3. The external inputs are listed exhaustively in §3, and every one of them
 is a completed published or preprinted proof.
+
+*(iii) We make no claim of priority against unpublished work.* The comparison table above reflects
+the published and preprinted literature as we have been able to search it; no entry combines
+compactification with punctures of either type before this paper. We are aware, from public author
+webpages rather than from any circulated draft, that further work extending the
+compactified-projectedness programme is listed as being in preparation by other authors, with no
+title, abstract or arXiv identifier made public as of this writing. Per standing project policy we
+neither cite nor characterise unpublished material, and we cannot determine whether it overlaps with
+the results below. If it does, the comparison above should be read as holding against the *published*
+record at the time of writing, not as a claim to have been first against work we have not seen.
 
 ### 1.5 What is *not* claimed
 
@@ -214,10 +251,10 @@ Listed once, and repeated where relevant:
    §10.2 for why we refuse that shortcut.
 6. One external lemma we rely on, [FKP, Lemma 7.9], has a proof whose text omits the Ramond twist;
    we judge the omission harmless but did not rewrite the proof ([GAP-FKP-RAMOND], §10.1).
-7. One of our two corollaries carries a *value* risk, not a mathematical gap: if someone constructs a
-   puncture-forgetting morphism of compactified supermoduli stacks and proves a non-vanishing
-   statement about it, Corollary A would become a corollary of [CN]. Corollary B would not be
-   affected, because forgetting a Ramond puncture is not a morphism at all ([GAP-ALT], §10.4).
+7. One of our two headline consequences carries a *value* risk, not a mathematical gap: if someone
+   constructs a puncture-forgetting morphism of compactified supermoduli stacks and proves a
+   non-vanishing statement about it, Corollary A would become a corollary of [CN]. Theorem B would not
+   be affected, because forgetting a Ramond puncture is not a morphism at all ([GAP-ALT], §10.4).
 
 ### 1.6 Organisation
 
@@ -225,7 +262,7 @@ Listed once, and repeated where relevant:
 their rigour status. §4 recalls the obstruction class, its functoriality, and the Donagi–Witten
 one-point obstruction family. §5 constructs the test morphism and computes the two sheaves that enter
 the argument. §6 proves Theorem M. §7 proves Proposition N and its two corollaries. §8 derives the
-parity refinement, Corollaries A and B, and the threshold in closed form, and records the machine
+parity refinement, Corollary A, Theorem B, and the threshold in closed form, and records the machine
 verification of the threshold arithmetic. §9 collects four consistency checks, one of which is a
 deliberate attempt to make the method contradict a known theorem. §10 lists the open ends, and §11
 concludes.
@@ -279,7 +316,7 @@ $$L^{\otimes2}\ \cong\ \omega_C\big(\rho_1+\dots+\rho_{2r}\big),$$
 where the $\rho_j$ are the **Ramond** punctures.
 
 > ⚠ **NS punctures do not twist $\omega_C$; only Ramond punctures do.** This single asymmetry is
-> responsible for several of the design decisions below, and for the fact that Corollary B behaves
+> responsible for several of the design decisions below, and for the fact that Theorem B behaves
 > differently from Corollary A.
 
 ### 2.3 Three notational traps in [FKP]
@@ -298,7 +335,8 @@ verified against the published text.
    contains no sentence asserting that the two are the same object, although this is evidently
    intended. Our $\overline{\mathfrak S}_{g;n,2r}$ corresponds to [FKP]'s
    $\overline{\mathcal S}_{g;n,2r}$ in the semicolon convention.
-3. **The upper limit in (8.11) is $m$, while Theorem B in the introduction writes $n_{\rm NS}$**, and
+3. **The upper limit in (8.11) is $m$, while [FKP]'s own Theorem B in its introduction writes
+   $n_{\rm NS}$** (not to be confused with our Theorem B, §1.2), and
    [FKP] nowhere declares $m=n_{\rm NS}$. We do not use (8.11) anywhere (see Lemma 5.5, route 1
    versus route 2), so this ambiguity does not propagate into our argument; we record it because it
    would matter for anyone attempting the alternative route.
@@ -634,7 +672,8 @@ Combining (a), (b), (c) gives the claim. $\square$
 > **Remark 5.6 (do not cite [FKP, Theorem C] here).** [FKP, Theorem C, p. 2] reads verbatim: *"Let
 > $B\to\overline{\mathcal S}_g$ be the gluing map to one of the components of $\Delta_{NS}$ from a
 > lower genus (uncompactified) moduli space $B$."* Its **target** is the **unpunctured**
-> $\overline{\mathcal S}_g$; on the same page, Theorem B explicitly writes
+> $\overline{\mathcal S}_g$; on the same page, [FKP]'s own Theorem B (unrelated to our Theorem B,
+> §1.2) explicitly writes
 > $\overline{\mathcal S}=\overline{\mathcal S}_{g,n_{NS},n_R}$, so the distinction is deliberate on
 > [FKP]'s part. Theorem C allows the *source* $B$ to carry punctures but not the *target*, and we
 > need a punctured target. This is why Lemma 5.5 is routed through [FKP, §9.1, Lemma 9.1(iii)(iv),
@@ -901,7 +940,7 @@ Lemma 6.1.* $\square$
 
 ---
 
-## 8. Parity, corollaries, and the threshold in closed form
+## 8. Parity, the two headline consequences, and the threshold in closed form
 
 ### The parity refinement
 
@@ -964,19 +1003,24 @@ $\overline{\mathfrak S}{}^{\varepsilon}_{g;n,0}$ is non-projected. (Take $a=1$, 
 *(A2) For every $g\ge2$ and every $n\ge2$, the even component $\overline{\mathfrak S}{}^{+}_{g;n,0}$
 is non-projected. (Take $a=0$, $h=g\ge2$.)*
 
-**Corollary 8.4 (= Corollary B; Ramond punctures present).** *For every $g\ge2$, every $n\ge0$ and
+**Theorem 8.4 (= Theorem B; Ramond punctures present).** *For every $g\ge2$, every $n\ge0$ and
 every $r\ge1$, the stack $\overline{\mathfrak S}_{g;n,2r}$ is non-projected. (Take $a=0$, $h=g\ge2$;
 (P2) holds automatically because $2r\ge2$.) Moreover, for every $g\ge3$, every $n\ge0$ and every
 $r\ge0$, $\overline{\mathfrak S}_{g;n,2r}$ is non-projected (take $a=1$). No connected-component
 refinement is claimed when $r>0$; see §10.3.*
 
+We label this a theorem rather than a corollary, despite the one-line derivation, because it is the
+result we consider hardest to replace: §9.4 shows there is no known way to obtain it from [CN] by a
+forgetful morphism, since forgetting a Ramond puncture is not a morphism at all. Corollary A above,
+proved by the identical method, does not carry the same immunity (§9.4, §10.4).
+
 **Corollary 8.5 (threshold, closed form).**
 $$\boxed{\ \overline{\mathfrak S}_{g;n,2r}\ \text{is non-projected whenever}\quad g\ge 3,\ \ \text{or}
 \ \ \big(g=2\ \text{and}\ n+2r\ge 2\big).\ }$$
 
-*Proof.* Immediate from Corollaries 8.3, 8.4 and Lemma 8.2(ii): the union of the region reachable
-with $a=1$ ($g\ge3$, any $n,r$) and the region reachable with $a=0$ ($g\ge2$ and $n+2r\ge2$) is
-exactly the stated set, and $a\ge2$ adds nothing. $\square$
+*Proof.* Immediate from Corollary 8.3, Theorem 8.4 and Lemma 8.2(ii): the union of the region
+reachable with $a=1$ ($g\ge3$, any $n,r$) and the region reachable with $a=0$ ($g\ge2$ and
+$n+2r\ge2$) is exactly the stated set, and $a\ge2$ adds nothing. $\square$
 
 ### Machine verification of the threshold arithmetic
 
@@ -1041,7 +1085,7 @@ characteristic), none of which survives the addition of $n\ge2$ marked points.
 
 ### 9.3 No conflict with Donagi–Ott or Wang
 
-Corollary 8.4 gives $g\ge2$ where [DO] requires $g\ge5r+1$ and [W] requires $g\ge n+5r+3$. The gap is
+Theorem 8.4 gives $g\ge2$ where [DO] requires $g\ge5r+1$ and [W] requires $g\ge n+5r+3$. The gap is
 large and must be explained rather than advertised. **The assertions are about different objects.**
 [DO] and [W] assert non-projectedness of the **uncompactified** $\mathfrak S_{g;n,2r}$; we assert
 non-projectedness of the **compactified** $\overline{\mathfrak S}_{g;n,2r}$, and our non-zero class is
@@ -1085,10 +1129,10 @@ and if the right-hand side is non-zero, Corollary A follows immediately. Is Coro
 **Conclusion.** The trivialisation route does not currently go through. Our construction is
 unconditional and, in addition, locates the obstruction (Remark 6.5). But we state the value risk
 plainly: **if someone closes both gaps, Corollary A becomes a corollary of [CN]** and its novelty
-drops. **Corollary B is untouched by this**, because forgetting a Ramond puncture is not a morphism at
+drops. **Theorem B is untouched by this**, because forgetting a Ramond puncture is not a morphism at
 all — Ramond punctures are the branch locus of the superconformal structure, not marked points, a
 point emphasised verbatim in [DO] ("Ramond punctures are not marked points!"). For this reason
-**Corollary B is the most robust and least replaceable output of this paper**, and it is where we
+**Theorem B is the most robust and least replaceable output of this paper**, and it is where we
 would ask a reader to place the paper's weight.
 
 ---
@@ -1104,7 +1148,7 @@ $\omega_C(R)$** — although the *statement* (7.8) permits $n_1,n_2>0$ Ramond pu
 a harmless omission: the gluing is a local operation in a neighbourhood of the NS node, which may be
 taken disjoint from the Ramond divisor, and replacing $\omega_C$ by $\omega_C(R)$ is a verbatim
 substitution there. **We have not independently rewritten that local computation, and we do not claim
-to have done so.** The affected statement is Corollary 8.4 ($r\ge1$).
+to have done so.** The affected statement is Theorem 8.4 ($r\ge1$).
 
 It should be recorded that the footprint of this gap is wider than the single lemma: [FKP, Lemma 8.7]
 and [FKP, Cor. 8.8] are also stated for NS punctures only, and the proof of [FKP, Lemma 9.1(i)] cites
@@ -1135,8 +1179,9 @@ classification of the connected components of $\overline S_{g;n,2r}$.
 ### 10.4 [GAP-ALT]: a value risk, not a mathematical gap
 
 As explained in §9.4: if the compactified puncture-forgetting morphism is constructed and
-$\iota_\pi\neq0$ is proved, Corollary A degenerates into a corollary of [CN]. Corollary B is
-unaffected. This is a risk to the paper's novelty, not to its correctness.
+$\iota_\pi\neq0$ is proved, Corollary A degenerates into a corollary of [CN]. Theorem B is
+unaffected. This is a risk to Corollary A's novelty, not to either result's correctness — it is
+the precise reason Theorem B, not Corollary A, carries this paper's title-level claim (§1.2).
 
 ### 10.5 Standard facts used without reproof
 
