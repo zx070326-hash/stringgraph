@@ -637,8 +637,8 @@ Combining (a), (b), (c) gives the claim. $\square$
 > $\overline{\mathcal S}_g$; on the same page, Theorem B explicitly writes
 > $\overline{\mathcal S}=\overline{\mathcal S}_{g,n_{NS},n_R}$, so the distinction is deliberate on
 > [FKP]'s part. Theorem C allows the *source* $B$ to carry punctures but not the *target*, and we
-> need a punctured target. This is why Lemma 5.5 is routed through §9.1 / Lemma 9.1(iii)(iv) /
-> eq. (9.6) instead.
+> need a punctured target. This is why Lemma 5.5 is routed through [FKP, §9.1, Lemma 9.1(iii)(iv),
+> eq. (9.6)] instead.
 
 > **Remark 5.7 (why the generalisation is free, and why Ramond costs nothing extra).** In [CN,
 > Lemma 6.2] the constant line $\mathfrak n$ is computed to be $M_q^{-1}$, using Example 8.9 on the
@@ -1190,7 +1190,9 @@ deliberately refused shortcut — Ramond-node gluing, which rests on an explicit
 - **[DO]** R. Donagi, N. Ott, *Supermoduli Space with Ramond punctures is not projected*,
   arXiv:2308.07957 [math.AG] (2023).
 - **[DW]** R. Donagi, E. Witten, *Supermoduli Space Is Not Projected*, arXiv:1304.7798 [hep-th]
-  (2013); in: String-Math 2012, Proc. Sympos. Pure Math. **90**, Amer. Math. Soc. (2015), 19–71.
+  (2013, v2 2023); in: String-Math 2012, Proc. Sympos. Pure Math. **90**, Amer. Math. Soc. (2015),
+  19–72. *(⚠ The bibliography of [CN] prints the page range as 19–71; INSPIRE gives 19–72. The
+  discrepancy is unresolved here and must be settled against the AMS volume before submission.)*
 - **[FKP]** G. Felder, D. Kazhdan, A. Polishchuk, *The Moduli Space of Stable Supercurves and Its
   Canonical Line Bundle*, Amer. J. Math. **145** (2023), no. 6, 1777–1886; DOI
   `10.1353/ajm.2023.a913296`; arXiv:2006.13271 [math.AG].

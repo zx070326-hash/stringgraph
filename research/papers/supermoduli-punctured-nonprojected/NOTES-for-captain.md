@@ -157,7 +157,9 @@ These are real blockers for a *submission*, not for the draft:
    Serre (1955), Green (1982). Their bibliographic details in the reference list were written from
    standard knowledge and **must be checked against the actual articles** before submission.
    ⚠ Specifically: [FKP, §2.6] cites **two** Jarvis papers ([22] and [23] in FKP's numbering); our
-   reference list gives only one, and the pair must be completed.
+   reference list gives only one, and the pair must be completed (`ISSUES.md` I2).
+   ⚠ Also: the project registry and [CN]'s bibliography disagree on [DW]'s page range (19–72 vs
+   19–71), and neither was checked against the AMS volume (`ISSUES.md` I4).
 4. **Translate the bundled script.** `scripts/thresholds.py` is a byte-identical copy of the
    attempt's verification script and has **Chinese comments and Chinese console output**. It was
    copied verbatim on purpose, so that it remains checkable against the source attempt. If it is to

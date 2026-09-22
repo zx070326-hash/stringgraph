@@ -87,7 +87,20 @@ the extraction records while writing this draft.
 
 ---
 
-## I4. The bundled verification script is not submission-ready (production)
+## I4. Two sources disagree on the page range of [DW] (citation)
+
+`literature/sources.bib` (entry `donagi-witten-2013`, sourced from INSPIRE recid 1231519 and a
+verbatim cross-reference) gives **Proc. Sympos. Pure Math. 90 (2015) 19–72**. The bibliography of
+[CN], transcribed verbatim in `literature/extractions/correa-noja-2026.md` E8, prints
+**19–71**. Neither has been checked against the AMS volume itself — the project's own bib note says
+so explicitly ("均未与 AMS 直证").
+
+The paper's reference entry currently gives 19–72 with a ⚠ note recording the conflict. One page
+number, zero mathematical consequence, but it must be settled before submission.
+
+---
+
+## I5. The bundled verification script is not submission-ready (production)
 
 `scripts/thresholds.py` is a **byte-identical** copy of
 `research/attempts/supermoduli-elliptic-tail-punctured/scripts/thresholds.py`, deliberately not
@@ -101,7 +114,7 @@ that should be a **new** file, leaving the verbatim copy in place.
 
 ---
 
-## I5. Title-block author field is a placeholder (production)
+## I6. Title-block author field is a placeholder (production)
 
 `paper.md` opens with `**Authors:** [To be determined by project lead]`. This is a deliberate
 placeholder, not an oversight, and is coupled to how the project chooses to describe agent-assisted
