@@ -1,9 +1,9 @@
-id: worldsheet.ddf-spanning-hypothesis--via-rank-inequalities
-target: worldsheet.ddf-spanning-hypothesis
+id: worldsheet.ddf-spanning-hypothesis-v2--via-rank-inequalities
+target: worldsheet.ddf-spanning-hypothesis-v2
 kind: proof
 status: formalized
 depends_on:
-  - id: worldsheet.ddf-spanning-rank-inequality
+  - id: worldsheet.ddf-spanning-rank-inequality-v2
     inferred: false
     note: |
       **条件命题的前件，不是证明步骤——本推导真正的量词方向是 ∀N。** Lean 声明
@@ -133,5 +133,29 @@ notes: |
   ——猜想负担被本推导**精确定位**到了一条逐 N 的有限维秩不等式上，
   且该不等式已知不能靠「每个 N 一个层真空奇异向量」这条捷径解决
   （见 worldsheet.ddf-spanning-rank-inequality notes 的 Kac 退化点硬事实）。
+
+  【2026-09-22（curator，分支 agent/curator/ddf-spanning-intercept-premise）：两端同时换代到
+  带 η(v,v) = 0 前件的 v2 卡，本推导的**论证一字未改**】
+  `target` 由 worldsheet.ddf-spanning-hypothesis 改指 worldsheet.ddf-spanning-hypothesis-v2；
+  第一条 `depends_on` 由 worldsheet.ddf-spanning-rank-inequality 改指
+  worldsheet.ddf-spanning-rank-inequality-v2。两张 v2 卡相对旧卡的唯一差别是在卡面加了
+  同一条前件 η(v,v) = 0（v := a − b；在 (N)(S) 下即 a₀ = 1），旧卡因缺此前件逐字为假
+  （反例见两张 v2 卡的 notes）。
+  ⚠ **本推导的 Lean 引理 `ddfSpans_of_forall_b26` 本身不带任何 a₀ 条件，这是对的，不是
+  「偷偷塞进来的前件」**：它是一条对任意 a₀ 都成立的**归约**（整塔张成 ⇐ 逐片秩不等式），
+  只不过在前件不成立时，它归约的是一条假结论到一条同样假的前提。两端同时加上前件后，
+  归约的证明体逐字不变，**Lean 一行未改**，`status: formalized` 不受影响。
+  形式上要写出带前件的版本也只需 `fun hv => ddfSpans_of_forall_b26 (h hv)` 一类改写。
+  本推导的 own/effective 与瓶颈位置（worldsheet.ddf-spanning-rank-inequality-v2 仍 open）
+  与换代前完全相同。
+  ⚠ **本文件的 id 与文件名同时由 `…ddf-spanning-hypothesis--via-rank-inequalities` 改成
+  `…ddf-spanning-hypothesis-v2--via-rank-inequalities`**：`validate` 强制推导 id 以
+  `<target>--via-` 开头（`tools/stringgraph/validate.py`「id must start with」一条），
+  改 target 就必须同时改 id 与文件路径，别无选择。**旧 id 在 `docs/ROADMAP.md`、
+  `formal/BLUEPRINT-moonshine-bridge.md`、若干 `research/attempts/**` 与几张图卡的
+  **正文散文**里被引用过**，那些引用现在悬空；curator 的写入范围不含 docs/formal/research，
+  已在交付报告里列清单交 lead 处理。未选择「保留旧文件当历史 + 新建重复文件」这一仓库
+  既有模式的理由：那会留下一条 `status: rigorous`/`formalized` 的推导指向一条**逐字为假**
+  的旧卡，等于图继续为一条假命题背书；搬走后旧卡诚实地落到 open。
 author: curator
 created: "2026-09-12"

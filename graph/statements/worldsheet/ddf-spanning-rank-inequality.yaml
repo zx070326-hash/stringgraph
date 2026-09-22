@@ -81,7 +81,31 @@ sources:
       不经过逐片秩不等式这一中间步骤；秩改写是本项目（`formal/BLUEPRINT-noghost.md` §B′）
       为形式化引入的等价重述，登记此条只为给本卡一个文献方位。
 tags: [bosonic-string, no-ghost, ddf-spans, critical-dimension, gap, bottleneck, open]
+superseded_by: worldsheet.ddf-spanning-rank-inequality-v2
 notes: |
+  【2026-09-22：本卡已换代，被 worldsheet.ddf-spanning-rank-inequality-v2 取代（curator，
+  分支 agent/curator/ddf-spanning-intercept-premise）。原因：**本卡如字面所写为假**——
+  它漏了一条前件 η(v, v) = 0（v := a − b；在 (N)(S) 下即 a₀ = 1），而 N = 1 这一片就是反例。
+  下面各段是换代前的历史记账，**一字未删**，但读时须带上这条订正。】
+
+  本卡的断言写「对**一切** N ∈ N：dim H_N ≤ dim D_N + dim Z_N」，记号一节把截距写成
+  「同一截距 a₀ := α'k² = ½η(a,a)」（随 a 自由变动），而【本卡明确不断言】(b) 只把 **D**
+  推给「不断言」，没有触及 a₀。于是卡面读作对一切 (D, a₀, N) 断言。
+  **反例**（η = diag(−1,+1,…)，D = 26）：a = (3/2,5/2,0,…) ⇒ a₀ = 2；b = (1,1,0,…) 满足
+  (N)(S)；v = a − b ⇒ η(v,v) = 2 ≠ 0。在片 V_1 上
+    a₀ = 1 : dim H_1 25、dim D_1 24、dim Z_1 1 ⇒ 25 ≤ 24+1 ✔
+    a₀ = 2 : dim H_1 25、dim D_1 24、dim Z_1 0 ⇒ 25 >  24+0 ✘
+  （dim D_1 ≤ D − 2 无条件成立；Z_1 的那个态是 L_{−1}|0;v⟩，它物理当且仅当 η(v,v) = 0。）
+  ⇒ 下面各段「N ≤ 4 两族计数恰好相等」「B26 2 ⟺ D = 26」等全部账目都是在 a₀ = 1 上算的
+  （Lean 侧每个 `b26_*_of_D26` 都带 `dotVec η a a = 2`），脱离该前件不成立；
+  v2 卡把它写上卡面后，那些记账逐字仍然有效。
+
+  本卡原本无推导，故换代不搬动任何推导；
+  worldsheet.ddf-spanning-hypothesis-v2--via-rank-inequalities 的前件边已改指 v2 卡。
+
+  ──────────────────────────────────────────────────────────────────────
+  （以下为换代前的原始 notes，一字未删）
+
   【立卡理由】把 worldsheet.ddf-spanning-hypothesis 的整塔张成压成逐 N 的秩不等式后，
   这条不等式本身值得独立成卡：(1) 它是 (B-26) 唯一含 D = 26 的地方（下面详述），
   (2) 它是 worldsheet.ddf-spanning-hypothesis--via-rank-inequalities 的显式前提，
