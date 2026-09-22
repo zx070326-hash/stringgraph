@@ -8,42 +8,81 @@ notes: |
   由 lead 派工（任务书要求三问 Q1/Q2/Q3 + 三档裁定 + §5 证明正文逐字抽取）。
 
   【产出】
-  - `scoping.md` —— Q1/Q2/Q3 逐条回答（每条带证据等级）+ 裁定 + 待证命题清单。
+  - `scoping.md` —— Q1/Q2/Q3 逐条回答（每条带证据等级）+ 裁定 + 待证命题清单 P1–P5。
   - `claim.md` —— 裁定 (i) 那一半要求写出的「正确的假设该怎么写」，写成一条精确到量词的
     候选定理（Thm 5.1′）。**它是本 attempt 未来若继续要证的东西，现在没有证明。**
   - `literature/extractions/borcherds-1992.md` 追加节 E4–E8 —— §5 证明正文 + §3 形式定义的
     逐字抽取（本轮最有复用价值的产出；原有 89 行一字未动）。
   - `scripts/extract_pdf.py` —— PyMuPDF 抽取 + 200 dpi 渲染脚本（项目纪律禁用 pdftotext）。
+  - `scripts/slice_dims.py` —— 精确有理数核验 scoping.md §5.4 的反例（片 (−1,1) 上三个
+    子空间的维数），逐例跑 D ∈ {3,4,26} × a₀ ∈ {1,2,3}，并机检「前件 (C) ⟹ a₀ = 1」。
+    运行：`PYTHONIOENCODING=utf-8 uv run python research/attempts/borcherds-rank-one-noghost/scripts/slice_dims.py`
 
   【本轮的裁定（详见 scoping.md 第 5 节）】
-  - 秩 1 退化格这一项：**(i) 只需重述假设**。§5 全部论证在单一度数片内部进行，秩 2 只做两件事
-    （供给 (r,w)≠0 的 w；给中心荷贡献 2），两件在本项目设定里都由 𝔥 内的双曲平面 span(k_0,k_0′)
-    完成，与格的秩无关。自对偶性在 §5 不被使用。
-  - 连续横动量这一项：**(i) 只需重述假设**（把「非负整数本征值」改成「谱 ⊆ c + Z_{≥0}」）。
-  - **但整体转移是 (ii)**：§5 是 Borcherds 自称的 "quick sketch"，承重步（Lemma 5.2 首句
-    「单项式构成 H 的基」）**没有任何论证**，所以"哪条假设被用在哪"无法从 §5 读出，
-    "只需重述假设"这个判断**不能以 §5 为依据**。要真推广必须自己证那一步（或取得 GT 1972 /
-    Frenkel 1985 全文）。
+  - 秩 1 退化格这一项：**(i) 只需重述假设**。§5 全部论证在单一度数片内部进行（每个子空间、
+    每个算子都保度数），秩 2 只做三件事（让 w 类光却不退化，从而 K_0 = (r,w) ≠ 0；让 w-振子
+    的核恰是 Ve^r ⊗ S(w(−n))；给中心荷贡献 24+2 里的那个 2），三件全部只需 𝔥 里有一个含 w
+    的双曲平面，一件都不需要格的秩 2。自对偶性与离散动量在 §5 一次未用。
+  - 连续横动量这一项：**(i) 只需重述假设**（把「非负整数本征值」改成「谱 ⊆ c + Z_{≥0}」；
+    真正需要的有限维性是「每个双分次片有限维」，本项目满足）。
+  - **但整体转移是 (ii) 需要真推广**：§5 是 Borcherds 自称的 "quick sketch"，承重步
+    （Lemma 5.2 首句「单项式构成 H 的基」）**没有任何论证**，所以"哪条假设被用在哪"无法
+    从 §5 读出，"只需重述假设"这个判断**不能以 §5 为依据核验**。要真推广必须自己证那一步
+    （或取得 GT 1972 / Frenkel 1985 全文）。
+  - **记账（按任务书"归约不是进展"）**：本轮**消掉**三条被本项目卡登记为障碍的东西
+    （(a) 有限维、(c) 两个形式不同、(d) 第二条类光方向），**新增**一条此前未被任何卡登记的
+    欠账（P1 = Lemma 5.2 首句）。净效果是三条变一条，但那一条比原来三条加起来都硬。
+
+  【Q3 的答案摘要（scoping.md 第 4 节）】
+  - Borcherds 的形式不是逐度数规定的，是由 §3 的「与共形向量相容」伴随公式刻画、再在张量积上
+    取"显然的"形式；但 §3 只是**断言这样的形式存在**（引 [3],[16],[18]），本文无构造。
+  - **不同度数间的正交性在 §5 里既不是定理也不是定义——根本没被用到**：`H` 从定义起就是单一
+    度数片。§5 用到的形式性质只有三条：单片上非退化（Lemma 5.2 逐字 "As H is nonsingular"）、
+    `L_i† = L_{−i}`、`K_i† = K_{−i}`。**正定性明确不是假设**（E4/E8 逐字）。
+  - 虽然 §5 不需要，度数正交仍是相容形式的**定理**（scoping.md 命题 C，用 §3 伴随公式 +
+    `ω_0 1 = 0` + 𝔥 上形式非退化证出）。
+  - 本项目侧的「层间正交是定义规定」是**唯一**与「动量零模自伴」相容的规定（命题 D），
+    而零模自伴是 `α_n† = α_{−n}` 的 n=0 情形——与 Borcherds 的形式同一条性质。剩下的每层标量
+    自由度对张成命题无害（不改根、不改张成），但会翻跨层的正/负定性符号，做正定性那一半时要回来处理。
 
   【给 lead 的三条跨任务发现（本 attempt 不写 graph/，请 lead 自行处置）】
-  1. **`worldsheet.ddf-spanning-hypothesis` 按字面很可能为假**：a₀ ≠ 1 时在 (rung −1, 能级 1)
-     一片上就有反例（scoping.md §5.4 给出显式反例：D ≥ 3、η=diag(−1,+1,…)、b=(1,1,0,…)、
-     a=(3/2,5/2,0,…)，满足 (N)(S)，a₀ = 2；物理片维数 D−1，DDF 片维数 D−2，零态为 0）。
-     该卡缺 `a₀ = 1`（等价 η(a,a) = 2）这条前件。
+  1. **`worldsheet.ddf-spanning-hypothesis` 按字面为假（已机检）**：a₀ ≠ 1 时在
+     (rung −1, 振子能级 1) 一片上就有反例。scoping.md §5.4 给出显式反例并由
+     `scripts/slice_dims.py` 精确有理数核验：D ≥ 2、η=diag(−1,+1,…)、b=(1,1,0,…)、
+     a=(3/2,5/2,0,…)，满足 (N)(S)(T)(O)(T′)；dim(H_phys∩片)=D−1，dim(D(Ε)∩片)≤D−2
+     （**无条件**：落在该片的 DDF 单项式只有 D−2 个），dim(H_null∩片)=0。
+     该卡缺 `a₀ = 1`（等价 η(a,a) = 2，等价 η(v,v) = 0）这条前件。
+     顺带：该卡 notes 逐字写的「N = 1 处计数自动平衡，(D−1) = (D−2) + 1 对一切 D」，
+     其中那个 **+1 就是 Rv**，而 v ∈ v^⊥ 当且仅当 a₀ = 1——即该 notes 从一开始就默默用了 a₀=1。
   2. **本项目已形式化的 level-one 卡里，`a₀ = 1` 是隐藏前件**：
      `worldsheet.ddf-spans-physical-states-level-one-modulo-null` 自称「不需要 a₀ = 1」，
-     但它的前件 (C)（Ε 在 v^⊥ 上完备，v = a − b）连同 (T)(T′)(O) 蕴含 η(v,v) = 2(a₀−1) = 0。
+     但它的前件 (C)（Ε 在 v^⊥ 上完备，v = a − b）连同 (T)(T′)(O) 蕴含 η(v,v) = 2(a₀−1) = 0
+     （R 为域时；一般环上弱化为「η(v,v) 不可逆」）。
      `worldsheet.transverse-frame-spans-orthogonal-complement` 的显式见证 a=(1/2,3/2,0,…)
      算出来正是 a₀ = 1。故两张卡其实一致，只是那句「不需要 a₀ = 1」误导。
+     ⇒ 两张卡不矛盾，**但目标卡的 statement 需要补前件**（statement 不可变 ⇒ 换代或新建）。
   3. **`literature/extractions/borcherds-1992.md` 第 54 行与疑问 2 有一处事实错误**：
      Borcherds 的 K_i **不是** DDF 算子族，它是沿 w 的 Heisenberg 模 w(i)（v = e^{−w}_{−2}e^w
      = ±w(−1)·1，计算见 scoping.md D1），**保持格度数**；本项目的 A^ε_n **移动层指标**。
      两者的真实关系是包含 D(Ε) ⊆ T，不是记号翻译。原 89 行按任务书未动，纠正写在追加节疑问 4/7。
      这条直接影响 `worldsheet.momentum-tower-is-borcherds-no-ghost-instance` 的断言 (2)
      与 `--via-borcherds-1992` 的 depends_on 注 3。
+     ⚠ 连带：`worldsheet.ddf-contour-equals-mode-sum` 的 notes 把 Borcherds 的 K_i 记作
+     「同一族算子的第三种写法」（见 ddf-spanning-hypothesis notes (4) 逐字转述），按本条为误；
+     这**不降低**该卡的难度，但把它与 Borcherds 路线的关系记错了——Borcherds 路线**不需要**
+     那条算子字典，它需要的是一个维数比较（scoping.md 的 P4）。
+  4. **`momentum-tower-is-borcherds-no-ghost-instance` 边界 (a) 说的「逐度数 ⇒ 求和回塔上
+     本图无来源、无节点」已不成立**：那条拼装引理 2026-09-11 起就有了
+     （Lean `ddfSpans_of_forall_antidiagonal_slice_int`，见目标卡 notes【2026-09-11 更新】）。
 
-  【effective 记账】本轮纯 scoping，不进图：`worldsheet.ddf-spanning-hypothesis` 的
-  effective 前后均为 `physical-argument`（瓶颈 `--via-borcherds-1992` 分支）——**零移动**。
+  【effective 记账】本轮纯 scoping，不写 graph/。`uv run stringgraph status
+  worldsheet.ddf-spanning-hypothesis` 本轮开始与结束时输出相同：
+    own_status = formalized；**effective = physical-argument**；
+    best_derivation = worldsheet.ddf-spanning-hypothesis--via-borcherds-1992
+      （--via-borcherds-1992: own=rigorous, effective=physical-argument）
+      （--via-rank-inequalities: own=formalized, effective=open）
+  ⇒ **零移动**，与任务书的预期一致。
+  ⚠ 上面【发现 1】**会**移动（它是对目标卡真值的反例，不是状态问题），但处置权在 lead/reviewer。
 
   【下一步（给 lead 的建议，不是承诺）】见 scoping.md 第 6 节的待证命题清单 P1–P5；
-  其中 P1（Lemma 5.2 首句的计数）是唯一真正困难的一条，其余四条是簿记。
+  其中 P1（Lemma 5.2 首句的计数）是唯一真正困难的一条，其余四条是簿记（P5 已完成）。
