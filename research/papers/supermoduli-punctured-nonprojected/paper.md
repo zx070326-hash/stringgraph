@@ -144,7 +144,7 @@ of [CN, §§5–8] transcribes verbatim, and the only two changes anywhere in th
 2. the constant line $M_q^{-1}$ becomes an unnamed one-dimensional space $\mathfrak n$, which we
    never compute.
 
-Neither change matters, because the key estimate (Lemma 8.1 below, after [CN, Lemma 7.1]) uses only
+Neither change matters, because the key estimate (Lemma 6.1 below, after [CN, Lemma 7.1]) uses only
 $H^0(C,W\otimes L)=W\otimes H^0(C,L)=0$ and $h^0(C,\mathcal O_C)\cdot\dim\mathfrak n=1$. The
 argument is insensitive to $\dim W$, and it never needs to know what $\mathfrak n$ is.
 
@@ -708,6 +708,92 @@ not a splitting.) $\square$
 argument: (i) the second summand of $W$ becomes $T_\xi S_{a;n+1,2r}$ instead of
 $T_\xi S^{\varepsilon}_{1,1}$; (ii) the constant line $M_q^{-1}$ becomes the uncomputed line
 $\mathfrak n$.
+
+---
+
+## 6. Proof of Theorem M
+
+Keep the notation of §5 and define
+$$J\colon\ H^1(C,L^{-1})\longrightarrow H^1\big(C,\mathrm{Hom}(L^{-1},\mathcal T)\big)
+=H^1(C,\mathcal T\otimes L),$$
+the map induced by the inclusion $\mathcal T_C\cong L^{-2}\hookrightarrow\mathcal T$ (equivalently, by
+$\mathrm{Hom}(L^{-1},\mathcal T_C)\cong L^{-1}\to\mathrm{Hom}(L^{-1},\mathcal T)$).
+
+**Lemma 6.1.** $\dim\ker J\le1$.
+
+*Proof.* Apply $\mathrm{Hom}(L^{-1},-)=(-)\otimes L$ to $0\to\mathcal T_C\to\mathcal T\to Q\to0$;
+using $\mathcal T_C\cong L^{-2}$ this gives
+$$0\to L^{-1}\to\mathcal T\otimes L\to Q\otimes L\to0 .$$
+The long exact sequence contains
+$$H^0(C,Q\otimes L)\xrightarrow{\ \delta\ }H^1(C,L^{-1})\xrightarrow{\ J\ }H^1(C,\mathcal T\otimes L),$$
+so $\ker J=\operatorname{im}\delta$ and $\dim\ker J\le h^0(C,Q\otimes L)$.
+
+By Proposition 5.9, tensoring the filtration by $L$ yields the exact sequence
+$$0\to W\otimes L\to Q\otimes L\to \mathcal O_C\otimes\mathfrak n\to0 ,$$
+using $(L^{-1}\otimes\mathfrak n)\otimes L\cong\mathcal O_C\otimes\mathfrak n$. Taking global
+sections and using ineffectivity of $L$,
+$$H^0(C,W\otimes L)=W\otimes H^0(C,L)=0 ,$$
+so $H^0(C,Q\otimes L)\hookrightarrow H^0(C,\mathcal O_C)\otimes\mathfrak n$ and therefore
+$$h^0(C,Q\otimes L)\ \le\ h^0(C,\mathcal O_C)\cdot\dim\mathfrak n\ =\ 1\cdot1\ =\ 1 .$$
+Hence $\dim\ker J\le1$. $\square$
+
+> **Remark 6.2 (insensitivity to $\dim W$ — the technical root of the whole generalisation).** The
+> proof of Lemma 6.1 uses the constant vector space $W$ only through
+> $H^0(C,W\otimes L)=W\otimes H^0(C,L)=0$. It is therefore **completely insensitive to $\dim W$**.
+> Since $\dim T_\xi S_{a;n+1,2r}=3a-3+(n+1)+2r$ grows linearly in $n$ and $r$, this is exactly why
+> adding arbitrarily many spectator punctures costs nothing. Likewise the line $\mathfrak n$ enters
+> only through $\dim\mathfrak n=1$; it occurs in exactly two places in the whole paper
+> (Proposition 5.9 and Lemma 6.1) and is never touched again.
+
+**Corollary 6.3.** *If $h\ge2$, there exists $\eta\in H^1(C,L^{-1})$ with $J(\eta)\neq0$.*
+
+*Proof.* From $L^{\otimes2}\cong\omega_C$ we get $\deg L=h-1$, hence $\deg L^{-1}=1-h<0$ and
+$H^0(C,L^{-1})=0$. Riemann–Roch gives
+$\chi(C,L^{-1})=\deg L^{-1}+1-h=2-2h$, so $h^1(C,L^{-1})=2h-2$. For $h\ge2$ the source of $J$ has
+dimension $\ge2>1\ge\dim\ker J$ (Lemma 6.1), so $\ker J\subsetneq H^1(C,L^{-1})$; choose
+$\eta\notin\ker J$. $\square$
+
+*(Note that here $L^{\otimes2}\cong\omega_C$ carries **no** Ramond twist, because the genus-$h$ side
+has no Ramond punctures. This is the second reason — the first being §7 — why Ramond punctures must
+be mounted on the tail; see Corollary 7.3.)*
+
+**Theorem 6.4 (= Theorem M).** *Let $h\ge2$ and $a,n,r\ge0$ satisfy $2a-2+(n+1)+2r>0$, and put
+$g=h+a$. Then*
+$$\omega_2\big(\overline{\mathfrak S}_{g;n,2r}\big)\ \neq\ 0 ,$$
+*and consequently $\overline{\mathfrak S}_{g;n,2r}$ is non-projected, in particular non-split.*
+
+*Proof.* Take all the data of Construction 5.3 and the class $\eta$ of Corollary 6.3, and form
+$F:=F_{\eta,\xi}\colon X_\eta\to\overline{\mathfrak S}_{g;n,2r}$.
+
+**Step 1 (identification of the comparison sheaf).** By (DW2)–(DW3),
+$\Lambda^2\mathcal T_-X_\eta\cong L^{-1}$, $\mathcal T_+X_\eta\cong\mathcal T_C\cong L^{-2}$ and
+$\omega_2(X_\eta)=\eta\in H^1(C,L^{-1})$. The comparison sheaf of Lemma 4.2 is
+$$\mathcal G_{F}=\mathrm{Hom}\big(\Lambda^2\mathcal T_-X_\eta,\ i^*\mathcal T_+
+\overline{\mathfrak S}_{g;n,2r}\big)\cong\mathrm{Hom}(L^{-1},\mathcal T)=\mathcal T\otimes L .$$
+
+**Step 2 (the coefficient morphism is $J$).** The map $j_F$ is induced by the even differential
+$dF_+\colon\mathcal T_+X_\eta=\mathcal T_C\to i^*\mathcal T_+\overline{\mathfrak S}_{g;n,2r}
+=\mathcal T$. The bosonic truncation of $F$ is $i$, and $di$ sends tangent directions of $C$ to
+tangent directions of the target, so under the identifications of Step 1 $dF_+$ is precisely the
+inclusion $\mathcal T_C\hookrightarrow\mathcal T$. Passing to cohomology gives exactly the map $J$ of
+this section, whence
+$$j_F\big(\omega_2(X_\eta)\big)=J(\eta)\neq0 .$$
+
+**Step 3 (functoriality).** Apply Lemma 4.2 to $F\colon X_\eta\to\overline{\mathfrak S}_{g;n,2r}$.
+Its hypotheses hold: $X_\eta$ is a $(1|2)$-dimensional supermanifold, and
+$\overline{\mathfrak S}_{g;n,2r}$ is a smooth proper DM superstack by [FKP, Thm. A] (I4). Hence
+$$\iota_F\big(\omega_2(\overline{\mathfrak S}_{g;n,2r})\big)=j_F\big(\omega_2(X_\eta)\big)=J(\eta)
+\neq0\quad\text{in }H^1(C,\mathcal G_F).$$
+In particular $\omega_2(\overline{\mathfrak S}_{g;n,2r})\neq0$.
+
+**Step 4.** By Proposition 4.1, non-vanishing of the primary obstruction prevents projectedness.
+$\square$
+
+> **Remark 6.5 (what the proof also gives).** The argument does more than assert non-vanishing: it
+> **locates** the obstruction. The class is already non-zero after restriction to the boundary test
+> curve $i(C)\subset\Delta_{\rm NS}$, and it is witnessed by an explicit $\eta$, namely any
+> $\eta\in H^1(C,L^{-1})\smallsetminus\ker J$ — a subset of complement dimension at most $1$ in a
+> space of dimension $2h-2$.
 
 ---
 
