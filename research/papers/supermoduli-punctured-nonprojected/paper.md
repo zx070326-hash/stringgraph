@@ -797,4 +797,106 @@ $\square$
 
 ---
 
+## 7. Proposition N: the naive placement returns zero identically
+
+Theorem M places the spectator punctures on the constant tail. The obvious alternative — and the
+first thing one tries — is to place them on the moving component, i.e. to replace [CN]'s
+$\mathfrak M^+_{h,1}$ by $\mathfrak M^+_{h,n+1}$ with $n$ of the markings fixed and one moving. This
+section proves that the alternative yields **no information whatsoever**, for structural reasons that
+have nothing to do with how cleverly the rest of the argument is arranged.
+
+This is not an aside. Together with Corollary 7.2 it shows that *separating gluing with a constant
+tail* is not a convenient choice but the **only** one available to the method — which retroactively
+explains a construction choice that [CN] makes without comment.
+
+**Proposition 7.1 (Proposition N).** *Let $n\ge1$. Fix a smooth curve $C$ of genus $h$, an
+ineffective even theta characteristic $L$, and $n$ pairwise distinct points
+$p_1,\dots,p_n\in C$. Consider the test family obtained by moving the $(n{+}1)$-st NS marking, i.e.
+the family built along*
+$$e_C^{\circ}\colon\ C^{\circ}:=C\smallsetminus\{p_1,\dots,p_n\}\ \longrightarrow\ S^+_{h;n+1,0},
+\qquad p\longmapsto (C,L,p_1,\dots,p_n,p),$$
+*and let $X^{\circ}_\eta$ be the corresponding Donagi–Witten one-point obstruction family. Then*
+$$(X^{\circ}_\eta)_{\rm bos}=C^{\circ}\ \text{ is affine},\qquad
+H^1(C^{\circ},\mathcal F)=0\ \ \text{for every coherent sheaf }\mathcal F .$$
+*In particular the primary obstruction class of the test family lies in the zero group,*
+$$\omega_2(X^\circ_\eta)\in H^1\big(C^\circ,\ \mathcal F^{\rm obs}_{X^\circ_\eta}\big)=0 ,$$
+*so the comparison map of Lemma 4.2 gives $j_F(\omega_2(X^\circ_\eta))=0$ and hence the trivial
+identity $\iota_F(\omega_2(\text{target}))=0$, for **every** $\eta$ and every target. The route
+detects nothing.*
+
+*Proof.* In four steps.
+
+**Step 1 (the test base must omit the fixed points).** Objects of the moduli problem
+$S_{h;n+1,0}$ are spin curves with $n+1$ **pairwise distinct** markings — in the definitions of
+stable spin curves with punctures used by [FKP, §2.6] (after Cornalba and Jarvis), markings on a
+smooth curve must be distinct, since otherwise the resulting family is not a family of
+$S_{h;n+1,0}$. Hence $p\mapsto(C,L,p_1,\dots,p_n,p)$ is undefined at $p=p_j$, and its maximal domain
+of definition is $C^{\circ}=C\smallsetminus\{p_1,\dots,p_n\}$. The Donagi–Witten one-point
+obstruction family is pulled back along this curve — the fibre of the universal pointed supercurve
+over the fixed spin curve — so its reduced space is exactly $C^{\circ}$.
+
+**Step 2 ($C^\circ$ is affine).** $C$ is a smooth projective curve and $n\ge1$, so $C^\circ$ is a
+smooth projective curve minus a non-empty finite set, hence affine (take an ample divisor supported
+on $\{p_1,\dots,p_n\}$).
+
+**Step 3 (Serre vanishing).** Higher cohomology of coherent sheaves on an affine scheme vanishes
+(Serre, I9): $H^i(C^\circ,\mathcal F)=0$ for $i\ge1$ and every coherent $\mathcal F$.
+
+**Step 4 (the value group is zero).** By §2.1 the primary obstruction of any smooth DM superstack
+$\mathfrak X$ lies in $H^1(\mathfrak X_{\rm bos},\mathcal F^{\rm obs}_{\mathfrak X})$. Here
+$(X^\circ_\eta)_{\rm bos}=C^\circ$ is affine by Steps 1–2, and
+$\mathcal F^{\rm obs}_{X^\circ_\eta}=\mathrm{Hom}(\Lambda^2\mathcal T_-X^\circ_\eta,
+\mathcal T_+X^\circ_\eta)$ is coherent — indeed locally free, since $\mathcal T_\pm$ of the
+Donagi–Witten family are vector bundles and both $\Lambda^2$ and $\mathrm{Hom}$ preserve local
+freeness. So Step 3 applies **whatever the coefficient sheaf is**, and
+$$\omega_2(X^\circ_\eta)\in H^1\big(C^\circ,\ \mathcal F^{\rm obs}\big)=0 .$$
+Therefore $j_F(\omega_2(X^\circ_\eta))=0$, and Lemma 4.2 yields only
+$\iota_F(\omega_2(\text{target}))=0$, which carries no information. $\square$
+
+> **Remark (an alternative one-line proof).** Proposition 4.1 states verbatim that $\omega_2$ *"is
+> compatible with étale pullback"*, and the open immersion $C^\circ\hookrightarrow C$ is étale;
+> hence $\omega_2(X^\circ_\eta)=\eta|_{C^\circ}\in H^1(C^\circ,L^{-1})=0$. Both proofs are correct;
+> the one given above is shorter and does not depend on the shape of $\eta$.
+
+> **Remark (the quantifier, which is easy to get backwards).** The conclusion is **not** that
+> the only available $\eta$ is $0$. On the contrary, with punctures the odd tangent space at
+> $(C,L,p_1,\dots,p_n)$ is $H^1\big(C,L^{-1}(-\sum_ip_i)\big)$, computed on the **projective** curve
+> $C$, of dimension
+> $$h^1\big(C,L^{-1}(-\textstyle\sum_ip_i)\big)=2h-2+n$$
+> (from $\deg L^{-1}(-\sum p_i)=1-h-n$, $\chi=2-2h-n$, $h^0=0$), matching the odd dimension of
+> $\mathfrak M_{h,n}$. So there are **more** classes $\eta$ to try than in the unpunctured case of
+> [CN], which has $2h-2$. What collapses is the **value** space of the obstruction, not its
+> **parameter** space. The correct reading of Proposition N is therefore stronger than the naive one:
+> *more to try than before, and every single one of them invisible.*
+
+**Corollary 7.2 (the non-separating gluing morphism is killed too).** *The non-separating NS gluing
+morphism [FKP, (7.9)],*
+$$\overline{\mathfrak S}_{g;m+2,n}\longrightarrow\overline{\mathfrak S}_{g+1;m,n},$$
+*cannot carry this method either.*
+
+*Proof.* (7.9) glues two NS punctures **on the same curve**. If it is to carry the method, one of the
+two glued points must be the moving point $p$ and the other a fixed point $q\in C$. The test base is
+then $C\smallsetminus\{q\}$, again affine, and Steps 2–4 of Proposition 7.1 apply verbatim. $\square$
+
+**Corollary 7.3 (Ramond punctures cannot go on the moving component either).** *Putting Ramond
+punctures on the moving genus-$h$ component fails for the reason of Proposition 7.1, and
+additionally for a second, independent reason: if the genus-$h$ side carries a non-zero Ramond
+divisor $R$, then $L^{\otimes2}\cong\omega_C(R)$, and the identifications
+$\Lambda^2\mathcal T_-X_\eta\cong L^{-1}$ and $\mathcal T_+X_\eta\cong L^{-2}$ of (DW2) both fail
+simultaneously, as does the step $\mathrm{Hom}(L^{-1},\mathcal T_C)\cong L^{-1}$ in the proof of
+Lemma 6.1.* $\square$
+
+> **Remark 7.4 (exactly what Proposition N does and does not assert).** Proposition N does **not**
+> assert that $\overline{\mathfrak S}_{g;n,2r}$ is projected, and it is not a meta-theorem saying
+> that no argument of this shape can work. It asserts that **this particular family of test curves
+> returns zero identically**. That is enough to force the placement decision: the spectator punctures
+> cannot sit on the moving component, so the only remaining option is the fixed tail — which §5–§6
+> show does work.
+
+> **Remark 7.5 (a by-product for [CN]).** [CN] uses a separating gluing with a constant elliptic tail
+> and offers no motivation for either choice. Proposition N and Corollary 7.2 supply one: both
+> choices are **forced** by the affineness obstruction, not selected for convenience.
+
+---
+
 <!-- SECTION-MARKER -->
