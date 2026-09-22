@@ -90,7 +90,7 @@ primary obstruction class, whose non-vanishing obstructs projectedness [CN, Prop
 > $$\omega_2\big(\overline{\mathfrak S}_{g;n,2r}\big)\ \neq\ 0 ,$$
 > and hence $\overline{\mathfrak S}_{g;n,2r}$ is non-projected, in particular non-split.
 
-Eliminating $h$ and $a$ (Corollary 8.4 below) turns (P1)–(P2) into a closed criterion in the
+Eliminating $h$ and $a$ (Corollary 8.5 below) turns (P1)–(P2) into a closed criterion in the
 invariants of the target:
 
 > **Corollary (threshold).**
@@ -156,8 +156,8 @@ $g=2$ becomes accessible exactly when $n+2r\ge2$.
 
 The technical reward of the constant-tail placement is separate and equally important: every
 difficulty specific to Ramond punctures is confined to the constant factor, and **no formula is ever
-needed on the constant factor**. This is why Corollary B costs no more than Corollary A (§7.3,
-Remark 7.4).
+needed on the constant factor**. This is why Corollary B costs no more than Corollary A
+(Remark 5.7).
 
 ### 1.4 Precise comparison with the literature
 
@@ -225,8 +225,9 @@ Listed once, and repeated where relevant:
 their rigour status. §4 recalls the obstruction class, its functoriality, and the Donagi–Witten
 one-point obstruction family. §5 constructs the test morphism and computes the two sheaves that enter
 the argument. §6 proves Theorem M. §7 proves Proposition N and its two corollaries. §8 derives the
-threshold in closed form and proves Corollaries A and B. §9 collects four consistency checks, one of
-which is a deliberate attempt to make the method contradict a known theorem. §10 lists the open ends.
+parity refinement, Corollaries A and B, and the threshold in closed form, and records the machine
+verification of the threshold arithmetic. §9 collects four consistency checks, one of which is a
+deliberate attempt to make the method contradict a known theorem. §10 lists the open ends.
 
 ---
 
@@ -306,9 +307,9 @@ verified against the published text.
 For $r=0$ the parity $\mathrm{par}(L):=h^0(C,L)\bmod 2$ is deformation invariant (Mumford), so
 $\overline S_{g;n,0}=\overline S{}^+_{g;n,0}\sqcup\overline S{}^-_{g;n,0}$; for compact-type nodal
 spin curves, parity is additive over the irreducible components, because the spin sheaf at an NS node
-is the direct sum of the direct images from the two branches (see the proof of Lemma 9.2 below). For
-$r>0$ the twist $\omega_C(\rho_1+\dots+\rho_{2r})$ destroys Mumford's invariance argument, and we make
-no component-level statement — see §10.3.
+is the direct sum of the direct images from the two branches (see the proof of Proposition 8.1
+below). For $r>0$ the twist $\omega_C(\rho_1+\dots+\rho_{2r})$ destroys Mumford's invariance
+argument, and we make no component-level statement — see §10.3.
 
 ---
 
@@ -414,6 +415,299 @@ Three consequences are used repeatedly and are worth isolating:
 - $\Lambda^2\mathcal T_-X_\eta\cong L^{-1}$ uses $L^{\otimes2}\cong\omega_C$ **without twist**, i.e.
   it requires that the genus-$h$ side carry **no Ramond punctures**. This is one of the two reasons
   (the other is §7) why Ramond punctures must live on the tail.
+
+---
+
+## 5. The construction
+
+Throughout this section and the next, fix integers $h,a,n,r$ subject to
+
+$$\textbf{(P1)}\quad h\ge 2, \qquad\qquad \textbf{(P2)}\quad 2a-2+(n+1)+2r>0 ,$$
+
+and put $g:=h+a$. Condition (P2) is the stability condition for a genus-$a$ curve carrying
+$n+1+2r$ marked points; it is automatic for $a\ge1$ and equivalent to $n+2r\ge2$ for $a=0$.
+
+### Two preliminary lemmas
+
+**Lemma 5.1 (bosonic truncation).** *For all $g$ and all $m$, $n$ with $n$ even,*
+$$\big(\overline{\mathfrak S}_{g;m,n}\big)_{\rm bos}\ \cong\ \overline S_{g;m,n},$$
+*the moduli stack of stable spin curves of genus $g$ with $m$ NS and $n$ Ramond punctures, a smooth
+proper Deligne–Mumford stack.*
+
+*Proof.* Let $\mathfrak X$ be a superstack over $\mathbb C$ and $S$ a purely even (ordinary) scheme.
+A morphism $\varphi:S\to\mathfrak X$ induces
+$\varphi^{\#}:\mathcal O_{\mathfrak X}\to\varphi_*\mathcal O_S$. Since $\mathcal O_S$ has no odd part,
+$\varphi^{\#}$ kills every odd section, hence kills the ideal $\mathcal J$ they generate, hence
+factors uniquely through $\mathcal O_{\mathfrak X}/\mathcal J=\mathcal O_{\mathfrak X_{\rm bos}}$.
+Therefore
+$$\mathrm{Hom}(S,\mathfrak X)=\mathrm{Hom}(S,\mathfrak X_{\rm bos})\quad\text{for every purely even
+$S$,}$$
+i.e. $\mathfrak X_{\rm bos}$ represents the restriction of the functor of $\mathfrak X$ to purely
+even bases.
+
+On the other hand [FKP, §2.6] states verbatim that *"if we only consider even bases, the functor of
+(stable) supercurves with punctures coincides with the functor of stable curves with punctures
+equipped with generalized spin structures"*, and that the latter functor is represented by
+$\overline S_{g,n_{\rm NS},n_{\rm R}}$, which *"was studied in [Jarvis] … In particular, it is shown
+to be a smooth proper Deligne–Mumford stack."* Two stacks representing the same functor on purely
+even bases are canonically isomorphic. $\square$
+
+*(For $m=n=0$ this is asserted, without proof, in [CN, §3.1]; Lemma 5.1 is the punctured version with
+the argument written out.)*
+
+**Lemma 5.2 (existence of the fixed tail).** *Let $a,n,r\ge0$ satisfy (P2). Then there exist a smooth
+curve $F$ of genus $a$, pairwise distinct points $q,y_1,\dots,y_n,\rho_1,\dots,\rho_{2r}\in F$, and a
+line bundle $N$ on $F$ with*
+$$N^{\otimes2}\ \cong\ \omega_F\big(\rho_1+\dots+\rho_{2r}\big),$$
+*such that the resulting datum $\xi=(F,N;q,y_1,\dots,y_n;\rho_1,\dots,\rho_{2r})$ is a
+$\mathbb C$-point of $\overline S_{a;n+1,2r}$ lying in the open locus $S_{a;n+1,2r}$ of smooth
+curves. Moreover:*
+
+- *for $a=0$ (which forces $n+2r\ge2$): $\omega_{\mathbb P^1}(\rho_1+\dots+\rho_{2r})=
+  \mathcal O(2r-2)$, so $N=\mathcal O_{\mathbb P^1}(r-1)$ is **unique**; when $r=0$,
+  $N=\mathcal O(-1)$ has $h^0=0$ and is therefore **even**;*
+- *for $a=1$ and $r=0$: $N^{\otimes2}\cong\mathcal O_E$, so $N$ is one of the four theta
+  characteristics of the elliptic curve $E$; $\mathcal O_E$ is **odd** and the three non-trivial
+  $2$-torsion points are **even**. In particular **both parities occur**.*
+
+*Proof.* Choose any smooth genus-$a$ curve $F$ and any $n+1+2r$ pairwise distinct points on it (over
+$\mathbb C$ this is always possible; for $a=0$ take points of $\mathbb P^1$). Write
+$\rho:=\rho_1+\dots+\rho_{2r}$. Then $\deg\omega_F(\rho)=2a-2+2r$ is even. On a smooth projective
+curve, $\mathrm{Pic}^0(F)$ is a complex torus, in particular a **divisible** abelian group, so every
+line bundle of even degree admits a square root: pick any $N_0$ with $\deg N_0=a-1+r$; then
+$\omega_F(\rho)\otimes N_0^{-2}\in\mathrm{Pic}^0(F)$ has a square root $\alpha$, and
+$N:=N_0\otimes\alpha$ works. Stability of the marked curve (finiteness of its automorphism group) is
+equivalent to $2a-2+\#\{\text{marked points}\}>0$, i.e. to $2a-2+(n+1)+2r>0$, which is (P2).
+Uniqueness for $a=0$ follows from $\mathrm{Pic}(\mathbb P^1)=\mathbb Z$; the parity count for
+$a=1,r=0$ is classical and is quoted verbatim in [CN, §6]. $\square$
+
+### Construction 5.3
+
+Fix, once and for all:
+
+- $(C,L)$: a smooth curve of genus $h\ge2$ together with an ineffective even theta characteristic,
+  $L^{\otimes2}\cong\omega_C$ and $H^0(C,L)=0$ (I8);
+- $\xi=(F,N;q,y_1,\dots,y_n;\rho_1,\dots,\rho_{2r})$: the fixed tail from Lemma 5.2, regarded as a
+  $\mathbb C$-point of the *smooth* supermoduli stack $\mathfrak S_{a;n+1,2r}$ (legitimate by
+  Lemma 5.1: over an even base, supercurves are spin curves). Since $\mathfrak S_{a;n+1,2r}$ is
+  Deligne–Mumford ([FKP, Thm. A] plus passage to an open substack) and $\xi$ is stable, the
+  automorphism group $A:=\mathrm{Aut}(\xi)$ is finite étale.
+
+Define
+
+$$\mathcal B\ :=\ \underbrace{\mathfrak S^+_{h;1,0}}_{=\ \mathfrak M^+_{h,1}\ \text{of [CN]}}\ \times\
+\mathfrak S_{a;\,n+1,\,2r},\qquad
+\mathcal B_{\rm bos}=S^+_{h;1,0}\times S_{a;n+1,2r}\ \ \text{(Lemma 5.1)},$$
+
+$$\Gamma\colon\ \mathcal B\ \longrightarrow\ \overline{\mathfrak S}_{g;n,2r}
+\qquad\big(\text{[FKP], eq. (7.8), with } g_1=h,\ m_1=0,\ n_1=0;\ g_2=a,\ m_2=n,\ n_2=2r\big).$$
+
+Indeed [FKP, (7.8)] reads, in general form,
+$$\overline{\mathfrak S}_{g_1;m_1+1,n_1}\times\overline{\mathfrak S}_{g_2;m_2+1,n_2}\longrightarrow
+\overline{\mathfrak S}_{g_1+g_2;\,m_1+m_2,\,n_1+n_2},$$
+gluing the last NS puncture on each factor; with the above indices the target is exactly
+$\overline{\mathfrak S}_{h+a;n,2r}$. Concretely: **the single NS puncture on the moving component and
+the point $q$ on the tail are glued into a separating NS node, while the $y_i$ and $\rho_j$ survive
+untouched as the $n$ NS and $2r$ Ramond punctures of the resulting curve.**
+
+Next put
+
+$$\tau_\xi\colon\ \mathfrak S^+_{h;1,0}\to\mathcal B,\quad
+\mathcal X\longmapsto(\mathcal X,\ \xi_S),\qquad \xi_S:=\xi\times_{\mathrm{Spec}\,\mathbb C}S,$$
+
+on $S$-points, and $\phi\mapsto(\phi,\mathrm{id}_S)$ on morphisms — this is the *constant tail*
+morphism, defined exactly as in [CN, §6]. Then set
+
+$$G_\xi:=\Gamma\circ\tau_\xi\colon\ \mathfrak S^+_{h;1,0}\to\overline{\mathfrak S}_{g;n,2r},
+\qquad
+F_{\eta,\xi}:=G_\xi\circ u_\eta\colon\ X_\eta\to\overline{\mathfrak S}_{g;n,2r},$$
+
+with $u_\eta$ as in (DW1). On bosonic truncations,
+
+$$e_C\colon C\to S^+_{h;1,0},\ p\mapsto(C,L,p);\qquad e:=\tau_{\xi,\rm bos}\circ e_C;\qquad
+i:=\Gamma_{\rm bos}\circ e\colon C\to\overline S_{g;n,2r},$$
+$$i(p)=(C,L,p)\ \cup_{p=q}\ (F,N;y_1,\dots,y_n;\rho_1,\dots,\rho_{2r}).$$
+
+> **The entire novelty is the second factor.** In [CN] it is $\mathfrak M^{\varepsilon}_{1,1}$
+> (genus $1$, one NS point); here it is $\mathfrak S_{a;n+1,2r}$ (genus $a$, $n+1$ NS points, $2r$
+> Ramond points). **The first factor is unchanged**, which is precisely why every lemma below can be
+> transported from [CN] with at most notational edits.
+
+### The tangent sheaf along the test curve
+
+**Lemma 5.4.** *Along $e\colon C\to\mathcal B_{\rm bos}$ there is an exact sequence*
+$$0\longrightarrow\mathcal T_C\longrightarrow e^*\mathcal T\mathcal B_{\rm bos}\longrightarrow
+W\otimes\mathcal O_C\longrightarrow0,\qquad
+W:=H^1(C,\mathcal T_C)\oplus T_{\xi_{\rm bos}}S_{a;n+1,2r},$$
+*where $W$ is a fixed finite-dimensional vector space.*
+
+*Proof.* This is [CN, Lemma 6.1] with the second factor replaced; we go through it factor by factor.
+
+*First factor.* $S^+_{h;1,0}\to S^+_h$ is the universal pointed curve over the smooth spin moduli
+stack. Pulling back its tangent sequence along $e_C$ gives
+$$0\to\mathcal T_C\to e_C^*\mathcal T S^+_{h;1,0}\to T_{(C,L)}S^+_h\otimes\mathcal O_C\to0 .$$
+Since the smooth spin moduli stack is finite étale over the moduli stack of smooth curves,
+$T_{(C,L)}S^+_h\cong H^1(C,\mathcal T_C)$. **This paragraph is identical to [CN], because the first
+factor is untouched.**
+
+*Second factor.* On the second factor $e$ is **constant**, equal to the stack-theoretic point
+$\xi_{\rm bos}$; hence
+$e^*\mathrm{pr}_2^*\mathcal T S_{a;n+1,2r}\cong T_{\xi_{\rm bos}}S_{a;n+1,2r}\otimes\mathcal O_C$.
+The *only* change relative to [CN] is that the constant vector space is now of dimension
+$3a-3+(n+1)+2r$ instead of $1$. The argument of [CN] uses only that this space is constant and
+finite-dimensional; its dimension never enters.
+
+*Residual gerbe.* $A=\mathrm{Aut}(\xi)$ is finite étale, so the residual gerbe contributes no
+infinitesimal tangent directions; all computations take place after pullback along $e$ to $C$, and no
+$A$-invariant part is taken. Identical to [CN].
+
+Adding the two factors gives the stated sequence. $\square$
+
+### The normal line
+
+This is the only step requiring care, and the only place where we deviate from the citation used in
+[CN].
+
+**Lemma 5.5 (normal line).** *Let $N_{\mathcal B}:=\mathcal O(\Delta_{\rm NS})|_{\mathcal B}$ be the
+normal line bundle of the gluing morphism $\Gamma$. Then*
+$$e^*N_{\mathcal B}\ \cong\ L^{-1}\otimes\mathfrak n ,$$
+*where $\mathfrak n:=\big(\Psi_2^{-1}\big)\big|_{\xi}$ is a one-dimensional $\mathbb C$-vector space
+— the fibre at $q$ of the inverse NS psi-line of the tail.*
+
+*Proof.* **(a) The normal-line formula applies in the punctured generality.** [FKP, §9.1, p. 58]
+begins verbatim: *"Let $\iota:B\to\overline{\mathcal S}$ be the standard gluing map covering an NS
+type boundary component, i.e., one of the maps (7.8) or (7.9), restricted to the locus of smooth
+supercurves."* Our $\Gamma$ **is** the map (7.8) (Construction 5.3), and $\mathcal B$ is a product of
+two *uncompactified* factors, hence lies in the locus of smooth supercurves. The setup therefore
+applies verbatim.
+
+[FKP] establishes $N_B\cong\Psi_1^{-1}\otimes\Psi_2^{-1}$ **twice**, by two independent routes, and
+only the second is available to us:
+
+- *Route 1 (bottom of p. 58 – top of p. 59): via the super Mumford isomorphism (8.11).* Here the
+  identification $N_B\cong\Psi_1^{-1}\otimes\Psi_2^{-1}$ appears as an **unnumbered display on
+  p. 59** — it is *not* equation (9.6). This route does survive the introduction of punctures, but
+  not for free: the psi-lines of the spectator punctures appear on both sides (on $B$ from the
+  factorwise (8.11), on $\overline{\mathcal S}$ from the (8.11) of the glued curve, with
+  $\iota^*\Psi_j=\Psi_j$ since they are literally the same punctures) and cancel, and one needs in
+  addition an argument that $\mathcal O(\Delta_R)|_B\cong\mathcal O_B$. **We do not use this route.**
+- *Route 2 (bottom of p. 60 – p. 61): via the definition (7.6) of the NS boundary line bundle.*
+  [FKP, eq. (9.6), p. 61] reads verbatim
+  $$\mathcal O(\Delta)|_B\simeq\operatorname{Ber}R\pi_*(j_*\Omega_{U/S})|_B\otimes
+  \operatorname{Ber}^{-1}R\pi_*(\Omega_{X/S}|_B)\simeq\Psi_1^{-1}\Psi_2^{-1}.$$
+  This route runs entirely through [FKP, Lemma 9.1(iii)(iv), p. 59], whose comparison sheaves
+  $\mathcal K$ and $\tilde{\mathcal C}$ are described in the source, verbatim, as *"supported on the
+  node"*. **No puncture enters this derivation**, which is what makes it the puncture-independent
+  route. This is the route we use.
+
+That $\Psi_1$ comes from the first factor and $\Psi_2$ from the second follows from the **definition**
+of $\Psi$ together with flat base change: [FKP, p. 57] (end of the proof of Lemma 8.7) states
+$\Psi\simeq\tilde\Psi\simeq\pi_*(I_P/I_D)$ and
+$P^*\omega_{D/S}\simeq\operatorname{Ber}(\Psi)=\Psi^{-1}$, every object in which is computed on the
+divisor $D_i$ of the $i$-th puncture; for $\mathcal B=S_1\times S_2$ the universal curve is
+$\tilde X=\mathrm{pr}_1^*\tilde X_1\sqcup\mathrm{pr}_2^*\tilde X_2$, whence
+$\Psi_2=\mathrm{pr}_2^*\Psi_{P_2}$.
+
+*(A caution for readers checking this against the source: the sentence on [FKP, p. 58] beginning
+"Note that in the case of a separating node, where $B=S_1\times S_2$, the line bundle
+$\mathcal B(\mathcal O_{\tilde X})$ is the exterior product of two similar line bundles on the
+factors $S_1$ and $S_2$" is about the Berezinian $\mathcal B(\mathcal O_{\tilde X})$, not about
+$\Psi$, and must not be used for the factorisation above.)*
+
+**(b) The $\Psi_1$ side: identical to [CN].** The first factor $\mathfrak S^+_{h;1,0}$ carries
+**exactly one NS puncture and no Ramond punctures** — precisely the situation of [CN, Lemma 6.2]. By
+[FKP, Example 8.9] (over an even base, the inverse NS psi-line at a marked point is the fibre of the
+inverse spin line at that point), applied along $e_C$ (base $C$, family = the fixed spin curve
+$(C,L)$ with moving marking $p$),
+$$e^*\Psi_1^{-1}\ \cong\ L^{-1}.$$
+Note that Example 8.9 is used **only here**, and here its hypotheses ("a family of supercurves with
+NS-punctures" over an even base, with $L^{\otimes2}\cong\omega_C$ untwisted) are satisfied verbatim.
+
+**(c) The $\Psi_2$ side: no formula is needed.** The tail is **constant** along $e$, so
+$e^*\Psi_2^{-1}$ is the constant line bundle $\mathfrak n\otimes\mathcal O_C$ for a one-dimensional
+vector space $\mathfrak n$. **Everything below uses only that it is a line; never what it is.**
+
+Combining (a), (b), (c) gives the claim. $\square$
+
+> **Remark 5.6 (do not cite [FKP, Theorem C] here).** [FKP, Theorem C, p. 2] reads verbatim: *"Let
+> $B\to\overline{\mathcal S}_g$ be the gluing map to one of the components of $\Delta_{NS}$ from a
+> lower genus (uncompactified) moduli space $B$."* Its **target** is the **unpunctured**
+> $\overline{\mathcal S}_g$; on the same page, Theorem B explicitly writes
+> $\overline{\mathcal S}=\overline{\mathcal S}_{g,n_{NS},n_R}$, so the distinction is deliberate on
+> [FKP]'s part. Theorem C allows the *source* $B$ to carry punctures but not the *target*, and we
+> need a punctured target. This is why Lemma 5.5 is routed through §9.1 / Lemma 9.1(iii)(iv) /
+> eq. (9.6) instead.
+
+> **Remark 5.7 (why the generalisation is free, and why Ramond costs nothing extra).** In [CN,
+> Lemma 6.2] the constant line $\mathfrak n$ is computed to be $M_q^{-1}$, using Example 8.9 on the
+> elliptic tail. With Ramond punctures on the tail, Example 8.9 — stated for families with
+> NS-punctures — does not directly apply, and the relation between the $\Psi$-lines and the
+> generalized spin structure would have to be re-examined. **Lemma 5.5(c) sidesteps this entirely by
+> not computing $\mathfrak n$**: the tail is constant, so $\mathfrak n$ is a line, and the only thing
+> the argument ever consumes is $h^0(C,\mathcal O_C\otimes\mathfrak n)=1$ (see Lemma 6.1). All of the
+> technical difficulty introduced by Ramond punctures is thereby quarantined inside the constant
+> factor, and no formula is ever required there. This is the real payoff of mounting the spectator
+> punctures on the fixed tail.
+
+> **Remark 5.8 (an inference, honestly labelled) [INF-NORMAL].** [FKP] never states eq. (9.6) for a
+> target with an arbitrary number of punctures. Our use of it for the punctured target
+> $\overline{\mathfrak S}_{g;n,2r}$ is **an inference based on the locality of the node singularity —
+> the sheaves in Lemma 9.1(iii)(iv) are, verbatim, "supported on the node" — and not a general
+> conclusion stated verbatim by [FKP]**. We regard the inference as solid (deformation theory of a
+> node is genuinely local, and no puncture enters route 2 at any point), but it is an inference, and
+> a reader who declines to make it should read every statement of this paper as conditional on it.
+
+### The even tangent quotient
+
+**Proposition 5.9.** *Let $\mathcal T:=i^*\mathcal T_+\overline{\mathfrak S}_{g;n,2r}\cong
+i^*\mathcal T\overline S_{g;n,2r}$ (the second isomorphism by $\mathcal T_+\cong\mathcal T_X$ and
+Lemma 5.1). The differential of $i$ gives an injection $\mathcal T_C\hookrightarrow\mathcal T$, and
+$Q:=\mathcal T/\mathcal T_C$ carries a two-step filtration*
+$$0\subseteq Q_0\subseteq Q,\qquad Q_0\cong W\otimes\mathcal O_C,\qquad
+Q/Q_0\cong L^{-1}\otimes\mathfrak n .$$
+
+*Proof.* By [FKP, Lemma 7.10], verbatim: *"Both morphisms (7.8) and (7.9) induce embeddings of
+codimension $1|0$ on tangent spaces and factor through the divisor $\Delta_{NS}$. Furthermore, near a
+stable supercurve with a single separating (resp., non-separating) NS node, the divisor
+$\Delta_{NS}$ coincides with the schematic image of (7.8) (resp., (7.9))."* Pulling back the tangent
+sequence of the boundary inclusion along $e$ therefore gives
+$$0\longrightarrow e^*\mathcal T\mathcal B_{\rm bos}\longrightarrow\mathcal T\longrightarrow
+e^*N_{\mathcal B}\longrightarrow0 .$$
+Splice this with the sequence of Lemma 5.4. The splice is the **third isomorphism theorem** applied to
+the two-step filtration $\mathcal T_C\subset e^*\mathcal T\mathcal B_{\rm bos}\subset\mathcal T$: with
+$Q:=\mathcal T/\mathcal T_C$ and
+$Q_0:=e^*\mathcal T\mathcal B_{\rm bos}/\mathcal T_C\cong W\otimes\mathcal O_C$ one obtains
+$$0\to W\otimes\mathcal O_C\to Q\to e^*N_{\mathcal B}\to0 ,$$
+and $e^*N_{\mathcal B}\cong L^{-1}\otimes\mathfrak n$ by Lemma 5.5. (The assertion is a filtration,
+not a splitting.) $\square$
+
+> **Remark 5.10 (no closed-immersion hypothesis is needed).** One might worry that the first sequence
+> above requires $\Gamma$ to be a closed immersion. It does not. By [FKP, Lemma 7.10, p. 48],
+> $d\Gamma$ has **constant corank $1|0$**, so $\operatorname{coker}(d\Gamma)$ is locally free of rank
+> $1|0$; its identification with $\mathcal O(\Delta_{NS})|_B=N_{\mathcal B}$ is exactly the content of
+> the sentence in the proof on p. 49: *"Using the fact that the morphism on tangent spaces is an
+> embedding with the image which is the orthogonal to $dt$, we deduce that near this point
+> $\Delta_{NS}$ is the schematic image of the morphism"* ($t$ = a local equation of $\Delta_{NS}$).
+> Pullback along $e$ of a short exact sequence of locally free sheaves is exact, so no closed
+> immersion is required. A closed immersion would be needed only to identify $\mathcal T$ with the
+> tangent sheaf of an actual subscheme; but our $\mathcal T$ is *defined* as the pullback
+> $i^*\mathcal T_+\overline{\mathfrak S}_{g;n,2r}$, not as an intrinsic object attached to an image.
+>
+> We also record that [FKP, Lemma 7.10] is itself stated and proved in punctured generality: its
+> proof begins, verbatim, *"Let $X$ be a stable supercurve with punctures and a fixed NS-node
+> $q\in X$"*, with the parenthetical *"(where we take into account all the punctures on both
+> sides)"*, and the displayed form of (7.8) on the same page matches our index choice
+> ($g_1=h,m_1=0,n_1=0$; $g_2=a,m_2=n,n_2=2r$) verbatim.
+
+> **Remark 5.11 (dimension cross-check).** $\dim\mathcal B_{\rm bos}=(3h-3+1)+(3a-3+(n+1)+2r)=
+> 3g-4+n+2r=\dim\overline S_{g;n,2r}-1$, consistent with codimension $1|0$. The ranks in
+> Proposition 5.9 add up correctly as well:
+> $1+\big[(3h-3)+(3a-3+n+1+2r)\big]+1=3g-3+n+2r=\dim\overline S_{g;n,2r}$.
+
+**Changes relative to [CN], in full.** Exactly two, neither of which touches the structure of the
+argument: (i) the second summand of $W$ becomes $T_\xi S_{a;n+1,2r}$ instead of
+$T_\xi S^{\varepsilon}_{1,1}$; (ii) the constant line $M_q^{-1}$ becomes the uncomputed line
+$\mathfrak n$.
 
 ---
 
