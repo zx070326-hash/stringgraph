@@ -229,3 +229,13 @@ at the boundary; they do not construct or use a global retraction of the *compac
   构造本身在数学上是否良定义于整个光滑轨迹（而非仅仅某个坐标卡）"这一更强的断言，需要另一轮
   阅读 Paper II 全文。**但这不是 claim.md Proposition C 所需要的**——(C1)/(C2) 只需要知道
   D'Hoker–Phong 从未使用紧化超模叠的整体收缩，本轮证据已经充分支持这一点到 L1。
+
+## 第二轮（2026-09-23）：登记综述文 hep-th/0211111
+
+`research/attempts/supermoduli-measure-consequence/draft-section.md`（只读）把六篇正文论文与其综述
+*Lectures on Two-Loop Superstrings*（hep-th/0211111）一起定义为引用键 [DP]。该综述已作为
+`dhoker-phong-2002-lectures` 登记进 `literature/sources.bib`，**核实档位仅书目层面**（`WebSearch`
+交叉核对标题/作者/arXiv 编号/摘要，未 `Read` 渲染 PDF 页图，未达 L1；发表状态存疑——部分来源标"未
+发表讲义"，部分标"会议录 Conf. Proc. C 0208124, 85 (2002)"，两者均未独立核实，bib 条目按 `@misc`
+登记且未填 `journal`/DOI 以免编造）。摘要内容与 I–IV 已发表结果一致（同一投影方法综述，无新结果），
+不改变上方"核实结论"的裁定。
