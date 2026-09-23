@@ -21,7 +21,7 @@ prose below it.
 | 1 (rank-2 machinery) | **Proved**, two independent verifications | Part 1 |
 | — (new: known nonzero-$\omega_2$ mechanism unavailable) | **Proved** (Lemma 2 + Cor. 2.1), scope stated precisely | Part 2 |
 | 2 (uncompactified cells split) | Open | — |
-| 3 (bosonic truncation structure) | Open | — |
+| 3 (bosonic truncation structure) | **Partial**: cell (B) divisor-typing verified (Part 3); root-stack representability imported; cell (A) not yet done | Part 3 |
 | 4 (inertia criterion fails) | Open | — |
 | 5 (boundary support reduction) | Open, contingent on Claim 2 | — |
 | 6 (the dichotomy) | **Open** | — |
@@ -235,6 +235,99 @@ surface base — see §6 for what such a computation would require.**
 
 ---
 
-## Part 3 — [in progress]
+## Part 3 — Lemma 3: the boundary-divisor typing for cell (B), verified by direct degree count
+
+We now independently verify the divisor-typing half of claim.md's Claim 3(1) for
+$X_B=\overline{\mathcal S}_{0;3,2}$, lying over $\overline M_{0,5}$ (points $1,2,3$ = NS,
+$4,5$ = Ramond).
+
+**Setup.** At a smooth point of $\overline M_{0,5}$, $C=\mathbb P^1$, and a generalized
+spin structure is $L$ with $L^{\otimes2}\cong\omega_C(\rho_4+\rho_5)=\mathcal O(-2+2)=
+\mathcal O$, so $L\cong\mathcal O_{\mathbb P^1}$ uniquely ($\mathrm{Pic}(\mathbb P^1)
+=\mathbb Z$ is torsion-free, so the unique square root of $\mathcal O$ is $\mathcal O$
+itself). Hence $S_{0;3,2}\to M_{0,5}$ is a trivial $\mu_2$-gerbe on the smooth locus:
+every fibre has a unique spin structure whose only automorphism is $\{\pm1\}$ acting by
+$(-1)^F$, which is exactly the fermion-parity gerbe already noted in claim.md §0. This
+confirms the "connected, $\mu_2$-gerbe over the interior of $\overline M_{0,5}$" part of
+Claim 3(1) away from the boundary.
+
+**Two candidate node prescriptions.** At a boundary point of $\overline M_{0,5}$ the
+curve degenerates to $C=C_1\cup_x C_2$. Classically (Cornalba's compactified theta
+divisor; Jarvis's stable spin curves — imported as standard, not re-derived from first
+principles here, see the caveat below) a generalized spin structure across a node
+comes in exactly two types:
+- **Ramond (locally free) type**: $L$ extends as an honest line bundle, with
+  $L_i^{\otimes2}\cong\omega_{C_i}\bigl(x_i+\sum_{\rho_j\text{ on }C_i}\rho_j\bigr)$ on
+  each branch $C_i$ — the node point $x_i$ is counted *with the same weight as a
+  Ramond puncture* in the local formula on each side.
+- **NS (non-locally-free) type**: $L$ is torsion-free but not locally free at the node;
+  each branch instead satisfies $L_i^{\otimes2}\cong\omega_{C_i}\bigl(\sum_{\rho_j\text{
+  on }C_i}\rho_j\bigr)$ — the node point is **not** counted at all.
+
+At a given boundary divisor, whichever of the two prescriptions has *every branch's
+right-hand side of even degree* (so that an honest square root $L_i$ exists on that
+$\mathbb P^1$-branch, since $\mathrm{Pic}(\mathbb P^1)=\mathbb Z$ has square roots
+exactly for even-degree bundles) is realized; parity considerations (as we check
+case-by-case below) show at most one of the two prescriptions is degree-consistent on
+each of the boundary divisors of $\overline M_{0,5}$, so this determines the type
+unambiguously — this is exactly the content of claim.md's node-typing quote from
+[Corrêa–Noja, p.6].
+
+**Lemma 3.** *For $X_B$, the divisors $D_{12},D_{13},D_{23},D_{45}$ are NS-type and the
+six divisors $D_{i4},D_{i5}$ ($i=1,2,3$) are Ramond-type. (This is exactly claim.md's
+Claim 3(1), divisor-typing half.)*
+
+*Proof.* By the $S_3$ symmetry permuting the NS labels $\{1,2,3\}$ and the $\mathbb Z/2$
+symmetry swapping the Ramond labels $\{4,5\}$, it suffices to check one representative
+of each of the three $S_3\times\mathbb Z/2$-orbits of divisors:
+$\{D_{12},D_{13},D_{23}\}$, $\{D_{45}\}$, and $\{D_{14},D_{15},D_{24},D_{25},D_{34},
+D_{35}\}$.
+
+*Case $D_{45}$* ($C_1\ni1,2,3$; $C_2\ni4,5$). NS prescription: on $C_1$,
+$\deg = \deg\omega_{C_1}= -2$ (even) $\Rightarrow L_1=\mathcal O(-1)$ exists; on $C_2$,
+$\deg=\deg\omega_{C_2}(\rho_4+\rho_5)=-2+2=0$ (even) $\Rightarrow L_2=\mathcal O$
+exists. Both branches consistent. Ramond prescription: on $C_1$,
+$\deg=\deg\omega_{C_1}(x_1)=-2+1=-1$ (**odd** — no square root on $\mathbb P^1$
+exists). So only the NS prescription is realizable: $D_{45}$ is NS-type.
+
+*Case $D_{12}$* ($C_1\ni1,2$; $C_2\ni3,4,5$). NS prescription: on $C_1$,
+$\deg=\deg\omega_{C_1}=-2$ (even) $\Rightarrow L_1=\mathcal O(-1)$; on $C_2$,
+$\deg=\deg\omega_{C_2}(\rho_4+\rho_5)=-2+2=0$ (even) $\Rightarrow L_2=\mathcal O$. Both
+consistent. Ramond prescription: on $C_1$, $\deg=\deg\omega_{C_1}(x_1)=-2+1=-1$ (odd,
+fails). So only NS is realizable: $D_{12}$ (hence $D_{13},D_{23}$ by symmetry) is
+NS-type.
+
+*Case $D_{14}$* ($C_1\ni1,4$; $C_2\ni2,3,5$). NS prescription: on $C_1$,
+$\deg=\deg\omega_{C_1}(\rho_4)=-2+1=-1$ (odd, fails). Ramond prescription: on $C_1$,
+$\deg=\deg\omega_{C_1}(\rho_4+x_1)=-2+1+1=0$ (even) $\Rightarrow L_1=\mathcal O$; on
+$C_2$, $\deg=\deg\omega_{C_2}(\rho_5+x_2)=-2+1+1=0$ (even) $\Rightarrow L_2=\mathcal O$.
+Both consistent under Ramond. So only Ramond is realizable: $D_{14}$ (hence all six
+$D_{i4},D_{i5}$, $i=1,2,3$, by symmetry) is Ramond-type. $\blacksquare$
+
+**What this establishes, and what remains imported.** The *typing* of all 10 boundary
+divisors (which four get a $\mu_2$-root, which six do not) is now independently
+verified by direct degree-parity computation, not merely quoted from claim.md. What is
+**not** re-derived here, and is imported as standard (Cornalba's compactified theta
+characteristic / Jarvis's stable $r$-spin curves, as used silently throughout FKP,
+[CN], and `paper.md`):
+`[GAP: root-stack representability]` the fact that the *coarse* statement "$L$ is
+torsion-free-but-not-locally-free at an NS-type node" is represented, at the level of
+the smooth *stack* $\overline{\mathcal S}_{0;3,2}$, by literally taking the $\mu_2$-root
+stack of $\overline M_{0,5}$ along the NS-type divisors (rather than some other smooth
+stacky modification). This is standard in the Abramovich–Jarvis–Chiodo picture of
+$r$-spin moduli as root stacks, but is not re-derived from Jarvis's original
+moduli-of-torsion-free-sheaves construction in this session; it is used here as an
+imported structural fact, consistent with how `paper.md` and [CN] use it.
+
+Granting that import, Lemma 3 gives exactly claim.md's Claim 3(1):
+$$\overline{\mathcal S}_{0;3,2}\ \text{is a}\ \mu_2\text{-gerbe over}\quad
+\mathcal X_0=\sqrt[2]{\bigl(\overline M_{0,5},\,D_{12}+D_{13}+D_{23}+D_{45}\bigr)}.$$
+
+**This settles the divisor-typing content of Claim 3(1) (modulo the imported
+root-stack-representability fact flagged above).**
+
+---
+
+## Part 4 — [in progress]
 
 *To be continued in the next commit.*
