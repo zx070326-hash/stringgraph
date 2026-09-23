@@ -691,4 +691,252 @@ closed subschemes; $D_i$ is supported on $P_i$). $\square$
 
 ---
 
-*(Parts §6–§11 follow.)*
+## 6. Step 4: Lemma 9.1 in the presence of spectator punctures
+
+### 6.1 The punctured §9.1 setup
+
+Fix data as in Claim P. Put
+$$B:=\mathcal S_{g_1;m_1+1,n_1}\times\mathcal S_{g_2;m_2+1,n_2}\quad\text{(separating case)},
+\qquad B:=\mathcal S_{g;m+2,n}\quad\text{(non-separating case)},$$
+and let $\iota\colon B\to\overline{\mathcal S}:=\overline{\mathcal S}_{g;m,n}$ be the
+restriction of (7.8) (resp. (7.9)) to the smooth locus; this exists by Cor. 4.4. Let
+$\widetilde\pi\colon\widetilde X\to B$ be the universal **smooth** supercurve over $B$ (in the
+separating case $\widetilde X=X_1\sqcup X_2$ is the disjoint union of the two pulled-back
+universal curves — "smooth supercurve" is used here in the possibly-disconnected sense, exactly
+as in [FKP]'s §9.1), with:
+
+- the two **glued** NS punctures $P_1,P_2$ and their divisors $D_1,D_2$, with psi-lines
+  $\Psi_1,\Psi_2$;
+- $m=m_1+m_2$ **spectator** NS punctures $P^{\rm sp}_\alpha$ with divisors $D^{\rm sp}_\alpha$
+  and psi-lines $\Psi^{\rm sp}_\alpha$;
+- the Ramond divisor $R=\sum_{j}R_j$, $n=n_1+n_2$ components.
+
+By Def. 2.4 all of $D_1,D_2,D^{\rm sp}_\bullet,R$ are pairwise disjoint. Let
+$X_B:=X\times_{\overline{\mathcal S}}B\to B$ be the pulled-back universal stable supercurve,
+obtained from $\widetilde X$ by identifying $P_1\simeq B\simeq P_2$ into a relative node
+$Q\subset X_B$ (Prop. 4.3), and $\rho\colon\widetilde X\to X_B$ the resulting finite morphism.
+Note $Q\cong B$, $\rho^{-1}(Q)=P_1\sqcup P_2$, and $Q$ is disjoint from the images of
+$D^{\rm sp}_\bullet$ and $R$. Following [FKP], set
+$\omega^{2k}_{X_B/B}:=\omega^{2k}_{X/\overline{\mathcal S}}|_{X_B}$ and
+$\omega^{2k+1}_{X_B/B}:=\omega^{2k}_{X_B/B}\otimes\omega_{X_B/B}$.
+
+> **Lemma 6.0 (parity of the divisor line bundles).** $\mathcal O_{\widetilde X}(D_i)$ and
+> $\mathcal O_{X}(R)$ are line bundles of rank $1|0$ (i.e. "even" divisors). Consequently
+> $\omega^{2k}(\ast)$ has rank $1|0$ and $\omega^{2k+1}(\ast)$ has rank $0|1$ for any twist by
+> such divisors.
+
+*Proof.* For $R$: L1, p. 7, proof of Lemma 2.6 — "locally $R_i$ is given by an even equation
+$f\in\mathcal O^+_X=\mathcal O_C$". For $D_i$: L1, p. 57, Remark 8.10 gives
+$\Psi_i^{-1}\simeq P_i^*\omega_{\widetilde X/B}(D_i)=P_i^*\omega_{\widetilde X/B}\otimes
+P_i^*\mathcal O(D_i)=\Psi_i\otimes P_i^*\mathcal O(D_i)$; since $\Psi_i^{\pm1}$ both have rank
+$0|1$, $P_i^*\mathcal O(D_i)$ has rank $1|0$, and a line bundle whose restriction to a section
+is even is even. The last assertion follows from
+$\operatorname{rank}\omega=0|1$ (S3) and multiplicativity of parity. $\square$
+
+### 6.2 Parts (i), (ii), (iii) are puncture-blind
+
+> **Proposition 6.1.** Parts (i), (ii), (iii) of [FKP]'s Lemma 9.1 — the sequences
+> (9.1), (9.3), (9.5), the isomorphisms (9.2), (9.4), and the statement
+> $\operatorname{Ber}R\pi_*\Omega_{X_B/B}\simeq\operatorname{Ber}R\pi_*\Omega_{\widetilde X/B}$
+> — hold verbatim in the setting of §6.1, for arbitrary $m\ge0$ and arbitrary even $n\ge0$.
+
+*Proof.* We go through [FKP]'s proof (L1, p. 60) and check each input.
+
+**(i)** The assertion is that $\rho^*\omega^2_{X_B/B}\cong\omega^2_{\widetilde X/B}(D_1+D_2)$.
+[FKP]'s proof has exactly two ingredients. (a) A natural identification over the smooth locus
+of $\widetilde X$: this is [FKP]'s Theorem 4.1 definition $\omega^{2k}:=j_*\omega^{2k}_{U}$
+(I5), which is constructed from the morphism alone and mentions no puncture, plus the fact that
+$\rho$ is an isomorphism away from $P_1\sqcup P_2$. (b) An extension across the node, checked
+"in an étale neighborhood of the node … in the framework of Sec. 6.2, using a generator $e$ of
+$\omega^2_{X/S}$ (see (6.13))". By §6.4 (I13) — "Everything in Sec. 6.2 and 6.3 has an analog
+in the case of families of stable supercurves with punctures … **This will not change the local
+picture near the nodes**" — this étale-local computation is unchanged by the presence of
+$D^{\rm sp}_\bullet$ and $R$, which do not meet the node.
+The canonical trivialisations of $\omega^2_{\widetilde X/B}(D_1+D_2)|_{P_i}$ used to identify
+the cokernel with $\mathcal O_Q$ are [FKP]'s Cor. 8.8, stated in the §8.4 setup which
+explicitly carries "$m$ NS punctures $P_1,\dots,P_m$ **and Ramond divisors $R_1,\dots,R_n$**"
+(I14). Hence (9.1) and (9.2) hold.
+
+**(ii)** [FKP]'s proof uses: Lemma 6.4 (a node-local statement of §6.2, unchanged by punctures
+by (I13)); Remark 8.10, $\Psi_i^{-1}\simeq P_i^*\omega_{\widetilde X/B}(D_i)$, again from the
+§8.4 setup with Ramond divisors (I14/I15); and explicit local coordinates
+$\frac1{z_i}[dz_i|d\theta_i]$, $\frac{\theta_i}{z_i}[dz_i|d\theta_i]$ at $D_i$ and at $Q$. All
+of these live on neighbourhoods of $D_1,D_2,Q$, which are disjoint from $D^{\rm sp}_\bullet$
+and $R$. The passage from $m=0$ to general $m$ (here $m$ is the **$\omega$-exponent**, Remark
+2.2) tensors (9.5) with $\omega^{2m}_{X_B/B}$, a line bundle, using the triviality of
+$Q^*(\omega^2_{X_B/B})$ — again node-local. Hence (9.3), (9.4), (9.5) hold.
+
+**(iii)** [FKP] open the proof with "First, we note that $\mathcal K$ is supported on the node,
+so it is enough to prove the assertion after replacing $X_B$ with the formal neighborhood of
+the node", so the argument is manifestly local at $Q$. Its only external input is Lemma 7.2(ii),
+whose setup (L1, p. 42) is "a family of stable supercurves $X/S$ over a smooth affine base $S$
+with a smooth map $t\colon S\to\mathbb A^1$ … the completion of $\mathcal O_X$ along $q(S_0)$
+is given by the standard generators and relations (6.11)" — an étale-local hypothesis at a
+single NS node, with **no puncture hypothesis at all**. Moreover $\Omega_{X_B/B}$ and
+$\Omega_{\widetilde X/B}$ are puncture-blind by Lemma 3.1. Hence the sequence
+$0\to\mathcal K\to\Omega_{X_B/B}\to\rho_*\Omega_{\widetilde X/B}\to0$ holds with the stated
+filtration of $\mathcal K$.
+
+For the last clause of (iii) we verify [FKP]'s assertion that $\operatorname{Ber}\pi_*\mathcal K$
+is canonically trivial, using (S3). The subfactors are
+$Q_*(\Psi_1^2\Psi_2^2),\ Q_*(\Psi_1^2\Psi_2),\ Q_*(\Psi_1\Psi_2^2),\ Q_*(\Psi_1\Psi_2)$;
+since $\pi\circ Q=\operatorname{id}_B$ and each $\Psi_i$ has rank $0|1$, their ranks are
+$1|0,\ 0|1,\ 0|1,\ 1|0$, so their Berezinians are
+$$\Psi_1^2\Psi_2^2,\quad(\Psi_1^2\Psi_2)^{-1},\quad(\Psi_1\Psi_2^2)^{-1},\quad\Psi_1\Psi_2,$$
+whose product is $\Psi_1^{2-2-1+1}\Psi_2^{2-1-2+1}=\mathcal O_B$. Hence
+$\operatorname{Ber}R\pi_*\Omega_{X_B/B}\simeq\operatorname{Ber}R\pi_*\Omega_{\widetilde X/B}$.
+**Note that no spectator $\Psi^{\rm sp}_\alpha$ occurs anywhere in this list** — the only
+psi-lines that can appear are those of the two glued punctures, because $\mathcal K$ is
+supported on $Q$. $\square$
+
+### 6.3 Part (iv): the [E1] repair, done Berezinian-first
+
+[FKP]'s (iv) produces the cokernel sheaf $\widetilde{\mathcal C}$ and reads off its Berezinian.
+Its one-line proof — "(iv) This follows from parts (i), (ii) and from the exact sequence (7.1)"
+(L1, p. 60) — is the **only** place in the whole chain where (7.1) is used, and therefore the
+only place where [E1] bites. Rather than repairing the $3\times3$ diagram (which would require
+checking the commutativity of squares whose vertical arrows are only defined up to the
+torsion-freeness of $j_*\Omega_U$), we derive the Berezinian consequence directly. The
+resulting statement is exactly the first display after Lemma 9.1 on L1, p. 60.
+
+> **Proposition 6.2.** In the setting of §6.1, there is a canonical isomorphism
+> $$\operatorname{Ber}R\pi_*\big(j_*\Omega_{U/\overline{\mathcal S}}\big|_{X_B}\big)\ \simeq\
+> \operatorname{Ber}R\widetilde\pi_*\big(\Omega_{\widetilde X/B}(D_1+D_2)\big)\otimes
+> \Psi_1^{-1}\otimes\Psi_2^{-1}.$$
+
+*Proof.* **Row 1 (on $X_B$).** Restrict the $R$-twisted fundamental sequence (7.1-R) of
+Lemma 5.1, written for the universal family $X\to\overline{\mathcal S}$, to the closed
+substack $X_B\subset X$:
+$$0\to\omega^2_{X_B/B}(R)\to\big(j_*\Omega_{U/\overline{\mathcal S}}\big)\big|_{X_B}
+\to\omega_{X_B/B}(R)\to0 .$$
+This is exact: restriction is right exact, and $\mathcal Tor_1^{\mathcal O_X}
+(\omega_{X/\overline{\mathcal S}}(R),\mathcal O_{X_B})=0$ because
+$\omega_{X/\overline{\mathcal S}}(R)$ is a line bundle. (I have used
+$\omega^{2}_{X/\overline{\mathcal S}}|_{X_B}=\omega^2_{X_B/B}$, which is [FKP]'s **definition**
+in Lemma 9.1(i), and $\omega_{X/\overline{\mathcal S}}|_{X_B}=\omega_{X_B/B}$, base change for
+the relative dualizing sheaf of a flat proper family.)
+By (S1),
+$$\operatorname{Ber}R\pi_*\big(j_*\Omega_{U/\overline{\mathcal S}}|_{X_B}\big)=
+\operatorname{Ber}R\pi_*\big(\omega^2_{X_B/B}(R)\big)\otimes
+\operatorname{Ber}R\pi_*\big(\omega_{X_B/B}(R)\big).\tag{6.1}$$
+
+**Row 2 (on $\widetilde X$).** On the smooth family $\widetilde X/B$, (7.1-R) reads
+$0\to\omega^2_{\widetilde X/B}(R)\to\Omega_{\widetilde X/B}\to\omega_{\widetilde X/B}(R)\to0$
+with all three terms locally free, hence locally split. Twist by the line bundle
+$\mathcal O_{\widetilde X}(D_1+D_2)$ and apply the exact functor $\rho_*$ ($\rho$ finite):
+$$0\to\rho_*\big(\omega^2_{\widetilde X/B}(D_1+D_2)\big)\otimes\mathcal O_{X_B}(R)
+\to\rho_*\big(\Omega_{\widetilde X/B}(D_1+D_2)\big)
+\to\rho_*\big(\omega_{\widetilde X/B}(D_1+D_2)\big)\otimes\mathcal O_{X_B}(R)\to0,$$
+where I used the projection formula together with
+$\rho^*\mathcal O_{X_B}(R)=\mathcal O_{\widetilde X}(R)$ ($\rho$ is an isomorphism near $R$).
+By (S1), and since $R\pi_*\rho_*=R\widetilde\pi_*$,
+$$\operatorname{Ber}R\widetilde\pi_*\big(\Omega_{\widetilde X/B}(D_1+D_2)\big)=
+\operatorname{Ber}R\pi_*\Big(\rho_*\omega^2_{\widetilde X/B}(D_1+D_2)\otimes\mathcal O(R)\Big)
+\otimes\operatorname{Ber}R\pi_*\Big(\rho_*\omega_{\widetilde X/B}(D_1+D_2)\otimes\mathcal O(R)
+\Big).\tag{6.2}$$
+
+**Comparison of the first factors.** Tensor (9.1) with $m=1$ — i.e.
+$0\to\omega^2_{X_B/B}\to\rho_*\omega^2_{\widetilde X/B}(D_1+D_2)\to\mathcal O_Q\to0$, valid by
+Prop. 6.1(i) — with the line bundle $\mathcal O_{X_B}(R)$. Since $Q\cap R=\varnothing$,
+Cor. 5.2 gives a canonical $\mathcal O_Q\otimes\mathcal O(R)\cong\mathcal O_Q$. Hence
+$$\operatorname{Ber}R\pi_*\Big(\rho_*\omega^2_{\widetilde X/B}(D_1+D_2)\otimes\mathcal O(R)\Big)
+=\operatorname{Ber}R\pi_*\big(\omega^2_{X_B/B}(R)\big)\otimes
+\operatorname{Ber}\pi_*\mathcal O_Q
+=\operatorname{Ber}R\pi_*\big(\omega^2_{X_B/B}(R)\big),$$
+because $Q\cong B$ gives $\pi_*\mathcal O_Q=\mathcal O_B$ of rank $1|0$, whose Berezinian is
+canonically $\mathcal O_B$.
+
+**Comparison of the second factors.** Tensor the "In addition" sequence of Lemma 9.1(ii) with
+$m=0$ — i.e. $0\to\omega_{X_B/B}\to\rho_*\omega_{\widetilde X/B}(D_1+D_2)\to\mathcal C\to0$,
+valid by Prop. 6.1(ii) — with $\mathcal O_{X_B}(R)$; again $\mathcal C$ is supported on $Q$, so
+$\mathcal C\otimes\mathcal O(R)\cong\mathcal C$ canonically (Cor. 5.2). By (9.5),
+$0\to Q_*\mathcal O_B\to\mathcal C\to Q_*(\Psi_1^{-1}\oplus\Psi_2^{-1})\to0$, and using (S3)
+($\Psi_i^{-1}$ has rank $0|1$, so $\operatorname{Ber}\Psi_i^{-1}=\Psi_i$),
+$$\operatorname{Ber}\pi_*\mathcal C=\operatorname{Ber}(\mathcal O_B)\otimes
+\operatorname{Ber}(\Psi_1^{-1}\oplus\Psi_2^{-1})=\Psi_1\otimes\Psi_2 .$$
+Hence
+$$\operatorname{Ber}R\pi_*\Big(\rho_*\omega_{\widetilde X/B}(D_1+D_2)\otimes\mathcal O(R)\Big)
+=\operatorname{Ber}R\pi_*\big(\omega_{X_B/B}(R)\big)\otimes\Psi_1\otimes\Psi_2 .$$
+
+**Conclusion.** Substituting the last two displays into (6.2) and comparing with (6.1),
+$$\operatorname{Ber}R\widetilde\pi_*\big(\Omega_{\widetilde X/B}(D_1+D_2)\big)=
+\operatorname{Ber}R\pi_*\big(j_*\Omega_{U/\overline{\mathcal S}}|_{X_B}\big)\otimes\Psi_1
+\otimes\Psi_2,$$
+which is the assertion. $\square$
+
+> **Remark 6.3 (what the repair cost).** Every occurrence of the Ramond twist cancelled for one
+> reason only: the three sheaves whose Berezinians carry $\Psi$-information —
+> $\mathcal O_Q$, $\mathcal C$, and later $\Omega(D_i)|_{D_i}$ — are **supported on $Q$ or on
+> $D_1\cup D_2$**, and $R$ is disjoint from both. The middle terms of both rows,
+> $j_*\Omega_{U}|_{X_B}$ and $\rho_*\Omega_{\widetilde X/B}(D_1+D_2)$, carry no $R$ at all
+> (Lemma 3.1). This is the precise sense in which "$R$ is a spectator": not that $R$ is far
+> from the node, but that the only $R$-twisted objects in the computation sit in the two outer
+> columns, where they occur once on each side and cancel.
+
+> **Remark 6.4 (the spectator NS punctures never appear).** By the same token, no
+> $\Psi^{\rm sp}_\alpha$ occurs anywhere in §6: (i)–(iii) are node-local, and Prop. 6.2's
+> correction terms are $\operatorname{Ber}\pi_*\mathcal O_Q$ and $\operatorname{Ber}\pi_*
+> \mathcal C$, both computed from $Q,\Psi_1,\Psi_2$ alone.
+
+---
+
+## 7. Step 5: the $D_1+D_2$ cancellation
+
+This is the step [FKP] compress into one line ("Finally the exact sequence
+$0\to\omega^2_{\widetilde X/B}\to\Omega_{\widetilde X/B}\to\omega_{\widetilde X/B}\to0$ near
+$D_1,D_2$, together with Lemma 8.7, show that …", L1, p. 60). Because it invokes the untwisted
+sequence, it is the second place where [E1] could bite; it does not, and here is why.
+
+> **Proposition 7.1.** In the setting of §6.1 there is a canonical isomorphism
+> $$\operatorname{Ber}R\widetilde\pi_*\big(\Omega_{\widetilde X/B}(D_1+D_2)\big)\ \simeq\
+> \operatorname{Ber}R\widetilde\pi_*\big(\Omega_{\widetilde X/B}\big),$$
+> for arbitrary $m\ge0$ spectator NS punctures and arbitrary even $n\ge0$ Ramond punctures.
+
+*Proof.* Since $D_1$ and $D_2$ are disjoint relative Cartier divisors and
+$\Omega_{\widetilde X/B}$ is locally free (rank $1|1$; $\widetilde X/B$ is smooth), there is an
+exact sequence
+$$0\to\Omega_{\widetilde X/B}\to\Omega_{\widetilde X/B}(D_1+D_2)\to
+\bigoplus_{i=1}^2\Big(\Omega_{\widetilde X/B}(D_i)\big|_{D_i}\Big)\to0 ,$$
+obtained by tensoring $0\to\mathcal O\to\mathcal O(D_1+D_2)\to\bigoplus_i\mathcal O(D_i)|_{D_i}
+\to0$ with $\Omega_{\widetilde X/B}$. The quotient is $\widetilde\pi$-finite, so by (S1)
+$$\operatorname{Ber}R\widetilde\pi_*\big(\Omega_{\widetilde X/B}(D_1+D_2)\big)=
+\operatorname{Ber}R\widetilde\pi_*\big(\Omega_{\widetilde X/B}\big)\otimes
+\prod_{i=1}^2\operatorname{Ber}\widetilde\pi_*\Big(\Omega_{\widetilde X/B}(D_i)\big|_{D_i}
+\Big).$$
+It remains to show each factor $\operatorname{Ber}\widetilde\pi_*(\Omega_{\widetilde X/B}(D_i)
+|_{D_i})$ is canonically $\mathcal O_B$.
+
+Fix $i$. On the smooth family $\widetilde X/B$ we have (7.1-R):
+$0\to\omega^2_{\widetilde X/B}(R)\to\Omega_{\widetilde X/B}\to\omega_{\widetilde X/B}(R)\to0$,
+with all terms locally free, hence locally split. Tensoring with the line bundle
+$\mathcal O(D_i)$ and restricting to $D_i$ preserves exactness, and
+$\mathcal O(R)|_{D_i}\cong\mathcal O_{D_i}$ **canonically** by Cor. 5.2, since $D_i\cap
+R=\varnothing$ (Def. 2.4: the NS punctures and the Ramond divisors are disjoint). Therefore
+$$0\to\omega^2_{\widetilde X/B}(D_i)\big|_{D_i}\to\Omega_{\widetilde X/B}(D_i)\big|_{D_i}
+\to\omega_{\widetilde X/B}(D_i)\big|_{D_i}\to0$$
+is exact, and by (S1)
+$$\operatorname{Ber}\widetilde\pi_*\Big(\Omega_{\widetilde X/B}(D_i)\big|_{D_i}\Big)=
+\operatorname{Ber}\widetilde\pi_*\Big(\omega^2_{\widetilde X/B}(D_i)\big|_{D_i}\Big)\otimes
+\operatorname{Ber}\widetilde\pi_*\Big(\omega_{\widetilde X/B}(D_i)\big|_{D_i}\Big).$$
+Now apply Lemma 8.7 (I14), which is stated for a family carrying $m$ NS punctures **and $n$
+Ramond divisors**, in its two displayed forms:
+- $\omega^2_{\widetilde X/B}(D_i)$ has rank $1|0$ by Lemma 6.0, so
+  $\operatorname{Ber}\widetilde\pi_*\big(\omega^2_{\widetilde X/B}(D_i)|_{D_i}\big)\simeq
+  \Psi_i^{-1}$;
+- $\omega_{\widetilde X/B}(D_i)$ has rank $0|1$ by Lemma 6.0, so
+  $\operatorname{Ber}\widetilde\pi_*\big(\omega_{\widetilde X/B}(D_i)|_{D_i}\big)\simeq\Psi_i$.
+
+Their product is $\Psi_i^{-1}\otimes\Psi_i\simeq\mathcal O_B$, the canonical evaluation
+pairing. $\square$
+
+> **Remark 7.2.** The cancellation is *exactly* the statement that $\Omega$ has rank $1|1$: its
+> two Jordan–Hölder pieces on $D_i$ have opposite parity, so Lemma 8.7 assigns them $\Psi_i^{-1}$
+> and $\Psi_i$. Nothing in it depends on $m$ or $n$: the spectator punctures $D^{\rm sp}_\alpha$
+> do not meet $D_i$, so they contribute no factor, and $R$ contributes the canonically trivial
+> $\mathcal O(R)|_{D_i}$. This answers the adversarial worry recorded as step 3 of `claim.md`
+> §4 ("check that the cancellation $\Psi_i^{-1}\cdot\Psi_i=\mathcal O$ there is insensitive to
+> the spectator punctures"): it is.
+
+---
+
+*(Parts §8–§11 follow.)*
