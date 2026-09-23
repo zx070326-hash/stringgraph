@@ -49,7 +49,7 @@ geometric content of the proof: the obstruction is supported on the boundary and
 about the interior.
 
 Consequently, Theorem M is consistent with, and cannot obstruct, any measure construction — such as
-the rigorous "vertical integration" method of [EW] — that proceeds by local patches on
+the rigorous local-slice method of [EW] — that proceeds by local patches on
 $\mathfrak S_{g;n,2r}$ glued across boundary strata, rather than by a single global retraction of the
 compactified stack. In particular it is consistent with the historical success of the genus-2
 construction of D'Hoker and Phong [DP], which lies numerically inside Theorem M's range — the explicit

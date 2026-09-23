@@ -213,7 +213,8 @@ overlap between Theorem M's quantifier range and D'Hoker–Phong's completed wor
 situation the restriction lemma predicts is *harmless* — a compactified obstruction supported on the
 boundary coexisting with an unconstrained, in-practice-projected smooth locus. Had D'Hoker–Phong's
 method instead required a retraction of the *full compactified* stack (including the boundary), the
-check would have forced a rewrite of Proposition C; it does not, because — as Witten states plainly in
+check would have forced a rewrite of Proposition C; it does not, because — as Donagi and Witten state
+plainly in
 the passage just quoted — even the theory's own validity "does not depend on a projection," and the
 careful (post-2012) treatment of the boundary/degeneration region never assumes one (§4 below).
 
@@ -241,11 +242,16 @@ the DW-ancestor theorems on the uncompactified side (which require $n\le g-1$, p
 
 **[PHYS]** No rigorous construction of the superstring measure in current use assumes or requires a
 global compactified projection. Witten's post-2012 framework (arXiv:1209.5461, arXiv:1304.2832)
-builds the integration cycle $\Gamma$ (or, for degenerate configurations, the "vertical integration"
-patchwork of local slices glued by transition data) explicitly *because* no global splitting can be
-assumed at any genus, and this design choice predates, and does not depend on, any specific genus
-threshold for non-projectedness. Witten states the point for the theory's overall logical status,
-`L1`-verified at the same location as above:
+builds the integration cycle $\Gamma$ from local slices glued by transition data, explicitly
+*because* no global splitting can be assumed at any genus, and this design choice predates, and does
+not depend on, any specific genus threshold for non-projectedness. (The name "vertical integration"
+belongs to the PCO-side systematisation of that gluing, which is **Sen–Witten**, *Filling The Gaps
+With PCO's*, arXiv:1504.00609, JHEP **09** (2015) 004 — not to [EW]. Sen–Witten's own abstract
+attributes the proposal to earlier work: "Recently, 'vertical integration' was proposed as a
+relatively simple method to do this". This project has read that abstract only, so the attribution is
+`L2`; see `literature/extractions/witten-2012-superstring-perturbation.md` item EW14.) Donagi and
+Witten state the point for the theory's overall logical status, `L1`-verified at the same location as
+above:
 
 > "The validity of superstring perturbation theory does not depend on a projection, so the existence
 > of string theory gives no hint that $\mathfrak M_g$ is projected."
@@ -312,7 +318,7 @@ of `draft-section.md`.**
    here touches the content of `graph/statements/consistency/superstring-perturbative-consistency-unproven-1998.yaml`
    or `graph/statements/consistency/massless-tadpole-obstruction-to-superstring-perturbation.yaml`
    (read for context, not cited as premises — this attempt does not write to `graph/`).
-4. **[GAP: the "vertical integration" necessity claim in §4.2 is argued, not derived from Theorem M
+4. **[GAP: the patchwise-necessity claim in §4.2 is argued, not derived from Theorem M
    alone.]** The claim that Witten's patch-based machinery is "strictly necessary" in the Theorem-M
    regime rests on combining (a) Theorem M (no global compactified retraction exists) with (b) the
    working assumption that a rigorous treatment of the compactified moduli space's boundary requires

@@ -47,7 +47,9 @@ projected, then $\mathfrak U$ is projected. Equivalently: **non-projectedness of
 stack (Theorem M) places no logical constraint whatsoever on whether the open substack $\mathfrak U$
 — in particular the smooth locus $\mathfrak S_{g;n,2r}$ — is projected.** It therefore cannot
 obstruct, contradict, or even bear on, any amplitude computation that is carried out by local
-patch-based methods on the smooth locus (Witten's "vertical integration"), including every completed
+patch-based methods on the smooth locus (Witten's local-slice construction; the PCO-side
+systematisation of the gluing is the "vertical integration" of Sen–Witten, arXiv:1504.00609, not
+of [EW]), including every completed
 low-genus computation that exploits local or even global projectedness of the *uncompactified* locus.
 
 **(C2) Bite part — narrow, and about a hypothetical strategy, not an actual method in use.** Theorem M

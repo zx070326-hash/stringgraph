@@ -1,7 +1,44 @@
-state: under-review
-reviewer: (none yet — requesting graph-reviewer dispatch, see notes)
+state: verified
+reviewer: peer Claude session `measurerev` (graph-reviewer role), 2026-09-23
 verdict: |
-  (pending — no reviewer round has occurred yet. Self-assessment by the authoring prover below.)
+  **Proposition C stands; the welded §9.5 of `paper.md` did not.**
+
+  The review was dispatched under root CLAUDE.md principle 8 case (c) — this attempt is the sole
+  source of a section of a draft intended for submission, and no reviewer had ever seen it. The
+  verdict separates cleanly into two parts:
+
+  (1) **The attempt itself: CONFIRMED.** (C1)'s restriction lemma survives attack (a) of the
+  authoring prover's own suggested list; (C2)'s framing is correctly labelled
+  physical-argument-level and does not overstate Remark 1.5. Proposition C is what this attempt
+  proves, and it proves it.
+
+  (2) **The transcription into `paper.md` §9.5 introduced two overclaims that are not in this
+  attempt's own `draft-section.md`.** Both CONFIRMED, both now fixed in the paper (commit 8070707):
+  - "empty from $g=2$ onward" — refuted by the paper's own §9.2 via [CN, Thm. 1.1(1)], which proves
+    $\overline{\mathfrak M}^-_2$ is *split*.
+  - "That is the strategy" — attributed Donagi–Witten's *uncompactified* strategy to the
+    compactified one Theorem M forecloses, contradicting §9.5's own next paragraph about [DP].
+  Also dropped: an unsupported "lowest external-leg count at which a compactified treatment is
+  needed at all", and an upgrade of this attempt's "applies with equal force" to "applies here
+  verbatim".
+
+  (3) **Two citation defects inside this attempt: CONFIRMED and fixed 2026-09-23.**
+  - **F4.** "Vertical integration" was attributed to [EW] = Witten arXiv:1209.5461 / 1304.2832. It
+    is not theirs: this project's own extraction record (item EW14 of
+    `literature/extractions/witten-2012-superstring-perturbation.md`) places it in Sen–Witten,
+    *Filling The Gaps With PCO's*, arXiv:1504.00609, JHEP **09** (2015) 004, whose abstract in turn
+    attributes the proposal to earlier work. Corrected in `claim.md`, `argument.md` §4.2 and §5
+    item 2, and `draft-section.md`; the attribution is now marked `L2` (abstract only), which is all
+    this project has read.
+  - **F5.** The quotation "The validity of superstring perturbation theory does not depend on a
+    projection…" was attributed to Witten alone at `argument.md` §3 and §4.2. It is
+    **Donagi–Witten**, arXiv:1304.7798 §1 p.4. Corrected in both places. (`paper.md` was already
+    correct — it says [DW, §1].)
+
+  **Transmission note.** The reviewer's report was truncated in delivery after finding F6; F1–F6
+  were received in full and each was independently re-verified by the lead against the primary
+  text before being acted on. Any findings beyond F6 have not been received. This is recorded so
+  that "verified" is not read as covering more than was actually transmitted.
 captain_confirmed: false
 notes: |
   === Task ===
@@ -91,7 +128,7 @@ notes: |
      direction anywhere in the literature surveyed — not needed for Proposition C (the restriction
      lemma makes Theorem M silent about it regardless of the true answer), but worth flagging as a
      genuinely open mathematical question adjacent to this attempt.
-  2. [GAP] The claim (§4.2 of argument.md) that Witten's patch-based "vertical integration" machinery
+  2. [GAP] The claim (§4.2 of argument.md) that Witten's patch-based local-slice machinery
      is *strictly necessary* (not merely sufficient) in the Theorem-M regime rests on the working
      assumption that no third method (neither global retraction nor patchwork) is known — a
      reasonable but not exhaustively surveyed premise.
