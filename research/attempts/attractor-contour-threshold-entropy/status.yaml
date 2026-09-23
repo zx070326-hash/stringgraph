@@ -1,6 +1,19 @@
-state: under-review
-reviewer: null
+state: verified
+reviewer: rev-attractor (sonnet, 2026-09-24)
 verdict: |
+  裁定 verified。这不是一条待入图的严格定理，而是一篇定性/解释性调查：
+  「Λ₀=1/(2√Δ)=π/(2S_BH) 主要是量纲/标度重写，系数 1/2（=π/2）里有
+  非平凡内容（|n₂|=1 分支饱和），但不构成独立物理」。复核后此结论站得住，
+  唯一列出的 [GAP-Step2]（S_BH=π√Δ 缺逐字来源）已由 lead 于 2026-09-20
+  用 Sen 2008 (3.1.23) 逐字引用关闭（见本文件下方历史记录与
+  literature/extractions/n4-dyon-leading-entropy.md、
+  graph/statements/holography/n4-dyon-leading-bekenstein-hawking-entropy.yaml，
+  来源记录严谨：标页码、逐字引文、诚实定为 physical-argument）。
+  此 verified **不放行毕业进图**——proof.md 自身的建议（不必立卡，若要用
+  只作为 gap-102b-route-a 的注记）是对的，予以维持。详见下方
+  review_2026_09_24 块。
+
+  原 prover verdict（保留，未改动）：
   The observation Λ₀ = π/(2S_BH) is **MOSTLY TRIVIAL** (dimensional artifact),
   with a **NON-TRIVIAL RESIDUE** (coefficient encoding branch saturation).
 
@@ -126,3 +139,82 @@ notes: |
 # 不是 agent 失误）。lead 最终是靠**更早 agent 下载到 worktree 的本地 PDF**
 # 取得原文的。教训：arXiv 不可达时先找本地已有 PDF，且**不要用 pdftotext 核对
 # 含系数的公式**（实测静默丢弃 π 和 √）。
+
+review_2026_09_24:
+  reviewer: rev-attractor (sonnet, 2026-09-24)
+  verdict: |
+    verified。proof.md 是一篇定性调查而非待入图定理；其结论（观察 Λ₀=π/(2S_BH)
+    基本是量纲重写、系数 1/2 有非平凡残余、不建议毕业进图）经独立复核成立。
+    先前记录的唯一 [GAP-Step2] 已被 lead 用 Sen 2008 (3.1.23) 逐字引用关闭，
+    来源可追溯。未发现载重错误；发现一处次要的不精确表述（见下）。
+  what_i_checked: |
+    1. 读完 claim.md 全文与 proof.md 全 8 节（308 行）。
+    2. 代数核对（proof.md §1 Step1、§6 Step3、claim.md §2）：
+       用 m=Q²/2, n=P²/2, ℓ=Q·P 代入 Q²P²-(Q·P)²=4mn-ℓ²=Δ，正确；
+       Λ₀=1/(2√Δ) 与 S_BH=π√Δ 联立给出 Λ₀=π/(2S_BH)，代数正确。
+    3. 追查 [GAP-Step2] 的关闭证据：读了 status.yaml 内嵌的 lead 记录、
+       literature/extractions/n4-dyon-leading-entropy.md 全文（E-LEAD-1/2 段）、
+       graph/statements/holography/n4-dyon-leading-bekenstein-hawking-entropy.yaml
+       全文。三者互相一致：Sen 2008 (3.1.23)/(3.1.24)（PDF p.39-40）逐字给出
+       S_BH=π√(Q²P²-(Q·P)²)，系数确为 π；来源记录标注了 PyMuPDF 读取方式、
+       明确避免 pdftotext（已知会丢 π 和 √ 符号）、诚实定为 physical-argument
+       并说明推导依赖的三条图外输入（面积律、二导数有效作用量、attractor
+       形式论）目前均无图节点承载。判定：该 GAP 的关闭证据可靠。
+    4. 核对 proof.md §4（系数 1/2 来源）引用的 gap-102b-route-a Corollary 8：
+       读了 research/attempts/gap-102b-route-a/status.yaml 全部审查历史——
+       该 attempt 已由独立 reviewer（n2rev）在 2026-09-20 做过 7 项对抗性核实，
+       裁定 rigorous verified，且发现并修正过两轮真实代数错误（B 系数、逐项取
+       绝对值破坏相消、循环论证）。本 attempt 引用的 Corollary 8
+       （Λ²(t*) ≤ 1/(4n₂²Δ) ≤ 1/(4Δ)）是该轮修正后的终版，被独立审查确认。
+       故本 attempt 站在一块已经过对抗性审查的砖块上，不是自证。
+    5. 检查 proof.md 各节是否有标高：全文用"PARTIALLY FORCED"
+       "LIMITED""HAS CONTENT"等 hedge 措辞，§7 明确区分"独立核实" vs
+       "信任输入" vs "未核实"，§8 给出诚实的后续建议清单而非声称完成。
+       结论性建议（§6.4 尾段、notes）是"不应毕业进图"，与本审查的判断一致，
+       不存在自我拔高。
+    6. 检查这份 status.yaml 是否已被下游任何图节点或其它 attempt 引用/
+       依赖：未发现——proof.md 本身也未声称任何图节点依赖它。故此裁定
+       不会移动任何图节点的 effective 状态（对应根 CLAUDE.md 原则 8 的
+       "零影响"默认放行情形，但既然任务已明确要求独立裁定，仍完整走了一遍）。
+  what_i_could_not_check: |
+    - 未重新独立验证 gap-102b-route-a 本身的 Prop 7 / Cor 8 / Thm 9 推导
+      （SymPy 代数、参数化完备性等）——该 attempt 已由另一独立 reviewer
+      （n2rev）做过对抗性审查并裁定 rigorous verified，按项目"verified 后
+      默认结项、不回头复审"的原则，本轮未重做。
+    - 未重新下载/核对 Sen 2008 PDF 原文——依赖的是 lead 已完成的 PyMuPDF
+      逐字核对记录（literature/extractions/n4-dyon-leading-entropy.md
+      E-LEAD-1/2），该记录本身写明了取得方式与页码，可信度较高，但我没有
+      亲自重新打开 PDF 页面图像复核这两条引文。
+    - proof.md §3 对 Λ 物理意义的讨论（DVV/Siegel 坐标的物理诠释、attractor
+      流的猜测性段落，如"Conjecture (to be verified)"处）本身就标注为未核实
+      的猜测，我也未去核实——因为 proof.md 自己已诚实标注为未验证，且
+      这部分不影响最终"MOSTLY TRIVIAL"的定性结论。
+    - 未评估是否存在其它文献给出与 Sen 2008 不同归一化下的 S_BH 公式
+      （proof.md §8 建议之一），这超出本次裁定所需范围。
+  gaps_blocking_verified: |
+    无。唯一记录的 [GAP-Step2]（proof.md 行 269-271, 295）已被本文件上方
+    "[GAP-Step2] 已关闭" 历史记录（约行 109-122）连同独立图节点与抽取记录
+    可靠地闭合，且该 attempt 本就声明其定性结论不依赖 S_BH 系数的精确值
+    （proof.md 行 40："regardless of coefficient"；行 273: "even without
+    Step 2, the dimensional analysis... is self-contained"）。
+
+    一处非阻塞的次要不精确（不影响裁定）：
+    - proof.md §3.3-3.4（约行 138-150）主张"Λ 无量纲而 S_BH 有量纲，故
+      等式只在特定单位制下成立"——lead 已在本文件行 101-103 指出这句话
+      在自然单位制下站不住（S_BH 同样无量纲）。本轮复核同意 lead 的更正，
+      且该句不是论证的承重环节：proof.md 最终定性结论（§6.1-6.3）建立在
+      §2 的标度论证与 §4 的 |n₂|=1 饱和论证上，不依赖这句关于量纲的错误
+      表述，故不构成阻塞 verified 的缺口。
+    - proof.md §4.1（约行 163-165）说系数 1/2 "is the square root of the
+      bound saturated by the |n₂|=1 branches"——严格说，Cor 8 的
+      1/(4n₂²Δ) ≤ 1/(4Δ) 只在 |n₂|=1 **且** 第二项 (j-2n₂v₁)²=0 时才真正
+      饱和；proof.md 未区分"上确界"与"逐点饱和"。这是定性论述中的一处
+      简化措辞，不影响 §6 的整体定性结论（系数确实由 |n₂|=1 支主导），
+      也不构成阻塞。
+  recommended_next_step: |
+    无需继续投入——这是一次已完结的负面/解释性调查，proof.md 自己的建议
+    （不立卡，至多在 gap-102b-route-a/proof.md 里加一句"数值上等于
+    π/(2S_BH)"的注记）是恰当的收尾。若未来有人想认真复用 (D) 条
+    （系数编码 |n₂|=1 分支饱和）作为独立物理论点，应先补上 gaps_blocking_verified
+    里指出的"上确界 vs 逐点饱和"这一措辞澄清，并重新评估是否值得立卡。
+
