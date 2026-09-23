@@ -6,7 +6,8 @@ statements about which *lattices* the divisor sum evaluates d_* on.  A separate 
 dstar_witnesses.py, plugs in the actual integers.
 
 Run:  python experiments.py [section...]
-      sections: selftest witness scan criterion tables lambda   (default: all)
+      sections: selftest witness lambda scan criterion tables alpha2 esteps noncyclic
+                (default: all, in that order)
 """
 
 import sys
@@ -456,8 +457,90 @@ def sec_noncyclic(DMAX=200):
 
 
 # --------------------------------------------------------------------------- #
+def sec_esteps(DMAX=600):
+    """Adversarial check of the two INTERMEDIATE steps inside the proof of Theorem E,
+    and of the claimed failure of Theorem D(1) at p = 2."""
+    hline("THEOREM E, INTERMEDIATE STEPS (checked independently of the conclusion)")
+    print("  step (i) : the two zeros of f1 mod p give middle coefficients with")
+    print("             l1' = -l1  (mod 2p);")
+    print("  step (ii): hence the two attached prime forms (p, l1, *) are inverse classes.")
+    tested = 0
+    bad_conj = []
+    bad_mid = []
+    for p in (2, 3, 5, 7, 11, 13):
+        for D1 in range(3, DMAX + 1):
+            if (-D1) % 4 not in (0, 1):
+                continue
+            if D1 % p == 0:
+                continue
+            for f1 in reduced_primitive_forms(-D1):
+                m1, l1, n1 = f1
+                zeros = [(x, y) for (x, y) in [(1, k) for k in range(p)] + [(0, 1)]
+                         if (m1 * x * x + l1 * x * y + n1 * y * y) % p == 0]
+                if len(zeros) != 2:
+                    continue
+                primes, mids = [], []
+                for (x, y) in zeros:
+                    X = Y = None
+                    for t in range(0, 200):
+                        for s in (0, 1, -1, 2, -2):
+                            XX, YY = x + p * s * t, y
+                            if (XX, YY) != (0, 0) and gcd(abs(XX), abs(YY)) == 1:
+                                X, Y = XX, YY
+                                break
+                        if X is not None:
+                            break
+                    if X is None:
+                        continue
+                    u, v = compose_basis(X, Y)
+                    g = act(f1, (X, u, Y, v))
+                    assert g[0] % p == 0 and disc(g) == -D1, (f1, p, g)
+                    assert (g[1] ** 2 + D1) % (4 * p) == 0
+                    primes.append(reduce_sl((p, g[1], (g[1] ** 2 + D1) // (4 * p))))
+                    mids.append(g[1])
+                if len(primes) != 2:
+                    continue
+                tested += 1
+                a, b = primes
+                if reduce_sl((a[0], -a[1], a[2])) != b:
+                    bad_conj.append((p, f1, a, b))
+                if (mids[0] + mids[1]) % (2 * p) != 0:
+                    bad_mid.append((p, f1, mids))
+    print("  cases tested: %d" % tested)
+    print("  step (i)  violations: %d" % len(bad_mid))
+    print("  step (ii) violations: %d" % len(bad_conj))
+    for z in bad_mid[:3]:
+        print("     ", z)
+    for z in bad_conj[:3]:
+        print("     ", z)
+
+    print()
+    print("  CLAIM D(1) IS FALSE AT p = 2 (the naive 'alpha=0: |C_p|=0 iff beta<=1' rule).")
+    print("  D(1) is stated for ODD p only; the sharp p=2 statement is D(4).")
+    bad = []
+    for D in range(3, DMAX + 1):
+        for f in all_reduced_forms(-D):
+            if content(f) % 2 == 0:
+                continue                                # alpha = 0
+            beta, d = 0, D
+            while d % 2 == 0:
+                d //= 2
+                beta += 1
+            n2 = sum(1 for (x, y) in [(1, 0), (0, 1), (1, 1)]
+                     if (2 * f[0] * x + f[1] * y) % 2 == 0
+                     and (f[1] * x + 2 * f[2] * y) % 2 == 0
+                     and (f[0] * x * x + f[1] * x * y + f[2] * y * y) % 4 == 0)
+            if n2 != (0 if beta <= 1 else 1):
+                bad.append((D, f, beta, n2))
+    print("  counterexamples to the naive rule at p = 2 (Delta <= %d): %d" % (DMAX, len(bad)))
+    for (D, f, beta, n2) in bad[:4]:
+        print("     Delta=%-5d f=%-14s beta=%d  true |C_2| = %d  (naive rule says %d)"
+              % (D, str(f), beta, n2, 0 if beta <= 1 else 1))
+
+
+# --------------------------------------------------------------------------- #
 if __name__ == "__main__":
     secs = sys.argv[1:] or ["selftest", "witness", "lambda", "scan", "criterion", "tables",
-                            "alpha2", "noncyclic"]
+                            "alpha2", "esteps", "noncyclic"]
     for s in secs:
         globals()["sec_" + s]()

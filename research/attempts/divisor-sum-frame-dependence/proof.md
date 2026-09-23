@@ -70,6 +70,20 @@ lattice `N`, and `d_*(g)` for a form `g`.
 
 ## 1. Overlattices, admissible frames, and the subgroup `H(Q)`
 
+### Lemma 1.0 (primitive lifts)
+
+Let `I ≥ 1` and let `(x̄, ȳ) ∈ (ℤ/I)²` satisfy `gcd(x̄, ȳ, I) = 1`. Then there is a **primitive**
+vector `(x,y) ∈ ℤ²` (i.e. `gcd(x,y) = 1`) reducing to `(x̄, ȳ)` mod `I`.
+
+*Proof.* If `I = 1` take `(1,0)`. Otherwise pick any integer lifts `x, y`; adding `I` to `x` if
+necessary, assume `x ≠ 0`. Put `e := gcd(x, I)`. Since `e | x` and `e | I`, the hypothesis
+`gcd(x,y,I) = 1` forces `gcd(y, e) = 1`. We look for `t ∈ ℤ` with `gcd(x, y + It) = 1`. Let `q` be a
+prime with `q | x` and `q | y + It`. If `q | I` then `q | e`, and `q | y + It` gives `q | y`,
+contradicting `gcd(y,e) = 1`; so `q ∤ I`, i.e. `I` is invertible mod `q`, and the condition
+`y + It ≡ 0 mod q` singles out exactly one residue class of `t` mod `q`. The set of primes `q | x`
+with `q ∤ I` is finite, and for each we must avoid one class out of `q ≥ 2`; by the Chinese remainder
+theorem such a `t` exists. Then `gcd(x, y+It) = 1` and `(x, y+It) ≡ (x̄,ȳ) mod I`. ∎
+
 ### Lemma 1.1 (when the `s`-th summand is a lattice)
 
 Let `(Q,P)` be a frame of `L` with form `(m,ℓ,n)` and let `s ≥ 1`. Put
@@ -167,11 +181,10 @@ The set of such classes is `ℙ¹(ℤ/I)`, of size `ψ(I)`. Now `ξ ∈ L^∨` i
 changes `f(x,y)` by `I·((x,y)G(u,v)ᵀ) + I²f(u,v) ≡ 0 mod I²`, so `f(x,y) mod I²` depends only on
 `[x:y]`; and `q̄(ξ) = 2f(x,y)/I² ∈ 2ℤ` iff `I² | f(x,y)`, which by Lemma 1.4(1) is the isotropy
 condition.
-(1) Given `[x:y] ∈ 𝒞_I(L)`, choose a lift `(x,y) ∈ ℤ²` with `gcd(x,y) = 1` (possible: from
-`gcd(x,y,I)=1`, adjusting `y` by a multiple of `I` kills all primes dividing `x` but not `I` —
-elementary CRT), and complete `Q' := xQ+yP` to a frame `(Q',P')` of `L`. Then `m' = f(x,y) ≡ 0 mod
-I²` and `ℓ' = Q'·P' ≡ 0 mod I` (because `Q'/I ∈ L^∨` and `P' ∈ L`), so the frame is `I`-admissible,
-and `H(Q') = ⟨Q'/I + L⟩ = [x:y]`.
+(1) Given `[x̄:ȳ] ∈ 𝒞_I(L)`, choose by **Lemma 1.0** a primitive lift `(x,y) ∈ ℤ²`, and complete it
+to a frame `(Q',P')` of `L` with `Q' := xQ+yP` (possible exactly because `(x,y)` is primitive). Then
+`m' = f(x,y) ≡ 0 mod I²` and `ℓ' = Q'·P' ≡ 0 mod I` (because `Q'/I ∈ L^∨` and `P' ∈ L`), so the
+frame is `I`-admissible, and `H(Q') = ⟨Q'/I + L⟩ = [x̄:ȳ]`.
 (3) `H(aQ+bP) = H(Q)` iff `(a,b) ≡ u(1,0)` mod `I` for a unit `u`, i.e. iff `b ≡ 0 mod I` (then
 `ad ≡ 1 mod I` forces `a` to be a unit). ∎
 
@@ -196,9 +209,9 @@ and `[M:L]² | Δ`; in particular `I² | Δ`.
 choosing a basis `(e,f)` of `M` and extending to a basis of `Λ` shows `e∧f` is primitive in `⋀²Λ`.
 Writing `Q = ae+bf`, `P = ce+df` gives `Q∧P = (ad−bc)\,e∧f`, so `gcd(Q∧P) = |ad−bc| = [M:L]`.
 `M ⊆ Λ` is even (sublattice of an even lattice) and `M·L ⊆ Λ·Λ ⊆ ℤ` gives `M ⊆ L^∨`; by Lemma 1.3,
-`M/L` is isotropic. For an isotropic subgroup `H` of a finite quadratic group of order `Δ` one has
-`|H|² | Δ` (indeed `π⁻¹(H)/π⁻¹(H)^∨` has order `Δ/|H|²`, an integer, because
-`π⁻¹(H) ⊆ π⁻¹(H)^∨` by evenness). ∎
+`M/L` is isotropic. Finally, for any lattice `N ⊇ L` of index `k` in the same rational span, the
+Gram matrices satisfy `det(Gram L) = k²·det(Gram N)`, so `det(Gram M) = Δ/I²`; since `M` is an
+integral lattice this is a (positive) integer, i.e. `I² | Δ`. ∎
 
 ### Definition 2.2 (the invariant)
 
@@ -238,9 +251,11 @@ adapted frames exist, and every adapted frame is `I`-admissible.
 (ii)⇒(i): `N_I ⊆ Λ` gives `Q/I ∈ Λ`.
 (iii)⇔(iv): Lemma 1.3 (the preimage map is injective on subgroups) plus Lemma 1.4(2).
 Any of them gives `M/L = H(Q)`, cyclic of order `I` by Lemma 1.4(1).
-Conversely suppose `M/L = ⟨w+L⟩` is cyclic of order `I`. Then `Iw ∈ L`, say `Iw = xQ₀+yP₀` for a
-frame `(Q₀,P₀)`, and `gcd(x,y,I) = 1` since `w+L` has order `I`. As in Proposition 1.6(1) choose a
-lift with `gcd(x,y) = 1` and complete `Q := xQ₀+yP₀` to a frame `(Q,P)`. Then `Q/I = w ∈ M ⊆ Λ`, so
+Conversely suppose `M/L = ⟨w+L⟩` is cyclic of order `I`. Then `Iw ∈ L`, say `Iw = x₀Q₀+y₀P₀` for a
+frame `(Q₀,P₀)`, and `gcd(x₀,y₀,I) = 1` since `w+L` has order `I`. By Lemma 1.0 choose
+`(x,y) ≡ (x₀,y₀) mod I` with `gcd(x,y) = 1`, and set `Q := xQ₀+yP₀`; since `(x−x₀, y−y₀) ∈ Iℤ²` we
+have `Q = Iw + Iv` with `v ∈ L`, so `Q/I = w+v ∈ M` and `Q/I + L = w + L` still generates `M/L`.
+Complete `Q` to a frame `(Q,P)` of `L` (possible as `(x,y)` is primitive). Then `Q/I ∈ M ⊆ Λ`, so
 the frame is adapted; and `Q/I ∈ M ⊆ L^∨` with `q(Q/I)/2 ∈ ℤ` (`M` even) gives `I²|m`, `I|ℓ`, i.e.
 `I`-admissibility. The same computation shows any adapted frame is `I`-admissible. ∎
 
@@ -311,52 +326,57 @@ Write `c := c(f)` for the content, `f = c·f₁` with `f₁` primitive of discri
 
 Let `p` be a prime.
 
-1. If `α = 0`: `|𝒞_p(L)| = 0` when `β ≤ 1`, and `|𝒞_p(L)| = 1` when `β ≥ 2`. (For `p = 2`,
-   `α = 0` forces `ℓ` odd or `m` or `n` odd; see (3) for the sharp `p=2` form.)
-2. If `α = 1`: `|𝒞_p(L)| = 1 + χ_{D₁}(p)`, where `χ_{D₁}` is the Kronecker symbol: `2` if `p` splits
-   in the order `𝒪_{D₁}`, `0` if `p` is inert, `1` if `p` ramifies (equivalently `β ≥ 2`).
-3. If `α ≥ 2`: `𝒞_p(L) = ℙ¹(𝔽_p)`, so `|𝒞_p(L)| = p+1`.
-4. Unconditional `p = 2` form: `𝒞_2(L) = ∅` if `ℓ` is odd; otherwise
-   `𝒞_2(L) = {[x:y] ∈ ℙ¹(𝔽₂) : f(x,y) ≡ 0 mod 4}`, so `|𝒞_2(L)| = #{v ∈ {m, n, m+ℓ+n} : 4 | v}`.
+1. **(odd `p` only)** If `α = 0`: `|𝒞_p(L)| = 0` when `β ≤ 1`, and `|𝒞_p(L)| = 1` when `β ≥ 2`.
+   **This statement is false at `p = 2`** (494 counterexamples with `Δ ≤ 600`, the smallest being
+   `f = (1,0,1)`, `Δ = 4`, `β = 2`, `𝒞_2 = ∅`); the sharp statement at `p = 2` is (4).
+2. If `α = 1` (any `p`, including `2`): `|𝒞_p(L)| = 1 + χ_{D₁}(p)`, where `χ_{D₁}` is the Kronecker
+   symbol: `2` if `p` splits in the order `𝒪_{D₁}`, `0` if `p` is inert, `1` if `p` ramifies.
+3. If `α ≥ 2` (any `p`): `𝒞_p(L) = ℙ¹(𝔽_p)`, so `|𝒞_p(L)| = p+1`.
+4. Unconditional `p = 2` statement, valid for every `α`: `𝒞_2(L) = ∅` if `ℓ` is odd; otherwise
+   `𝒞_2(L) = {[x:y] ∈ ℙ¹(𝔽₂) : f(x,y) ≡ 0 mod 4}`, so
+   `|𝒞_2(L)| = #{v ∈ {m, n, m+ℓ+n} : 4 | v}`.
 
 *Proof.* The conditions are `G·(x,y)ᵀ ≡ 0 mod p` and `f(x,y) ≡ 0 mod p²`.
 
 (4) `G mod 2 = [[0,ℓ],[ℓ,0]]`, so the first condition reads `ℓy ≡ ℓx ≡ 0 mod 2`: it fails for all
 `[x:y] ∈ ℙ¹(𝔽₂)` if `ℓ` is odd and is vacuous if `ℓ` is even. In the latter case the second
-condition evaluated at the three points `[1:0], [0:1], [1:1]` gives `m, n, m+ℓ+n ≡ 0 mod 4`.
+condition evaluated at the three points `[1:0], [0:1], [1:1]` gives `m, n, m+ℓ+n ≡ 0 mod 4`. No
+assumption on `α` was used.
 
-(3) `p^α | c` with `α ≥ 2` gives `p² | f(x,y)` for all `(x,y)` and `p | c | ℓ`, `p | m`, `p | n`, so
+(3) `p^α | c` with `α ≥ 2` gives `p² | f(x,y)` for all `(x,y)`, and `p | c` divides `2m, ℓ, 2n`, so
 `G ≡ 0 mod p`: both conditions are vacuous.
 
-(2) `α = 1`: again `p | c` makes `G ≡ 0 mod p` vacuous (entries `2m, ℓ, 2n` are all divisible by
-`p`). The second condition is `c f₁(x,y) ≡ 0 mod p²`, i.e. `f₁(x,y) ≡ 0 mod p`. Since `f₁` is
-primitive, `f₁ mod p` is a nonzero binary quadratic form over `𝔽_p`, and the number of its zeros in
-`ℙ¹(𝔽_p)` is `1 + χ_{D₁}(p)`. For odd `p` this is the classical count
-`#\{t : f₁(t,1) ≡ 0\} + [p | \text{leading coeff}] = 1 + \left(\frac{D₁}{p}\right)`. For `p = 2` one
-checks the three points directly: if `D₁ ≡ 1 mod 8` then `ℓ₁` is odd and `4m₁n₁ ≡ 0 mod 8`, so
-`m₁n₁` is even and exactly two of `m₁, n₁, m₁+ℓ₁+n₁` are even; if `D₁ ≡ 5 mod 8` then `m₁n₁` is odd
-and all three are odd; if `D₁ ≡ 0 mod 4` then `ℓ₁` is even, `m₁,n₁` are not both even (primitivity),
-and exactly one of the three is even. These are precisely `1 + χ_{D₁}(2) = 2, 0, 1`.
+(2) `α = 1`: again `p | c` makes the condition `G ≡ 0 mod p` vacuous. The second condition is
+`c f₁(x,y) ≡ 0 mod p²` with `v_p(c) = 1`, i.e. `f₁(x,y) ≡ 0 mod p`. Since `f₁` is primitive,
+`f₁ mod p` is a nonzero binary quadratic form over `𝔽_p`, and the number of its zeros in `ℙ¹(𝔽_p)`
+is `1 + χ_{D₁}(p)`. For odd `p` this is the classical count
+`#{t : f₁(t,1) ≡ 0} + [p | m₁] = 1 + (D₁/p)`. For `p = 2` check the three points directly: if
+`D₁ ≡ 1 mod 8` then `ℓ₁` is odd and `4m₁n₁ = ℓ₁² − D₁ ≡ 0 mod 8`, so `m₁n₁` is even and exactly two
+of `m₁, n₁, m₁+ℓ₁+n₁` are even; if `D₁ ≡ 5 mod 8` then `m₁n₁` is odd and all three are odd; if
+`D₁ ≡ 0 mod 4` then `ℓ₁` is even, `m₁, n₁` are not both even (primitivity), and exactly one of the
+three is even. These are `2, 0, 1 = 1 + χ_{D₁}(2)`.
 
-(1) `α = 0`. `det(G) = Δ`. If `p ∤ Δ` (so `β = 0`), `G` is invertible mod `p` and there is no
-nonzero solution. If `p | Δ` then `G mod p` is singular but nonzero: `G ≡ 0 mod p` would give
-`p | 2m, ℓ, 2n`, hence (p odd) `p | c`, contradicting `α = 0`; for `p = 2` use (4): `α = 0` and
-`2 | Δ` force `ℓ` even, hence `m` or `n` odd, and at most two of `m,n,m+ℓ+n` are `≡ 0 mod 2`, so
-`G mod 2` has rank 1 as well (its kernel is one point of `ℙ¹`). So there is exactly one candidate
-`[x:y]`; choose a frame in which it is `[1:0]`, so `p | 2m` and `p | ℓ`, and `p ∤ n` (else
-`p | c`). Then `p | m` for odd `p`; for `p = 2`, `2 | 2m` is automatic but `ℓ` even and `n` odd force
-`m` even by the rank count just made. Now `Δ = 4mn − ℓ²` with `p | ℓ`:
-if `v_p(m) = 1` then `v_p(4mn) = 1` for odd `p` (resp. `v_2(4mn) = 3` and `v_2(ℓ²) ≥ 2`; in both
-cases `v_p(Δ) = min(v_p(4mn), v_p(ℓ²))` is forced to be `≤ 2` — see the sharper statement below), and
-`p² ∤ m = f(1,0)`, so the candidate fails and `𝒞_p(L) = ∅`; if `v_p(m) ≥ 2` then `p² | f(1,0)` and
-the candidate succeeds. Finally `v_p(m) ≥ 2 ⟺ β ≥ 2`: `p | ℓ` gives `p² | ℓ²`, so
-`v_p(Δ) ≥ 2 ⟺ p² | 4mn ⟺ p² | m` (using `p ∤ n` and `p` odd), and `β = v_p(Δ)` here. For `p = 2`
-statement (4) is the sharp form and (1) should be read through it. ∎
+(1) `α = 0`, `p` odd. If `p ∤ Δ` (i.e. `β = 0`) then `det(G mod p) = Δ ≢ 0`, so `G mod p` is
+invertible and there is no nonzero solution. If `p | Δ`, then `G mod p` is singular but nonzero:
+`G ≡ 0 mod p` would give `p | 2m, ℓ, 2n`, hence (`p` odd) `p | c`, contradicting `α = 0`. So
+`G mod p` has rank exactly `1` and its kernel is a single point of `ℙ¹(𝔽_p)`. Choose a frame in
+which that point is `[1:0]`: then `p | 2m` and `p | ℓ`, so `p | m`, and `p ∤ n` (else `p | c`). The
+remaining condition is `p² | f(1,0) = m`. Finally, using `p | ℓ` and `p ∤ n`:
 
-> The `p = 2`, `α = 0` bookkeeping inside (1) is stated only for completeness; **the sharp and
-> verified statement at `p = 2` is (4)**, which needs no case analysis. Claim (4) was checked against
-> the definition on all 15159 reduced forms of discriminant `≥ −2000`
-> (`scripts/experiments.py tables`, 0 failures), and (1)–(3) for `p = 3,5,7` on the same range.
+ - if `v_p(m) = 1` then `v_p(4mn) = 1` while `v_p(ℓ²) ≥ 2`, so `β = v_p(Δ) = v_p(4mn − ℓ²) = 1`;
+ - if `v_p(m) ≥ 2` then `v_p(4mn) ≥ 2` and `v_p(ℓ²) ≥ 2`, so `β ≥ 2`.
+
+Hence `p² | m ⟺ β ≥ 2`, which is the assertion. ∎
+
+> **Why (1) fails at `p = 2`.** The step "`p | 2m ⟹ p | m`" uses `p` odd. At `p = 2` the kernel
+> condition only gives `2 | ℓ` and `2 | 2m`, which is no information about `m`; correspondingly
+> `f = (1,0,1)` has `β = 2` but `𝒞_2 = ∅`, since `x² + y² ≡ 0 mod 4` has no primitive solution. This
+> is why (4) is stated separately and why the `p = 2` column of every table below is computed from
+> (4), never from (1).
+>
+> *Verification*: claim (4) was checked against the definition on all 15159 reduced forms of
+> discriminant `≥ −2000` (`scripts/experiments.py tables`, 0 failures); (1)–(3) for `p = 3,5,7` on
+> the same range; the failure of (1) at `p = 2` is exhibited in `scripts/experiments.py esteps`.
 
 ### Corollary 3.2 (when the literature formula is safe)
 
@@ -493,6 +513,13 @@ using `p | m₁`. From `xv − ℓ₁u = 1` and `x = −n₁ + tp` we get `ℓ�
 `ℓ₁' ≡ ℓ₁ − 2ℓ₁ + 2pℓ₁tv ≡ −ℓ₁ mod 2p`. Since a form `(p, b, ·)` of discriminant `D₁` is determined
 up to `SL(2,ℤ)`-class by `b mod 2p`, and `(p,b,·)⁻¹ = (p,−b,·)`, the prime attached to the second
 zero is `[𝔭]⁻¹`. Hence the second value of `κ` is `c'([f₁][𝔭])`.
+
+> *Independent check of the two steps just made* (they are the only places in Theorem E where an
+> explicit computation replaces a citation): `scripts/experiments.py esteps` recomputes, for all
+> primitive `f₁` of discriminant `≥ −600` and all `p ∈ {2,3,5,7,11,13}` with `p ∤ D₁` and two zeros,
+> (i) the two middle coefficients `ℓ₁, ℓ₁'` and (ii) the two prime forms, and verifies
+> `ℓ₁' ≡ −ℓ₁ mod 2p` and "second prime = conjugate of the first". **5694 cases, 0 violations of
+> either.**
 
 *The criterion*: the two classes `u := c'[f₁][𝔭]⁻¹` and `w := c'[f₁][𝔭]` give the same isometry
 class iff they are equal or inverse (`GL` vs `SL`); multiplication by the constant `c'` is injective
@@ -699,6 +726,8 @@ python experiments.py                # all structural experiments (exact integer
 python experiments.py scan           # Remark 4.1 table
 python experiments.py criterion      # Theorem E, 1798 cases, 0 mismatches
 python experiments.py alpha2         # Theorem E' / Corollary 6.1
+python experiments.py esteps         # the two internal steps of Theorem E (5694 cases),
+                                     #  and the failure of Theorem D(1) at p = 2
 python experiments.py noncyclic      # Proposition 7.1
 python dstar_witnesses.py            # the actual integers (needs the 1/Phi_10 coefficients
                                      #  of the torsion-immortal-positivity-hecke attempt)

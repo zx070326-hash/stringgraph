@@ -187,6 +187,24 @@ THEOREM E'' TEST (v_p(content) >= 2): N_p = (c/p^2) * (index-p sublattice of L_1
   p=5: 1 forms tested, 0 mismatches; 0 have a zero of f1 mod p, of which 0 are frame-independent (must be 0)
 
 ====================================================================================================
+THEOREM E, INTERMEDIATE STEPS (checked independently of the conclusion)
+====================================================================================================
+  step (i) : the two zeros of f1 mod p give middle coefficients with
+             l1' = -l1  (mod 2p);
+  step (ii): hence the two attached prime forms (p, l1, *) are inverse classes.
+  cases tested: 5694
+  step (i)  violations: 0
+  step (ii) violations: 0
+
+  CLAIM D(1) IS FALSE AT p = 2 (the naive 'alpha=0: |C_p|=0 iff beta<=1' rule).
+  D(1) is stated for ODD p only; the sharp p=2 statement is D(4).
+  counterexamples to the naive rule at p = 2 (Delta <= 600): 494
+     Delta=4     f=(1, 0, 1)      beta=2  true |C_2| = 0  (naive rule says 1)
+     Delta=8     f=(1, 0, 2)      beta=3  true |C_2| = 0  (naive rule says 1)
+     Delta=20    f=(1, 0, 5)      beta=2  true |C_2| = 0  (naive rule says 1)
+     Delta=20    f=(2, 2, 3)      beta=2  true |C_2| = 0  (naive rule says 1)
+
+====================================================================================================
 NON-CYCLIC SATURATION QUOTIENT:  L = 2M,  M/L = (Z/2)^2,  I = [M:L] = 4
 ====================================================================================================
   If M is primitive in Lambda and L = 2M then I = gcd(Q^P) = 4 but M/L is NOT
