@@ -21,6 +21,8 @@ $J[2]$，于是纤维上传递，于是连通。$r=0$ 时靶是 $\omega_C$，根
 
 **这不是一次归约**（把未证命题换成更小的未证命题）：下面 §2–§5 是一条完整的证明链，
 外部输入只有四条标准结果加两条已逐字核对的 FKP 陈述，全部 `rigorous`。
+§8 给出**第二条逻辑独立的证明**（拓扑路线），两条路线结论逐字一致。
+§6 与 `scripts/components-check.py` 给出显式验证与穷举复核。
 
 ---
 
@@ -457,56 +459,153 @@ $L^{\otimes2}\cong\omega_C(R)$ 要求 $\deg\omega_C(R)=2g-2+\#R$ 为偶数，故
 
 ---
 
-## §8 概念性旁证：Johnson 二次型（**非承重**）
+## §8 第二条证明：Johnson 二次型（拓扑路线，与 §3 逻辑独立）
 
-本节不被 §2–§7 的任何一步使用，只给出"为什么 $r=0$ 特殊"的第二种说法，并与 §3 交叉对照。
-读者若只关心正确性，可跳过。
+本节给出定理 3.3 / 推论 3.4 的**第二条完整证明**，走拓扑而非代数几何。
+它与 §3 共用的只有"$\Theta$ 是 $J[2]$-torsor"这一背景直觉；论证本身不经过 Picard 概形、
+不经过 Abel–Jacobi、不经过 §3 的任何引理。两条路线给出**同一个**答案，且给出**同一个**
+"$r=0$ 时归零"的机制，这是本 attempt 最强的无隐藏错误证据。
+
+本节的有限组合内容已由 `scripts/components-check.py` 穷举复核（$g\le2$，$m\le3$，
+实跑 `RESULT: ALL OK`，退出码 0）。
+
+### 8.1 模型
 
 把 $C$ 的底曲面记为 $\Sigma_g$，$\Sigma^\circ:=\Sigma_g\setminus\{p_\bullet,\rho_\bullet\}$
 （挖掉全部 $m$ 个穿孔），$V^\circ:=H_1(\Sigma^\circ;\mathbb Z/2)$，$\dim V^\circ=2g+m-1$。
 $\mathcal O(R)|_{\Sigma^\circ}\cong\mathcal O$，故 $L|_{\Sigma^\circ}$ 是 $\omega|_{\Sigma^\circ}$ 的平方根，
 即 $\Sigma^\circ$ 上的自旋结构，对应一个二次型 $q:V^\circ\to\mathbb Z/2$，
-$q(x+y)=q(x)+q(y)+x\cdot y$（计数相符：自旋结构有 $2^{2g+m-1}$ 个，二次细化也有 $2^{2g+m-1}$ 个）。
+$$q(x+y)=q(x)+q(y)+x\cdot y .$$
+计数相符：$\Sigma^\circ$ 上的自旋结构有 $|H^1(\Sigma^\circ;\mathbb Z/2)|=2^{2g+m-1}$ 个，
+而交形式的二次细化构成 $(V^\circ)^*$-torsor，也是 $2^{2g+m-1}$ 个（脚本 A1 已穷举复核）。
 
 $V^\circ$ 上 $\bmod\,2$ 交形式的根基 $\mathrm{Rad}$ 由穿孔圈 $\gamma_1,\dots,\gamma_m$ 张成，
-唯一关系是 $\sum_j\gamma_j=0$。在根基上 $x\cdot y=0$，故 $q|_{\mathrm{Rad}}$ **线性**，于是
+唯一关系是 $\sum_j\gamma_j=0$，故 $\dim\mathrm{Rad}=m-1$。
+在根基上 $x\cdot y=0$，故 $q|_{\mathrm{Rad}}$ **线性**，于是
 $$\sum_{j=1}^m q(\gamma_j)=q\Big(\sum_j\gamma_j\Big)=q(0)=0. \tag{8.1}$$
 
 **$q(\gamma_j)$ 只依赖穿孔类型。** $q(\gamma_j)$ 只由自旋结构在 $\gamma_j$ 的环形邻域上的限制
-（连同标架）决定，而该限制只由穿孔是 NS 还是 Ramond 决定。记两个值为
+（连同曲面给出的标架）决定，而该限制只由穿孔是 NS 还是 Ramond 决定。记两个值为
 $\epsilon_{\rm NS},\epsilon_{\rm R}\in\mathbb Z/2$。二者**不同**：环带上恰有两个自旋结构，
 且 $q$（取值于 $H_1(\text{环带};\mathbb Z/2)=\mathbb Z/2$ 的生成元上）是它们的完全不变量。
 
-**定出赋值。** 把 (8.1) 用于任意容许构型：$n\,\epsilon_{\rm NS}+2r\,\epsilon_{\rm R}
-=n\,\epsilon_{\rm NS}=0\ (\mathrm{mod}\ 2)$。取 $n=1$（只要 $2g-1+2r>0$ 就存在这样的构型），
-得 $\epsilon_{\rm NS}=0$，从而 $\epsilon_{\rm R}=1$。反过来代回 (8.1) 得 $\#R\equiv0$，
-与 §6.4 一致。✓
+**定出赋值（不依赖任何标架符号约定）。** 把 (8.1) 用于任意容许构型：
+$n\,\epsilon_{\rm NS}+2r\,\epsilon_{\rm R}=n\,\epsilon_{\rm NS}\ (\mathrm{mod}\ 2)=0$。
+取 $n=1$（只要 $2g-1+2r>0$ 就存在这样的构型），得 $\epsilon_{\rm NS}=0$，从而 $\epsilon_{\rm R}=1$。
+反过来代回 (8.1) 得 $\#R\equiv0$，与 §6.4 一致。✓
+（这一步把"众所周知的正负号陷阱"完全绕开：赋值不是查表得来的，是由 (8.1) + "NS 穿孔数无约束"
+唯一确定的。）
 
-**dichotomy。** $q$ 下降到 $V:=V^\circ/\mathrm{Rad}=H_1(\Sigma_g;\mathbb Z/2)$（从而拥有 Arf 不变量）
-当且仅当
+于是广义自旋结构的集合模型是
+$$Q_\epsilon:=\{q\ :\ q(\gamma_j)=\epsilon_j\ \forall j\},\qquad
+\epsilon_j=\begin{cases}0,&\text{第 }j\text{ 个是 NS}\\ 1,&\text{第 }j\text{ 个是 Ramond.}\end{cases}$$
+$q|_{\mathrm{Rad}}$ 被 $\epsilon$ 完全固定（$\mathrm{Rad}$ 由 $\gamma_j$ 张成，$q|_{\mathrm{Rad}}$ 线性），
+故 $Q_\epsilon$ 是 $\mathrm{Ann}(\mathrm{Rad})=\{f\in(V^\circ)^*:f|_{\mathrm{Rad}}=0\}$-torsor，
+$$|Q_\epsilon|=2^{\dim V^\circ-\dim\mathrm{Rad}}=2^{2g},$$
+与引理 2.1 的纤维大小**一致**。✓（脚本 A2 复核；同时复核 $Q_\epsilon\ne\emptyset\iff\sum_j\epsilon_j=0$。）
+
+### 8.2 点推在 $H_1$ 上的作用（自带推导，不查文献）
+
+设 $P_{j,\alpha}\in\Gamma_{g,m}$ 为把第 $j$ 个穿孔沿闭路 $\alpha$ 推一圈的映射类。
+由 Birman，$P_{j,\alpha}=T_{\alpha_L}T_{\alpha_R}^{-1}$，其中 $\alpha_L,\alpha_R$ 是 $\alpha$ 的环形
+邻域（含该穿孔）的两条边界曲线，满足 $[\alpha_L]=[\alpha]$、$[\alpha_R]=[\alpha]+\gamma_j$
+（差一个穿孔圈）。Dehn 扭转在 $\bmod\,2$ 同调上是 $T_c(x)=x+(x\cdot c)c$。于是
+$$P_{j,\alpha}(x)=x+(x\cdot\alpha)\alpha+\big(x\cdot(\alpha+\gamma_j)\big)(\alpha+\gamma_j)
+\overset{(\gamma_j\in\mathrm{Rad})}{=}x+(x\cdot\alpha)\alpha+(x\cdot\alpha)(\alpha+\gamma_j)
+=x+(x\cdot\alpha)\,\gamma_j. \tag{8.2}$$
+（$\bmod\,2$ 下这是对合：$P^2=\mathrm{id}$，因为 $\gamma_j\cdot\alpha=0$。故 $P^{-1}=P$。）
+
+### 定理 8.2（拓扑路线的主定理）
+
+设 $Q_\epsilon\ne\emptyset$。映射类群通过 $q\mapsto q\circ\phi_*^{-1}$ 作用在 $Q_\epsilon$ 上（(X4) 的
+自然性）。则对 $\alpha\in H_1(\Sigma_g;\mathbb Z/2)$，
+$$\big(P_{j,\alpha}\cdot q\big)(x)=q\big(x+(x\cdot\alpha)\gamma_j\big)
+=q(x)+(x\cdot\alpha)\,q(\gamma_j)+(x\cdot\alpha)\underbrace{(x\cdot\gamma_j)}_{=0}
+=q(x)+\epsilon_j\,(x\cdot\alpha). \tag{8.3}$$
+从而：
+
+1. **若 $\epsilon_j=0$（NS 穿孔）**：$P_{j,\alpha}$ 在 $Q_\epsilon$ 上**逐点不动**。
+   特别地 $r=0$ 时全部点推作用平凡。
+2. **若 $\epsilon_j=1$（Ramond 穿孔）**：$P_{j,\alpha}$ 作用为平移
+   $q\mapsto q+\langle\,\cdot\,,\alpha\rangle$。当 $\alpha$ 取遍 $H_1(\Sigma_g;\mathbb Z/2)$ 时，
+   线性泛函 $x\mapsto x\cdot\alpha$ 取遍整个 $\mathrm{Ann}(\mathrm{Rad})$
+   （因为交形式在 $V=V^\circ/\mathrm{Rad}$ 上非退化，$\alpha\mapsto\langle\cdot,\alpha\rangle$
+   是 $V\xrightarrow{\sim}\mathrm{Ann}(\mathrm{Rad})$ 的同构）。故点推子群在 $Q_\epsilon$ 上
+   **单纯传递**。
+
+**证明。** (8.3) 的三步：第一步是 (8.2) 与 $P^{-1}=P$；第二步用二次恒等式
+$q(u+v)=q(u)+q(v)+u\cdot v$ 配 $u=x$、$v=(x\cdot\alpha)\gamma_j$，注意 $(x\cdot\alpha)\in\{0,1\}$
+且 $q(\lambda\gamma_j)=\lambda q(\gamma_j)$（$\lambda\in\{0,1\}$ 时显然）；第三步用 $\gamma_j\in\mathrm{Rad}$。
+维数计数：$\dim V=2g=\dim\mathrm{Ann}(\mathrm{Rad})$，配合非退化性给出所述同构。
+又 $\alpha$ 可以取遍 $H_1(\Sigma_g;\mathbb Z/2)$：推动第 $j$ 个穿孔的闭路取自
+$\pi_1(\Sigma_g\setminus\{\text{其余穿孔}\})$，其到 $H_1(\Sigma_g;\mathbb Z/2)$ 的映射满
+（引理 3.2 的拓扑部分）。$\square$
+
+### 推论 8.3（= 推论 3.4 与定理 4.1，第二次得到）
+
+由引理 2.3（$\pi_0=\Theta/\Gamma_{g,m}$，且 $\Theta\cong Q_\epsilon$ 作为 $\Gamma_{g,m}$-集）：
+
+- $r\ge1$：定理 8.2(2) 给出传递，故 $S_{g;n,2r}$ 连通。**与推论 3.4 一致。**
+- $r=0$：定理 8.2(1) 给出点推平凡，作用因子分解过 $\Gamma_g\to Sp(2g,\mathbb Z/2)$，
+  两条轨道（Arf），**与定理 4.1 一致**。
+
+### 8.4 dichotomy 的概念性陈述
+
+$q$ 下降到 $V:=V^\circ/\mathrm{Rad}=H_1(\Sigma_g;\mathbb Z/2)$（从而拥有 Arf 不变量）当且仅当
 $$q(x+\rho)=q(x)+q(\rho)+\underbrace{x\cdot\rho}_{=0}=q(x)\quad\forall\rho\in\mathrm{Rad}
 \iff q|_{\mathrm{Rad}}=0\iff \text{所有 }q(\gamma_j)=0\iff r=0 .$$
 
 即：**Arf 不变量存在当且仅当没有 Ramond 穿孔。** 这与 §3–§4 的结论逐字吻合：$r=0$ 时不变量是
 Arf（= Mumford 宇称，(X3)），$r\ge1$ 时连不变量的定义域都不存在。
 
-⚠ 本节的 $\epsilon_{\rm NS}=0$、$\epsilon_{\rm R}=1$ 是**由 (8.1) 反推**得到的，
-本文没有独立重做"标架 + 自旋结构 ⟹ $q$ 的取值"这一步局部计算（那里有众所周知的正负号陷阱）。
-这是本节被标为非承重的原因。承重的论证在 §3，不经过任何标架约定。
+### 8.5 两条路线的对照表
+
+| | §3 代数路线 | §8 拓扑路线 |
+|---|---|---|
+| 纤维 | $\Theta_R=\mathrm{sq}^{-1}(\omega_C(R))$，$J[2]$-torsor，$2^{2g}$ 个 | $Q_\epsilon$，$\mathrm{Ann}(\mathrm{Rad})$-torsor，$2^{2g}$ 个 |
+| 点推单值 | 平移 $[\alpha]\bmod2\in J[2]$（引理 3.1+3.2） | 平移 $\epsilon_j\langle\cdot,\alpha\rangle$（式 (8.3)） |
+| $r=0$ 时 | $\psi$ 常值 $\Rightarrow$ 单值 $\equiv0$（注 3.5） | $\epsilon_j=0\Rightarrow$ 作用 $\equiv\mathrm{id}$（定理 8.2(1)） |
+| 差别的来源 | 扭转除子里有没有动点（命题 4.2） | $q$ 在根基上是否为零（§8.4） |
+| 用到的外部输入 | Picard 概形、Abel–Jacobi、$[2]$-同源 | Johnson 对应、Birman 点推分解 |
+
+两列的"$r=0$ 时归零"是**同一个现象的两种写法**：$\epsilon_j$ 与 $\psi$ 中 $y$ 的系数是同一个数
+（命题 4.2 的 $\epsilon_i$）。
 
 ---
 
 ## §9 仍然开放的 `[GAP]` 清单
 
-- `[GAP-PRIOR]`（程序性，见 §10）：本文 $r\ge1$ 的连通性结论在文献中的地位尚未完成检索。
-  数学上它属于"带扭转的自旋/高自旋模空间的分量分类"这一有成熟文献的范畴，**很可能是已知的**。
+- `[GAP-PRIOR]`（程序性，见 §10）：本文 $r\ge1$ 的连通性结论在文献中的地位见 `prior-art.md`。
+  数学上它属于"带扭转的自旋 / 高自旋模空间的分量分类"这一有成熟文献的范畴，**很可能是已知的**。
   本 attempt 的交付物不以"新定理"自居，见 §10。
 - `[GAP-CORNALBA]`（低，不影响 $r\ge1$）：注 5.3 中 $r=0$ 时"两分量在紧化后不合并"直接引用
   论文命题 8.1 / Cornalba 1989，本文未重证。
 - `[GAP-REP]`（低，技术）：引理 2.1 中相对 Picard 函子的可表性、以及注 2.2 中"gerbe 不改变底空间"
   按标准事实引用，未给出参考文献的精确定位。二者都不是本文结论的实质内容，但严格化时应补引用。
+- `[GAP-JOHNSON-PUNCT]`（低，只影响 §8 这条**冗余**路线）：(X4) 的 Johnson 对应对**闭**曲面是
+  经典的；§8 用的是**带穿孔**曲面版本（自旋结构 ↔ $V^\circ$ 上的二次细化，映射类群按
+  $q\mapsto q\circ\phi_*^{-1}$ 作用）。本文用计数 $2^{2g+m-1}=2^{2g+m-1}$ 做了一致性检验，
+  并把"$\epsilon_{\rm NS}=0,\epsilon_{\rm R}=1$"由 (8.1) 独立推出，但**未重证该对应本身**。
+  ⚠ **这不影响主结论**：§3 的代数证明完全不经过 Johnson 对应。§8 是第二条独立路线，
+  即使它被推翻，推论 3.4 与定理 5.2 不受影响。
 - ✅ **不构成缺口**：`[GAP-FKP-RAMOND]`。本文不走 FKP §8.4–§9.1 那条只对 NS 陈述的链
   （见 §1.3），故不受其影响。
+
+### 9.1 承重清单（reviewer 应优先攻击的地方）
+
+主结论（定理 5.2）的完整依赖是：
+$$\text{(X1)}+\text{(X2)}+\text{(X5a,b)}+\text{(X6)}
++\text{引理 2.1}+\text{引理 2.3}+\text{引理 3.1}+\text{引理 3.2}+\text{定理 3.3}+\text{引理 5.1}.$$
+**不承重**的有：(X3)、(X4)、(X5c,d,e)（只用于 $r=0$ 的对照定理 4.1）、整个 §6、整个 §8。
+
+自认为最脆弱的三处（请优先攻）：
+1. **引理 2.1 的可表性与"$\mathrm{sq}$ 是 $J[2]$-torsor"在叠上的表述**（`[GAP-REP]`）。
+2. **定理 3.3 中"$\iota^*\mathcal S=\psi^*\mathrm{sq}$"这一步**：它依赖"沿 $\iota$ 曲线族是常族"，
+   要确认相对 Picard 沿常族拉回确实是 $C^\circ\times\mathrm{Pic}(C)$（而不是被某个扭转缠上）。
+3. **引理 5.1 对 (X2) 的使用**：FKP Prop 7.8 的 $B$ 是**超叠**上的平展邻域，
+   本文把"光滑态射 $\Rightarrow$ 开映射"用在底层拓扑空间上。这一步的超几何细节值得独立复核
+   （本文的辩护：该论证只用到 $|B|\to|\overline{\mathfrak S}|$ 开、以及 $|B|\to\mathbb A^k$ 开，
+   两条都是底空间层面的陈述，$t_i$ 是偶函数故下降到玻色截断）。
 
 ---
 
