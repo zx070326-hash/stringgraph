@@ -1,0 +1,12 @@
+state: draft
+reviewer: null
+verdict: null
+captain_confirmed: false
+notes: |
+  2026-09-23, theorem-prover, branch agent/prover/fkp-96-punctured.
+
+  目标：攻掉 research/papers/supermoduli-punctured-nonprojected/paper.md 的唯一推断标注
+  [INF-NORMAL]（Remark 5.8）——即 FKP (9.6) 在带穿孔靶上是否成立。
+
+  当前状态：claim.md 已写定（命题 P / P′、可用砖块 A1–A9、攻击计划五步、证据纪律）。
+  proof.md 尚未开始。尚无结论。
