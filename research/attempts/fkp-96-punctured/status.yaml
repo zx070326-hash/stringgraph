@@ -1,6 +1,16 @@
-state: under-review
-reviewer: null
-verdict: null
+state: verified
+reviewer: rev-fkp96 (sonnet, 2026-09-24)
+verdict: >
+  Claim P (Thm 8.1) and its instantiation Cor 10.1 hold; [INF-NORMAL] is retractable.
+  Independently re-verified at L1 against arXiv:2006.13271v3 page images (9 pages: 5, 41,
+  44, 47, 48, 56, 58, 60, 61) that every quoted FKP formula, and in particular the two
+  claimed defects [E1] ((7.1) printed without the Ramond twist, p.41) and [E2] (Lemma 7.9's
+  proof using the r=0 case of (2.5), p.48), are transcribed faithfully; both defects are
+  real and the given repairs (Lemma 5.1, Prop 4.3) are mathematically sound on independent
+  re-derivation. The central new computation (Prop 6.2, the Berezinian-first bypass of the
+  defective (7.1)-based diagram) was re-derived step by step and checks out, as do Lemma 4.1
+  (branch duality), Prop 7.1 (D1+D2 cancellation) and Prop 9.1 (Δ_R disjoint from ι(B)).
+  No load-bearing [GAP] blocks Cor 10.1.
 captain_confirmed: false
 notes: |
   2026-09-23, theorem-prover, branch agent/prover/fkp-96-punctured.
@@ -40,3 +50,70 @@ notes: |
   (2) Prop 4.3 中 Hom(ℒ, ω_{Z₀}(D)) ≅ ℒ 的对偶计算；
   (3) Prop 9.1（ι(B) 上无 Ramond 节点）是否遗漏了边界情形；
   (4) §10.3 对论文两句话的指控是否成立。
+
+review_2026_09_24:
+  verdict: >
+    verified. claim.md 的 Claim P（proof.md Thm 8.1）与其在论文指标上的实例化
+    Cor 10.1 成立；[INF-NORMAL] 可撤。理由见上面顶层 verdict 字段。
+  sections_checked_in_full:
+    - "claim.md 全文（命题、记号、可用/不可用输入表）"
+    - "proof.md §0（verdict）、§2（输入清单与页码，逐条核对可核实项）"
+    - "proof.md §3（Lemma 3.1 穿孔盲性、Lemma 3.3、Cor 3.4、Prop 3.5）——独立重新推导，成立"
+    - "proof.md §4（Lemma 4.1 分支对偶引理、Prop 4.3 [E2] 修复、Cor 4.4）——独立重算局部环
+       k[[x,y]]/(xy) 上 Ann(y) 计算，与 Lemma 4.1(1) 一致；Prop 4.3 的 Hom(L,ω_C(Σr_i))≅L
+       步骤正确"
+    - "proof.md §5（Lemma 5.1 [E1] 修复、Cor 5.2、Remark 5.3/5.4）——与 L1 p.5, p.41 核对一致"
+    - "proof.md §6.3（Prop 6.2，Berezinian-first 旁路）——逐步重算 (6.1)/(6.2) 两行、两次
+       factor 比较、最终抵消，全部核对通过，这是本证明最技术性的新计算"
+    - "proof.md §7（Prop 7.1，D1+D2 抵消）——核对通过"
+    - "proof.md §8（Thm 8.1 证明的五步等式链、Thm 8.3 非分离情形的修正）——核对通过"
+    - "proof.md §9（Prop 9.1，Δ_R 与 ι(B) 不交）——核对通过，并与 FKP Lemma 7.10（p.48，
+       已在 L1 核对）独立吻合"
+    - "proof.md §10.1–10.4（Cor 10.1 实例化、Lemma 10.2 psi 线分解、两条「论文原话有误」
+       的指控）——逻辑核对通过"
+    - "proof.md §11（G1–G7 七条残留 [GAP] 的定性）——同意 prover 自己的判断：均非
+       Cor 10.1 的承重缺口（详见下）"
+  sections_only_skimmed:
+    - "proof.md §6.1–6.2（Prop 6.1 (i)(ii)(iii)，对 FKP Lemma 9.1 三部分的穿孔推广）——
+       通读并核对了引用的 FKP 陈述位置是否与 [FKP] 原文一致，但未独立重算 §6.2 的局部
+       坐标计算本身（该计算发生在 FKP pp.33-40，见 G1，见下）"
+    - "proof.md §10.5、Remark 10.5/10.6（文本层面的讨论，非承重）——通读，未逐句核对"
+  what_i_could_not_check:
+    - "L1 核实覆盖了 9 页（5, 41, 44, 47, 48, 56, 58, 60, 61），全部与 proof.md 的转录逐字
+       吻合，特别是两处关键缺口 [E1]（p.41 的 (7.1) 确实不带 (R) 扭转）与 [E2]（p.48 的
+       Lemma 7.9 证明确实写的是 L≅Hom(L,ω_C) 的 r=0 情形）——这是本轮审查最强的独立证据。
+       但未核实 prover 声称读过的其余页（2, 6, 7, 42, 45, 46, 57, 59），也未核实
+       [FKP] pp.33-40（Sec 6.2，G1 的来源）、Lemma 8.7/Cor 8.8/Remark 8.10 的证明正文
+       （G2，只核对了 p.56 的陈述本身，未读证明）、Theorem A 的证明（G5，FKP 主定理，
+       信任为黑箱是合理的引用实践）、Lemma 7.2(ii)/7.3 的证明（G6）。"
+    - "没有验证 research/papers/supermoduli-punctured-nonprojected/paper.md 本身的其余部分
+       （只核对了 proof.md §10 对该论文 Construction 5.3 / Lemma 5.5 / Remark 5.8 的转述与
+       proof.md 内部逻辑是否一致，未去读该论文原文核实转述是否忠实）。"
+    - "Remark 8.2 的符号（sign）问题未独立核实——接受 prover 的论证（只影响生成元选取，
+       不影响同构类，[FKP] 自己也只做到符号）。"
+  gaps_blocking_verified: []
+  gaps_assessed_non_blocking:
+    - "G1 (proof.md L1279-1286): FKP §6.2（pp.33-40）未在 L1 读。风险低——§6.2 是节点的
+       局部模型，穿孔与节点不交，且转移论证只依赖一句已核实的 L1 陈述（§6.4，I13）。"
+    - "G2 (L1287-1291): Lemma 8.7/Cor 8.8/Remark 8.10 的证明未读，但其陈述（已在 p.56 核实）
+       本身就是在'm 个 NS 穿孔 + n 个 Ramond 除子'的一般设定下写的，这是 [GAP-FKP-RAMOND]
+       原本担心会咬人的地方，结果没有咬——陈述层面已经够用。"
+    - "G3 (L1292-1296): Berezinian 乘法性中的排序符号歧义，[FKP] 自己也不处理；只影响
+       典范生成元的选取，不影响本证明与论文所需的线丛同构类。"
+    - "G4 (L1297-1301): [FKP] Example 8.9 仍只对 NS 成立，本证明未修——但 Cor 10.1 及其
+       支持的论文 Lemma 5.5(a) 均不使用 Example 8.9；论文自己的 Lemma 5.5(c) 正是为
+       绕开它而设计的。真实存在但确认为不承重。"
+    - "G5 (L1302-1305): FKP Theorem A（主定理，超模空间的光滑真 DM 栈表示性）作为黑箱引用。
+       这是引用已发表严格证明的合理实践，不是本证明自身的缺口。"
+    - "G6 (L1306-1308): FKP Lemma 7.2(ii)/7.3 作为黑箱引用，两处均可见是节点局部命题
+       （L1 已核实其所在证明是局部于单个节点的陈述），故穿孔盲性论证适用。"
+    - "G7 (L1309-1313): Thm 8.3（非分离情形，Claim P′）的证明明显比 Thm 8.1 单薄——
+       论文实际只用 (7.8)（分离情形，Thm 8.1），未用 Thm 8.3。同意 prover 的建议：
+       若未来要依赖 Thm 8.3，应重新独立展开 §6-7 对 (7.9) 的论证，而非仅凭'检查每个
+       ingredient 都适用于 (7.9)'的检视式论证。"
+  recommended_next_step: >
+    Cor 10.1 已可供 research/papers/supermoduli-punctured-nonprojected/paper.md 引用以撤销
+    [INF-NORMAL]；该论文若采纳，应按 proof.md §10.4 的建议在 Construction 5.3 / Lemma 5.5
+    附近加一条 [FKP-ERRATA] 式的按语，注明继承 [E1]/[E2] 两条对 [FKP] 的勘误。按本项目
+    "verified 后默认结项"的纪律，本 attempt 到此为止，不建议再派复审；下一步动作应落在
+    引用方（supermoduli-punctured-nonprojected paper.md）而非本 attempt。
