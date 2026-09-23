@@ -140,6 +140,27 @@ Source: attempt **C** throughout. Nothing in this section comes from A or B.
 - (P′) refuted, (P′_ad) is the correct premise: C lines 269-314 (§5)
 - Honest novelty statement relative to the literature: C lines 396-426 (§8)
 
+**Remark 6.8 and Proposition 6.9 (added 2026-09-23) — ⚠️ NOT in C**
+- **Neither traces to any attempt.** Both were produced during a post-welding audit of §6 that
+  compared the section against C rather than merely tracing it. That audit found two defects: the
+  "Ancillary files" paragraph claimed three scripts where four were tracked, and
+  `primitive_frame_search.py` — the script backing Remark 6.6's minimality claim — was **not bundled
+  at all**, so a referee could not have reproduced that claim from the paper's own ancillary files.
+  Both fixed in commit d9c49c9.
+- **Remark 6.8** is a systematic sweep (Δ_M ≤ 24, all GL(2,ℤ) classes of M, all index-I sublattices
+  L with M/L cyclic, I ∈ {2,3}, SL(2,ℤ) ball R = 6), printed line by line by the extended
+  `scripts/primitive_frame_search.py`; recorded output in `scripts/primitive_output.txt`. Its three
+  conclusions are **computational within that range**, not proved, and the text says so.
+- **Proposition 6.9** is proved unconditionally (content/parity argument), and independently checked
+  on 8394 admissible frames by the same script. It refutes the converse of Proposition 6.5, which
+  the paper had previously recorded as open in two places — Problem 9.1 and the §8 discussion, both
+  updated in the same commit.
+- ⚠️ **Both need a reviewer before submission.** They are the only mathematical content in the paper
+  with no attempt behind them and no adversarial round, which is precisely the failure mode this
+  file exists to catch. The companion paper's §9.5 was welded the same way and a review found two
+  overclaims in it; one overclaim was in fact caught and removed from Remark 6.8's own first draft
+  (it asserted minimality "by Proposition 6.5", which is false — H(12) = H(15) = 2 are smaller).
+
 ## Paper §7 (Positivity theorem)
 
 **Theorem 7.1 (Main result)**
