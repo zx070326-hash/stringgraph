@@ -170,17 +170,38 @@ and the paper never did. If it turns out to contain the lattice criterion, the d
 2. **Authors and affiliation.** Not yet written into the draft at all. Captain's decision, coupled to
    how the project describes agent-assisted work.
 3. **Ancillary scripts are submission-ready but English-only-adjacent.** `scripts/` holds
-   `coefficients.py`, `frame_search.py`, `divisor_sum_values.py`, `lattice_witness.py` plus their
-   recorded output. They are byte-identical copies of the attempts' engines except for one import path,
-   are pure standard library, use exact integer arithmetic, and run clean (exit 0; the engine's own
+   `coefficients.py`, `frame_search.py`, `divisor_sum_values.py`, `lattice_witness.py`,
+   `primitive_frame_search.py` plus their recorded output. They are byte-identical copies of the
+   attempts' engines except for one import path (`primitive_frame_search.py` additionally carries the
+   Remark 6.8 sweep and the Proposition 6.9 check, which exist only in the paper), are pure standard
+   library, use exact integer arithmetic, and run clean (exit 0; the engine's own
    self-tests report 86 and 171 cases of Rosselló Thm 1 and Cor 1.1 with no violations; the identity
    control returns difference 0). **Check their comments for Chinese text before bundling** — this was
    a real problem with the supermoduli paper's script.
 4. **Resolve the benchmark table citation** (§4.4) — optional.
 5. **Wait on Problem 9.2** (§4.3) — recommended.
 6. `SOURCEMAP.md` is current as of 2026-09-23 and maps every section to line ranges in A, B or C,
-   including the three items that are *not* transcriptions (the H(D) convention, the Λ-realizability
-   remark, Problem 9.2). It is an internal aid, not a submission artefact.
+   including the items that are *not* transcriptions (the H(D) convention, the Λ-realizability
+   remark, Problem 9.2, and — added 2026-09-23 — Remark 6.8 and Propositions 6.9/6.10).
+   It is an internal aid, not a submission artefact.
+7. ⏳ **Remark 6.8 and Propositions 6.9/6.10 have no attempt behind them and no reviewer.** They were
+   written directly into the paper during a post-welding audit of §6 (the audit that found
+   `primitive_frame_search.py` was backing a claim in Remark 6.6 without being bundled). Proposition
+   6.9 is proved and machine-checked; Remark 6.8's three conclusions are computational within a
+   stated range and labelled as such. They are nonetheless the only mathematics in the paper that has
+   never been attacked by anyone, which is exactly the failure mode that bit the supermoduli paper's
+   §9.5. **A reviewer should see them before submission.**
+8. ⏳ **A stronger result is in review and may supersede §6.8–§6.10 and answer Problem 9.1 outright.**
+   `research/attempts/divisor-sum-frame-dependence/` (merged to `main`, `state: under-review`,
+   reviewer `framedeprev` dispatched 2026-09-23) reports a structure theorem: D_I is a function of
+   (L, H) for H a cyclic isotropic subgroup; a class-*group* criterion for frame-independence; and
+   the same invariant 𝔇(L) the paper's Remark 6.8 arrives at independently. Its wider sweep
+   (Δ ≤ 400, I ≤ 6) corroborates Remark 6.8 and extends it by an order of magnitude. **Nothing from
+   it has been welded in.** If the review confirms it, Problem 9.1 stops being the paper's headline
+   open problem and becomes a theorem — which would be a materially stronger paper and is worth
+   waiting for. It also carries an unresolved `[GAP-INJ]` affecting only the frame-*dependence*
+   direction, not the frame-independence results the paper currently states.
+
 
 ---
 
