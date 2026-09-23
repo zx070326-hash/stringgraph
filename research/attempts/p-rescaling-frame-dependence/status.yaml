@@ -1,9 +1,9 @@
 slug: p-rescaling-frame-dependence
-state: under-review
+state: verified
 opened: 2026-09-23
 captain_confirmed: false
-reviewer: null
-verdict: null
+reviewer: "rev-prescale (sonnet, 2026-09-24)"
+verdict: "Theorems A-E and Prop 5.1 hand-checked and machine-reproduced bit-for-bit; the four most load-bearing literature quotations (AN 2009.01172 (2.6)/(2.13), BSS 0802.1556 (1)/(2)/(4), DGM 0803.2692 (4.5)-(4.12), BCP 1806.03330 (5.79)-(5.81)) verified verbatim against real PDF page images; slot-based (not letter-based) convention discipline is explicit and correct throughout; remaining [GAP]s are honest, narrow, and non-load-bearing for the stated theorems -> verified."
 
 origin: |
   research/papers/torsion-dyon-shift-positivity/paper.md §9 (line 350) defers the question
@@ -117,3 +117,137 @@ notes: |
    - [GAP] (H2) at I>1: whether the physical single-centred index equals the attractor-contour
      d_* at torsion > 1 is the standing question of holography.torsion-immortal-positivity and
      is not settled here.  PART 4 shows Thm D's conclusion is unchanged with the total index.
+
+review_2026_09_24:
+  verdict: |
+    VERIFIED. Independent adversarial review by rev-prescale (sonnet). Read claim.md and
+    proof.md in full (500+161 lines) plus lit-findings.md (622 lines) in full. Re-derived
+    Theorems A, C, Proposition 5.1, D and E by hand from the stated hypotheses; found the
+    algebra correct at every step, including the (ad+bc)=1+2bc oddness argument in Theorem E
+    and the primitivity/unimodularity argument in Prop 5.1. Independently re-executed both
+    scripts/p_rescaling_witness.py and scripts/lattice_frames.py from a clean checkout; output
+    is identical (module CRLF/LF) to the committed run_output.txt and
+    lattice_frames_output.txt, including every headline integer (D'_2(4,8,8)=7999235715072,
+    D'_2(4,4,0)=7999541469408, difference 305754336; the Gamma^0(2) sharpness table at
+    (4,8,0); the 8750/0 and 24304+4700/0 machine-check counts). The underlying d_* Fourier
+    machinery (coefficients.py, torsion_divisor_sum.py) is imported read-only from
+    research/attempts/torsion-immortal-positivity-hecke, an attempt already `state: verified`
+    with heavy adversarial review (graph-reviewer + literature cross-check) recorded in its
+    own status.yaml, so I did not re-derive that machinery from scratch, only re-ran it.
+  what_i_checked: |
+    - Full text of claim.md, proof.md, lit-findings.md, status.yaml as they stood before this
+      review, plus root CLAUDE.md and research/CLAUDE.md.
+    - Hand re-derivation of: Lemma 2.1 (GL(2,Z) class function, incl. the diag(1,-1) part),
+      Theorem A (D'_I(m,n,l)=D_I(n,m,l)), Theorem C (V_s=W_s U W_s^{-1} integral iff s|b, and
+      the Gamma^0(I)/Gamma_0(I) invariance groups), Proposition 5.1 (adapted frames = one
+      coset, via P0 primitive + Lambda unimodular => exists lambda with P0.lambda=1),
+      Theorem B and D (the exact-integer witnesses), Proposition 8.1 (BSS (7) is the signed
+      sum, via the sigma~=s^2 sigma-check, v~=s v-check substitution and Jacobian 1/s^3),
+      Theorem E (parity invariance of l-l/s under Gamma^0(I)).
+    - Independent re-execution of both scripts (fresh `python p_rescaling_witness.py` and
+      `python lattice_frames.py` from this worktree's own copy of the attempt directory,
+      diffed against the committed output files -- byte-identical modulo line endings).
+    - L1 verification against real arXiv PDF page images (curl direct fetch succeeded for
+      all four targets, no TLS-block workaround needed; pdftoppm -r 200, read via the Read
+      tool, never pdftotext):
+        * arXiv:2009.01172 (Alexandrov-Nampuri) PDF pp.5-7 (printed pp.4-6): eq (2.6)
+          n=Q^2/2, m=P^2/2 CONFIRMED verbatim; eq (2.13)
+          Omega_I(n,m,l) = sum_{d|I} d Omega_1(n, m/d^2, l/d) CONFIRMED verbatim, magnetic
+          slot m=P^2/2 divided by d^2 -- this is the crux fact behind Claim 1's refutation
+          of the pre-registered BSS guess, and it checks out exactly as quoted.
+        * arXiv:0802.1556 (Banerjee-Sen-Srivastava) PDF pp.2-3 (printed pp.2-3): eq (1)
+          exponent i*pi*(sigma-check*Q^2 + rho-check*P^2 + 2*v-check*Q.P) CONFIRMED verbatim
+          (=> sigma-check carries Q^2/2); eq (2) Q^2/2 in r^2*Z, P^2/2 in Z, Q.P in r*Z
+          CONFIRMED verbatim; eq (4) Phi_10(rho-check, s^2*sigma-check+k/sbar^2,
+          s*v-check+l/sbar) CONFIRMED verbatim -- sigma-check (the Q^2/2 slot) is scaled by
+          s^2, so BSS is Q-rescaling as claimed, refuting the pre-registered "BSS is
+          P-rescaling" hypothesis. This is the single most consequential correction in the
+          attempt and it is now independently confirmed against the primary source.
+        * arXiv:0803.2692 (Dabholkar-Gomes-Murthy) PDF pp.19-20 (printed pp.18-19): eqs
+          (4.5)-(4.12), including the verbatim sentence "The partition function Z_I is
+          however not invariant under the full SL(2,Z) but only under a congruence subgroup
+          Gamma^0(I)..." and the matrix identity (4.6) and the coset discussion (4.12), ALL
+          CONFIRMED verbatim against the page image, matching lit-findings.md F3b exactly
+          word for word including equation numbers.
+        * arXiv:1806.03330 (Bossard-Cosnier-Horeau-Pioline) PDF p.64 (printed p.64): eqs
+          (5.79)-(5.81), the Gram-matrix P-rescaling formula
+          (Q^2, QP/d; QP/d, P^2/d^2) and "in agreement with the prescription in [41, 72]"
+          CONFIRMED verbatim.
+      All four checked quotations matched lit-findings.md and proof.md exactly, including
+      equation numbers, subscripts, and the specific verbatim sentences quoted. No
+      discrepancy found in any of the four.
+  convention_consistency: |
+    This is the hazard the task brief specifically flagged, and the attempt handles it
+    correctly and explicitly rather than by accident. claim.md/proof.md fix their OWN
+    notation once (m=Q^2/2, n=P^2/2, l=Q.P) and never silently borrow a paper's letters:
+    proof.md section 0 states in so many words "Which charge is divided is the only safe
+    identifier. Letter conventions differ across the literature: DGM and CNR divide the
+    electric invariant Q^2/2 by s^2; Alexandrov-Nampuri and BCP divide the magnetic
+    invariant P^2/2, even though AN's letters (n=Q^2/2, m=P^2/2) make (2.13) look like DGM's
+    (3.28) when read left-to-right." My own page-image check of AN (2.6) confirms AN's
+    letters ARE the opposite of DGM's (n=electric there, not m), and confirms the "which slot
+    is squared" criterion was applied correctly in both directions (AN: P^2/2 divided,
+    P-rescaling; BSS: Q^2/2 divided via sigma-check, Q-rescaling). No metric-signature or
+    alpha'-normalization issue arises since d_* and the divisor sums are purely combinatorial
+    (integer Fourier coefficients of a fixed Siegel modular form), so those root-CLAUDE.md
+    convention axes (principle 6) do not apply here; the live convention axis is "which
+    physical charge sits in which chemical-potential slot", and it is handled correctly
+    throughout, including in the cross-task warning about paper.md's own section 4 dictionary
+    (item 2 of the "cross-task messages" block, which I independently believe is correct: AN's
+    sigma carries P^2/2 per my own eq.(2.6) check, while paper.md's rho carries Q^2/2 per its
+    own section 2, so identifying paper.md's rho with AN's sigma does silently swap electric
+    and magnetic -- this is a self-reported problem in a SIBLING document, correctly flagged
+    and correctly out of this attempt's write scope).
+  what_i_could_not_check: |
+    - arXiv:0802.0544 (BSS "torsion two", the three-T-duality-orbit claim, F5b/F5c/F5d) --
+      not fetched or page-checked by me; I relied on lit-findings.md's L1 labels. This
+      matters only for the flavor text around Theorem D ("this is consistent with a 2008
+      result") and for the third-orbit [GAP] in proof.md section 7/10, not for Theorem D's
+      own two-orbit witness, which stands on DGM+S-duality alone (H1+H2) and does not need
+      BSS 0802.0544 as a premise.
+    - arXiv:2007.10302 (Cardoso-Nampuri-Rossello), arXiv:0801.0149 (Banerjee-Sen), and the
+      triage-level (F11) papers (0804.0651, 1912.06562, 1702.05095, 2005.07712, 2205.08726,
+      1002.3857) -- not independently page-checked. These feed only the Q3 blast-radius
+      classification table, which the attempt itself already flags as carrying
+      "[GAP: survey completeness]" and is explicitly not load-bearing for Theorems A-E.
+    - I did not re-derive the underlying attractor-contour Fourier-coefficient machinery
+      (coefficients.py / torsion_divisor_sum.py, i.e. the actual numerical value of d_* at
+      any given (m,n,l)) from the definition of the contour integral; I trust it because the
+      hosting attempt (torsion-immortal-positivity-hecke) is independently `state: verified`
+      with its own recorded adversarial review. If that machinery were wrong, Theorem B/D's
+      specific integers would be wrong, but Theorems A, C, Prop 5.1, and the qualitative form
+      of Theorem D (proved abstractly for ANY GL(2,Z)-class function f in proof.md section 6,
+      "Not an artefact of choosing d_*") would be unaffected.
+    - AN's own [GAP: which SL(2,Z) in (2.16)] is left open by the attempt itself and by me;
+      I did not attempt to resolve it. It is correctly scoped as the only place a (jia3/
+      load-bearing) classification could move to (yi3/adapted-only), and does not affect
+      Theorems A-E.
+    - I did not check the bibliographic identity claims in lit-findings.md F6c (title/arXiv
+      mismatch for the paper.md reference [banerjee-sen-2008]) against BCP's own reference
+      list beyond what's visible in the page image I already pulled (which does list
+      [71]=Banerjee-Sen 0801.0149 in the eq (5.79) context, consistent with the claim, but I
+      did not pull BCP's bibliography pages 151/153 to independently confirm the [71]/[41]/
+      [72] resolution).
+  gaps_blocking_verified: |
+    None. All five [GAP]s in proof.md section 10 (AN's Gamma^0(I) in (2.16), the third
+    torsion-2 orbit's index, survey completeness, (H2) at I>1, and the DGM eq(51)/eq(52)
+    sign-convention scope note) are explicitly non-load-bearing for the theorems the attempt
+    actually proves (A-E, Prop 5.1): each is either (a) an acknowledged incompleteness in the
+    literature survey (Q3's blast-radius table) that the attempt itself reports as narrowing
+    its own conclusion rather than resisting, or (b) a standing open question of a DIFFERENT
+    attempt (torsion-immortal-positivity-hecke's H2) that this attempt correctly does not
+    claim to resolve and shows is inessential to its own conclusion via the total-index
+    cross-check in proof.md PART 4 (line ~275-279). proof.md line 328-330's third-orbit gap is
+    honestly scoped as "not computed here" rather than assumed away.
+  recommended_next_step: |
+    Graduation-track next step (not required by this review, offered for the lead): per
+    research/CLAUDE.md step 4, this attempt may now graduate via graph-curator into
+    graph/statements/ with kind: proof, status: rigorous, sources pointing at proof.md, and
+    the note explicitly declaring "original proof in this project, see
+    research/attempts/p-rescaling-frame-dependence/proof.md" -- captain_confirmed is not a
+    gate for that per root CLAUDE.md's "图是仪器不是产品" section. The two `cross-task
+    messages for the lead` in the notes block above (paper.md line 350's wrong attribution of
+    the P-rescaling family to BSS, and paper.md section 4's silent electric/magnetic swap in
+    its AN dictionary) are unresolved corrections to a SIBLING document
+    (research/papers/torsion-dyon-shift-positivity/paper.md) that this attempt is not
+    permitted to edit; they remain open action items for whoever owns that paper.
