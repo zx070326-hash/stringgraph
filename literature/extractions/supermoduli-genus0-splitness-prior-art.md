@@ -107,10 +107,9 @@
 
 ### E3 ★ Witten 2012 §5.1.3 的**归属**：splitting 最早由 Nelson 1988 描述、Giddings 1992 细化
 - 位置：**排版 p.55（PDF 第 58 页）**紧接 E2 引文之后 / **排版 p.55 末至 p.56 初**。
-  ⚠ **text-only**（本条引文来自 `pdftotext`，**未**单独做页图像核实；引文所在段落与 E2 同页，
-  E2 的页图像里可见该段开头，但本条完整引文按保守标准标 text-only）。
+  **L1（页图像逐字核实，PDF 第 59 页 = 排版 p.56）**。
 - 类型：归属说明
-- 原文陈述（text-only）：
+- 原文陈述（**逐字，L1**）：
   > The splittings of $\widehat{\mathfrak M}_{0,4}$ and their properties were first described
   > in [46], with more detail in [33]. The relevance to superstring perturbation theory is as
   > follows [47]. Although tree level scattering amplitudes at generic values of the external
@@ -158,10 +157,10 @@
 
 ### E5 ★ Witten 2012 §5.1.3 末：$\overline{\mathfrak S}_{0;4,0}$ 的 **orbifold 结构**描述
   —— 与 "$\mu_2$-gerbe over $\sqrt[2]{(\mathbb P^1,0+1+\infty)}$" 是同一个几何，但**措辞不同**
-- 位置：**排版 p.55 末（PDF 第 58 页底）至 p.56 初**。⚠ **text-only**（该段跨页，本轮只对
-  p.55 做了页图像核实，引文主体在 p.56，**未**做页图像核实）。
+- 位置：**排版 p.56（PDF 第 59 页）**。（本轮已对
+  p.56（PDF 第 59 页）做了页图像核实 —— **L1**。）
 - 类型：definition/remark
-- 原文陈述（text-only）：
+- 原文陈述（**逐字，L1**）：
   > To understand $\widehat{\mathfrak M}_{0,4}$ more deeply, one has to describe its orbifold
   > structure. Let us discuss what happens along the reduced space
   > $\widehat{\mathfrak M}_{0,4,\mathrm{red}}$, which roughly speaking (ignoring the orbifold
@@ -200,7 +199,7 @@
 ## 1. 相邻陈述的检索结果（任务书要求分别搜的几条）
 
 ### 1a. 未紧化 $\mathfrak S_{0;n,0}$（任意 $n$）的 split / projected
-- **KNOWN**。Witten arXiv:1209.2459 **排版 p.55**（text-only，紧接 E2）逐字：
+- **KNOWN**。Witten arXiv:1209.2459 **排版 p.56 首段（PDF 第 59 页，L1 页图像核实）**逐字：
   > What we have said about $\widehat{\mathfrak M}_{0,4}$ extends to $\widehat{\mathfrak
   > M}_{0,k}$ for all $k \ge 4$. By making use of the supersymmetric extension of the cross
   > ratio, one can always define holomorphic splittings $\pi : \widehat{\mathfrak M}_{0,k}
