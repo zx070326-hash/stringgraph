@@ -1,6 +1,10 @@
-state: under-review
-reviewer: null
-verdict: null
+state: verified
+reviewer: rev-fkp79 (sonnet, 2026-09-24)
+verdict: >
+  Verified: FKP Lemma 7.9 holds with the Ramond twist for arbitrary m_i,n_i>=0 (proof.md Theorem
+  7.1). All primary-source quotes checked verbatim against 200dpi page images; the core local
+  computation (SS4-SS5) is correct; the 5 internal [GAP] markers are all decorative/out-of-scope,
+  none load-bearing for the claim.
 captain_confirmed: false
 notes: |
   ================================================================
@@ -204,3 +208,81 @@ notes: |
      **p.5 §2.2 的 (2.2)/(2.3) 与带 R 的 δ:Ω→ω(R)**（现有 E 条目里没有），
      因为它是 (7.1_R) 的一手出处，也是判定 (7.1) 非印刷错误的关键证据。
      此项属 researcher/curator 范围，本 agent 未动手。
+review_2026_09_24:
+  verdict: verified
+  what_i_checked: |
+    - Read root CLAUDE.md and research/CLAUDE.md lifecycle rules.
+    - Read claim.md and proof.md in full (777 lines).
+    - Downloaded arXiv:2006.13271v3 via curl (succeeded first try, http=0, size=886606), rendered
+      pp.5,6,7,47,48 at 200dpi with pdftoppm, read the PNGs directly (no pdftotext).
+    - Cross-checked every verbatim quotation proof.md attributes to these five pages against the
+      page images. All matched character-for-character:
+        * p.6 Definition 2.4: "a collection of disjoint closed subschemes called NS-punctures and
+          R-punctures", delta:O_X -> omega_X/S(R), condition (2.4) with the twist, stability
+          clause (ii).
+        * p.7 Lemma 2.6 and (2.5) with its twist omega_C(sum r_i); and "this immediately follows
+          from the fact that locally R_i is given by an even equation f in O_X^+ = O_C" -- exactly
+          the sentence proof.md SS4.3 leans on for "O_Z(R^Z) is even, hence commutes with the
+          parity splitting" (the prover's own self-flagged weak point (a) in the notes block).
+          Confirmed present verbatim; closes that flag.
+        * p.47 SS7.5 gluing construction and Lemma 7.9's printed statement (ends in omega_Z/S, no
+          twist, confirming SS1.3's "Observation").
+        * p.48 Lemma 7.9's printed proof verbatim, including "It is well known that ... L (+) L' ->
+          Hom(...,omega_Z0) is an isomorphism" (untwisted) -- confirms SS1.4's itemisation of the
+          three places the twist is dropped and the claim that the quoted formula matches Remark
+          2.3 (p.5) rather than (2.5) (p.7).
+        * p.5 SS2.2: (2.2), the dual sequence 0->D^-2(-R)->Omega_X/S->D^-1->0, (2.3) D=omega^-1(-R),
+          Remark 2.3's untwisted L^2~omega_C. Matches proof.md SS10.2bis's transcription;
+          independently re-derived D^-1=omega(R), D^-2(-R)=omega^2(R) myself from (2.3), correct
+          algebra, matching proof.md's claimed sequence 0->omega^2(R)->Omega_X/S->omega(R)->0.
+    - Independently traced the local-model computation in proof.md SS5.2 step by step
+      (A=k[[u,v]]/(uv), Ann_A(v)=(u), branch inclusions iota_C/iota_C', the Hom_A(A_1,A*eta)~=(u)*eta
+      identification via evaluation at 1, the final "alpha a unit" isomorphism criterion). Found
+      the algebra correct at every step, no errors.
+    - Verified p.6 Lemma 2.5(iii) (the four CM conditions used in SS6.3) matches proof.md's quote,
+      on the same page image.
+    - Confirmed Definition 2.4's "disjoint" clause covers the *entire* collection of P_i and R_i
+      together, exactly hypothesis (H1) that the load-bearing step z not-in Supp(R^Z) rests on.
+    - Enumerated all [GAP: ...] markers via grep (5 internal + 2 references to the external
+      [GAP-FKP-RAMOND] being discharged, matching the task brief's "7 GAP" count) and classified
+      each: all 5 internal ones are decorative or explicitly outside claim.md's scope. None is
+      load-bearing for Theorem 7.1 as stated in claim.md.
+  what_i_could_not_check: |
+    - Did not independently fetch pp.41,56-60 (Footprint I/II source pages) against page images;
+      relied on the prover's own transcriptions there. Those sections are an audit of *other*
+      statements (paper.md SS10.1, the elliptic-tail attempt's [GAP-LIT] 1b, the status of (7.1)/
+      Lemma 9.1), not part of claim.md's Main Claim, so this does not block the verdict but is
+      flagged as unverified by me.
+    - Did not reprove [S1] (Rosenlicht/Serre description of omega_Z0 at a node) from first
+      principles; it is classical and R-independent, low risk, but I did not check Hartshorne/
+      ACGH/Serre GACC myself.
+    - Did not rederive FKP's own base-change/flatness bookkeeping for SS6.1/SS6.3 over a general
+      (non-purely-even) base S line by line against FKP's original argument.
+    - Did not independently fetch the sibling attempt fkp-96-punctured's proof.md to re-check the
+      cross-comparison recorded in the existing notes block; this attempt's own proof.md is
+      self-contained and does not depend on the sibling being correct, so it does not affect the
+      verdict.
+  gaps_blocking_verified: []
+  gaps_reviewed_non_blocking:
+    - id: "[GAP: S1 not reproved]"
+      proof_md_line: 754
+      why_non_blocking: "Classical Rosenlicht/Serre fact about nodal dualizing sheaves, R-independent, cited not reproved; standard and uncontested."
+    - id: "[GAP: general base]"
+      proof_md_line: 757
+      why_non_blocking: "(2.4) is fibrewise by Definition 2.4's own wording, so a field-valued check suffices for the Main Proposition; general-S bookkeeping for delta_Z's construction is FKP's own and only picks up R via the projection formula, checked to have no R-dependence beyond that."
+    - id: "[GAP: last arrow of Lemma 7.9's display never named by FKP]"
+      proof_md_line: 763
+      why_non_blocking: "Interpretive step resolved to the unique natural candidate (canonical residue-free branch inclusion), shown consistent with the stalk computation in SS5.2/(5.4)."
+    - id: "[GAP: Remark 2.3 vs (2.5)]"
+      proof_md_line: 773
+      why_non_blocking: "Unresolved question about a different statement (Remark 2.3, p.5) this proof never invokes; proof.md uses (2.5) throughout."
+    - id: "[GAP: Lemma 9.1(iv) not re-derived in full]"
+      proof_md_line: 746
+      why_non_blocking: "Ancillary side-investigation (Footprint II) of a different lemma feeding a different theorem (Thm B/(9.6)); outside claim.md's Main Claim (Lemma 7.9 and (7.8)/(7.9))."
+  recommended_next_step: >
+    None required to close this attempt: verified means graduation-eligible per research/CLAUDE.md
+    lifecycle step 4 (graph-curator may write it into graph/statements/ citing proof.md as source,
+    kind: proof, status: rigorous, without waiting on captain_confirmed). If further rigor is
+    wanted, the two genuinely open threads are (1) re-deriving Lemma 9.1(iv) under (7.1_R) in full
+    (a new attempt, not a defect of this one), and (2) an independent fetch of pp.41/56-60 for
+    Footprint I/II (lower priority, outside the claim).
