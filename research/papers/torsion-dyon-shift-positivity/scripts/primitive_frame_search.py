@@ -229,48 +229,45 @@ def sweep(DMAX=24, R=6, Is=(2, 3)):
     return rows
 
 
-def verify_prop_69(R=40):
-    """Proposition 6.9: M = (1,3,0), L = Z(2w)+Zu, I = 2.  Delta_M = 12, H(12) = 2,
-    yet the s=2 form lies in the canonical class (1,3,0) on EVERY admissible frame.
+def verify_prop_69(DMAX=40, R=7, primes=(2, 3, 5)):
+    """Proposition 6.9: for L = Z(p w) + Z u of index p in M, if p does not divide
+    nu = u^2/2 then the s=p term of eq(52) lies in the class of M on EVERY admissible
+    frame, hence D_p is frame-independent.
 
-    The proof is unconditional (admissibility forces c even, hence d odd, hence
-    n = 4b^2+3d^2 odd, hence the s=2 form has odd content and cannot be the
-    imprimitive class (2,2,0+2) = (2,2,2)).  This routine checks it on a large ball.
+    The proof is unconditional: admissibility forces c = p c', and then
+    V = [[a, p b], [c', d]] has det 1, so (a w + c' u, p b w + d u) is an SL(2,Z)
+    basis of M whose Gram form is exactly (m/p^2, n, l/p).
+
+    This routine checks the conclusion directly, and separately records that the
+    hypothesis is not vacuous and that it is genuinely needed (i.e. that violations
+    appear as soon as p | nu).
     """
-    mu, nu, lam = 1, 3, 0
-    canon = true_multiset_general(mu, nu, lam, ((2, 0), (0, 1)), 2)
-    tested = bad = 0
-    contents, seen = set(), set()
-    for a in range(-R, R + 1):
-        for d in range(-R, R + 1):
-            for b in range(-R, R + 1):
-                num = a * d - 1
-                if b:
-                    if num % b:
+    held = held_bad = 0
+    failed = failed_dep = 0
+    for p in primes:
+        for D in range(3, DMAX + 1):
+            for (mu, nu, lam) in m_classes(D):
+                canon = reduce_form(mu, nu, lam)
+                dep = False
+                for (a, b, c, d) in sl2_ball(R):
+                    Q, P = (p * a, c), (p * b, d)
+                    m = q_form(mu, nu, lam, *Q)
+                    n = q_form(mu, nu, lam, *P)
+                    l = bilin(mu, nu, lam, Q, P)
+                    if m < 1 or n < 1 or 4 * m * n - l * l <= 0:
                         continue
-                    c = num // b
-                elif num:
-                    continue
+                    if m % (p * p) or l % p:
+                        continue
+                    if reduce_form(m // (p * p), n, l // p) != canon:
+                        dep = True
+                        break
+                if nu % p:
+                    held += 1
+                    held_bad += 1 if dep else 0
                 else:
-                    c = 0
-                if abs(c) > 4 * R:
-                    continue
-                Q, P = (2 * a, c), (2 * b, d)
-                m = q_form(mu, nu, lam, *Q)
-                n = q_form(mu, nu, lam, *P)
-                l = bilin(mu, nu, lam, Q, P)
-                if m < 1 or n < 1 or 4 * m * n - l * l <= 0:
-                    continue
-                if m % 4 or l % 2:
-                    continue
-                tested += 1
-                f = (m // 4, n, l // 2)
-                contents.add(gcd(gcd(f[0], f[1]), f[2]))
-                seen.add(reduce_form(*f))
-                if dgm_multiset(m, n, l, 2) != canon:
-                    bad += 1
-    return dict(tested=tested, bad=bad, contents=sorted(contents),
-                classes=sorted(seen), canonical=canon)
+                    failed += 1
+                    failed_dep += 1 if dep else 0
+    return dict(held=held, held_bad=held_bad, failed=failed, failed_dep=failed_dep)
 
 
 def main():
@@ -335,15 +332,15 @@ def main():
     print("     -> the deciding datum is the pair L subset M, not M alone.")
 
     print("\n" + "=" * 100)
-    print("Proposition 6.9: M = (1,3,0), L = Z(2w) + Zu, I = 2, Delta_M = 12, H(12) = 2.")
+    print("Proposition 6.9: L = Z(p w) + Z u of index p in M.  If p does not divide")
+    print("nu = u^2/2, then D_p is frame-independent.  p in {2,3,5}, Delta_M <= 40.")
     print("=" * 100)
     v = verify_prop_69()
-    print(f"  admissible frames tested            : {v['tested']}")
-    print(f"  canonical intermediate-lattice terms: {v['canonical']}")
-    print(f"  contents of the s=2 form seen       : {v['contents']}  (proof: always odd)")
-    print(f"  classes of the s=2 form seen        : {v['classes']}")
-    print(f"  frames on which eq(52) differs      : {v['bad']}")
-    print(f"  RESULT: {'ALL OK' if v['bad'] == 0 and v['contents'] == [1] else 'MISMATCH'}")
+    print(f"  (p,M) pairs where the hypothesis p does not divide nu HOLDS : {v['held']}")
+    print(f"     of these, frame-DEPENDENT (must be 0)                    : {v['held_bad']}")
+    print(f"  (p,M) pairs where it FAILS                                  : {v['failed']}")
+    print(f"     of these, frame-dependent (shows the hypothesis is needed): {v['failed_dep']}")
+    print(f"  RESULT: {'ALL OK' if v['held_bad'] == 0 and v['failed_dep'] > 0 else 'MISMATCH'}")
 
 
 if __name__ == "__main__":
