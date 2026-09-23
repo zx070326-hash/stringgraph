@@ -185,3 +185,229 @@ The union of the three cases is all of $g\ge2$. $\square$
 >    is a real one.
 
 ---
+
+## 4. The first split case of odd rank $2$: $\overline{\mathfrak S}_{0;4,0}$
+
+Sections 1–3 used no computation. This section contains the one genuinely new calculation of the
+attempt: the smallest stack to which neither Lemma 1.1 nor Theorem 3.3 applies,
+$$\overline{\mathfrak S}_{0;4,0},\qquad \dim=(3\cdot0-3+4\mid 2\cdot0-2+4)=(1\mid 2),$$
+is **split**. Because $\operatorname{rank}\mathcal T_-=2$ here, K2 makes splitness *equivalent* to
+$\omega_2=0$, so the computation is not merely sufficient — it is the whole question.
+
+### 4.1 The bosonic truncation is a $\mu_2$-gerbe over a $\mu_2$-root stack
+
+**Lemma 4.1.** *Let $X:=\overline S_{0;4,0}=(\overline{\mathfrak S}_{0;4,0})_{\rm bos}$, the stack of
+stable spin curves of genus $0$ with four labelled NS punctures. Let $\mathcal X:=X_{\rm rig}$
+be its rigidification along the generic automorphism $-1$ of the spin sheaf. Then*
+$$\mathcal X\ \cong\ \sqrt[2]{\big(\mathbb P^1_\lambda,\ [0]+[1]+[\infty]\big)},$$
+*the $\mu_2$-root stack of $\overline M_{0,4}=\mathbb P^1_\lambda$ at its three boundary points, and
+$X\to\mathcal X$ is a $\mu_2$-gerbe.*
+
+*Proof.* Normalise $p_1=0$, $p_2=1$, $p_3=\infty$, $p_4=\lambda$; then $\overline M_{0,4}=\mathbb P^1_\lambda$
+is a fine moduli scheme (four labelled points on $\mathbb P^1$ have no nontrivial automorphisms).
+
+*Fibres.* Over $\lambda\notin\{0,1,\infty\}$ the curve is $C=\mathbb P^1$, $\omega_C=\mathcal O(-2)$,
+and a spin structure is a line bundle $L$ with $L^{\otimes2}\cong\omega_C$; since
+$\operatorname{Pic}(\mathbb P^1)=\mathbb Z$ is torsion-free, $L=\mathcal O(-1)$ is the unique solution,
+and the isomorphism $L^{\otimes2}\xrightarrow{\ \sim\ }\omega_C$ is unique up to
+$\mathbb C^\times$, absorbable by rescaling $L$. The automorphisms of $(C,L,\phi)$ fixing the four
+points are therefore exactly $\{\pm1\}$ acting on $L$. Over $\lambda\in\{0,1,\infty\}$ the stable curve
+is $C'\cup_q C''$, two copies of $\mathbb P^1$ meeting in one node, with two of the $p_i$ on each. By K6
+the spin sheaf is $j'_*L'\oplus j''_*L''$ with $L'^{\otimes2}\cong\omega_{C'}$ and
+$L''^{\otimes2}\cong\omega_{C''}$ *untwisted*, i.e. $L'=L''=\mathcal O_{\mathbb P^1}(-1)$, again unique.
+So the map $X\to\overline M_{0,4}$ is bijective on points, and the coarse space of $X$ is $\mathbb P^1_\lambda$.
+
+*Automorphisms.* Over the interior, $\operatorname{Aut}=\mu_2$. Over a boundary point, each branch
+carries three special points ($q$ plus two punctures), so the underlying pointed curve is rigid, while
+the spin sheaf admits the independent rescalings $(\alpha,\beta)$ with $\alpha^2=\beta^2=1$; hence
+$\operatorname{Aut}=\mu_2\times\mu_2$. Rigidifying the diagonal $\mu_2$ (the one present everywhere)
+leaves a residual $\mu_2$ at each of the three boundary points and trivial stabiliser elsewhere.
+
+*Action on the smoothing parameter.* Let $t$ be the smoothing parameter of the node in
+$\overline M_{0,4}$ (so $t$ is a local coordinate at $\lambda=0$, $\lambda=1$, $\lambda^{-1}=0$
+respectively), and $\tau$ the smoothing parameter of the *spin* curve. Then $\tau^2=t$, and the
+residual automorphism $(\alpha,\beta)=(-1,+1)$ acts by $\tau\mapsto-\tau$. Equivalently, in K8's
+notation, the normal bundle of the boundary divisor $B\subset X$ is
+$\mathcal O(\Delta_{\rm NS})|_B\cong\Psi_1^{-1}\Psi_2^{-1}$, whereas the normal bundle of
+$\Delta\subset\overline M$ is $\psi_1^{-1}\psi_2^{-1}=(\Psi_1^{-1}\Psi_2^{-1})^{\otimes2}$ — the
+displayed square being K8's $\Psi_i^{\otimes2}\cong p_i^*L^{\otimes2}=p_i^*\omega_C=\psi_i$ for an NS
+puncture. So $N_B^{\otimes2}\cong N_\Delta|_B$: the map $X\to\overline M_{0,4}$ is ramified of index
+exactly $2$ along the boundary.
+
+*Conclusion.* $\mathcal X$ is a tame stacky curve with coarse space $\mathbb P^1$, trivial stabiliser
+off $\{0,1,\infty\}$ and $\mu_2$ acting by $\tau\mapsto-\tau$ at each of those three points. By the
+local structure theorem for tame stacky curves this is the $\mu_2$-root stack at the three points.
+$\square$
+
+> **[GAP-1]** The step *"$\tau^2=t$ and $(-1,+1)$ acts by $\tau\mapsto-\tau$"* is imported, not proved
+> here. It is the classical ramification statement for Cornalba's compactified spin moduli, and it is
+> **equivalent** to K8 as displayed. I have verified the equivalence but not re-derived K8 from
+> [FKP] first principles. Note, however, that §4.3 below produces a section of $\det\mathcal T_-^\vee$
+> whose local order at $\lambda=0$ is $\lambda^{-1/2}$; a half-integral order is *impossible* on a
+> scheme, so the computation independently forces the stacky structure with even ramification. In that
+> sense [GAP-1] is confirmed a posteriori, though only up to "ramification index divisible by $2$".
+
+**Numerical consequences.** For the $\mu_2$-root stack at $k=3$ points of $\mathbb P^1$,
+$$\deg\omega_{\mathcal X}=\deg\omega_{\mathbb P^1}+\sum_{i=1}^{3}\Big(1-\tfrac12\Big)=-2+\tfrac32=-\tfrac12,
+\qquad \deg\mathcal T_{\mathcal X}=+\tfrac12 ,$$
+and each stacky point $\mathcal D_i$ has $\deg\mathcal O(\mathcal D_i)=\tfrac12$.
+
+### 4.2 The obstruction sheaf has weight $0$, so the gerbe is invisible
+
+**Lemma 4.2.** *$\mathcal T_X\otimes\Lambda^2\mathcal T_-^\vee$ is pulled back from $\mathcal X$, and*
+$$H^1\big(X,\ \mathcal T_X\otimes\Lambda^2\mathcal T_-^\vee\big)\ \cong\
+H^1\big(\mathcal X,\ \mathcal T_{\mathcal X}\otimes\Lambda^2\mathcal T_-^\vee\big).$$
+
+*Proof.* Coherent sheaves on a $\mu_2$-gerbe $\rho:X\to\mathcal X$ decompose into weight-$0$ and
+weight-$1$ parts, and $R\rho_*$ kills the weight-$1$ part while being the identity on the weight-$0$
+part; so it suffices to check that the sheaf has weight $0$.
+
+$\mu_2$ is finite étale, so $\mathcal T_X=\rho^*\mathcal T_{\mathcal X}$: weight $0$.
+
+By K7 and relative duality, $\mathcal T_-^\vee=\mathcal J/\mathcal J^2
+=\pi_*\big(\omega_\pi\otimes\mathcal L(\mathcal D)\big)=\pi_*\big(\mathcal L^{\otimes3}(\mathcal D)\big)$,
+where $\pi:\mathcal C\to X$ is the universal curve, $\mathcal L$ the universal spin sheaf,
+$\mathcal D=\sum_{i=1}^4[\sigma_i]$, and $\omega_\pi=\mathcal L^{\otimes2}$. The generic automorphism
+$-1$ acts on $\mathcal L$ by $-1$, hence on $\mathcal L^{\otimes3}$ by $(-1)^3=-1$: $\mathcal T_-^\vee$
+has weight $1$. Therefore $\Lambda^2\mathcal T_-^\vee$ has weight $1+1=2\equiv0 \pmod 2$. $\square$
+
+*(Consistency: rank $\mathcal T_-^\vee=h^0(\mathbb P^1,\mathcal O(-3)(D))=h^0(\mathcal O(1))=2$, as it
+must be, $2g-2+n+r=2$.)*
+
+### 4.3 The determinant: $\Lambda^2\mathcal T_-^\vee\cong\mathcal T_{\mathcal X}$
+
+Over the interior, sections of $\mathcal T_-^\vee$ are "$\tfrac32$-differentials with at worst simple
+poles at the punctures": writing $\varphi=f(z)\,(dz)^{3/2}$ on $C=\mathbb P^1_z$ with
+$p=(0,1,\infty,\lambda)$, the conditions are that $f$ have at worst simple poles at $0,1,\lambda$, no
+other poles, and $f(z)=O(z^{-2})$ as $z\to\infty$ (because $(dz)^{3/2}=\pm w^{-3}(dw)^{3/2}$ for
+$w=1/z$, so a simple pole at $w=0$ means $\operatorname{ord}_w f\ge2$). Partial fractions give
+$f=\frac{A}{z}+\frac{B}{z-1}+\frac{C}{z-\lambda}$ with $A+B+C=0$: a $2$-dimensional space, as expected.
+
+Fix the rational frame
+$$\varphi_1:=\frac{(dz)^{3/2}}{(z-1)(z-\lambda)},\qquad
+\varphi_2:=\frac{(dz)^{3/2}}{z(z-1)(z-\lambda)},\qquad
+s:=\varphi_1\wedge\varphi_2\ \in\ \Lambda^2\mathcal T_-^\vee .$$
+Both satisfy the conditions, and they are independent for every $\lambda\notin\{0,1,\infty\}$
+($\varphi_1$ is regular at $z=0$, $\varphi_2$ is not). Hence **$s$ is a nowhere-vanishing holomorphic
+frame over the interior**, and $s$ is $\mu_2$-invariant (the sign ambiguity in $(dz)^{3/2}$ enters
+$\varphi_1\wedge\varphi_2$ squared), so it descends to $\mathcal X$. It remains to compute
+$\operatorname{ord}(s)$ at the three boundary points. Throughout, $e_1,e_2$ denote a local frame of
+$\mathcal T_-^\vee$ near the boundary point whose values at the boundary generate, respectively, the
+$C'$- and $C''$-summand of
+$$\mathcal T_-^\vee\big|_{\rm bdry}
+=H^0\!\big(C',L'^{\otimes3}(\text{3 special pts})\big)\ \oplus\
+H^0\!\big(C'',L''^{\otimes3}(\text{3 special pts})\big),$$
+each summand being $H^0(\mathbb P^1,\mathcal O(-3+3))=H^0(\mathcal O)=\mathbb C$ by K6 (the node counts
+as an NS puncture on each branch). Note $1+1=2=\operatorname{rank}$, so $\mathcal T_-^\vee$ is indeed
+locally free across the boundary and this is a legitimate frame.
+
+**(i) $\lambda\to0$** ($p_1=0$ and $p_4=\lambda$ collide; bubble coordinate $y=z/\lambda$, so
+$q\leftrightarrow z=0\leftrightarrow y=\infty$).
+
+On $C'=\mathbb P^1_z$ (special points $q=0$, $p_2=1$, $p_3=\infty$):
+$\varphi_1\to\frac{(dz)^{3/2}}{z(z-1)}$, which has simple poles at $0,1$ and is $O(z^{-2})$ at
+$\infty$: a valid nonzero limit. So $e_1=\lim\varphi_1$.
+
+On $C''$: $z=\lambda y$, $(dz)^{3/2}=\lambda^{3/2}(dy)^{3/2}$, hence
+$$\varphi_2=\frac{\lambda^{3/2}(dy)^{3/2}}{\lambda y\,(\lambda y-1)\,\lambda(y-1)}
+=\lambda^{-1/2}\,\frac{(dy)^{3/2}}{y(y-1)(\lambda y-1)},
+\qquad \lambda^{1/2}\varphi_2\ \longrightarrow\ -\frac{(dy)^{3/2}}{y(y-1)} ,$$
+valid on $C''$ (special points $p_1=0$, $p_4=1$, $q=\infty$). So $e_2=\lim\lambda^{1/2}\varphi_2$, and
+in the same chart $\varphi_1=\lambda^{1/2}\frac{(dy)^{3/2}}{(\lambda y-1)(y-1)}\to0$, confirming that
+$\varphi_1$ has no $e_2$-component at $\lambda=0$. Therefore
+$$s=\varphi_1\wedge\varphi_2=\lambda^{-1/2}\,(1+O(\lambda))\ e_1\wedge e_2,
+\qquad \operatorname{ord}_{\lambda=0}(s)=-\tfrac12 .$$
+
+**(ii) $\lambda\to1$** ($\mu:=\lambda-1$; $p_2=1$ and $p_4=\lambda$ collide; $y=(z-1)/\mu$).
+
+Neither $\varphi_1$ nor $\varphi_2$ has a limit on $C'$ (both acquire a double pole at $z=1=q$), but
+$$\varphi_1-\varphi_2=\frac{(dz)^{3/2}}{z(z-\lambda)}\ \longrightarrow\ \frac{(dz)^{3/2}}{z(z-1)}=:e_1 ,$$
+valid on $C'$ (special points $p_1=0$, $q=1$, $p_3=\infty$). On $C''$: $z-1=\mu y$,
+$z-\lambda=\mu(y-1)$, so
+$$\varphi_1=\frac{\mu^{3/2}(dy)^{3/2}}{\mu y\cdot\mu(y-1)}=\mu^{-1/2}\frac{(dy)^{3/2}}{y(y-1)},
+\qquad e_2=\lim \mu^{1/2}\varphi_1=\frac{(dy)^{3/2}}{y(y-1)} ,$$
+valid on $C''$ (special points $p_2=0$, $p_4=1$, $q=\infty$). Hence
+$\varphi_1=\mu^{-1/2}(e_2+O(\mu))$ and $\varphi_2=\varphi_1-(e_1+O(\mu))$, so
+$$s=\varphi_1\wedge\varphi_2=\big(\mu^{-1/2}e_2\big)\wedge(-e_1)+\cdots=\mu^{-1/2}(1+O(\mu))\,e_1\wedge e_2,
+\qquad \operatorname{ord}_{\lambda=1}(s)=-\tfrac12 .$$
+
+**(iii) $\lambda\to\infty$** ($\nu:=1/\lambda$; $p_3=\infty$ and $p_4=\lambda$ collide; $w=1/z$,
+$y=w/\nu$).
+
+On $C'=\mathbb P^1_z$ (special points $p_1=0$, $p_2=1$, $q=\infty$): from
+$\frac1{z-\lambda}=-\nu\big(1+\nu z+\cdots\big)$,
+$$\varphi_2=-\nu\,\frac{(dz)^{3/2}}{z(z-1)}\big(1+O(\nu)\big),
+\qquad e_1:=\lim\big(-\nu^{-1}\varphi_2\big)=\frac{(dz)^{3/2}}{z(z-1)} ,$$
+valid on $C'$ ($O(z^{-2})$ at $q=\infty$). By contrast $-\nu^{-1}\varphi_1\to\frac{(dz)^{3/2}}{z-1}$,
+which is only $O(z^{-1})$ at $q$, hence **not** a section — so $\varphi_1$ must live on the bubble.
+Indeed, with $z=1/(\nu y)$, $dz=-\frac{dy}{\nu y^2}$, $(dz)^{3/2}=\pm\nu^{-3/2}y^{-3}(dy)^{3/2}$,
+$z-1=\frac{1-\nu y}{\nu y}$, $z-\lambda=\frac{1-y}{\nu y}$:
+$$\varphi_1=\nu^{-3/2}y^{-3}(dy)^{3/2}\cdot\frac{\nu^2y^2}{(1-\nu y)(1-y)}
+=\nu^{1/2}\,\frac{(dy)^{3/2}}{y(1-y)(1-\nu y)},\qquad
+e_2:=\lim\nu^{-1/2}\varphi_1=\frac{(dy)^{3/2}}{y(1-y)},$$
+valid on $C''$ (special points $p_3=0$, $p_4=1$, $q=\infty$). In the same chart
+$\varphi_2=\nu y\,\varphi_1=O(\nu^{3/2})$, so $-\nu^{-1}\varphi_2\to 0$ on the bubble, confirming that
+$\varphi_2$ has no $e_2$-component. Therefore
+$$s=\varphi_1\wedge\varphi_2=\big(\nu^{1/2}e_2\big)\wedge\big(-\nu e_1\big)(1+\cdots)
+=\nu^{3/2}(1+O(\nu))\,e_1\wedge e_2,\qquad \operatorname{ord}_{\lambda=\infty}(s)=+\tfrac32 .$$
+
+**Proposition 4.3.** *$\deg_{\mathcal X}\Lambda^2\mathcal T_-^\vee=\tfrac12$. In fact*
+$$\Lambda^2\mathcal T_-^\vee\ \cong\ \mathcal T_{\mathcal X}\ =\ \omega_{\mathcal X}^{-1} .$$
+
+*Proof.* $s$ is a rational section with no zeros or poles in the interior, so
+$$\deg\Lambda^2\mathcal T_-^\vee=\sum_{\lambda\in\{0,1,\infty\}}\operatorname{ord}_\lambda(s)
+=-\tfrac12-\tfrac12+\tfrac32=\tfrac12 .$$
+(Equivalently, in the stacky uniformisers $\tau$ with $\tau^2=\lambda,\ \lambda-1,\ \nu$, the orders are
+$-1,-1,+3$, each stacky point having degree $\tfrac12$.)
+
+For the sharper statement, compare with the rational section $d\lambda$ of $\omega_{\mathcal X}$:
+$\operatorname{div}_{\mathbb P^1}(d\lambda)=-2[\infty]$, and in the stacky uniformisers
+$d\lambda=2\tau\,d\tau$ at $\lambda=0$ and $\lambda=1$, while $d\lambda=-d\nu/\nu^2=-2\tau^{-3}d\tau$ at
+$\lambda=\infty$; so $\operatorname{div}_{\mathcal X}(d\lambda)$ has $\tau$-orders $(+1,+1,-3)$, total
+degree $\tfrac12(1+1-3)=-\tfrac12=\deg\omega_{\mathcal X}$ (an independent check on §4.1). The
+$\tau$-orders of $s$ are $(-1,-1,+3)$, exactly the negatives. Two line bundles on a stacky curve with
+equal divisors of rational sections are isomorphic, whence
+$\Lambda^2\mathcal T_-^\vee\cong\omega_{\mathcal X}^{-1}$, the isomorphism sending
+$s\mapsto\partial_\lambda$. $\square$
+
+> **Remark 4.4 (why Prop. 4.3 is a strong self-check).** The three local orders were computed in three
+> different charts with three different degenerations and no symmetry was assumed; that they conspire
+> to reproduce $-\operatorname{div}(d\lambda)$ point by point (not merely in total degree) is a
+> three-fold coincidence unless the computation is right. It also makes the answer manifestly
+> $S_3$-equivariant for the anharmonic action on $(\mathbb P^1_\lambda;0,1,\infty)$ induced by
+> relabelling the punctures, which the frame $(\varphi_1,\varphi_2)$ certainly is not.
+
+### 4.4 Vanishing of $\omega_2$, and splitness
+
+**Theorem 4.5.** *$\omega_2(\overline{\mathfrak S}_{0;4,0})=0$, and $\overline{\mathfrak S}_{0;4,0}$ is
+**split** (in particular projected).*
+
+*Proof.* By Lemma 4.2 and Prop. 4.3, the obstruction group is
+$$H^1\big(X,\mathcal T_X\otimes\Lambda^2\mathcal T_-^\vee\big)
+\cong H^1\big(\mathcal X,\ \mathcal T_{\mathcal X}\otimes\mathcal T_{\mathcal X}\big)
+= H^1\big(\mathcal X,\ \omega_{\mathcal X}^{-2}\big).$$
+$\mathcal X$ is a proper, smooth, connected, tame stacky curve, so Serre duality holds:
+$H^1(\mathcal X,\mathcal L)^\vee\cong H^0(\mathcal X,\omega_{\mathcal X}\otimes\mathcal L^{-1})$. Here
+$\omega_{\mathcal X}\otimes\mathcal L^{-1}=\omega_{\mathcal X}^{3}$, of degree
+$3\cdot(-\tfrac12)=-\tfrac32<0$. A nonzero global section of a line bundle on an integral proper stacky
+curve has effective divisor, hence non-negative degree; therefore
+$H^0(\mathcal X,\omega_{\mathcal X}^{3})=0$ and $H^1(\mathcal X,\omega_{\mathcal X}^{-2})=0$.
+Consequently $\omega_2=0$.
+
+By K1, $\overline{\mathfrak S}_{0;4,0}$ is a smooth DM superstack, and
+$\operatorname{rank}\mathcal T_-=2g-2+n+r=2$. K2 = [CN, Prop. 2.2] therefore upgrades $\omega_2=0$ to
+splitness. $\square$
+
+> **Remark 4.6 (robustness).** The conclusion survives large errors in §4.1 and §4.3. Writing
+> $\mathcal L=\mathcal T_{\mathcal X}\otimes\Lambda^2\mathcal T_-^\vee$, the vanishing
+> $H^1(\mathcal X,\mathcal L)=0$ needs only
+> $$\deg\Lambda^2\mathcal T_-^\vee\ >\ 2\deg\omega_{\mathcal X}=-1 .$$
+> We found $+\tfrac12$, a margin of $\tfrac32$. Even if the stacky structure of Lemma 4.1 were wrong
+> and $\mathcal X$ were the bare $\mathbb P^1$ ($\deg\omega=-2$), the requirement would be
+> $\deg\Lambda^2\mathcal T_-^\vee>-4$, which the computed value also satisfies. The only way to break
+> Theorem 4.5 is for $\Lambda^2\mathcal T_-^\vee$ to be *much* more negative than computed.
+
+> **Remark 4.7 (context).** $\overline{\mathfrak S}_{0;4,0}$ is the supermoduli space of the tree-level
+> four-point NS amplitude — the very first place where superstring perturbation theory integrates over
+> a nontrivial supermoduli space. Theorem 4.5 says the classical practice of integrating over the odd
+> directions fibrewise is *legitimate there*, not merely convenient. Contrast Theorem 3.3.
