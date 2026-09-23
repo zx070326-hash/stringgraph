@@ -1161,19 +1161,30 @@ form "this rules nothing out" would be a misreading in the other direction.
 
 **What is ruled out.** Were $\overline{\mathfrak S}_{g;n,2r}$ projected, one could fix a single global
 holomorphic retraction onto the bosonic truncation and integrate fibrewise along it — on the interior
-and on every boundary stratum simultaneously. That is the strategy Donagi and Witten describe as the
-usual one in practice: "if $\mathfrak M_g$ is split — or at least projected — then a possible strategy
-in superstring perturbation theory is to integrate over $\mathfrak M_g$ by first integrating over the
+and on every boundary stratum simultaneously. Call this the *global compactified retraction* strategy.
+Theorem M shows it is unavailable on the whole of the range covered by the threshold: for every
+$g\ge3$ and any $(n,r)$, and at $g=2$ as soon as $n+2r\ge2$. It is not available there even in
+principle, and within that range no appeal to smallness of $n$ or $r$ recovers it.
+
+Outside that range the situation is genuinely open, and in one case it is known to go the other way:
+$\overline{\mathfrak M}{}^{-}_2=\overline{\mathfrak S}{}^{-}_{2;0,0}$ is **split** by
+[CN, Thm. 1.1(1)], so there the global compactified retraction does exist. By §9.2 our method reaches
+only the even component at $g=2$, and $(g,n,r)=(2,1,0)$ together with the $g=2$ odd-parity punctured
+components lies outside the threshold altogether. We therefore say nothing about whether the strategy
+survives in those cases; §9.2 records a heuristic for why we expect it not to, and marks it as a
+heuristic.
+
+The analogous statement for the *uncompactified* stack is not ours and is not a consequence of
+Theorem M. Donagi and Witten describe the uncompactified version of the strategy as the one used in
+practice — "if $\mathfrak M_g$ is split — or at least projected — then a possible strategy in
+superstring perturbation theory is to integrate over $\mathfrak M_g$ by first integrating over the
 fibers of its projection to $\mathcal{SM}_g$. Indeed, practical calculations in superstring
 perturbation theory — such as the $g=2$ calculations that are surveyed in [16] — are usually done in
-this way" [DW, §1], their [16] being the two-loop program of [DP]. Theorem M shows that, applied to
-the **compactified** stack, this
-strategy is unavailable over the whole of its range: for every $g\ge3$ and any $(n,r)$, and already at
-$g=2$ as soon as $n+2r\ge2$ — that is, at the lowest genus and lowest external-leg count at which a
-compactified treatment is needed at all. The regime in which such a global shortcut could have
-simplified the analysis of degeneration limits, and hence of factorisation and infrared behaviour, is
-therefore empty from $g=2$ onward. It is not available even in principle, and no appeal to smallness
-of $g$, $n$ or $r$ recovers it.
+this way" [DW, §1], their [16] being the two-loop program of [DP] — and they explicitly set
+compactification aside [DW, Remark 1.4]. Their sentence is about $\mathfrak M_g$; Theorem M is about
+$\overline{\mathfrak S}_{g;n,2r}$. What Theorem M forecloses is the compactified analogue of that
+strategy, in the range stated above; by §9.3 it leaves the uncompactified statement, and hence the
+calculations [DW] are describing, entirely untouched.
 
 Nothing in this bears on the patchwise constructions that are actually in use. Witten's treatment
 [EW] proceeds by local slices glued across strata rather than by a global retraction; by §9.3 it is
@@ -1191,11 +1202,13 @@ suspected would be destroyed by adding punctures is, on the compactification, in
 
 **What is not claimed.** Theorem M identifies no new obstruction to the validity of superstring
 perturbation theory, and we do not read it as casting doubt on any existing construction. On this we
-can do no better than quote Donagi and Witten's assessment of their own result, which applies here
-verbatim: "**The validity of superstring perturbation theory does not depend on a projection**, so the
-existence of string theory gives no hint that $\mathfrak M_g$ is projected" [DW, §1]. Non-projectedness
-is a statement about how the moduli space may be described, not about whether the integral over it
-exists.
+can do no better than quote Donagi and Witten's assessment of their own result, which applies with
+equal force here: "**The validity of superstring perturbation theory does not depend on a
+projection**, so the existence of string theory gives no hint that $\mathfrak M_g$ is projected"
+[DW, §1]. They wrote it about the uncompactified $\mathfrak M_g$; we are not entitled to transplant
+it word for word to $\overline{\mathfrak S}_{g;n,2r}$, but the reasoning behind it does not depend on
+which of the two one has in mind. Non-projectedness is a statement about how the moduli space may be
+described, not about whether the integral over it exists.
 
 ---
 
