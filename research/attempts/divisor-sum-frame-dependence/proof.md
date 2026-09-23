@@ -298,6 +298,20 @@ Let `(Q,P)` be an `I`-admissible frame with `H(Q) ≠ M/L` (in particular this h
 *Proof.* If `N_I ⊆ Λ` then `N_I ⊆ (L⊗ℚ) ∩ Λ = M` and `[N_I:L] = I = [M:L]` force `N_I = M`, i.e.
 `H(Q) = M/L`. ∎
 
+**Example 2.6.1 (Remark 6.3, realized in an explicit `Λ`).** Take `Λ = U ⊕ U` (even, unimodular,
+basis `e₁,f₁,e₂,f₂` with `e_i·f_i = 1` and all other products `0`) and the charge pair
+`Q = 2(e₁+f₁)`, `P = e₂+4f₂`. Then `(m,n,ℓ) = (4,4,0)`, `Δ = 64`, and `I = gcd(Q∧P) = 2`.
+
+ - In the frame `(Q,P)`: `Q/2 = (1,1,0,0) = e₁+f₁ ∈ Λ`. The frame is adapted, `H(Q) = M/L`, and
+   `N_2 = M`.
+ - In the S-duality-related frame `(−Q−P, −P)`: `(m,n,ℓ) = (8,4,8)`, still `2`-admissible, but
+   `Q₂/2 = (−2,−2,−1,−4)/2 ∉ Λ`. So `N_2' ⊄ Λ`, exactly as Proposition 2.6 predicts.
+
+The two chains of isometry classes are `[(4,0,4),(1,0,4)]` and `[(4,0,4),(2,0,2)]`, giving the two
+integers `7999541469408` and `7999235715072` (Theorem C2(1)). This is the full mechanism of
+Remark 6.3: the second frame is not evaluating `d_*` on a lattice of charges at all.
+(`scripts/experiments.py lambda`, exact integer linear algebra in `Λ`.)
+
 ### Proposition 2.7 (uniqueness of the invariant, and the limits of uniqueness)
 
 Among all functions `F` of the pair `(L ⊆ Λ)`, the condition "`F(L ⊆ Λ) = D_I(m,n,ℓ)` for some (hence
