@@ -442,6 +442,30 @@ $$j_f\big(\omega_2(\mathfrak Y)\big)\ =\ \iota_f\big(\omega_2(\mathfrak X)\big)
 > whether the method can say anything at all. This is the single observation that produces
 > Proposition N in §7.
 
+**Lemma 4.4 (the open-immersion exception).** *Let $j\colon\mathfrak U\hookrightarrow\mathfrak X$ be
+an open immersion of smooth DM superstacks, $j_0\colon U\hookrightarrow X$ the induced open immersion
+of bosonic truncations. Then the cospan of Lemma 4.2 degenerates to an honest restriction of
+obstruction groups:*
+$$j_0^*\,\omega_2(\mathfrak X)\ =\ \omega_2(\mathfrak U)\qquad\text{in }
+H^1\big(U,\mathcal F^{\rm obs}_{\mathfrak U}\big).$$
+
+*Proof.* For an open immersion both $dj_+$ and $dj_-$ are isomorphisms, so
+$\mathcal G_j=\mathrm{Hom}(\Lambda^2\mathcal T_-\mathfrak U,\ j_0^*\mathcal T_+\mathfrak X)
+\cong\mathcal F^{\rm obs}_{\mathfrak U}$, under which $j_j$ becomes the identity and $\iota_j$
+becomes $j_0^*$. Lemma 4.2's conclusion $j_j(\omega_2(\mathfrak U))=\iota_j(\omega_2(\mathfrak X))$
+is then the stated equality. $\square$
+
+> **Remark 4.5 (what Lemma 4.4 costs us).** Remark 4.3 warns that Lemma 4.2 gives no map between
+> obstruction groups; Lemma 4.4 is the one case where it does, and the implication it yields runs
+> *against* us. Taking $\mathfrak U=\mathfrak S_{g;n,2r}$ and
+> $\mathfrak X=\overline{\mathfrak S}_{g;n,2r}$, non-vanishing on the smooth locus forces
+> non-vanishing on the compactification, so every uncompactified theorem in the table of §1.4
+> transfers to the compactification for free — as [DW, Remark 1.4] observes. §1.4 caveat (i)
+> subtracts that overlap. The converse fails, which is §9.3. We record the lemma here, rather than
+> leaving it implicit, because it is the exact instrument that fixes the boundary of what this paper
+> may claim as new — and, in §10.7, the exact instrument that makes this paper's sharpest open
+> question statable.
+
 ### The Donagi–Witten one-point obstruction family
 
 Let $h\ge2$, let $C$ be a smooth curve of genus $h$, and let $L$ be an **ineffective even theta
@@ -1126,6 +1150,19 @@ be a stronger condition"). The compactified assertion is therefore *weaker* than
 one, not merely different from it, and wherever the thresholds overlap the credit is theirs. §1.4
 caveat (i) records exactly which part of our range survives that subtraction.
 
+One further distinction has to be drawn here, because the two halves are easy to run together and
+only one of them is true. **What Theorem M implies** about $\mathfrak S_{g;n,2r}$ is nothing: the
+implication genuinely does not run that way. **Whether the class $\omega_2$ is supported on the
+boundary** is a different question, and in part of our range the answer is known to be *no*. By
+Lemma 4.4, $j_0^*\omega_2(\overline{\mathfrak S}_{g;n,0})=\omega_2(\mathfrak S_{g;n,0})$, and on the
+range of [DW, Thm. 1.3] the right-hand side is non-zero; so there the very class we exhibit provably
+does **not** lie in $\ker j_0^*$, and does carry information about the smooth locus. It is our *test
+curve*, lying in $\Delta_{\rm NS}$, that certifies nothing about the interior — not the class it
+detects. Everything §9.5 concludes about superstring perturbation theory needs only the first half,
+which is unaffected; but the disclaimer should be read as epistemological, about this paper's method,
+and not as a geometric assertion that the obstruction lives on the boundary. Outside [DW]'s range we
+do not know which of the two holds, and §10.7 makes that the paper's sharpest open question.
+
 The same remark settles a question a reader with a physics background will ask first: does Theorem 8.4
 obstruct any existing construction of the superstring measure? It does not, and cannot. Any open
 substack of a projected stack is projected — the retraction restricts — so non-projectedness of
@@ -1250,11 +1287,20 @@ every $g\ge3$, and with **no upper bound on $n$ whatever**; Theorem B extends it
 where we are aware of no analogous expectation on record. The absence of a puncture–genus coupling in
 our threshold (§8) sharpens this: on the compactification an obstruction survives that is indifferent
 to the number of punctures, whatever happens on the uncompactified side to the obstructions Donagi and
-Witten expected the punctures to destroy. We do not claim these are the same obstruction. Theirs is
-constructed on the interior of $\mathfrak M_{g,n}$; ours is the class of §6, detected on a test curve
-inside $\Delta_{\rm NS}$, and we have not related the two — §9.3's point that the assertions concern
-different objects applies here as well. What Corollary A supplies is the conclusion [DW, Remark 1.5]
-expected, not a continuation of the argument that led them to expect it.
+Witten expected the punctures to destroy.
+
+The two are in fact more closely related than that phrasing suggests, and it is worth being exact
+about how. The generator is *theirs*: §6 Step 1 runs on $\omega_2(X_\eta)=\eta$, which is the
+Donagi–Witten one-point family and [DW, Prop. 3.4] verbatim (§4; recorded as an external input in
+§10.5). What differs is the target the family is mapped into — they probe the interior of
+$\mathfrak M_{g,n}$, we push the same $X_\eta$ into
+$\Delta_{\rm NS}\subset\overline{\mathfrak S}_{g;n,2r}$ — and the two targets are related by the
+restriction map of Lemma 4.4. So this is not a second, unrelated mechanism that happens to be
+puncture-blind; it is [DW]'s mechanism evaluated on a boundary test object, where the puncture count
+enters only through the elliptic tail and drops out of the threshold. What we cannot say is whether
+the two *classes* agree outside [DW]'s range: that is precisely the kernel question of §10.7, and
+until it is settled our threshold's indifference to $n$ is evidence about the compactified class
+alone.
 
 **What is not claimed.** Theorem M identifies no new obstruction to the validity of superstring
 perturbation theory, and we do not read it as casting doubt on any existing construction. On this we
@@ -1334,6 +1380,36 @@ the precise reason Theorem B, not Corollary A, carries this paper's title-level 
   but by [DW, Thm 1.2] transported along the restriction lemma, not by us (§1.4 caveat (i)).
 - Gluing at Ramond nodes is deliberately avoided (§10.2).
 
+
+### 10.7 The one question this paper makes precise but does not answer
+
+Write $\partial:=\overline S_{g;n,2r}\smallsetminus S_{g;n,2r}$ for the whole boundary of the bosonic
+truncation (not merely $\Delta_{\rm NS}$, which is one divisor in it), and
+$\mathcal F:=\mathcal F^{\rm obs}_{\overline{\mathfrak S}_{g;n,2r}}$. Local cohomology gives
+$$H^1_{\partial}\big(\overline S,\mathcal F\big)\longrightarrow H^1\big(\overline S,\mathcal F\big)
+\xrightarrow{\ j_0^*\ }H^1\big(S,\mathcal F|_S\big),$$
+so $\ker j_0^*$ is exactly the set of classes supported on the boundary. By Lemma 4.4 the right-hand
+map sends $\omega_2(\overline{\mathfrak S}_{g;n,2r})$ to $\omega_2(\mathfrak S_{g;n,2r})$. The
+question is where our class sits.
+
+On the range of [DW, Thm. 1.3] the answer is known and is "not in the kernel" (§9.3). Precisely the
+region left over after the subtraction of §1.4 caveat (i) — the region $n\ge g$, and the parity gap
+[DW] declines to resolve — is where we do not know. Both answers would be worth having, which is why
+we single this out rather than list it with the gaps of §10.5:
+
+- If $j_0^*\omega_2\neq0$ there, one obtains a non-projectedness theorem for the **uncompactified**
+  $\mathfrak S_{g;n,0}$ past [DW]'s ceiling $n\le g-1$ — against the expectation of [DW, Remark 1.5]
+  that for $n\gg g$ requiring the points to be distinct "very likely kills the obstructions to
+  splitness". Confirming or refuting that expectation is a result either way, and it would be a
+  stronger result than anything proved here.
+- If $j_0^*\omega_2=0$ there, one obtains an obstruction class that is **purely boundary-supported**,
+  with no obstruction on the interior: the first genuine geometric separation between
+  $\overline{\mathfrak S}$ and $\mathfrak S$, which would turn §9.3's disclaimer from a caveat into
+  a theorem.
+
+We have not attempted either. What this paper contributes to the question is the two objects needed
+to *state* it — the compactified class of Theorem M, and Lemma 4.4's restriction map — together with
+the observation that [DW, Thm. 1.3] already settles it on the complementary range.
 ---
 
 ## 11. Conclusion
