@@ -603,7 +603,12 @@ Everything from Lemma 8.7 to (8.11) is stated *inside* this setup.
   $\omega_{X/S}(R)$ there is not even an omission.
 * **Example 8.9 is the only genuinely NS-only item**, and it is **off the chain**: it is an
   illustration computing $\Psi_i^{-1}\simeq p_i^*L^{-1}$ for NS-only families over an even base, and
-  no later statement invokes it.
+  no later statement of [FKP] invokes it.
+  *(Caveat, so that this is not misread: Example 8.9 is off **[FKP]'s** chain to (9.6). Our own
+  paper does use it — in Lemma 5.5 and Remark 5.7, to identify the tail psi-line $\mathfrak n$ — but
+  on the genus-$h$ factor, which carries exactly one NS puncture and no Ramond puncture, so its two
+  hypotheses hold there verbatim. Nothing in this attempt extends Example 8.9, and nothing in our
+  paper needs it extended.)*
 * **Therefore §10.1's sentence "the entire derivation chain leading to (9.6) runs on NS-only lemmas"
   is false as written and should be deleted.** The only NS-only ingredient that was ever load-bearing
   is Lemma 7.9 — precisely the one this attempt has now proved in the punctured generality (§7).
