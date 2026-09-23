@@ -239,6 +239,26 @@ one. Note also that this erosion is *already realised* — unlike the value risk
 [GAP-ALT], which waits on a compactified forgetful morphism nobody has yet constructed, the transfer
 above needs nothing but the restriction lemma.
 
+**Remark 1.1 (the class is not merely a boundary artefact).** The subtraction just made invites an
+obvious objection: if our class is detected on a test curve inside $\Delta_{\rm NS}$, is
+$\omega_2(\overline{\mathfrak S}_{g;n,2r})$ perhaps *supported* on the boundary — a compactification
+artefact carrying no information about the stack one actually integrates over? On part of the range
+the answer is provably no. Write $\partial:=\overline{\mathfrak S}_{g;n,2r}\smallsetminus\mathfrak
+S_{g;n,2r}$ and let $j\colon\mathfrak S_{g;n,2r}\hookrightarrow\overline{\mathfrak S}_{g;n,2r}$ be
+the open immersion; the boundary-supported classes are exactly $\ker j_0^*$. By Lemma 4.4 an open
+immersion makes the cospan of Lemma 4.2 degenerate to an honest restriction, so
+$$j_0^*\,\omega_2(\overline{\mathfrak S}_{g;n,0})\ =\ \omega_2(\mathfrak S_{g;n,0}),$$
+and on the range of [DW, Thm. 1.3] the right-hand side is non-zero. Hence there
+$\omega_2(\overline{\mathfrak S}_{g;n,0})\notin\ker j_0^*$: it is not boundary-supported, and the
+compactified obstruction genuinely restricts to the interior one.
+
+Two things this does and does not say. It is a statement about the *class*, not about our *witness*:
+the test curve of §6 lies in $\Delta_{\rm NS}$ and by itself certifies nothing about the interior
+(§9.3). And it is confined to [DW]'s range — outside it, whether $\omega_2$ becomes boundary-supported
+is open, and is exactly the question §10.7 isolates. Within that range, however, this is the one
+positive statement available here about how the compactified and interior obstructions are related,
+and it is the reason the results below should not be read as being about the boundary alone.
+
 *(ii) We do not use [W].* Wang's preprint is self-described in its arXiv comment field as a
 "preliminary draft". No step of any proof in this paper invokes [W], nor [DO]; both appear only in
 this comparison and in §9.3. The external inputs are listed exhaustively in §3, and every one of them
@@ -259,8 +279,10 @@ record at the time of writing, not as a claim to have been first against work we
 Listed once, and repeated where relevant:
 
 1. Nothing about the **uncompactified** stacks $\mathfrak S_{g;n,2r}$.
-2. Nothing in the **positive** direction: we exhibit no projection and no splitting, and in
-   particular we do not touch [CN, Thm 1.1(1)].
+2. Nothing in the **positive** direction: we exhibit no projection and no splitting, on any stack, in
+   any range, and in particular we do not touch [CN, Thm 1.1(1)]. (Remark 1.1 is positive in a
+   different sense — it asserts that a class is *non*-zero after restriction — and is not an
+   exception to this.)
 3. The **odd**-parity punctured components at $g=2$, and the odd component at $(g,n,r)=(2,1,0)$, are
    open here. Our method provably cannot reach them, and §9.2 explains why that is a feature: if it
    could, it would contradict [CN, Thm 1.1(1)]. The *even* component at $(2,1,0)$ is **not** open —
@@ -1153,15 +1175,15 @@ caveat (i) records exactly which part of our range survives that subtraction.
 One further distinction has to be drawn here, because the two halves are easy to run together and
 only one of them is true. **What Theorem M implies** about $\mathfrak S_{g;n,2r}$ is nothing: the
 implication genuinely does not run that way. **Whether the class $\omega_2$ is supported on the
-boundary** is a different question, and in part of our range the answer is known to be *no*. By
-Lemma 4.4, $j_0^*\omega_2(\overline{\mathfrak S}_{g;n,0})=\omega_2(\mathfrak S_{g;n,0})$, and on the
-range of [DW, Thm. 1.3] the right-hand side is non-zero; so there the very class we exhibit provably
-does **not** lie in $\ker j_0^*$, and does carry information about the smooth locus. It is our *test
-curve*, lying in $\Delta_{\rm NS}$, that certifies nothing about the interior — not the class it
-detects. Everything §9.5 concludes about superstring perturbation theory needs only the first half,
-which is unaffected; but the disclaimer should be read as epistemological, about this paper's method,
-and not as a geometric assertion that the obstruction lives on the boundary. Outside [DW]'s range we
-do not know which of the two holds, and §10.7 makes that the paper's sharpest open question.
+boundary** is a different question, and in part of our range the answer is known to be *no* — this is
+Remark 1.1, which we do not repeat. Its two halves are: on the range of [DW, Thm. 1.3] the class we
+exhibit provably does not lie in $\ker j_0^*$ and does carry information about the smooth locus; and
+it is our *test curve*, lying in $\Delta_{\rm NS}$, that certifies nothing about the interior — not
+the class it detects. Everything §9.5 concludes about superstring perturbation theory needs only the
+first half, which is unaffected; but the disclaimer should be read as epistemological, about this
+paper's method, and not as a geometric assertion that the obstruction lives on the boundary. Outside
+[DW]'s range we do not know which of the two holds, and §10.7 makes that the paper's sharpest open
+question.
 
 The same remark settles a question a reader with a physics background will ask first: does Theorem 8.4
 obstruct any existing construction of the superstring measure? It does not, and cannot. Any open
@@ -1392,7 +1414,8 @@ so $\ker j_0^*$ is exactly the set of classes supported on the boundary. By Lemm
 map sends $\omega_2(\overline{\mathfrak S}_{g;n,2r})$ to $\omega_2(\mathfrak S_{g;n,2r})$. The
 question is where our class sits.
 
-On the range of [DW, Thm. 1.3] the answer is known and is "not in the kernel" (§9.3). Precisely the
+On the range of [DW, Thm. 1.3] the answer is known and is "not in the kernel" (Remark 1.1, §9.3).
+Precisely the
 region left over after the subtraction of §1.4 caveat (i) — the region $n\ge g$, and the parity gap
 [DW] declines to resolve — is where we do not know. Both answers would be worth having, which is why
 we single this out rather than list it with the gaps of §10.5:
