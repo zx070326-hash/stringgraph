@@ -218,11 +218,90 @@
   > parameters $\theta_i$, $i=4,\dots,k$ and $\eta$. This parametrization of the moduli space
   > is used in practice in computing superstring scattering amplitudes in genus 0.
 
+- **Ott–Voronov 2019/2024 的独立显式商描述**（arXiv:1910.05655v4，**排版 p.3，L1 页图像核实**）：
+  > One kind, the Neveu-Schwarz punctures, are entirely analogous to marked points on ordinary
+  > Riemann surfaces, and their moduli are straightforward to understand. The moduli space
+  > $\mathfrak M_{0,n_{\mathrm{NS}}}$ of genus zero super Riemann surfaces with
+  > $n_{\mathrm{NS}} \ge 3$ Neveu-Schwarz punctures may be described just like in the classical
+  > case:
+  > $$\mathfrak M_{0,n_{\mathrm{NS}}} \cong \mathrm{Conf}(\mathbb{CP}^{1|1},
+  > n_{\mathrm{NS}})/\mathrm{POSp}(1|2,\mathbb C),$$
+  > where $\mathrm{Conf}(\mathbb{CP}^{1|1}, n_{\mathrm{NS}})$ denotes the configuration space of
+  > $n_{\mathrm{NS}}$ distinct, labeled points on the complex projective superspace
+  > $\mathbb{CP}^{1|1}$ and $\mathrm{POSp}(1|2,\mathbb C) = OSp(1|2,\mathbb C)/\{\pm\,\mathrm{id}\}$
+  > stands for the projective orthosymplectic supergroup, which is also the supergroup of
+  > automorphisms of $\mathbb{CP}^{1|1}$ preserving the standard SUSY structure on it, cf.
+  > [Wit19a]. Note that the action of the group is free up to stabilizer $\mathbb Z_2$ and
+  > therefore $\dim \mathfrak M_{0,n_{\mathrm{NS}}} = \dim \mathrm{Conf}(\mathbb{CP}^{1|1},
+  > n_{\mathrm{NS}}) - \dim OSp(1|2,\mathbb C) = (n_{\mathrm{NS}} - 3, n_{\mathrm{NS}} - 2)$.
+  ⚠ **重要限定**：这是**未紧化**的 $\mathfrak M_{0,n_{NS}}$，而且他们**没有使用 "split" 或
+  "projected" 任何一个词来描述它**——只给了商描述与维数，并称其 moduli "straightforward to
+  understand"。全文 grep 确认：`split` 一词在本文中只用于 "split supercurve / split superscheme"
+  等局部技术意义，**从未**用于断言 $\mathfrak M_{0,n_{NS}}$ 本身是 split。
+  ⚠ 另注：`Conf(\mathbb{CP}^{1|1},n)` 是 split 超概形的开子概形，但**超群商未必保持 splitness**，
+  所以这条商描述**本身不构成** splitness 的证明。本抽取只如实记录，不做推断。
+
+- **Bettadapura 2021 的二手归属（arXiv:2106.16035，排版 p.2，L1 页图像核实）** ——
+  这是本轮找到的**第二条**独立指向同一结果的文献：
+  > remarks by Witten in [Wit15a, Wit15b] strongly suggest non-splitting in the instance
+  > $g = 3$, $n = 0$. **In genus $g = 0, n = 4$, Giddings in [Gid92] constructs a splitting
+  > through generalizing the familiar cross ratio. This construction is suggested to split
+  > supermoduli space for $g = 0$ and any $n$.** In the case $(g,n) = (1,0)$, supermoduli space
+  > is split for dimensional reasons. For $g = 1$ and general $n$, supermoduli space appears to
+  > split in light of the classical, one loop calculations by Green and Schwarz in [GS82].
+  ⚠ Bettadapura 在同页 Remark（p.2 底至 p.3 顶，text-only）明确说明他考虑的是**未紧化**空间：
+  > Remark. As an aside, note that the bound in (1) is on the marked points. Since the
+  > supermoduli space we consider here is not compactified, the marked points will not collide.
+  > Consequently, it might well imply the genus $g$, $n$-pointed supermoduli space will split
+  > for $n$ sufficiently large. This was conjectured by Donagi and Witten in [DW15, Remark 1.5].
+  **判定**：Bettadapura 把 $(g,n)=(0,4)$ 的 splitting **归属给 Giddings 1992**（不是 Witten），
+  用词是 "constructs a splitting"（肯定语气），而把"任意 $n$"一般化的地位降为
+  "**is suggested to** split"（非断言）。这与 Witten 的归属（E3，"first described in [46]
+  = Nelson 1988, with more detail in [33] = Giddings 1992"）**大体一致但不完全相同**：
+  Witten 把最早的功劳给 Nelson，Bettadapura 只提 Giddings。
+
 ### 1b. 紧化 $\overline{\mathfrak S}_{0;n,2r}$ 对小 $(n,r)$
-- 见 1a（$r=0$ 情形）。$r>0$（Ramond）情形另见 §2 的 Ott–Voronov 与 FKP 条目。
+- $r=0$：见 1a（Witten 的 $\widehat{\mathfrak M}_{0,k}$，$k\ge4$，**紧化**，逐字）。
+- **FKP arXiv:2006.13271（紧化构造论文本身）不讨论亏格零的 split/projected 问题**：
+  全文 `pdftotext` grep（`genus 0` / `genus zero` / `g = 0` / `split` / `projected`）确认，
+  `split` 只出现在 "split exact sequence" / "$X$ is split, with $\mathcal O_X = \mathcal O_C
+  \oplus L$"（§局部节点模型）等**局部技术**意义上，`projected` 只出现在**参考文献表**
+  （[16] Donagi–Witten）里。**FKP 全文没有任何一处断言或否定任何 $\overline{\mathcal S}_{g,n_{NS},n_R}$
+  的 splitness。**
+- **Corrêa–Noja arXiv:2606.06733（"Compactified supermoduli space is almost never projected"）
+  的量词显式排除亏格 0/1**（摘要逐字，text-only）：
+  > We settle the projectedness problem for the compactified unpunctured supermoduli stack in
+  > **every genus at least two**. In genus two, the odd component is split, whereas the even
+  > component is non-projected. In every genus $g \ge 3$, both compactified parity components
+  > are non-projected.
+  即：**紧化情形已知的完整分类从 $g\ge2$ 开始，$g=0$ 不在其射程内**，且他们**未**声称
+  $g=0$ 有障碍。
 
 ### 1c. "奇维 2 + 基是负典范次数曲线 ⟹ split" 的一般定理
-- 见 §3 的评估。
+- 见 §3 的评估。**叠层面的奇秩 2 判据已有编号命题**：Corrêa–Noja arXiv:2606.06733
+  **Proposition 2.2, p.3（L1 页图像核实）**逐字：
+  > **Proposition 2.2.** *Let $\mathfrak X$ be a smooth Deligne–Mumford superstack over
+  > $\mathbb C$, and let $X = \mathfrak X_{\mathrm{bos}}$. There is a canonical primary
+  > obstruction class*
+  > $$\omega_2(\mathfrak X) \in H^1\!\left(X,\ T_X \otimes \textstyle\bigwedge^2
+  > T_-^\vee \mathfrak X\right).$$
+  > *It is compatible with étale pullback. If $\omega_2(\mathfrak X)\ne 0$, then $\mathfrak X$
+  > is not projected. If $T_-\mathfrak X$ has rank two, then*
+  > $$\mathfrak X \text{ is split} \iff \omega_2(\mathfrak X) = 0.$$
+  同页前文（**逐字，L1**）：
+  > A splitting induces a projection. Conversely, in odd rank two, projectedness and splitting
+  > are equivalent by Green's obstruction theory: there are no higher Green obstructions beyond
+  > the primary obstruction, see for example [6, 7].
+  证明末段（text-only）：
+  > Finally, when $T_-\mathfrak X$ has rank two, there are no odd exterior powers beyond degree
+  > two and hence no higher Green obstructions. Thus vanishing of the primary obstruction is
+  > equivalent to projectedness, and in odd rank two projectedness is equivalent to splitting.
+  > This is the rank-two case of Green's obstruction theory, again in the form recalled in [7,
+  > Corollaries 2.3–2.4].
+  **这条把 Donagi–Witten 的 supermanifold 版 Corollary 2.3（E4）提升到了
+  smooth DM superstack**，正是把 Witten 的 coarse 论证搬到叠上所缺的那一块（见 E5 备注）。
+  ⚠ 但注意：它给的是**判据**（$\omega_2=0 \Rightarrow$ split），**不是**"负典范次数 ⟹
+  $\omega_2=0$" 的消失定理。消失那一步仍要逐例算。
 
 ### 1d. $\mu_2$-gerbe over 平方根叠的显式识别
 - 见 E5：**按此措辞 NOT FOUND**；同一几何被 Witten 用 orbifold 语言描述过。
