@@ -87,17 +87,25 @@ Bricks used as known (all *rigorous, published*, none a conjecture):
 > The two cells outside `paper.md`'s box are supplied by the published literature, not by a new
 > argument: $(g,n,r)=(2,0,0)$ by K4, and $(g,n,r)=(2,1,0)$ by K3 together with Claim B.
 
-> **Claim D (a genuinely split case with odd rank $2$).**
+> **Claim D (a genuinely split case with odd rank $2$).** *(= `proof.md` Thm 4.5)*
 > $\overline{\mathfrak S}_{0;4,0}$, of dimension $(1\mid2)$, is **split**. Concretely,
 > $\omega_2(\overline{\mathfrak S}_{0;4,0})=0$ because its bosonic truncation is a $\mu_2$-gerbe over
 > the $\mu_2$-root stack $\mathcal X$ of $(\mathbb P^1,\,0+1+\infty)$, on which
-> $$\deg_{\mathcal X}\mathcal T_{\mathcal X}=\tfrac12,\qquad
-> \deg_{\mathcal X}\Lambda^2\mathcal T_-^\vee=\tfrac12,\qquad
-> \deg_{\mathcal X}\big(\mathcal T\otimes\Lambda^2\mathcal T_-^\vee\big)=1>\deg\omega_{\mathcal X},$$
+> $$\Lambda^2\mathcal T_-^\vee\ \cong\ \mathcal T_{\mathcal X},\qquad
+> \deg_{\mathcal X}\mathcal T_{\mathcal X}=\tfrac12,\qquad
+> \deg_{\mathcal X}\big(\mathcal T_{\mathcal X}\otimes\Lambda^2\mathcal T_-^\vee\big)=1
+> >-\tfrac12=\deg\omega_{\mathcal X},$$
 > so $H^1$ of the obstruction sheaf vanishes by Serre duality; K2 then upgrades $\omega_2=0$ to
 > splitness because $\operatorname{rank}\mathcal T_-=2$.
 
-> **Claim E (what stays open).** After A–D the region $\mathcal R^c$ decomposes as
+> **Claim F (everything of bosonic dimension $\le1$ is split).** *(= `proof.md` Thm 5.1)*
+> If $\dim_{\rm even}\overline{\mathfrak S}_{g;n,2r}=3g-3+n+2r\le1$ then
+> $\overline{\mathfrak S}_{g;n,2r}$ is split. There are exactly six such stable triples,
+> $(0;3,0),(0;1,2),(0;4,0),(0;2,2),(0;0,4),(1;1,0)$; five of them are covered by Claim A and the
+> sixth is Claim D. Moreover $(0;4,0)$ is the **unique** stable triple with $3g-3+n+2r=1$ *and*
+> $2g-2+n+r=2$, i.e. the unique cell to which the degree argument of Claim D can apply at all.
+
+> **Claim E (what stays open).** After A–D and F the region $\mathcal R^c$ decomposes as
 > * **closed, non-projected:** $g=2$, all $(n,r)$ — Claim C;
 > * **closed, split:** $2g-2+n+r\le1$ — Claim A; plus $(g,n,r)=(0,4,0)$ — Claim D; plus
 >   $\overline{\mathfrak S}{}^-_{2;0,0}$ — K4;
@@ -106,10 +114,13 @@ Bricks used as known (all *rigorous, published*, none a conjecture):
 
 ## 2. What is *not* claimed
 
-1. No claim that $g\le1$ is entirely split. Claims A and D cover only finitely many cells of it.
+1. No claim that $g\le1$ is entirely split. Claims A, D and F cover only finitely many cells of it.
 2. Claim C asserts non-projectedness of the **whole stack** for $r>0$, and of the **even component**
    only for $r=0$; nothing about the odd component at $g=2$ with $n\ge1$.
 3. Nothing is claimed about $\overline{\mathfrak S}_{0;n,0}$ for $n\ge5$ or about
    $\overline{\mathfrak S}_{0;n,2r}$ with $r\ge1$ and $n+r\ge4$.
 4. Claims C and E rest on the correctness of `paper.md` Cor. 8.5 (K5) only for the cells the paper
-   itself covers; Claims A, B, D are independent of it.
+   itself covers; Claims A, B, D, F are independent of it.
+5. **No prior-art search has been run.** Per the project rule, it is due when a result enters
+   `graph/` or goes public, not now. Claim D in particular concerns a small and natural object and
+   may be known; Claims A and B are certainly folklore and are stated only because they are used.
