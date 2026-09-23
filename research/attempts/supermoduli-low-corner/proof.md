@@ -20,10 +20,10 @@ prose below it.
 |---|---|---|
 | 1 (rank-2 machinery) | **Proved**, two independent verifications | Part 1 |
 | — (new: known nonzero-$\omega_2$ mechanism unavailable) | **Proved** (Lemma 2 + Cor. 2.1), scope stated precisely | Part 2 |
-| 2 (uncompactified cells split) | Open | — |
+| 2 (uncompactified cells split) | **Proved** (Lemma 4, via affine vanishing) | Part 4 |
 | 3 (bosonic truncation structure) | **Partial**: cell (B) divisor-typing verified (Part 3); root-stack representability imported; cell (A) not yet done | Part 3 |
 | 4 (inertia criterion fails) | Open | — |
-| 5 (boundary support reduction) | Open, contingent on Claim 2 | — |
+| 5 (boundary support reduction) | **Proved** (Corollary 4.1) | Part 4 |
 | 6 (the dichotomy) | **Open** | — |
 
 ---
@@ -328,6 +328,103 @@ root-stack-representability fact flagged above).**
 
 ---
 
-## Part 4 — [in progress]
+## Part 4 — Lemma 4 (= Claim 2, both cells) via affine vanishing, and Corollary 4.1 (= Claim 5)
+
+**Lemma 4.** *The open substacks $\mathfrak S_{1;2,0}\subset\overline{\mathfrak S}_{1;2,0}$
+and $\mathfrak S_{0;3,2}\subset\overline{\mathfrak S}_{0;3,2}$ of smooth super Riemann
+surfaces are split.*
+
+*Proof.* By Lemma 1 (odd rank 2 in both cases), it suffices to show
+$\omega_2(\mathfrak S_{\bullet})=0$, i.e. that
+$H^1\bigl(M_\bullet,\, T_{M_\bullet}\otimes\det\mathcal F_\bullet\bigr)=0$, where
+$M_\bullet$ is the (smooth, uncompactified) bosonic moduli and
+$T_{M_\bullet}\otimes\det\mathcal F_\bullet$ is a vector bundle on it (smoothness of the
+open substack). It suffices, by Serre's affine vanishing theorem for coherent sheaves
+(any coherent sheaf on an affine scheme has vanishing higher cohomology; the analogous
+statement descends to a smooth DM stack with **affine coarse moduli space** over
+$\mathbb C$: if $\pi:\mathcal M\to M_{\mathrm{coarse}}$ is the coarse map, $\pi$ is
+proper and quasi-finite hence affine, so $R^i\pi_*=0$ for $i>0$ and
+$H^i(\mathcal M,\mathcal E)=H^i(M_{\mathrm{coarse}},\pi_*\mathcal E)$; if
+$M_{\mathrm{coarse}}$ is affine this vanishes for $i>0$), to show that the coarse
+moduli spaces $M_{0,5}$ (cell B) and $M_{1,2}$ (cell A) are affine.
+
+**$M_{0,5}$ is affine.** Using the $\mathrm{PGL}_2$-action to fix three of the five
+marked points at $0,1,\infty$, the remaining two points give an isomorphism
+$$M_{0,5}\ \cong\ \{(x_4,x_5)\in(\mathbb C\setminus\{0,1\})^2 : x_4\ne x_5\},$$
+an explicit Zariski-open (complement of finitely many hyperplanes $x_i=0,1,x_4=x_5$) in
+the affine plane $\mathbb A^2$. The complement of a hypersurface in an affine variety is
+affine (its coordinate ring is a localization of that of the ambient affine variety), so
+$M_{0,5}$ is affine.
+
+**$M_{1,2}$ is affine.** Recall $M_{1,1}\cong\mathbb A^1_j$ (the $j$-line) is affine —
+classical. Using the first marked point $p_1$ as the group-law origin of $E$, a
+$\mathbb C$-point of $M_{1,2}$ is a pair $(E,p_2)$ with $p_2\in E\setminus\{0\}$, modulo
+the finite automorphism group $\mathrm{Aut}(E,0)$ (order $2$, $4$, or $6$ depending on
+$j$). The morphism $\mathcal E^\times\to M_{1,1}$ (universal elliptic curve minus its
+zero section) is affine: each fibre $E\setminus\{0\}$ is the complement of an ample
+divisor (a single point is ample on a genus-$1$ curve) in a proper curve, hence affine
+(complement of a relative ample divisor in a proper morphism is an affine morphism —
+standard, e.g. via the relative Serre criterion), and this is compatible in families.
+An affine morphism over an affine base has affine total space, so $\mathcal E^\times$
+(as a scheme, i.e. before quotienting) is affine. Quotienting a affine scheme by a
+finite group action gives an affine scheme (its ring of invariants is again finitely
+generated, by classical invariant theory in characteristic $0$, and $\mathrm{Spec}$ of
+that ring computes the quotient). Hence $M_{1,2}=\mathcal E^\times/\mathrm{Aut}(E,0)$
+(fibred over $M_{1,1}=\mathbb A^1$, itself affine, with affine fibres — the same
+"affine morphism over affine base" argument applies one level up) is affine.
+
+Both coarse spaces are affine, so $H^1(M_\bullet,T_{M_\bullet}\otimes\det\mathcal F_\bullet)=0$
+in both cases, giving $\omega_2(\mathfrak S_\bullet)=0$, hence (Lemma 1) both open
+substacks are split. $\blacksquare$
+
+**This is precisely claim.md's Claim 2, now fully established for both cells**, by an
+elementary and completely general mechanism (affineness of the genus-$\le1$ open moduli
+spaces involved), matching Donagi–Witten's own remark (arXiv:1304.7798v2, p.4,
+Introduction, read this session) that projectedness for small $g$ "follows from the
+cohomological nature of the obstructions to splitting and the nature of the reduced
+spaces $\mathcal{SM}_g$ for small $g$" — we can now say precisely *what* that nature is:
+affineness.
+
+### Corollary 4.1 (= Claim 5, boundary support)
+
+**Corollary 4.1.** *$\omega_2(\overline{\mathfrak S}_{1;2,0})$ and
+$\omega_2(\overline{\mathfrak S}_{0;3,2})$, if non-zero, are supported on the boundary:
+each lies in the image of $H^1_{\partial X}(X,\mathcal V_{\mathfrak X})\to
+H^1(X,\mathcal V_{\mathfrak X})$ for $X\in\{X_A,X_B\}$ and $\partial X$ the (normal
+crossing) boundary divisor.*
+
+*Proof.* Write $j:U\hookrightarrow X$ for the open embedding of the smooth locus (so
+$U=M_{1,2}$ or $M_{0,5}$) with closed complement $\partial X = X\setminus U$. Corrêa–Noja
+Proposition 2.2 (quoted in Part 1, Appendix A source #1) states $\omega_2$ "is compatible
+with étale pullback"; an open immersion is in particular étale, so
+$$j^*\,\omega_2(\overline{\mathfrak S}_\bullet) \;=\; \omega_2(\mathfrak S_\bullet)
+\quad\text{in } H^1(U,\mathcal V_{\mathfrak X}|_U).$$
+By Lemma 4, the right-hand side is $0$. So $\omega_2(\overline{\mathfrak S}_\bullet)$
+lies in $\ker\bigl(H^1(X,\mathcal V_{\mathfrak X})\xrightarrow{\ j^*\ }
+H^1(U,\mathcal V_{\mathfrak X}|_U)\bigr)$. The long exact sequence of local cohomology
+for the closed subscheme $\partial X\subset X$ (coefficients in the coherent sheaf
+$\mathcal V_{\mathfrak X}$),
+$$\cdots \to H^1_{\partial X}(X,\mathcal V_{\mathfrak X}) \to H^1(X,\mathcal V_{\mathfrak X})
+\xrightarrow{\ j^*\ } H^1(U,\mathcal V_{\mathfrak X}|_U) \to \cdots,$$
+identifies this kernel exactly with the image of $H^1_{\partial X}(X,\mathcal V_{\mathfrak
+X})\to H^1(X,\mathcal V_{\mathfrak X})$, i.e. with the classes "supported on
+$\partial X$." $\blacksquare$
+
+**This settles claim.md's Claim 5 in full** (the boundary-support half; the trivial
+"$H^1(X,\mathcal V_{\mathfrak X})=0\Rightarrow$ split" half of Claim 5 is immediate from
+Lemma 1 and needs no separate argument).
+
+**What Corollary 4.1 buys us, concretely.** It does *not* by itself decide Claim 6. It
+narrows the search: any non-vanishing of $\omega_2$ must come from the local cohomology
+$H^1_{\partial X}$, which (by the standard excision/Mayer–Vietoris description of local
+cohomology along a normal-crossing divisor) is built from residues along the boundary
+components and their pairwise intersections. Combined with Lemma 3 (which of the ten
+boundary divisors of $X_B$ actually carry a $\mu_2$-root, i.e. are candidates for a
+non-trivial "twisted" contribution) this gives a finite, structured list of places to
+look — see §6 for the precise remaining target.
+
+---
+
+## Part 5 — [in progress]
 
 *To be continued in the next commit.*
