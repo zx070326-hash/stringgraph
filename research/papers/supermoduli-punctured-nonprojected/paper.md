@@ -51,9 +51,12 @@ tail" is not a convenient choice but the only possible one; this explains, retro
 construction choice left unmotivated in Corrêa–Noja.
 
 We state explicitly what is not proved: nothing is claimed about the uncompactified stacks
-$\mathfrak S_{g;n,2r}$, nothing in the positive (split/projected) direction, nothing about
-$(g,n,r)=(2,1,0)$ or about odd-parity punctured components at $g=2$, and no connected-component
-refinement when $r>0$. We deliberately avoid gluing at Ramond nodes, since the Ramond analogue of the
+$\mathfrak S_{g;n,2r}$, nothing in the positive (split/projected) direction, nothing about the **odd**
+component at $(g,n,r)=(2,1,0)$ or about odd-parity punctured components at $g=2$, and no
+connected-component refinement when $r>0$. We also state explicitly what is not *new*: on their own
+thresholds [DW], [DO] and [W] already imply the compactified statement, since non-projectedness
+passes from an open substack to the ambient stack; §1.4 caveat (i) subtracts that overlap and says
+what remains. We deliberately avoid gluing at Ramond nodes, since the Ramond analogue of the
 normal-bundle computation is only conjectural in Felder–Kazhdan–Polishchuk ([FKP, §9.3], verbatim
 "We conjecture that…"); taking that shortcut would have lowered the epistemic status of the
 conclusion from *proved* to *conditional on a conjecture*.
@@ -211,14 +214,30 @@ Read off from the table, the three concrete gains are:
 
 **Three caveats, stated here rather than buried.**
 
-*(i) The objects are not the same.* [DW], [DO] and [W] concern the **uncompactified** stacks; this
-paper, like [CN], concerns the **compactified** ones. Our non-vanishing class is detected on a test
-curve lying inside the NS boundary divisor $\Delta_{\rm NS}$, so Theorem M says nothing whatever about
-the smooth locus $\mathfrak S_{g;n,2r}$, and we make no claim to supersede [DW], [DO] or [W] as
-statements about it (§9.3). Precisely the same relation holds between [CN]'s $g\ge3$ and [DW]'s
-$g\ge5$, and it is the reason the numbers in the table can look so different without any
-contradiction. The comparison above should be read as: *in the compactified punctured quadrant there
-was previously no threshold at all, and there now is one, namely $g\ge2$.*
+*(i) The objects are not the same, and the implication between them runs one way.* [DW], [DO] and
+[W] concern the **uncompactified** stacks; this paper, like [CN], concerns the **compactified** ones.
+Our non-vanishing class is detected on a test curve lying inside the NS boundary divisor
+$\Delta_{\rm NS}$, so Theorem M says nothing whatever about the smooth locus $\mathfrak S_{g;n,2r}$,
+and we make no claim to supersede [DW], [DO] or [W] as statements about it (§9.3).
+
+But the converse implication does hold, and it must be stated plainly here rather than left for a
+referee to notice. Since an open substack of a projected stack is projected (§9.3), non-projectedness
+of $\mathfrak S_{g;n,2r}$ **implies** non-projectedness of $\overline{\mathfrak S}_{g;n,2r}$ — a point
+Donagi and Witten make themselves: "Asking for the compactification to be projected would only be a
+stronger condition" [DW, Remark 1.4]. So part of the compactified punctured quadrant was already
+covered, for free and by the authors of [DW] themselves: [DW, Thm 1.3] yields non-projectedness of
+$\overline{\mathfrak S}_{g;n,0}$ for $1\le n\le g-1$ (both parities for $g$ odd, even parity for $g$
+even), and [DW, Thm 1.2] yields it for $n=1$, even parity, every $g\ge2$; [DO] and [W] transfer the
+same way on their own thresholds.
+
+What had no threshold before is the complement, and that is what Corollary A and Theorem B supply:
+the region $n\ge g$; the parity gap [DW] explicitly declines to resolve (verbatim: "We do not resolve
+the question of projectedness of $\mathfrak M_{g,n}$ for the case of even $g$, odd spin structure,
+and $n\ge1$"); at $g=2$, every $n\ge2$; and, for Ramond punctures, everything below the [DO] and [W]
+thresholds. The three gains listed above should be read against that baseline, not against an empty
+one. Note also that this erosion is *already realised* — unlike the value risk of §10.4
+[GAP-ALT], which waits on a compactified forgetful morphism nobody has yet constructed, the transfer
+above needs nothing but the restriction lemma.
 
 *(ii) We do not use [W].* Wang's preprint is self-described in its arXiv comment field as a
 "preliminary draft". No step of any proof in this paper invokes [W], nor [DO]; both appear only in
@@ -242,9 +261,10 @@ Listed once, and repeated where relevant:
 1. Nothing about the **uncompactified** stacks $\mathfrak S_{g;n,2r}$.
 2. Nothing in the **positive** direction: we exhibit no projection and no splitting, and in
    particular we do not touch [CN, Thm 1.1(1)].
-3. The cases $(g,n,r)=(2,1,0)$ and the **odd-parity punctured components at $g=2$** are open here.
-   Our method provably cannot reach them, and §9.2 explains why that is a feature: if it could, it
-   would contradict [CN, Thm 1.1(1)].
+3. The **odd**-parity punctured components at $g=2$, and the odd component at $(g,n,r)=(2,1,0)$, are
+   open here. Our method provably cannot reach them, and §9.2 explains why that is a feature: if it
+   could, it would contradict [CN, Thm 1.1(1)]. The *even* component at $(2,1,0)$ is **not** open —
+   it follows from [DW, Thm 1.2] by the restriction lemma (§1.4 caveat (i)) — but it is not ours.
 4. For $r>0$ we assert non-projectedness of the whole stack $\overline{\mathfrak S}_{g;n,2r}$ and do
    **not** identify a connected component ([GAP-COMP], §10.3).
 5. We do not glue at Ramond nodes, so nothing is claimed about the Ramond boundary components; see
@@ -1097,6 +1117,15 @@ holds between [CN]'s $g\ge3$ and [DW]'s $g\ge5$: [CN] can do better precisely be
 boundary. There is no contradiction, and no claim of improvement on [DO] or [W] as statements about
 $\mathfrak S_{g;n,2r}$.
 
+It must be added at once that the implication runs the *other* way for free, and that this is a
+restriction on what we may claim, not a further strength. Non-projectedness of the open substack
+implies non-projectedness of the ambient stack — the same restriction argument, read in the
+contrapositive — so on their own thresholds [DW], [DO] and [W] already yield the compactified
+statement, as [DW, Remark 1.4] observes ("Asking for the compactification to be projected would only
+be a stronger condition"). The compactified assertion is therefore *weaker* than the uncompactified
+one, not merely different from it, and wherever the thresholds overlap the credit is theirs. §1.4
+caveat (i) records exactly which part of our range survives that subtraction.
+
 The same remark settles a question a reader with a physics background will ask first: does Theorem 8.4
 obstruct any existing construction of the superstring measure? It does not, and cannot. Any open
 substack of a projected stack is projected — the retraction restricts — so non-projectedness of
@@ -1175,11 +1204,14 @@ $\overline{\mathfrak M}{}^{+}_2=\overline{\mathfrak S}{}^{+}_{2;0,0}$ is **non-p
 Theorem M — §9.2 verifies that our construction cannot reach $(g,n,r)=(2,0,0)$ at all, which is
 exactly what compatibility with [CN, Thm. 1.1(1)] requires of it.
 
-What is genuinely open is smaller than the complement of the threshold: $(g,n,r)=(2,1,0)$, and the
-$g=2$ odd-parity punctured components for every $n$. By §9.2 our method reaches only the even
-component at $g=2$, and both of these lie outside the threshold altogether. We make no claim about
-them in either direction; §9.2 records a heuristic for why we expect the strategy not to survive
-there, and marks it as a heuristic.
+What is genuinely open is smaller still: the **odd** component at $(g,n,r)=(2,1,0)$, and the $g=2$
+odd-parity punctured components for every $n$. The *even* component at $(2,1,0)$ is not open either —
+[DW, Thm 1.2] gives non-projectedness of $\mathfrak M^+_{2,1}=\mathfrak S^+_{2;1,0}$, and the
+restriction lemma carries it to the compactification (§1.4 caveat (i)) — though that is [DW]'s result
+and not ours. By §9.2 our method reaches only the even component at $g=2$, and all of these lie
+outside the threshold altogether. We make no claim about the genuinely open cases in either
+direction; §9.2 records a heuristic for why we expect the strategy not to survive there, and marks it
+as a heuristic.
 
 The analogous statement for the *uncompactified* stack is not ours and is not a consequence of
 Theorem M. Donagi and Witten describe the uncompactified version of the strategy as the one used in
@@ -1296,9 +1328,10 @@ the precise reason Theorem B, not Corollary A, carries this paper's title-level 
 - Nothing is asserted about the **uncompactified** $\mathfrak S_{g;n,2r}$.
 - Nothing is asserted in the **positive** direction (splitness or projectedness), in contrast with
   [CN, Thm. 1.1(1)].
-- $(g,n,r)=(2,1,0)$ and the **odd**-parity punctured components at $g=2$ are completely open here;
-  by §9.2 the method cannot reach them, and for the odd component at $g=2$ that is structurally
-  required rather than accidental.
+- The **odd** component at $(g,n,r)=(2,1,0)$ and the **odd**-parity punctured components at $g=2$
+  are completely open here; by §9.2 the method cannot reach them, and for the odd component at $g=2$
+  that is structurally required rather than accidental. The *even* component at $(2,1,0)$ is settled,
+  but by [DW, Thm 1.2] transported along the restriction lemma, not by us (§1.4 caveat (i)).
 - Gluing at Ramond nodes is deliberately avoided (§10.2).
 
 ---
