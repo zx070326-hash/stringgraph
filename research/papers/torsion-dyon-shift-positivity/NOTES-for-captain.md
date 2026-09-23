@@ -280,7 +280,8 @@ in the literature, not only in our copy of it.
    self-tests report 86 and 171 cases of Rosselló Thm 1 and Cor 1.1 with no violations; the identity
    control returns difference 0). **Check their comments for Chinese text before bundling** — this was
    a real problem with the supermoduli paper's script.
-4. **Resolve the benchmark table citation** (§4.4) — optional.
+4. ✅ **Benchmark table citation resolved** (§4.4) — Bringmann–Murthy Appendix A is now cited in §3,
+   and Remark 6.3.1 makes witness (A) checkable without running our code. Done, not optional.
 5. **Wait on Problem 9.2** (§4.3) — recommended.
 6. `SOURCEMAP.md` is current as of 2026-09-23 and maps every section to line ranges in A, B or C,
    including the items that are *not* transcriptions (the H(D) convention, the Λ-realizability
