@@ -426,4 +426,269 @@ $\mathcal I\cong k_*k^*\mathcal I$ extension argument. $\square$
 
 ---
 
-*(Parts §4–§11 follow.)*
+## 4. Step 2 [E2]: the gluing map (7.8) exists in the presence of Ramond punctures
+
+### 4.1 What is wrong
+
+The whole of §9.1 — hence (9.6) — presupposes that the gluing map (7.8) exists, i.e. that
+gluing two stable supercurves along an NS puncture yields a stable supercurve. That is
+[FKP]'s Lemma 7.9 (I11). Its proof, **L1, p. 48**, reads in full (relevant part transcribed
+verbatim from the page image):
+
+> "Note that $L$ and $L'$ are generalized spin-structures, i.e., we have an isomorphism
+> $L\xrightarrow{\ \sim\ }\underline{\operatorname{Hom}}(L,\omega_C)$ (which corresponds to
+> $\delta^-$ on $X$), and similarly, for $L'$. Furthermore, we know that $L$ (resp., $L'$) is
+> locally free near $P$ (resp., $P'$).
+> The glued superscheme $Z$ has the underlying nodal curve $Z_0$, which is glued from $C$ and
+> $C'$ along $P\simeq P'$, and
+> $$\mathcal O_Z\simeq\mathcal O_{Z_0}\oplus j_*L\oplus j'_*L'.$$
+> It is well known that the natural map
+> $$j_*L\oplus j'_*L'\to\underline{\operatorname{Hom}}(j_*L\oplus j'_*L',\omega_{Z_0})$$
+> is an isomorphism, i.e., $j_*L\oplus j'_*L'$ is a generalized spin-structure. It is easy to
+> see that above map is precisely $\delta^-$, so this proves that $Z/S$ is a stable
+> supercurve."
+
+Compare [FKP]'s own definition of a generalized spin structure, **L1, p. 7** (I3):
+(2.5) is $L\xrightarrow{\sim}\underline{\operatorname{Hom}}(L,\omega_C(\sum r_i))$, and "a
+coherent sheaf $L$ on a prestable curve $C/S$ equipped with an isomorphism (2.5) is called a
+generalized spin structure". The printed proof of Lemma 7.9 therefore uses the $r_\bullet=
+\varnothing$ form throughout: it calls $L\cong\underline{\operatorname{Hom}}(L,\omega_C)$ "the"
+generalized spin structure, and asserts the untwisted statement for $Z_0$. Similarly its first
+paragraph says "$\delta^-$ induces an isomorphism of $\mathcal O_Z^-$ with $\omega_Z^-$", while
+Def. 2.4's condition (2.4) (I1) demands an isomorphism with $\omega_Z(R)^-$.
+
+So as printed Lemma 7.9 is proved only for $n_1=n_2=0$, and (7.8) is justified only for
+$n_1=n_2=0$ — even though the displayed map (7.8) carries general $(n_1,n_2)$. This is
+`[GAP-FKP-RAMOND]` at its sharpest point. **It is repairable.** The repair is §4.3.
+
+### 4.2 A duality lemma for a branch of a nodal curve
+
+> **Lemma 4.1.** Let $Z_0$ be a curve over an algebraically closed field with a node at $p_0$,
+> let $C\subset Z_0$ be one of the two branches through $p_0$ (a closed subscheme, with
+> $j\colon C\hookrightarrow Z_0$ the inclusion), and suppose $Z_0$ is Gorenstein of pure
+> dimension 1 with dualizing sheaf $\omega_{Z_0}$. Set
+> $j^!\mathcal F:=\underline{\operatorname{Hom}}_{\mathcal O_{Z_0}}(\mathcal O_C,\mathcal F)$,
+> an $\mathcal O_C$-module. Then:
+> 1. $j^!\omega_{Z_0}\cong\omega_C$, and under this isomorphism the trace map
+>    $j_*j^!\omega_{Z_0}\hookrightarrow\omega_{Z_0}$ (evaluation at $1$) is the canonical
+>    inclusion $j_*\omega_C\hookrightarrow\omega_{Z_0}$ of the dualizing sheaf of the branch.
+> 2. For every line bundle $N$ on $Z_0$, $j^!(\omega_{Z_0}\otimes N)\cong\omega_C\otimes j^*N$,
+>    compatibly with (1).
+> 3. For every coherent $\mathcal O_C$-module $F$,
+>    $\underline{\operatorname{Hom}}_{\mathcal O_{Z_0}}(j_*F,\omega_{Z_0}\otimes N)\cong
+>    j_*\underline{\operatorname{Hom}}_{\mathcal O_C}(F,\omega_C\otimes j^*N)$, the
+>    isomorphism sending $\phi\colon F\to\omega_C\otimes j^*N$ to the composite
+>    $j_*F\xrightarrow{j_*\phi}j_*(\omega_C\otimes j^*N)\hookrightarrow\omega_{Z_0}\otimes N$.
+
+*Proof.* (3) is the $\underline{\operatorname{Hom}}$-adjunction for the closed embedding $j$:
+for any $\mathcal O_{Z_0}$-module $G$ and any $\mathcal O_C$-module $F$, an
+$\mathcal O_{Z_0}$-linear map $j_*F\to G$ is the same as an $\mathcal O_C$-linear map
+$F\to\underline{\operatorname{Hom}}_{\mathcal O_{Z_0}}(\mathcal O_C,G)=j^!G$, and this
+identification is evaluation-at-$1$ composed with $j_*(-)$. Combined with (1) and (2) this is
+exactly the displayed statement.
+
+(2): for $N$ invertible,
+$\underline{\operatorname{Hom}}_{\mathcal O_{Z_0}}(\mathcal O_C,\mathcal F\otimes N)\cong
+\underline{\operatorname{Hom}}_{\mathcal O_{Z_0}}(\mathcal O_C,\mathcal F)\otimes N$, and the
+right-hand side, viewed as an $\mathcal O_C$-module, is $j^!\mathcal F\otimes j^*N$.
+
+(1): the statement is local, and away from $p_0$ the inclusion $j$ is an open immersion onto a
+subscheme where $\mathcal O_C=\mathcal O_{Z_0}$, so $j^!\omega_{Z_0}=\omega_{Z_0}|_C=\omega_C$
+and the trace is the identity. At $p_0$ take the complete local ring
+$\mathcal O_{Z_0,p_0}=k[[x,y]]/(xy)$, with $C=\{y=0\}$, so
+$\mathcal O_{C,p_0}=k[[x]]$. Then $\omega_{Z_0,p_0}$ is free of rank one on the generator
+$\eta$ with $\eta=\frac{dx}{x}=-\frac{dy}{y}$ (the standard generator of the dualizing sheaf of
+a node). Hence
+$$j^!\omega_{Z_0}=\{\alpha\in\omega_{Z_0,p_0}:y\alpha=0\}
+=\operatorname{Ann}_{\mathcal O_{Z_0,p_0}}(y)\cdot\eta=(x)\cdot\eta,$$
+and $(x)\eta=k[[x]]\cdot x\eta=k[[x]]\,dx=\omega_{C,p_0}$; the inclusion
+$(x)\eta\subset\omega_{Z_0,p_0}$ is precisely the standard inclusion
+$j_*\omega_C\subset\omega_{Z_0}$ (i.e. "differentials on the branch, extended by zero on the
+other branch, have no pole and zero residue at $p_0$"). $\square$
+
+> **Remark 4.2.** The content of Lemma 4.1(1) is the *cancellation of two opposite twists*:
+> $j^*\omega_{Z_0}=\omega_C(p_0)$, and $\underline{\operatorname{Hom}}(\mathcal O_C,
+> \mathcal O_{Z_0})=\mathcal I_{C'}\cong\mathcal O_C(-p_0)$, so
+> $j^!\omega_{Z_0}=\omega_C(p_0)(-p_0)=\omega_C$. This is why the node contributes **no** extra
+> twist, and it is exactly what makes the argument insensitive to whether the Ramond twist is
+> present: the Ramond points $r_i$ sit away from $p_0$ and pass through untouched.
+
+### 4.3 The repair
+
+> **Proposition 4.3 (Lemma 7.9 with Ramond punctures).** Let $S$ be even, and let
+> $(X,P_\bullet,R_\bullet)/S$ and $(X',P'_\bullet,R'_\bullet)/S$ be families of stable
+> supercurves with punctures; let $P\subset X$ and $P'\subset X'$ be NS punctures, and let
+> $Z:=X\sqcup_{P\simeq S\simeq P'}X'$ be the glued superscheme, with $\delta_Z$ defined as the
+> composite
+> $$\mathcal O_Z\longrightarrow j_*\mathcal O_X\oplus j'_*\mathcal O_{X'}
+> \xrightarrow{\ j_*\delta_X\oplus j'_*\delta_{X'}\ }
+> j_*\omega_{X/S}(R)\oplus j'_*\omega_{X'/S}(R')\longrightarrow\omega_{Z/S}(R_{\rm tot}),$$
+> where $R_{\rm tot}$ is the (disjoint) union of the images of $R_\bullet$ and $R'_\bullet$.
+> Then $(Z,\text{remaining NS punctures},R_{\rm tot})/S$ is a family of stable supercurves with
+> punctures. **No hypothesis $R=R'=\varnothing$ is needed.**
+
+*Proof.* Follow [FKP]'s own reduction, replacing only the defective step.
+
+*Reduction to a geometric point.* Everything except condition (2.4) of Def. 2.4 (I1) is a
+statement about the superscheme $Z/S$, its open smooth part, and the divisors; it is verified
+exactly as in [FKP]: $(U\smallsetminus P)\sqcup(U'\smallsetminus P')$ is an open subset of $Z$
+which is a smooth supercurve over $S$ and contains all the remaining punctures. Condition
+(2.4) is, verbatim in Def. 2.4, a condition **on each geometric fibre**; so it suffices to
+treat $S=\operatorname{pt}$. Since $S$ is then even, Lemma 2.6 (I3) applies, and we must show:
+
+> with $C,C'$ the bosonic truncations, $p\in C$, $p'\in C'$ the images of $P,P'$,
+> $r_1,\dots,r_a\in C$ and $r'_1,\dots,r'_b\in C'$ the Ramond points, $L,L'$ the generalized
+> spin structures, $Z_0:=C\cup_{p\sim p'}C'$, and $\mathcal L:=j_*L\oplus j'_*L'$, the map
+> $$\delta^-_Z\colon\ \mathcal L\ \longrightarrow\
+> \underline{\operatorname{Hom}}_{\mathcal O_{Z_0}}\!\big(\mathcal L,\ \omega_{Z_0}
+> (\textstyle\sum_i r_i+\sum_j r'_j)\big)$$
+> induced by $\delta^-_X=(2.5)_L$ and $\delta^-_{X'}=(2.5)_{L'}$ is an isomorphism.
+
+Here I used: $\mathcal O_Z=\mathcal O_{Z_0}\oplus j_*L\oplus j'_*L'$ (L1, p. 48, quoted above —
+this part of [FKP]'s proof is correct and puncture-independent, because $P\cong S$ has relative
+dimension $0|0$, so the gluing condition $f|_P=f'|_{P'}$ is a condition on even sections only);
+$\omega^-_Z=\underline{\operatorname{Hom}}(\mathcal L,\omega_{Z_0})$ and
+$\omega_Z(R_{\rm tot})^-=\underline{\operatorname{Hom}}(\mathcal L,\omega_{Z_0}(R_{\rm tot}))$
+by (I3) and the fact that $\mathcal O(R_{\rm tot})$ is an **even** line bundle — L1, p. 7:
+"locally $R_i$ is given by an even equation $f\in\mathcal O^+_X=\mathcal O_C$, and $r_i$ is
+given by the same equation $f$ in $C$"; and that $r_\bullet,r'_\bullet$ are disjoint from
+$p_0:=[p]=[p']\in Z_0$, since by Def. 2.4 the punctures lie in the smooth locus.
+
+Now compute, writing $D:=\sum_i r_i+\sum_j r'_j$ as a Cartier divisor on $Z_0$:
+$$\underline{\operatorname{Hom}}_{\mathcal O_{Z_0}}(\mathcal L,\omega_{Z_0}(D))
+=\underline{\operatorname{Hom}}(j_*L,\omega_{Z_0}(D))\ \oplus\
+\underline{\operatorname{Hom}}(j'_*L',\omega_{Z_0}(D))$$
+(a $\underline{\operatorname{Hom}}$ out of a direct sum). For the first summand, Lemma 4.1(3)
+with $N=\mathcal O_{Z_0}(D)$ gives
+$$\underline{\operatorname{Hom}}_{\mathcal O_{Z_0}}(j_*L,\omega_{Z_0}(D))
+\ \cong\ j_*\,\underline{\operatorname{Hom}}_{\mathcal O_C}\!\big(L,\ \omega_C\otimes
+j^*\mathcal O_{Z_0}(D)\big)
+\ =\ j_*\,\underline{\operatorname{Hom}}_{\mathcal O_C}\!\big(L,\ \omega_C(\textstyle\sum_i
+r_i)\big),$$
+where $j^*\mathcal O_{Z_0}(D)=\mathcal O_C(\sum_i r_i)$ because the points $r'_j$ lie on
+$C'\smallsetminus\{p'\}$, hence do not meet $C$. By (2.5) for $L$, the right-hand side is
+$j_*L$. Symmetrically for the second summand. Adding,
+$$\underline{\operatorname{Hom}}_{\mathcal O_{Z_0}}(\mathcal L,\omega_{Z_0}(D))\ \cong\
+j_*L\oplus j'_*L'=\mathcal L .$$
+
+It remains to check that the isomorphism just produced **is** $\delta^-_Z$. By Lemma 4.1(3) the
+isomorphism sends $\phi\colon L\to\omega_C(\sum_i r_i)$ to the composite
+$j_*L\xrightarrow{j_*\phi}j_*(\omega_C(\sum_i r_i))\hookrightarrow\omega_{Z_0}(D)$, i.e. to
+"apply $\phi$ on the branch, then include via the trace". Taking $\phi=(2.5)_L=\delta^-_X$
+(L1, p. 7: "The isomorphism (2.5) corresponds to $\delta^-$") and likewise on $C'$, this
+composite is precisely the odd part of the three-arrow composite defining $\delta_Z$ in the
+statement, whose last arrow is the canonical map $j_*\omega_{X/S}(R)\oplus j'_*\omega_{X'/S}
+(R')\to\omega_{Z/S}(R_{\rm tot})$ — which on odd parts is, by Lemma 4.1(1), the trace
+inclusion. Hence $\delta^-_Z$ is an isomorphism.
+
+Finally $\mathcal L=j_*L\oplus j'_*L'$ is coherent, flat, relatively Cohen–Macaulay and locally
+free of rank 1 on a fibrewise dense open of $Z_0$ (at $p_0$ its complete local module is
+$k[[x]]\oplus k[[y]]$, which is torsion free of depth 1 over $k[[x,y]]/(xy)$), and $Z_0$ is
+prestable with reduced fibres, smooth near all remaining marked points. By Lemma 2.6 the triple
+$(Z_0,\mathcal L,\delta_Z^-)$ is a supercurve with punctures; stability of $Z$ is the stability
+of $(Z_0,\text{marked points})$, unchanged from [FKP]. $\square$
+
+> **Corollary 4.4.** The morphisms (7.8) and (7.9) exist as stated, for all
+> $m_i\ge0$ and all even $n_i\ge0$:
+> $$\overline{\mathcal S}_{g_1;m_1+1,n_1}\times\overline{\mathcal S}_{g_2;m_2+1,n_2}
+> \to\overline{\mathcal S}_{g_1+g_2;m_1+m_2,n_1+n_2},\qquad
+> \overline{\mathcal S}_{g;m+2,n}\to\overline{\mathcal S}_{g+1;m,n}.$$
+
+*Proof.* Apply Prop. 4.3 to the two families pulled back from the factors (resp., to $X/S$ with
+its two NS punctures $P,P'$), and use that $\overline{\mathcal S}_{g;m,n}$ *represents* the
+functor of families of stable supercurves with $m$ NS and $n$ Ramond punctures (I4), so that
+the constructed family over $\overline{\mathcal S}_{g_1;m_1+1,n_1}\times
+\overline{\mathcal S}_{g_2;m_2+1,n_2}$ is classified by a unique morphism. $\square$
+
+> **Remark 4.5 (consistency check on parities).** On a smooth fibre, (2.5) says
+> $L^{\otimes2}\cong\omega_C(\sum r_i)$, so $2\deg L=2g-2+n$ and $n$ must be even. The gluing
+> adds $n=n_1+n_2$, even ✓, and raises the genus by $g_1+g_2$ with no change to the parity
+> bookkeeping — the glued $Z_0$ has arithmetic genus $g_1+g_2$ and $\mathcal L$ has
+> "$\deg$" $g_1-1+\frac{n_1}2+g_2-1+\frac{n_2}2+1$, matching $\frac{2(g_1+g_2)-2+n}{2}+1$
+> correctly for a node contribution. This is only a sanity check, not part of the proof.
+
+---
+
+## 5. Step 3 [E1]: the fundamental sequence carries a Ramond twist
+
+### 5.1 What is wrong
+
+**L1, p. 41** (I6) prints, for a smooth supercurve $U/S$,
+$$0\to\omega^2_{U/S}\xrightarrow{\ \kappa\ }\Omega_{U/S}\xrightarrow{\ \delta\ }\omega_{U/S}
+\to0,$$
+and Lemma 7.1 concludes (7.1) $0\to\omega^2_{X/S}\to j_*\Omega_{U/S}\to\omega_{X/S}\to0$.
+But [FKP]'s own §2.2, **L1, p. 5** (I2), gives for a smooth supercurve **with Ramond punctures**
+$$0\to\mathcal D^{-2}(-R)\to\Omega_{X/S}\to\mathcal D^{-1}\to0,\qquad
+\mathcal D\simeq\omega^{-1}_{X/S}(-R),$$
+whence $\mathcal D^{-1}=\omega_{X/S}(R)$ and
+$\mathcal D^{-2}(-R)=\omega^2_{X/S}(2R)(-R)=\omega^2_{X/S}(R)$, and the third arrow is
+identified on the same page as
+"$\delta\colon\Omega_{X/S}\to\mathcal D^{-1}\simeq\omega_{X/S}(R)$".
+So the correct sequence on a smooth supercurve with Ramond punctures is
+$$0\to\omega^2_{U/S}(R)\xrightarrow{\ \kappa\ }\Omega_{U/S}\xrightarrow{\ \delta\ }
+\omega_{U/S}(R)\to0.\tag{7.1$'_{\rm sm}$}$$
+The printed (7.1) is its $R=\varnothing$ specialisation. That this is an omission and not a
+different convention is confirmed by [FKP]'s §7.4, **L1, p. 47** (I10), which writes the very
+same $\delta$ **with** the twist: "$\delta\colon\Omega_{X/\overline{\mathcal S}}\to
+\omega_{X/\overline{\mathcal S}}(R)$".
+
+This matters, because **Lemma 9.1(iv) uses (7.1) by name**. L1, p. 60, proof of Lemma 9.1:
+"(iv) This follows from parts (i), (ii) and from the exact sequence (7.1) (and a similar exact
+sequence for $\Omega_{\widetilde X/B}$ which holds over the smooth locus)."
+
+### 5.2 The repair
+
+> **Lemma 5.1 (the $R$-twisted fundamental sequence).** Let $\pi\colon X\to S$ be a family of
+> stable supercurves with punctures, $j\colon U\hookrightarrow X$ the complement of the nodes,
+> $R\subset U$ the Ramond divisor. Then there is an exact sequence on $X$
+> $$0\to\omega^2_{X/S}(R)\xrightarrow{\ \kappa\ }j_*\Omega_{U/S}
+> \xrightarrow{\ j_*\delta\ }\omega_{X/S}(R)\to0.\tag{7.1-R}$$
+> Moreover, on the open set $V:=X\smallsetminus R$ — which contains every node and every NS
+> puncture — the canonical section $s_R$ of $\mathcal O_X(R)$ trivialises $\mathcal O_X(R)|_V$,
+> and (7.1-R)$|_V$ is identified with (7.1)$|_V$.
+
+*Proof.* On $U$ the sequence is (7.1$'_{\rm sm}$), which is [FKP]'s (I2) rewritten using (2.3),
+as computed above. Apply $j_*$. Left-exactness is automatic. For the outer terms,
+$R\subset U$ is a relative Cartier divisor **disjoint from the nodes**, so
+$\mathcal O_X(R)$ is a line bundle on $X$ with $j^*\mathcal O_X(R)=\mathcal O_U(R)$, and by the
+projection formula $j_*(\omega^{2}_{U/S}(R))=(j_*\omega^2_{U/S})(R)=\omega^2_{X/S}(R)$ (using
+(I5) for the middle equality) and $j_*(\omega_{U/S}(R))=\omega_{X/S}(R)$.
+
+Surjectivity of $j_*\delta$ is a local question on $X$. Away from the nodes it is the
+surjectivity of $\delta$ on $U$. At a node it is [FKP]'s Lemma 7.1, whose proof is local at the
+node (**L1, p. 42**: "Near a Ramond node, the map $\delta\colon\Omega_{X/S}\to\omega_{X/S}=
+j_*\omega_{U/S}$ is surjective", followed by the NS-node computation); since $R$ does not meet
+the nodes, $\mathcal O_X(R)$ is canonically trivial there and the twisted and untwisted
+statements are literally the same statement. The last sentence of the Lemma is then the
+definition of $s_R$. $\square$
+
+> **Corollary 5.2 (where the twist is invisible).** Let $W\subset X$ be any open subset
+> disjoint from $R$. Then over $W$ the sequences (7.1) and (7.1-R) coincide, canonically, via
+> $s_R$. In particular this applies to:
+> (a) a neighbourhood of a node $Q$;
+> (b) a neighbourhood of an NS puncture $P_i$ and of its divisor $D_i$.
+> Consequently, for any coherent sheaf $\mathcal F$ on $X$ whose support is contained in $W$,
+> the canonical map $\mathcal F\to\mathcal F\otimes\mathcal O_X(R)$, $s\mapsto s\otimes s_R$,
+> is an isomorphism.
+
+*Proof.* Immediate: $s_R$ is nowhere vanishing on $X\smallsetminus R$, and by Def. 2.4 the
+divisors $R_j$ are disjoint from the nodes (they lie in the smooth locus $U$) and from the
+NS punctures and their divisors $D_i$ (Def. 2.4 requires the $P_i$ and $R_j$ to be disjoint
+closed subschemes; $D_i$ is supported on $P_i$). $\square$
+
+> **Remark 5.3 ([E1] does not damage §3).** Proposition 3.5 — the definition of $\Delta$ and
+> the isomorphism (7.6) — does **not** use (7.1) at any point: it uses only Prop. 7.4 (I7),
+> whose proof is étale-local at a single node, plus smoothness of
+> $\overline{\mathcal S}_{g;m,n}$ and the codimension estimate. The only consumer of (7.1) in
+> the whole chain is Lemma 9.1(iv), treated in §6.
+
+> **Remark 5.4 (a third instance of the same omission).** The composite defining $\delta_Z$ in
+> Lemma 7.9 is printed (L1, p. 47) as ending in $j_*\omega_{X/S}\oplus j'_*\omega_{X'/S}\to
+> \omega_{Z/S}$, again untwisted; the correct composite is the one displayed in Prop. 4.3.
+> [E1] and [E2] are thus two symptoms of one editorial fact: §7 of [FKP] was written with
+> $R=\varnothing$ in mind, while §2 and §7.4 carry the twist. None of the three instances is a
+> mathematical error in the untwisted case, and all three are repaired above.
+
+---
+
+*(Parts §6–§11 follow.)*
