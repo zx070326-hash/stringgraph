@@ -74,7 +74,7 @@ PART 5 -- Theorem C:  D_I is invariant under Gamma^0(I) = {b = 0 mod I},
    how many distinct values does D_2 take on the SL(2,Z)-orbit of (4,4,0)?
       D_2 =        7999541469408   (e.g. U=[[-4,-3],[-1,-1]] -> (100,8,56),  b mod 2 = 1,  124 matrices)
       D_2 =        7999235715072   (e.g. U=[[-3,-1],[-2,-1]] -> (40,20,56),  b mod 2 = 1,  56 matrices)
-      distinct values: 2   [SL(2,Z):Gamma^0(2)] = 3, the third coset is arithmetically inadmissible (4 does not divide m)
+      distinct values: 2   [SL(2,Z):Gamma^0(2)] = 3.  (All three cosets are represented by admissible frames here; two of them happen to share a value.  See the per-base table below: at base (4,8,0) the three cosets give three DIFFERENT values, so Gamma^0(2) is the FULL stabiliser there and the factorisation through Gamma^0(2)\SL(2,Z) is sharp.)
 
    value count over the SL(2,Z) orbit, for several I=2 base points
    (coset invariant of Gamma^0(2)\SL(2,Z) is the top row (a,b) mod 2)

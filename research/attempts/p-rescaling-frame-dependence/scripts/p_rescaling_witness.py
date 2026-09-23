@@ -305,8 +305,11 @@ def main():
         a, b, c, d, mm, nn, ll = reps[0]
         print(f"      D_2 = {v:>20d}   (e.g. U=[[{a},{b}],[{c},{d}]] -> ({mm},{nn},{ll}),"
               f"  b mod 2 = {b % 2},  {len(reps)} matrices)")
-    print(f"      distinct values: {len(vals)}   [SL(2,Z):Gamma^0(2)] = 3,"
-          f" the third coset is arithmetically inadmissible (4 does not divide m)")
+    print(f"      distinct values: {len(vals)}   [SL(2,Z):Gamma^0(2)] = 3."
+          f"  (All three cosets are represented by admissible frames here; two of them"
+          f" happen to share a value.  See the per-base table below: at base (4,8,0) the"
+          f" three cosets give three DIFFERENT values, so Gamma^0(2) is the FULL stabiliser"
+          f" there and the factorisation through Gamma^0(2)\\SL(2,Z) is sharp.)")
 
     print()
     print("   value count over the SL(2,Z) orbit, for several I=2 base points")
