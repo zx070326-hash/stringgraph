@@ -28,6 +28,52 @@ novelty: >-
   and 5.1, which give paper.md a positive direction it explicitly disclaims
   having (its section 1.5(2): "Nothing in the positive direction").
 
+# --- !! PRIOR-ART COLLISION ON THM 4.5, recorded by lead 2026-09-23 --------
+# Source: literature/extractions/supermoduli-genus0-splitness-prior-art.md
+# (researcher round agent/researcher/supermoduli-genus0-splitness-prior-art,
+#  merged to main 2026-09-23; all quotes L1 page-image verified).
+# The "new content" sentence above was written WITHOUT this information and
+# must not be read as still standing. A reviewer must settle the residue
+# before Thm 4.5 is described as new anywhere.
+prior_art_thm_4_5:
+  verdict: >-
+    The BARE STATEMENT "Sbar_{0;4,0} is split" is NOT new. Witten,
+    arXiv:1209.2459 section 5.1.3, typeset p.54-55, asks the identical
+    question verbatim ("The supermanifold hat-M_{0,4} has dimension 1|2. Is
+    this supermanifold split?") about the COMPACTIFIED object and answers yes,
+    exhibiting an explicit splitting - the OSp(1|2)-invariant super cross ratio
+    (5.13) - and the equally explicit second splitting (5.14). He attributes
+    the splittings to Nelson (Superstrings '88) and Giddings, CMP 143 (1992).
+    The attempt cites neither; "Witten" appears in proof.md only as the W of
+    Donagi-Witten. paper.md section 1.5(2)'s "Nothing in the positive
+    direction" is a statement about paper.md, not about the literature.
+  what_may_survive: >-
+    Witten's argument is at the SUPERMANIFOLD / coarse level - a holomorphic
+    map to CP^1 - and he presents it BEFORE introducing the orbifold structure
+    (p.56), never returning to claim the splitting survives it; he outsources
+    the stack-level precision to a private letter from Deligne, which this
+    project cannot register. The extraction records this discontinuity as a
+    fact of the source and explicitly declines to judge whether it is
+    substantive. Thm 4.5 is stack-level (mu_2-gerbe over the mu_2-root stack of
+    (P^1, 0+1+inf), Lambda^2 T_-^v = T_X, Serre duality). So the candidate
+    residue is exactly: "split AS A STACK, by an obstruction-class computation
+    rather than by exhibiting a map". That is a narrower claim than the one in
+    the novelty field, and NOBODY HAS CHECKED IT.
+  also_settled_by_that_round: >-
+    (i) "odd rank 2 => projected <=> split", used by the attempt via [CN Prop
+    2.2], is also Donagi-Witten arXiv:1304.7798 Corollary 2.3, p.19 - a
+    numbered corollary, not folklore. (ii) The general mechanism "odd rank 2 +
+    negative canonical degree => omega_2 = 0" is FALSE as a general statement
+    (Vishnyakova's non-split Q^{1|2} over CP^1); degrees must be computed case
+    by case, which Thm 4.5 does. (iii) No counter-statement exists anywhere:
+    every published non-projectedness result is quantified g >= 2 or g >= 5.
+  action_required_before_graduation: >-
+    Cite Witten section 5.1.3 (and its Nelson/Giddings attribution) in proof.md
+    section 4, restate the novelty claim as the stack-level residue above or
+    drop it, and have the reviewer rule on whether that residue is real. Note
+    the attempt's own next_targets list below was chosen on the assumption that
+    (0;4,0) was newly settled here; the targets themselves are unaffected.
+
 # --- what is proved --------------------------------------------------------
 results:
   - id: lemma-1.1
