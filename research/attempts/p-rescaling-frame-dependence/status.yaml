@@ -1,0 +1,37 @@
+slug: p-rescaling-frame-dependence
+state: draft
+opened: 2026-09-23
+captain_confirmed: false
+reviewer: null
+verdict: null
+
+origin: |
+  research/papers/torsion-dyon-shift-positivity/paper.md §9 (line 350) defers the question
+  of whether the "P-rescaling" torsion divisor-sum formulae in the literature are frame
+  dependent, and the paper nowhere bounds the blast radius of its own negative finding.
+
+questions:
+  - id: Q1
+    text: Which literature formulae form the P-rescaling family? Verbatim, with PDF equation numbers.
+    state: open
+  - id: Q2
+    text: Is the P-rescaling divisor sum likewise frame dependent? Explicit integer witness or proof of independence.
+    state: open
+  - id: Q3
+    text: Blast radius - which papers use D_I (or D'_I) as a charge function, classified into load-bearing / adapted-only / transcription-only.
+    state: open
+
+notes: |
+  2026-09-23 open. claim.md written before any computation, per project lifecycle.
+  Working hypotheses (NOT results):
+   - the P-family is Banerjee-Sen-Srivastava 0802.0544 + 0802.1556;
+   - transfer should be by the reflection d_*(m,n,l) = d_*(n,m,l), but the lattice-theoretic
+     side (which frames count as "adapted") must be redone, not assumed;
+   - BSS's formula carries an extra average over shifts k/sbar^2, l/sbar, so it is NOT the
+     bare divisor sum and must be Fourier-analysed from scratch.
+  Discipline reminders adopted for this attempt:
+   - every literature quotation is labelled L1 (page image read by me) or L3 (transcribed);
+   - equation numbers taken from the arXiv PDF, never from ar5iv (project has a standing
+     correction record for exactly this, see literature/extractions/dabholkar-gomes-murthy-2008.md C2);
+   - the rho/sigma/v dictionary for the P-family is re-derived from scratch, not copied
+     from the Q-family dictionary.
