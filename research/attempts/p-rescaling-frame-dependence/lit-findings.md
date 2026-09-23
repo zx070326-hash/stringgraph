@@ -91,6 +91,63 @@ adapted-frame restriction of (P'_ad) is therefore **present in DGM's own §2**, 
 (3.28) does is drop it from the *notation* by writing the left side as a function of
 (Q²/2,P²/2,Q·P) alone.
 
+### F3b (L1, pp. 17–19 of the PDF = printed pp. 16–18, §4.1) — **the decisive finding of this attempt**
+
+DGM do not merely restrict to the (I,1,1,1) frame in §2; in §4.1 they **prove the Γ⁰(I)
+invariance and state outright that their partition function is not SL(2,ℤ)-invariant**.
+Verbatim, printed p. 18:
+
+> "This defines the embedding of the physical duality group into the Sp(2,ℤ). **The partition
+> function 𝒵_I is however not invariant under the full SL(2,ℤ) but only under a congruence
+> subgroup Γ⁰(I) defined by matrices**
+>
+>   h = (a b; c d) ∈ SL(2,ℤ)   b = 0 mod I .   (4.5)
+>
+> To see the invariance of the partition function under this subgroup, we consider the
+> transformation properties under each of the terms (3.27) under h. Note that
+>
+>   (s²ρ′ sv′; sv′ σ′) = (d −sc; −b/s a)(s²ρ sv; sv σ)(d −b/s; −sc a)   (4.6)
+>
+> Using the fact that b = 0 mod (I) and using the modular properties of Φ₁₀(ρ,σ,v) under
+> Sp(2,ℤ), it is easy to see that Φ₁₀(s²ρ′,σ′,sv′) = Φ₁₀(s²ρ,σ,sv).  (4.7)"
+
+and, continuing on the same page and the next (printed pp. 18–19):
+
+> "We therefore see that the degeneracy defined by (3.26) is manifestly invariant under
+> Γ⁰(I). The complete spectrum of dyons should of course be invariant under the full SL(2,ℤ)
+> which is the physical duality group. To exhibit this duality invariance we proceed as
+> follows. Consider the coset
+>
+>   SL(2,ℤ)/Γ⁰(I) ≡ {g₀, g₁, … g_k},   (4.12)
+>
+> where k is the order of Γ⁰(I) in SL(2,ℤ) and g₀ is the identity element. **The function 𝒵_I
+> is not invariant under the full SL(2,ℤ). Under the action of an element g_l it will
+> transform to a new function which we denote by 𝒵_I^{(l)}** with the convention that
+> 𝒵_I^{(0)} = 𝒵_I. The charge vector Γ of the dyon will also transform under this element to
+> a new charge vector Γ^{(l)}. The invariants of this transformed charge vector will no longer
+> be of the form (r₁,r₂,r₃,u₁) = (I,1,1,1). **However, the degeneracy of these dyons Γ^{(l)}
+> can be defined simply by using the transformed partition function 𝒵_I^{(l)}.** With these
+> definitions, the resulting spectrum is thus manifestly duality invariant under the full
+> duality group SL(2,ℤ)."
+
+**Consequences — these narrow this project's claim and must be reported, not resisted.**
+
+1. DGM's (4.6) is, term by term, the matrix identity that `proof.md` Theorem C proves:
+   the *s*-th summand is carried to the *s*-th summand by the integral matrix
+   (d, −b/s; −sc, a), which is integral **iff s | b**. My Theorem C is therefore
+   **not new mathematics**; it is DGM (4.5)–(4.7) restated on the charge side. What is new
+   here is only (i) the exact-integer *measurement* of how much the value moves between
+   cosets, and (ii) the transfer of the statement to the P-rescaling operator.
+2. **DGM state explicitly that their formula is attached to the (I,1,1,1) frame and that a
+   different function 𝒵_I^{(l)} must be used on the other SL(2,ℤ)/Γ⁰(I) cosets.** So the
+   "frame dependence" of the divisor sum is *the content of DGM §4.1*, not a defect DGM
+   overlooked. What (3.28) does, and all it does, is drop that hypothesis from the notation
+   by writing the left side as a function of (Q²/2, P²/2, Q·P) alone.
+3. Hence for the 甲/乙/丙 classification, **DGM itself is (乙)**: the formula is stated —
+   in the same paper, two pages later — only on the adapted orbit, with the non-adapted
+   orbits handled by a different function. Any claim that DGM's result is *wrong* because of
+   frame dependence does not survive reading §4.1.
+
 ---
 
 ## 2. Banerjee–Sen–Srivastava, arXiv:0802.1556 ("torsion > 1") — also Q-rescaling
@@ -357,12 +414,24 @@ with the surrounding text: "Note that if we considered the generating function Z
 with I > 1 and performed a similar expansion, due to (2.13) the corresponding coefficients
 would be Jacobi forms only with respect to a congruence subgroup Γ⁰(I) ⊂ SL(2,ℤ) [26]".
 
-Here SL(2,ℤ) acts on τ, AN's **electric** variable. The stabiliser of the *Q*-adapted
-condition under Q → aQ + bP is b ≡ 0 (mod r) = Γ⁰(r); the stabiliser of the *P*-adapted
-condition is c ≡ 0 (mod r) = Γ₀(r). AN pair a P-rescaling divisor sum (2.13) with the
-Q-adapted congruence subgroup Γ⁰(I) (2.16). That combination is internally inconsistent, and
-is the clearest evidence that (2.13) is a transcription of DGM (3.28) in which the rescaled
-slot was matched by *position in the letter triple* rather than by *which charge it carries*.
+Here SL(2,ℤ) acts on τ, AN's **electric** variable. On the charge side (see `proof.md`
+Theorem C) the stabiliser of the *Q*-adapted condition under (Q,P) ↦ (aQ+bP, cQ+dP) is
+b ≡ 0 (mod I) = Γ⁰(I); the stabiliser of the *P*-adapted condition is c ≡ 0 (mod I) = Γ₀(I).
+AN pair a P-rescaling divisor sum (2.13) with the label Γ⁰(I) (2.16), taken over from [26].
+
+**How far this goes — stated carefully.** DGM's Γ⁰(I) (their (4.5), F3b below) is a
+statement about the charge-space action (4.1) (Q,P) ↦ h(Q,P), and DGM's divisor sum divides
+Q²/2, so for DGM Γ⁰(I) = {b ≡ 0} is the *correct* group. AN's divisor sum divides P²/2, so
+the corresponding charge-space stabiliser is Γ₀(I) = {c ≡ 0}. If (2.16)'s SL(2,ℤ) is meant
+to be the same charge-space S-duality as DGM's (4.1), then (2.13)+(2.16) are mutually
+inconsistent. If instead (2.16)'s SL(2,ℤ) is the Jacobi-modular group acting on (τ,z) at
+fixed index — which is the group under which "the coefficients are Jacobi forms" is the
+natural phrasing — then it is not the same group as (4.1) and no comparison of Γ⁰ with Γ₀
+is meaningful without redoing the Sp(4,ℤ) embedding.
+**[GAP: which SL(2,ℤ) AN mean in (2.16) is not determined by the text I have read.]**
+What is certain and frame-independent is F7b: (2.13) divides the magnetic slot and (3.28)
+divides the electric one, so the two are different statements about charges; `proof.md`
+Theorem D exhibits an (m,n,ℓ,I) at which they give different integers.
 
 ### F7d — consequence for `paper.md` §4
 
