@@ -17,7 +17,8 @@ notes: |
 
   2026-09-23, second prover pass: proof.md now exists (Parts 0-6), built from scratch, with
   every load-bearing formula re-derived or checked against a page image (log in Appendix A).
-  This supersedes and discharges the previous "lead" warning above (kept only as history):
+  This supersedes and discharges the previous "lead" warning (which said no proof.md existed;
+  that is no longer true, and the warning has been removed rather than kept):
   the "planned state of play" that warning referred to was never independently re-verified in
   this pass and should not be assumed correct beyond what is restated below.
 
