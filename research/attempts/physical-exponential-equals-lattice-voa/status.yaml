@@ -1,5 +1,9 @@
 state: under-review
-reviewer: graph-reviewer (sonnet, 2026-09-18, 三轮问答, lead 两次追压)
+reviewer: |
+  graph-reviewer (sonnet, 2026-09-18, 三轮问答, lead 两次追压) —— round 1，结构审查 + 定理 6.8 单支
+  的逐步重算（2026-09-19 补审，docs/reviews/theorem-6-8-recomputation-audit-2026-09-19.md）。
+  rev-voa (sonnet, 2026-09-24, round 2) —— 独立核 round 1 裁定是否真闭合 + 给 42 处 [GAP] 逐条定性
+  + 核 graph/ 6 处引用的暴露面。只读 proof.md/claim.md/graph/**，只写本文件（status.yaml）。
 verdict: |
   准予 draft -> under-review，零必改项，两条非阻塞建议。
   完整裁定见 docs/reviews/track-iii-proof-review-2026-09-18.md。
@@ -34,6 +38,147 @@ verdict: |
   lead 要求当场检验，审查者读了 §2.2/§6.3 源文本后**推翻了自己的猜想**——
   §6.3 根本不是归纳（对固定但任意的 γ,δ 单次代入），引理 2.5 的 (⇒) 方向
   逐层独立、未用到 Z 的后继/良序/生成元有限性。定理 6.8 单独毕业的建议不撤回。
+
+review_2026_09_24:
+  verdict: |
+    独立核（不继承 round 1 结论）后维持 round 1/1.5 的裁定：state 停留 under-review，不升、不降。
+    理由：round 1 的两轮审查（2026-09-18 结构审查 + 2026-09-19 定理 6.8 逐步重算）documented
+    的裁定与本轮独立重读 proof.md 第 1088–1137 行、docs/reviews/ 两份记录、graph/ 6 处引用后
+    的核对结果**一致，未发现新问题**；但 attempt 的主张（正面结果 §0–§5 / Claim A′ / (H-anchor)）
+    从未被逐步重算过，round 1/1.5 也从未声称覆盖它——**这不是本轮新发现的缺口，是 round 1 自己
+    从未主张闭合的部分，继续原样开放**。42 处 [GAP] 里唯一真正碰到已毕业图内容的
+    （[GAP-vac]）是记账缺口，不影响 Theorem 6.8 论证本身的正确性。**graph/ 的 6 处引用没有一处
+    依赖任何承重 GAP 之后的结论**——见 gap_triage 与 graph_exposure。
+
+  round1_objections_status:
+    - objection: "8/8『未发现问题』的裁定只有约 1.5/8 是独立重算，其余是论证追溯/一致性核对（track-iii-proof-review §2）"
+      status: 已闭合（对定理 6.8 这一支）
+      note: |
+        2026-09-19 补审把定理 6.8 单支的重算覆盖率从 1.5/8 提到 4.0/7，本轮独立重读该审查记录
+        （docs/reviews/theorem-6-8-recomputation-audit-2026-09-19.md）与 proof.md 第 1088–1124 行，
+        逐符号比对：K_*(γ,δ)=⟨γ,δ⟩+ν_γ、(6.4) 两式、δ=0 代入给 c 常值、代回给 ε≡1、
+        与 (3.8) 矛盾——链条自洽，未发现算错。**但正面结果那支（§0–§5）与 (H-anchor) 相关的
+        一切仍是原始的 1.5/8 覆盖率，未补审**，round 1 自己也这样声明，不是本轮新发现。
+    - objection: "proof.md 第 1109 行『两个最低非零指标必须相同』只写结论没写论证，疑似隐藏假设/循环"
+      status: 已闭合
+      note: |
+        2026-09-19 审查构造了显式两分支反证（K_*<K_γ(δ) 与 K_*>K_γ(δ) 各自导出矛盾），
+        本轮独立核对该反证逻辑成立，且该反证已内联进图上的推导卡
+        math.lattice-vertex-algebra-odd-pairing-obstruction--via-lowest-nonzero-coefficient.yaml
+        （见该卡 summary 第三步），不再是"只写结论"。
+    - objection: "定理 6.8『未引用任何物理记号或 (H-anchor)、干净独立』——2026-09-19 订正为并非干净独立于 [GAP-vac]"
+      status: 已闭合（作为订正记录，不是待办）
+      note: |
+        proof.md 第 1092 行裸用 Y_U(1,x)=id_U 属实（本轮独立核对该行）。订正已落地为两条附加条件
+        ——推导卡内联重写 Δ̄(δ,x)·1=1 三行、如实登记 [GAP-vac]——本轮核对推导卡确实执行了两条。
+        [GAP-vac] 本身仍开放（见 gap_triage），但"记账缺口"这一定性本轮维持。
+    - objection: "候选脆点：§6.3 定理 6.8 把引理 2.1–2.5 从 Z 推广到一般偶格 L 是否真的穷尽 L×L，还是只沿可数子集宣称"
+      status: 已闭合（round 1 内部自行提出并当场排除）
+      note: |
+        本轮独立重读 proof.md §6.3（1058–1153 行）：证明对"固定但任意"的 γ,δ 单次代入，
+        (6.4) 对一切 γ,δ∈L 是全称结论，不是从某个可数子集外推；round 1 的排除理由成立。
+    - objection: "本轮没有构造过反例（round 1.5 自陈：是『没尝试』而非『尝试了但失败』）"
+      status: 未闭合，如实维持开放
+      note: |
+        本轮同样**没有**构造反例（不在任务范围内独立完成一个具体秩 2 偶格 + 奇配对 + 满足
+        (3.6)–(3.8) 的 ε 的反例搜索，这需要独立验证一整套算子公理，超出本轮核查预算）。
+        如实记录：这是"没做"，不是"做了没发现"。
+    - objection: "正面结果那一支（§0–§5）、(H-anchor) 相关的一切、§6.1/§6.2 非类光结论——round 1/1.5 完全未审"
+      status: 无法判定（本轮同样未独立重算，与 round 1/1.5 状态一致，不构成新增开放项）
+      note: |
+        本轮时间预算内通读了这些章节的结构（claim.md 全文、proof.md 目录与关键定义），
+        但**未逐步重算**其中的孤立代数步骤（例如 §2 命题 2.7、§3 定理 3.5、§5 五步系数核对）。
+        这与 round 1/1.5 的覆盖边界完全相同——不是本轮新发现的缺口，是继承的、从未闭合过的缺口。
+
+  gap_triage:
+    summary: |
+      proof.md 正文含 "GAP" 的行约 44 行（`grep -c GAP proof.md`），对应 8 个具名 [GAP-*] 类别
+      （多数在 §7.1/§7.2 与正文各多次被引用/交叉引用，故行数 > 类别数）。
+      classification 按"是否影响 graph/ 已毕业内容（定理 6.8/推论 6.9 + 4 张定义卡）的正确性"分类：
+      承重（load-bearing，对已毕业结论）= 0 类；承重（对未毕业的正面主张 Claim A′/(H-anchor)）= 5 类；
+      记账/装饰性（不影响任何已证结论，只是图卡挂载问题）= 3 类。
+    load_bearing_for_unpublished_positive_claim:
+      - id: GAP-anchor
+        proof_md_lines: "633, 656, 671, 707, 926, 1163-1173"
+        verdict: 真正承重，是全篇最大的缺口
+        note: |
+          (H-anchor)（"物理记号 :e^{ink0·X(z)}: 就是满足 (C1)(C2)(C3) 的那族算子"）无图内承载，
+          proof.md 自己承认在当前图现状下不可能成为定理。它是 Claim A′ 变成"物理陈述"的唯一桥梁。
+          **未毕业**：graph/ 现存的桥卡（-v2）status 仍是 physical-argument，未声称跨过这条缝。
+      - id: GAP-continuous
+        proof_md_lines: "1189-1192"
+        verdict: 真正承重（对正面主张），但已被 GAP-anchor 隔离，不重复计
+        note: "离散塔↔连续动量对接无图节点；proof.md 自陈这一步由 (H-anchor) 承担。"
+      - id: GAP-module-family
+        proof_md_lines: "1194-1199"
+        verdict: 承重但已被写进前提（不影响 Claim A′ 主定理，只影响"物理塔必须是 M(1,p̃)"这一更强主张）
+      - id: GAP-δ-downstream
+        proof_md_lines: "247, 367, 380, 403, 1182-1187"
+        verdict: 承重但明确声明"不是 Claim A′ 的前提"，只影响用到内积/幺正性的下游（本 attempt 未产出这类下游结论）
+      - id: GAP-rank-general
+        proof_md_lines: "1150-1153"
+        verdict: 承重但明确"本卡不需要"（推广版本的主张缺证明，主定理不受影响）
+    bookkeeping_not_load_bearing:
+      - id: GAP-vac
+        proof_md_lines: "773, 937, 1175-1180, 1265"
+        verdict: |
+          唯一一个**触及已毕业图内容**（定理 6.8/推论 6.9 的证明第 1092 行裸用 Y_U(1,x)=id_U）的 GAP。
+          性质是记账缺口，不是数学缺口：模的真空公理是 VOA 模定义的标准组成部分（类比顶点代数自身
+          真空公理 Y(1,x)=id_V），不是存疑的断言。curator 已建 math.vertex-algebra-module-vacuum-axiom
+          定义卡（rigorous，来源 Borcherds 1986 §4）专门承载它——**但该卡与定理 6.8 推导卡之间未连
+          depends_on 边**（推导卡 depends_on 只列 math.lattice-vertex-algebra 一条），是本轮发现的
+          一处未闭合的图记账细节，建议 curator 补边，不阻塞、不影响裁定。
+      - id: GAP-def-cards
+        proof_md_lines: "1203-1207"
+        verdict: |
+          已闭合。三张缺失定义卡（E^±/Δ̄、Z_n(z)）已由 curator 分别建为
+          math.vertex-algebra-exponential-and-shift-operators.yaml 与
+          worldsheet.tower-zero-mode-monodromy-factor.yaml（均 rigorous，纯定义，无独立 GAP）。
+      - id: GAP-target-card
+        proof_md_lines: "1208-1218"
+        verdict: 已闭合。-v2 订正卡已建，状态刻意保持 physical-argument（未因订正记号错误而抬档）。
+
+  graph_exposure:
+    files_checked:
+      - graph/derivations/math/lattice-vertex-algebra-odd-pairing-obstruction--via-lowest-nonzero-coefficient.yaml
+      - graph/statements/math/lattice-vertex-algebra-odd-pairing-obstruction.yaml
+      - graph/statements/math/vertex-algebra-exponential-and-shift-operators.yaml
+      - graph/statements/math/vertex-algebra-module-vacuum-axiom.yaml
+      - graph/statements/worldsheet/physical-exponential-equals-voa-vertex-operator-v2.yaml
+      - graph/statements/worldsheet/tower-zero-mode-monodromy-factor.yaml
+    verdict: |
+      **无需立即上报**。6 处引用可分两类：
+      (1) 4 张纯定义卡（E^±/Δ̄、真空公理、Z_n(z)）——照抄 Li–Wang (3.2)/(p.11) 与 Borcherds 1986 §4
+          的标准定义，不含任何本 attempt 的原创证明步骤，status: rigorous 名副其实，与本 attempt
+          的正面主张（Claim A′、(H-anchor)）无关。
+      (2) Theorem 6.8（"奇配对障碍"，statement + derivation 各一张卡，status: rigorous）——这是
+          proof.md §6.3 的**负面/no-go 结果**，其证明（本轮独立核对，见 round1_objections_status）
+          只用到 §1 的刚性引理（引理 2.1–2.5，逐层独立、与层指标集的代数结构无关）与 (3.6)–(3.8)
+          的 cocycle 公理，**完全不使用** Claim A/A′、(H-anchor)、GAP-anchor、GAP-continuous、
+          GAP-module-family、GAP-δ-downstream、GAP-rank-general 中的任何一个——这些全是"正面结果"
+          专属的缺口，Theorem 6.8 是纯代数反面结果，走的是不同的证明路径。
+          唯一接触的 GAP 是 [GAP-vac]（见上，记账缺口，非数学缺口）。
+      **且**：唯一断言"正面方向成立"的桥卡（worldsheet.physical-exponential-equals-voa-vertex-operator-v2）
+      status 仍是 physical-argument，未被本 attempt 升级，卡内 notes 明确记录这一点、且解释了原因
+      与本 attempt 的 GAP 分类完全对应。⇒ graph 暴露面是自洽的：图只吸收了本 attempt 里已经过
+      独立重算的那一支（Theorem 6.8），没有任何卡的 status 建立在 GAP-anchor 之后。
+    minor_finding_not_urgent: |
+      定理 6.8 推导卡的 depends_on 未连到 math.vertex-algebra-module-vacuum-axiom（虽然该卡存在且
+      正是为了承载 [GAP-vac] 而建），是记账层面的边缺失，建议 curator 顺手补上，不构成"必须上报"
+      的发现（不影响任何 effective 状态，按根 CLAUDE.md 原则 8 属于"默认放行"）。
+
+  what_i_could_not_check: |
+    - 未逐步重算 §0–§5（正面结果、Claim A′ 全部证明）与 §6.1/§6.2（非类光边界定理）的孤立代数步骤——
+      与 round 1/1.5 覆盖边界相同，不是本轮新缺口。
+    - 未独立构造反例（同 round 1.5 的开放项）。
+    - Li–Wang 2008 (3.14)/(3.2)/(3.5)–(3.8) 等原文逐字文本未重新对照 arXiv:0802.0173 的 PDF 页面图像
+      核实——本轮信任 literature/extractions/math-sources.md §36.6 的既有 L1 抽取记录（该记录已被
+      round 1 与本 attempt 反复引用且历史上出过订正记录，说明它经受过检验），未重新走
+      curl→pdftoppm→Read 流程独立核实原文，因为本轮任务重心是"闭合状态核对 + GAP 定性 + graph 暴露面"，
+      不是重新做逐字文献核实。
+    - graph/ 中除上述 6 个文件外，是否还有*间接*依赖本 attempt 结论的节点（例如某节点的 notes 提及
+      本 attempt 但未走 sources/depends_on 边）——只做了 grep -rl 精确路径匹配，未做语义级搜索。
+
 captain_confirmed: false
 notes: |
   ==========================================================================
