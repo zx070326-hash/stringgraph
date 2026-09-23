@@ -161,6 +161,13 @@ extraction record for it anywhere in `literature/`, so per this project's rules 
 and the paper never did. If it turns out to contain the lattice criterion, the disposition should be
 "independently reproduced", not "refuted". Closing this needs a researcher round with network access.
 
+⏳ **That round was dispatched 2026-09-23** (`agent/researcher/arxiv-2510-05219`, writes `literature/**`
+only). It is also carrying §4.4's benchmark-citation question as a secondary objective. This is the
+paper's last open novelty question: §3 establishes there is no priority race with Banerjee–Sen, but
+that argument covers only the sources this project has actually read, and 2510.05219 is the one
+title we know of and have *not* read. **Recommendation: do not submit before this returns** — the
+cost of learning the answer from a referee is much higher than the cost of waiting.
+
 ---
 
 ## 5. Production checklist before any submission

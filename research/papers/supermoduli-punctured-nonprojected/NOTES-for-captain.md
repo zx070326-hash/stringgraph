@@ -167,6 +167,19 @@ NS-only, and Lemma 9.1(i)'s proof cites Cor. 8.8, so the whole chain to (9.6) ru
 This is **not** a gap of our paper (we glue only at NS nodes). It is listed here because a referee
 who notices it will ask, and the honest answer is already in the text.
 
+⏳ **Round dispatched 2026-09-23 to close it outright.** The standing position above — "both reviewer
+rounds agreed this is harmless" — is a *judgement nobody has checked by doing the computation*;
+§10.1 says so itself ("We have not independently rewritten that local computation"). Since
+[GAP-FKP-RAMOND] sits directly under Theorem 8.4 at $r\ge1$, and Theorem B is this paper's
+title-level claim (§5.4), an unverified external omission is load-bearing in the worst possible
+place. A `theorem-prover` round (`research/attempts/fkp-79-ramond-twist/`) is now rewriting FKP's
+Lemma 7.9 proof under $\omega_C\rightsquigarrow\omega_C(R)$ from the rendered p.47–48. Three
+outcomes, all useful: (a) it goes through and §10.1's gap label can be **removed**, making Theorem B
+unconditional; (b) it needs extra hypotheses, which we then check against our actual §5–§6 usage;
+(c) it fails, in which case the title-level claim has a real problem and we need to know now rather
+than from a referee. The brief explicitly tells the agent the "harmless" judgement is the object
+under test, not a prior. **Recommendation: do not submit before this returns.**
+
 ### 3.5 What we refused to do, and why it is a plus
 
 FKP §9.3 states the Ramond-node analogue of the normal-line computation as "**We conjecture that** …".
@@ -314,6 +327,14 @@ independently re-verified against the primary text, and anything beyond F6 was n
 | `gapcomp` | Close `[GAP-COMP]` (§10.3 of the paper): component refinement when $r>0$ | `research/attempts/supermoduli-ramond-components/**` | in flight |
 | `measurerev` | The §5.2 review above | read-only | ✅ **landed** — cleared M, refuted §9.5 as written; see §5.2 |
 | `sharpness` | Is the threshold **sharp**? The paper leaves $(g,n,r)=(2,1,0)$, the $g=2$ odd-parity punctured components, and all of $g\le1$ untouched, and §9.2 only says the *method* cannot reach them. Whether they are genuinely split or merely out of reach is unknown | `research/attempts/supermoduli-threshold-sharpness/**` | in flight |
+| `fkp79` | Close `[GAP-FKP-RAMOND]` (§3.4, paper §10.1) by rewriting [FKP] Lemma 7.9's proof under $\omega_C\rightsquigarrow\omega_C(R)$. Dispatched 2026-09-23 because this is the only unverified external dependency sitting under a **title-level** claim | `research/attempts/fkp-79-ramond-twist/**` | in flight |
+
+**Cross-round fact relayed to `fkp79` (2026-09-23):** `fkp96` independently reported, from the same
+pages, that Lemma 7.9's proof "uses the $r=0$ case of (2.5)" and that (7.1) needs an $(R)$ twist.
+That is two separate rounds finding the same $r=0$ assumption baked into the same proof, arrived at
+from different directions. It raises the prior that the omission is a genuine restriction rather
+than typographic — which is precisely why `fkp79` was dispatched and why §3.4's standing "harmless"
+judgement should not be relied on until it returns.
 
 The first two, if they land, remove two of the three items in §3 ("Risks the captain should weigh")
 outright: `[INF-NORMAL]` is the objection §2's table assigns to IMRN / Math. Z., and `[GAP-COMP]` is
