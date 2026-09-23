@@ -37,7 +37,14 @@ proposes, and not without cost. Precisely:
    plus Prop. 7.4, and Prop. 7.4 is stated and proved for an arbitrary family of stable
    supercurves with no puncture hypothesis whatsoever.
 
-So `[INF-NORMAL]` is retractable, at the price of carrying [E1] and [E2] as explicit repairs.
+So `[INF-NORMAL]` is retractable, at the price of carrying [E1] and [E2] as explicit repairs, and
+at the price of correcting the paper's own justification: two of its sentences are wrong as
+written — "no puncture enters this derivation" (three do, §10.3(A)) and "the locality of the node
+singularity" as the ground of the inference (insufficient by itself, §10.3(B)) — even though the
+conclusion they support is correct. §10 states the exact replacement, §11 prices the residual gaps,
+and Remark 10.5 settles the textual question of whether [FKP] may be read as already stating (9.6)
+in the punctured generality (arguably yes; it does not matter, because their proof of Lemma 9.1(iv)
+is defective for $R\neq\varnothing$ either way).
 
 ---
 
