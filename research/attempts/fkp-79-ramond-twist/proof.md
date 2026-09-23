@@ -554,7 +554,151 @@ distinct* on a *smooth* curve $F$).
 
 ---
 
-## 9. Open points
+## 9. Footprint I — which surrounding statements are really NS-only
+
+This section is an independent page-image audit of the claim, circulating in this project, that
+"the entire derivation chain leading to (9.6) runs on NS-only lemmas"
+(`research/papers/supermoduli-punctured-nonprojected/paper.md` §10.1). **That sentence is wrong**,
+and the chain is in better shape than it says. Evidence, all from rendered page images at 220 dpi.
+
+### 9.1 The §8.4 setup already declares Ramond divisors [p. 56, verbatim]
+
+> **8.4. Canonical line bundle on the moduli space of stable supercurves with punctures.** Let
+> $\pi:X\to S$ be a stable supercurve with NS punctures $P_1,\dots,P_m$ and **Ramond divisors
+> $R_1,\dots,R_n$**. We denote by $D_i\subset X$ the divisors associated with $P_i$ as in Sec. 2.5.
+> For every $i=1,\dots,m$, let us define a line bundle of rank $0|1$ on $S$,
+> $\Psi_i:=P_i^*\omega_{X/S}$.
+
+Everything from Lemma 8.7 to (8.11) is stated *inside* this setup.
+
+### 9.2 Statement-by-statement
+
+| statement | page | scope as printed | on the (9.6) chain? |
+|---|---|---|---|
+| **Lemma 8.7** ($\Psi_i\simeq\pi_*\mathcal O_{D_i}/\mathcal O_S$, $\Psi_i^{-1}\simeq P_i^*\omega_{X/S}(D_i)\simeq P_i^*\omega_{D_i/S}\simeq\mathrm{Ber}(\pi_*\mathcal O_{D_i})$) | 56 | §8.4 setup, **Ramond divisors present** | **yes** (proof of Lemma 8.11, p. 58; and p. 60, last paragraph) |
+| **Cor. 8.8** ("The line bundle $P_i^*\omega^2_{X/S}(D_i)$ on $S$ is canonically trivialized") | 57 | same setup, **Ramond divisors present** | **yes** (cited by name in Lemma 9.1(i), p. 59) |
+| **Example 8.9** ("Suppose $X\to S,(P_i)$ is a family of supercurves with **NS-punctures** over an *even* base $S$ … $(C,L)$ … with **spin-structures**") | 57 | **genuinely NS-only**, and an even base as well | **no** — not cited in the proof of Lemma 8.11 (p. 58), nor in Lemma 9.1 (pp. 59–60), nor in the proof of Theorem B (p. 58) |
+| **Remark 8.10** | 57 | §8.4 setup; and it **explicitly handles the Ramond divisors**: "For every Ramond divisor $R_j\subset X$ let us consider the line bundle on the base, $\Phi_j:=\mathrm{Ber}(\pi_*\mathcal O_{R_j})^{-1}\simeq\mathrm{Ber}(\pi_*\omega_{R_j})$. Note that $\Phi_j=\Phi_{R_j}$ (see (7.10)), so the line bundles $\Phi_j^2$ are canonically trivialized." | **yes** (cited by name in the proof of Lemma 9.1(ii), p. 60) |
+| **Lemma 8.11 / Theorem B (8.11)** | 57–58 | §8.4 setup; the proof runs on (8.2), Lemma 8.7, the filtration of $\omega^3(2R)/\omega^3$, and the trivializations of $\Phi_j^2$ | it *is* the chain |
+
+### 9.3 Verdict
+
+* **Lemma 8.7, Cor. 8.8 and Remark 8.10 are already stated in punctured generality.** The narrowed
+  scope claimed for `[GAP-FKP-RAMOND]` is correct on this point.
+* Moreover Lemma 8.7 and Cor. 8.8 are **insensitive** to the twist for a structural reason worth
+  recording: every object in them is pulled back along $P_i$, and $P_i\cap R=\varnothing$
+  (Definition 2.4), so $P_i^*\omega_{X/S}(R)=P_i^*\omega_{X/S}$. Writing $\omega_{X/S}$ rather than
+  $\omega_{X/S}(R)$ there is not even an omission.
+* **Example 8.9 is the only genuinely NS-only item**, and it is **off the chain**: it is an
+  illustration computing $\Psi_i^{-1}\simeq p_i^*L^{-1}$ for NS-only families over an even base, and
+  no later statement invokes it.
+* **Therefore §10.1's sentence "the entire derivation chain leading to (9.6) runs on NS-only lemmas"
+  is false as written and should be deleted.** The only NS-only ingredient that was ever load-bearing
+  is Lemma 7.9 — precisely the one this attempt has now proved in the punctured generality (§7).
+
+---
+
+## 10. Footprint II — the status of (7.1)
+
+A second claim circulating in this project is that **(7.1) is a misprint** and should read
+$0\to\omega^2_{X/S}(R)\to j_*\Omega_{U/S}\to\omega_{X/S}(R)\to0$. My independent verdict:
+**the corrected formula is right, the word "misprint" is wrong.**
+
+### 10.1 What is actually printed [p. 41, verbatim]
+
+> **7.1. Modified sheaf of differentials.** Let $\pi:X\to S$ be **a family of stable supercurves**
+> such that the map from $S$ to the deformation space of each node is smooth. Let $j:U\to X$ be the
+> embedding of the smooth locus. […]
+> Since $U/S$ is a smooth supercurve, we have an exact sequence
+> $$0\to\omega^2_{U/S}\xrightarrow{\ \kappa\ }\Omega_{U/S}\xrightarrow{\ \delta\ }\omega_{U/S}\to0$$
+> where in standard coordinates
+> $$\delta(dz)=\theta[dz|d\theta],\quad\delta(d\theta)=[dz|d\theta],\qquad
+> \kappa([dz|d\theta]^{\otimes2})=dz-\theta d\theta.$$
+> […]
+> **Lemma 7.1.** *The map $j_*\delta$ is surjective, so we have an exact sequence*
+> $$0\to\omega^2_{X/S}\xrightarrow{\ \kappa\ }j_*\Omega_{U/S}\xrightarrow{\ j_*\delta\ }\omega_{X/S}\to0.
+> \tag{7.1}$$
+
+Two things follow from the *hypothesis line* and the *displayed local formulas*, and they decide the
+question:
+
+1. §7.1 is opened for "a family of **stable supercurves**", with **no punctures in the hypotheses**.
+2. $\delta(dz)=\theta[dz|d\theta]$, $\delta(d\theta)=[dz|d\theta]$ are the formulas for the **NS
+   (non-degenerate) normal form** $D=\partial_\theta+\theta\partial_z$, for which $Dz=\theta$,
+   $D\theta=1$. They are *not* the Ramond normal form.
+
+So (7.1) is a **correct statement, correctly proved, in a narrower scope than its later use** — not a
+typographical slip. Calling it a misprint misdescribes where the defect is: nothing is mistyped;
+§7.1 simply never states the punctured case, and Lemma 9.1(iv) (p. 60, verbatim: *"This follows from
+parts (i), (ii) and from the exact sequence (7.1) (and a similar exact sequence for
+$\Omega_{\widetilde X/B}$ which holds over the smooth locus)"*) then invokes it for the universal
+supercurve over $\overline{\mathcal S}_{g,n_{NS},n_R}$, which does have punctures.
+
+### 10.2 The correct punctured analogue, derived
+
+**Proposition 10.1.** *Let $(X/S,P_\bullet,R_\bullet)$ be a family of stable supercurves with
+punctures, with the smoothness hypothesis of §7.1, and $j:U\to X$ the smooth locus. Then*
+$$0\ \to\ \omega^2_{X/S}(R)\ \xrightarrow{\ \kappa\ }\ j_*\Omega_{U/S}\ \xrightarrow{\ j_*\delta\ }\
+\omega_{X/S}(R)\ \to\ 0. \tag{7.1$_R$}$$
+
+*Proof.* Two independent checks.
+
+**(a) Berezinian rank count (global, convention-free).** The middle term is *not* twisted: $\Omega_{U/S}$
+is intrinsic, and $j_*$ does not see $R$. The right-hand term is forced to be $\omega_{X/S}(R)$ by
+Definition 2.4, which declares $\delta:\mathcal O_X\to\omega_{X/S}(R)$ and — via (2.4) — requires
+$\delta^-$ to be *onto* the odd part of $\omega(R)$. For a short exact sequence of locally free
+modules, $\mathrm{Ber}$ is multiplicative; $\mathrm{Ber}(\Omega_{U/S})=\omega_{U/S}$ by definition;
+the quotient $\omega(R)$ has rank $0|1$, so $\mathrm{Ber}(\omega(R))=\omega(R)^{-1}$; the kernel $K$
+has rank $1|0$, so $\mathrm{Ber}(K)=K$. Hence
+$$\omega\ =\ K\otimes\omega^{-1}(-R)\qquad\Longrightarrow\qquad K=\omega^2(R).$$
+
+**(b) Local normal form at a Ramond divisor.** Near $R_j=\{z=0\}$ the structure derivation of a smooth
+supercurve with a Ramond puncture is $D=\partial_\theta+\theta z\,\partial_z$ (the degenerate case:
+$D^2=z\partial_z$), so $Dz=\theta z$, $D\theta=1$, and $\delta(f)=(Df)\,\sigma$ with $\sigma$ the
+generator of the target. Consistency with Lemma 2.6's dictionary pins $\sigma$ down: over an even
+base, $\omega^-_X=\underline{\mathrm{Hom}}(L,\omega_C)$ and $\delta^-:L\xrightarrow{\sim}
+\underline{\mathrm{Hom}}(L,\omega_C(r))=\omega_X(R)^-$, so with $L=\mathcal O_C\theta$ near $r$ one
+gets $\delta(\theta)=\theta^\vee\otimes\frac{dz}{z}$, i.e.
+$$\sigma\ =\ z^{-1}[dz|d\theta],$$
+a generator of $\omega_{X/S}(R)$ and **not** of $\omega_{X/S}$. Then
+$$\delta(dz)=\theta z\,\sigma=\theta\,[dz|d\theta],\qquad \delta(d\theta)=\sigma=z^{-1}[dz|d\theta],$$
+which is surjective onto $\mathcal O\sigma=\omega(R)$, with kernel generated by
+$$dz-\theta z\,d\theta,$$
+free of rank $1|0$; and the twisted $\kappa$ is $\sigma^{\otimes2}=z^{-2}[dz|d\theta]^{\otimes2}
+\mapsto z^{-1}(dz-\theta z\,d\theta)$, identifying the kernel with $\omega^2(R)$. Away from $R$ the
+normal form is the NS one and the printed (7.1) applies verbatim; the two descriptions agree on the
+overlap because $z$ is a unit there. Exactness at the nodes is FKP's Lemma 7.1, whose argument is
+node-local and does not involve $R$ (the nodes are disjoint from the punctures). $\square$
+
+**Corroboration from §6.4 [p. 41, verbatim]:**
+$\mathcal A_{(X,P_\bullet,R_\bullet)/S}\simeq\mathcal L(X,P_\bullet,R_\bullet):=\omega^{-2}_{X/S}
+(-\sum_{i\in I}D_i-2\sum_{j\in J}R_j)$. Reading this as "$K^{-1}$, further twisted down by the
+conditions of fixing the punctures" gives $K^{-1}=\omega^{-2}(-R)$ before the $-D_i$ for the NS
+punctures and one further $-R$ for fixing the Ramond divisors — i.e. $K=\omega^2(R)$, matching
+(7.1$_R$). This is numerology rather than proof, but it is consistent, whereas $K=\omega^2$ would
+require the Ramond-fixing condition to cost $-2R$ in one step.
+
+### 10.3 Does the scope gap damage Lemma 9.1(iv), hence (9.6)?
+
+No, and for the *same reason* as in §8: the twist enters **symmetrically and cancels**.
+Lemma 9.1(iv) compares $j_*\Omega_{U/\overline{\mathcal S}}|_{X_B}$ with
+$\Omega_{\widetilde X/B}(D_1+D_2)$ and asserts that the cokernel $\widetilde{\mathcal C}$ is
+supported **on the node** with subfactors $\mathcal O_Q,\mathcal O_Q,Q_*(\Psi_1^{-1}\oplus\Psi_2^{-1})$.
+Replacing (7.1) by (7.1$_R$) for $X_B$ and simultaneously for $\widetilde X$ leaves the **middle**
+terms $j_*\Omega_U$, $\Omega_{\widetilde X/B}$ — the only ones appearing in (iv) — literally
+unchanged, and twists the outer terms by the *same* $\mathcal O(R)$ on both sides, since $R$ is
+pulled back identically along $\rho:\widetilde X\to X_B$ (the Ramond divisors are untouched by the
+NS gluing and are disjoint from the node). The same applies to the displayed sequence at the foot of
+p. 60, $0\to\omega^2_{\widetilde X/B}\to\Omega_{\widetilde X/B}\to\omega_{\widetilde X/B}\to0$, which
+is invoked *"near $D_1,D_2$"* — a region disjoint from $R$, where the twist is canonically trivial.
+
+**[GAP: Lemma 9.1(iv) not re-derived in full]** I have checked which terms move and which do not, and
+found no term whose twist fails to cancel; I have not rewritten the whole of the proof of Lemma 9.1
+under (7.1$_R$).
+
+---
+
+## 11. Open points
 
 - **[GAP: S1 not reproved]** The description of $\omega_{Z_0}$ near a node (Rosenlicht/Serre, §1.5
   [S1]) is imported as a standard fact and used in (5.2). It is classical, predates all of the
