@@ -1,12 +1,59 @@
-state: draft
+state: under-review
 reviewer: null
 verdict: null
 captain_confirmed: false
 notes: |
-  开工（2026-09-23，theorem-prover / agent/prover/supermoduli-ramond-components）。
+  2026-09-23，theorem-prover / agent/prover/supermoduli-ramond-components。
 
   任务：攻 research/papers/supermoduli-punctured-nonprojected/paper.md §10.3 的 [GAP-COMP]
   —— r>=1 时 S̄_{g;n,2r} 的连通分量分类未知，故论文定理 B 只能断言整个叠非投影。
 
-  claim.md 已立（量词完备），计划两条独立路线（代数单值 / 拓扑二次型）+ 紧化稠密性。
-  proof.md 尚未开始。
+  ## 结果（一句话）
+
+  r>=1 时 S̄_{g;n,2r}（以及超叠 𝔖̄_{g;n,2r}）**连通**，故 [GAP-COMP] 在 Ramond 情形是空的：
+  不存在可加细的分量结构，定理 B 已经就是分量级陈述。
+
+  ## 但是：数学不是新的（查重后如实修订）
+
+  Jarvis, "Geometry of the moduli of higher spin curves", Internat. J. Math. 11 (2000) 637-663
+  （预印本 arXiv:math/9809138v3）Thm 3.3.1 / 3.3.11 已给出一般情形的分量个数。
+  取 r_Jarvis=2、Ramond 点 m_i=1、NS 点 m_i=0，他的 ℓ_{g,2}(m)=gcd(2,2,m_•) 在全部五种情形
+  （g>=2 / g=1 / g=0，有 / 无 Ramond）与本 attempt 的结论**逐格相符**。
+
+  而且 Jarvis 这篇就是 **FKP 自己的参考文献 [22]**（FKP p.13 引它说明 S̄_{g,n_NS,n_R} 是光滑固有
+  DM 叠，但没引其中的不可约性定理）。
+
+  ⇒ **[GAP-COMP] 应重新分类为「文献缺口」，不是数学缺口。** 关闭它不需要新数学，引
+  Jarvis Thm 3.3.11 即可。详见 prior-art.md。
+
+  ## 本 attempt 仍然承重的部分（不是全部作废）
+
+  1. proof.md §5 的稠密性论证：只用「内部在 FKP 紧化里稠密」（输入是已 L1 核过的 FKP
+     Prop 7.8(ii)），从而**绕开**「Jarvis 的无挠层紧化 = FKP 的 twisted-curve 紧化」这个
+     本 attempt 未核对的同构（登记为 [GAP-JARVIS-COMPACT]）。
+  2. 注 2.2 + 论文引理 5.1：从玻色截断回到超叠。平凡但 Jarvis 全文不涉及超几何。
+  3. §6.2 的 g=2、2r=2 显式宇称跳变见证（h^0(L)=1+[L≅ω_C]；L≅ω_C ⟺ ρ_2=ι(ρ_1)；
+     余维 1 轨迹上 1 偶 + 15 奇，其余处 16 奇）。检索未见此计算见诸文献。
+     附带价值：Jarvis v3 p.17 的 ℓ 定义按**字面**读作 "if g≠2"（400 dpi 页图反复确认，不是 OCR
+     误读；显然应为 "if g>=2"），恰好把 g=2 漏在外面，而 g=2 正是论文定理 M 的阈值情形。
+     本 attempt 的两条证明都独立覆盖 g=2。
+  4. 两条互相独立的证明（§3 代数单值 / §8 Johnson 二次型）+ scripts/components-check.py 穷举复核
+     （输出 RESULT: ALL OK）。对外不是新结果，对内是可复核的交叉验证。
+
+  ## 核对纪律
+
+  所有作判据用的公式都用渲染页图 L1 核过：
+  - FKP p.13 §2.6 广义自旋结构定义；FKP p.47 Prop 7.8(ii)（170 dpi）。
+  - Jarvis Def 2.3.9（p.12）、Note 2.1.5（p.7）、§3.3.1 + Thm 3.3.1（p.17）、Thm 3.3.11（p.23），
+    前三条 400 dpi 裁剪，末条 170 dpi 整页。
+  - 未核对已发表版 Internat. J. Math. 11 (2000)（无访问），故所有逐字引用标明取自 arXiv v3。
+
+  ## 请 lead 派 graph-reviewer
+
+  自评已完成，转 under-review。reviewer 应优先攻 proof.md §9.1 列出的三处承重点
+  （引理 2.1 的可表性；定理 3.3 中 ι*𝒮 = ψ*sq 这一步；引理 5.1 把「光滑态射 ⇒ 开映射」用到
+  超叠底空间上的超几何细节），以及 prior-art.md §2 的约定翻译表是否真的逐格对上。
+
+  reviewer 若同意，本 attempt 的正确毕业形态是：**不往 graph/ 立新卡**（结论已发表，应由
+  graph-curator 按正常流程从 Jarvis 抽取），只把 §5 稠密性 + §6.2 见证作为论文的技术附注。
+  是否合并进论文由 lead 决定；本 attempt 全程未碰 research/papers/**。
