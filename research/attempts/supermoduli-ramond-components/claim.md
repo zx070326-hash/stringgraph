@@ -138,3 +138,25 @@ $\overline S_{g;n,0}=\overline S^+\sqcup\overline S^-$；(ii) NS 节点处自旋
   但只在确认光滑性的范围内；见 proof.md 对应处的讨论）。
 - 不碰 Ramond 节点处的粘接（FKP §9.3 只是猜想）。
 - 不修改 `research/papers/**`、`graph/**`、`formal/**`、`literature/**` 或任何其它 attempt 目录。
+
+## 9. 新颖性修订（2026-09-23，查重之后回填；本节优先于 §2 的语气）
+
+查重结果写在同目录 `prior-art.md`。要点：
+
+**(C1) 与 (C2) 不是新结果。** Jarvis, *Geometry of the moduli of higher spin curves*,
+Internat. J. Math. **11** (2000) 637–663（= **FKP 自己的参考文献 [22]**，FKP p.13 引它说明
+$\overline{\mathcal S}_{g,n_{NS},n_R}$ 是光滑固有 DM 叠）的 Theorem 3.3.1 / 3.3.11 已给出
+一般情形的分量个数；取 $r_{\rm Jarvis}=2$、Ramond 点 $m_i=1$、NS 点 $m_i=0$，他的
+$\ell_{g,2}(\mathbf m)=\gcd(2,2,m_\bullet)$ 在**全部五种情形**上与 (C1)(C2) 逐格相符。
+
+因此：
+
+- **(C4) 改写**：`[GAP-COMP]` 不是数学缺口，是**文献缺口**——所缺的定理写在论文已引的那一篇里，
+  只是换了记号。关闭它不需要新数学，引 Jarvis Thm 3.3.11 即可。
+- **(C1)(C2)(C3) 降格**为"已发表定理的独立重证 + 搬到本论文记号"。按根 `CLAUDE.md`
+  「负面结果与『已知结论的新推导路径』算产出，但要标清楚」归类，**不得包装成新数学**。
+- **仍然承重的**：proof.md §5 的稠密性论证（它绕开了"Jarvis 的紧化是否等于 FKP 的紧化"这个
+  本 attempt 未核对的问题，登记为 `[GAP-JARVIS-COMPACT]`）；注 2.2 从玻色截断回到超叠的一步；
+  以及 §6.2 的 $g=2,2r=2$ 显式宇称跳变见证（文献未见，且 Jarvis v3 p.17 的 $\ell$ 定义按字面读
+  恰好把 $g=2$ 漏在外面——原文作 "if $g\neq2$"，显然应为 "if $g\ge2$"）。
+- **(C5) 保留**，但它在知道 (C1) 之后是一句话推论（连通 ⟹ 任何局部常值函数是常值）。
