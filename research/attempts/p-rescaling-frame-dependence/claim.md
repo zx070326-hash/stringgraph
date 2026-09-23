@@ -35,6 +35,10 @@ Two divisor-sum operators, both appearing in the literature:
 
   **(Q-rescaling)**  D_I(m,n,ℓ) := Σ_{s|I} s · d_*(m/s², n, ℓ/s)   ← DGM 0803.2692 eq(3.28)
   **(P-rescaling)**  D'_I(m,n,ℓ) := Σ_{s|I} s · d_*(m, n/s², ℓ/s)  ← the Banerjee–Sen–Srivastava family
+                                                                    **[REFUTED — see §4. BSS is
+                                                                    Q-rescaling. The P-family is
+                                                                    AN 2009.01172 (2.13) and
+                                                                    BCP 1806.03330 (5.80).]**
 
 (terms with s²∤m resp. s²∤n, or s∤ℓ, are set to 0; this matches the contour-integral
 convention of Theorem 5.2(b) of the paper).
@@ -125,3 +129,33 @@ literature statements and carry L1/L3 labels individually.
   ask which side the P-family lands on.
 - Any edit to `research/papers/**`. This attempt only reports; the paper edit, if any, is
   the lead's call.
+
+---
+
+## 4. Reconciliation (written after the work; §§0–3 above are left as pre-registered)
+
+This section records which of the pre-registered working hypotheses survived, so that
+`claim.md` and `proof.md` are self-consistent without rewriting the pre-registration.
+
+| pre-registered item | outcome | where |
+|---|---|---|
+| Claim 1: "the P-rescaling family consists of at least BSS 0802.0544 and 0802.1556" | **refuted.** BSS put Q²/2 in the σ̌ slot, which is the one carrying s² (their (1)+(2)+(7)); BSS is **Q**-rescaling. The P-family is **AN 2009.01172 (2.13)** and **BCP 1806.03330 (5.80)**. | `lit-findings.md` F4b, F4d, F7a/b, F8; `proof.md` §9 Q1 |
+| Theorem A (reflection transfer) | **proved**, machine-checked over 8750 instances | `proof.md` §3 |
+| Theorem B (P-rescaling frame dependence; predicted 7999541469408 vs 7999235715072) | **proved, with exactly the predicted integers** | `proof.md` §6 |
+| Theorem C (the BSS k,l-average is a projector returning 0 off the adapted arithmetic) | **false as stated.** The k,l sums are a periodisation that BSS undo inside their own derivation; (7) is an honest divisor sum on the Q-adapted set 𝓑. | `proof.md` §8.1 |
+| Theorem D (which side of the sign question BSS falls on) | **answered**: the signed, (3.26)+(3.27)-type side, weights s·(−1)^{ℓ−ℓ/s}. Renumbered **Proposition 8.1** in `proof.md` to avoid a clash. | `proof.md` §8.1 |
+| Claim 3 (甲/乙/丙 table), pre-registered with "I am not committed to any particular distribution" | **answered, and the distribution is heavily (乙)/(丙)**: 6 of 8 divisor-sum papers are (乙), 2 are (甲) narrowly, 4 further papers are (丙). Reported as a narrowing of the paper's claim, as pre-registered. | `lit-findings.md` §7 |
+
+Two results were **not** pre-registered and were found along the way:
+
+- **Proposition 5.1** (`proof.md` §5): the adapted frames of a fixed lattice form *exactly*
+  one Γ⁰(I) (resp. Γ₀(I)) coset — so both published formulae are well posed as functions of
+  (lattice, adapted type), and only the notational step of dropping the adaptedness fails.
+- **Theorem D** (`proof.md` §7): under DGM + S-duality, the index is **not** a function of
+  (m,n,ℓ,I) at I = 2, with gap 305 754 336 at (4,8,8). This is the exact-integer
+  quantification of BSS 0802.0544 §6.3's three T-duality orbits.
+
+And one prior-art correction that narrows the whole attempt: **DGM 0803.2692 §4.1 state and
+prove the Γ⁰(I) restriction themselves** and give a different 𝒵_I^{(l)} per coset
+(`lit-findings.md` F3b, L1 printed pp. 18–19). Theorem C is therefore not new mathematics,
+and DGM itself classifies as (乙).
