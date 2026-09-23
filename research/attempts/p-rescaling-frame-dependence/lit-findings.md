@@ -24,7 +24,7 @@ see which physical invariant sits in the slot that gets multiplied by s².**
 |---|---|---|---|---|
 | DGM 0803.2692 | ρ | σ | ρ | **Q** |
 | BSS 0802.1556 | σ̌ | ρ̌ | σ̌ | **Q** |
-| BSS 0802.0544 | σ̌ | ρ̌ | (see F4) | **Q** |
+| BSS 0802.0544 | σ̌ (eq (1), eq (7.2)) | ρ̌ | — (no divisor sum at all; see F5c) | **neither** |
 | Alexandrov–Nampuri 2009.01172 | τ (index n) | σ (index m) | σ | **P** |
 | this project's paper.md | ρ (=m) | σ (=n) | ρ | **Q** |
 
@@ -164,7 +164,13 @@ accident.
 
 ---
 
-## 3. Banerjee–Sen–Srivastava, arXiv:0802.0544 ("torsion two") — the caveat, stated in 2008
+## 3. Banerjee–Sen–Srivastava, arXiv:0802.0544 — the three orbits, stated in 2008
+
+Title page (L1, p. 1): S. Banerjee, A. Sen, Y. K. Srivastava, **"Generalities of Quarter BPS
+Dyon Partition Function and Dyons of Torsion Two"**, arXiv:0802.0544v2 [hep-th], 12 Feb 2008,
+Harish-Chandra Research Institute. Abstract, verbatim in part: "We use our analysis to
+constrain the dyon partition function for two hitherto unknown cases – the partition function
+of dyons of torsion two (i.e. gcd(Q ∧ P)=2) in heterotic string theory on T⁶ and …".
 
 ### F5 (L1, p. 3, §1, around eq (1.1))
 
@@ -180,14 +186,94 @@ accident.
 
 This is the caveat of the paper's Remark 6.3 / (P'_ad), stated in the source literature in
 February 2008, in the same words modulo notation. The honest reading is that the paper's
-Remark 6.3 supplies the **first explicit integer witness** of a phenomenon that BSS had
-already flagged as a logical possibility and guarded against by construction.
+Remark 6.3 supplies an explicit *integer* witness for a phenomenon that BSS had already
+flagged as a logical possibility and guarded against by construction — and, as F5c now
+shows, had also asserted **as a fact** for r = 2.
 
-(Table of contents, L1, p. 2: §7 "A proposal for the partition function of dyons of torsion
-two", p. 48; §6.3 "Dyons of torsion 2 in heterotic string theory on T⁶", p. 35. The
-"eq (1.23)" cited in `dgm-eq51-eq52-third-party-crosscheck.md` §E1 is an ar5iv flat-counter
-artifact — an equation numbered 1.23 cannot live in §7. The compiled number is recorded in
-F5b below.)
+### F5b (L1, p. 35, §6.3) — **the decisive sentence: three T-duality orbits at fixed (Q²,P²,Q·P)**
+
+§6.3 fixes the family 𝒜 of charge vectors (6.3.1) with Q, P as explicit integer 4-vectors,
+computes (6.3.2) Q² = 4(m+1), P² = 4(K−J), Q·P = 2(K+J−m+1), notes gcd{Q_iP_j − Q_jP_i} = 2,
+and then says, **verbatim**:
+
+> "It was shown in [42][20] that for r = 2 **there are three T-duality orbits for given
+> (Q², P², Q·P)** – in the first Q is twice a primitive lattice vector, in the second P is
+> twice a primitive lattice vector, and in the third both Q and P are primitive but Q ± P
+> are twice primitive lattice vectors. The dyon charges given in (6.3.1) are clearly of the
+> third kind. In the notation of [20] the discrete T-duality invariants of these charges are
+> (r₁ = 1, r₂ = 1, r₃ = 2, u₁ = 1)."
+
+with (L1, p. 61 and p. 63 of the same PDF) **[20] = S. Banerjee, A. Sen, "S-duality Action on
+Discrete T-duality Invariants," arXiv:0801.0149** and **[42] = S. Banerjee, A. Sen, "Duality
+Orbits, Dyon Spectrum and Gauge Theory Limit of Heterotic String Theory on T⁶,"
+arXiv:0712.0043**. (This also settles F6c at L1: the title "Duality Orbits …" belongs to
+0712.0043, not to 0801.0149.)
+
+**This is the whole question, answered in the source literature.** At torsion 2 the triple
+(Q²,P²,Q·P) does *not* determine the T-duality orbit; there are three, and they are
+distinguished exactly by *which* of Q, P, or Q ± P is the non-primitive one — i.e. by
+**Q-adapted / P-adapted / neither**. Any formula asserting that the index is a function of
+(Q²/2, P²/2, Q·P, I) alone is therefore, at r = 2, asserting that these three orbits carry
+equal indices — a statement that nothing in DGM or AN establishes, and that F5d shows BSS
+believed to be false.
+
+### F5c (L1, pp. 48–49, §7) — BSS's torsion-two partition function is **not** a divisor sum
+
+§7 is titled "A proposal for the partition function of dyons of torsion two" and opens
+(verbatim, p. 48):
+
+> "In this section we shall consider the set of dyons described in §6.3, carrying charge
+> vectors (Q,P) with torsion 2, **Q, P primitive** and Q²/2, P²/2 even, and propose a form of
+> the partition function that satisfies all the constraints derived in §6.3."
+
+- **(7.1)** (pp. 48–49): 1/Φ̌(ρ̌,σ̌,v̌) = (1/16)[ 16 terms 1/Φ₁₀(ρ̌+b₁, σ̌+b₂, v̌+b₃) with
+  (b₁,b₂,b₃) running over a set of 0, ½, ¼, ¾ shifts ] + [ 1/Φ₁₀(ρ̌+σ̌+2v̌, ρ̌+σ̌−2v̌, σ̌−ρ̌)
+  + 1/Φ₁₀(ρ̌+σ̌+2v̌+½, ρ̌+σ̌−2v̌+½, σ̌−ρ̌+½) ].
+- **(7.2)**: d(Q,P) = ¼(−1)^{Q·P+1} ∫_𝒞 dρ̌_s dσ̌_s dv̌_s e^{−iπ/4(σ̌_s Q² + ρ̌_s P² + 2v̌_s Q·P)}
+  /Φ̌(ρ̌,σ̌,v̌), with (ρ̌_s,σ̌_s,v̌_s) ≡ (4ρ̌,4σ̌,4v̌). **⇒ σ̌ again carries Q²/2**, consistent
+  with 0802.1556 eq (1); see the table in §0.
+- verbatim after (7.3), p. 49: "Note that the sixteen terms inside the first square bracket
+  in (7.1) together gives the partition function of dyons of unit torsion subject to the
+  constraint that Q²/2, P²/2, Q·P are even and Q² + P² − 2Q·P is a multiple of 8. **The
+  second term is new and reflects the effect of considering states with torsion two.**"
+
+**No term of (7.1) has the shape 1/Φ₁₀(ρ̌, s²σ̌, sv̌).** The torsion-2 content sits in the
+second bracket, which is a *linear* change of variables (ρ̌+σ̌±2v̌, σ̌−ρ̌), not a divisor
+rescaling. So BSS's formula for this orbit is structurally unrelated to the divisor sum:
+the divisor sum is simply not the right object on the both-primitive orbit.
+
+### F5d (L1, p. 10 eq (1.23) and p. 11 top) — BSS give **three different** partition functions, one per orbit
+
+Correction to my own earlier note and to `dgm-eq51-eq52-third-party-crosscheck.md` §E1:
+**(1.23) is a genuine compiled equation number**, living in the introduction §1 (p. 10), not
+an ar5iv artifact. p. 55 verbatim: "Since (7.1) and (7.32) contains information about all the
+torsion two dyons with primitive (Q,P), the full partition function for such dyons is
+obtained by taking the sum of these two functions. This gives the result quoted in (1.23)."
+
+- **(1.23)** (p. 10) = (1/8)[8 terms 1/Φ₁₀(ρ̌+b₁,σ̌+b₂,v̌+b₃), shifts in {0,½,¼,¾}]
+  + 2/Φ₁₀(ρ̌+σ̌+2v̌, ρ̌+σ̌−2v̌, σ̌−ρ̌), introduced verbatim by: "The formula for the partition
+  function when **Q and P are both primitive but (Q ± P) are twice primitive vectors** is".
+- verbatim, p. 11, immediately after (1.25):
+
+  > "**There are two more classes of dyons of torsion two, – one where Q is primitive and P is
+  > twice a primitive vector and the other where P is primitive and Q is twice a primitive
+  > vector. The partition functions for these dyons can be recovered from the one given above
+  > by S-duality transformations (Q,P) → (Q, P−Q) and (Q,P) → (Q−P, P) respectively [20].
+  > This amount to making replacements (ρ̌,σ̌,v̌) → (ρ̌, σ̌+ρ̌+2v̌, v̌+ρ̌) and
+  > (ρ̌,σ̌,v̌) → (ρ̌+σ̌+2v̌, σ̌, v̌+σ̌) respectively in eq.(1.23).**"
+
+**Read this carefully.** BSS assert that the three torsion-2 orbits have **three different
+partition functions**, related by *substitutions of the chemical potentials* — and a
+substitution of the chemical potentials is exactly a relabelling of which (Q²/2, P²/2, Q·P)
+each Fourier coefficient sits at. Two dyons in different orbits with the *same*
+(Q²/2, P²/2, Q·P) therefore read off coefficients of *different* functions at the same point,
+and BSS nowhere claim those coefficients agree.
+
+Note also the direction: (1.23) is the both-primitive orbit; (ρ̌,σ̌,v̌) → (ρ̌+σ̌+2v̌, σ̌, v̌+σ̌)
+gives the orbit with **Q twice primitive** (Q-adapted, DGM's), and
+(ρ̌,σ̌,v̌) → (ρ̌, σ̌+ρ̌+2v̌, v̌+ρ̌) gives the orbit with **P twice primitive** (P-adapted). The
+two substitutions are exchanged by ρ̌ ↔ σ̌, i.e. by Q ↔ P — which is precisely the reflection
+relating D_I and D'_I in `proof.md` Theorem A.
 
 ---
 
