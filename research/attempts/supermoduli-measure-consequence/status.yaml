@@ -98,6 +98,39 @@ verdict: |
   same way as Theorem M rather than the other way. §9.5 now says so, and the genuinely-open set is
   narrowed to $(2,1,0)$ and the $g=2$ odd-parity punctured components, matching what §1, §2.3 and
   §10.6 already said. If F11's text turns out to make a different point, it will be applied on top.
+
+  **Round closed 2026-09-23.** Both outstanding items arrived. **F11** was delivered in full, proved
+  its point via [DW, Thm 1.2] plus the restriction lemma, was verified by the lead and applied — it
+  makes a different and correct point from the one the lead found independently, and both fixes are
+  now in the paper. **§5** returned clean: no further findings. The reviewer re-checked §9.5 line by
+  line against "claims neither more nor less than Theorem M proves" and passed all four remaining
+  assertions (the "or at least projected" reading at `paper.md:1162-1164`; Corollary A's stated range
+  at `:1186-1188`, which F11 does not erode because A1's novelty is in $n\ge g$ while [DW, Remark 1.5]
+  speaks of $n\gg g$; the "recorded there, not proved" attribution at `:1185-1186`, matching the
+  extraction's "very likely" / "we would expect" at `:605-607`; and the §9.3/§9.5 division of labour
+  at `:1157-1160`), plus two self-consistency checks in §9.1–§9.2. The reviewer also confirmed the
+  lead's correction of its own §10.7 draft: the complement of $\Delta_{\rm NS}$ is not the interior,
+  so the local-cohomology support must be taken over the whole boundary $\partial$.
+
+  **Scope limit the reviewer stated itself, and which this verdict does not cover:** §5–§8 of
+  `paper.md` — the main proofs of Theorem M and Proposition N — were **not verified, not one step**.
+  This round verified §9's *claims about* those results, not the results. That is the single largest
+  unreviewed surface in the paper and it is not closed by anything recorded here.
+
+  **Positioning advice received and acted on.** The reviewer's judgement was: title unchanged, §1.2
+  ordering unchanged, and specifically *do not* re-centre the paper on the §10.7 open question —
+  "a paper positions on what it proved, not on what it asked", and §10 plus one introductory sentence
+  is the correct home for it. It noted that the §1.4 subtraction strengthens rather than weakens the
+  existing ordering: F11 erodes Corollary A far more than Theorem B, so the structural reason already
+  given for Theorem B's top billing (forgetting a Ramond puncture is not a morphism) now also answers
+  an *already-realised* erosion, not merely a hypothetical one. The one positioning change it did
+  recommend has been made: the statement that the exhibited class is provably **not**
+  boundary-supported on [DW, Thm 1.3]'s range — previously buried in §9.3 — is now **Remark 1.1** in
+  §1.4, placed to answer the question a referee asks immediately after reading the subtraction.
+  Rationale recorded verbatim from the reviewer: catching the subtraction with a theorem beats
+  catching it with an open question. The abstract's description of Proposition N as "a second,
+  negative result of equal weight" was also softened to "in our view the more structural of the two",
+  matching §10 and the reviewer's observation that after the subtraction "equal" understates it.
 captain_confirmed: false
 notes: |
   === Task ===

@@ -40,7 +40,8 @@ most robust and least replaceable output. (§1.4 situates both results against t
 in a comparison table, none of whose entries combine compactification with Ramond punctures; we make
 no claim about unpublished work in progress by other authors — see the caveats gathered there.)
 
-We prove a second, negative result of equal weight. If the spectator punctures are instead carried by
+We prove a second, negative result, in our view the more structural of the two. If the spectator
+punctures are instead carried by
 the moving component — the naive generalisation — then the reduced space of the Donagi–Witten
 one-point obstruction family is the affine curve $C\smallsetminus\{p_1,\dots,p_n\}$, Serre vanishing
 forces $H^1$ of *every* coherent sheaf on it to vanish, and the primary obstruction class of the test
