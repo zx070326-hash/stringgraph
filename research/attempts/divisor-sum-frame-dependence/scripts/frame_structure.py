@@ -220,6 +220,12 @@ def all_reduced_forms(D):
     return out
 
 
+def gl_classes(D):
+    """All GL(2,Z)-classes (= isometry classes of the corresponding even lattices) of
+    integral positive definite forms of discriminant D, including imprimitive ones."""
+    return sorted({reduce_gl(f) for f in all_reduced_forms(D)})
+
+
 def is_ambiguous(f):
     """[f]^2 = 1 in the class group  <=>  the reduced form has b = 0, a = b, or a = c."""
     a, b, c = reduce_sl(f)

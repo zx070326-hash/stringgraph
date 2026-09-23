@@ -14,7 +14,7 @@ from math import gcd
 
 from frame_structure import (
     act, admissible_frames, all_reduced_forms, chain, class_number, content,
-    disc, divisors, frame_from_primitive, is_admissible, is_ambiguous,
+    disc, divisors, frame_from_primitive, gl_classes, is_admissible, is_ambiguous,
     prime_form, reduce_gl, reduce_sl, reduced_primitive_forms, value_classes,
 )
 
@@ -114,7 +114,7 @@ def sec_scan(DMAX=400, IMAX=6):
         D = -Delta
         if D % 4 not in (0, 1):
             continue
-        for f in all_reduced_forms(D):
+        for f in gl_classes(D):
             for I in range(2, IMAX + 1):
                 vc = value_classes(f, I, box=4 * I + 5)
                 if not vc:
@@ -123,8 +123,11 @@ def sec_scan(DMAX=400, IMAX=6):
                 for H in vc:
                     allcl |= vc[H]
                 dep = len(allcl) > 1
-                # the paper's predicate: some Delta/s^2 (s|I, s>1) has class number > 1
-                hs = []
+                # the paper's predicate, three readings of "class number of Delta/s^2":
+                #   (tot) all SL classes of that discriminant (primitive + imprimitive)
+                #   (gl)  all GL classes = isometry classes of even lattices of det Delta/s^2
+                #   (prim) only primitive SL classes
+                hs, hsp = [], []
                 ok = True
                 for s in divisors(I):
                     if s == 1:
@@ -132,11 +135,14 @@ def sec_scan(DMAX=400, IMAX=6):
                     if Delta % (s * s):
                         ok = False
                         break
-                    hs.append(len(all_reduced_forms(-Delta // (s * s))))
+                    hs.append(len(gl_classes(-Delta // (s * s))))
+                    hsp.append(class_number(-Delta // (s * s)))
                 if not ok:
                     continue
                 paper = any(h > 1 for h in hs)
-                rows.append((Delta, f, I, len(vc), len(allcl), dep, tuple(hs), paper))
+                paper_prim = any(h > 1 for h in hsp)
+                rows.append((Delta, f, I, len(vc), len(allcl), dep, tuple(hs), paper,
+                             tuple(hsp), paper_prim))
 
     n = len(rows)
     tt = [r for r in rows if r[5] and r[7]]
@@ -164,6 +170,27 @@ def sec_scan(DMAX=400, IMAX=6):
         print("       Delta=%-4d f=%-14s I=%d  |C_I|=%d  #values=%d  h=%s"
               % (r[0], str(r[1]), r[2], r[3], r[4], list(r[6])))
     print("     total with |C_I| >= 2: %d" % len(hard))
+
+    print()
+    print("  --- the other reading: 'class number' = number of PRIMITIVE classes ---")
+    tf2 = [r for r in rows if r[5] and not r[9]]
+    print("  frame DEPENDENT with all primitive class numbers = 1: %d cases" % len(tf2))
+    print("  (under this reading even the 'if' direction of the paper's claim fails;")
+    print("   the paper's own witness is among these)")
+    for r in sorted(tf2, key=lambda r: (r[0], r[2]))[:8]:
+        print("       Delta=%-4d f=%-14s I=%d  |C_I|=%d  #values=%d  h_prim=%s  h_tot=%s"
+              % (r[0], str(r[1]), r[2], r[3], r[4], list(r[8]), list(r[6])))
+
+    print()
+    print("  --- frame DEPENDENT cases, smallest 12 ---")
+    for r in sorted(tt, key=lambda r: (r[0], r[2]))[:12]:
+        print("       Delta=%-4d f=%-14s I=%d  |C_I|=%d  #values=%d  h_tot=%s"
+              % (r[0], str(r[1]), r[2], r[3], r[4], list(r[6])))
+    print("  maximum number of distinct values of D_I observed: %d"
+          % max(r[4] for r in rows))
+    for r in sorted(rows, key=lambda r: -r[4])[:3]:
+        print("       Delta=%-4d f=%-14s I=%d  |C_I|=%d  #values=%d"
+              % (r[0], str(r[1]), r[2], r[3], r[4]))
     return rows
 
 
