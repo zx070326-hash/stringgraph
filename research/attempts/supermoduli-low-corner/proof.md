@@ -425,6 +425,176 @@ look — see §6 for the precise remaining target.
 
 ---
 
-## Part 5 — [in progress]
+## Part 5 — §6: the precise remaining target for Claim 6, and what would be needed
 
-*To be continued in the next commit.*
+This section does **not** resolve Claim 6. It records, as precisely as this session
+gets, what a resolution would require, so that the computation is well-posed for future
+work rather than left as a vague "compute $\omega_2$."
+
+### 5.1 The line bundle $\det\mathcal F_{\mathfrak X}$, made explicit for cell (B)
+
+At a smooth point $(C=\mathbb P^1, L=\mathcal O; y_1,y_2,y_3,\rho_1,\rho_2)$ of $X_B$, we
+computed (see the rank cross-check below) that
+$$T_-\mathfrak X\big|_{\rm pt} = H^1\bigl(C, L^{-1}(-y_1-y_2-y_3)\bigr),\qquad
+\det\bigl(T_-^\vee\mathfrak X\big|_{\rm pt}\bigr) \;\cong\;
+\det H^0\bigl(C,\ L^3(y_1+y_2+y_3-\rho_1-\rho_2)\bigr),$$
+via Serre duality ($H^1(F)^\vee\cong H^0(\omega_C\otimes F^\vee)$ with
+$F=L^{-1}(-\sum y_i)$, and $\omega_C\otimes L = L^3(-\rho_1-\rho_2)$ from the defining
+relation $L^{\otimes2}\cong\omega_C(\rho_1+\rho_2)$).
+
+**Rank cross-check.** On the smooth locus $L=\mathcal O$ (Part 3), so this is
+$H^0(\mathbb P^1,\mathcal O(y_1+y_2+y_3-\rho_1-\rho_2)) = H^0(\mathbb P^1,\mathcal O(1))$,
+which is $2$-dimensional — matches the required odd rank $2$ (claim.md §1) and cross-checks
+against the Riemann–Roch computation directly on $T_-$: $\deg L^{-1}(-\sum y_i)=-3$,
+$\chi=-3+1=-2$ (genus $0$), $h^0=0$ (negative degree) $\Rightarrow h^1=2$. Consistent.
+
+**What this identifies.** Away from the boundary, $\mathcal F_{\mathfrak X}$ is
+(canonically, since $L=\mathcal O$ globally on the smooth locus) the rank-$2$ bundle on
+$M_{0,5}$ whose fibre is $H^0(\mathbb P^1,\mathcal O(y_1+y_2+y_3-\rho_1-\rho_2))$, i.e.
+$\mathcal F_{\mathfrak X}=\pi_*\mathcal O_{\mathcal C}(\sigma_1+\sigma_2+\sigma_3-\sigma_4-
+\sigma_5)$, the **pushforward along the universal curve**
+$\pi:\overline M_{0,6}\to\overline M_{0,5}$ (adding a $6$th, moving, point $z$; the
+$\sigma_i$ are the $5$ tautological sections) **of the relative degree-$1$ line bundle**
+$\mathcal O_{\mathcal C}(\sigma_1+\sigma_2+\sigma_3-\sigma_4-\sigma_5)$. This
+identification is exact on the open locus and (granting the imported root-stack
+representability of Part 3) extends to the compactification after twisting by the
+appropriate root data along $D_{12}+D_{13}+D_{23}+D_{45}$.
+
+`[GAP: explicit Chern class of det F]` Computing $c_1(\det\mathcal F_{\mathfrak X}) =
+c_1(\pi_*\mathcal O_{\mathcal C}(\sigma_1+\sigma_2+\sigma_3-\sigma_4-\sigma_5))$ as an
+explicit combination of the standard generators of $\mathrm{Pic}(\overline M_{0,5})$
+(the ten boundary classes $\delta_{ij}$, or equivalently the $\psi$-classes
+$\psi_1,\dots,\psi_5$, related by the standard genus-$0$ relations) is **not done in
+this session**. The standard tool is Grothendieck–Riemann–Roch applied to the
+family of $\mathbb P^1$'s $\pi:\overline M_{0,6}\to\overline M_{0,5}$ (equivalently,
+Mumford's or Arbarello–Cornalba's formulas for pushforwards of line bundles along the
+universal curve in genus $0$, where the fibrewise cohomology and its degeneration at
+the boundary are completely explicit because every fibre is a nodal union of
+$\mathbb P^1$'s). This is a finite, mechanical (if somewhat long) computation, not a
+conceptual obstacle — but it was not carried out here, and getting the boundary
+corrections right (where $\sigma_i$'s collide, i.e. exactly at the $D_{ij}$ divisors of
+Lemma 3) requires care that a rushed computation risks getting wrong, so it is recorded
+as an open item rather than attempted under time pressure. `scripts/` in this attempt
+is empty; a symbolic computation (e.g. using known closed-form recursions for
+$\psi$-class intersection numbers on $\overline M_{0,n}$, or the `admcycles` Sage
+package if available) would be the natural way to carry this out reliably.
+
+### 5.2 What the rest of the computation needs, once §5.1 is done
+
+1. $T_{X_B}$, the tangent bundle of the root stack $\mathcal X_0$ (or of $\overline
+   M_{0,5}$ pulled back, twisted by the root data) — standard once the surface's
+   tangent bundle is expressed via the log-tangent sequence along the boundary
+   (again mechanical given $\overline M_{0,5}$'s explicit toric-like presentation as an
+   iterated blow-up of $\mathbb P^2$, `[GAP: explicit tangent bundle]`, not carried out
+   here).
+2. The tensor product $\mathcal V_{\mathfrak X}=T_X\otimes\det\mathcal F_{\mathfrak X}$
+   as an explicit line bundle (once 1 and §5.1 are both explicit).
+3. By Corollary 4.1, only the **local cohomology supported on** $\partial X_B$
+   (the union of the ten $D_{ij}$) matters. For a normal-crossing divisor with several
+   components, $H^1_{\partial X}(X,\mathcal V)$ is computed by the Čech/Mayer–Vietoris
+   complex built from $H^0$ of $\mathcal V$ twisted by the relevant normal bundles on
+   each component and each pairwise intersection point (the ten $D_{ij}$ meet each
+   other only at points, since $\overline M_{0,5}$'s boundary is a normal-crossing
+   arrangement of $(-1)$-curves — this is the del Pezzo-of-degree-$5$ "pentagon"
+   configuration). `[GAP: local cohomology computation]` This final step — writing down
+   the Mayer–Vietoris complex and computing whether the resulting class is forced to
+   vanish or can be non-zero — is genuinely the crux of Claim 6 and is not attempted
+   here.
+
+### 5.3 Cell (A): even less is pinned down
+
+For cell A, Claim 3(2)–(3) (the $\mu_2$-gerbe/root-stack structure of
+$\overline{\mathcal S}^-_{1;2,0}$ and the degree-$3$ étale structure of
+$\overline{\mathcal S}^+_{1;2,0}$) have **not** been independently verified this
+session (only cell B's divisor typing was checked, in Part 3). `[GAP: cell-A structure]`
+The same degree-parity method used in Part 3 should transfer directly (checking, on
+each boundary divisor of $\overline{\mathcal M}_{1,2}$, whether the NS or Ramond node
+prescription is degree-consistent on each branch — including the genus-$1$ branch,
+where the relevant Picard group is no longer $\mathbb Z$, so "even/odd degree" must be
+replaced by "does a square root exist in $\mathrm{Pic}(E)$," which is automatic for
+*every* degree on an elliptic curve since $\mathrm{Pic}^0(E)$ is divisible — so the
+obstruction on an elliptic branch, if any, is of a different, subtler kind than on a
+rational branch, and was not worked out here), but doing so honestly is separate work,
+not carried out in this session.
+
+**Summary of what remains for Claim 6:** a genuinely non-trivial, multi-step
+computation (explicit line bundle on a stacky surface, its tangent-bundle twist, and a
+normal-crossing local-cohomology computation) for cell (B), and an *additional*,
+not-yet-started structural verification (Claim 3(2)-(3)) plus the analogous
+computation for cell (A). Neither cell's dichotomy is settled by this session.
+
+---
+
+## Part 6 — Summary and honest verdict
+
+**What is proved (self-contained, from primary sources verified against page images,
+or independently re-derived):**
+- **Lemma 1** (= Claim 1): odd rank $2$ $\Rightarrow$ split $\iff$ projected $\iff$
+  $\omega_2=0$, for both cells. Two independent routes.
+- **Lemma 2 + Corollary 2.1**: the only published mechanism for proving $\omega_2\ne0$
+  in this literature (the Donagi–Witten one-point obstruction family) is structurally
+  unavailable for both cells, because it needs a smooth curve of genus $\ge2$
+  somewhere in the construction and both cells have total genus $\le1$. Scope of this
+  negative statement is stated precisely (Part 2) — it does not itself imply
+  $\omega_2=0$.
+- **Lemma 3** (part of Claim 3(1)): the NS/Ramond typing of all ten boundary divisors
+  of $\overline M_{0,5}$ for cell (B), verified by direct Riemann–Roch degree-parity
+  computation (not merely quoted).
+- **Lemma 4** (= Claim 2, both cells): the open, uncompactified loci
+  $\mathfrak S_{1;2,0}$ and $\mathfrak S_{0;3,2}$ are split, via an elementary Serre
+  affine-vanishing argument (the coarse moduli spaces $M_{0,5}$ and $M_{1,2}$ are both
+  affine).
+- **Corollary 4.1** (= Claim 5): $\omega_2$ of both compactified cells, if non-zero, is
+  necessarily boundary-supported, an immediate consequence of Lemma 4 plus the
+  étale-pullback compatibility of $\omega_2$ (Corrêa–Noja Prop. 2.2).
+
+**What is explicitly open, as `[GAP]`s:**
+1. `[GAP: root-stack representability]` (Part 3) — imported, not re-derived from
+   Jarvis's/Cornalba's original moduli-of-torsion-free-sheaves construction.
+2. `[GAP: explicit Chern class of det F]`, `[GAP: explicit tangent bundle]`,
+   `[GAP: local cohomology computation]` (Part 5) — the actual target computation for
+   Claim 6, cell (B); none of its three steps were carried out.
+3. `[GAP: cell-A structure]` (Part 5.3) — Claim 3(2)-(3) not independently checked;
+   the analogous Claim-6 computation for cell (A) not started.
+4. Claim 4 (inertia-character criterion) — not attempted this session; deprioritized as
+   a negative meta-claim that, even if established, would not by itself move Claim 6
+   forward (it only shows one more technique doesn't decide the question, the same kind
+   of result as Lemma 2, not a resolution).
+
+**Honest verdict on viability.** The *negative* half of the picture (Claim 6 cannot be
+settled by importing either of the two techniques that exist in the literature — the
+curve-base degree method, already shown exhausted by `supermoduli-threshold-sharpness`
+Remark 5.2, and now the one-point obstruction family, shown exhausted here by Lemma 2)
+is now solid and, I believe, essentially complete: there is no way to reach a verdict on
+Claim 6 by importing existing machinery. The *positive* half — a genuine vanishing
+argument sufficient to conclude $\omega_2=0$, i.e. a full proof that both cells are
+**split** — is a well-posed and, on current evidence (Corollary 4.1 already restricts
+the target to a finite Mayer–Vietoris computation on an explicit, well-understood del
+Pezzo surface with an explicit normal-crossing boundary arrangement), plausibly
+tractable computation, but it was **not completed** this session; the three `[GAP]`s in
+§5.2 are genuine, unfinished mathematics, not a hidden reduction dressed up as
+completion.
+
+**Is this path viable?** Yes, more so than it looked at the start of this session.
+Corollary 4.1 removed the "surface-base curve-degree method doesn't apply" obstacle
+that killed the naive approach (`supermoduli-threshold-sharpness` Remark 5.2): we no
+longer need a *global* vanishing theorem on a $2$-dimensional stack, only a *local*
+one (Mayer–Vietoris on the boundary normal-crossing arrangement), which is a
+qualitatively easier target with completely explicit, classical tools ($\psi$-class
+calculus on $\overline M_{0,5}$). The remaining work (§5.1–5.2) is real but bounded and
+mechanical, not conceptually stuck.
+
+**Recommendation for next steps.** (1) Carry out the Grothendieck–Riemann–Roch /
+$\psi$-class computation of $\det\mathcal F_{\mathfrak X}$ for cell (B) explicitly
+(§5.1) — ideally with a symbolic-computation script in `scripts/`, since
+$\overline M_{0,5}$'s intersection theory is completely algorithmic (Kontsevich–Manin
+recursions) and error-prone by hand. (2) Then attempt the Mayer–Vietoris local
+cohomology computation (§5.2 item 3) directly, since Corollary 4.1 + Lemma 3 already
+supply the precise geometric input (which divisors, which normal bundles) it needs.
+(3) Only after (or in parallel with) resolving cell (B), redo the (structurally similar
+but technically different, elliptic-branch) computation for cell (A) — Part 5.3 flags
+exactly where the method needs new input (Picard group of an elliptic curve is
+divisible, changing the parity-obstruction argument of Lemma 3). This attempt should
+stay `draft`/`under-review` rather than closing; a future prover picking it up has,
+thanks to this session, a fully-reduced, well-posed finite computation to run rather
+than an open-ended search for a method.
