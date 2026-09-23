@@ -22,7 +22,7 @@
 | 主命题：$\overline{\mathfrak S}_{0;4,0}$ 是 split | **KNOWN（作为 supermanifold 层面的陈述）** —— Witten, arXiv:1209.2459 §5.1.3, p.54–55，**逐字问了同一个问题并给出肯定回答**，并给出显式 splitting（超交比）。见 E1/E2。 |
 | 该陈述是"证明"还是"断言" | **显式构造 + 一句话论证**，不是编号定理、无证明环境。Witten 自陈这些 splitting "first described in" Nelson (Superstrings '88) 与 Giddings, CMP 143 (1992)。见 E3。 |
 | 奇维 2 时 projected ⟺ split | **KNOWN 且是编号推论** —— Donagi–Witten, arXiv:1304.7798, **Corollary 2.3, p.19**。见 E4。 |
-| 一般机制（奇秩 2 + 基是负典范次数曲线 ⟹ $\omega_2=0$，Serre 对偶） | **标准到"练习"的程度**：所需全部输入（$\omega_2 \in H^1(M,\mathrm{Hom}(\wedge^2T_-,T_+))$ 是唯一障碍、曲线上线丛 $H^1$ 的消失判据）都是教科书级。见 §3 的评估。 |
+| 一般机制（奇秩 2 + 基是负典范次数曲线 ⟹ $\omega_2=0$，Serre 对偶） | **判据部分是标准的（编号推论，见 E4/1c/E8）；"负典范次数 ⟹ $\omega_2=0$" 作为一般陈述则是 <span style="color:red">假的</span>** —— $\mathbb{CP}^1$ 上存在非 split 的 $1\vert2$ 超流形（Vishnyakova 的 $\mathbb Q^{1\vert2}$，E6，L1）。消失只在奇丛次数落在特定范围时成立，必须逐例算次数。**详见 §3（2026-09-23 追加，此行据 E6 修订了本文件早先版本的措辞）**。 |
 | $\mu_2$-gerbe over $\sqrt[2]{(\mathbb P^1,0+1+\infty)}$ 的显式识别 | **NOT FOUND（按此措辞）**。Witten p.55 末段用物理语言描述了**同一个几何**（一般点自同构 $\mathbb Z_2$、三个边界点跳到 $\mathbb Z_2\times\mathbb Z_2$、法丛须在 orbifold 意义下定义），但**未**使用 "gerbe" / "root stack" / "square root stack" 任何一个词，且他为此引的是 Deligne 致 Witten 的**私人信件** [49]（不可登记）。见 E5。 |
 | 文献是否有**相反**陈述（亏格零超模非 split/有障碍） | **未发现**。所有已核查的非 projected 结果的量词都是 $g\ge 2$ 或 $g\ge 5$，亏格零被显式排除在外。见 §4。 |
 
@@ -334,3 +334,174 @@
 ## 5. 仍未取得原文的来源（供船长手点）
 
 （本轮检索中被 Witten 指为原始出处、但本轮**未拿到全文**的条目，列在 §5 续表，见后续追加。）
+
+---
+
+# 追加（2026-09-23 第二批）：§3 一般机制、§4 反向陈述、§5 续表
+
+## 陈述（续）
+
+### E6 ★ Vishnyakova 2012：$\mathbb{CP}^1$ 上**存在**非 split 的 $1|2$ 超流形
+- 文献：E. G. Vishnyakova, "Even-homogeneous supermanifolds on the complex projective line",
+  arXiv:1212.6614（Differ. Geom. Appl. **31** (2013)）。
+- 位置：**排版 p.12（= PDF 第 12 页）**，Theorem 10 之后的 Corollary。**L1（页图像逐字核实）**。
+- 类型：proposition（编号 Corollary，有证明指引："By the similar argument as in [2],
+  Corollary of Theorem 1, we get:"）
+- 原文陈述（**逐字，L1**）：
+  > **Corollary.** Any non-split even-homogeneous supermanifold $\mathcal M$ of dimension
+  > $1|2$, where $\mathcal M_0 = \mathbb{CP}^1$, is isomorphic to $\mathbb Q^{1|2}$.
+  >
+  > Here $\mathbb Q^{1|2}$ is the (homogeneous) supermanifold corresponding to the cocycle
+  > $x^{-1}\xi_1\xi_2\frac{\partial}{\partial x}$ (see [2] for more details).
+- 文献自称的严格程度：数学定理，有证明（引 [2] = Onishchik 等的同类论证）。
+- 文献自列的依赖：Green 定理（本文 Theorem 1，逐字："Theorem 1. [Green] … classes of
+  isomorphic supermanifolds $\mathcal M$ with the retract $\mathrm{gr}\,\mathcal M = \mathcal M$
+  are in bijection with orbits of the action $\mathrm{Int}$ of the group $\mathrm{Aut}\,E$ on
+  $H^1(M_0,(T\mathcal M)_2)$."，text-only）；Grothendieck 分裂定理。
+- **对本任务的意义（如实转述，不作推断）**：此 Corollary 的存在本身就说明
+  **"底空间是 $\mathbb{CP}^1$（负典范次数）+ 奇秩 2"并不蕴含 split** —— 反例 $\mathbb Q^{1|2}$
+  被点名、被分类、且是这一类里唯一的（在 even-homogeneous 范畴内）。
+- 旁证（text-only，同文 p.2–3）：该文第 3 节对 $T_2^{ij}$ 给出显式转移函数
+  （公式 (4)：$\xi_i\xi_j\partial/\partial x \mapsto -y^{2-k_i-k_j}\eta_i\eta_j\partial/\partial y - \dots$），
+  即障碍所在线丛的次数由 $2-k_i-k_j$ 决定 —— **消失与否取决于奇丛的次数 $k_i$，不只取决于底的亏格**。
+  ⚠ 这一段是 text-only，curator 若要用公式 (4) 必须自己再做 L1 核实。
+
+### E7 Wang 2025：迄今最强的非 projected 量词，**仍把亏格零排除在外**
+- 文献：Tianyi Wang, "On Nonprojectedness of Supermoduli with Neveu-Schwarz and Ramond
+  Punctures", arXiv:2512.15727v1（2025-12-05）。
+- 位置：**p.1 摘要**。**L1（页图像逐字核实）**。
+- 原文陈述（**逐字，L1**）：
+  > We study the supermoduli space $\mathfrak M_{g,n,2r}$ of Super Riemann Surfaces (SRS) of
+  > genus $g$, with $n$ Neveu-Schwarz punctures and $2r$ Ramond punctures. We improve the result
+  > of Donagi, Witten, and Ott [1, 2, 3] by showing that the supermoduli space
+  > $\mathfrak M_{g,n,2r}$ is not projected if $g \ge n + 5r + 3$.
+- 同页引言（**逐字，L1**）对既有结果的量词复述：
+  > They showed that $\mathfrak M_{g,n,0}$ is not projected for $g \ge 2$ and $g - 1 \ge n \ge 1$.
+  > Then following this work, Donagi and Ott [3] proved that $\mathfrak M_{g,0,2r}$ is not
+  > projected for $g \ge 5r+1 \ge 6$.
+- **量词检查**：代入 $g=0,\ n=4,\ r=0$ 得 $0 \ge 7$，假。**亏格零落在所有这些定理的适用范围之外。**
+
+### E8 Corrêa–Noja 2026：奇秩 $\le 3$ 时形变问题线性、奇秩 2 时首要障碍完备
+- 文献：M. Corrêa, S. Noja, "Formal moduli and the splitting theory of supermanifolds",
+  arXiv:2605.03166v1（2026-05-04，75 页）。
+- 位置：**排版 p.57**，§8.6 "Low odd rank: linearity and completeness of the primary
+  obstruction"，Theorem 8.40 与 Corollary 8.41。**L1（页图像逐字核实）**。
+- 原文陈述（**逐字，L1**；$\mathsf F$ 为奇余法丛 odd conormal bundle）：
+  > 8.6. **Low odd rank: linearity and completeness of the primary obstruction.** The formal
+  > Green tower has an immediate consequence in small odd dimension. The first possible nonlinear
+  > term in the Maurer–Cartan equation is the bracket of two weight-two derivations. This bracket
+  > has weight four. Hence, if the odd rank is at most three, there is no room for such a term.
+  > In this range the fixed-retract formal moduli problem is therefore linear: the whole
+  > deformation class is its first Green coordinate. This gives a useful test case for the
+  > preceding formalism and explains why odd rank two examples are governed entirely by their
+  > primary obstruction class.
+  >
+  > **Theorem 8.40** (Low odd rank linearity). *Let $\pi : \mathsf Y \to \mathsf S$ be as above,
+  > let $\mathsf F$ be locally free of rank $\mathfrak n \le 3$ … In particular, in odd rank at
+  > most three, the fixed-retract formal moduli problem has no nonlinear Kuranishi equations.*
+  >
+  > **Corollary 8.41** (Odd rank two). *Assume* $\mathrm{rk}\,\mathsf F = 2$. *Then*
+  > $$\mathcal T^{\langle 2\rangle}_{\mathsf A_{\mathrm{spl}}/\mathsf S} \cong
+  > \mathcal Q^{(2)}_{\mathsf F/\mathsf S} = \mathcal T_{\mathsf Y/\mathsf S}\otimes
+  > \textstyle\bigwedge^2\mathsf F.$$
+- 文献自列的依赖：Green 障碍塔；Donagi–Witten 的 Atiyah 类分量（摘要逐字，text-only：
+  "the Donagi–Witten component gives the primary obstruction"）。
+- **对本任务的意义**：这是 2026 年仍在被重新包装、重新证明的"奇秩 2 ⟹ 首要障碍完备"。
+  它**加强**了"该机制是标准件"的判断，同时（与 E6 一起）说明**标准的是判据，不是消失**。
+
+---
+
+## 3. 一般机制是"结果"还是"练习"？（任务书交付物 3）
+
+**裁定：判据是标准件（引用即可，referee 会认为是 routine）；但任务书所述的那条一般机制
+"奇秩 2 + 基是负典范次数曲线 $\Rightarrow \omega_2 = 0$（Serre 对偶）"**
+**作为一般陈述是假的，因此具体计算不是"零内容的练习"，而是一次必须算次数的具体核验。**
+
+拆成三段：
+
+**(a) "奇秩 2 时 projected $\iff$ split、且 $\omega_2$ 是唯一障碍" —— 完全标准，可直接引用。**
+证据链（全部 L1）：
+- Donagi–Witten arXiv:1304.7798 **Corollary 2.3, p.19**（supermanifold 版，编号推论）——见 E4；
+- Corrêa–Noja arXiv:2606.06733 **Proposition 2.2, p.3**（smooth DM superstack 版，编号命题）——见 1c；
+- Corrêa–Noja arXiv:2605.03166 **Theorem 8.40 / Corollary 8.41, p.57**（形式模理论版，2026）——见 E8。
+三处独立陈述、三种不同包装、跨 14 年。**referee 对这一步只会要求一个引用。**
+
+**(b) "$\omega_2 \in H^1(\text{基}, T_+\otimes\wedge^2 T_-^\vee)$，基是曲线时由次数判消失" ——
+计算手段标准，但结论依赖奇丛次数，不由"负典范次数"单独决定。**
+反例是公开的、编号的、有证明的：**E6**（Vishnyakova p.12 Corollary，L1）给出 $\mathbb{CP}^1$ 上
+非 split 的 $1|2$ 超流形 $\mathbb Q^{1|2}$，对应 1-上链 $x^{-1}\xi_1\xi_2\partial_x$。
+$\mathbb{CP}^1$ 的典范次数是 $-2 < 0$，奇秩是 2 —— 任务书所述机制的两个前提都满足，结论却不成立。
+所以那条机制若要成立，必须补上奇丛次数的条件（在 Vishnyakova 的记号里就是 $k_1+k_2$ 落在哪一侧）。
+⚠ 本文件**不**代替 curator 去写出那个条件——那属于推断，按 `literature/CLAUDE.md` 规则 2 不在抽取阶段做。
+
+**(c) 本项目要的那个具体对象（$\overline{\mathfrak S}_{0;4,0}$）** 的 split 性，
+公开文献里**已有结论**（E1/E2，Witten p.54–55，显式构造超交比 splitting），
+但那是 **supermanifold/coarse 层面**的、非定理环境的论证；**叠层面（含 $\mathbb Z_2\times\mathbb Z_2$
+增强自同构与 orbifold 法丛）的严格版本，Witten 外包给了 Deligne 的私人信件 [49]**（见 E5），
+按规则 1 不可登记。
+
+**给 lead 的一句话**：referee 不会把"奇秩 2 判据"当结果；但**会**把"在这个具体的 stacky $\mathbb P^1$ 上
+把 $\omega_2$ 所在的线丛次数算出来并判消失"当作一段必须写出来的、可验证的计算
+——因为同样前提下的反例就在文献里躺着（E6）。这段计算是**练习难度的结果**，不是**可以省略的练习**。
+
+---
+
+## 4. 文献是否在何处陈述了**相反**的结论？（任务书交付物 4）
+
+**裁定：未发现任何一处说亏格零超模（紧化或不紧化、NS 或 R 穿孔）非 split / 有障碍。**
+本轮逐条核过的全部非 projected / 非 split 陈述及其量词：
+
+| 文献 | 陈述 | 量词 | 亏格零是否落入 | 核实等级 |
+|---|---|---|---|---|
+| Donagi–Witten 1304.7798 Thm 1.1 | $\mathfrak M_g$ 非 projected | $g\ge5$ | 否 | text-only |
+| Donagi–Witten 1304.7798 Thm 1.2/1.3 | $\mathfrak M_{g,n}$ 非 projected | $g\ge2$，$g-1\ge n\ge1$ | 否 | text-only |
+| Donagi–Ott（经 Wang 转述） | $\mathfrak M_{g,0,2r}$ 非 projected | $g\ge5r+1\ge6$ | 否 | **L1**（E7） |
+| Wang 2512.15727 摘要 | $\mathfrak M_{g,n,2r}$ 非 projected | $g\ge n+5r+3$ | 否（$0\ge7$ 假） | **L1**（E7） |
+| Corrêa–Noja 2606.06733 摘要 | 紧化无穿孔超模叠 projectedness 问题"settled" | "every genus at least two" | 否 | text-only |
+| FKP 2408.11136 | $\mathcal S_2$ 非 projected | $g=2$ | 否 | text-only |
+
+另有一条**容易被误读成反例、但不是**的陈述，如实记录：
+- FKP arXiv:2408.11136 §5.6（text-only）逐字：
+  > the universal curve over the moduli space $\mathcal S^-_{1,1}$ corresponding to supercurves
+  > with odd underlying spin structure is not split.
+
+  ⚠ 这里非 split 的是 $\mathcal S^-_{1,1}$ 上的**万有曲线**，不是模空间本身，且亏格是 1 不是 0。
+  **不构成反向陈述。**
+
+唯一的"张力"不在 split 与否，而在 **split 之后能否直接做纤维积分**：Witten p.55（L1，见 E2）逐字
+说他构造的 splitting 没有一个在无穷远除子处令人满意（"none of the splittings that we have described
+is satisfactory at each of the divisors at infinity"），p.56 进一步说树图要在无穷远处做修正。
+**这不是"非 split"，是"split 但 splitting 不自然"。** curator 若把这条做成图节点，必须把两者分成两张卡。
+
+---
+
+## 5（续）. 仍未取得原文的来源（供船长手点）
+
+| 来源 | 为什么要它 | 状态 / URL |
+|---|---|---|
+| S. Giddings, "Punctures On Super Riemann Surfaces", Commun. Math. Phys. **143** (1992) 355–370 | Witten p.56 与 Bettadapura p.2 都把亏格零 splitting 的**详细版**归给它——这是主命题最可能的"原始证明"所在 | 付费墙。DOI `10.1007/BF02099013`；Project Euclid `projecteuclid.org/euclid.cmp/1104248954`（返回 ~1.1 KB 存根）。INSPIRE 给报告号 **UCSB-TH-91-10**，KEK 扫描件猜测 URL 返回 HTML 而非 PDF。**未取得** |
+| P. Nelson, "Some Simple Supermoduli Spaces", in *Superstrings '88*（eds. M. B. Green et al., World Scientific） | Witten p.56 逐字说 splitting "were **first** described in [46]" ——最早出处 | 纸本会议论文集，无 arXiv、无公开扫描。**未取得** |
+| P. Deligne, letter to E. Witten (March 4, 2012) | Witten 把 $\widehat{\mathfrak M}_{0,4}$ 的 **orbifold/叠层面**精确化外包给了它（E5） | **私人信件，按 `literature/CLAUDE.md` 规则 1 本项目不得登记**。列在此处只为说明"叠层面缺口"的去向 |
+| Yu. I. Manin, *Gauge Field Theory and Complex Geometry*（Springer Grundlehren 289） | 任务书点名；Green 障碍理论与超流形分裂的经典参照 | 纸本书，本轮未取得 |
+| D. Leites, A. S. Tikhomirov, "Non-split superstrings of dimension $(1|2)$", J. Geom. Phys. **216** (2025) 105579 | 由 Corrêa–Noja 2605.03166 参考文献 [25] 发现；标题直指 $(1|2)$ 维非 split 对象，与 §3(b) 的反例族同类 | 未检索到 arXiv 版本，Elsevier 付费墙。**未取得**，建议船长手点 |
+| E. G. Vishnyakova, "On complex analytic $1|2$- and $1|3$-dimensional supermanifolds associated with $\mathbb{CP}^1$" | Corrêa–Noja 2605.03166 参考文献 [43]；$\mathbb{CP}^1$ 上 $1|2$ 超流形的分类（§3(b) 的正面对照） | 文集文章，本轮只取得 arXiv:1212.6614（同作者姊妹篇）。**未取得** |
+
+## 6（续）. 第二批发现的原文疑点
+
+5. **Corrêa–Noja arXiv:2605.03166 p.57 的 Corollary 8.41 用 $\mathsf F$ 表示奇余法丛
+   （odd conormal bundle，p.1 逐字定义 $\mathsf F_X := \mathcal J_X/\mathcal J_X^2$），
+   于是障碍群写成 $H^1(\mathsf Y, \mathcal T_{\mathsf Y}\otimes\wedge^2\mathsf F)$；
+   而 Donagi–Witten Cor. 2.3 写的是 $H^1(M,\mathrm{Hom}(\wedge^2 T_-, T_+))$，
+   Corrêa–Noja 2606.06733 写的是 $H^1(X, T_X\otimes\wedge^2 T_-^\vee)$。**
+   三者是同一个群（$\wedge^2 T_-^\vee \cong \wedge^2\mathsf F$），但**对偶符号一处写作 $\mathsf F$、
+   一处写作 $T_-^\vee$**；curator 若跨文献拼接必须声明用哪套记号，否则极易写成 $\wedge^2 T_-$。
+6. **Vishnyakova arXiv:1212.6614 的 $k_i$ 符号约定**：p.2（text-only）逐字
+   "$y = x^{-1},\ \eta_i = x^{-k_i}\xi_i$" —— **$k_i$ 出现在指数的负号上**，
+   与"$E = \oplus\mathcal O(k_i)$"式的直觉差一个符号。引用其次数条件时必须先固定这条转移公式。
+7. **Vishnyakova 的 Remark 2（p.12，L1）自承其参照文献 [2] 漏掉了一个超流形**：
+   逐字 "The supermanifold $\mathcal M$ with the retract $(k, 2-k, 0)$, corresponding to the
+   cocycle $\frac1x\xi_1\xi_2\xi_3\frac{\partial}{\partial\xi_3}$, **which was lost in [2]**,
+   in even-homogeneous but not homogeneous. Hence the main result in [2], Theorem 1, is correct."
+   —— 这是作者对前人分类表遗漏的显式更正，属该领域"分类表不完整"的先例，记录备查。
+   （原文 "in even-homogeneous" 疑为 "is even-homogeneous" 的排印错误，L1 页图像确认原文如此。）
+
