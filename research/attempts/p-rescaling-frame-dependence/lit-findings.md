@@ -443,3 +443,180 @@ Theorem 4.1 of the paper survives as an identity about Φ₁₀, but the sentenc
 from DGM equation (51) precisely by the half-integer shift" compares two formulae that live
 on different charge slots, and the claim that AN's framework *corrects DGM* does not follow
 from AN alone.
+
+---
+
+## 6. The P-rescaling family is larger than AN, and its second member gets it right
+
+### F8 (L1, arXiv:1806.03330 p. 64, eqs (5.79)–(5.81))
+
+Bossard–Cosnier-Horeau–Pioline, *Exact effective interactions and 1/4-BPS dyons in heterotic
+CHL orbifolds*, SciPost. Verbatim:
+
+> "For example in the maximal rank case, all primitive charges (Q,P) are in the U-duality
+> orbit of a charge of the form **[71]**
+>
+>   Q = e₁ + q e₂ ,   P = p e₂ ,   Q ∧ P = p e₁ ∧ e₂ ,   (5.79)
+>
+> with e₁ and e₂ primitive in Λ_{22,6}. **The integer p is sometimes known as the 'torsion'.**
+> In that case (5.74) simplifies to
+>
+>   C̄(Q,P;Ω⋆₂) = Σ_{d≥1, d|p} d · C[ ( Q²      QP/d  ) , (1 0; 0 d) Ω⋆₂ (1 0; 0 d) ] ,  (5.80)
+>                                     ( QP/d    P²/d² )
+>
+> in agreement with the prescription in **[41, 72]**, with additional fineprint on the contour
+> of integration."
+
+Reference resolution (L1, BCP bibliography pp. 151, 153): **[71] = Banerjee–Sen 0801.0149**,
+**[41] = BSS 0802.1556**, **[72] = DGM 0803.2692**.
+
+Three things follow, and they are the cleanest data points in this file.
+
+1. **(5.80) is a P-rescaling divisor sum.** The Gram argument is (Q², QP/d; QP/d, P²/d²):
+   it is **P² that is divided by d²**. In the (m,n,ℓ) = (Q²/2, P²/2, Q·P) notation of
+   `claim.md` this is exactly D′_I. So the P-rescaling family has at least two members:
+   AN (2.13) and BCP (5.80)–(5.81).
+2. **BCP state it on an explicitly P-adapted frame.** (5.79) has P = p e₂ ∈ pΛ with torsion
+   p, so P ∈ IΛ by construction; the formula is never applied to a bare triple (m,n,ℓ,I).
+   Compare DGM, whose (I,1,1,1) normal form has Q = I e₁ ∈ IΛ. Both papers pick the adapted
+   frame for the charge *they* divide; they pick *opposite* charges, and each is right in
+   its own frame.
+3. **BCP also carry the contour.** The second argument of C is Ω⋆₂ ↦ diag(1,d) Ω⋆₂ diag(1,d),
+   i.e. the attractor contour is transformed along with the Gram matrix. The bare operators
+   D_I, D′_I drop this; Theorem 5.2 of the project paper is the statement that dropping it is
+   legitimate on the attractor contour, and BCP's own "with additional fineprint on the
+   contour of integration" is an acknowledgement of the same point.
+
+BCP's sentence "in agreement with the prescription in [41, 72]" is, read through `proof.md`
+Theorem A (D′_I(m,n,ℓ) = D_I(n,m,ℓ)), **correct**: their P-rescaling statement on a P-adapted
+frame and DGM's Q-rescaling statement on a Q-adapted frame are the same statement, conjugated
+by the S-duality element (Q,P) ↦ (P,−Q). Theorem A is the precise form of that agreement.
+
+### F9 (L1, arXiv:2007.10302 pp. 19, 30, §3.7 and App. A) — Cardoso–Nampuri–Rosselló
+
+*Arithmetic of decay walls through continued fractions*. Their letters are **m = ½Q_m²
+(magnetic), n = ½Q_e² (electric)** (their (A.7), L1 p. 30), so their divisor sum divides the
+**electric** slot: it is the same physical statement as DGM. Verbatim, p. 19:
+
+> "**3.7 Decadent dyons with torsion I > 1.** The extension of our solution to the dyon
+> counting problem for I ≠ 1 in heterotic string theory on T⁶ is quite straightforward. We
+> again restrict to 0 ≤ ℓ ≤ m with m > 0. The dyonic degeneracy, d_I(m,n,ℓ) for general I is
+> expressed in terms **[17, 18]** of the dyonic degeneracy of states d(m,n,ℓ) for I = 1 as
+>
+>   d_I(m,n,ℓ) = Σ_{t|I} t d(m, n/t², ℓ/t) .   (3.40)
+>
+> Each summand in (3.40) is computed by (2.19) via the continued fraction approach to
+> generating decay walls. However, note that only those decay walls contribute to (2.19) that
+> correspond to n_γ, ℓ_γ t = 0 mod t². This condition implies that the dyonic walls correspond
+> to a subset of the PSL(2,ℤ) group, which as we show in the appendix, is the subgroup
+>
+>   Γ⁰(t) = { (a b; c d) ∈ PSL(2,ℤ) | b = 0 mod t } .   (3.41)
+>
+> Hence, choosing only Γ⁰(t) matrices from the continued fraction algorithm, we can perform an
+> exact computation of d_I, using (3.40)."
+
+([17] = BSS 0802.1556, [18] = DGM 0803.2692, L1 p. 33.) And Appendix A, p. 30, verbatim:
+
+> "Next, we consider decadent dyons (m,n,ℓ) in the N = 1 CHL model with arbitrary torsion I.
+> This requires the charge bilinears to be quantized according to
+>
+>   m ∈ ℤ ,  n ∈ t²ℤ ,  ℓ ∈ tℤ ,   (A.9)
+>
+> with t|I. … Under a transformation γ ∈ SL(2,ℤ), (m,n,ℓ) transform as
+>
+>   m_γ = mp² − ℓpr + nr² ,  n_γ = mq² − ℓqs + ns² ,  ℓ_γ = −2mpq − 2nrs + ℓ(ps+qr) .  (A.11)
+>
+> **Demanding m_γ ∈ ℤ, n_γ ∈ t²ℤ, ℓ_γ ∈ tℤ implies that q is a multiple of t, and hence γ lies
+> in the subgroup Γ⁰(t) ⊂ PSL(2,ℤ).**"
+
+This is the *same computation* as `proof.md` Theorem C and DGM (4.6): the transformed divided
+slot is n_γ = q²m − qsℓ + s²n, and integrality of n_γ/t² forces t | q. (Their γ = (p q; r s)
+is my U conjugated by the swap J, γ ↦ JγᵀJ, which fixes the upper-right entry — so their
+"q ≡ 0 mod t" and my "b ≡ 0 mod I" are the same condition and both groups are Γ⁰ in the
+standard labelling. This cross-check matters: the ρ/σ/v trap has a group-theoretic twin.)
+
+**Classification.** CNR know the Γ⁰(t) condition and use it — but they use it to restrict the
+**decay-wall matrices** summed over inside a *fixed* frame, not to restrict the frame in which
+(m,n,ℓ) is presented. Their §3.7 conclusion ("We have thus solved the decadent dyon counting
+problem for all negative and zero discriminant 1/4-BPS states in N = 4 heterotic string theory
+on T⁶", p. 19) is asserted for d_I(m,n,ℓ) on the arithmetic hypothesis (A.9) alone. By
+`proof.md` Theorems B and C that hypothesis is not sufficient to pin the value; an adaptedness
+(equivalently, a Γ⁰(I)-coset) hypothesis has to be added. This is a **hypothesis-tightening,
+not an arithmetic error**: on Q-adapted frames their numbers are what DGM's formula gives.
+
+### F10 (L1, arXiv:2403.19630 p. 7, eqs (2.1)–(2.3))
+
+*The Immortal Dyon Index Is Positive*. Verbatim:
+
+> "A state with unit torsion, I = 1, is completely specified by the charge bilinears Q⃗², P⃗²,
+> Q⃗·P⃗ [51]. **From now on we focus on this class of states, since the degeneracies of dyons
+> with torsion greater than one are related to the degeneracies of unit torsion dyons
+> [52–54].**"
+
+and (2.3): m = P⃗²/2, n = Q⃗²/2, ℓ = Q⃗·P⃗ (the AN/DMZ letter assignment). The torsion
+divisor sum is **never written down** and nothing is deduced from it; it is cited only as the
+reason for restricting to I = 1. → **(丙)**.
+
+### F11 (triage level — my own text extraction of the arXiv PDFs, **not** page images)
+
+Triaged from the 98 INSPIRE records citing DGM 0803.2692 by searching the full text for
+"torsion"; only the papers below mention it at all outside a bibliography.
+
+- **arXiv:0804.0651** (Sen, *U-duality Invariant Dyon Spectrum in type II on T⁶*), p. 5:
+  "A formula for the index B₁₄ for unit torsion dyons has been written down in [7,8,4], but
+  since the charge vector (9) has torsion Q₅, **we cannot use the results of [7,8,4] directly.
+  We shall now show however that by a suitable U-duality transformation we can map the charge
+  vector (9) to another charge vector of unit torsion**, and then use the result of [4]."
+  → no divisor sum is used at all; the torsion is removed by an explicit duality map. **(乙)**,
+  and methodologically the safest treatment in the survey.
+- **arXiv:1912.06562**, p. 9 footnote 2: "Here and in the following, we refer to dyons with
+  torsion 1, i.e. gcd{Q_iP_j − Q_jP_i} = 1. A similar story for generic dyons [25,26] should
+  follow along the same lines." → **(丙)**.
+- **arXiv:1702.05095** (*No More Walls!*), p. 55: "Throughout this paper, we have focused on
+  'torsion-free' dyons, i.e. dyons with the discrete T-duality invariant I ≡ gcd(Q∧P) = 1. In
+  several cases, dyons with more general I have been counted [18,49,50] … **It would be
+  interesting to find the counting functions for all I for our CHL models**." → **(丙)**,
+  explicitly out of scope.
+- **arXiv:2005.07712** (Fischbach–Klemm–Nega): unit torsion throughout; the only mention of
+  I > 1 is footnote 12 on p. 5 ("in [44] these constraints were also used to propose the
+  correct partition function of dyons with torsion greater than one for the unorbifolded
+  theory"). → **(丙)**.
+- **arXiv:2205.08726** (*Positivity of discrete information for CHL black holes*): the string
+  "torsion" does not occur in the document at all. → not in the family.
+- **arXiv:1002.3857** (*Discrete Information from CHL Black Holes*): "torsion" occurs only in
+  the titles of refs [22],[23] in its bibliography. → not in the family (its "discrete
+  information" is the CHL twisted/untwisted residue data, not gcd(Q∧P)).
+
+---
+
+## 7. Answer to Question 3 — the blast radius, classified
+
+Criterion, as set in `claim.md`: **(甲)** a stated conclusion would need restating if the
+divisor sum is not a function of (m,n,ℓ,I); **(乙)** the use is on adapted frames (or an
+explicitly fixed frame) and is unaffected; **(丙)** the formula is transcribed or cited,
+nothing is deduced from it.
+
+| paper | eq. | rescales | used for | class | why |
+|---|---|---|---|---|---|
+| DGM 0803.2692 | (3.27),(3.28) | **Q** | the paper's main result | **乙** | §2.1 fixes the (I,1,1,1) = Q-adapted frame; §4.1 (4.5)–(4.12) proves only Γ⁰(I)-invariance and supplies a *different* 𝒵_I^{(l)} per coset. F3, F3b. |
+| BSS 0802.1556 | (3),(7),(10) | **Q** | torsion-r partition function | **乙** | the set 𝓑 is the adapted set by construction, and (10) gives a different Φ̌′ per Γ⁰(r)-coset. F4d, F4e. |
+| BSS 0802.0544 | — | — | three orbits at torsion 2 | **乙** | writes no divisor sum; gives three separate partition functions, one per T-duality orbit. F5b, F5c, F5d. |
+| Banerjee–Sen 0801.0149 | (2),(3),(11),(12) | — | S-duality on (r₁,r₂,r₃,u₁) | **乙** | this is the *source* of the correct statement: the stabiliser is Γ⁰(r) and the rest is an SL(2,ℤ)/Γ⁰(r) coset. F6. |
+| BCP 1806.03330 | (5.79)–(5.81) | **P** | 1/4-BPS couplings in D = 3 | **乙** | frame written out explicitly, P = p e₂ ∈ pΛ; contour transformed too. F8. |
+| Alexandrov–Nampuri 2009.01172 | (2.13), (4.27)–(4.28) | **P** | consistency check of the generalized holomorphic anomaly eq (4.26) | **甲, narrowly** | (2.13) is asserted for Ω_I(n,m,ℓ) with no frame hypothesis and attributed to DGM (3.28), which divides the *other* charge. F7b; see the GAP in F7c. |
+| Cardoso–Nampuri–Rosselló 2007.10302 | (2.3), (3.40)–(3.41), (A.9)–(A.11) | **Q** | §3.7's extension of the decadent-dyon count to I > 1 | **甲, narrowly** | d_I(m,n,ℓ) asserted on the arithmetic hypothesis (A.9) alone; an adaptedness/coset hypothesis must be added. Their App. A already contains the needed Γ⁰(t) computation. F9. |
+| Sen 0804.0651 | — | — | B₁₄ for a torsion-Q₅ charge | **乙** | maps to unit torsion by an explicit U-duality instead. F11. |
+| 1912.06562, 1702.05095, 2005.07712, 2403.19630 | — | — | — | **丙** | restrict to I = 1 and cite the torsion literature only as a reason to do so. F10, F11. |
+
+**Honest summary of the blast radius: it is small, and smaller than the shape of the negative
+result suggests.** Of the eight papers that actually write a torsion divisor sum, six state it
+on an explicitly adapted or explicitly fixed frame — including DGM itself, which proves the
+Γ⁰(I) restriction in its own §4.1. The two (甲) entries are **hypothesis-tightenings of one
+sentence each**, not defects in any computed number. The modern positivity literature
+(2403.19630, 2205.08726) does not touch the formula at all.
+
+**[GAP: not surveyed.]** The 98 INSPIRE records citing DGM were triaged by full-text search
+for the string "torsion" on the nine most likely candidates only; records without an arXiv
+eprint, and papers reaching the divisor sum through BSS or Banerjee–Sen rather than DGM, were
+not enumerated. A complete survey would also search the citation sets of 0801.0149 (52),
+0802.0544 (53) and 0802.1556 (77).
