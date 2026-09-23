@@ -7,13 +7,20 @@ author: theorem-prover agent (branch agent/prover/supermoduli-threshold-sharpnes
 
 state: under-review
 reviewer: reviewer agent "thm45rev", dispatched by lead 2026-09-23 (read-only;
-  verdict transcribed into this file by lead)
+  verdict transcribed into this file by lead); rev-threshold (sonnet,
+  2026-09-24, round 2)
 verdict: >-
   Thm 4.5 correct-with-gaps; its novelty residue over Witten section 5.1.3 is
   MINOR but real. See review_thm_4_5. NOT yet `verified` — the review's
   literature half was not independently sourced (see
   review_thm_4_5.reviewer_verification_limits, which is the part of this
-  review a reader should weigh most heavily).
+  review a reader should weigh most heavily). Round 2 (this review) covers
+  everything outside Thm 4.5: the (a)/(b)/(c) regional partition holds up,
+  with one caveat now confirmed at L1 (Witten's coarse splitting construction
+  extends to hat-M_{0,k}, all k>=4, bearing on part of the "open" region) that
+  is not yet reflected in the `answer`/`open_region` fields below. State stays
+  `under-review`: it was never going to move past Thm 4.5's own unresolved
+  status, and this round did not touch that.
 captain_confirmed: false
 
 # --- REVIEW OF THM 4.5, round 1, 2026-09-23 --------------------------------
@@ -179,6 +186,139 @@ review_thm_4_5:
       written up as new, check it against this sentence, not just against the
       k=4 discussion. Ramond cases (r>=1) are NOT covered - Witten's Ramond
       discussion is a separate subsection (5.1.4) and was not read at L1 here.
+
+# --- REVIEW ROUND 2, 2026-09-24 (rev-threshold) ----------------------------
+# Scope: everything OTHER than Thm 4.5's own correctness/novelty, which round
+# 1 (thm45rev) already covered and which this round does not redo. Task: (1)
+# audit the answer:(a)/(b)/(c) partition, (2) independently check the
+# lead_l1_verification "k>=4" finding above and judge its impact myself,
+# (3) render an overall state verdict, (4) triage the [GAP] tags.
+review_2026_09_24:
+  verdict: >-
+    No error found in Sections 1-3 and 5 (Lemma 1.1, Cor 1.3, Lemma 2.1, Thm
+    3.3, Thm 5.1); the arithmetic enumerations were re-checked by rerunning
+    `python scripts/region.py`, which passes both internal assertions and
+    reproduces every triple claimed in claim.md and proof.md. The
+    (a)/(b)/(c) partition in `answer:` is essentially correct but its part
+    (c) is now slightly overstated in light of an L1-confirmed Witten
+    passage (see witten_k_ge_4_impact) that was not yet folded into `answer`
+    or `open_region` when I started. Overall state stays `under-review`: Thm
+    4.5 (Claim D, the only genuinely new computation in this attempt) was
+    already found correct-with-gaps and explicitly NOT verified in round 1,
+    and nothing in this round touches that — so the attempt as a whole
+    cannot be `verified` regardless of how clean the surrounding bookkeeping
+    is. Not `refuted` (no error found anywhere) and not `abandoned` (live,
+    with a concrete next step already on record).
+  regional_answer_abc_check: >-
+    (b) [g>=2, non-projected]: correctly assembled from K3+K4 (published,
+    L1-verified per claim.md) plus K5 = paper.md's own Cor 8.5, which is
+    honestly flagged in the bricks table as "this project's own draft,
+    internally reviewed" rather than published — so (b)'s status is only as
+    solid as that separate, still-in-review attempt. That is a correct
+    disclosure, not a defect of this attempt. The disjoint-union step
+    (Props 3.1/3.2) is trivial and correct. (a) [split, bosonic dim<=1]: Cor
+    1.3 (rank T_- <=1 => canonically split, Lemma 1.1) is an elementary,
+    self-contained superalgebra argument with no literature dependency
+    beyond K1 (smoothness) — I re-derived it line by line and found no gap.
+    Thm 4.5 is the one non-elementary ingredient of (a) and its status is
+    exactly what round 1 already recorded (correct-with-gaps, not
+    independently verified) — I did not re-review it. (c) [open]: the
+    enumeration g=1 n+r>=2 / g=0 n+r>=4 except (4,0) / odd component g=2
+    n>=1 matches scripts/region.py's "OPEN" list exactly. But "open in both
+    directions" is now too strong for the r=0 slice of the g=0 sub-region
+    (n>=5, r=0) — see witten_k_ge_4_impact. It remains accurate for the
+    Ramond sub-region (r>=1) and for g=1, which I separately checked is
+    untouched (Witten's genus-1 discussion in section 5.2, PDF pp. 60-61 =
+    typeset 57-58, is about the UNPUNCTURED torus, n=r=0, which is not even
+    a stable member of the Sbar_{g;n,2r} family at g=1 since stability needs
+    n+2r>0; so it does not collide with the attempt's g=1 open region).
+  witten_k_ge_4_impact: >-
+    Independently fetched arXiv:1209.2459 (curl, TLS-interception bypass via
+    --resolve, same recipe as the prior L1 pass) and rendered PDF p.59 =
+    typeset p.56 at 200dpi with pdftoppm, read as an image (not pdftotext).
+    Verbatim, top of typeset p.56: "What we have said about hat-M_{0,4}
+    extends to hat-M_{0,k} for all k >= 4. By making use of the
+    supersymmetric extension of the cross ratio, one can always define
+    holomorphic splittings pi : hat-M_{0,k} -> M_{0,k}. But there are many
+    ways to do this and none is fully satisfactory." CONFIRMED ACCURATE
+    against lead_l1_verification's transcription. My own reading of what
+    this means, independent of the lead's note: this is the SAME character
+    of statement as the k=4 case one paragraph earlier — it asserts
+    existence of a splitting (hence splitness, in Witten's own usage of the
+    word two paragraphs up) at the coarse/supermanifold level, hedged only
+    on NATURALITY/uniqueness ("many ways... none fully satisfactory"), not
+    on whether the construction is well-defined as the automorphism group
+    jumps at the boundary divisors. The orbifold-structure paragraph that
+    follows (same page) discusses ONLY hat-M_{0,4} explicitly and does not
+    revisit the k>=4 extension against it. So the same residue the reviewer
+    and lead already isolated for Thm 4.5 -- "split at the supermanifold
+    level, stack-level status unaddressed, deferred to the uncitable
+    Deligne letter [49]" -- applies verbatim to every hat-M_{0,k}, k>=4, at
+    r=0. Consequence for THIS attempt: the open_region bullet "g=0 with
+    n+r>=4, except (n,r)=(4,0)" is not "open in both directions" for its
+    r=0 sub-part (n>=5) in the sense claim.md/proof.md currently imply --
+    Witten already supplies a coarse-level splitting there, unattributed by
+    this attempt. What is actually open for that sub-part is the same
+    narrower stack-level question that GAP-1 lite for Thm 4.5 is: does the
+    construction survive the automorphism-jumping locus. I read section
+    5.1.4 (Ramond Punctures, typeset p.56-57, PDF pp.59-60) far enough to
+    confirm it is a SEPARATE subsection treating only n_R=2 Ramond-puncture
+    cases explicitly and does not extend the k>=4 NS statement to r>=1; the
+    lead's note that "Ramond cases are NOT covered" stands on my own read.
+    This finding does not change Thm 4.5's own verdict (n=4, r=0 is the one
+    case with an actual proof in this attempt, independent of Witten's
+    citation gap) and does not resolve anything -- it only means the
+    open_region entry for g=0, r=0, n>=5 should be annotated the same way
+    Thm 4.5's novelty field is: "not new at the coarse level; stack level
+    genuinely open and uncited."
+  gap_triage: >-
+    Only 3 [GAP] tags exist in proof.md (GAP-1, GAP-2, GAP-3); the dispatch
+    instructions said 4, which does not match grep output -- noting the
+    discrepancy rather than inventing a fourth. GAP-1 (proof.md:254-260,
+    Lemma 4.1's tau^2=t root-stack identification): LOAD-BEARING for Thm 4.5
+    as constructed (everything in section 4.2-4.4 is built on the stacky
+    structure Lemma 4.1 asserts), partially self-mitigated by Remark 4.6's
+    large numerical margin and already triaged by round 1 as R-1
+    ("plausible, not independently confirmed"); I have nothing to add to
+    that beyond confirming it is real and already tracked. GAP-2 (proof.md:
+    470-473, Prop 5.3 freeness/representability): DECORATIVE -- proof.md
+    itself states "nothing else in this file depends on Proposition 5.3,"
+    and I confirmed no downstream result (Thm 5.1, the open_region table,
+    the recommendation section) cites Prop 5.3; it is sketch-only scenery,
+    consistent with its `status: sketch-only` tag in `results:` above. GAP-3
+    (proof.md:520-522, "no mechanism found producing nonzero omega_2 from
+    genus<=1 data, and none proven not to exist"): this is not a gap in a
+    completed proof step -- it is an honest boundary-of-knowledge statement
+    that keeps the open_region entries genuinely two-sided rather than
+    covertly hinting at an expected answer. Its only "load" is rhetorical:
+    it is the thing that stops Section 5.3's table from silently implying
+    the open region is "probably non-projected."
+  what_i_could_not_check: >-
+    Did not re-review Thm 4.5's own correctness or novelty (explicitly out
+    of scope per the dispatch; round 1 already did this and I was told not
+    to redo it). Did not independently verify paper.md's own Cor 8.5 (K5) --
+    that is a separate attempt under separate review by other agents in this
+    session (rev-fkp79, rev-fkp96, rev-prescale, rev-ramond, rev-voa per the
+    active-agent list); this attempt's honesty about depending on it is all
+    I checked. Did not read Witten section 5.1.4 (Ramond punctures) past its
+    opening paragraphs, nor the rest of section 5.2 (genus 1, odd spin
+    structure) past confirming it is about unpunctured tori -- if genus-1
+    WITH punctures is discussed later in Witten's paper 6 or 8, I have not
+    checked it against the attempt's "g=1, n+r>=2 open" claim. Did not check
+    Nelson (Superstrings '88) or Giddings (CMP 143, 1992) -- both remain
+    UNOBTAINED per round 1's note, unaffected by this round.
+  recommended_next_step: >-
+    Before this attempt graduates: (1) close Thm 4.5's R-1/R-2 (round 1's
+    job, still open) -- this is the actual blocker for `verified`, not
+    anything found this round; (2) when proof.md section 5.3 is next
+    touched, add one sentence citing Witten arXiv:1209.2459 typeset p.56
+    ("hat-M_{0,4} extends to hat-M_{0,k} for all k>=4") next to the "g=0,
+    n+r>=4 except (4,0)" open-region bullet, with the same coarse-vs-stack
+    caveat already written for Thm 4.5's novelty field, so a reader does not
+    read that bullet as "open in both directions" when the coarse-level
+    direction already has a citable (if uncited) candidate answer. This is a
+    documentation fix, not a correctness fix -- it does not change any
+    verdict in this file.
 
 # --- one-line answer -------------------------------------------------------
 answer: >-
