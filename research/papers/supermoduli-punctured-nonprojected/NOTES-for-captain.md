@@ -365,6 +365,23 @@ or the physics folklore, then what we have is an exercise, not a result, and it 
 than claimed. **Recommendation: do not submit, and do not insert Theorem 4.5 into `paper.md`, before
 both `sharprev` and `genus0priorart` return.**
 
+**A guard against reading "sharpness" as more than it is (lead, 2026-09-23).** Even with Theorem 4.5
+standing, the threshold is *not* settled. Writing the odd rank of $\overline{\mathfrak S}_{g;n,2r}$
+as $2g-2+n+r$, what is known splits as:
+
+- **split**, because odd rank $\le1$ forces it: the finitely many cells with $2g-2+n+r=1$;
+- **split**, by Theorem 4.5: $(0;4,0)$ — the unique cell with odd rank $2$ *and* bosonic dimension $1$;
+- **non-projected**: everything with $g\ge2$;
+- **open in both directions**: all of $g=1$ with $n+r\ge2$, and all of $g=0$ with $n+r\ge4$ except
+  $(0;4,0)$. That is two infinite families, and the attempt's own GAP-3 says plainly that it found no
+  mechanism producing a nonzero $\omega_2$ from genus $\le1$ data *and did not prove none exists*.
+
+So the honest headline is "the low corner is provably split, and the degree method that proves it is
+exhausted", not "$g\ge2$ is exactly the non-projected region". The `lowcorner` round is aimed at the
+first two cells of the open families precisely because the gap is infinite. Any sharpness section
+inserted into `paper.md` must carry this enumeration, or a referee will read a threshold claim we
+have not earned.
+
 ### 5.4 Addendum (2026-09-23): structural elevation of the Ramond case to title level
 
 A second theorem-prover round restructured the paper's presentation to put the Ramond-puncture case
