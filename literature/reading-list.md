@@ -106,7 +106,28 @@
 | P1 | wang-2025 | pp.1–3（摘要+§1+§2 至 Lemma 2.7） | math | researcher | **extracted（部分 L1，2026-09-18）** → `extractions/wang-2025.md`（E1–E3）。arXiv:2512.15727，**arXiv comment 自陈 "preliminary draft"**。推广 Donagi-Ott 至 NS+Ramond 混合穿孔，g≥n+5r+3；n=0 特例下比 Donagi-Ott 更苛刻，"improve" 应理解为覆盖范围推广而非同设置下的数值加强（inferred） |
 | P0 | felder-kazhdan-polishchuk-2020 | 全文（74 页，Theorem A/B/C + §2.2/§2.6/§5.1/§5.4） | math | researcher | **extracted（L1 全文，2026-09-18）** → `extractions/felder-kazhdan-polishchuk-2020.md`（E1–E6）。arXiv:2006.13271v3，Amer. J. Math. 145 (2023) 1777–1886。⚠ **不是** `felder-kazhdan-polishchuk-2024`（arXiv:2408.11136，只处理亏格 2）——本条是紧化+任意穿孔数超模叠存在性（Theorem A），`research/attempts/supermoduli-compactified-punctured/` 推论 A/B 的地基依赖。Theorem A 记号带上划线 $\overline{S}_{g,n_{NS},n_R}$（pdftotext 会丢失上划线）；"$n_R$ necessarily even" 只附着于 §2.6 引用的经典自旋曲线模叠 [22]/[23]，不是本文 Theorem A 自身重申的假设 |
 
+| P1 | bhand-sen-singh-2025 | 全文导航 + pp.1–10, 28, 35–38 逐页图核对 | holography | researcher | **extracted（部分 L1，2026-09-23）** → `extractions/bhand-sen-singh-2025-single-centered.md`。arXiv:2510.05219。为 `research/papers/torsion-dyon-shift-positivity/NOTES-for-captain.md` §4.5 的未核实预印本而抽。**结论：与该论文无重叠**——全文限 torsion one（eq 1.1），"torsion" 一词全文只出现一次，divisor/class number/saturation/superlattice/congruence/adapted 等词零出现，26 条参考文献里 DGM 0803.2692 / Rosselló 2403.19630 / BSS 0802.0544 / 0802.1556 / Alexandrov–Nampuri 2009.01172 全部缺席。唯一接触点是 (1.16)–(1.17) 的 d\*(γᵀTγ)=d\*(T)（无证明步骤），是 paper.md Appendix A Prop A.1 的已发表先例 |
+| P2 | bringmann-murthy-2012 | 追加：Appendix A（pp.28–29）+ §3（p.11） | holography | researcher | **extracted 追加（L1 页图，2026-09-23）** → `extractions/bringmann-murthy-2012.md` 追加段 E4–E6。**关闭 NOTES §4.4**：附录 A 的 m=1,2,3,4 表逐位给出全部五个基准简并度（50064 / 32861184 / 632078672 / 9337042944 / 113477152800）及其正确的 (m,n,ℓ)，且 paper.md §6 三个 D₂ 展示式的每个被加数都在表内。⚠ 2026-09-14 记的"PDF 为压缩流，未能提取正文"已不成立 |
+| P2 | sen-2011-siegel-sign | Table 1（印刷页 11）一页 | holography | researcher | **extracted（部分 L1，2026-09-23）** → `extractions/sen-2011-siegel-sign.md`。arXiv:1008.4209。第二份独立出处，覆盖五个基准值中的前三个（50064 / 32861184 / 632078672），但印的是总指标 −B₆ 而非单心 d\* |
+| P2 | sen-2008-precision-counting | 追加：印刷页 142 的无编号表（v3） | holography | researcher | **extracted 追加（L1 页图，2026-09-23）** → 追加段 S10。覆盖五个基准值中的前两个。⚠ v3=196 页、v4=178+ 页，**引用页码必须写版本号** |
+
 ## 已知获取路线备忘
+
+- **★★ 新增（2026-09-23，researcher）：NOTES §4.4「基准简并度找不到可引用表格」的三条死路与活路。**
+  背景：`research/papers/torsion-dyon-shift-positivity/NOTES-for-captain.md` §4.4 记「ar5iv 截断 0708.1270 §5；
+  hep-th/0505094 的 HTML 转换失败」。本轮实测：
+  · **活路 = `curl -sL https://arxiv.org/pdf/<id>` 直接取 PDF**。0708.1270v3（196 页，1.8 MB）与
+    1208.3476（30 页）都一次取到，`pdftotext` 定位 + `pdftoppm -r 200~220` 页图读数全程顺畅。
+    **ar5iv 截断不是原文不可得，只是转换器的限制——不要因为 ar5iv 失败就判 L0。**
+  · **死路 1：hep-th/0505094（Shih–Strominger–Yin, "Recounting Dyons in N=4 String Theory"）根本没有数值表。**
+    全文 6 页，`table` 一词零出现，五个基准值一个不含。§4.4 把它列为候选出处是误判，
+    **不必再为它找 HTML/PDF 转换路径**。
+  · **死路 2：Sen 的两张表都只覆盖部分。** 0708.1270 p.142 覆盖 (2,2,0)/(4,4,0) 两个；
+    1008.4209 Table 1 覆盖前三个。**只有 Bringmann–Murthy 1208.3476 附录 A 五个全覆盖，且直接是单心指标。**
+  · **`pdftotext -layout` 在这三张表上全部错排**（表头行与数据行错位、相邻两行的标签与数据互换）。
+    1008.4209 Table 1 里 `(4,6)` 行的数据被贴到 `(6,6)` 标签上——**若只信文本抽取会把 632078672 记成 (6,6,0)，
+    而 (6,6,0) 实际是 16193130552**。这是本项目 2026-09-23 已经踩过一次的同型错误（三个三元组贴错）。
+    ⇒ **凡数值表，一律 `pdftoppm` + PIL 放大后读页图，不例外。**
 
 - **★★ 新增（2026-09-11，researcher）：INSPIRE/arXiv API 取「逐字完整摘要」的可靠写法。**
   中介概括器有 **125 字符引用上限**，直接要「verbatim」会被改写成转述（本轮在 Gibbons–Hull 上踩过一次）。
