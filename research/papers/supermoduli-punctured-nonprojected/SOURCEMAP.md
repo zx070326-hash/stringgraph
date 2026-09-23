@@ -16,7 +16,9 @@ Written 2026-09-23, against `paper.md` at 1339 lines. It is an internal verifica
 - **Cl**: `research/attempts/supermoduli-elliptic-tail-punctured/claim.md` (196 lines)
 - **Pr**: `research/attempts/supermoduli-elliptic-tail-punctured/prior-art.md` (149 lines)
 - **M**: `research/attempts/supermoduli-measure-consequence/` (`claim.md` + `argument.md`) —
-  ⚠️ **`state: under-review`, no reviewer round has ever occurred**; see the warning under §9.5 below
+  `state: verified` (peer session `measurerev`, graph-reviewer role, 2026-09-23); the round found two
+  overclaims that transcription had added to §9.5 and two citation defects inside M itself, all now
+  fixed. See the note under §9.5 below
 - **I**: `ISSUES.md` in this directory
 
 ---
@@ -108,7 +110,17 @@ Written 2026-09-23, against `paper.md` at 1339 lines. It is an internal verifica
 | §9.4 The forgetful-morphism objection (1113-1154) | P §6.4 (821-853) |
 | §9.5 What Theorem M forecloses (1155-1199) | **M**, plus four `L1` quotations from [DW] and [EW] (extraction records in `literature/extractions/`). See the warning below |
 
-> ⚠️ **§9.5 rests on an attempt that has never been reviewed.** `research/attempts/supermoduli-measure-consequence/status.yaml` reads `state: under-review`, `reviewer: (none yet)`. Its own author classified the (C2) half as "physical-argument-level interpretive framing", not as proved mathematics. §9.5 as written leans mostly on things that do *not* need M — the restriction lemma is already in paper §9.3, Theorem M is the paper's own, and the four quotations are `L1` — so the exposure is smaller than the attempt's status suggests. But the section exists to answer a predictable referee question, so it is exactly the kind of text that must be right. A `graph-reviewer` round on M, including a check that §9.5 claims neither more nor less than M proves, was dispatched 2026-09-23 and is in flight. **This must be resolved before submission.**
+> ✅ **§9.5's review has landed (2026-09-23), and it found real defects.** The `graph-reviewer` round
+> on **M** returned CONFIRMED on Proposition C itself, and CONFIRMED on **two overclaims that had been
+> welded into §9.5 during transcription and are in neither `claim.md`, `argument.md` nor
+> `draft-section.md`**: (i) "empty from $g=2$ onward", refuted by the paper's own §9.2 via
+> [CN, Thm. 1.1(1)] — $\overline{\mathfrak M}^-_2$ is *split*; (ii) "That is the strategy", which
+> attributed Donagi–Witten's *uncompactified* strategy to the compactified one Theorem M forecloses,
+> contradicting §9.5's own next paragraph about [DP]. Both are fixed (commit 8070707), along with an
+> unsupported "lowest external-leg count" claim and an upgrade of "applies with equal force" to
+> "applies here verbatim". **M** is now `state: verified`; two citation defects inside it (F4, F5)
+> were fixed in commit 72a42a1. The reviewer's report was truncated after F6, and the verdict says so
+> — §9.5 is cleared to the extent of what was transmitted and re-verified, not beyond.
 
 ## Paper §10 (Honest boundaries and open problems)
 
@@ -137,9 +149,11 @@ All six `[GAP-*]` labels and the surrounding text: P §7 (854-918), reproduced i
    is a step in an argument, and it is a step that removes an unconditional sentence rather than
    adding one. Everything else in the paper is a transcription of P.
 2. **Two source attempts, two different standings.** P is `verified` with two adversarial reviewer
-   rounds. **M is `under-review` with none.** The paper does not distinguish them typographically,
-   and it should not have to — but the captain's signature covers both, and §9.5 is the part that is
-   not yet covered by any review at all.
+   rounds. **M is `verified` with one** (2026-09-23), and that round's most valuable finding was not
+   about M at all: it was that §9.5, as transcribed into the paper, asserted two things M does not
+   prove and that the paper's own §9.2 refutes. Both are fixed. The lesson is recorded here because
+   it is the one failure mode this SOURCEMAP exists to catch — a claim that appears in the paper and
+   in no source document.
 3. **`captain_confirmed: false` on P as well.** Per the root `CLAUDE.md` that is sufficient for the
    content to be built upon internally and not sufficient for external release. Both the paper and
    §9.5's source are blocked on the same signature; see `NOTES-for-captain.md` §0.

@@ -213,8 +213,10 @@ These are real blockers for a *submission*, not for the draft:
 6. **~~Optional~~ `SOURCEMAP.md` — written 2026-09-23**, mapping each paper section to line ranges in
    the attempt's `proof.md`. It is an internal verification aid, not a submission artefact. Writing it
    surfaced one thing worth the captain's attention, recorded as §5.2 below.
-7. **Resolve §9.5's provenance** — see §5.2. This is a real blocker for submission, unlike items 1–6,
-   which are production work.
+7. **~~Resolve §9.5's provenance~~ — done 2026-09-23, and it was not a formality.** The review
+   cleared the source attempt and **refuted §9.5 as written**: two overclaims, one of them refuted by
+   the paper's own §9.2. Both fixed. See §5.2 for what happened and why it is worth reading before
+   signing anything else in this directory.
 
 ---
 
@@ -270,21 +272,48 @@ not a suspected-error problem.
 C1 and C2 on their own terms, checking whether C2's `physical-argument` grading is the right grading
 (too high *or* too low), re-running the attempt's D'Hoker–Phong self-check, and — the part that
 matters here — reading §9.5 against what M actually proves to confirm it claims neither more nor
-less. Result pending at the time of writing.
+less.
 
-**Captain's call**: do not sign while §9.5's source sits at `under-review` with no reviewer. Either
-the review clears it, or §9.5 gets cut. Cutting it costs the paper the CMP payoff answer and returns
-that column of §2's table to where it was before 2026-09-23 — a real cost, but a smaller one than
-publishing a referee-facing section that nobody checked.
+**Result (2026-09-23, same day): the paragraph above was wrong about where the risk was.** I judged
+this a provenance problem and not a suspected-error problem. The review found errors, and it found
+them in exactly the place I had reasoned was safe — not in M, but in the *transcription* of M into
+§9.5. M itself came back CONFIRMED and is now `state: verified`. §9.5 came back **refuted as
+written**, with two CONFIRMED overclaims present in neither `claim.md`, `argument.md` nor
+`draft-section.md`:
 
-### 5.3 Addendum (2026-09-23, lead): four rounds in flight against this paper
+1. **"empty from $g=2$ onward"** — refuted by the paper's own §9.2, which cites [CN, Thm. 1.1(1)]
+   for the *splitness* of $\overline{\mathfrak M}^-_2$. The paper contradicted itself across two
+   sections, and the refuting citation was already in it.
+2. **"That is the strategy"** — attributed Donagi–Witten's *uncompactified* strategy to the
+   compactified one Theorem M forecloses, contradicting §9.5's own next paragraph about [DP].
 
-| Round | Target | Where it writes |
-|---|---|---|
-| `fkp96` | Close `[INF-NORMAL]` (§3.3) by deriving [FKP] (9.6) for punctured targets | `research/attempts/fkp-96-punctured/**` |
-| `gapcomp` | Close `[GAP-COMP]` (§10.3 of the paper): component refinement when $r>0$ | `research/attempts/supermoduli-ramond-components/**` |
-| `measurerev` | The §5.2 review above | read-only |
-| `sharpness` | Is the threshold **sharp**? The paper leaves $(g,n,r)=(2,1,0)$, the $g=2$ odd-parity punctured components, and all of $g\le1$ untouched, and §9.2 only says the *method* cannot reach them. Whether they are genuinely split or merely out of reach is unknown | `research/attempts/supermoduli-threshold-sharpness/**` |
+Also removed: an unsupported "lowest external-leg count at which a compactified treatment is needed
+at all" (D'Hoker–Phong's $n=0$ two-loop degeneration work exists), and an upgrade of M's "applies
+with equal force" to "applies here verbatim". All four fixed in commit 8070707; two citation defects
+found inside M (vertical integration is Sen–Witten's, not [EW]'s; the "validity does not depend on a
+projection" quote is Donagi–Witten's, not Witten's) fixed in 72a42a1.
+
+**Why this is recorded at this length**: the defects were introduced by welding, survived my own
+read-through, and would have been invisible to any check that only asked "is the source attempt
+sound?" — the source attempt *was* sound. They were caught by the one question the reviewer was
+charged with that I did not think would pay: does the section claim neither more nor less than its
+source proves. If the captain takes one procedural lesson from this round, it is that a paper's
+referee-facing sections need to be diffed against their sources, not merely traced to them.
+
+**Captain's call, updated**: §9.5's provenance is no longer a blocker. It is reviewed, its source is
+`verified`, and the defects the review found are fixed. One honest limit remains: the reviewer's
+report was **truncated in delivery after its sixth finding**, so findings F1–F6 were received and
+independently re-verified against the primary text, and anything beyond F6 was not. The attempt's
+`status.yaml` says so in its verdict rather than quietly claiming a clean bill.
+
+### 5.3 Addendum (2026-09-23, lead): four rounds dispatched against this paper
+
+| Round | Target | Where it writes | Status |
+|---|---|---|---|
+| `fkp96` | Close `[INF-NORMAL]` (§3.3) by deriving [FKP] (9.6) for punctured targets | `research/attempts/fkp-96-punctured/**` | ◐ **half landed.** Its §3 proves the strong form — the complex $[\Omega_{X/S}\to j_*\Omega_{U/S}]$, its Berezinian and the canonical trivialization depend on $\pi$ alone, because the punctures enter a supercurve only through the target twist of $\delta$ and $\delta$ never appears in the complex — so (7.6) holds verbatim on $\overline{\mathcal S}_{g;m,n}$. The round then died to an API fault; its work is committed (6cfec89) and it has been resumed. It also reports two errors in [FKP] that the remaining half must repair: (7.1) needs an $(R)$ twist, and the proof of Lemma 7.9 uses the $r=0$ case of (2.5) |
+| `gapcomp` | Close `[GAP-COMP]` (§10.3 of the paper): component refinement when $r>0$ | `research/attempts/supermoduli-ramond-components/**` | in flight |
+| `measurerev` | The §5.2 review above | read-only | ✅ **landed** — cleared M, refuted §9.5 as written; see §5.2 |
+| `sharpness` | Is the threshold **sharp**? The paper leaves $(g,n,r)=(2,1,0)$, the $g=2$ odd-parity punctured components, and all of $g\le1$ untouched, and §9.2 only says the *method* cannot reach them. Whether they are genuinely split or merely out of reach is unknown | `research/attempts/supermoduli-threshold-sharpness/**` | in flight |
 
 The first two, if they land, remove two of the three items in §3 ("Risks the captain should weigh")
 outright: `[INF-NORMAL]` is the objection §2's table assigns to IMRN / Math. Z., and `[GAP-COMP]` is
