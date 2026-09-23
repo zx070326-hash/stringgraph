@@ -127,7 +127,7 @@ The numerical values are computed using scripts that implement the Fourier–Jac
   d_*(1,1,0) = 50064,  d_*(2,2,0) = 32861184,  d_*(3,2,0) = 632078672,
   d_*(4,2,0) = 9337042944,  d_*(5,2,0) = 113477152800,
 
-corresponding to (Q²,P²) = (2,2), (4,4), (6,4), (8,4), (10,4) with Q·P = 0, together with d_*(1,1,1) = 25353 and d_*(4,1,2) = 16491600 used above. These values are the ones that circulate in the literature on 1/4-BPS degeneracies; we have not been able to verify a specific table number in a citable published source, and state them here as computed values reproduced by our implementation rather than as quotations.
+corresponding to (Q²,P²) = (2,2), (4,4), (6,4), (8,4), (10,4) with Q·P = 0, together with d_*(1,1,1) = 25353 and d_*(4,1,2) = 16491600 used above. All five, **with their charge triples**, are published: they are the coefficients of the mock Jacobi form ψ_m^F tabulated in Bringmann–Murthy [bringmann-murthy-2012], Appendix A, pp. 28–29 — 50064 at (m,n,ℓ)=(1,1,0); 32861184 at (2,2,0); 632078672 at (3,2,0) and again at (2,3,0); 9337042944 at (4,2,0) and again at (2,4,0); 113477152800 at (2,5,0). Those coefficients are the *single-centered* index directly, so no "total = immortal at Q·P = 0" step is needed to use them, and the two doubly-tabulated values supply an internal consistency check on the table itself. Sen's tables [sen-2011-siegel-sign, Table 1, p. 11] and [sen-2008, v3 p. 142] corroborate the first three and the first two respectively, but both print the chamber-dependent total −B₆; Bringmann–Murthy is therefore the citation to use.
 
 **Remark 3.2.** No erratum or revision to [dgm-2008] addressing this discrepancy has been published. The most natural resolution is that equation (51) should include a half-integer shift on the elliptic variable for even divisors, as we derive in §4.
 
@@ -327,6 +327,8 @@ differing by 23433111576.
 By Proposition 6.1(b), the s-th terms are immortal indices of forms of discriminant Δ/s². In witness (A), Δ/s² = 16 for s = 2, and H(16) = 2: the adapted frame gives L^{(2)} = ℤw + ℤu = M of class (1,4,0), while the non-adapted frame gives the triple (8/4, 4, 8/2) = (2,4,4) ∼ (2,2,0), the *other* class. In witness (B), Δ/s² = 32 and H(32) = 3, the two frames landing in the classes (1,8,0) and (2,4,0). In witness (C), Δ/s² = 23 and H(23) = 2, the two frames landing in (1,6,1) and (2,3,1). In each case the s = 1 terms coincide and the entire discrepancy sits in the s = I term, as the displayed arithmetic shows.
 
 The values of d_* are exact integers computed by `scripts/divisor_sum_values.py` (bundled; pure standard-library integer arithmetic, no floating point) from the Fourier coefficients of 1/Φ₁₀. That engine reproduces, exactly, the published unit-torsion degeneracies at the five charges (Q²,P²) = (2,2), (4,4), (6,4), (8,4), (10,4) with Q·P = 0 — namely 50064, 32861184, 632078672, 9337042944, 113477152800 — at which the total and immortal indices coincide, and it satisfies Rosselló's Theorem 1 and Corollary 1.1 on every charge in its computed range (86 and 171 tests respectively, no violations). A control run with U = identity returns difference 0, confirming that the nonzero differences are produced by a genuinely non-trivial change of basis and not by the script. ∎
+
+**Remark 6.3.1 (witness (A) does not depend on our software).** A reader who declines to run the bundled scripts can reconstruct the displayed integers of witness (A), and the second line of witness (B), from the published table of [bringmann-murthy-2012], Appendix A, pp. 28–29, which lists d_*(4,4,0) = 7999169992704, d_*(1,4,0) = 185738352, d_*(2,2,0) = 32861184, d_*(4,8,0) = 479643192755712000 and d_*(4,2,0) = 9337042944. Two of the four summands enter through GL(2,ℤ) equivalences — d_*(8,4,8) = d_*(4,4,0) and d_*(2,4,4) = d_*(2,2,0) — each realized by a single elementary unimodular transformation, which is Proposition A.1. So the frame dependence asserted in Theorem 6.3 can be checked against published numbers by hand; the scripts are needed only for witness (C) and for the first line of witness (B), where d_*(1,8,0) = 668043042720 and the I = 3 values lie outside the tabulated range.
 
 **Theorem 6.4 ((m,n,ℓ,I) is not a complete invariant of a charge pair).** There exist two charge pairs in U ⊕ U with identical (m,n,ℓ,I) whose saturations are not isometric:
 
@@ -542,11 +544,15 @@ d_*(T') = ∫_{C_*(T';Λ)} 𝒢(Ω) e^{-2πi Tr(ΩT')} dΩ
 
 This proves S-duality invariance independently of [rossello-2024], using only the contour covariance framework developed in §5.
 
+Cf. [bhand-sen-singh-2025], eq. (1.16)–(1.17), which states d_*(γ^T T γ) = d_*(T) for γ ∈ SL(2,ℤ) by the same route — Sp-invariance of Φ₁₀, the covariance γ₀^T T γ₀ = adj(T) of the contour, and invariance of the measure — though without proof steps, and sidestepping the half-period shift by carrying an explicit (−1)^{T₁₂+1} prefactor instead. We claim no priority for Proposition A.1; the attribution is to [rossello-2024] (Remark 7.2).
+
 ## References
 
 [alexandrov-nampuri-2020] S. Alexandrov, S. Nampuri, "Refinement and modularity of immortal dyons," arXiv:2009.01172, JHEP 01 (2021) 147.
 
-[banerjee-sen-2008] S. Banerjee, A. Sen, "Duality Orbits, Dyon Spectrum and Gauge Theory Limit of Heterotic String Theory on T^6," arXiv:0801.0149, JHEP 03 (2008) 022.
+[banerjee-sen-2008] S. Banerjee, A. Sen, "S-duality Action on Discrete T-duality Invariants," arXiv:0801.0149, JHEP 04 (2008) 012.
+
+[bringmann-murthy-2012] K. Bringmann, S. Murthy, "On the positivity of black hole degeneracies in string theory," arXiv:1208.3476, Commun. Number Theory Phys. 7 (2013) 15–56, doi:10.4310/CNTP.2013.v7.n1.a2. (Coefficient tables of ψ_m^F in Appendix A, pp. 28–29.)
 
 [dgm-2008] A. Dabholkar, J. Gomes, S. Murthy, "Counting all dyons in N=4 string theory," arXiv:0803.2692, JHEP 05 (2011) 059.
 
@@ -559,4 +565,8 @@ This proves S-duality invariance independently of [rossello-2024], using only th
 [rossello-2024] M. Rosselló, "The Immortal Dyon Index Is Positive," arXiv:2403.19630.
 
 [sen-2008] A. Sen, "Black Hole Entropy Function, Attractors and Precision Counting of Microstates," Gen. Rel. Grav. 40 (2008) 2249, arXiv:0708.1270.
+
+[sen-2011-siegel-sign] A. Sen, "How Do Black Holes Predict the Sign of the Fourier Coefficients of Siegel Modular Forms?," arXiv:1008.4209, Gen. Rel. Grav. 43 (2011) 2171–2183.
+
+[bhand-sen-singh-2025] A. Bhand, A. Sen, R. K. Singh, "Generating Function of Single Centered Black Hole Index from the Igusa Cusp Form," arXiv:2510.05219 (v1, 2025).
 
