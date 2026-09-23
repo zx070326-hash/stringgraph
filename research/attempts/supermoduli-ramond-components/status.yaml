@@ -1,6 +1,9 @@
-state: under-review
-reviewer: null
-verdict: null
+state: verified
+reviewer: rev-ramond (sonnet, 2026-09-24)
+verdict: |
+  核心证明链（(X1)+(X2)+(X5a,b)+(X6)+引理2.1+2.3+3.1+3.2+定理3.3+引理5.1，给出 r>=1 时
+  S_{g;n,2r} 与 S̄_{g;n,2r}/𝔖̄_{g;n,2r} 连通）逻辑严密、外部输入全部 L1 核实，未发现错误；
+  attempt 对自身新颖性的降级（"已知结论的独立重证"）如实、准确。判 verified。
 captain_confirmed: false
 notes: |
   2026-09-23，theorem-prover / agent/prover/supermoduli-ramond-components。
@@ -57,3 +60,157 @@ notes: |
   reviewer 若同意，本 attempt 的正确毕业形态是：**不往 graph/ 立新卡**（结论已发表，应由
   graph-curator 按正常流程从 Jarvis 抽取），只把 §5 稠密性 + §6.2 见证作为论文的技术附注。
   是否合并进论文由 lead 决定；本 attempt 全程未碰 research/papers/**。
+
+review_2026_09_24:
+  verdict: >
+    verified。主目标（r>=1 时 S_{g;n,2r} 及其紧化/超叠连通，故论文 [GAP-COMP] 在 Ramond
+    情形为空）的完整证明链 (X1)+(X2)+(X5a,b)+(X6)+引理2.1+引理2.3+引理3.1+引理3.2+定理3.3+
+    引理5.1+定理5.2 逐步核对，未发现逻辑跳步或引用失实。两条独立路线（§3 代数单值 / §8
+    Johnson 二次型）给出同一结论，且 §8 的组合模型已用 scripts/components-check.py 独立
+    重跑复核，输出 RESULT: ALL OK（10 个 (g,eps) 情形 + §6.1/§6.2 显式算例，全部通过，
+    我本人重跑过一遍而非只信任 prover 的记录）。attempt 对自身新颖性的降级
+    （Jarvis Thm 3.3.1/3.3.11 已覆盖 (C1)(C2)）如实准确，未包装成新数学，符合根 CLAUDE.md
+    的纪律。唯一新发现的、prover 未登记的小缺口（见下）不影响主结论，判 verified 不受影响。
+
+  what_i_checked: |
+    1. 逐步跟随 proof.md §1-§5（承重链）：记号一致性、量词范围、Lemma 2.1（π 有限平展、
+       Θ_R 是 J[2]-torsor）、Lemma 2.3（π_0(S) = Θ/Γ_{g,m} 经 Teichmüller 空间可缩化简）、
+       Lemma 3.1（平方覆叠单值 = mod 2 约化，直接验证了其初等证明）、Lemma 3.2（Abel-Jacobi
+       在 π_1 上是 Hurewicz 同态，逐行核对了"填穿孔满同态 + 交换化满"的论证）、Thm 3.3
+       （核心单值计算：ι*S = ψ*sq 的构造，拉回到常曲线族的论证）、Lemma 5.1（FKP Prop 7.8(ii)
+       的局部形式 + 光滑态射开映射给出稠密性）、Thm 5.2（连通分量是开集 + 与稠密子集相交
+       给出满射 π_0(S)↠π_0(S̄)）。
+    2. 逐步跟随 §4（r=0 对照）、§8（Johnson 二次型独立路线，含 (8.1)-(8.3) 的手算）、§9.1
+       承重清单本身的自评是否准确。
+    3. L1 页图核实（本人独立渲染，未信任 prover 的转述）：
+       - FKP arXiv:2006.13271v3 第13页（170dpi）：(X1) 广义自旋结构定义逐字确认，含
+         "L^2≃ω_C(r_1+...+r_n)，(r_•) 为 Ramond 穿孔"、"n_R necessarily even"、引 [22][23]
+         证光滑固有 DM 叠——全部与 proof.md/claim.md 的引用逐字相符。
+       - FKP 第47页（170dpi）：(X2) Prop 7.8(ii) 及其证明逐字确认，含 "there exists an étale
+         neighborhood B ... with a smooth morphism t_1,...,t_k:B→A^k such that ... Δ 的理想由
+         t_1...t_k 生成"——与 proof.md 引用逐字相符。
+       - Jarvis arXiv:math/9809138v3 第17页（200dpi）：(J3) 逐字确认，包括 "if g≠2" 的排印
+         问题——反复确认不是 OCR 误读，页面原文确实写 "g≠2"（而非 attempt 所需的 "g≥2"），
+         attempt 与论文 paper.md 对此的"应为 g≥2"解读是合理的上下文推断，但两者都如实标注
+         "未核对已发表版是否修正"。
+       - Jarvis 第23页（200dpi）：(J4) Thm 3.3.11 逐字确认，含 "and and" 原文重复词
+         （细节精确到这个程度，说明取材是真实页图而非转述/伪造）。
+       （未渲染核对 Jarvis p.7 Note 2.1.5、p.12 Def 2.3.9——见 what_i_could_not_check。）
+    4. 独立重跑 scripts/components-check.py（python -X utf8），完整输出核对，
+       10 个 (g,eps) 情形 + elliptic_monodromy_check + genus2_parity_jump_check 全部
+       RESULT: ALL OK，与 proof.md §8 的断言逐条对应。
+    5. 交叉核对 research/papers/supermoduli-punctured-nonprojected/paper.md §10.3（当前
+       HEAD，commit b507a01，晚于本 attempt 约 1 小时，显然是另一 agent 独立完成）：论文
+       已经用一条不同、更直接的路线（Lemma 10.1 的 Ramond-twist 同构 + FKP Remark 2.17
+       钉死是 Jarvis-type 无挠层紧化而非 Abramovich–Jarvis 扭曲曲线叠）把 [GAP-COMP] 关闭，
+       结论与本 attempt 完全一致（同样引 Jarvis Thm 3.3.1/3.3.11，同样的 g≠2 排印问题
+       处理方式）。两条独立路线互相印证，没有发现矛盾。本 attempt 的 §5 稠密性论证走的是
+       另一条技术路线（完全在 FKP 自己的对象内部工作，不需要"FKP 紧化 = Jarvis 紧化"这个
+       同构，见下方 compactification 核查），与论文现在采用的路线是逻辑独立的两条证明。
+
+  gap_triage:
+    - tag: "[GAP-COMP]（claim.md/proof.md 里反复出现，8 处）"
+      classification: 装饰性（对本 attempt 而言）
+      note: >
+        这不是本 attempt 自身的缺口，而是本 attempt 要关闭的、论文里的外部缺口。所有出现处
+        都是在陈述"本文对它的处置"，不是本文证明链里的未闭合环节。已由主证明链闭合。
+    - tag: "[GAP-FKP-RAMOND]（2 处）"
+      classification: 装饰性
+      note: 论文另一条已登记的缺口，proof.md §1.3 明确论证本 attempt 的证明路线不经过它，
+        我核对了 §1.3 与 §3 的论证确实不引用 FKP §8.4-§9.1 链条上的任何结果，成立。
+    - tag: "[GAP-PRIOR]"
+      classification: 已闭合（承重，但已处理）
+      note: 查重完成，Jarvis 覆盖，prior-art.md 的核实记录经我抽查（(J3)(J4)）属实。
+    - tag: "[GAP-CORNALBA]（proof.md:612）"
+      classification: 真实但不承重（明确标注 low，不影响 r≥1）
+      note: >
+        r=0 时"两个宇称分量在紧化后不合并"这一方向（(C3) 对 (C2) 的紧化版本）本 attempt
+        没有重证，直接引用论文命题 8.1/Cornalba 1989。核实：主目标 (C1)/(C4)（r≥1 的连通性）
+        只需要 Lemma 5.1 给出的"分量不增"方向（π_0(S)↠π_0(S̄)满射），这一方向本 attempt
+        自己证了，不依赖 Cornalba。triage 准确。
+    - tag: "[GAP-JARVIS-COMPACT]（proof.md:616,688；claim.md:159）"
+      classification: 真实但不承重（明确标注"不影响主结论"，且论证令人信服）
+      note: >
+        "Jarvis 的无挠层紧化 = FKP 的 twisted-curve 紧化"这个同构本 attempt 没有核对。
+        但核实了 proof.md §5 的稠密性论证确实完全在 FKP 自己的对象（S_{g;n,2r} ⊂
+        S̄_{g;n,2r} ⊂ 𝔖̄_{g;n,2r}）内部工作，只用 FKP 自己的 Prop 7.8(ii)（已 L1 核过），
+        从未引用 Jarvis 的任何紧化陈述来证明 (C1)（Jarvis 只在 prior-art 讨论、§10 定位
+        section 里出现）。这个 triage 是准确的，且是本审查重点核实的两个陷阱之一
+        （见 compactification_and_stack_level_check）。
+    - tag: "[GAP-REP]（proof.md:621,640，2 处）"
+      classification: 真实，低风险，未独立复核
+      note: >
+        相对 Picard 函子可表性（标准，如 BLR/Kleiman）+ "gerbe 不改变底空间"（标准拓扑
+        stack 事实）本审查未去查具体教科书定位核实其精确表述，接受为标准事实。风险很低
+        （这两条是代数几何 folklore，不太可能出错），但我没有独立验证，如实记录。
+    - tag: "[GAP-JOHNSON-PUNCT]（proof.md:623）"
+      classification: 真实，低风险，不承重（明确标注只影响冗余的 §8 路线）
+      note: >
+        带穿孔曲面上 Johnson 对应（自旋结构 ↔ 二次细化）本 attempt 未重证该对应本身，只用
+        计数一致性做检验。核实：§3 的主证明完全不经过这条路线（§3 只用 Picard 概形 +
+        Abel-Jacobi，不提二次型），故即使 §8 有问题，Thm 3.3/推论3.4/定理5.2 不受影响。
+        triage 准确。
+    - tag: "[GAP-M0]（本次审查新发现，proof.md 未登记）"
+      classification: 真实但边缘、低风险、不影响主结论 (C1)
+      note: >
+        Lemma 2.1 的假设显式写"设 2g-2+m>0 且 m≥1"，证明中用到"因 m≥1，万有曲线有截面"来
+        取 fppf-局部基点 L_0。但 Thm 4.1（(C2)，r=0 对照定理）字面陈述覆盖 g≥1、n=0（此时
+        m=n+2r=0）的情形（例如 g=2、无穿孔的经典 theta 特征模空间），这落在 m≥1 假设之外，
+        Lemma 2.1→Lemma 2.3 的链条字面上没有覆盖这个角点。数学上这大概率不是真障碍——
+        相对 Pic 函子的表示性与"fppf 局部取基点"标准论证并不真的需要全局截面（可以先添加
+        辅助标记点再遗忘，或直接用 J 光滑给出 fppf 局部截面存在），只是 proof.md 的具体写法
+        为了简洁引入了这个可以避免的假设、然后没有为 m=0 补一句。
+        **不影响判 verified 的理由**：(a) 这个角点只出现在 Thm 4.1（(C2)），而 (C2) 在
+        §9.1 承重清单里已被 prover 自己标为"不承重"（只用于 sanity check，不是主结论）；
+        (b) (C1)（r≥1，即 [GAP-COMP] 的真正目标）恒有 m=n+2r≥2r≥2，永远不落入 m=0，
+        完全不受影响；(c) g≥1、n=0、r=0 时 theta 特征模空间恰两分量是经典结果
+        （Atiyah/Mumford），结论本身毫无疑问为真，只是这一份证明的这一条支路的写法有
+        一个可修补的技术漏洞。建议 prover（若日后回头动这份文件）在 Lemma 2.1 补一句
+        "m=0 时改用 fppf 局部截面，论证同样成立"或类似的一行修补；不构成回炉重审的理由
+        （根 CLAUDE.md 原则8：不移动 effective，默认放行）。
+
+  compactification_and_stack_level_check:
+    convention_check: >
+      通篇只使用 FKP 自己的紧化对象 S̄_{g;n,2r}/𝔖̄_{g;n,2r}（(X1)(X2)(X6) 均出自 FKP 原文，
+      已 L1 核实），从未把它与 Jarvis 的 S̄^{1/2,m}_{g,n} 直接等同去证明主结论——这个潜在
+      同一性问题被显式登记为 [GAP-JARVIS-COMPACT] 并被证明路线绕开（见上）。这正是审查
+      任务提示要重点核的紧化陷阱；本 attempt 通过了这一核查：它没有混用两个紧化的结论。
+      交叉印证：paper.md 现在的独立解决方案（Lemma 10.1）反而选择了正面处理这个同一性
+      问题（通过显式的 Ramond-twist 同构 + FKP Remark 2.17 钉死"是 Jarvis 型紧化、不是
+      Abramovich-Jarvis 扭曲曲线叠"），说明这个陷阱是真实存在的、值得警惕的，而本 attempt
+      选择绕开它是一个合理且审慎的技术决定，不是疏忽。
+    stack_vs_coarse_check: >
+      注 2.2 显式处理了 stack 层面 vs 粗空间层面的问题：S_{g;n,2r} → 𝒮（忘掉 ±1∈Aut(L) 的
+      粗化）是 μ_2-gerbe，而 gerbe 不改变底层拓扑空间/π_0，所以本文把全部 π_0 陈述都转移到
+      拓扑空间层面处理，这个转移本身是标准且正确的（gerbe 的定义就保证底空间不变）。
+      Lemma 2.3 的 Teichmüller 空间商也完全在拓扑空间/轨道层面进行，没有在中途切换到
+      "stack 上的连通分量"这种需要额外论证的表述。因此本 attempt 全篇没有出现"粗空间层面
+      的论证被当成 stack 层面结论"的错误——所有陈述从一开始就明确是拓扑空间/π_0 层面的，
+      不存在需要额外证明的跳跃。唯一需要注意的是：注 2.2 提到"穿孔编号 vs 不编号只影响
+      再除以一个有限群、只可能减少分量数"，这个单向不等式的方向我核实是对的（连通空间
+      模有限群作用后仍连通），用法正确（用来说明"有编号连通⟹无编号连通"，方向合适）。
+
+  what_i_could_not_check:
+    - "Jarvis p.7 Note 2.1.5、p.12 Def 2.3.9 未渲染页图核对，只信任 prior-art.md 的转述（(J1)(J2)），
+      未独立验证。这两条只在 prior-art 的记号翻译表里用，不进入主证明链 (X1)-(X6)，风险低。"
+    - "[GAP-REP] 涉及的相对 Picard 函子可表性、gerbe 拓扑事实，未查具体教科书定位核实精确表述，
+      接受为标准 folklore。"
+    - "未独立重新推导 §8 Johnson 二次型对应本身（带穿孔曲面自旋结构 ↔ 二次细化的双射，以及
+      映射类群作用公式），只验证了给定该对应成立时，proof.md 的后续计算（(8.1)-(8.3)、
+      point-push 公式）在逻辑上自洽，并用脚本复核了有限模型的组合结果。§3 主路线不依赖此项，
+      风险已被本 attempt 自己正确隔离。"
+    - "未核对 FKP 论文的出版版本（Amer. J. Math. 2023）与 arXiv v3 是否有页码/内容差异——本审查
+      与 proof.md 一样只对 arXiv 版本做了 L1 核实。"
+    - "未独立验证 Lemma 2.1 中'sq 与同源 [2]:J→J 相容'及'J 可除故 sq 满'这类交换群概形的
+      标准性质，接受为标准事实（阿贝尔簇理论 folklore）。"
+    - "未尝试对定理 3.3 的单值计算给出第三条独立复核路径（例如直接的复解析/周期矩阵计算）；
+      §3（代数）与 §8（拓扑）两条路线虽逻辑独立，但都由同一位 prover 写就，不能完全排除
+      两条路线共享同一个未被发现的系统性错误的可能性（尽管我逐步核对未发现任何错误迹象）。"
+
+  recommended_next_step: >
+    按根 CLAUDE.md「verified 之后默认结项」：不建议再派复审。若要继续投入，下一步应是
+    lead 决定是否需要把 §5 稠密性论证（绕开紧化同一性问题的技术贡献）或 §6.2 显式见证
+    写成论文附注——这是 prover 自己在 notes 里提的建议，本次审查同意其判断合理，但落地
+    与否、以及是否与 paper.md 现在已经采用的 Lemma 10.1 路线重复，应由 lead 权衡（因为
+    paper.md 已经关闭了 [GAP-COMP]，本 attempt 的剩余承重内容目前没有下游消费者）。
+    不建议往 graph/ 立新卡：结论本身非本 attempt 原创（Jarvis 1999/2000）。
