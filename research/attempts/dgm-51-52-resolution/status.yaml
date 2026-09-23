@@ -1,6 +1,16 @@
-state: under-review
-reviewer: "awaiting graph-reviewer assignment"
+state: verified
+reviewer: "rev-dgm (sonnet, 2026-09-24)"
 verdict: |
+  VERIFIED (rev-dgm, 2026-09-24): primary claim (DVV, not eq52, is the effective-status floor
+  of holography.torsion-immortal-positivity) is independently confirmed against the live graph;
+  the secondary literature-adjudication claim is honestly scoped as non-independent consolidation
+  and rests on the sister attempt's already-verified/captain-confirmed Prop 5.1, which this review
+  additionally re-derived from scratch against the official arXiv PDF page image (p.16, eq 3.26-3.28)
+  — see review_2026_09_24 below for the full chain of what was checked.
+
+  ---
+  Prior verdict text (theorem-prover, 2026-09-20, superseded by review_2026_09_24 below but kept
+  for process history — do not cite as the current conclusion):
   DGM eq(51)/(52) contradiction analyzed with literature consolidation.
 
   **Primary Finding (Negative Result)**: Resolving eq(51)/(52) does NOT enable upgrading
@@ -53,3 +63,112 @@ notes: |
   - holography.torsion-immortal-positivity-conditional [rigorous | depends_on: eq52-premise]
 
   This is analogous to conditional theorems in pure mathematics ("assuming RH, ...").
+
+review_2026_09_24:
+  reviewer: "rev-dgm (sonnet, 2026-09-24)"
+  verdict: "verified"
+  what_i_checked: |
+    1. Re-derived the Primary Claim independently rather than trusting the attempt's own
+       `stringgraph why` transcript in proof.md §0.1: ran `uv run stringgraph why
+       holography.torsion-immortal-positivity` and `stringgraph status` myself (same output:
+       target own=rigorous/effective=physical-argument, floor = holography.dvv-dyon-index-
+       generating-function), then read the raw YAML by hand — graph/statements/holography/
+       dgm-torsion-divisor-sum.yaml (notes: "本卡是 physical-argument 命题") and
+       graph/statements/holography/dvv-dyon-index-generating-function.yaml (notes: "严格度：
+       physical-argument"), plus graph/derivations/holography/dgm-torsion-divisor-sum--via-
+       dgm-duality-argument.yaml, whose depends_on explicitly lists dvv-dyon-index-generating-
+       function as the I=1 base point. This confirms the Primary Claim (DVV, not eq52, is the
+       effective-status floor) independently of the attempt's own narrative.
+    2. Did NOT stop at "already captain-confirmed elsewhere" for the eq(51)/(52) contradiction
+       itself — downloaded the official arXiv PDF for 0803.2692 via curl (first try succeeded,
+       no TLS blocking this session) and rendered page 16 at 200dpi with pdftoppm (never
+       pdftotext), read as a PNG image with the Read tool. Confirmed verbatim: eq(3.26) is the
+       contour formula Ω_I(Γ)=(-1)^{Q.P+1}∮dσdρdv exp(-iπ Γ^t M Γ) Z_I(τ); eq(3.27) is
+       Z_I(ρ,σ,v)=Σ_{s|I} s/Φ₁₀(s²ρ,σ,sv) (= claim.md's "eq51"); eq(3.28) is
+       Ω_I(Q²/2,P²/2,Q.P)=Σ_{s|I} s·Ω₁(Q²/2s²,P²/2,Q.P/s) (= claim.md's "eq52"). This matches
+       the graph node's ar5iv(50)/(51)/(52) = official-PDF(3.26)/(3.27)/(3.28) correction table
+       verbatim (both content and location, p.16 §3.4).
+    3. Re-derived Prop 5.1's sign clash from scratch (not copied from proof.md or the sister
+       attempt): substituting eq(3.27) into eq(3.26) and using Ω₁(m',n',ℓ')=(-1)^{ℓ'+1}d(m',n',ℓ')
+       (I=1 case of the same eq(3.26)) gives Ω_I(m,n,ℓ)=Σ_s s·(-1)^{ℓ+ℓ/s}·Ω₁(m/s²,n,ℓ/s), which
+       differs from eq(3.28)'s Σ_s s·Ω₁(m/s²,n,ℓ/s) by exactly the sign (-1)^{ℓ+ℓ/s}, nonzero
+       (=-1) iff s is even and ℓ/s is odd. This reproduces claim.md/proof.md's stated discrepancy
+       (−1)^{ℓ−ℓ/s} independently, from the primary source, not from trusting the prior write-up.
+       Conclusion: the eq(50)+(51) vs eq(52) contradiction is a real, literal fact about the
+       printed paper — not a transcription artifact or convention mismatch on my reading of the
+       page image, corroborating (independently of it) the sister attempt's captain-confirmed
+       Prop 5.1.
+    4. Read claim.md and proof.md end to end; grepped for every "[GAP ...]" occurrence (only two
+       load-relevant tags exist: [GAP 11.2] at proof.md:170/211/215/291/327, and [GAP 9.4] at
+       proof.md:271/328 — claim.md's task brief mentioning "9 处 [GAP]" appears to count loosely,
+       the file itself has exactly these two numbered GAPs plus a handful of unnumbered "GAP"
+       prose mentions).
+    5. Checked whether either GAP is load-bearing for the two claims actually asserted in
+       claim.md. [GAP 11.2] (does positivity survive if eq51 were correct instead of eq52) is
+       explicitly stated by the attempt itself to be moot given its own eq52 verdict, and is not
+       invoked by the Primary Claim at all. [GAP 9.4] (Appell-Lerch/DMZ commutation, Prop D) is
+       explicitly scoped by the attempt as unrelated to Thm 6.1 and not used by either claim.md
+       claim. Independently confirmed neither claim's derivation chain (as I retraced it in
+       points 1-3 above) touches either GAP.
+    6. Checked the "What This Attempt Does NOT Claim" section in claim.md against the body of
+       proof.md for consistency — found no contradiction: proof.md nowhere claims independent
+       verification of A-N/BSS PDFs, nowhere claims [GAP 11.2] is closed, nowhere claims a graph
+       upgrade follows. The hedging is accurate, not decorative.
+    7. Checked status.yaml's own history: an earlier version of this attempt's verdict (dated
+       2026-09-20, preserved in `notes` above) made three overclaims (false three-way
+       corroboration loop, "eq52 is the irreducible physical input" i.e. missing the DVV floor,
+       and a redundant graph-node recommendation) that were already caught and struck through by
+       the lead before this review started. I independently re-checked all three corrections
+       hold: (a) confirmed via graph/conventions and sources.bib that A-N/BSS extraction records
+       predate this attempt and are not independent re-verifications by it; (b) confirmed via
+       point 1 above that DVV, not eq52, is the actual floor; (c) confirmed via propagate.py's
+       behavior (own=rigorous/effective=physical-argument already computed automatically) that no
+       new graph node would move any effective status, so the original node-creation
+       recommendation was correctly retracted.
+  pages_read_at_L1: |
+    arXiv:0803.2692 (Dabholkar-Gaiotto-Murthy), official PDF v1, printed page 16 (PDF page 17 of
+    30 — printed page numbers run one behind the PDF page index in this file), §3.4, containing
+    eq(3.21)-(3.28). Rendered via `pdftoppm -r 200 -f 17 -l 17 -png`. Also skimmed printed page 15
+    (PDF page 16) for context (eqs 3.21-3.22, not load-bearing for this claim).
+  what_i_could_not_check: |
+    - Did NOT independently re-verify Alexandrov-Nampuri arXiv:2009.01172 eq(2.11)/(2.13) or BSS
+      arXiv:0802.0544/0802.0556 against their own L1 page images. This review relies on the
+      existing literature/sources.bib extraction notes (attributed to prior researcher-agent
+      work) and on the sister attempt torsion-immortal-positivity-hecke's own two-leg review
+      (graph-reviewer + general-purpose verbatim check, captain-confirmed 2026-09-15 for
+      external statement of the contradiction specifically). Given claim.md's Secondary Claim is
+      itself explicitly scoped as "consolidation, NOT independent verification," I judged
+      re-doing that full literature check out of proportion to what this attempt claims for
+      itself — but this is a real gap in my own independent coverage, not just the attempt's.
+    - Did NOT re-verify [GAP 10.4.a]/[GAP 10.4.c]/[GAP 10.4.d] or any other machinery inside the
+      sister attempt torsion-immortal-positivity-hecke beyond Prop 5.1 (which I re-derived from
+      the primary source myself, see above) and Prop 5.4's closed-form generating function
+      (took the (s-1)/2 half-period-shift formula on trust from proof.md §1.2 without
+      re-deriving it symbolically).
+    - Did NOT check whether Rosselló arXiv:2403.19630 §4 actually supports the Cardy/Rademacher
+      growth claim used in the [GAP 11.2] asymptotic argument (§3, Lemma 3.1) — this is moot for
+      the verdict since [GAP 11.2] is not load-bearing for either claim, but I flag it as
+      unchecked in case anyone later tries to promote §3's dominance-lemma sketch.
+    - Did not attempt to independently re-run the 219-point numerical verification cited from
+      torsion-immortal-positivity-hecke §12 (no scripts/ directory exists in this attempt to
+      re-run; the numbers are inherited, not produced here).
+  gaps_blocking_verified: |
+    None. [GAP 11.2] (proof.md lines 166-215, 291, 327) and [GAP 9.4] (proof.md lines 253-280,
+    328) are both real open gaps but neither is load-bearing for the two claims this attempt
+    actually asserts in claim.md (Primary: DVV is the floor; Secondary: eq52 over eq51, framed
+    as non-independent consolidation). The attempt is careful to say so itself (proof.md §3.2
+    "moot", §5.3 "not blocking"), and my independent retracing of both claims' derivation chains
+    (see what_i_checked 1-3, 5) confirms neither GAP enters either chain. Decorative-vs-load-
+    bearing classification: [GAP 11.2] and [GAP 9.4] = decorative w.r.t. this attempt's own
+    claims (they matter for the *sister* attempt's Prop D / full positivity program, not for what
+    dgm-51-52-resolution itself asserts).
+  recommended_next_step: |
+    None required from theorem-prover for this attempt specifically — proof.md §7.1's own "no
+    further action required" self-assessment is correct as far as claim.md's stated claims go.
+    If anyone wants to close the remaining gap in *my own* coverage (not the attempt's), the next
+    step would be an independent L1 read of A-N 2009.01172 eq(2.11)/(2.13) and BSS 0802.0544/
+    0802.0556, but that is lower priority than the project's three named frontier items and is
+    not required to let this attempt sit at `verified`. Per root CLAUDE.md principle 8, no
+    further review round should be spent here unless someone is about to build on top of this
+    attempt's claims specifically (as opposed to the sister attempt's Thm 6.1, which already has
+    its own captain-confirmed verification chain).
