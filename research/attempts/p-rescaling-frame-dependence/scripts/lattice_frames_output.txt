@@ -1,0 +1,50 @@
+============================================================================================
+L1 -- ONE torsion-2 lattice, TWO frames, both satisfying  I^2|n  and  I|l
+      (the hypotheses under which the P-rescaling formula AN (2.13) is stated)
+============================================================================================
+  frame 1  (Q, P)
+     Q = (0, 4, 1, 4)   primitive=True   Q in I.Lambda ? False
+     P = (2, 4, 0, 0)   primitive=False   P in I.Lambda ? True
+     (m,n,l) = (4,8,8)   Delta = 64   torsion I = 2
+     arithmetic hypotheses:  I^2|m ? True   I^2|n ? True   I|l ? True
+  frame 2  (Q, P-Q)   [U = [[1,0],[-1,1]], det=1]
+     Q = (0, 4, 1, 4)   primitive=True   Q in I.Lambda ? False
+     P = (2, 0, -1, -4)   primitive=True   P in I.Lambda ? False
+     (m,n,l) = (4,4,0)   Delta = 64   torsion I = 2
+     arithmetic hypotheses:  I^2|m ? True   I^2|n ? True   I|l ? True
+  same sublattice?  Z Q1 + Z P1 == Z Q2 + Z P2 since the change of basis is in SL(2,Z), det = 1
+  => a single physical dyon, torsion 2, whose T-duality invariants are
+     (4,8,8) in one duality frame and (4,4,0) in another,
+     and BOTH pass the arithmetic test I^2|n, I|l.
+
+============================================================================================
+L2 -- at (m,n,l,I) = (4,8,8,2) BOTH adapted orbits are non-empty
+============================================================================================
+  Q-adapted  (Q in 2.Lambda)
+     Q = (2, 2, 0, 0)   primitive=False   Q in I.Lambda ? True
+     P = (4, 0, 1, 8)   primitive=True   P in I.Lambda ? False
+     (m,n,l) = (4,8,8)   Delta = 64   torsion I = 2
+     arithmetic hypotheses:  I^2|m ? True   I^2|n ? True   I|l ? True
+  P-adapted  (P in 2.Lambda)
+     Q = (0, 4, 1, 4)   primitive=True   Q in I.Lambda ? False
+     P = (2, 4, 0, 0)   primitive=False   P in I.Lambda ? True
+     (m,n,l) = (4,8,8)   Delta = 64   torsion I = 2
+     arithmetic hypotheses:  I^2|m ? True   I^2|n ? True   I|l ? True
+  => DGM (3.28) applies to the first, AN (2.13) applies to the second,
+     and they are evaluated at the SAME (m,n,l,I).
+
+============================================================================================
+L3 -- the third (both-primitive) torsion-2 orbit of BSS 0802.0544 also exists here
+============================================================================================
+  both-primitive  (Q, P primitive; Q+-P in 2.Lambda)
+     Q = (1, 1, 1, 1)   primitive=True   Q in I.Lambda ? False
+     P = (1, 1, -1, -1)   primitive=True   P in I.Lambda ? False
+     (m,n,l) = (2,2,0)   Delta = 16   torsion I = 2
+     arithmetic hypotheses:  I^2|m ? False   I^2|n ? False   I|l ? True
+     Q+P = (2, 2, 0, 0)  in 2.Lambda ? True
+     Q-P = (0, 0, 2, 2)  in 2.Lambda ? True
+  (invariants differ from (4,8,8); shown only to exhibit the third orbit type
+   concretely -- BSS 0802.0544 p.35 assert all three types occur at fixed
+   (Q^2,P^2,Q.P), which is the qualitative statement this attempt quantifies.)
+
+ALL ASSERTIONS PASSED
