@@ -1,0 +1,125 @@
+slug: supermoduli-threshold-sharpness
+title: >-
+  Is the (g; n, 2r) threshold of the compactified-punctured non-projectedness
+  theorem sharp?
+opened: 2026-09-23
+author: theorem-prover agent (branch agent/prover/supermoduli-threshold-sharpness)
+
+state: under-review
+reviewer: null
+verdict: null
+captain_confirmed: false
+
+# --- one-line answer -------------------------------------------------------
+answer: >-
+  Mixed (b) + (a). The threshold of paper.md Cor 8.5 is NOT sharp: the whole
+  g=2 row is non-projected, the two missing cells (2;0,0) and (2;1,0) being
+  already closed by published results the paper does not invoke. Outside g>=2
+  the answer is genuinely split in a determinate corner (odd rank <= 1, plus
+  the new case Sbar_{0;4,0}), and open elsewhere.
+
+# --- what is proved --------------------------------------------------------
+results:
+  - id: lemma-1.1
+    statement: >-
+      A smooth DM superstack with rank T_- <= 1 is canonically split.
+    status: complete
+    depends_on_literature: []
+  - id: cor-1.3
+    statement: >-
+      Sbar_{g;n,2r} is split whenever 2g-2+n+r <= 1 (8 stable triples).
+    status: complete
+    depends_on_literature: [FKP-ThmA]
+  - id: lemma-2.1
+    statement: >-
+      Projectedness/splitness restricts to open substacks; contrapositively
+      non-projectedness of the smooth locus implies it for the compactification.
+    status: complete
+    depends_on_literature: []
+    note: >-
+      Stated verbatim as a remark by Donagi-Witten (Rem 1.4) but never used in
+      paper.md. It is the key that closes (2;1,0).
+  - id: thm-3.3
+    statement: >-
+      Sbar_{g;n,2r} is non-projected for EVERY g>=2, every n, every r; and for
+      r=0 the even component is non-projected for every g>=2, every n.
+    status: complete
+    depends_on_literature: [DW-Thm1.2, CN-Thm1.1(2), paper.md-Cor8.5]
+  - id: thm-4.5
+    statement: >-
+      Sbar_{0;4,0} (dimension (1|2), odd rank 2) is SPLIT. Proof: its bosonic
+      truncation is a mu_2-gerbe over the mu_2-root stack of (P^1, 0+1+inf);
+      Lambda^2 T_-^v = T_X there (computed from an explicit frame of
+      3/2-differentials); so omega_2 lives in H^1(X, omega_X^{-2}) = 0 by Serre
+      duality; rank 2 then upgrades omega_2 = 0 to splitness via [CN Prop 2.2].
+    status: complete-with-one-imported-step
+    depends_on_literature: [FKP-ThmA, FKP-eq9.6, FKP-Lemma7.9, CN-Prop2.2]
+  - id: thm-5.1
+    statement: >-
+      Sbar_{g;n,2r} is split whenever its bosonic dimension 3g-3+n+2r <= 1
+      (exactly six stable triples).
+    status: complete
+  - id: prop-5.3
+    statement: >-
+      The SMOOTH genus-0 spaces S_{0;n,0} are split (OSp(1|2) gauge fixing).
+    status: sketch-only
+    note: not load-bearing; see GAP-2.
+
+# --- honest gaps -----------------------------------------------------------
+gaps:
+  - id: GAP-1
+    where: proof.md, Lemma 4.1
+    what: >-
+      "tau^2 = t at an NS node, and the residual mu_2 acts by tau -> -tau" is
+      imported, not re-derived from [FKP]. It is equivalent to FKP eq (9.6)
+      (O(Delta_NS)|_B = Psi_1^-1 Psi_2^-1) combined with Psi_i^2 = psi_i, and I
+      verified that equivalence. Confirmed a posteriori by the computation in
+      section 4.3, which produces a half-integral order lambda^{-1/2} -
+      impossible on a scheme. Remark 4.6 shows Thm 4.5 survives even if this
+      description were wrong.
+  - id: GAP-2
+    where: proof.md, Prop 5.3
+    what: >-
+      Freeness of the OSp(1|2) action and representability of the quotient are
+      not checked. Nothing else depends on Prop 5.3.
+  - id: GAP-3
+    where: proof.md, section 5.3(2)
+    what: >-
+      I found no mechanism producing a nonzero omega_2 from genus <= 1 data,
+      and did NOT prove that none exists. The open region is open in both
+      directions.
+
+# --- open region -----------------------------------------------------------
+open_region:
+  - "g = 1 with n + r >= 2"
+  - "g = 0 with n + r >= 4, except (n,r) = (4,0)"
+  - "the odd parity component Sbar^-_{2;n,0} for n >= 1"
+next_targets:
+  - >-
+    Sbar_{1;2,0} and Sbar_{0;3,2}: the two smallest cells where odd rank is
+    still exactly 2 (so [CN Prop 2.2] remains an iff) but the bosonic base is a
+    surface, killing the degree argument. Concrete, finite work, no new idea
+    needed.
+  - >-
+    Sbar^-_{2;n,0}, n>=1: the unique place where [DW], [CN] and paper.md all
+    stop at the same wall. DW says verbatim they do not resolve even spin
+    structure + odd parity + n>=1.
+
+# --- recommendation to the lead -------------------------------------------
+recommendation_for_paper_md: >-
+  Widen Cor 8.5's region to "g>=2, all n, all r", attributing (2;0,0) to
+  [CN Thm 1.1(2)]/[FKP2] and (2;1,0) to [DW Thm 1.2] + [DW Rem 1.4]; state
+  Lemma 2.1 in section 9.3 in BOTH directions (currently only the failing
+  direction is noted); optionally add a sharpness section with Cor 1.3,
+  Thm 4.5, Thm 5.1 and the table of section 5.3. See proof.md section 5.4.
+  This attempt writes nothing outside its own directory.
+
+notes: >-
+  Prior-art search deliberately deferred (project rule: due when a result
+  enters graph/ or goes public). Thm 4.5 in particular has NOT been checked
+  against the literature; Sbar_{0;4,0} is a small and natural object and the
+  result may well be known. Lemma 1.1 and Lemma 2.1 are certainly folklore -
+  they are included because they are used, not because they are new.
+  scripts/region.py re-derives every enumeration in proof.md and asserts the
+  two arithmetic claims (no g>=2 cell has odd rank <= 1; (0;4,0) is the unique
+  cell with bosonic dim 1 and odd rank 2). Run: python scripts/region.py

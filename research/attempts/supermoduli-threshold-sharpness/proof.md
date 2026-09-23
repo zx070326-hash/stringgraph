@@ -411,3 +411,124 @@ splitness. $\square$
 > four-point NS amplitude — the very first place where superstring perturbation theory integrates over
 > a nontrivial supermoduli space. Theorem 4.5 says the classical practice of integrating over the odd
 > directions fibrewise is *legitimate there*, not merely convenient. Contrast Theorem 3.3.
+
+---
+
+## 5. The corrected picture, and what remains open
+
+### 5.1 Everything of bosonic dimension $\le1$ is split
+
+**Theorem 5.1.** *If $\dim_{\rm even}\overline{\mathfrak S}_{g;n,2r}=3g-3+n+2r\le1$, then
+$\overline{\mathfrak S}_{g;n,2r}$ is split. Explicitly the stable triples with $3g-3+n+2r\le1$ are*
+$$\underbrace{(0;3,0),\ (0;1,2)}_{\dim=(0\mid\ast)}\ \cup\
+\underbrace{(0;4,0),\ (0;2,2),\ (0;0,4),\ (1;1,0)}_{\dim=(1\mid\ast)} ,$$
+*and all six are split.*
+
+*Proof.* Stability is $2g-2+n+2r>0$. If $g\ge2$ then $3g-3\ge3$ and $3g-3+n+2r\ge3$, so no triple
+occurs. If $g=1$ then $n+2r\le1$ and stability forces $n+2r=1$, i.e. $(n,r)=(1,0)$. If $g=0$ then
+$3\le n+2r\le4$, giving $(3,0),(1,1)$ and $(4,0),(2,1),(0,2)$.
+
+Their odd ranks $d=2g-2+n+r$ are $1,0,2,1,0,1$ in the order displayed. All but $(0;4,0)$ have $d\le1$
+and are split by Corollary 1.3; $(0;4,0)$ is split by Theorem 4.5. $\square$
+
+> **Remark 5.2 ($(0;4,0)$ is the *only* case the degree method can reach).** The argument of §4 needs
+> $\dim_{\rm even}=1$ (so that $H^1$ of a line bundle is controlled by its degree) **and**
+> $\operatorname{rank}\mathcal T_-=2$ (so that K2 turns $\omega_2=0$ into splitness). These two demand
+> $3g-3+n+2r=1$ and $2g-2+n+r=2$; subtracting, $g+r=0$, hence $g=r=0$ and $n=4$. So Theorem 4.5 is
+> not one instance of a family that the method could continue — it exhausts the method. Everything
+> beyond it needs a genuinely different idea.
+
+### 5.2 The smooth genus-$0$ spaces are split, and this says nothing about their compactifications
+
+**Proposition 5.3 (sketch).** *For every $n\ge3$ the open substack $\mathfrak S_{0;n,0}$ of smooth
+genus-$0$ supercurves with $n$ NS punctures is split; concretely
+$\mathfrak S_{0;n,0}\cong[\,V/(\mathbb Z/2)\,]$ with $V\subseteq\mathbb C^{n-3\mid n-2}$ open.*
+
+*Sketch.* A genus-$0$ super Riemann surface without punctures is rigid: its deformation space is
+$H^1(\mathbb P^1,\mathcal T)\oplus H^1(\mathbb P^1,L^{-1})=H^1(\mathcal O(2))\oplus H^1(\mathcal O(1))=0$,
+so every such SRS is $\mathbb P^{1\mid1}$, with automorphism group $OSp(1\mid2)$ of dimension
+$(3\mid2)$. The moduli problem is therefore the quotient of the configuration superspace of $n$ NS
+punctures $(z_i\mid\theta_i)$ in $\mathbb P^{1\mid1}$ by $OSp(1\mid2)$. Gauge-fix $z_1=0$, $z_2=1$,
+$z_3=\infty$ using the even part (the $PGL_2$-stabiliser of three points is trivial), and
+$\theta_1=\theta_2=0$ using the two odd generators. The residual coordinates are
+$(z_4,\dots,z_n\mid\theta_3,\dots,\theta_n)$, of dimension $(n-3\mid n-2)$ as required, and the residual
+gauge group is the $\mathbb Z/2$ acting by $\theta\mapsto-\theta$. This presentation is manifestly
+split. $\square$
+
+> **[GAP-2]** Proposition 5.3 is written at the level of a gauge-fixing argument. Making it a theorem
+> requires checking that the $OSp(1\mid2)$-action on the configuration superspace is free modulo the
+> residual $\mathbb Z/2$ and that the quotient is representable by the stated global chart. I have not
+> done that, and nothing else in this file depends on Proposition 5.3.
+
+**Why it does not help.** Proposition 5.3 gives splitness of the *open* part only, and Lemma 2.1 runs
+in the wrong direction for that: openness transports projectedness *downwards*, never upwards. The
+published record shows the gap is real, not merely a defect of technique:
+
+* [DW, Remark 1.5], verbatim: *"For $n\gg g$, requiring the $n$ points to be distinct very likely
+  kills the obstructions to splitness, **though we would expect the compactification of
+  $\mathfrak M_{g,n}$ to be non-split**."*
+* [CN, Thm 1.1(2)] / [FKP2]: $\overline{\mathfrak M}{}^{+}_2$ is non-projected, while no source claims
+  non-projectedness of the smooth $\mathfrak M^{+}_2$ (the earliest published non-projectedness for
+  unpunctured smooth curves is [DW, Thm 1.1] at $g\ge5$; $g\ge3$ is only *suspected* there).
+
+So the entire content of the residual question lives at the boundary divisors, exactly where
+Proposition 5.3 has nothing to say.
+
+### 5.3 The residual open region
+
+Collecting Theorem 3.3 (non-projected), Corollary 1.3 and Theorems 4.5, 5.1 (split):
+
+| region | verdict | by |
+|---|---|---|
+| $g\ge2$, all $n,r$ | **non-projected** | Thm 3.3 |
+| $2g-2+n+r\le1$ | **split** | Cor 1.3 |
+| $(g;n,2r)=(0;4,0)$ | **split** | Thm 4.5 |
+| component $\overline{\mathfrak S}{}^{-}_{2;0,0}=\overline{\mathfrak M}{}^{-}_2$ | **split** | K4 |
+| $g=1$, $n+r\ge2$ | **open** | — |
+| $g=0$, $n+r\ge4$, $(n,r)\ne(4,0)$ | **open** | — |
+| component $\overline{\mathfrak S}{}^{-}_{2;n,0}$, $n\ge1$ | **open** | — |
+
+**Why both directions stall on the open region.** Let $d=2g-2+n+r$ and $D=3g-3+n+2r$.
+
+1. *Towards splitness.* K2's criterion "$\omega_2=0\Rightarrow$ split" is available only when $d=2$.
+   The locus $d=2$ inside the open region is
+   $$g=0:\ (n,r)\in\{(3,1),(2,2),(1,3),(0,4)\},\qquad g=1:\ (n,r)\in\{(2,0),(1,1),(0,2)\}$$
+   (the remaining member $g=2$, $(n,r)=(0,0)$ is [CN]'s theorem, and $g=0$, $(4,0)$ is Theorem 4.5).
+   For each of these $D\ge2$, so $H^1$ of the obstruction sheaf is no longer controlled by a degree.
+   The smallest are $\overline{\mathfrak S}_{1;2,0}$ and $\overline{\mathfrak S}_{0;3,2}$, both with
+   $D=2$: **surfaces**. Computing $H^1$ of a line bundle on those two stacky surfaces is the concrete
+   next task, and it is a finite amount of work, not a new idea.
+   For $d\ge3$ even $\omega_2=0$ would not suffice: one would need the higher obstructions
+   $\omega_4,\omega_6,\dots$ or a direct construction of a retraction.
+2. *Towards non-projectedness.* Every published non-vanishing of $\omega_2$ — [DW], [DO], [W], [CN],
+   and `paper.md` itself — is ultimately produced by restricting to a boundary or a gluing locus and
+   exhibiting a component of $\omega_2$ proportional to a *positive* multiple of a class that survives.
+   All of them need $g\ge2$ somewhere: `paper.md` needs (P1) $h\ge2$, whose failure at $h\le1$ is not
+   a technical accident but the vanishing $H^1(C,L^{-1})=0$ recorded in `paper.md` Lemma 8.2(i);
+   [DW]/[DO]/[W] need $g\ge2$, $g\ge5r+1$, $g\ge n+5r+3$ respectively. **[GAP-3]:** I found no
+   mechanism at all that produces a nonzero $\omega_2$ from genus $\le1$ data, and I did not prove
+   that none exists.
+
+### 5.4 Recommendation for `research/papers/supermoduli-punctured-nonprojected/paper.md`
+
+*(Recorded here only; this attempt does not write outside its own directory.)*
+
+1. **Corollary 8.5's region should be widened to "$g\ge2$, all $n$, all $r$"**, with the two extra
+   cells attributed to the literature, not to the paper's construction: $(g;n,2r)=(2;0,0)$ to
+   [CN, Thm 1.1(2)] (originally [FKP2]), and $(2;1,0)$ to [DW, Thm 1.2] combined with
+   [DW, Remark 1.4] (= Lemma 2.1 here). The paper's own Theorem M is unaffected; what changes is the
+   *statement of the known region*, and the removal of $(2,1,0)$ from the list of open cases in §1.5(3)
+   and §10.6.
+2. **§9.3 should state Lemma 2.1 in both directions.** It currently observes only that the implication
+   compactified $\Rightarrow$ smooth fails; the implication that *does* hold (smooth non-projected
+   $\Rightarrow$ compactified non-projected) is what closes $(2,1,0)$, and stating it also makes
+   §9.3's comparison with [DO]/[W] sharper: the paper's $g\ge3$ result is not merely "different from"
+   theirs, it strictly *contains* the compactified consequence of theirs.
+3. **A sharpness section may be added**, containing: Corollary 1.3 (split for $2g-2+n+r\le1$),
+   Theorem 4.5 ($\overline{\mathfrak S}_{0;4,0}$ split), Theorem 5.1 (split for $3g-3+n+2r\le1$), and
+   the table of §5.4. This converts §9.2's apologetic *"the method structurally cannot reach
+   $\overline{\mathfrak M}{}^-_2$"* into the positive statement that $g\ge2$ is exactly the
+   non-projected region and that the first split case with odd rank $2$ is $\overline{\mathfrak S}_{0;4,0}$.
+4. **The odd component $\overline{\mathfrak S}{}^-_{2;n,0}$, $n\ge1$, should be listed as the single
+   sharpest open problem** at $g\ge2$: it is the unique place where [DW], [CN] and `paper.md` all stop
+   at the same wall.
