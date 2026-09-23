@@ -400,11 +400,17 @@ coprime to `I`. ∎
 
 ---
 
-## 4. Refutation of the "class number 1" criterion
+## 4. The class-number criterion, both directions
 
-§9 of the paper under study asserts that the frame dependence "is invisible **exactly when** the
-relevant discriminants `Δ/s²` have class number 1". We settle both directions. Two readings of
-"class number `h(D)`" must be distinguished:
+> ⚠ **Corrected 2026-09-23 (lead, after `framedeprev` finding 1).** This section was headed
+> "Refutation of the 'class number 1' criterion" and opened by attributing an "exactly when" claim to
+> §9 of the paper under study. **That attribution is false** — the paper states the condition is
+> sufficient and explicitly declines to claim necessity, in every version including the one live when
+> this attempt opened. Nothing is refuted. What follows is a correct settlement of both directions:
+> the "if" half reproves the paper's Proposition 6.5, and the "only if" half answers the paper's own
+> Problem 9.1. The mathematics is unchanged.
+
+We settle both directions. Two readings of "class number `h(D)`" must be distinguished:
 
   - **(P)** the standard one, `h(D) = |Pic(𝒪_D)| =` number of `SL(2,ℤ)`-classes of **primitive**
     forms of discriminant `D`;
@@ -649,7 +655,11 @@ Theorem B shows adapted frames exist **iff `M/L` is cyclic**. This is a real res
 Let `M ⊆ Λ` be primitive of rank 2 with form `f₀`, let `L := 2M`, so `I = 4` and
 `M/L ≅ (ℤ/2)²`. Then:
 
-1. No adapted frame exists; the premise `(P'_ad)` of the paper is **vacuous** for such charges.
+1. No adapted frame exists. *(Corrected 2026-09-23, lead, after `framedeprev` finding 2: this read
+   "the premise `(P'_ad)` of the paper is **vacuous** for such charges". That is the wrong word — the
+   paper does not silently assume cyclicity, it **hypothesises** it, at `paper.md:87`, in Cor. 8.1,
+   and at `paper.md:475`. The correct statement is that this is the set the paper's hypothesis
+   excludes, and that the exclusion is necessary.)*
 2. `𝒞_4(L) ≠ ∅` iff `f₀` primitively represents a multiple of 4; when this holds, (★) *is* defined
    in some frame, and it has the wrong **shape**: it has 3 terms with weights `1,2,4` (total 7),
    whereas the number of rank-2 lattices `N` with `L ⊆ N ⊆ Λ` is 5, with weights `1,2,2,2,4`
@@ -673,9 +683,17 @@ lattice of signature `(6,22)` (Nikulin's criterion: `rank Λ − rank M = 26 > 2
 `M` with `Δ(M) ≤ 200` for which `L = 2M` admits a 4-admissible frame. (The Nikulin input is used
 only for this realizability remark.)
 
-**Consequence for the paper under study.** Its restriction to adapted frames is not merely a
-convenient normalization: it silently restricts the *theorem* to charges with cyclic `M/L`. That
-restriction should be stated as a hypothesis, and the complementary set is not small.
+**Consequence for the paper under study.** *(Corrected 2026-09-23, lead, after `framedeprev` finding
+4. The original text read: "it silently restricts the theorem to charges with cyclic `M/L`. That
+restriction should be stated as a hypothesis." **It already is stated as a hypothesis** — the paper's
+Corollary 8.1 reads "…and that `M/L` is cyclic (automatic if `Q` or `P` is primitive)"; `paper.md:87`
+states that adapted bases exist iff `M/L` is cyclic; `paper.md:475` flags the non-cyclic case as
+unknown. The `status.yaml` phrasing "the paper's theorem is VACUOUS" was wrong and has been struck.)*
+
+What is genuinely new here, and is the part worth welding, is Prop 7.1(2)(3): on non-cyclic `M/L`
+the literature formula has the wrong *shape* — 3 terms of weight 7 against 5 intermediate lattices of
+weight 11 — and at `Δ(L)=256` it is frame-dependent. That is a statement about the complementary set
+the paper marks unknown, not a correction to the paper's hypotheses.
 
 ---
 
@@ -693,6 +711,14 @@ restriction should be stated as a hypothesis, and the complementary set is not s
    (Corollary 5.1), and the phenomenon is invisible to all local invariants (Corollary 5.2).
 
 **Q2 — what is the correct S-duality-invariant object?**
+
+> ⚠ **Attribution corrected 2026-09-23 (lead, after `framedeprev` finding 3).** `𝒟(L ⊆ Λ)` below is
+> **not this attempt's discovery**. It is the paper's own `𝔇(L)`, defined and proved S-/T-invariant at
+> `paper.md:470–475`. What this attempt adds is the *frame-side* analysis: Theorem A (the divisor sum
+> is a function of `(L,H)`), Theorem B (the four-way characterisation of adaptedness), and
+> Prop. 2.6/7.1 (what the frame sum evaluates when the frame is admissible but not adapted). The
+> identification `D_I = 𝒟` in adapted frames is a reproof, stated here for self-containedness.
+
 `𝒟(L ⊆ Λ) = Σ_{L ⊆ N ⊆ Λ} [N:L]·d_*(N)`, the index-weighted sum over the finitely many rank-2
 lattices between `L` and its saturation (Definition 2.2). It is manifestly a function of the pair
 `(L ⊆ Λ)` and hence S- and T-duality invariant (Proposition 2.3); it equals the divisor sum (★) in

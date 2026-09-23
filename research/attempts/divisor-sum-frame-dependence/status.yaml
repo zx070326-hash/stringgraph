@@ -1,7 +1,17 @@
-state: under-review
+state: verified
 opened: 2026-09-23
-reviewer: null
-verdict: null
+reviewer: framedeprev (graph-reviewer, 2026-09-23)
+verdict: >
+  VERIFIED, mathematics only, after four required corrections were applied by the lead.
+  The reviewer found no error in Theorems A, B, C1, C3 (sufficiency), D, E, E'' or Prop 7.1:
+  "The mathematics stands." What did NOT stand was a group of four claims the attempt made
+  ABOUT THE PAPER IT WAS ATTACKING -- (1) that the paper asserts "invisible exactly when
+  h = 1" (it never did, in any revision: paper.md:352, Cor. 6.10, Problem 9.1, paper.md:509);
+  (2) that the paper "silently restricts" to cyclic M/L (it hypothesises it: paper.md:87,
+  Cor. 8.1, paper.md:475); (3) that D(L in Lambda) is this attempt's answer (it is the paper's
+  own frak-D(L), paper.md:470-475); (4) the word VACUOUS. All four are struck or rewritten,
+  in claim.md Claim C, proof.md sections 4 / 7 / 8, and in the summary below. No mathematical
+  statement moved. Welding into paper.md waits on the reviewer's per-item welding list.
 captain_confirmed: false
 
 summary: >
@@ -12,10 +22,17 @@ summary: >
   D_L = L^v/L; the tuple (m,n,l,I) records L and I but NOT H, which is the whole content of the
   frame dependence. The S-duality- and T-duality-invariant object is
   D(L in Lambda) = sum over rank-2 lattices N with L <= N <= Lambda of [N:L] * d_*(N),
-  which equals D_I in every adapted frame. The paper's section 9 "exactly when the relevant
-  discriminants have class number 1" is REFUTED; the correct criterion is a class-GROUP condition
-  ([f1]^2 = 1 or [p]^2 = 1) when v_p(content) = 1, and a content/Hecke condition when
-  v_p(content) >= 2 (which is the regime of the paper's own witness).
+  which equals D_I in every adapted frame -- this object is the PAPER'S OWN frak-D(L)
+  (paper.md:470-475), not a discovery of this attempt; what is new here is the frame-side
+  analysis (Theorems A, B, Prop. 2.6, Prop. 7.1).
+  CORRECTED 2026-09-23: an earlier version of this field said the paper's section 9 criterion
+  "exactly when the relevant discriminants have class number 1" is REFUTED. The paper never made
+  that claim -- it states sufficiency and explicitly declines necessity (paper.md:352, Cor. 6.10,
+  Problem 9.1, paper.md:509). Nothing is refuted. What is proved is both directions of the
+  criterion: the "if" half is the paper's Prop. 6.5, and the "only if" half answers the paper's
+  own Problem 9.1 -- the correct criterion is a class-GROUP condition ([f1]^2 = 1 or [p]^2 = 1)
+  when v_p(content) = 1, and a content/Hecke condition when v_p(content) >= 2 (the regime of the
+  paper's own witness).
 
 notes:
   - "2026-09-23: claim.md written (statements A-D)."
@@ -54,12 +71,23 @@ notes:
      p=2, 220 forms, 182 with a zero, all 182 dependent, 0 mismatches; p=3, 19 forms, 14 with a zero,
      all dependent."
   - "2026-09-23: NEW FINDING beyond the task, for the lead to relay to the paper's author: when M/L
-     is NOT cyclic (e.g. L = 2M, I = 4, M/L = (Z/2)^2) NO adapted frame exists, so the paper's
-     theorem is VACUOUS for those charges. 4-admissible frames still exist (236 cases with
-     Delta(M) <= 200) and there the literature formula has the wrong SHAPE: 3 terms of total weight
-     7 instead of 5 intermediate lattices of total weight 11. At Delta = 256 it is even frame-
-     dependent, so it is certainly wrong there, independently of any conjecture."
+     is NOT cyclic (e.g. L = 2M, I = 4, M/L = (Z/2)^2) NO adapted frame exists. CORRECTED
+     2026-09-23 after framedeprev finding 4: this note originally continued 'so the paper's theorem
+     is VACUOUS for those charges'. Wrong word and wrong target -- the paper HYPOTHESISES cyclicity
+     (paper.md:87, Cor. 8.1) and flags the non-cyclic case as unknown (paper.md:475), so the
+     non-cyclic set is exactly what its hypothesis excludes, not a hole in it. What IS new: in that
+     excluded set, 4-admissible frames still exist (236 cases with Delta(M) <= 200) and there the
+     literature formula has the wrong SHAPE: 3 terms of total weight 7 instead of 5 intermediate
+     lattices of total weight 11. At Delta = 256 it is even frame-dependent, so it is certainly
+     wrong there, independently of any conjecture. That is a result about the complement of the
+     paper's hypothesis, and is the part worth welding."
   - "2026-09-23: proof.md complete, state -> under-review. Requesting graph-reviewer."
+  - "2026-09-23 (lead): framedeprev returned. Mathematics VERIFIED; four false claims about the
+     paper under study struck (claim.md Claim C, proof.md sections 4/7/8, this file's summary and
+     the note above). state -> verified. NOT YET WELDED into paper.md: awaiting framedeprev's
+     per-item welding list (line numbers, target section, prerequisite propositions, and [GAP-INJ]
+     exposure), in particular for Prop 7.1(3), whose frame-DEPENDENCE direction is the one
+     [GAP-INJ] bears on."
 
 gaps:
   - "[GAP-I1]: every statement mentioning d_* is conditional on Input (I1), d_* is a GL(2,Z)-class

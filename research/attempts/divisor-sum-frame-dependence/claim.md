@@ -12,7 +12,10 @@
 > and the paper's own witness refutes the "if" direction; (iii) the `α ≥ 2` regime — which is where
 > the paper's witness lives — is governed by a content/Hecke criterion, not by C4. `proof.md` also
 > proves a statement not anticipated here: when the saturation quotient `M/L` is **non-cyclic** the
-> paper's adapted-frame theorem is vacuous, and the literature divisor sum has the wrong *shape*.
+> literature divisor sum has the wrong *shape* and is sometimes frame-dependent. *(Corrected
+> 2026-09-23 after `framedeprev` finding 4: this sentence read "the paper's adapted-frame theorem is
+> vacuous". It is not — the paper hypothesises cyclic `M/L` and flags the non-cyclic case as open.
+> The result is about the complement of its hypothesis.)*
 
 ---
 
@@ -91,6 +94,11 @@ That is the exact content of the failure.)*
 
 ### Claim B (The invariant object) — the answer to "what is the correct formula"
 
+> **Attribution (added 2026-09-23 after `framedeprev` finding 3).** The object `𝒟(L ⊆ Λ)` below is
+> the paper's own `𝔇(L)` (`paper.md:470–475`), where it is already defined and already proved S- and
+> T-invariant. B1 is therefore a reproof, not a discovery. What is new in Claim B is **B2** (the
+> four-way characterisation of adaptedness) and **B5** (what happens outside cyclic `M/L`).
+
 Let `(Q,P)` be a charge pair in `Λ`, `L = ℤQ + ℤP`, `M := (L⊗ℚ) ∩ Λ` the saturation, `I = [M:L]`
 the torsion. Define
 
@@ -127,10 +135,20 @@ is then *not* a divisor sum over `s|I` (the number of terms is the number of sub
 the number of divisors of `I`). Whether `𝒟` is the physically correct count in that case is **not**
 claimed here; see the `[GAP]` list.
 
-### Claim C (The correct criterion; refutation of "exactly when")
+### Claim C (The correct criterion)
 
-The paper's §9 asserts that the frame dependence "is invisible **exactly when** the relevant
-discriminants `Δ/s²` have class number 1". We claim:
+> ⚠ **Corrected 2026-09-23 by the lead, after `framedeprev`'s review (finding 1).** This claim was
+> originally headed "refutation of 'exactly when'" and asserted that the paper under study claims
+> class number 1 is invisibility's criterion *exactly when*. **The paper never claimed that, in any
+> version.** It says the opposite in four places — `paper.md:352` ("This is a sufficient condition,
+> and we do not claim it is necessary"), Corollary 6.10, Problem 9.1 ("Is it necessary? **No**") and
+> `paper.md:509` — and the revision live when this attempt opened (`65015bd`) already read "We do
+> not claim the converse." There is no refutation here and never was. The correct framing: **C1 is
+> the paper's Proposition 6.5**, and **C2(2) answers the paper's Problem 9.1** — which the paper
+> independently answered for itself (Cor. 6.10 at 17:01, Prop. 6.9 at 17:08) after this attempt's
+> last commit at 17:00:29. The mathematics below is unaffected and stands.
+
+We settle both directions of the class-number criterion:
 
 (C1) The "if" direction is true and trivial: if for every `s|I`, `s>1`, all integral positive-definite
 forms of discriminant `−Δ/s²` are `GL(2,ℤ)`-equivalent, then `D_I` is frame-independent on `L`.
