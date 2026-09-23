@@ -1,0 +1,191 @@
+# claim.md — What the torsion divisor sum is actually a function of
+
+**Slug**: `divisor-sum-frame-dependence`
+**Opened**: 2026-09-23
+**Object of study**: Remark 6.3 of `research/papers/torsion-dyon-shift-positivity/paper.md`, upgraded from
+"here is one counterexample" to a structure theorem.
+
+---
+
+## 0. Standing notation and inputs
+
+Throughout, `Λ` is an even lattice (the charge lattice; for type II on K3×T² it is the full
+28-dimensional even lattice, but nothing below uses its rank or signature). A **charge pair** is a
+pair `(Q,P) ∈ Λ²` spanning a rank-2 sublattice
+
+  `L := ℤQ + ℤP ⊆ Λ`.
+
+Its **invariants** are `m = Q²/2`, `n = P²/2`, `ℓ = Q·P`, `Δ = 4mn − ℓ²`, and its **torsion** is
+`I = gcd(Q∧P)`, the content of `Q∧P` in `⋀²Λ`.
+
+A **frame** for `L` is an ordered basis `(Q,P)` of `L`. `SL(2,ℤ)` (S-duality) acts simply
+transitively on frames up to sign; the invariants `(m,n,ℓ)` are frame-dependent, `Δ`, `I` and the
+isometry class of `L` are not.
+
+We write binary quadratic forms as triples `f = (a,b,c)` meaning `f(x,y) = ax² + bxy + cy²`, with
+discriminant `disc f = b² − 4ac`. A frame `(Q,P)` of `L` gives the form `f = (m, ℓ, n)` with
+`disc f = −Δ`, and `f(x,y) = q(xQ + yP)/2` where `q(v) = v·v`. Frames of `L` ↔ forms in the
+`GL(2,ℤ)`-class of `f`. `L` is an even positive-definite rank-2 lattice iff `f` is an integral
+positive-definite form (`m,n ≥ 1`, `Δ > 0`); the Gram matrix of `L` in the frame is
+`G = [[2m, ℓ],[ℓ, 2n]]`, `det G = Δ`. The **content** of `f` is `c(f) = gcd(m,ℓ,n)`.
+
+`L^∨` is the dual lattice, `D_L = L^∨/L` the discriminant group (order `Δ`) with its
+`ℚ/2ℤ`-valued quadratic form `q̄(ξ) = ξ·ξ mod 2ℤ`. A subgroup `H ⊆ D_L` is **isotropic** if
+`q̄|_H = 0`; by Nikulin's correspondence, isotropic `H` ↔ even overlattices `L ⊆ L_H ⊆ L^∨`
+with `L_H/L = H`.
+
+**Input (I1)** [external, not proved here]: `d_*` is a `GL(2,ℤ)`-class function on positive-definite
+integral binary quadratic forms, i.e. `d_*(m,n,ℓ)` depends only on the isometry class of the lattice
+`L` with Gram `[[2m,ℓ],[ℓ,2n]]`. Source: Proposition A.1 of the paper = Prop. 4.4 of
+`research/attempts/torsion-immortal-positivity-hecke/proof.md` (state `verified`; graduated into the
+graph at epistemic status `physical-argument`, because the *definition* of `d_*` by the attractor
+contour integral carries physical input). Everything below that mentions `d_*` is conditional on
+(I1); the purely lattice-theoretic statements (Theorems A, B, C) are not.
+
+**The object under study.** For `I ≥ 1` and a frame with `I²|m` and `I|ℓ`,
+
+  `D_I(m,n,ℓ) := Σ_{s|I} s · d_*(m/s², n, ℓ/s)`.
+
+This is the right-hand side of DGM eq. (52) and of Theorem 6.1 of the paper. Remark 6.3 of the paper
+exhibits one lattice and two frames on which it takes two different values.
+
+---
+
+## 1. Claims
+
+### Claim A (Frame Structure Theorem) — purely lattice-theoretic
+
+Let `L` be an even positive-definite rank-2 lattice and `I ≥ 1`.
+
+(A1) A frame `(Q,P)` of `L` satisfies `I²|m` and `I|ℓ` **iff** the subgroup
+  `H(Q) := ⟨ (Q/I) + L ⟩ ⊆ D_L`
+is a cyclic isotropic subgroup of order exactly `I`. Call such frames *`I`-admissible*.
+
+(A2) For each `s | I`, the `s`-th summand of `D_I` is `s · d_*(N_s)` where
+  `N_s := ℤ(Q/s) + ℤP`
+is the even overlattice of `L` of index `s` corresponding to the unique order-`s` subgroup
+`H(Q)_s ⊆ H(Q)`. In particular `N_s` depends only on `H(Q)`, not on the rest of the frame, and
+  `D_I(frame) = Σ_{s|I} s · d_*(N_s(H(Q)))`.
+
+(A3) Consequently (under (I1)) `D_I` is a well-defined function on the set
+  `𝒞_I(L) := { cyclic isotropic subgroups of D_L of order I }`,
+and is constant on `O(L)`-orbits of `𝒞_I(L)`. Two `I`-admissible frames give the same value of
+`D_I` whenever they give the same `H`; the map frames → `𝒞_I(L)` is surjective, and its fibres are
+the orbits of the Borel subgroup `Γ₀(I) ⊆ SL(2,ℤ)`.
+
+*(So: `D_I` is a function of the pair `(L, H)`, and `(m,n,ℓ,I)` records `L` and `I` but not `H`.
+That is the exact content of the failure.)*
+
+### Claim B (The invariant object) — the answer to "what is the correct formula"
+
+Let `(Q,P)` be a charge pair in `Λ`, `L = ℤQ + ℤP`, `M := (L⊗ℚ) ∩ Λ` the saturation, `I = [M:L]`
+the torsion. Define
+
+  **𝒟(L ⊆ Λ) := Σ_{N} [N : L] · d_*(N)**,  the sum over **all** rank-2 sublattices `N ⊆ Λ` with
+  `L ⊆ N` (equivalently, all lattices intermediate between `L` and `M`; there are finitely many).
+
+(B1) `𝒟(L ⊆ Λ)` is manifestly a function of the pair `(L ⊆ Λ)` alone. Hence it is invariant under
+S-duality (change of frame of `L`) and under T-duality (`O(Λ)`), with no adaptedness hypothesis.
+
+(B2) Let `(Q,P)` be an `I`-admissible frame. The following are equivalent:
+  (i) the frame is *adapted*, `Q ∈ IΛ`;
+  (ii) `N_s ⊆ Λ` for every `s|I` (every lattice whose `d_*` the divisor sum evaluates is an honest
+     charge sublattice);
+  (iii) `N_I = M`;
+  (iv) `H(Q) = M/L`.
+Any of these forces `M/L` to be cyclic of order `I`, and conversely if `M/L` is cyclic then adapted
+frames exist.
+
+(B3) If `M/L` is cyclic of order `I`, then for **every** adapted frame
+  `D_I(m,n,ℓ) = 𝒟(L ⊆ Λ)`,
+the intermediate lattices being exactly the `M_s`, one for each `s|I`, with `[M_s:L] = s`.
+
+(B4) Therefore the physical premise `(P'_ad)` of the paper — "the contour integral equals the
+single-centred degeneracy, asserted on adapted frames" — is *equivalent* to the frame-free premise
+
+  `(P_inv)`: the single-centred degeneracy of the charge pair `(Q,P)` equals `𝒟(L ⊆ Λ)`,
+
+whose S-duality invariance is automatic. The frame restriction is not an extra physical hypothesis;
+it is the coordinate description of a coordinate-free formula.
+
+(B5) When `M/L` is **not** cyclic there is no adapted frame, and the non-adapted frames evaluate
+`d_*` on lattices `N_s ⊄ Λ`. `𝒟(L ⊆ Λ)` is still defined and is still the natural candidate, but it
+is then *not* a divisor sum over `s|I` (the number of terms is the number of subgroups of `M/L`, not
+the number of divisors of `I`). Whether `𝒟` is the physically correct count in that case is **not**
+claimed here; see the `[GAP]` list.
+
+### Claim C (The correct criterion; refutation of "exactly when")
+
+The paper's §9 asserts that the frame dependence "is invisible **exactly when** the relevant
+discriminants `Δ/s²` have class number 1". We claim:
+
+(C1) The "if" direction is true and trivial: if for every `s|I`, `s>1`, all integral positive-definite
+forms of discriminant `−Δ/s²` are `GL(2,ℤ)`-equivalent, then `D_I` is frame-independent on `L`.
+
+(C2) The "only if" direction is **false**. Two independent mechanisms produce counterexamples:
+  (a) `|𝒞_I(L)| ≤ 1`: `L` admits only one admissible `H` at all, so there is nothing to compare,
+    no matter how large `h(Δ/s²)` is. Witness: `f = (4,4,6)`, `Δ = 80`, `I = 2`, `h(−20) = 2`.
+  (b) `|𝒞_I(L)| ≥ 2` but the map `H ↦ [N_I]` is constant. Witness: `f = (3,3,18)`-class,
+    `Δ = 207`, `I = 3`, `h(−23) = 3`, two admissible frames, both giving the class `(2,1,3)`.
+
+(C3) The correct criterion is: **`D_I` is frame-independent on `L` iff the map
+`𝒞_I(L) → ∏_{s|I} {classes}`, `H ↦ ([N_s(H)])_{s|I}`, is constant** (sufficient; and necessary up
+to the possibility that `d_*` takes equal values on inequivalent forms, see `[GAP-INJ]`).
+`𝒞_I(L)` is computed by a purely local recipe (Claim D), and the map is computed by Gauss reduction.
+
+(C4) For `I = p` an odd prime with `v_p(c(f)) = 1` (equivalently `v_p(Δ) = 2` and
+`|𝒞_p(L)| = 2`), the criterion becomes a **class-group**, not a class-number, condition. Writing
+`c(f) = p·c'` and `f = p c' f₁` with `f₁` primitive of discriminant `D₁`, and `𝔭` a prime of
+`𝒪_{D₁}` above `p` (which splits):
+
+  `{ [N_p(H)] : H ∈ 𝒞_p(L) } = { c'·(f₁𝔭), c'·(f₁𝔭⁻¹) }`,
+
+so `D_p` is frame-independent on `L` **iff `[𝔭]² = 1` or `[f₁]² = 1` in `Pic(𝒪_{D₁})`**.
+In particular:
+  - the class number of `Δ/p²` is irrelevant: it may be arbitrarily large with no frame dependence;
+  - the two competing classes always lie in the **same genus** (they differ by `[𝔭]²`, a square), so
+    the failure is invisible to every genus invariant; the class group, not the genus, is the
+    relevant object.
+
+### Claim D (What `𝒞_I(L)` is, explicitly)
+
+(D1) `𝒞_I(L)` embeds in `ℙ¹(ℤ/I)` (cyclic order-`I` subgroups of `L/IL ≅ (ℤ/I)²`), of size
+`ψ(I) = I∏_{p|I}(1+1/p)`, and is cut out by the congruences
+  `G·Q ≡ 0 (mod I)` and `f(Q) ≡ 0 (mod I²)`.
+It is multiplicative: `𝒞_I = ∏_{p^a ‖ I} 𝒞_{p^a}`.
+
+(D2) For `p` odd, let `α ≤ β` be the `p`-adic Jordan exponents of `L` at `p` (so `α = v_p(c(f))`,
+`α + β = v_p(Δ)`). Then
+
+  | `α` | `β` | `\|𝒞_p(L)\|` |
+  |---|---|---|
+  | 0 | ≤1 | 0 |
+  | 0 | ≥2 | 1 |
+  | 1 | 1 | 2 if `p` splits in `𝒪_{−Δ/p²}`, else 0 |
+  | 1 | ≥2 | 1 |
+  | ≥2 | (≥2) | `p+1` |
+
+(D3) For `p = 2`: `𝒞_2(L) = ∅` if `ℓ` is odd; otherwise `𝒞_2(L) = { [x:y] ∈ ℙ¹(𝔽₂) : f(x,y) ≡ 0
+mod 4 }`, i.e. its size is `#{ v ∈ {m, n, m+ℓ+n} : v ≡ 0 mod 4 }`.
+
+---
+
+## 2. What is *not* claimed
+
+- Nothing here proves `(P_inv)` / `(P'_ad)`. The physical premise is untouched; it is only
+  **restated** in a frame-free form (Claim B4). That is a clarification, not a proof.
+- Nothing here changes any statement of §§3–6 of the paper; those are statements about triples.
+- Claim B5 (non-cyclic saturation quotient) is a *proposal*, explicitly flagged as unproved.
+- `d_*` itself is not computed or bounded; (I1) is used as a black box.
+
+## 3. Quantifier-explicit restatement of the two headline theorems
+
+**Theorem A.** ∀ even positive-definite rank-2 lattices `L`, ∀ `I ≥ 1`, ∀ frames `(Q,P)`, `(Q',P')`
+of `L` with `I²|m, I|ℓ` and `I²|m', I|ℓ'`: if `⟨Q/I + L⟩ = ⟨Q'/I + L⟩` as subgroups of `D_L`, then
+for every `s|I` the lattices `ℤ(Q/s)+ℤP` and `ℤ(Q'/s)+ℤP'` are equal (not merely isometric); hence
+`D_I(m,n,ℓ) = D_I(m',n',ℓ')`.
+
+**Theorem B.** ∀ even lattices `Λ`, ∀ rank-2 `L ⊆ Λ` with cyclic saturation quotient `M/L` of order
+`I`, ∀ adapted frames `(Q,P)` of `L` (i.e. `Q ∈ IΛ`):
+`Σ_{s|I} s·d_*(m/s², n, ℓ/s) = Σ_{L ⊆ N ⊆ Λ} [N:L]·d_*(N)`,
+the right-hand side being independent of the frame by construction.

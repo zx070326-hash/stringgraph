@@ -1,0 +1,22 @@
+state: draft
+opened: 2026-09-23
+reviewer: null
+verdict: null
+captain_confirmed: false
+
+summary: >
+  Upgrades Remark 6.3 of research/papers/torsion-dyon-shift-positivity/paper.md from a single
+  counterexample to a structure theorem. Two targets: (1) the paper's §9 "exactly when the relevant
+  discriminants have class number 1" criterion; (2) the construction of the S-duality invariant
+  object of which the divisor sum on adapted frames is a special value.
+
+notes:
+  - "2026-09-23: claim.md written. Working hypothesis (to be proved in proof.md): the torsion divisor
+     sum D_I is a function of the pair (L, H) where H is a cyclic isotropic subgroup of order I in
+     the discriminant group D_L = L^v/L; adapted frames are exactly those with H = M/L, M the
+     saturation of L in Lambda; and the frame-free invariant is
+     D(L subset Lambda) = sum over rank-2 sublattices N with L subset N subset Lambda of [N:L]*d_*(N)."
+  - "2026-09-23: expected verdict on the paper's 'exactly when': FALSE in the 'only if' direction,
+     with two structurally different counterexample mechanisms. To be verified by exact computation."
+
+gaps: []
