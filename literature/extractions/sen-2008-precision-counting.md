@@ -674,3 +674,73 @@ Sen 在 (C.13)/(C.14)（p.160）给出一组生成 Ĝ 子群的矩阵，但**未
 `holography.bss-phi-tilde-proportional-to-igusa-phi10` 的未解除前提。
 （此前 lead 曾判「不必追 DJS 2007，c 不在关键路径」——那条判断只针对**常数 c 的数值**，
 对**识别本身**不适用，现予以区分。）
+
+---
+
+## 追加抽取 S10（researcher, 2026-09-23）：印刷页 142 的 d(Q,P) 数值表
+
+- 抽取者：researcher agent（分支 `agent/researcher/arxiv-2510-05219`，本轮次要目标）
+- 可信度分级：**L1**（官方 arXiv PDF v3 + `pdftoppm -r 200` 渲染页图逐位读数）
+- 取件方式：`curl -sL https://arxiv.org/pdf/0708.1270v3`，196 页；**PDF 页 142 = 印刷页 142**。
+  注意本记录上文按 v4（178+ 页）抽取，本轮取到的是 **v3（196 页）**；两版页码不同，
+  本条以 v3 的 PDF 页 142 为准，且该页页脚印的数字也是 142。
+- 抽取动机：`research/papers/torsion-dyon-shift-positivity/NOTES-for-captain.md` §4.4
+  （"五个基准简并度未能核到可引用的表格出处；ar5iv 截断 0708.1270 §5"）。
+  **本轮绕开了 ar5iv，直接读 PDF，§5.6 完整可读。**
+
+### S10.1 表格本体
+- 位置：§5.6 末尾，(5.6.57) 之后的**无编号表格**，印刷页 142。
+- 类型：数值表（data）
+- 表前引导句逐字（页图核对）：
+  > "In order to see how good this approximation is, we give below the exact results for d(Q⃗, P⃗)
+  > calculated from (5.1.3) and S_stat ≡ ln d(Q⃗, P⃗) for certain values of Q², P² and Q·P in the case
+  > of heterotic string theory on T⁶, i.e. the N = 1, M = K3 model.³⁹ We also give the approximate
+  > statistical entropies S_stat^(0) calculated with the 'tree level' statistical entropy function,
+  > and S_stat^(1) calculated with the 'tree level' plus 'one loop' statistical entropy function.⁴⁰"
+- 表体逐字（列：Q² ｜ P² ｜ Q·P ｜ d(Q,P) ｜ S_stat ｜ S_stat^(0) ｜ S_stat^(1)）：
+
+  | Q² | P² | Q·P | d(Q,P) | S_stat | S_stat^(0) | S_stat^(1) |
+  |---|---|---|---|---|---|---|
+  | 2 | 2 | 0 | **50064** | 10.82 | 6.28 | 10.62 |
+  | 4 | 4 | 0 | **32861184** | 17.31 | 12.57 | 16.90 |
+  | 6 | 6 | 0 | 16193130552 | 23.51 | 18.85 | 23.19 |
+  | 6 | 6 | 1 | 11232685725 | 23.14 | 18.59 | 22.88 |
+  | 6 | 6 | 2 | 4173501828 | 22.15 | 17.77 | 21.94 |
+  | 6 | 6 | 3 | 920577636 | 20.64 | 16.32 | 20.41 |
+  | 6 | 6 | 4 | 110910300 | 18.52 | 14.05 | 18.40 |
+
+- 脚注 40 逐字（同页页脚，**对围道/chamber 有直接约束，不可略**）：
+  > "⁴⁰In this table the sign of Q·P has been chosen in such a way that in deforming the original
+  > contour lying at ṽ₂ < 0 to the final contour corresponding to ρ̃₂, ṽ₂, σ̃₂ given by η₁(ε), η₂(ε),
+  > η₃(ε) given in (5.6.22) we do not pass through the pole at ṽ = 0. For the other choice of the
+  > sign of Q·P we need to pass through this pole. This will give an additional contribution to
+  > S_stat. Although this contribution is exponentially suppressed for large charges, it may not be
+  > negligible for the charges used in this table."
+- 脚注 39 逐字：
+  > "³⁹In this case K₀ = 1/4π and the additive constant in (5.6.57) vanishes."
+- 文献自称的严格程度："exact results … calculated from (5.1.3)"——精确整数，由围道积分/傅里叶系数算得；
+  无证明，是数值对照表。
+- 文献列出的依赖：(5.1.3)（dyon 简并度的围道积分公式）；(5.6.22)（围道形变）。
+
+### S10.2 与 `paper.md` §3 五个基准值的对照
+
+| paper.md §3 | (Q²,P²,Q·P) | 本表位置 | 数值 | 裁定 |
+|---|---|---|---|---|
+| d_*(1,1,0) = 50064 | (2,2,0) | 第 1 行 | 50064 | **SUPPORT** |
+| d_*(2,2,0) = 32861184 | (4,4,0) | 第 2 行 | 32861184 | **SUPPORT** |
+| d_*(3,2,0) = 632078672 | (6,4,0) | **本表无 (6,4) 行** | — | **无定论（本表不覆盖）** |
+| d_*(4,2,0) = 9337042944 | (8,4,0) | 本表无此行 | — | **无定论（本表不覆盖）** |
+| d_*(5,2,0) = 113477152800 | (10,4,0) | 本表无此行 | — | **无定论（本表不覆盖）** |
+
+本表只覆盖 Q²=P² 的对角情形与 (6,6,ℓ) 的 ℓ 扫描，故只命中五个基准值中的**前两个**。
+覆盖面最广的是 `bringmann-murthy-2012` 附录 A（五个全覆盖），其次是
+`sen-2011-siegel-sign`（arXiv:1008.4209）Table 1（前三个）。
+
+### S10.3 本条抽取的限制（必须与数字一起传下去）
+1. 本表的 d(Q,P) 是**总简并度（-B₆ 类）**、且**依赖围道**（脚注 40 明确说了 Q·P 的符号选择
+   决定是否穿过 ṽ=0 的极点），**不是** paper.md 意义下的单心/immortal 指标 d_*。
+   两行命中的都是 Q·P=0，paper.md §3 自称在这些点上总指标与 immortal 指标重合——
+   **该重合本抽取不核实**。若只需要 d_* 的可引用出处，用 Bringmann–Murthy 附录 A 更直接。
+2. 表格无编号（不是 "Table N"），引用时须写"§5.6，(5.6.57) 之后的无编号表格，印刷页 142"。
+3. 版本差异：本记录上文（2026-09-14）按 v4 抽取并称 178+ 页；本条按 v3（196 页）。
+   若要引用页码，**必须写明 arXiv 版本号**，否则页码对不上。

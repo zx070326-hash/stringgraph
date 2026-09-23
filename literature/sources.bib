@@ -5116,7 +5116,17 @@
   volume    = {7},
   pages     = {15--56},
   year      = {2013},
-  note      = {arXiv:1208.3476. 用 mock 模形式方法 + 圆法（Rademacher 展开）+ Kloosterman 和估计，纯解析数论严格证明 mock Jacobi 系数正性；覆盖 N=4（K3×T²）指标 m=1,2（全判别式）及 N=8（T⁶）对应情形（非"充分大判别式"，见 task#17 核实）。抽取记录 extractions/bringmann-murthy-2012.md。}
+  number    = {1},
+  doi       = {10.4310/CNTP.2013.v7.n1.a2},
+  eprint    = {1208.3476},
+  archivePrefix = {arXiv},
+  primaryClass  = {hep-th},
+  note      = {arXiv:1208.3476. 用 mock 模形式方法 + 圆法（Rademacher 展开）+ Kloosterman 和估计，纯解析数论严格证明 mock Jacobi 系数正性；覆盖 N=4（K3×T²）指标 m=1,2（全判别式）及 N=8（T⁶）对应情形（非"充分大判别式"，见 task#17 核实）。抽取记录 extractions/bringmann-murthy-2012.md。
+               追加（researcher 2026-09-23）：**Appendix A（印刷页 28--29）是本项目找到的唯一一份同时覆盖全部五个基准单心简并度的已发表表格**——
+               m=1,2,3,4 的 ψ_m 系数表逐位给出 50064 / 32861184 / 632078672 / 9337042944 / 113477152800 及其正确的 (m,n,ℓ)，
+               直接就是单心（immortal）指标，不需要"总指标与单心指标在 Q·P=0 重合"这一步。
+               `research/papers/torsion-dyon-shift-positivity/paper.md` §6 的三个 D₂ 展示式的每一个被加数也都在此表内。
+               ⚠ 表格须读渲染页图：`pdftotext -layout` 会把 m=1/2/3 的表头与数据行错排。见 extractions 追加段 E4--E6。}
 }
 
 @article{rossello-2024,
@@ -5151,6 +5161,28 @@
     冲突裁定：verdict (c)——DMZ/Rosselló 与 BSS 确为不同命名习惯，经"傅里叶相位系数"
     标准核验，物理磁荷/电荷槽本身对应一致，只是符号 m 的指代对调；草稿 §3 引理 2 的
     ρ/σ/τ 对应表 SUPPORT）。}
+}
+
+@article{bhand-sen-singh-2025,
+  author    = {Bhand, Ajit and Sen, Ashoke and Singh, Ranveer Kumar},
+  title     = {Generating Function of Single Centered Black Hole Index from the Igusa Cusp Form},
+  year      = {2025},
+  eprint    = {2510.05219},
+  archivePrefix = {arXiv},
+  primaryClass  = {hep-th},
+  note      = {arXiv:2510.05219 v1（2025-10-06 18:00:46 UTC，38 页 3 图，hep-th + math.NT；
+    截至 2026-09-23 无 journal-ref、无 DOI、无 v2）。**挠一（torsion one）**单心黑洞指标的
+    生成函数 F(Ω) = Σ_{m,n,ℓ} d*(m,n,ℓ)(−1)^{ℓ+1}e^{2πi(mτ+nσ+ℓz)}：把 1/Φ₁₀ 减去由 η^{−24}
+    构造的双心黑洞生成函数，证明所得 F̃(Ω) 在 det Im Ω > 1/4 上无奇点、绝对收敛、PSL(2,ℤ) 不变
+    （(1.20)），并给出其亚纯延拓的极点（Thm 5.3）与两种单心指标定义的相等（Thm 5.4）。
+    eq(1.1) 逐字把范围限死在 gcd{Q_iP_j−Q_jP_i}=1；全文"torsion"仅出现这一次。
+    **★ (1.16)–(1.17)：d*(γ^tTγ)=d*(T)（γ∈SL(2,ℤ)），由 Φ₁₀ 的 Sp 不变性 + γ₀^tTγ₀=adj(T)
+    的围道协变 + 测度不变推出**——与 research/papers/torsion-dyon-shift-positivity/paper.md
+    Appendix A Prop A.1 同陈述同路线，是该命题的已有公开先例（但 BSS 只写"It follows from…"，
+    未给证明步骤）。不引 DGM 0803.2692、不引 Rosselló 2403.19630、不引 Alexandrov–Nampuri
+    2009.01172、不引 BSS(Srivastava) 0802.0544/0802.1556；无除子和、无 adapted frame、
+    无格论字典、无类数判据。由 researcher 于 2026-09-23 登记（关闭该论文 NOTES-for-captain §4.5）。
+    抽取记录 extractions/bhand-sen-singh-2025-single-centered.md（L1，PDF 页面图像逐字核对）。}
 }
 
 @misc{stringgraph-research-2026,
@@ -5582,17 +5614,41 @@
 }
 
 @article{banerjee-sen-2008-tduality,
-  author  = {Banerjee, Sandip and Sen, Ashoke},
+  author  = {Banerjee, Shamik and Sen, Ashoke},
   title   = {S-duality Action on Discrete T-duality Invariants},
   journal = {JHEP},
-  volume  = {09},
-  pages   = {027},
+  volume  = {04},
+  pages   = {012},
   year    = {2008},
   note    = {arXiv:0801.0149。由 researcher 于 2026-09-18 登记（GAP-BKM 查重门任务，回应"Sen 挠 dyon 系列"要求）。
              **正文已取得（L1）**：ar5iv HTML 全文检索。逐字确认不含"automorphism"、"Borcherds"（除引用标题）、
              "Kac-Moody"/"BKM"、"Weyl vector"、"Hecke operator"字样。挠 r>1 的讨论停留在
              "积分核应是 Sp(2,Z) 某含 Γ⁰(r) 子群的模形式"这一推测性结论句，未给出自同构或 Hecke 构造。
-             见 extractions/banerjee-sen-2008-tduality.md。}
+             见 extractions/banerjee-sen-2008-tduality.md。
+             **订正 2026-09-23（researcher）**：原条目写 author={Banerjee, Sandip}、JHEP 09 (2008) 027，
+             两处均误。arXiv API 与 INSPIRE（`/api/arxiv/0801.0149`）一致给出
+             **Shamik Banerjee** 与 **JHEP 04 (2008) 012**（artid 012, volume 04, year 2008），已按此改正。
+             ⚠ **勿与 banerjee-sen-2008-duality-orbits（arXiv:0712.0043）混淆**：那是同二人另一篇，
+             题名 "Duality orbits, dyon spectrum and gauge theory limit…"，JHEP 03 (2008) 022。}
+}
+
+@article{banerjee-sen-2008-duality-orbits,
+  author  = {Banerjee, Shamik and Sen, Ashoke},
+  title   = {Duality Orbits, Dyon Spectrum and Gauge Theory Limit of Heterotic String Theory on {$T^6$}},
+  journal = {JHEP},
+  volume  = {03},
+  pages   = {022},
+  year    = {2008},
+  eprint  = {0712.0043},
+  archivePrefix = {arXiv},
+  primaryClass  = {hep-th},
+  note    = {arXiv:0712.0043（提交 2007-12-03）。由 researcher 于 2026-09-23 登记，**仅元数据（L1，
+             arXiv API + INSPIRE `/api/arxiv/0712.0043` 双源一致：Shamik Banerjee / JHEP 03 (2008) 022 /
+             artid 022）；正文尚未取得，内容为 L0，不得据此写图节点。**
+             登记理由：Bhand–Sen–Singh arXiv:2510.05219 的参考 [6] 逐字引的是本篇（作为"挠一时指标只依赖
+             Q²,P²,Q·P"的出处），而 research/papers/torsion-dyon-shift-positivity/paper.md 的
+             [banerjee-sen-2008] 把本篇的题名/刊号与 0801.0149 的 arXiv 号**混成了一条**，需要两条分开的
+             bib key 才能说清。见 extractions/bhand-sen-singh-2025-single-centered.md Q4。}
 }
 
 @article{harvey-moore-1996,
@@ -5650,7 +5706,30 @@
              代入 (D.19) 验证 n≥m,0≤ℓ≤m 时无解——这是 Route A 剩余的关键证明步骤，非抽取范围。§5.4 "walls of marginal stability" 是模空间
              （axion-dilaton 平面）壁，与 Φ₁₀ 在 Siegel 空间的零点超曲面是不同几何对象，不可等同引用。抽取记录 extractions/sen-2008-precision-counting.md（S1--S9）。
              ⚠ 任务原文误将 hep-th/0505094 称为"Black Hole Attractors and the Topological String"——该 arXiv 号实际是
-             Shih-Strominger-Yin "Recounting Dyons in N=4 String Theory"；对应标题的正确论文是 Ooguri-Strominger-Vafa hep-th/0405146。两者本轮均未抽取。}
+             Shih-Strominger-Yin "Recounting Dyons in N=4 String Theory"；对应标题的正确论文是 Ooguri-Strominger-Vafa hep-th/0405146。两者本轮均未抽取。
+             追加（researcher 2026-09-23）：印刷页 142 有一张无编号的 d(Q,P) 数值表，给出 (Q²,P²,Q·P)=(2,2,0)→50064、
+             (4,4,0)→32861184 等 7 行精确整数，是 `research/papers/torsion-dyon-shift-positivity/paper.md` §3 五个基准值中
+             两个的可引用出处。见 extractions/sen-2008-precision-counting.md 追加段 S10。}
+}
+
+@article{sen-2011-siegel-sign,
+  author  = {Sen, Ashoke},
+  title   = {How Do Black Holes Predict the Sign of the Fourier Coefficients of {S}iegel Modular Forms?},
+  journal = {General Relativity and Gravitation},
+  volume  = {43},
+  pages   = {2171--2183},
+  year    = {2011},
+  doi     = {10.1007/s10714-011-1175-9},
+  eprint  = {1008.4209},
+  archivePrefix = {arXiv},
+  primaryClass  = {hep-th},
+  note    = {arXiv:1008.4209（作者单篇，Sen）。researcher 2026-09-23 登记。本项目用到的是 **Table 1（印刷页 11 = PDF 页 11）**：
+             杂化弦 on T⁶ 的 −B₆ 数值表，行 = (Q²,P²)，列 = Q·P ∈ {−2,0,1,2,3,4}。它给出
+             (2,2,0)→50064、(4,4,0)→32861184、(4,6,0)→632078672，是 `research/papers/torsion-dyon-shift-positivity/paper.md`
+             §3 五个基准值中三个的第二份独立已发表出处（与 bringmann-murthy-2012 附录 A 逐位一致）。
+             注意 Table 1 印的是**总指标 −B₆**（含双中心贡献，依赖 chamber），不是单心/immortal 指标；
+             两者在 Q·P=0 上重合。全文主题是"黑洞物理预言 Φ₁₀ 傅里叶系数的符号"，非本项目当前论证链所需。
+             抽取记录 extractions/sen-2011-siegel-sign.md。}
 }
 
 % ---------------------------------------------------------------------------
