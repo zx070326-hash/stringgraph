@@ -56,9 +56,22 @@ drafted: ~1200 lines of markdown, which is roughly 25–30 journal pages in LaTe
 
 | Candidate | Why it fits | Why it might not |
 |---|---|---|
-| **Communications in Mathematical Physics** | [DW] is the ancestor of the whole line and sits in the string-math world; CMP routinely publishes supergeometry with this flavour; referees who know both the physics motivation and the stack technology exist there; a title foregrounding Ramond punctures (the physically loaded case, tied to worldsheet fermion boundary conditions) reads naturally to this audience | CMP referees may ask for the physical payoff (superstring measure) which this paper deliberately does not supply |
+| **Communications in Mathematical Physics** | [DW] is the ancestor of the whole line and sits in the string-math world; CMP routinely publishes supergeometry with this flavour; referees who know both the physics motivation and the stack technology exist there; a title foregrounding Ramond punctures (the physically loaded case, tied to worldsheet fermion boundary conditions) reads naturally to this audience | ~~CMP referees may ask for the physical payoff (superstring measure) which this paper deliberately does not supply~~ — **addressed 2026-09-23, see below** |
 | **Journal of Geometry and Physics** / **Letters in Mathematical Physics** | Correct length, correct audience, faster turnaround; LMP would suit if the paper were cut to the two main theorems | Lower visibility; a result that removes the $n\le g-1$ restriction deserves better than a venue where it will be missed |
 | **International Mathematics Research Notices (IMRN)** or **Mathematische Zeitschrift** | Pure-AG venues where "moduli stack $X$ is non-projected, here is the obstruction class" is a normal paper; no pressure to supply physics; a title-level theorem plus a structural immunity argument (rather than "corollary of a recent paper") is a stronger pure-AG pitch than the previous framing was | Referees will be stricter about the one inference flagged as `[INF-NORMAL]` (§5, Remark 5.8) and may demand that FKP (9.6) be re-derived for punctured targets rather than inferred |
+
+**CMP's "no physical payoff" objection is now answered (2026-09-23).** §9.5 was added to the paper: it
+states precisely which measure-construction strategy Theorem M forecloses (a single global holomorphic
+retraction of the *compactified* stack, unavailable from $g=2$ with two external legs onward), which
+ones it leaves untouched (the patchwise constructions of [EW] and [DP] — already argued in §9.3), and
+reads Theorem M against [DW, Remark 1.5], where Donagi and Witten record but do not prove the
+expectation that the compactification of $\mathfrak M_{g,n}$ is non-split. All four quotations used
+there are `L1` in this project's own extraction. Note this is a *credibility and completeness* gain,
+not a new result: the honest content of §9.5 is that Theorem M has narrow physical bite, and the
+section says so explicitly. It removes a predictable referee question; it does not raise the paper's
+mathematical weight. **Two items in §2's "why it might not" column are now unequal**: CMP's objection
+is answered, IMRN/Math. Z.'s `[INF-NORMAL]` objection is not (a `theorem-prover` round on it was
+dispatched 2026-09-23; see §5).
 
 **Recommendation, weakly held**: a math-physics venue (CMP first choice) is the best match for the
 *framing*, because the honest-boundaries section (§10) reads naturally there and would look unusual
