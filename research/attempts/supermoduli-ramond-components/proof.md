@@ -474,6 +474,20 @@ $L^{\otimes2}\cong\omega_C(R)$ 要求 $\deg\omega_C(R)=2g-2+\#R$ 为偶数，故
 是否照办由 lead 决定；本文件按纪律**不修改** `research/papers/**`。
 在毕业进图之前，这条结论**不得**被论文或图中任何节点依赖。
 
+**查重后的修订建议（2026-09-23，优先于上一段）**：这条命题**已发表**——Jarvis (2000)
+Thm 3.3.1 / 3.3.11（= 论文已引的 FKP 参考文献 [22]），见 §10 与 `prior-art.md`。
+所以论文里正确的写法是**引用**，不是"本文证明"：
+
+> For $r\ge1$ the relevant bosonic stack is the moduli of $2$-spin curves of type
+> $\mathbf m=(0,\dots,0,1,\dots,1)$ ($m_i=1$ exactly at the Ramond punctures), and by
+> [Jarvis, *Geometry of the moduli of higher spin curves*, Internat. J. Math. 11 (2000), Thm 3.3.11]
+> one has $\ell_{g,2}(\mathbf m)=\gcd(2,2,m_\bullet)=1$, hence it is irreducible. Therefore
+> $\overline{\mathfrak S}_{g;n,2r}$ is connected and Theorem B is already a component-level statement.
+
+如果 lead 希望论文**不依赖**"Jarvis 的紧化 = FKP 的紧化"这个未核对的同构，
+可以改为引 Jarvis 的**内部**版本（$\mathcal S^{1/2,\mathbf m}_{g,n}$ 不可约），再接本文 §5 的
+稠密性引理（其输入只有已 L1 核过的 FKP Prop 7.8(ii)）。这是本文在这件事上唯一的实质贡献。
+
 ---
 
 ## §8 第二条证明：Johnson 二次型（拓扑路线，与 §3 逻辑独立）
