@@ -12,11 +12,21 @@ captain_confirmed: false
 
 # --- one-line answer -------------------------------------------------------
 answer: >-
-  Mixed (b) + (a). The threshold of paper.md Cor 8.5 is NOT sharp: the whole
-  g=2 row is non-projected, the two missing cells (2;0,0) and (2;1,0) being
-  already closed by published results the paper does not invoke. Outside g>=2
-  the answer is genuinely split in a determinate corner (odd rank <= 1, plus
-  the new case Sbar_{0;4,0}), and open elsewhere.
+  Mixed (a) + (b) + (c), by region. (b) The threshold of paper.md Cor 8.5 is
+  NOT sharp: the known non-projected region is the whole of g>=2, the two extra
+  cells (2;0,0) and (2;1,0) coming from [CN Thm 1.1(2)] and [DW Thm 1.2] +
+  restriction. This is NOT new - paper.md already records both transfers in
+  four places; what is missing there is only the assembled statement. (a) Below
+  that, a determinate corner is genuinely split: odd rank <= 1 (Cor 1.3) and
+  the new case Sbar_{0;4,0} (Thm 4.5), hence everything of bosonic dimension
+  <= 1 (Thm 5.1). (c) The rest of g <= 1, plus the odd component at g=2 with
+  n >= 1, is open in both directions.
+novelty: >-
+  Section 3 (the g=2 row) is bookkeeping over published inputs, zero novelty.
+  The new content is Section 4 (Sbar_{0;4,0} is split, with the computation
+  Lambda^2 T_-^v = T_X on the mu_2-root stack) and the elementary Sections 1
+  and 5.1, which give paper.md a positive direction it explicitly disclaims
+  having (its section 1.5(2): "Nothing in the positive direction").
 
 # --- what is proved --------------------------------------------------------
 results:
@@ -107,12 +117,23 @@ next_targets:
 
 # --- recommendation to the lead -------------------------------------------
 recommendation_for_paper_md: >-
-  Widen Cor 8.5's region to "g>=2, all n, all r", attributing (2;0,0) to
-  [CN Thm 1.1(2)]/[FKP2] and (2;1,0) to [DW Thm 1.2] + [DW Rem 1.4]; state
-  Lemma 2.1 in section 9.3 in BOTH directions (currently only the failing
-  direction is noted); optionally add a sharpness section with Cor 1.3,
-  Thm 4.5, Thm 5.1 and the table of section 5.3. See proof.md section 5.4.
+  Checked against the version of paper.md read 2026-09-23, which ALREADY
+  contains the restriction-lemma transfer (1.4 caveat (i), 1.5(3), 9.3, 10.6).
+  So: (1) presentational - add a one-line corollary assembling the combined
+  known region "non-projected for every g>=2, every n, every r" beside the box
+  of Cor 8.5, since the paper states every ingredient in four separate places
+  but never assembles them, which is why the box reads as a threshold;
+  (2) one sentence - the disjoint-union step promoting "even component" to
+  "whole stack" at (2;1,0); (3) THE SUBSTANTIVE ONE - add a sharpness section
+  with Cor 1.3, Thm 4.5, Thm 5.1, Rem 5.2 and the table of section 5.3, giving
+  the paper the positive direction its 1.5(2) disclaims. See proof.md 5.4.
   This attempt writes nothing outside its own directory.
+
+errata_in_own_history: >-
+  Commits 57937f3 and 9f9ff11 of this branch claimed paper.md had failed to use
+  the restriction lemma and listed (2,1,0) as open. That was wrong - a stale
+  reading of the manuscript. Corrected in Remark 2.2, Remark 3.4 and 5.4 of
+  proof.md. Sections 1, 4 and 5.1 never depended on paper.md.
 
 notes: >-
   Prior-art search deliberately deferred (project rule: due when a result

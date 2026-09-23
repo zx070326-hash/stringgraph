@@ -105,19 +105,24 @@ the restriction of $\rho\circ\iota=\mathrm{id}_X$ to an open substack. So $\math
 If $\mathfrak X\cong\operatorname{Tot}(\Pi E)$ for an odd bundle $E$ on $X$, then
 $\mathfrak U\cong\operatorname{Tot}(\Pi E|_U)$, so splitness restricts as well. $\square$
 
-> **Remark 2.2 (this is not new; it is only unused).** [DW, Remark 1.4] states the same implication
-> verbatim: *"Though $\mathfrak M_g$ and $\mathfrak M_{g,n}$, like their bosonic counterparts, have
-> natural Deligne–Mumford compactifications, we do not consider the compactifications in the present
-> paper. Our assertion is that $\mathfrak M_g$ and $\mathfrak M_{g,n}$ are non-projected without any
-> consideration of the compactification. **Asking for the compactification to be projected would only
-> be a stronger condition.**"* (L1-verified transcription recorded in
-> `literature/extractions/witten-2012-superstring-perturbation.md`, entry EW21.)
+> **Remark 2.2 (this is folklore, and `paper.md` already uses it).** [DW, Remark 1.4] states the same
+> implication verbatim: *"Though $\mathfrak M_g$ and $\mathfrak M_{g,n}$, like their bosonic
+> counterparts, have natural Deligne–Mumford compactifications, we do not consider the
+> compactifications in the present paper. Our assertion is that $\mathfrak M_g$ and $\mathfrak M_{g,n}$
+> are non-projected without any consideration of the compactification. **Asking for the
+> compactification to be projected would only be a stronger condition.**"* (L1-verified transcription
+> in `literature/extractions/witten-2012-superstring-perturbation.md`, entry EW21.)
 >
-> `paper.md` §9.3 correctly notes the *converse* failure ("non-projectedness of the compactification
-> does not imply non-projectedness of the smooth locus") and correctly declines to claim any
-> improvement on [DW]/[DO]/[W] *as statements about $\mathfrak S_{g;n,2r}$*. But it never runs the
-> implication in the direction that does hold, and that direction is exactly what closes the one
-> genuinely interesting hole in its threshold. See §3.
+> **Correction to an earlier version of this file.** I first wrote that `paper.md` never runs this
+> implication. That is **false** in the current text: §1.4 caveat (i) states it explicitly ("Since an
+> open substack of a projected stack is projected (§9.3), non-projectedness of
+> $\mathfrak S_{g;n,2r}$ **implies** non-projectedness of $\overline{\mathfrak S}_{g;n,2r}$"),
+> subtracts the resulting overlap from the paper's own claim of novelty, and §1.5(3), §9.3 and §10.6
+> each record that the *even* component at $(2,1,0)$ is settled by [DW, Thm 1.2] transported this way.
+> Lemma 2.1 is therefore reproved here for self-containedness, not as a correction. What follows in §3
+> is consequently **bookkeeping over already-published inputs**, not a new result; its only function
+> is to state the combined region in one place, which `paper.md` does not do.
+
 
 ---
 
@@ -169,20 +174,27 @@ The union of the three cases is all of $g\ge2$. $\square$
 
 > **Remark 3.4 (what this does and does not do to `paper.md`).**
 > 1. Corollary 8.5 of `paper.md` is a *sufficient* condition and is not falsified by Theorem 3.3.
->    What is falsified is the implicit reading of it as a threshold: `paper.md` §1.5(3) and §10.6 list
->    $(g,n,r)=(2,1,0)$ as *"completely open here"*, and §9.2 discusses only why the method cannot
->    reach it. In fact the even component of that stack was already settled, in 2013, by [DW, Thm 1.2]
->    plus [DW, Remark 1.4]. The same holds for $(2,0,0)$ via [CN, Thm 1.1(2)].
-> 2. The correct statement of what is *new* in `paper.md` at $g=2$ is therefore narrower than the box
->    suggests, and the correct statement of what is *true* is wider. Both should be said.
-> 3. Nothing here touches $g\ge3$, where `paper.md` is strictly stronger than everything published
->    (no other source reaches a compactified punctured stack at all).
+>    What Theorem 3.3 shows is that the **boxed region is not the known region**: read as a threshold,
+>    the box understates what is true by the two cells $(2;0,0)$ and $(2;1,0)$.
+> 2. **`paper.md` already knows both cells.** §1.4's comparison table lists [CN, Thm 1.1(2)] for
+>    $\overline{\mathfrak M}{}^+_2=\overline{\mathfrak S}{}^+_{2;0,0}$; §1.4 caveat (i), §1.5(3), §9.3
+>    and §10.6 each state that the even component at $(2,1,0)$ is settled by [DW, Thm 1.2] transported
+>    along the restriction lemma. So §3 contains **no new mathematics**. Its content is (a) the
+>    one-line disjoint-union step promoting the even-component statements to the whole stack, and
+>    (b) the observation that the three sources plus the paper's own theorem tile the region $g\ge2$
+>    **exactly**, with no cell left over — a statement `paper.md` never assembles in one place.
+> 3. Nothing here touches $g\ge3$, where `paper.md` is strictly stronger than everything published in
+>    the compactified punctured setting.
 > 4. Theorem 3.3 leaves the **odd** parity component at $g=2$ with $n\ge1$ genuinely open:
 >    $\overline{\mathfrak S}{}^{-}_{2;n,0}$ for $n\ge1$. At $n=0$ it is split by [CN]; `paper.md`
 >    §9.2 shows its method reaches only the even component at $g=2$; and [DW] states verbatim *"We do
 >    not resolve the question of projectedness of $\mathfrak M_{g,n}$ for the case of even $g$, odd
 >    spin structure, and $n\ge1$."* So all three sources stop at exactly the same wall, and the wall
->    is a real one.
+>    is a real one. `paper.md` §1.5(3) and §10.6 already say this.
+> 5. **Therefore the real content of this attempt is §1, §4 and §5.1, not §3.** `paper.md` §1.5(2)
+>    says verbatim that it asserts *"Nothing in the **positive** direction"*; that is precisely the
+>    half the present file adds.
+
 
 ---
 
@@ -511,24 +523,38 @@ Collecting Theorem 3.3 (non-projected), Corollary 1.3 and Theorems 4.5, 5.1 (spl
 
 ### 5.4 Recommendation for `research/papers/supermoduli-punctured-nonprojected/paper.md`
 
-*(Recorded here only; this attempt does not write outside its own directory.)*
+*(Recorded here only; this attempt does not write outside its own directory. Written against the
+version of `paper.md` read on 2026-09-23, which **already** contains the restriction-lemma transfer
+in §1.4 caveat (i), §1.5(3), §9.3 and §10.6 — so the first two items below are presentational, and
+the third is where the new material is.)*
 
-1. **Corollary 8.5's region should be widened to "$g\ge2$, all $n$, all $r$"**, with the two extra
-   cells attributed to the literature, not to the paper's construction: $(g;n,2r)=(2;0,0)$ to
-   [CN, Thm 1.1(2)] (originally [FKP2]), and $(2;1,0)$ to [DW, Thm 1.2] combined with
-   [DW, Remark 1.4] (= Lemma 2.1 here). The paper's own Theorem M is unaffected; what changes is the
-   *statement of the known region*, and the removal of $(2,1,0)$ from the list of open cases in §1.5(3)
-   and §10.6.
-2. **§9.3 should state Lemma 2.1 in both directions.** It currently observes only that the implication
-   compactified $\Rightarrow$ smooth fails; the implication that *does* hold (smooth non-projected
-   $\Rightarrow$ compactified non-projected) is what closes $(2,1,0)$, and stating it also makes
-   §9.3's comparison with [DO]/[W] sharper: the paper's $g\ge3$ result is not merely "different from"
-   theirs, it strictly *contains* the compactified consequence of theirs.
-3. **A sharpness section may be added**, containing: Corollary 1.3 (split for $2g-2+n+r\le1$),
-   Theorem 4.5 ($\overline{\mathfrak S}_{0;4,0}$ split), Theorem 5.1 (split for $3g-3+n+2r\le1$), and
-   the table of §5.4. This converts §9.2's apologetic *"the method structurally cannot reach
-   $\overline{\mathfrak M}{}^-_2$"* into the positive statement that $g\ge2$ is exactly the
-   non-projected region and that the first split case with odd rank $2$ is $\overline{\mathfrak S}_{0;4,0}$.
-4. **The odd component $\overline{\mathfrak S}{}^-_{2;n,0}$, $n\ge1$, should be listed as the single
-   sharpest open problem** at $g\ge2$: it is the unique place where [DW], [CN] and `paper.md` all stop
-   at the same wall.
+1. **Add a one-line corollary stating the combined known region** — *"$\overline{\mathfrak S}_{g;n,2r}$
+   is non-projected for every $g\ge2$, every $n\ge0$, every $r\ge0$"* (Theorem 3.3 here) — beside the
+   box of Cor. 8.5, with the two cells outside the box attributed to [CN, Thm 1.1(2)]/[FKP2] and to
+   [DW, Thm 1.2] + restriction. The paper states every ingredient, in four separate places, but never
+   assembles them; that is why the box reads as a threshold when it delimits only the paper's own
+   contribution. Mathematically this changes nothing.
+2. **Spell out the disjoint-union step.** §1.5(3) and §10.6 settle the *even component* at $(2,1,0)$;
+   promoting that to the whole stack $\overline{\mathfrak S}_{2;1,0}$ needs the trivial observation
+   that a disjoint union is projected iff each component is, together with local constancy of parity
+   for $r=0$. One sentence (Prop. 3.1 here).
+3. **Add a sharpness section — this is where the new material is.** §1.5(2) says verbatim that the
+   paper asserts *"Nothing in the **positive** direction"*. The present file supplies one:
+   Corollary 1.3 (split whenever $2g-2+n+r\le1$), **Theorem 4.5**
+   ($\overline{\mathfrak S}_{0;4,0}$ is split — the first split case of odd rank $2$ other than
+   [CN]'s $\overline{\mathfrak M}{}^{-}_2$), Theorem 5.1 (split whenever $3g-3+n+2r\le1$),
+   Remark 5.2 (the degree method reaches $(0;4,0)$ and nothing else), and the table of §5.3.
+   Together with Theorem 3.3 this turns §9.2's apologetic *"the method structurally cannot reach
+   $\overline{\mathfrak M}{}^-_2$"* into a two-sided statement: **as far as anything is known,
+   $g\ge2$ is exactly the non-projected region, and the low corner is not merely unreached but
+   provably split.**
+4. **Keep $\overline{\mathfrak S}{}^-_{2;n,0}$, $n\ge1$, as the single sharpest open problem.**
+   `paper.md` already lists it; §5.3 here only confirms that [DW], [CN] and `paper.md` stop at the
+   same wall.
+
+> **Provenance note (honesty about my own error).** The first two commits of this attempt
+> (`57937f3`, `9f9ff11`) asserted that `paper.md` had *failed* to use the restriction lemma and that
+> it listed $(2,1,0)$ as open. That was **wrong**: I was working from a stale reading of the
+> manuscript, which in its current form states the transfer explicitly and subtracts the resulting
+> overlap from its own novelty claim. Remark 2.2, Remark 3.4 and this subsection were corrected.
+> §1, §4 and §5.1 never depended on `paper.md` and are unaffected.

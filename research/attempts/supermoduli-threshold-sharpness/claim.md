@@ -86,6 +86,11 @@ Bricks used as known (all *rigorous, published*, none a conjecture):
 > non-projected for every $g\ge2$ and every $n\ge0$.
 > The two cells outside `paper.md`'s box are supplied by the published literature, not by a new
 > argument: $(g,n,r)=(2,0,0)$ by K4, and $(g,n,r)=(2,1,0)$ by K3 together with Claim B.
+> **Novelty: none.** `paper.md` in its current form already records both transfers (§1.4 caveat (i),
+> §1.5(3), §9.3, §10.6). Claim C is the assembled statement plus the disjoint-union step from
+> "even component" to "whole stack"; it is bookkeeping, and is stated only because it is the
+> baseline against which Claims A, D, F measure sharpness.
+
 
 > **Claim D (a genuinely split case with odd rank $2$).** *(= `proof.md` Thm 4.5)*
 > $\overline{\mathfrak S}_{0;4,0}$, of dimension $(1\mid2)$, is **split**. Concretely,
