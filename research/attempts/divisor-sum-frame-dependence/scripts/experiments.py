@@ -13,9 +13,10 @@ import sys
 from math import gcd
 
 from frame_structure import (
-    act, admissible_frames, all_reduced_forms, chain, class_number, content,
-    disc, divisors, frame_from_primitive, gl_classes, is_admissible, is_ambiguous,
-    prime_form, reduce_gl, reduce_sl, reduced_primitive_forms, value_classes,
+    act, admissible_frames, all_reduced_forms, chain, class_number, compose_basis,
+    content, disc, divisors, frame_from_primitive, gl_classes, is_admissible,
+    is_ambiguous, prime_form, reduce_gl, reduce_sl, reduced_primitive_forms,
+    value_classes,
 )
 
 
@@ -173,11 +174,19 @@ def sec_scan(DMAX=400, IMAX=6):
 
     print()
     print("  --- the other reading: 'class number' = number of PRIMITIVE classes ---")
+    print("  (h(D) = |Pic(O_D)| counts primitive forms only; this is the STANDARD reading)")
     tf2 = [r for r in rows if r[5] and not r[9]]
+    ft2 = [r for r in rows if not r[5] and r[9]]
+    ft2h = [r for r in ft2 if r[3] >= 2]
     print("  frame DEPENDENT with all primitive class numbers = 1: %d cases" % len(tf2))
     print("  (under this reading even the 'if' direction of the paper's claim fails;")
     print("   the paper's own witness is among these)")
     for r in sorted(tf2, key=lambda r: (r[0], r[2]))[:8]:
+        print("       Delta=%-4d f=%-14s I=%d  |C_I|=%d  #values=%d  h_prim=%s  h_tot=%s"
+              % (r[0], str(r[1]), r[2], r[3], r[4], list(r[8]), list(r[6])))
+    print("  frame INDEPENDENT with some primitive class number > 1: %d cases"
+          " (of which %d have |C_I| >= 2)" % (len(ft2), len(ft2h)))
+    for r in sorted(ft2h, key=lambda r: (r[0], r[2]))[:8]:
         print("       Delta=%-4d f=%-14s I=%d  |C_I|=%d  #values=%d  h_prim=%s  h_tot=%s"
               % (r[0], str(r[1]), r[2], r[3], r[4], list(r[8]), list(r[6])))
 
@@ -196,12 +205,12 @@ def sec_scan(DMAX=400, IMAX=6):
 
 # --------------------------------------------------------------------------- #
 def sec_criterion(DMAX=3000):
-    hline("CRITERION TEST (odd p, v_p(content) = 1):  independent  <=>  [f1]^2=1 or [p]^2=1")
+    hline("CRITERION TEST (v_p(content) = 1):  independent  <=>  [f1]^2=1 or [p]^2=1")
     print("  f = p*c'*f1 with f1 primitive of disc D1;  p splits in O_{D1};  |C_p| = 2.")
     tested = 0
     bad = []
     examples = []
-    for p in (3, 5, 7, 11, 13):
+    for p in (2, 3, 5, 7, 11, 13):
         for Delta in range(3, DMAX + 1):
             D = -Delta
             if D % 4 not in (0, 1):
@@ -353,7 +362,102 @@ def sec_lambda():
 
 
 # --------------------------------------------------------------------------- #
+def sec_alpha2(DMAX=2000):
+    hline("THEOREM E'' TEST (v_p(content) >= 2): N_p = (c/p^2) * (index-p sublattice of L_1)")
+    print("  prediction: |C_p| = p+1 and the multiset of classes is the image of [f1] under")
+    print("  the classical p-Hecke correspondence, scaled by c/p^2.  A zero of f1 mod p gives")
+    print("  an IMPRIMITIVE sublattice, hence a class of different content => frame dependent.")
+    for p in (2, 3, 5):
+        tested = mismatch = zerodep = zerodep_bad = 0
+        for Delta in range(3, DMAX + 1):
+            D = -Delta
+            if D % 4 not in (0, 1):
+                continue
+            for f in all_reduced_forms(D):
+                c = content(f)
+                if c % (p * p):
+                    continue
+                f1 = tuple(t // c for t in f)
+                scale = c // (p * p)
+                pred = set()
+                nzero = 0
+                for (x, y) in [(1, 0), (0, 1)] + [(1, k) for k in range(1, p)]:
+                    u, v = compose_basis(x, y)
+                    sub = act(f1, (x, p * u, y, p * v))
+                    if content(sub) % p == 0:
+                        nzero += 1
+                    pred.add(reduce_gl(tuple(scale * t for t in sub)))
+                vc = value_classes(f, p, box=4 * p + 5)
+                obs = set()
+                for H in vc:
+                    for ch in vc[H]:
+                        obs.add(ch[-1])          # the N_p class
+                tested += 1
+                if len(vc) != p + 1 or pred != obs:
+                    mismatch += 1
+                    if mismatch <= 3:
+                        print("     MISMATCH f=%s p=%d |C_p|=%d pred=%s obs=%s"
+                              % (str(f), p, len(vc), sorted(pred), sorted(obs)))
+                if nzero:
+                    zerodep += 1
+                    if len(obs) < 2:
+                        zerodep_bad += 1
+                        if zerodep_bad <= 3:
+                            print("     ZERO-BUT-INDEPENDENT f=%s p=%d obs=%s"
+                                  % (str(f), p, sorted(obs)))
+        print("  p=%d: %d forms tested, %d mismatches; %d have a zero of f1 mod p, "
+              "of which %d are frame-independent (must be 0)"
+              % (p, tested, mismatch, zerodep, zerodep_bad))
+
+
+# --------------------------------------------------------------------------- #
+def sec_noncyclic(DMAX=200):
+    hline("NON-CYCLIC SATURATION QUOTIENT:  L = 2M,  M/L = (Z/2)^2,  I = [M:L] = 4")
+    print("  If M is primitive in Lambda and L = 2M then I = gcd(Q^P) = 4 but M/L is NOT")
+    print("  cyclic, so NO adapted frame exists.  The divisor sum over s|4 still makes sense")
+    print("  in any 4-admissible frame; we compare its SHAPE with the frame-free sum")
+    print("  D(L in Lambda) = sum over L <= N <= M of [N:L] d_*(N).")
+    print()
+    print("  intermediate lattices for M/L = (Z/2)^2: 5 of them, weights [N:L] = 1,2,2,2,4")
+    print("  divisor sum over s|4:                    3 terms,  weights 1,2,4")
+    print()
+    found = 0
+    for D0 in range(3, DMAX + 1):
+        if (-D0) % 4 not in (0, 1):
+            continue
+        for f0 in reduced_primitive_forms(-D0):
+            f = tuple(4 * t for t in f0)          # form of L = 2M
+            vc = value_classes(f, 4, box=21)
+            if not vc:
+                continue
+            allcl = set()
+            for H in vc:
+                allcl |= vc[H]
+            # the true intermediate lattices: subgroups of (Z/2)^2 in the basis (e,f) of M
+            m0, l0, n0 = f0
+            inter = [(1, reduce_gl(f)),                     # N = L
+                     (2, reduce_gl((m0, 2 * l0, 4 * n0))),  # N = Ze + 2Zf
+                     (2, reduce_gl((4 * m0, 2 * l0, n0))),  # N = 2Ze + Zf
+                     (2, reduce_gl(act(f0, (1, 0, 1, 2)))),  # N = Z(e+f) + 2Zf
+                     (4, reduce_gl(f0))]                    # N = M
+            found += 1
+            if found <= 6:
+                print("  M = %-12s L = 2M = %-14s Delta(L) = %d" % (str(f0), str(f), -disc(f)))
+                print("     |C_4(L)| = %d, distinct divisor-sum chains = %d" % (len(vc), len(allcl)))
+                for ch in sorted(allcl):
+                    print("        divisor-sum terms (weights 1,2,4): %s" % list(ch))
+                print("        TRUE sum   (weight, class): %s" % inter)
+    print()
+    print("  total M with Delta(M) <= %d admitting a 4-admissible frame for L = 2M: %d"
+          % (DMAX, found))
+    print("  => whenever such a frame exists, the literature formula has the WRONG NUMBER")
+    print("     of terms (3 instead of 5) and the wrong total weight (1+2+4=7 instead of")
+    print("     1+2+2+2+4=11).  This is a failure of shape, not just of frame choice.")
+
+
+# --------------------------------------------------------------------------- #
 if __name__ == "__main__":
-    secs = sys.argv[1:] or ["selftest", "witness", "lambda", "scan", "criterion", "tables"]
+    secs = sys.argv[1:] or ["selftest", "witness", "lambda", "scan", "criterion", "tables",
+                            "alpha2", "noncyclic"]
     for s in secs:
         globals()["sec_" + s]()
