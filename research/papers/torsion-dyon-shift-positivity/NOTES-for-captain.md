@@ -186,33 +186,82 @@ to a manuscript we intend to submit and the finder should not also be the confir
 **Recommendation: do not submit before `prescalerev` returns.** Items 2 and 3 both sit under abstract
 item (B); if they are confirmed, the abstract changes.
 
-### 4.4 The benchmark degeneracies are stated as computed, not quoted
+### 4.4 The benchmark degeneracies now have a published source — CLOSED
 
-The five values 50064 / 32861184 / 632078672 / 9337042944 / 113477152800 circulate in the 1/4-BPS
-literature, but a citable table number was not verified (ar5iv truncates 0708.1270 §5; the HTML
-conversion of hep-th/0505094 fails). The paper says so explicitly in §3 rather than attaching a
-reference it cannot back. A researcher round on the published PDFs would close this; it is a
-production nicety, not a blocker, since the values are independently recomputed by the bundled engine
-and by the reviewer's from-scratch engine.
+**Resolved 2026-09-23** by the `arxiv-2510-05219` researcher round (carried as its secondary
+objective). All five values, **with their charge triples**, are in Bringmann–Murthy,
+*On the positivity of black hole degeneracies in string theory*, CNTP 7 (2013) 15-56
+(arXiv:1208.3476), **Appendix A, pp. 28-29**: 50064 at (m,n,l)=(1,1,0); 32861184 at (2,2,0);
+632078672 at (3,2,0) *and again* at (2,3,0); 9337042944 at (4,2,0) *and again* at (2,4,0);
+113477152800 at (2,5,0). These are coefficients of the mock Jacobi form psi_m^F, i.e. the
+*single-centered* index directly — no "total = immortal at Q.P = 0" step is needed. The two
+doubly-tabulated values are an internal consistency check on the table.
+
+Two Sen tables corroborate part of the list (arXiv:1008.4209 Table 1 p. 11, first three;
+arXiv:0708.1270 v3 p. 142, first two) but print the chamber-dependent total -B_6, so
+Bringmann-Murthy is the citation to use. §3 now cites it and the "stated as computed, not quoted"
+sentence is gone.
+
+**Bonus, now written into the paper as Remark 6.3.1**: every summand of witness (A) and of the
+second line of witness (B) is in that same appendix, so those integers are reconstructible from
+published numbers by hand. The bundled scripts are needed only for witness (C) and for the first
+line of (B). This materially weakens the "trust their code" objection a referee could raise.
+
+Two transcription warnings for anyone who touches this again: `pdftotext` **mis-rows all three
+tables** (in Sen 1008.4209 Table 1 it moves the (4,6) data onto the (6,6) label, which would turn
+632078672 into a value for (6,6,0) — the true (6,6,0) is 16193130552). Read page images. Also, the
+earlier guess that hep-th/0505094 (Shih-Strominger-Yin) holds a table is **wrong**: 6 pages, no
+table, none of the five values.
 
 **Correction recorded 2026-09-23**: three of these five values had been attached to the *wrong* charge
 triples in earlier drafts of §3 (632078672 is d_*(3,2,0), not d_*(3,3,0); 9337042944 is d_*(4,2,0),
 not d_*(2,3,1); 113477152800 is d_*(5,2,0), not d_*(3,4,2)). Found during cross-checking against the
-engine, fixed, and logged in `SOURCEMAP.md`. Nothing downstream used the mislabelled triples.
+engine, fixed, and logged in `SOURCEMAP.md`. Nothing downstream used the mislabelled triples. The
+corrected triples are now independently confirmed against the Bringmann-Murthy table.
 
-### 4.5 One unverified preprint is deliberately not cited
+### 4.5 The unverified preprint has been read — no overlap. CLOSED
 
-arXiv:2510.05219 was cited in an early draft of C on the strength of a search snippet. There is no
-extraction record for it anywhere in `literature/`, so per this project's rules C stopped citing it
-and the paper never did. If it turns out to contain the lattice criterion, the disposition should be
-"independently reproduced", not "refuted". Closing this needs a researcher round with network access.
+**Resolved 2026-09-23.** arXiv:2510.05219 = A. Bhand, A. Sen, R. K. Singh, *Generating Function of
+Single Centered Black Hole Index from the Igusa Cusp Form* (v1, 2025-10-06, 38 pp., hep-th +
+math.NT; no journal-ref, no DOI, no v2). Extracted at L1 from the official PDF with page-image
+verification: `literature/extractions/bhand-sen-singh-2025-single-centered.md`.
 
-⏳ **That round was dispatched 2026-09-23** (`agent/researcher/arxiv-2510-05219`, writes `literature/**`
-only). It is also carrying §4.4's benchmark-citation question as a secondary objective. This is the
-paper's last open novelty question: §3 establishes there is no priority race with Banerjee–Sen, but
-that argument covers only the sources this project has actually read, and 2510.05219 is the one
-title we know of and have *not* read. **Recommendation: do not submit before this returns** — the
-cost of learning the answer from a referee is much higher than the cost of waiting.
+**No overlap.** Its scope is fixed at *torsion one* by its own eq (1.1),
+gcd{Q_i P_j - Q_j P_i} = 1; the word "torsion" occurs **exactly once** in the whole text, in the
+sentence introducing that equation. Divisor sum, superlattice, saturation, class number, adapted
+frame, congruence subgroup, Smith normal form: **zero occurrences**. Its 26-item reference list
+(checked on the page image, not the text layer) contains **none** of DGM 0803.2692,
+Rossello 2403.19630, Alexandrov-Nampuri 2009.01172, BSS 0802.0544, BSS 0802.1556,
+Gritsenko-Nikulin, Kawai — the entire torsion-I>1 line is absent from it. Its six self-listed
+results are analyticity, convergence, pole-cancellation and meromorphic-continuation statements
+about the single-centered generating function F(Omega) at torsion one. **There is no priority
+question.**
+
+One contact point, a citation matter and not a positioning matter: its eq (1.16)-(1.17) state
+d_*(gamma^T T gamma) = d_*(T) for gamma in SL(2,Z) by the same route as our Appendix A
+(Prop A.1) — Phi_10's Sp-invariance, the contour covariance, measure invariance — but without proof
+steps, and sidestepping the half-period shift with an explicit (-1)^{T_12+1} prefactor. Appendix A
+already says "for completeness" and Remark 7.2 already attributes the invariance to Rossello, so
+the right action was a "cf." line, which is now in Appendix A.
+
+**This closes the paper's last open novelty question.** §3's finding of no priority race with
+Banerjee-Sen now covers every title this project knows of.
+
+### 4.6 Two bibliography errors found and fixed
+
+Both in `paper.md`, both found by the same round:
+
+1. `[banerjee-sen-2008]` printed the title and journal number of **0712.0043** against the arXiv
+   number of **0801.0149**. The citation's *content* (the Gamma^0(r) discrete-T-duality-invariant
+   observation) belongs to 0801.0149, so the arXiv number was right and the title/journal were
+   wrong. Now reads: S. Banerjee, A. Sen, *S-duality Action on Discrete T-duality Invariants*,
+   arXiv:0801.0149, JHEP **04** (2008) 012 — verified against INSPIRE.
+2. `literature/sources.bib` had the same entry as `Banerjee, Sandip` (should be **Shamik**) with
+   journal JHEP 09 (2008) 027 (should be **04 (2008) 012**). Fixed in the researcher's branch.
+
+Worth knowing: **Bringmann-Murthy's own reference [3] has this bug too** — it prints an em-dash
+continuing "N. Banerjee" from [2], but 0801.0149 is Banerjee (Shamik) and **Sen**. So the error is
+in the literature, not only in our copy of it.
 
 ---
 
