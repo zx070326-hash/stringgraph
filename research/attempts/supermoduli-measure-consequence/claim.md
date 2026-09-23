@@ -44,8 +44,8 @@ truncation and $\mathfrak U\subset\overline{\mathfrak S}_{g;n,2r}$ the correspon
 (in particular $U$ may be the smooth interior locus $\mathfrak S_{g;n,2r,{\rm bos}}$, or any single
 coordinate patch used in a local slice construction). If $\overline{\mathfrak S}_{g;n,2r}$ is
 projected, then $\mathfrak U$ is projected. Equivalently: **non-projectedness of the compactified
-stack (Theorem M) places no logical constraint whatsoever on whether the open substack $\mathfrak U$
-— in particular the smooth locus $\mathfrak S_{g;n,2r}$ — is projected.** It therefore cannot
+stack (Theorem M) does not imply non-projectedness of the open substack $\mathfrak U$
+— in particular of the smooth locus $\mathfrak S_{g;n,2r}$.** It therefore cannot
 obstruct, contradict, or even bear on, any amplitude computation that is carried out by local
 patch-based methods on the smooth locus (Witten's local-slice construction; the PCO-side
 systematisation of the gluing is the "vertical integration" of Sen–Witten, arXiv:1504.00609, not
@@ -59,8 +59,9 @@ treatment): the existence of a single global holomorphic retraction
 $\overline{\mathfrak S}_{g;n,2r}\to\overline{\mathfrak S}_{g;n,2r,{\rm bos}}$ valid simultaneously on
 the interior and every boundary stratum, for **every** $g\ge3$ (any $n,r$) and for $g=2$ whenever
 $n+2r\ge2$ — in particular already at the lowest amplitude-relevant genus $g=2$ with as few as $2$
-NS punctures, or with any nonzero number of Ramond punctures. No completed rigorous construction of
-the superstring measure has ever used or needed such a global compactified projection (see
+NS punctures, or with any nonzero number of Ramond punctures. We are aware of no completed rigorous
+construction of
+the superstring measure that has used or needed such a global compactified projection (see
 argument.md §3); the content of (C2) is that it could not have, even in principle, in this regime.
 
 **Epistemic status**: (C1) is a rigorous mathematical fact (elementary sheaf theory) once Theorem M

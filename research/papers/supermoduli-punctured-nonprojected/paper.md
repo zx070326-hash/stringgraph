@@ -1100,7 +1100,7 @@ $\mathfrak S_{g;n,2r}$.
 The same remark settles a question a reader with a physics background will ask first: does Theorem 8.4
 obstruct any existing construction of the superstring measure? It does not, and cannot. Any open
 substack of a projected stack is projected — the retraction restricts — so non-projectedness of
-$\overline{\mathfrak S}_{g;n,2r}$ implies nothing whatsoever about $\mathfrak S_{g;n,2r}$ or about any
+$\overline{\mathfrak S}_{g;n,2r}$ does not imply non-projectedness of $\mathfrak S_{g;n,2r}$ or of any
 coordinate patch inside it. Concretely, the most complete explicit computation in the literature,
 D'Hoker–Phong's two-loop program [DP], constructs a gauge-slice-independent chiral measure by local
 slice-based gauge fixing and then analyses degeneration only *after* integration over the odd moduli
@@ -1190,15 +1190,30 @@ Nothing in this bears on the patchwise constructions that are actually in use. W
 [EW] proceeds by local slices glued across strata rather than by a global retraction; by §9.3 it is
 untouched by Theorem M, as is the two-loop program of [DP].
 
+It is worth making the [DP] case explicit, because the numerical overlap is immediate and a reader
+will check it: the four-point genus-two computation of [DP, V–VI] has $(g,n,r)=(2,4,0)$, which
+satisfies $n+2r\ge2$ and so lies inside the range of Corollary A2. There is no tension. That
+computation is carried out on — and exploits projectedness of — the **uncompactified** locus,
+a fact Witten states outright: "Supermoduli space is holomorphically projected in low orders and
+this fact has been exploited in explicit computations, especially in [D'Hoker–Phong]" [EW, §3.3.2].
+Theorem M is a statement about $\overline{\mathfrak S}_{2;4,0}$ and, by the restriction argument of
+§9.3, constrains the interior in neither direction. A completed low-genus computation inside
+Corollary A2's range is therefore exactly what one should expect to find, not a counterexample to it.
+
 **A sharper reading.** Donagi and Witten cap their own punctured theorem at $n\le g-1$ and, discussing
 why, write that for $n\gg g$ "requiring the $n$ points to be distinct very likely kills the
 obstructions to splitness, **though we would expect the compactification of $\mathfrak M_{g,n}$ to be
 non-split**" [DW, Remark 1.5]. That expectation is recorded there, not proved, and it is about the
 compactification precisely where their own method stops. Corollary A establishes it — rigorously, for
 every $g\ge3$, and with **no upper bound on $n$ whatever**; Theorem B extends it to Ramond punctures,
-where no analogous expectation had been recorded at all. The absence of a puncture–genus coupling in
-our threshold (§8) is the quantitative form of the same point: the mechanism that Donagi and Witten
-suspected would be destroyed by adding punctures is, on the compactification, indifferent to them.
+where we are aware of no analogous expectation on record. The absence of a puncture–genus coupling in
+our threshold (§8) sharpens this: on the compactification an obstruction survives that is indifferent
+to the number of punctures, whatever happens on the uncompactified side to the obstructions Donagi and
+Witten expected the punctures to destroy. We do not claim these are the same obstruction. Theirs is
+constructed on the interior of $\mathfrak M_{g,n}$; ours is the class of §6, detected on a test curve
+inside $\Delta_{\rm NS}$, and we have not related the two — §9.3's point that the assertions concern
+different objects applies here as well. What Corollary A supplies is the conclusion [DW, Remark 1.5]
+expected, not a continuation of the argument that led them to expect it.
 
 **What is not claimed.** Theorem M identifies no new obstruction to the validity of superstring
 perturbation theory, and we do not read it as casting doubt on any existing construction. On this we

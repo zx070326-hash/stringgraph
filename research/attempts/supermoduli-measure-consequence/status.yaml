@@ -35,10 +35,40 @@ verdict: |
     **Donagi–Witten**, arXiv:1304.7798 §1 p.4. Corrected in both places. (`paper.md` was already
     correct — it says [DW, §1].)
 
-  **Transmission note.** The reviewer's report was truncated in delivery after finding F6; F1–F6
-  were received in full and each was independently re-verified by the lead against the primary
-  text before being acted on. Any findings beyond F6 have not been received. This is recorded so
-  that "verified" is not read as covering more than was actually transmitted.
+  - **F7.** Two unchecked universal negatives: `claim.md` (C2) "No completed rigorous construction
+    of the superstring measure has ever used or needed…" and `paper.md` §9.5 "where no analogous
+    expectation had been recorded at all". Neither is a search this project performed. Both
+    weakened to "we are aware of no…". Applied 2026-09-23.
+  - **F8.** `claim.md` (C1) "places no logical constraint whatsoever" and `paper.md` §9.3
+    "implies nothing whatsoever about $\mathfrak S_{g;n,2r}$". The restriction lemma proves a
+    *non-implication* (projected ⟹ projected on opens, contrapositive only), not logical
+    independence — the latter would additionally require both interior cases to be realizable,
+    which is not shown. Both changed to "does not imply". Applied 2026-09-23. The local argument
+    of §9.3 needs only the non-implication, so nothing is lost.
+  - **F9.** The D'Hoker–Phong overlap check present at `draft-section.md:54-57` — the four-point
+    genus-two computation has $(g,n,r)=(2,4,0)$, which lies *inside* Corollary A2's range — had
+    been dropped from `paper.md` §9.5 during welding. A referee will compute it and ask. Restored
+    to §9.5 with the resolution (that computation is on, and exploits projectedness of, the
+    uncompactified locus; [EW, §3.3.2] states this outright). Applied 2026-09-23.
+  - **F10** (the reviewer's only CONFIRMED finding, and the only one with mathematical content).
+    `paper.md` §9.5 read "the mechanism that Donagi and Witten suspected would be destroyed by
+    adding punctures is, on the compactification, indifferent to them." This conflates two
+    obstruction mechanisms: [DW, Remark 1.5]'s expectation concerns the obstructions of their own
+    interior construction on $\mathfrak M_{g,n}$, whereas this paper's puncture-independent
+    threshold comes from the boundary class of §6 detected on a test curve in $\Delta_{\rm NS}$.
+    The paper nowhere relates the two classes — indeed §9.3 insists the assertions are about
+    different objects, so §9.5 was in tension with it. Rewritten to claim only that *an*
+    obstruction indifferent to the puncture count survives on the compactification, with an
+    explicit disclaimer that the two are not claimed to be the same and have not been related.
+    Applied 2026-09-23.
+
+  **Transmission note.** The reviewer's report was delivered in two parts: F1–F6 arrived first,
+  then the report was truncated; the remainder (F6 complete, F7–F10) was received on 2026-09-23
+  and is recorded above. Each finding was independently re-verified by the lead against the
+  primary text before being acted on. The reviewer also sent a proposed replacement block for
+  §9.5's "What is ruled out" paragraph which was itself truncated mid-sentence; it was **not**
+  applied, and the §9.5 edits above were written by the lead instead. Whether anything further
+  followed F10 is unknown.
 captain_confirmed: false
 notes: |
   === Task ===
