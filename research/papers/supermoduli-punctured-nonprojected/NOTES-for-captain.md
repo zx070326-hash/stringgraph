@@ -4,7 +4,7 @@
 **Source attempt**: `research/attempts/supermoduli-elliptic-tail-punctured/` (`state: verified`,
 two adversarial graph-reviewer rounds: 2026-09-18 lead-dispatched, 2026-09-20 agent `smreview`)
 **Written by**: theorem-prover, branch `agent/prover/supermoduli-punctured-nonprojected`, 2026-09-22;
-restructured (Ramond case elevated to title level, §5.1) by a second theorem-prover round, same
+restructured (Ramond case elevated to title level, §5.4) by a second theorem-prover round, same
 branch, 2026-09-23
 **Current external-release status**: 🔴 **none, and none is permitted.** `captain_confirmed: false`.
 
@@ -210,9 +210,11 @@ These are real blockers for a *submission*, not for the draft:
    publish a section that names a value risk to one's own corollary, but the honesty is the point,
    and the graduation constraints were written assuming those boundaries are visible. Cutting §10 to
    "polish" the paper would be exactly the failure mode this project exists to prevent.
-6. **Optional**: a `SOURCEMAP.md` in the style of `research/papers/torsion-dyon-shift-positivity/`
-   mapping each paper section to line ranges in the attempt's `proof.md`. Not written this round; it
-   is an internal verification aid, not a submission artefact.
+6. **~~Optional~~ `SOURCEMAP.md` — written 2026-09-23**, mapping each paper section to line ranges in
+   the attempt's `proof.md`. It is an internal verification aid, not a submission artefact. Writing it
+   surfaced one thing worth the captain's attention, recorded as §5.2 below.
+7. **Resolve §9.5's provenance** — see §5.2. This is a real blocker for submission, unlike items 1–6,
+   which are production work.
 
 ---
 
@@ -237,7 +239,61 @@ already in `proof.md`. **It should be checked by a reviewer.** Nothing in Theore
 or any corollary is affected. The remaining `ISSUES.md` entries are bibliographic or production
 items.
 
-### 5.1 Addendum (2026-09-23): structural elevation of the Ramond case to title level
+### 5.2 Addendum (2026-09-23, lead): §9.5 rests on an attempt nobody has reviewed
+
+Building `SOURCEMAP.md` turned this up, and it changes one line of §0.
+
+Every section of the paper traces to `research/attempts/supermoduli-elliptic-tail-punctured/proof.md`
+— `state: verified`, two adversarial graph-reviewer rounds — **except §9.5**, which draws on
+`research/attempts/supermoduli-measure-consequence/`. That attempt reads:
+
+```
+state: under-review
+reviewer: (none yet — requesting graph-reviewer dispatch, see notes)
+verdict: (pending — no reviewer round has occurred yet.)
+```
+
+Its own author split Proposition C into a "safety" half (C1, the restriction lemma — rigorous and
+proved) and a "bite" half (C2), and graded C2 as *physical-argument-level interpretive framing*, not
+as proved mathematics. §9.5 is the section that was added on 2026-09-23 **specifically to pre-empt
+CMP's "where is the physical payoff" objection** (§2 above). A section written to answer a referee
+before they ask is exactly the text that has to be right.
+
+**How bad is it, honestly**: smaller than the status line suggests. §9.5's load-bearing pieces are
+the paper's own Theorem M, the restriction lemma already proved in §9.3, and four `L1`-verified
+quotations from [DW] and [EW]. The part that is genuinely M's — the framing of *which* measure
+strategy is foreclosed — is also the part §9.5 states most cautiously, and the section's closing
+paragraph ("What is not claimed") gives away more than it takes. So this is a **provenance** problem,
+not a suspected-error problem.
+
+**What was done about it**: a `graph-reviewer` round was dispatched 2026-09-23, charged with judging
+C1 and C2 on their own terms, checking whether C2's `physical-argument` grading is the right grading
+(too high *or* too low), re-running the attempt's D'Hoker–Phong self-check, and — the part that
+matters here — reading §9.5 against what M actually proves to confirm it claims neither more nor
+less. Result pending at the time of writing.
+
+**Captain's call**: do not sign while §9.5's source sits at `under-review` with no reviewer. Either
+the review clears it, or §9.5 gets cut. Cutting it costs the paper the CMP payoff answer and returns
+that column of §2's table to where it was before 2026-09-23 — a real cost, but a smaller one than
+publishing a referee-facing section that nobody checked.
+
+### 5.3 Addendum (2026-09-23, lead): four rounds in flight against this paper
+
+| Round | Target | Where it writes |
+|---|---|---|
+| `fkp96` | Close `[INF-NORMAL]` (§3.3) by deriving [FKP] (9.6) for punctured targets | `research/attempts/fkp-96-punctured/**` |
+| `gapcomp` | Close `[GAP-COMP]` (§10.3 of the paper): component refinement when $r>0$ | `research/attempts/supermoduli-ramond-components/**` |
+| `measurerev` | The §5.2 review above | read-only |
+| `sharpness` | Is the threshold **sharp**? The paper leaves $(g,n,r)=(2,1,0)$, the $g=2$ odd-parity punctured components, and all of $g\le1$ untouched, and §9.2 only says the *method* cannot reach them. Whether they are genuinely split or merely out of reach is unknown | `research/attempts/supermoduli-threshold-sharpness/**` |
+
+The first two, if they land, remove two of the three items in §3 ("Risks the captain should weigh")
+outright: `[INF-NORMAL]` is the objection §2's table assigns to IMRN / Math. Z., and `[GAP-COMP]` is
+the one caveat attached to Theorem B's statement. The fourth is upside rather than risk reduction: a
+sharpness theorem — in either direction — would turn "here is a threshold" into "here is *the*
+threshold", which is a different class of result. None of the four is a prerequisite for submitting
+what exists today; all four change what is worth submitting.
+
+### 5.4 Addendum (2026-09-23): structural elevation of the Ramond case to title level
 
 A second theorem-prover round restructured the paper's presentation to put the Ramond-puncture case
 at title level. This was **pure relayout, not new mathematics**: the renamed result (Corollary B →
