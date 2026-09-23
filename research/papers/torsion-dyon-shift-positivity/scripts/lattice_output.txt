@@ -1,0 +1,54 @@
+================================================================================================
+WITNESS A -- one physical charge, two S-duality frames
+================================================================================================
+
+frame 1  (adapted)
+   Q = (2, 2, 0, 0)   P = (0, 0, 1, 4)
+   (m,n,l) = (4, 4, 0)   Delta = 64   class (4, 4, 0)
+   I = gcd(Q^P) = 2      [M:L] from Smith normal form = 2      (V1) True
+   saturation basis  u = (1, 1, 0, 0),  v = (0, 0, 1, 4)
+   Gram class of M  = (1, 4, 0)   (Delta/I^2 = 16)
+   content of Q, P (1 = primitive): (2, 1)
+   admissible for I (I^2|m, I|l): True
+   adapted (Q in I*Lattice):      True
+
+frame 2  (admissible, NOT adapted, both charges primitive)
+   Q = (-2, -2, -1, -4)   P = (0, 0, -1, -4)
+   (m,n,l) = (8, 4, 8)   Delta = 64   class (4, 4, 0)
+   I = gcd(Q^P) = 2      [M:L] from Smith normal form = 2      (V1) True
+   saturation basis  u = (2, 2, 1, 4),  v = (1, 1, 0, 0)
+   Gram class of M  = (1, 4, 0)   (Delta/I^2 = 16)
+   content of Q, P (1 = primitive): (1, 1)
+   admissible for I (I^2|m, I|l): True
+   adapted (Q in I*Lattice):      False
+
+   same lattice L in both frames: True (different bases)   same saturation class: True
+   invariants differ: (4, 4, 0, 2) vs (8, 4, 8, 2), both admissible for I=2
+
+================================================================================================
+WITNESS D -- two charges with identical (m,n,l,I) but non-isometric saturations
+================================================================================================
+
+charge (a)  [= witness A frame 2]
+   Q = (-2, -2, -1, -4)   P = (0, 0, -1, -4)
+   (m,n,l) = (8, 4, 8)   Delta = 64   class (4, 4, 0)
+   I = gcd(Q^P) = 2      [M:L] from Smith normal form = 2      (V1) True
+   saturation basis  u = (2, 2, 1, 4),  v = (1, 1, 0, 0)
+   Gram class of M  = (1, 4, 0)   (Delta/I^2 = 16)
+   content of Q, P (1 = primitive): (1, 1)
+   admissible for I (I^2|m, I|l): True
+   adapted (Q in I*Lattice):      False
+
+charge (b)
+   Q = (2, 4, 0, 0)   P = (1, 2, 1, 2)
+   (m,n,l) = (8, 4, 8)   Delta = 64   class (4, 4, 0)
+   I = gcd(Q^P) = 2      [M:L] from Smith normal form = 2      (V1) True
+   saturation basis  u = (1, 2, 1, 2),  v = (0, 0, 1, 2)
+   Gram class of M  = (2, 2, 0)   (Delta/I^2 = 16)
+   content of Q, P (1 = primitive): (2, 1)
+   admissible for I (I^2|m, I|l): True
+   adapted (Q in I*Lattice):      True
+
+   identical invariants (m,n,l,I): True
+   saturation classes:  (a) (1, 4, 0)   vs   (b) (2, 2, 0)   ->  isometric? False
+   ((1,4,0) represents 1 and is primitive; (2,2,0) is imprimitive -- so the two saturations are NOT isometric.)
