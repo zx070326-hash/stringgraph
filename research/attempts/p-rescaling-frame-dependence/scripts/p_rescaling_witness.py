@@ -244,6 +244,92 @@ def main():
 
     print()
     print("=" * 96)
+    print("PART 5 -- Theorem C:  D_I is invariant under Gamma^0(I) = {b = 0 mod I},")
+    print("          D'_I is invariant under Gamma_0(I) = {c = 0 mod I}, and no more.")
+    print("=" * 96)
+    SL2 = [(a, b, c, d)
+           for a in range(-4, 5) for b in range(-4, 5)
+           for c in range(-4, 5) for d in range(-4, 5)
+           if a * d - b * c == 1]
+    print(f"   SL(2,Z) elements with entries in [-4,4]: {len(SL2)}")
+    for I in (2, 3, 4):
+        okQ = badQ = okP = badP = 0
+        viol_in, viol_out = [], []
+        for m in range(I * I, MMAX + 1, I * I):
+            for n in range(1, NREP + 1):
+                for l in range(0, 2 * (m + n) + 1, I):
+                    if 4 * m * n - l * l <= 0:
+                        continue
+                    v0 = DQ(dstar, I, m, n, l)
+                    if v0 is None:
+                        continue
+                    for (a, b, c, d) in SL2:
+                        mm, nn, ll = act((a, b, c, d), m, n, l)
+                        if mm < 1 or nn < 1 or mm % (I * I) or ll % I:
+                            continue
+                        v1 = DQ(dstar, I, mm, nn, ll)
+                        if v1 is None:
+                            continue
+                        if b % I == 0:
+                            if v1 == v0:
+                                okQ += 1
+                            else:
+                                badQ += 1
+                                viol_in.append((m, n, l, (a, b, c, d), v0, v1))
+                        else:
+                            if v1 != v0:
+                                okP += 1
+                                viol_out.append((m, n, l, (a, b, c, d), v0, v1))
+                            else:
+                                badP += 1
+        print(f"   I = {I}:  b = 0 mod I  -> D_I preserved in {okQ} cases, VIOLATED in {badQ}")
+        if viol_in:
+            print(f"            !! counterexample to Theorem C: {viol_in[0]}")
+        print(f"            b != 0 mod I -> D_I changed in {okP} cases, "
+              f"happened to agree in {badP}")
+        if viol_out:
+            print(f"            e.g. {viol_out[0][:4]}: {viol_out[0][4]} -> {viol_out[0][5]}")
+
+    print()
+    print("   how many distinct values does D_2 take on the SL(2,Z)-orbit of (4,4,0)?")
+    vals = {}
+    for (a, b, c, d) in SL2:
+        mm, nn, ll = act((a, b, c, d), 4, 4, 0)
+        if mm < 1 or nn < 1 or mm % 4 or ll % 2:
+            continue
+        v = DQ(dstar, 2, mm, nn, ll)
+        if v is None:
+            continue
+        vals.setdefault(v, []).append((a, b, c, d, mm, nn, ll))
+    for v, reps in sorted(vals.items(), reverse=True):
+        a, b, c, d, mm, nn, ll = reps[0]
+        print(f"      D_2 = {v:>20d}   (e.g. U=[[{a},{b}],[{c},{d}]] -> ({mm},{nn},{ll}),"
+              f"  b mod 2 = {b % 2},  {len(reps)} matrices)")
+    print(f"      distinct values: {len(vals)}   [SL(2,Z):Gamma^0(2)] = 3,"
+          f" the third coset is arithmetically inadmissible (4 does not divide m)")
+
+    print()
+    print("   value count over the SL(2,Z) orbit, for several I=2 base points")
+    print("   (coset invariant of Gamma^0(2)\\SL(2,Z) is the top row (a,b) mod 2)")
+    for base_pt in [(4, 4, 0), (4, 8, 0), (4, 8, 4), (8, 4, 4), (4, 12, 4), (12, 4, 4)]:
+        m0, n0, l0 = base_pt
+        if 4 * m0 * n0 - l0 * l0 <= 0 or m0 % 4 or l0 % 2:
+            continue
+        by_coset = {}
+        for (a, b, c, d) in SL2:
+            mm, nn, ll = act((a, b, c, d), m0, n0, l0)
+            if mm < 1 or nn < 1 or mm % 4 or ll % 2:
+                continue
+            v = DQ(dstar, 2, mm, nn, ll)
+            if v is None:
+                continue
+            by_coset.setdefault((a % 2, b % 2), set()).add(v)
+        allv = set().union(*by_coset.values()) if by_coset else set()
+        print(f"      base {base_pt}: {len(allv)} distinct D_2 values; per coset "
+              + ", ".join(f"{k}->{sorted(v)}" for k, v in sorted(by_coset.items())))
+
+    print()
+    print("=" * 96)
     print("PART 4 -- the phenomenon is not special to d_*: same witness with the TOTAL index")
     print("=" * 96)
     if found:

@@ -58,6 +58,34 @@ PART 3 -- DGM (3.28) vs AN (2.13) at the SAME (m,n,l,I):  minimal witness
       difference = 305754336
 
 ================================================================================================
+PART 5 -- Theorem C:  D_I is invariant under Gamma^0(I) = {b = 0 mod I},
+          D'_I is invariant under Gamma_0(I) = {c = 0 mod I}, and no more.
+================================================================================================
+   SL(2,Z) elements with entries in [-4,4]: 180
+   I = 2:  b = 0 mod I  -> D_I preserved in 15686 cases, VIOLATED in 0
+            b != 0 mod I -> D_I changed in 4776 cases, happened to agree in 3036
+            e.g. (4, 4, 0, (-3, -1, -2, -1)): 7999541469408 -> 7999235715072
+   I = 3:  b = 0 mod I  -> D_I preserved in 3100 cases, VIOLATED in 0
+            b != 0 mod I -> D_I changed in 280 cases, happened to agree in 540
+            e.g. (9, 6, 3, (-4, -1, -3, -1)): 4315653393243150656664 -> 4315653393219717545088
+   I = 4:  b = 0 mod I  -> D_I preserved in 0 cases, VIOLATED in 0
+            b != 0 mod I -> D_I changed in 0 cases, happened to agree in 0
+
+   how many distinct values does D_2 take on the SL(2,Z)-orbit of (4,4,0)?
+      D_2 =        7999541469408   (e.g. U=[[-4,-3],[-1,-1]] -> (100,8,56),  b mod 2 = 1,  124 matrices)
+      D_2 =        7999235715072   (e.g. U=[[-3,-1],[-2,-1]] -> (40,20,56),  b mod 2 = 1,  56 matrices)
+      distinct values: 2   [SL(2,Z):Gamma^0(2)] = 3, the third coset is arithmetically inadmissible (4 does not divide m)
+
+   value count over the SL(2,Z) orbit, for several I=2 base points
+   (coset invariant of Gamma^0(2)\SL(2,Z) is the top row (a,b) mod 2)
+      base (4, 4, 0): 2 distinct D_2 values; per coset (0, 1)->[7999541469408], (1, 0)->[7999541469408], (1, 1)->[7999235715072]
+      base (4, 8, 0): 3 distinct D_2 values; per coset (0, 1)->[479643211429797888], (1, 0)->[479644528841797440], (1, 1)->[479643201102715656]
+      base (4, 8, 4): 2 distinct D_2 values; per coset (0, 1)->[35695527889519104], (1, 0)->[35695727296851936], (1, 1)->[35695527889519104]
+      base (8, 4, 4): 2 distinct D_2 values; per coset (0, 1)->[35695727296851936], (1, 0)->[35695527889519104], (1, 1)->[35695527889519104]
+      base (4, 12, 4): 2 distinct D_2 values; per coset (0, 1)->[487965856026297164832], (1, 0)->[487966096639529442336], (1, 1)->[487965856026297164832]
+      base (12, 4, 4): 2 distinct D_2 values; per coset (0, 1)->[487966096639529442336], (1, 0)->[487965856026297164832], (1, 1)->[487965856026297164832]
+
+================================================================================================
 PART 4 -- the phenomenon is not special to d_*: same witness with the TOTAL index
 ================================================================================================
    at I=2, (m,n,l)=(4,8,8):  D_I[total] = 7999541469408,  D'_I[total] = 7999235715072,  differ? True
