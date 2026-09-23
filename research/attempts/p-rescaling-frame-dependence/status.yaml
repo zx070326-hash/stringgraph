@@ -1,5 +1,5 @@
 slug: p-rescaling-frame-dependence
-state: draft
+state: under-review
 opened: 2026-09-23
 captain_confirmed: false
 reviewer: null
@@ -13,25 +13,107 @@ origin: |
 questions:
   - id: Q1
     text: Which literature formulae form the P-rescaling family? Verbatim, with PDF equation numbers.
-    state: open
+    state: answered
+    answer: |
+      NOT Banerjee-Sen-Srivastava (the pre-registered guess; refuted - BSS 0802.1556 (1)+(2)+(7)
+      put Q^2/2 in the sigma-check slot, the slot carrying s^2, so BSS is Q-rescaling).
+      The P-rescaling family is
+        - Alexandrov-Nampuri 2009.01172 eq (2.13), with (2.6) fixing m = P^2/2  [L1, p.5-6];
+        - Bossard-Cosnier-Horeau-Pioline 1806.03330 eq (5.80), Gram argument
+          (Q^2, QP/d ; QP/d, P^2/d^2)  [L1, p.64].
+      Q-rescaling: DGM 0803.2692 (3.27)/(3.28), BSS 0802.1556 (7), CNR 2007.10302 (3.40)
+      (CNR's letters look like AN's but m = Q_m^2/2 is magnetic there, so the divided slot is
+      electric).  Full table with verbatim quotations and L1/L3 labels in lit-findings.md.
   - id: Q2
     text: Is the P-rescaling divisor sum likewise frame dependent? Explicit integer witness or proof of independence.
-    state: open
+    state: answered
+    answer: |
+      Yes, and by the same mechanism.  proof.md Theorem B: one torsion-2 lattice in U+U,
+      two frames (Q,P) and (Q,P-Q), invariants (4,8,8) and (4,4,0), BOTH satisfying the
+      arithmetic hypotheses I^2|n and I|l under which the literature states the formula, give
+      D'_2 = 7999235715072 and 7999541469408, difference 305754336 - the exact transpose of
+      paper.md Remark 6.3, as Theorem A (D'_I(m,n,l) = D_I(n,m,l)) predicts.
+      Theorem C: the exact invariance group of D'_I is Gamma_0(I) = {c = 0 mod I}, not
+      Gamma^0(I).  Proposition 5.1: the adapted frames of a fixed lattice are exactly one
+      coset, so both formulae ARE well posed as functions of (lattice, adapted type); only
+      the step of dropping the adaptedness from the notation fails.
   - id: Q3
     text: Blast radius - which papers use D_I (or D'_I) as a charge function, classified into load-bearing / adapted-only / transcription-only.
-    state: open
+    state: answered
+    answer: |
+      Small, and smaller than the shape of the negative result suggests.  Table in
+      lit-findings.md §7.  Of the eight located papers writing a torsion divisor sum, SIX are
+      (yi3 / adapted-only) - including DGM itself, whose §4.1 proves the Gamma^0(I) restriction
+      and supplies a different Z_I^(l) per coset.  TWO are (jia3 / load-bearing) but narrowly:
+      AN 2009.01172 (2.13) and CNR 2007.10302 §3.7, each needing ONE sentence's hypothesis
+      tightened ("on a P-adapted frame" / "on a Q-adapted frame"); no computed number in
+      either paper is wrong.  Four further papers are (bing3 / transcription-only).
+      Carries [GAP: survey completeness] - nine of 98 DGM-citing records were triaged.
 
 notes: |
-  2026-09-23 open. claim.md written before any computation, per project lifecycle.
-  Working hypotheses (NOT results):
-   - the P-family is Banerjee-Sen-Srivastava 0802.0544 + 0802.1556;
-   - transfer should be by the reflection d_*(m,n,l) = d_*(n,m,l), but the lattice-theoretic
-     side (which frames count as "adapted") must be redone, not assumed;
-   - BSS's formula carries an extra average over shifts k/sbar^2, l/sbar, so it is NOT the
-     bare divisor sum and must be Fourier-analysed from scratch.
-  Discipline reminders adopted for this attempt:
-   - every literature quotation is labelled L1 (page image read by me) or L3 (transcribed);
-   - equation numbers taken from the arXiv PDF, never from ar5iv (project has a standing
-     correction record for exactly this, see literature/extractions/dabholkar-gomes-murthy-2008.md C2);
-   - the rho/sigma/v dictionary for the P-family is re-derived from scratch, not copied
-     from the Q-family dictionary.
+  2026-09-23 moved draft -> under-review.  Requesting a graph-reviewer pass.
+
+  WHAT IS PROVED (proof.md):
+   - Thm A  D'_I(m,n,l) = D_I(n,m,l).  Two lines from the GL(2,Z) class-function property.
+            Machine: 8750 instances, 0 violations.  This is the precise form of BCP's
+            "in agreement with [41,72]".
+   - Thm C  D_I is Gamma^0(I)-invariant, D'_I is Gamma_0(I)-invariant, via
+            V_s = W_s U W_s^{-1} = [[a, b/s],[c s, d]], integral iff s|b.
+            NOT NEW: this is DGM (4.5)-(4.7) on the charge side, and CNR App. A (A.9)-(A.11).
+            Sharp: at (4,8,0), I=2, the three Gamma^0(2) cosets give three DIFFERENT values.
+   - Prop 5.1  adapted frames of a fixed lattice = exactly one Gamma^0(I) (resp Gamma_0(I))
+            coset.  Proof uses primitivity of the non-divided charge + unimodularity of Lambda.
+   - Thm B  the integer witness, above.
+   - Thm D  under DGM + S-duality the index is NOT a function of (m,n,l,I): at (4,8,8,2) both
+            a Q-adapted and a P-adapted lattice exist and carry 7999541469408 vs 7999235715072.
+            This QUANTIFIES BSS 0802.0544 §6.3 (three T-duality orbits at fixed (Q^2,P^2,Q.P)).
+   - Prop 8.1  BSS (7) is the SIGNED sum, weights s(-1)^{l-l/s}: change variables
+            sigma~ = s^2 sigma-check, v~ = s v-check; the Jacobian 1/s^3 cancels the s^3.
+            So BSS is on the DGM (3.26)+(3.27) side, not the bare (3.28) side.
+   - Thm E  the signed sum is ALSO Gamma^0(I)-invariant.  Key step: l' - l'/s = (ad+bc)(l - l/s)
+            mod 2, and ad+bc = 1+2bc is odd.  So the DGM eq(51)/eq(52) sign question is
+            ORTHOGONAL to the frame question; neither resolves the other.
+
+  THE FINDING THAT NARROWS THIS ATTEMPT (report it, do not resist it):
+   DGM 0803.2692 §4.1 state and prove the Gamma^0(I) restriction themselves and say outright
+   that a DIFFERENT partition function Z_I^(l) must be used on each other SL(2,Z)/Gamma^0(I)
+   coset (lit-findings.md F3b, L1, printed pp.18-19).  The frame dependence reported by
+   paper.md Remark 6.3 is the CONTENT of DGM §4.1, not an oversight.  What is new here is
+   the exact-integer measurement, the transfer to the P-rescaling operator, Prop 5.1, and
+   Thm D/E.
+
+  CROSS-TASK MESSAGES FOR THE LEAD (this attempt may not edit those files):
+   1. research/papers/torsion-dyon-shift-positivity/paper.md §9 line 350 says the literature
+      formulae "rescale P rather than Q" and names the BSS family.  The naming is wrong:
+      BSS is Q-rescaling.  The P-family is AN 2009.01172 and BCP 1806.03330.
+   2. Same paper, §4: its variable dictionary rho <-> sigma_AN, v <-> z_AN, sigma <-> tau_AN
+      correctly identifies which slot carries s^2, but paper.md's rho carries Q^2/2 while AN's
+      sigma carries P^2/2, so the dictionary silently identifies the electric with the magnetic
+      invariant.  Theorem 4.1 survives as an identity about Phi_10; the sentence asserting that
+      AN's framework corrects DGM does not follow from AN alone.  Details lit-findings.md F7d.
+   3. literature/extractions/dgm-eq51-eq52-third-party-crosscheck.md §E1/E2 reads the
+      l=1, sbar=2 term of BSS (4) ("v-check + 1/2") as independent support for a half-integer
+      shift.  It is not: BSS say the k,l sums are a periodisation, and they undo them in (7),
+      where no shift survives.  See proof.md §8.1.
+   4. New bibliography entries that belong in literature/ but were written here instead
+      (write scope): AN 2009.01172, BCP 1806.03330, CNR 2007.10302, Sen 0804.0651, plus the
+      triage notes on 1912.06562, 1702.05095, 2005.07712, 2205.08726, 1002.3857, 2403.19630.
+      All in lit-findings.md, each tagged L1 (page image read by me) or triage-level.
+
+  DISCIPLINE RECORD:
+   - every literature quotation is labelled L1 / L3 / triage; no ar5iv equation numbers used;
+   - all arithmetic is exact Python int; the single float printed anywhere is a commentary
+     line in PART 2 that enters no assertion;
+   - a `(-1) ** k` with negative k returning a float inverted the PART 6 conclusion for one
+     revision (it reported 6928 spurious violations of Theorem E).  Fixed in commit a504e31;
+     recorded in proof.md §8.2 so a reviewer can see the failure mode.
+
+  OPEN GAPS (all carried in proof.md §10):
+   - [GAP] which SL(2,Z) AN mean in (2.16).  This is the only place a (jia3) could become (yi3).
+   - [GAP] the third torsion-2 orbit (Q,P primitive, Q+-P in 2.Lambda) has no computed index;
+     it is not given by D_2 or D'_2.
+   - [GAP] survey completeness: 9 of the 98 DGM-citing records triaged; the citation sets of
+     0801.0149, 0802.0544, 0802.1556 were not enumerated.
+   - [GAP] (H2) at I>1: whether the physical single-centred index equals the attractor-contour
+     d_* at torsion > 1 is the standing question of holography.torsion-immortal-positivity and
+     is not settled here.  PART 4 shows Thm D's conclusion is unchanged with the total index.
