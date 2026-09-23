@@ -1,0 +1,26 @@
+state: draft
+slug: supermoduli-low-corner
+title: >-
+  Projectedness/splitness of the compactified supermoduli stacks
+  \overline{S}_{1;2,0} and \overline{S}_{0;3,2}
+reviewer: null
+verdict: null
+captain_confirmed: false
+notes: |
+  Opened 2026-09-23. Target: settle split vs non-projected for the two smallest cells with
+  odd rank exactly 2 and 2-dimensional bosonic base, in the FKP compactification convention
+  used by research/papers/supermoduli-punctured-nonprojected/paper.md.
+
+  Source-verification discipline: every formula used as grounds for a step is checked against
+  a RENDERED PDF PAGE IMAGE (Read tool on the pdf), not pdftotext. Pages actually read as
+  images are logged in proof.md Appendix A.
+
+  Current state of play (see proof.md for the mathematics):
+  - Claim 1 (odd rank 2 => split <=> projected <=> omega_2 = 0): established, with an
+    independent self-contained proof, plus verbatim confirmation of [CN, Prop. 2.2] from the
+    rendered page image of arXiv:2606.06733 p.3.
+  - Claim 2 (uncompactified cells split): established.
+  - Claim 3 (structure of bosonic truncations): established.
+  - Claim 4 (inertia-character criterion cannot decide either cell): established.
+  - Claim 5 (obstruction is boundary-supported): established.
+  - Claim 6 (the dichotomy): NOT settled. Load-bearing gaps are listed in proof.md Sec. 9.
