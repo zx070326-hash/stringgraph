@@ -53,8 +53,8 @@ construction choice left unmotivated in Corrêa–Noja.
 
 We state explicitly what is not proved: nothing is claimed about the uncompactified stacks
 $\mathfrak S_{g;n,2r}$, nothing in the positive (split/projected) direction, nothing about the **odd**
-component at $(g,n,r)=(2,1,0)$ or about odd-parity punctured components at $g=2$, and no
-connected-component refinement when $r>0$. We also state explicitly what is not *new*: on their own
+component at $(g,n,r)=(2,1,0)$ or about odd-parity punctured components at $g=2$. We also state
+explicitly what is not *new*: on their own
 thresholds [DW], [DO] and [W] already imply the compactified statement, since non-projectedness
 passes from an open substack to the ambient stack; §1.4 caveat (i) subtracts that overlap and says
 what remains. We deliberately avoid gluing at Ramond nodes, since the Ramond analogue of the
@@ -288,8 +288,11 @@ Listed once, and repeated where relevant:
    open here. Our method provably cannot reach them, and §9.2 explains why that is a feature: if it
    could, it would contradict [CN, Thm 1.1(1)]. The *even* component at $(2,1,0)$ is **not** open —
    it follows from [DW, Thm 1.2] by the restriction lemma (§1.4 caveat (i)) — but it is not ours.
-4. For $r>0$ we assert non-projectedness of the whole stack $\overline{\mathfrak S}_{g;n,2r}$ and do
-   **not** identify a connected component ([GAP-COMP], §10.3).
+4. ~~For $r>0$ we assert non-projectedness of the whole stack $\overline{\mathfrak S}_{g;n,2r}$ and do
+   **not** identify a connected component.~~ **Withdrawn**: for $r\ge1$ the stack
+   $\overline S_{g;n,2r}$ is irreducible (Corollary 10.2, from [J, Thm. 3.3.1] via the Ramond twist
+   of Lemma 10.1), so there is only one component and Theorem 6.4 is already the component-level
+   statement. The $r=0$ case is handled by Proposition 8.1 as before.
 5. We do not glue at Ramond nodes, so nothing is claimed about the Ramond boundary components; see
    §10.2 for why we refuse that shortcut.
 6. One external lemma we rely on, [FKP, Lemma 7.9], has a proof whose text omits the Ramond twist;
@@ -393,7 +396,8 @@ $\overline S_{g;n,0}=\overline S{}^+_{g;n,0}\sqcup\overline S{}^-_{g;n,0}$; for 
 spin curves, parity is additive over the irreducible components, because the spin sheaf at an NS node
 is the direct sum of the direct images from the two branches (see the proof of Proposition 8.1
 below). For $r>0$ the twist $\omega_C(\rho_1+\dots+\rho_{2r})$ destroys Mumford's invariance
-argument, and we make no component-level statement — see §10.3.
+argument, so parity is no longer available as a component label; but no refinement is needed there,
+because for $r\ge1$ the stack $\overline S_{g;n,2r}$ is irreducible (Corollary 10.2) — see §10.3.
 
 ---
 
@@ -414,6 +418,8 @@ physics-level argument**, so the conclusion inherits no such ceiling.
 | I7 | Over an even base with NS punctures, $\Psi_i^{-1}\simeq p_i^*L^{-1}$ | [FKP, Example 8.9, p. 57] | rigorous (published); used **only** on the unpunctured genus-$h$ factor |
 | I8 | Every smooth curve of genus $h\ge2$ carries an ineffective even theta characteristic | Mumford; Cornalba (cited in [CN, §5]) | standard |
 | I9 | $H^i(\text{affine},\ \mathcal F)=0$ for $i\ge1$ and $\mathcal F$ coherent | Serre | standard; used **only** for the negative result of §7 |
+| I10 | The even-base functor of stable supercurves with punctures is the functor of generalized spin structures, and the compactification is the torsion-free-sheaf one of [J], [JKV] — not the twisted-curve stack | [FKP, §2.6 and Remark 2.17, pp. 12, 14] | rigorous (published) |
+| I11 | $\overline{\mathcal S}^{\,1/r,\mathbf m}_{g,n}$ has $d_{g,r}(\mathbf m)$ irreducible components, $d$ = number of positive divisors of $\ell_{g,r}(\mathbf m)$ | [J, Thm. 3.3.1] (with $\ell,d$ as in [J, §3.3.1]); over $\mathbb C$ | rigorous (published); used **only** in §10.3 |
 
 > **Remark 3.1 (what is deliberately not used).** [FKP, §9.3] formulates the **Ramond-node**
 > analogue of the normal-line computation, verbatim, as
@@ -1075,8 +1081,9 @@ is non-projected. (Take $a=0$, $h=g\ge2$.)*
 **Theorem 8.4 (= Theorem B; Ramond punctures present).** *For every $g\ge2$, every $n\ge0$ and
 every $r\ge1$, the stack $\overline{\mathfrak S}_{g;n,2r}$ is non-projected. (Take $a=0$, $h=g\ge2$;
 (P2) holds automatically because $2r\ge2$.) Moreover, for every $g\ge3$, every $n\ge0$ and every
-$r\ge0$, $\overline{\mathfrak S}_{g;n,2r}$ is non-projected (take $a=1$). No connected-component
-refinement is claimed when $r>0$; see §10.3.*
+$r\ge0$, $\overline{\mathfrak S}_{g;n,2r}$ is non-projected (take $a=1$). For $r\ge1$ this is
+automatically a statement about a connected component, since $\overline S_{g;n,2r}$ is then
+irreducible (Corollary 10.2); see §10.3.*
 
 We label this a theorem rather than a corollary, despite the one-line derivation, because it is the
 result we consider hardest to replace: §9.4 shows there is no known way to obtain it from [CN] by a
@@ -1367,14 +1374,83 @@ resulting theorem would be conditional on an unproved conjecture. We therefore g
 throughout. If that conjecture is later proved, new and possibly better constructions become
 available.
 
-### 10.3 [GAP-COMP]: no component refinement when $r>0$
+### 10.3 [GAP-COMP] is closed for $r\ge1$: $\overline S_{g;n,2r}$ is irreducible
 
-For $r>0$ the generalized spin structure satisfies $L^{\otimes2}\cong\omega(R)$ and Mumford's parity
-invariance no longer applies; we do not know whether $\overline S_{g;n,2r}$ is connected, nor which
-discrete invariants label its components. Theorem 6.4 therefore asserts only that the **whole stack**
-$\overline{\mathfrak S}_{g;n,2r}$ is non-projected — which is logically complete, since
-$\omega_2\neq0$ suffices — and identifies no component. Refining to the component level requires a
-classification of the connected components of $\overline S_{g;n,2r}$.
+An earlier version of this section recorded as an open gap that, for $r>0$, the generalized spin
+structure satisfies $L^{\otimes2}\cong\omega(R)$, so Mumford's parity invariance no longer applies,
+and we did not know whether $\overline S_{g;n,2r}$ is connected nor which discrete invariants label
+its components. All three clauses are resolved, and by citation rather than by new work. We record
+the closure here rather than silently deleting the gap, because the resolution changes how
+Theorem 6.4 should be read.
+
+**The object being counted.** Write $\overline S_{g;n,2r}$ for the reduced space of
+$\overline{\mathfrak S}_{g;n,2r}$, i.e. the stack obtained by restricting the moduli functor to even
+bases. Two facts from [FKP] fix what this stack is, and both are stated there rather than assumed
+here. First, [FKP, §2.6]: "If we only consider even bases, the functor of (stable) supercurves with
+punctures coincides with the functor of stable curves with punctures equipped with generalized spin
+structures i.e., coherent sheaves $L$ as in Lemma 2.6," where that $L$ satisfies
+$L^{\otimes2}\cong\omega(R)$ and is rank-1 torsion-free at the nodes. Second, [FKP, Remark 2.17]
+identifies the compactification: the stack $\overline{\mathcal S}_{g,n_{NS},n_R}$ is the one
+"considered in [J], [JKV]", whose coarse moduli "gives the same compactification of the classical
+moduli space of spin curves as the one constructed by Cornalba", and the twisted-curve stack of
+Abramovich–Jarvis is explicitly set aside — "We will not use the latter moduli stack in this paper."
+So $\overline S_{g;n,2r}$ is a stack of Jarvis-type stable generalized spin curves with a
+torsion-free-sheaf compactification, not a twisted-curve stack, and Jarvis's component count applies
+to it directly. (Earlier drafts of this paper carried a gap here on the opposite reading; it is
+withdrawn.)
+
+**Lemma 10.1 (the Ramond twist).** *Let $R=\sum_{j=1}^{2r}D_{\rho_j}$ be the sum of the Cartier
+divisors of the Ramond sections, and let $\mathbf m$ be the type with $m_i=1$ at each Ramond section
+and $m_i=0$ at each NS section. Then*
+$$(X/T,\ L,\ c)\ \longmapsto\ \big(X/T,\ L\otimes\mathcal O_X(-R),\ c\otimes\mathrm{id}\big)$$
+*is an isomorphism of stacks over $\overline{\mathcal M}_{g,n+2r}$*
+$$\overline S_{g;n,2r}\ \xrightarrow{\ \sim\ }\ \overline{\mathcal S}^{\,1/2,\mathbf m}_{g,n+2r},$$
+*with inverse $-\otimes\mathcal O_X(R)$, where the target is Jarvis's stack of stable generalized
+spin curves of type $\mathbf m$.*
+
+*Proof.* Three steps. (i) The Ramond sections land in the fibrewise smooth locus and are disjoint
+from one another and from the NS sections, so $R$ is an effective Cartier divisor disjoint from every
+node; hence $\mathcal O_X(-R)$ is a line bundle, and it is trivial on a neighbourhood of each node.
+(ii) Tensoring by a line bundle is an exact, base-change-compatible autoequivalence, so it preserves
+rank-1 torsion-freeness; being a local isomorphism at every node it preserves Jarvis's local
+conditions there — the order of the root at each node and the pure/net condition. This is the only
+step in which the disjointness of step (i) does real work. (iii) On the target,
+$(L\otimes\mathcal O(-R))^{\otimes2}\cong\omega(R)\otimes\mathcal O(-2R)=\omega(-R)=\omega(\mathbf m)$,
+which is Jarvis's sheaf of Definition 2.3.9. The inverse functor is the same construction with $R$ in
+place of $-R$. $\square$
+
+*(We do not route this through [J, Note 2.1.5], which would give the same answer via $-1\equiv1
+\bmod 2$: types in [J] are normalized to lie in $[0,d)$, so $m_i=-1$ is not admissible and the note
+would be applied outside its stated range. The direct twist above has no such issue.)*
+
+**Corollary 10.2.** *For $r\ge1$, $\overline S_{g;n,2r}$ is irreducible, hence connected.*
+
+*Proof.* By Lemma 10.1 it suffices to count the components of
+$\overline{\mathcal S}^{\,1/2,\mathbf m}_{g,n+2r}$. Jarvis's Theorem 3.3.1 — stated for the
+**compactification**, over $\mathbb C$, for stable pointed curves with labelled sections and type
+$\mathbf m$ normalized to $0\le m_i<r$, all of which hold here — says that this stack is the disjoint
+union of $d_{g,r}(\mathbf m)$ irreducible components, where $d_{g,r}(\mathbf m)$ is the number of
+positive divisors of $\ell_{g,r}(\mathbf m)$. At $r=2$ one has $\ell_{0,2}=1$,
+$\ell_{1,2}(\mathbf m)=\gcd(2,m_1,\dots,m_n)$ and $\ell_{g,2}(\mathbf m)=\gcd(2,2,m_1,\dots,m_n)$
+for $g\ge2$. Since $r\ge1$ forces $m_i=1$ for at least one $i$, every one of these gcds equals $1$,
+so $d=1$. $\square$
+
+*(Two notes on the citation. First, the printed definition of $\ell_{g,r}(\mathbf m)$ in [J, §3.3.1]
+reads "if $g\ne2$" where "$g\ge2$" is meant; the literal reading overlaps the preceding $g=0$ and
+$g=1$ clauses and assigns them conflicting values, and the same sentence concludes "thus
+$\ell_{g,r}(\mathbf m)$ is either 1 or 2 for $g\ge2$". We read it as $g\ge2$, as the surrounding text
+forces. Second, [J, Thm. 3.3.1] is stated over $\mathbb C$, which is our base field throughout; for a
+general field of characteristic prime to $r$ one would cite [J, Thm. 3.3.11] instead.)*
+
+**Consequence for Theorem 6.4.** Its assertion that the **whole stack**
+$\overline{\mathfrak S}_{g;n,2r}$ is non-projected was previously logically complete but not
+component-level. By Corollary 10.2 there is, for $r\ge1$, nothing to refine: the whole stack *is* the
+component. Theorem 6.4 is therefore already the component-level statement, and the caveat attached to
+it elsewhere in this paper is withdrawn.
+
+**What this does not cover.** $r=0$. There $\mathbf m=\mathbf 0$, $\ell_{g,2}=2$ and $d=2$, recovering
+the two parity components; that case is handled by Proposition 8.1 and needs no change. The closure
+above is for $r\ge1$ only.
 
 ### 10.4 [GAP-ALT]: a value risk, not a mathematical gap
 
@@ -1483,6 +1559,12 @@ deliberately refused shortcut — Ramond-node gluing, which rests on an explicit
   Thm. 1.1(2)]; not used in this paper.)*
 - **[G]** P. Green, *On holomorphic graded manifolds*, Proc. Amer. Math. Soc. **85** (1982), no. 4,
   587–590.
+- **[J]** T. Jarvis, *Geometry of the moduli of higher spin curves*, Internat. J. Math. **11** (2000),
+  no. 5, 637–663; arXiv:math/9809138. *(Theorem 3.3.1, and the definitions of $\ell_{g,r}(\mathbf m)$
+  and $d_{g,r}(\mathbf m)$ in §3.3.1; used in §10.3. This is reference [22] of [FKP].)*
+- **[JKV]** T. Jarvis, T. Kimura, A. Vaintrob, *Moduli spaces of higher spin curves and integrable
+  hierarchies*, Compositio Math. **126** (2001), no. 2, 157–212. *(Reference [23] of [FKP]; cited
+  here only as a co-reference in [FKP, Remark 2.17], no result of it is used.)*
 - **[W]** T. Wang, *On the Nonprojectedness of Supermoduli with Neveu-Schwarz and Ramond Punctures*,
   arXiv:2512.15727 [math.AG] (2025). *Not used in any proof of this paper; the arXiv comment field
   describes it as a preliminary draft.*
