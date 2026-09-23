@@ -66,10 +66,10 @@ def main():
     NREP = C.NMAX - C.MARGIN
 
     def mock(m, n, l):
-        return (-1) ** (l + 1) * F[m].get((n, abs(l)), 0)
+        return (-1) ** ((l + 1) % 2) * F[m].get((n, abs(l)), 0)
 
     def total(m, n, l):
-        return (-1) ** (l + 1) * psis[m].get((n, abs(l)), 0)
+        return (-1) ** ((l + 1) % 2) * psis[m].get((n, abs(l)), 0)
 
     def _reduced_lookup(g, m, n, l):
         if 4 * m * n - l * l <= 0 or m < 1 or n < 1:
@@ -345,6 +345,72 @@ def main():
     print("   (Lemma: for ANY GL(2,Z)-class function f, D_I[f] and D'_I[f] disagree at")
     print("    (m,n,l,I) as soon as f separates the classes of [m/s^2, l/s, n] and")
     print("    [m, l/s, n/s^2] for some s|I, s>1.  d_* and the total index are two such f.)")
+
+    print()
+    print("=" * 96)
+    print("PART 6 -- Theorem E: the SIGNED divisor sum (the DGM (3.26)+(3.27) / BSS (7) side)")
+    print("          Dt_I = sum_s s (-1)^(l - l/s) d_*(m/s^2, n, l/s)")
+    print("          Is it also Gamma^0(I)-invariant, or does the sign break it?")
+    print("=" * 96)
+
+    def DQ_signed(f, I, m, n, l):
+        tot = 0
+        for s in divisors(I):
+            if l % s or m % (s * s):
+                continue
+            t = f(m // (s * s), n, l // s)
+            if t is None:
+                return None
+            tot += s * (-1) ** ((l - l // s) % 2) * t
+        return tot
+
+    for I in (2, 3):
+        ok = bad_ct = 0
+        ex = None
+        for m in range(I * I, 13, 1):
+            for n in range(1, 13):
+                for l in range(-12, 13):
+                    if m % (I * I) or l % I or 4 * m * n - l * l <= 0:
+                        continue
+                    v0 = DQ_signed(dstar, I, m, n, l)
+                    if v0 is None:
+                        continue
+                    for U in SL2:
+                        if U[1] % I:
+                            continue
+                        mm, nn, ll = act(U, m, n, l)
+                        v1 = DQ_signed(dstar, I, mm, nn, ll)
+                        if v1 is None:
+                            continue
+                        if v0 == v1:
+                            ok += 1
+                        else:
+                            bad_ct += 1
+                            if ex is None:
+                                ex = (m, n, l, U, v0, v1)
+        print(f"   I = {I}:  b = 0 mod I  -> Dt_I preserved in {ok} cases, VIOLATED in {bad_ct}")
+        if ex:
+            print(f"            first violation: (m,n,l)={ex[:3]}, U={ex[3]}: {ex[4]} -> {ex[5]}")
+    print()
+    print("   parity check underlying the result: for U with I|b and I^2|m, I|l,")
+    print("   is (-1)^(l' - l'/s) = (-1)^(l - l/s) for every s|I?")
+    par_bad = 0
+    for I in (2, 3, 4, 6):
+        for m in range(I * I, 30, 1):
+            for n in range(1, 30):
+                for l in range(-20, 21):
+                    if m % (I * I) or l % I or 4 * m * n - l * l <= 0:
+                        continue
+                    for U in SL2:
+                        if U[1] % I:
+                            continue
+                        mm, nn, ll = act(U, m, n, l)
+                        for s in divisors(I):
+                            if mm % (s * s) or ll % s:
+                                continue
+                            if (ll - ll // s) % 2 != (l - l // s) % 2:
+                                par_bad += 1
+    print(f"      parity mismatches found: {par_bad}")
 
 
 if __name__ == "__main__":

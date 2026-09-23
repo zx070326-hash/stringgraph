@@ -94,3 +94,15 @@ PART 4 -- the phenomenon is not special to d_*: same witness with the TOTAL inde
    (Lemma: for ANY GL(2,Z)-class function f, D_I[f] and D'_I[f] disagree at
     (m,n,l,I) as soon as f separates the classes of [m/s^2, l/s, n] and
     [m, l/s, n/s^2] for some s|I, s>1.  d_* and the total index are two such f.)
+
+================================================================================================
+PART 6 -- Theorem E: the SIGNED divisor sum (the DGM (3.26)+(3.27) / BSS (7) side)
+          Dt_I = sum_s s (-1)^(l - l/s) d_*(m/s^2, n, l/s)
+          Is it also Gamma^0(I)-invariant, or does the sign break it?
+================================================================================================
+   I = 2:  b = 0 mod I  -> Dt_I preserved in 24304 cases, VIOLATED in 0
+   I = 3:  b = 0 mod I  -> Dt_I preserved in 4700 cases, VIOLATED in 0
+
+   parity check underlying the result: for U with I|b and I^2|m, I|l,
+   is (-1)^(l' - l'/s) = (-1)^(l - l/s) for every s|I?
+      parity mismatches found: 0
