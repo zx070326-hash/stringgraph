@@ -264,7 +264,9 @@ one-point obstruction family. §5 constructs the test morphism and computes the 
 the argument. §6 proves Theorem M. §7 proves Proposition N and its two corollaries. §8 derives the
 parity refinement, Corollary A, Theorem B, and the threshold in closed form, and records the machine
 verification of the threshold arithmetic. §9 collects four consistency checks, one of which is a
-deliberate attempt to make the method contradict a known theorem. §10 lists the open ends, and §11
+deliberate attempt to make the method contradict a known theorem, and closes (§9.5) by stating, for
+the reader arriving from the physics side, exactly which strategy for constructing the superstring
+measure Theorem M forecloses and which it leaves untouched. §10 lists the open ends, and §11
 concludes.
 
 ---
@@ -1150,6 +1152,53 @@ would ask a reader to place the paper's weight.
 
 ---
 
+### 9.5 What Theorem M forecloses, and what it does not
+
+§9.3 answered the negative half of the physicist's question: Theorem M cannot obstruct any
+construction that works on $\mathfrak S_{g;n,2r}$ or on a coordinate patch inside it, because a
+retraction restricts to open substacks. We record here the positive half, since a statement of the
+form "this rules nothing out" would be a misreading in the other direction.
+
+**What is ruled out.** Were $\overline{\mathfrak S}_{g;n,2r}$ projected, one could fix a single global
+holomorphic retraction onto the bosonic truncation and integrate fibrewise along it — on the interior
+and on every boundary stratum simultaneously. That is the strategy Donagi and Witten describe as the
+usual one in practice: "if $\mathfrak M_g$ is split — or at least projected — then a possible strategy
+in superstring perturbation theory is to integrate over $\mathfrak M_g$ by first integrating over the
+fibers of its projection to $\mathcal{SM}_g$. Indeed, practical calculations in superstring
+perturbation theory — such as the $g=2$ calculations that are surveyed in [16] — are usually done in
+this way" [DW, §1], their [16] being the two-loop program of [DP]. Theorem M shows that, applied to
+the **compactified** stack, this
+strategy is unavailable over the whole of its range: for every $g\ge3$ and any $(n,r)$, and already at
+$g=2$ as soon as $n+2r\ge2$ — that is, at the lowest genus and lowest external-leg count at which a
+compactified treatment is needed at all. The regime in which such a global shortcut could have
+simplified the analysis of degeneration limits, and hence of factorisation and infrared behaviour, is
+therefore empty from $g=2$ onward. It is not available even in principle, and no appeal to smallness
+of $g$, $n$ or $r$ recovers it.
+
+Nothing in this bears on the patchwise constructions that are actually in use. Witten's treatment
+[EW] proceeds by local slices glued across strata rather than by a global retraction; by §9.3 it is
+untouched by Theorem M, as is the two-loop program of [DP].
+
+**A sharper reading.** Donagi and Witten cap their own punctured theorem at $n\le g-1$ and, discussing
+why, write that for $n\gg g$ "requiring the $n$ points to be distinct very likely kills the
+obstructions to splitness, **though we would expect the compactification of $\mathfrak M_{g,n}$ to be
+non-split**" [DW, Remark 1.5]. That expectation is recorded there, not proved, and it is about the
+compactification precisely where their own method stops. Corollary A establishes it — rigorously, for
+every $g\ge3$, and with **no upper bound on $n$ whatever**; Theorem B extends it to Ramond punctures,
+where no analogous expectation had been recorded at all. The absence of a puncture–genus coupling in
+our threshold (§8) is the quantitative form of the same point: the mechanism that Donagi and Witten
+suspected would be destroyed by adding punctures is, on the compactification, indifferent to them.
+
+**What is not claimed.** Theorem M identifies no new obstruction to the validity of superstring
+perturbation theory, and we do not read it as casting doubt on any existing construction. On this we
+can do no better than quote Donagi and Witten's assessment of their own result, which applies here
+verbatim: "**The validity of superstring perturbation theory does not depend on a projection**, so the
+existence of string theory gives no hint that $\mathfrak M_g$ is projected" [DW, §1]. Non-projectedness
+is a statement about how the moduli space may be described, not about whether the integral over it
+exists.
+
+---
+
 ## 10. Honest boundaries and open problems
 
 ### 10.1 [GAP-FKP-RAMOND]: an omission in an external proof
@@ -1252,6 +1301,9 @@ deliberately refused shortcut — Ramond-node gluing, which rests on an explicit
   19–71. *(The page range is printed as 19–72 by INSPIRE; we follow the publisher's own Crossref
   record for DOI `10.1090/pspum/090/01525`, which gives 19–71, in agreement with the bibliography of
   [CN].)*
+- **[EW]** E. Witten, *Superstring Perturbation Theory Revisited*, arXiv:1209.5461 [hep-th] (2012;
+  v4 2023). *(Cited in §9.5 only, for the patchwise construction of the measure; not used in any
+  proof of this paper.)*
 - **[FKP]** G. Felder, D. Kazhdan, A. Polishchuk, *The Moduli Space of Stable Supercurves and Its
   Canonical Line Bundle*, Amer. J. Math. **145** (2023), no. 6, 1777–1886; DOI
   `10.1353/ajm.2023.a913296`; arXiv:2006.13271 [math.AG].
