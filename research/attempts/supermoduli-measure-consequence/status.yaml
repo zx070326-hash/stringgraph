@@ -12,6 +12,25 @@ verdict: |
   physical-argument-level and does not overstate Remark 1.5. Proposition C is what this attempt
   proves, and it proves it.
 
+  **Reviewer's own verdict text, as transmitted 2026-09-23 (translated, verbatim in substance):**
+  Proposition C holds; no counterexample or fatal hole found. (C1)'s restriction lemma is rigorously
+  proved with correct quantifiers — checked step by step: $r\circ\iota=\mathrm{id}$ forces
+  $|r|=\mathrm{id}$, so projectedness is equivalent to splitting of the structure sheaf sequence;
+  restricting a sheaf morphism to an open set preserves splitting, and likewise for open substacks.
+  (C2)'s quantifiers agree with Theorem M. The mandatory self-check holds and has been independently
+  upgraded to L1 by `literature/extractions/dhoker-phong-two-loop-i-vi.md`; all four L1 quotations
+  were checked verbatim without error ([DW, Rem. 1.4] = :601-604; [DW, Rem. 1.5] = :605-607;
+  "projected in low orders" = :267-280; "validity does not depend on a projection" = :614-629).
+  **Grade correction:** (C2)'s mathematical core is the definition of "non-projected" unwound on
+  Theorem M — a synonym-rewrite, not an independent corollary. What genuinely needs
+  `physical-argument` grade is the unexhausted literature-survey assertion that no one uses or needs
+  the shortcut. The citation-attribution errors (vertical integration misattributed to [EW]; [DW]
+  cited as Witten alone) were fixed in 72a42a1.
+
+  This grade correction was applied to `claim.md`'s Epistemic status block on 2026-09-23, splitting
+  (C2) three ways. It is the most valuable item in the whole review: it prevents the paper from
+  double-counting one theorem as two results.
+
   (2) **The transcription into `paper.md` §9.5 introduced two overclaims that are not in this
   attempt's own `draft-section.md`.** Both CONFIRMED, both now fixed in the paper (commit 8070707):
   - "empty from $g=2$ onward" — refuted by the paper's own §9.2 via [CN, Thm. 1.1(1)], which proves
@@ -62,13 +81,23 @@ verdict: |
     explicit disclaimer that the two are not claimed to be the same and have not been related.
     Applied 2026-09-23.
 
-  **Transmission note.** The reviewer's report was delivered in two parts: F1–F6 arrived first,
-  then the report was truncated; the remainder (F6 complete, F7–F10) was received on 2026-09-23
-  and is recorded above. Each finding was independently re-verified by the lead against the
-  primary text before being acted on. The reviewer also sent a proposed replacement block for
-  §9.5's "What is ruled out" paragraph which was itself truncated mid-sentence; it was **not**
-  applied, and the §9.5 edits above were written by the lead instead. Whether anything further
-  followed F10 is unknown.
+  **Transmission note.** The reviewer's report was delivered in three parts: F1–F6 arrived first,
+  then the report was truncated; the remainder (F6 complete, F7–F10, plus the reviewer's own verdict
+  text) was received on 2026-09-23 and is recorded above. Each finding was independently re-verified
+  by the lead against the primary text before being acted on. Two items are still outstanding, both
+  truncated mid-delivery: **F11** (the reviewer states that §9.5's "Left open by Theorem M are $g=2$
+  with $n+2r\le1$" needs a further clause because one $g=2$ even-parity case is not in fact open)
+  and the reviewer's final §5. Both have been requested.
+
+  On F11 the lead did not wait. Checking §9.5 independently turned up a defect in the same sentence,
+  though possibly not the same one: the paragraph said everything outside the threshold was
+  "genuinely open, and in one case it is known to go the other way", citing only [CN, Thm. 1.1(1)]
+  (odd genus-two split). But the paper's own bibliography records **[CN, Thm. 1.1(2)]** — the
+  compactified genus-two **even** component is **non-projected**, first proved in [FKP2]. So the
+  unpunctured genus-two case is settled in *both* parities, and one of those settlements goes the
+  same way as Theorem M rather than the other way. §9.5 now says so, and the genuinely-open set is
+  narrowed to $(2,1,0)$ and the $g=2$ odd-parity punctured components, matching what §1, §2.3 and
+  §10.6 already said. If F11's text turns out to make a different point, it will be applied on top.
 captain_confirmed: false
 notes: |
   === Task ===

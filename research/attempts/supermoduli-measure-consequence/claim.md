@@ -66,10 +66,26 @@ argument.md §3); the content of (C2) is that it could not have, even in princip
 
 **Epistemic status**: (C1) is a rigorous mathematical fact (elementary sheaf theory) once Theorem M
 and the standard definitions of projected/split are granted; the mandatory self-check below shows it
-is consistent with, and required by, Donagi–Witten's own Remark 1.4. (C2) is a correct but
-deliberately modest mathematical corollary of Theorem M; its *physical* framing — "this closes off a
-hypothetical shortcut" — is a `physical-argument`-level interpretive claim, not a theorem, and is
-labelled as such throughout argument.md.
+is consistent with, and required by, Donagi–Witten's own Remark 1.4.
+
+(C2) needs to be split three ways, because its parts sit at different grades and lumping them
+overstates the weakest one (this refinement is the reviewer's, 2026-09-23):
+
+1. **The mathematical part is not an independent corollary.** "No global holomorphic retraction of
+   $\overline{\mathfrak S}_{g;n,2r}$ onto its bosonic truncation exists" is the *definition* of
+   non-projectedness unwound on Theorem M, not a deduction from it. It is rigorous, and it is
+   exactly as strong as Theorem M — no more. Presenting it as a further consequence would be
+   double-counting one result.
+2. **"No completed rigorous construction has used or needed such a retraction" is an unexhausted
+   literature survey**, not a theorem. This is the assertion that actually carries
+   `physical-argument` grade, and it is the one a referee could refute with a single citation. It is
+   stated as "we are aware of no…" above for that reason.
+3. **"This closes off a shortcut" is interpretive framing.** The shortcut is hypothetical; that it
+   would have been *useful* had it existed is a judgement about how one might have organised a
+   computation, not a mathematical claim, and argument.md labels it as such throughout.
+
+The value of (C2) is therefore in (2) and (3) — in identifying *which* hypothetical method Theorem M
+forecloses and arguing that no one depends on it — not in (1), which is Theorem M restated.
 
 ---
 

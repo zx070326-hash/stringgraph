@@ -1166,13 +1166,20 @@ Theorem M shows it is unavailable on the whole of the range covered by the thres
 $g\ge3$ and any $(n,r)$, and at $g=2$ as soon as $n+2r\ge2$. It is not available there even in
 principle, and within that range no appeal to smallness of $n$ or $r$ recovers it.
 
-Outside that range the situation is genuinely open, and in one case it is known to go the other way:
-$\overline{\mathfrak M}{}^{-}_2=\overline{\mathfrak S}{}^{-}_{2;0,0}$ is **split** by
-[CN, Thm. 1.1(1)], so there the global compactified retraction does exist. By §9.2 our method reaches
-only the even component at $g=2$, and $(g,n,r)=(2,1,0)$ together with the $g=2$ odd-parity punctured
-components lies outside the threshold altogether. We therefore say nothing about whether the strategy
-survives in those cases; §9.2 records a heuristic for why we expect it not to, and marks it as a
-heuristic.
+Outside that range the situation is not uniformly open, and we should be precise about which parts
+of the complement are already settled — by others, not by us. The unpunctured genus-two case is
+settled in **both** parities: $\overline{\mathfrak M}{}^{-}_2=\overline{\mathfrak S}{}^{-}_{2;0,0}$
+is **split** by [CN, Thm. 1.1(1)], so there the global compactified retraction does exist, while
+$\overline{\mathfrak M}{}^{+}_2=\overline{\mathfrak S}{}^{+}_{2;0,0}$ is **non-projected** by
+[CN, Thm. 1.1(2)] (first proved in [FKP2]), so there it does not. Neither is a consequence of
+Theorem M — §9.2 verifies that our construction cannot reach $(g,n,r)=(2,0,0)$ at all, which is
+exactly what compatibility with [CN, Thm. 1.1(1)] requires of it.
+
+What is genuinely open is smaller than the complement of the threshold: $(g,n,r)=(2,1,0)$, and the
+$g=2$ odd-parity punctured components for every $n$. By §9.2 our method reaches only the even
+component at $g=2$, and both of these lie outside the threshold altogether. We make no claim about
+them in either direction; §9.2 records a heuristic for why we expect the strategy not to survive
+there, and marks it as a heuristic.
 
 The analogous statement for the *uncompactified* stack is not ours and is not a consequence of
 Theorem M. Donagi and Witten describe the uncompactified version of the strategy as the one used in
@@ -1191,14 +1198,16 @@ Nothing in this bears on the patchwise constructions that are actually in use. W
 untouched by Theorem M, as is the two-loop program of [DP].
 
 It is worth making the [DP] case explicit, because the numerical overlap is immediate and a reader
-will check it: the four-point genus-two computation of [DP, V–VI] has $(g,n,r)=(2,4,0)$, which
-satisfies $n+2r\ge2$ and so lies inside the range of Corollary A2. There is no tension. That
-computation is carried out on — and exploits projectedness of — the **uncompactified** locus,
-a fact Witten states outright: "Supermoduli space is holomorphically projected in low orders and
-this fact has been exploited in explicit computations, especially in [D'Hoker–Phong]" [EW, §3.3.2].
-Theorem M is a statement about $\overline{\mathfrak S}_{2;4,0}$ and, by the restriction argument of
-§9.3, constrains the interior in neither direction. A completed low-genus computation inside
-Corollary A2's range is therefore exactly what one should expect to find, not a counterexample to it.
+will check it: the four-point genus-two computation of [DP, V–VI] has $(g,n,r)=(2,4,0)$, hence
+$n+2r\ge2$, and so lies inside the range of Corollary A2. There is no tension. That computation is
+performed on the **uncompactified** locus and exploits projectedness there — a fact Witten states
+outright: "Supermoduli space is holomorphically projected in low orders and this fact has been
+exploited in explicit computations, especially in [D'Hoker–Phong]" [EW, §3.3.2] — and its
+degeneration analysis is carried out on a formula that is by that stage already bosonic in the
+classical period matrix (§9.3). Corollary A2's obstruction, by contrast, is detected on
+$\Delta_{\rm NS}$ and, retractions restricting to open substacks, certifies nothing about
+$\mathfrak S_{2;4,0}$ in either direction. A completed low-genus computation inside Corollary A2's
+range is therefore exactly what one should expect to find, not a counterexample to it.
 
 **A sharper reading.** Donagi and Witten cap their own punctured theorem at $n\le g-1$ and, discussing
 why, write that for $n\gg g$ "requiring the $n$ points to be distinct very likely kills the
