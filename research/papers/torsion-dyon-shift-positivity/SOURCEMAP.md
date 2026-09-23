@@ -6,11 +6,17 @@ This document maps every assertion in `paper.md` to specific line numbers in the
 
 - **A**: `research/attempts/torsion-immortal-positivity-hecke/proof.md`
 - **B**: `research/attempts/bkm-shift-explanation/proof.md`
+- **C**: `research/attempts/torsion-divisor-sum-covariance/proof.md` (added 2026-09-23, the source of the new §6)
+
+Section numbering note: the insertion of §6 ("The divisor sum is not a function of the charge") on
+2026-09-23 shifted the old §6–§9 to §7–§10. This file uses the **current** paper numbering
+throughout; the old numbers appear only in this note.
 
 ## Paper §1 (Introduction)
 
 - Background on Sen conjecture, Rosselló result: General knowledge, no specific source
-- Three main results overview: Synthesized from A and B claim.md files
+- Main results overview: Synthesized from the claim.md files of A, B and C
+- The lead paragraph on the frame-dependence result: C lines 12-28 (§0 结论一览)
 
 ## Paper §2 (Notation and conventions)
 
@@ -19,7 +25,8 @@ This document maps every assertion in `paper.md` to specific line numbers in the
 - Attractor cycle definition (R5)/(R5'): A lines 119-122
 - Immortal index d_*: A lines 124-127
 - Torsion-I generating function 𝒢_I: A lines 52-54, 283-284
-- Physical assumption (P') isolation: A lines 489-496, claim.md lines 169-180
+- Lattice vocabulary (L, saturation M, torsion I, adapted frames, Γ₀(I) orbit): C lines 29-106 (§1)
+- Physical assumption isolation: A lines 489-496, claim.md lines 169-180; narrowed to (P'_ad) by C lines 269-314
 
 ## Paper §3 (Incompatibility of DGM eq(51) and (52))
 
@@ -34,6 +41,17 @@ This document maps every assertion in `paper.md` to specific line numbers in the
 
 **Remark on no erratum**
 - Literature search result: A lines 298-302, B status.yaml lines 113-115
+
+**Benchmark table of d_* values (paper lines 125-126)**
+- Engine output: `scripts/divisor_sum_values.py` (bundled), cross-checked against A's own script output
+- **Correction 2026-09-23**: three of the five values had been attached to the wrong triples in earlier
+  drafts (632078672 is d_*(3,2,0), not d_*(3,3,0); 9337042944 is d_*(4,2,0), not d_*(2,3,1);
+  113477152800 is d_*(5,2,0), not d_*(3,4,2)). The list is now the consecutive family
+  (1,1,0),(2,2,0),(3,2,0),(4,2,0),(5,2,0), i.e. (Q²,P²) = (2,2),(4,4),(6,4),(8,4),(10,4) at Q·P = 0.
+  The same five values are used again in the proof of Theorem 6.3.
+
+**Remark 3.3 (this witness is frame-independent)**
+- C lines 141-147 (Note 2.4); forward reference to Proposition 6.5
 
 ## Paper §4 (Algebraic derivation of half-integer shift)
 
@@ -79,41 +97,93 @@ This document maps every assertion in `paper.md` to specific line numbers in the
 **Remark 5.4**
 - Significance of bypassing mock forms: Synthesized from A lines 225-230 (Note 4.3)
 
-## Paper §6 (Positivity theorem)
+## Paper §6 (The divisor sum is not a function of the charge) — added 2026-09-23
 
-**Theorem 6.1 (Main result)**
+Source: attempt **C** throughout. Nothing in this section comes from A or B.
+
+**Terminology block (frame / admissible / adapted), counting convention H(D)**
+- Lattice dictionary, I = gcd(Q∧P) = [M:L]: C lines 29-44 (Lemma 1.1)
+- adapted ⟹ admissible: C lines 45-49 (Lemma 1.2)
+- adapted frames exist ⟺ M/L cyclic: C lines 50-61 (Lemma 1.3), 62-67 (Lemma 1.4)
+- adapted frames = one Γ₀(I) orbit: C lines 68-79 (Lemma 1.5)
+- admissible triples = invariants of adapted frames: C lines 80-106 (Lemma 1.6)
+- H(D) counting convention (imprimitive forms included): **written for the paper**, no source line. It makes explicit the count C uses implicitly in Prop 2.3 and §3; h(−16)=1 but H(16)=2, and witness A depends on the latter. Arithmetic facts H(3)=H(4)=1, H(16)=2, H(23)=2, H(32)=3 are standard and are also visible in C's witness tables.
+
+**Proposition 6.1 (a)-(e) and proof (the superlattice mechanism)**
+- Statement and proof: C lines 113-130 (Prop 2.1)
+- Part (b)'s appeal to d_* being a class function: paper Appendix A / A lines 194-224 (Prop 4.4)
+
+**Remark 6.2 (this is what the DGM derivation does)**
+- C lines 131-134 (Note 2.2), quoting `literature/extractions/dabholkar-gomes-murthy-2008.md` S4
+
+**Remark (realizability in the physical charge lattice, Γ^{6,22} ≅ U³ ⊕ E₈(−1)²)**
+- **Written for the paper.** C's `status.yaml` records the absence of this bridge as a small defect flagged by the 2026-09-18 reviewer; the remark closes it. The lattice facts (U⊕U a primitive orthogonal summand of Γ^{6,22}; the same Γ^{6,22} on both sides of string–string duality) are standard and carry no load in any proof — they only certify that C's witnesses occur as honest charge pairs.
+
+**Theorem 6.3 (frame dependence), witnesses A, B, C and proof**
+- Statement: C lines 150-152 (Thm 3.1)
+- Witness A (Δ=16 at s=2; both vectors primitive in frame 2): C lines 153-188
+- Witness B (frames related by S = [[0,−1],[1,0]]): C lines 189-203
+- Witness C (I = 3, Δ/s² = 23): C lines 204-218
+- Comparison table: C lines 219-224
+- External validation of the numerical engine: C lines 225-244
+- All displayed integers: `scripts/divisor_sum_values.py` (bundled), `scripts/lattice_witness.py` (bundled)
+
+**Theorem 6.4 ((m,n,ℓ,I) is not a complete invariant)**
+- Statement, table and proof: C lines 245-268
+
+**Proposition 6.5 and Remark 6.6 (why the failure went unnoticed)**
+- Sufficient condition H(Δ/s²)=1: C lines 135-140 (Prop 2.3)
+- The §3 witness lies in the blind spot: C lines 141-147 (Note 2.4)
+
+**Remark 6.7 (what this forces, what it leaves standing)**
+- Positivity survives with wider coverage: C lines 354-395 (§7)
+- (P′) refuted, (P′_ad) is the correct premise: C lines 269-314 (§5)
+- Honest novelty statement relative to the literature: C lines 396-426 (§8)
+
+## Paper §7 (Positivity theorem)
+
+**Theorem 7.1 (Main result)**
 - Statement: A lines 307-314 (Theorem 6.1)
 - Proof part (a) (divisor sum identity): A lines 317-319
 - Proof part (b) (positivity via Rosselló): A lines 321-325
 
-**Remark 6.2 (Why Rosselló is gcd-independent)**
+**Remark 7.2 (Why Rosselló is gcd-independent)**
 - Explanation of Gauss reduction and S-duality: A lines 326-332 (Note 6.2)
 - Reference to our independent S-duality proof: A lines 194-224 (Prop 4.4)
 
 **Cross-check with gcd>1 cases**
 - Numerical verification without gcd restriction: A scripts output, mentioned in A lines 328-330
 
-## Paper §7 (Physical interpretation)
+## Paper §8 (Physical interpretation and remaining assumption)
 
-**Physical assumption (P')**
+**Physical assumption (P'_ad)**
 - Isolation of physical input: A lines 489-496 (§10 opening)
 - Three ingredients (duality, zero modes, wall-crossing): A claim.md lines 172-176
+- Restriction of the premise from charges to *adapted frames*: C lines 269-314 (§5)
+- **Corollary 8.1** (positivity on an S-duality invariant charge domain): C lines 354-395 (§7)
 - What the paper proves mathematically: Synthesized from A lines 916-931 (§14 Conclusion)
 
-## Paper §8 (Open problems)
+## Paper §9 (Open problems)
 
-**Problem 8.1 (BKM algebra interpretation)**
+**Problem 9.1 (the sharp criterion, and the invariant object behind D_I)**
+- Sufficient condition, necessity left open: C lines 135-140 (Prop 2.3) + C lines 450-end (GAP list)
+- The candidate invariant 𝔇(L) = Σ_{L ⊆ L' ⊆ M} [L':L]·d_*(T_{L'}): C lines 315-353 (§6, covariant rewriting)
+
+**Problem 9.2 (do the fractional-shift formulae fail in the same way?)**
+- **Posed for the paper.** Those formulae rescale P rather than Q, so Proposition 6.1's analysis does not transfer; no source claims either way. Recorded as open, not as a negative result.
+
+**Problem 9.3 (BKM algebra interpretation)**
 - Half-integer shift and ℤ/2ℤ automorphism: B lines 98-110 (claim.md BKM section)
 - Partial results on Cartan element H_r: B lines 346-384 (proof.md S2)
 - Weight mismatch Den_ω vs Φ₁₀: B lines 389-445 (proof.md S3)
 - Status: B status.yaml lines 82-85, GAP-BKM acknowledged as open
 
-**Problem 8.2 (Mock modular form perspective)**
+**Problem 9.4 (Mock modular form perspective)**
 - Commutation of 𝒯_I with DMZ decomposition: A lines 412-476 (§9, crux 2)
 - Theta term Θ_{m,t} computation: A lines 440-463 (Lemmas 9.2, 9.3)
 - Obstacle identification: A lines 464-476, GAP 9.4
 
-**Problem 8.3 (Mock equality beyond Gauss reduction)**
+**Problem 9.5 (Mock equality beyond Gauss-reduced representatives)**
 - Numerical evidence for n≥m domain: A lines 500-509 (§10.2 discovery #3)
 - Explicit counterexample (5,1,4): A lines 504-505
 - Mechanism (c_m^F not GL(2,ℤ)-invariant): A lines 506-509
@@ -121,11 +191,11 @@ This document maps every assertion in `paper.md` to specific line numbers in the
 - Three candidate routes for proof: A lines 935-999 (§10.5)
 - Status: A status.yaml lines 911 (GAP 10.2b still open)
 
-## Paper §9 (Conclusion)
+## Paper §10 (Conclusion)
 
-- Summary of four main steps: Synthesized from both attempts' conclusions
-- Reduction of physical assumptions: A lines 489-496
-- Open questions reiteration: From §8 sourcing above
+- Summary of the main steps: Synthesized from both attempts' conclusions and C §0
+- Reduction of physical assumptions: A lines 489-496, narrowed to adapted frames by C lines 269-314
+- Open questions reiteration: From §9 sourcing above
 
 ## Paper Appendix A (S-duality invariance)
 
@@ -138,7 +208,8 @@ This document maps every assertion in `paper.md` to specific line numbers in the
 
 ## Verification notes
 
-- **No new mathematical claims**: Every assertion in the paper can be traced to specific line ranges in A or B proof.md files.
-- **Honest boundary preservation**: All three GAPs acknowledged in paper §8 are explicitly marked as GAPs in the source attempts' status.yaml files.
-- **Captain-confirmed scope**: Both source attempts have captain_confirmed=true in their status.yaml (A line 4, B line 4), validating the mathematical content being synthesized.
-- **Physical assumption isolation**: (P') is consistently labeled as "physical input, not proven here" in both paper §7 and source A lines 489-496.
+- **Claims not traceable to a proof.md line.** Three items in the paper are *not* transcriptions and are flagged as such above: (i) the H(D) counting convention in §6; (ii) the Λ-realizability remark in §6.2; (iii) Problem 9.2. None of them carries load in any proof — (i) is notation making an implicit count explicit, (ii) certifies that C's witnesses occur in the physical charge lattice, (iii) is a question. Every *assertion with mathematical content* traces to a line range in A, B or C.
+- **Honest boundary preservation**: all GAPs acknowledged in paper §9 are explicitly marked as GAPs in the source attempts' status.yaml files.
+- **Captain-confirmed scope**: A and B have `captain_confirmed: true` (A line 4, B line 4). **C has `captain_confirmed: false`** (C's status.yaml line 59) with `state: verified`; per the root CLAUDE.md, that is sufficient for the content to be built upon internally but **not** for external release. §6 of the paper therefore rests on a verified-but-not-captain-confirmed attempt, and this must be resolved before submission — see `NOTES-for-captain.md`.
+- **Physical assumption isolation**: the premise is labeled "physical input, not proven here" in paper §8 and in A lines 489-496. Since C §5, it is stated on *adapted frames* — (P'_ad), not (P') — and the paper does not assert it on arbitrary admissible frames.
+- **Numerical reproducibility**: every integer displayed in §3, §6 and §7 is printed verbatim by one of the three bundled scripts, which use exact integer arithmetic and the Python standard library only. Recorded output is in `scripts/run_output.txt` and `scripts/lattice_output.txt`.
