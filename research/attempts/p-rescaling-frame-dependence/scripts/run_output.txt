@@ -1,0 +1,68 @@
+================================================================================================
+PART 0 -- sanity: d_* is a GL(2,Z) class function, and is m<->n symmetric
+================================================================================================
+   violations of d_*(U.T) = d_*(T) or of d_*(m,n,l) = d_*(n,m,l): 0
+
+================================================================================================
+PART 1 -- Theorem A:  D'_I(m,n,l) = D_I(n,m,l)   (reflection transfer)
+================================================================================================
+   instances checked: 8750    violations: 0
+
+================================================================================================
+PART 2 -- Theorem B: two frames of ONE lattice, both P-adapted-compatible,
+          on which the P-rescaling divisor sum D'_2 takes different values
+================================================================================================
+   frame 1: (m,n,l) = (4, 4, 0)      Delta = 64
+   frame 2: (m,n,l) = (4, 8, 8)      Delta = 64   [ U = [[1,0],[1,1]], det = 1 ]
+   SL(2,Z)-equivalent forms?  True   (reduced rep = (4, 4, 0))
+   frame 1: I^2 | n ? True    I | l ? True    [the hypotheses under which the P-rescaling formula is stated]
+   frame 2: I^2 | n ? True    I | l ? True    [the hypotheses under which the P-rescaling formula is stated]
+
+   d_*(4, 4, 0)               =        7999169992704
+   d_*(4,1,0)                 =            185738352     [ s = 2 term, reduced rep (1, 4, 0) ]
+   d_*(4, 8, 8)             =        7999169992704
+   d_*(4, 2, 4)                 =             32861184     [ s = 2 term, reduced rep (2, 2, 0) ]
+
+   D'_2(4, 4, 0)  =        7999541469408
+   D'_2(4, 8, 8) =        7999235715072
+   difference               =            305754336
+   equal? False
+   relative size |diff| / max  ~ 3.822e-05   (commentary only)
+
+   transpose cross-check (paper.md Remark 6.3, Q-rescaling):
+      D_2(4,4,0) =        7999541469408
+      D_2(8,4,8) =        7999235715072
+
+================================================================================================
+PART 3 -- DGM (3.28) vs AN (2.13) at the SAME (m,n,l,I):  minimal witness
+================================================================================================
+   domain: I^2|m AND I^2|n AND I|l  (both formulae's hypotheses hold simultaneously)
+    I   m   n   l  Delta              D_I  (DGM)              D_I  (AN)           diff
+    2   4   8   8     64           7999541469408          7999235715072      305754336
+    2   8   4   8     64           7999235715072          7999541469408     -305754336
+    2   4   8   6     92        1268925854257440       1268910232183056    15622074384
+    2   4  12  10     92        1268925854257440       1268910232183056    15622074384
+    2   8   4   6     92        1268910232183056       1268925854257440   -15622074384
+    2  12   4  10     92        1268910232183056       1268925854257440   -15622074384
+    2   4   8   4    112       35695727296851936      35695527889519104   199407332832
+    2   8   4   4    112       35695527889519104      35695727296851936  -199407332832
+   total disagreeing points in range: 40
+
+   MINIMAL WITNESS (smallest Delta, then smallest m):
+      I = 2,  (m,n,l) = (4,8,8),  Delta = 64
+      DGM (3.28):  sum_s s d_*(m/s^2, n, l/s) = 1*d_*(4,8,8) + 2*d_*(1,8,4) = 7999541469408
+      AN  (2.13):  sum_s s d_*(m, n/s^2, l/s) = 1*d_*(4,8,8) + 2*d_*(4,2,4) = 7999235715072
+      the two s>1 arguments reduce to inequivalent forms:
+         [1,4,8]  ->  (1, 4, 0)   d_* = 185738352
+         [4,4,2]  ->  (2, 2, 0)   d_* = 32861184
+      difference = 305754336
+
+================================================================================================
+PART 4 -- the phenomenon is not special to d_*: same witness with the TOTAL index
+================================================================================================
+   at I=2, (m,n,l)=(4,8,8):  D_I[total] = 7999541469408,  D'_I[total] = 7999235715072,  differ? True
+   Theorem B witness with total index: 7999541469408 vs 7999235715072, differ? True
+
+   (Lemma: for ANY GL(2,Z)-class function f, D_I[f] and D'_I[f] disagree at
+    (m,n,l,I) as soon as f separates the classes of [m/s^2, l/s, n] and
+    [m, l/s, n/s^2] for some s|I, s>1.  d_* and the total index are two such f.)
