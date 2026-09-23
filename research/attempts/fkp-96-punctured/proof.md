@@ -939,4 +939,134 @@ pairing. $\square$
 
 ---
 
-*(Parts §8–§11 follow.)*
+## 8. The theorem
+
+### 8.1 The separating case (Claim P)
+
+> **Theorem 8.1 (punctured normal-line formula, separating case).** Let $g_1,g_2\ge0$ and
+> $m_1,m_2\ge0$, $n_1,n_2\ge0$ even, be such that $(g_1;m_1{+}1,n_1)$ and $(g_2;m_2{+}1,n_2)$
+> lie in the stable range. Put $g=g_1+g_2$, $m=m_1+m_2$, $n=n_1+n_2$, and let
+> $$\iota\colon\ B=\mathcal S_{g_1;m_1+1,n_1}\times\mathcal S_{g_2;m_2+1,n_2}\
+> \longrightarrow\ \overline{\mathcal S}_{g;m,n}$$
+> be the separating NS gluing map (7.8) restricted to the smooth locus, and $\Psi_1,\Psi_2$ the
+> psi-lines of the two glued NS punctures. Then there are isomorphisms of line bundles of rank
+> $1|0$ on $B$
+> $$\iota^*\mathcal O(\Delta_{\rm NS})\ \cong\ \iota^*\mathcal O(\Delta)\ \cong\
+> \Psi_1^{-1}\otimes\Psi_2^{-1},$$
+> canonical up to the sign ambiguity of Remark 8.2. In particular the formula holds for
+> **arbitrary** $m,n$, not only $m=n=0$.
+
+*Proof.* The map $\iota$ exists by Cor. 4.4. For the second isomorphism:
+$$
+\begin{aligned}
+\iota^*\mathcal O(\Delta)
+&\ \cong\ \Big[\operatorname{Ber}R\pi_*\big(j_*\Omega_{U/\overline{\mathcal S}}\big)\otimes
+\operatorname{Ber}^{-1}R\pi_*\big(\Omega_{X/\overline{\mathcal S}}\big)\Big]\Big|_B
+&&\text{(Prop.\ 3.5)}\\
+&\ \cong\ \operatorname{Ber}R\pi_*\big(j_*\Omega_{U/\overline{\mathcal S}}\big|_{X_B}\big)
+\otimes\operatorname{Ber}^{-1}R\pi_*\big(\Omega_{X_B/B}\big)
+&&\text{(S2)}\\
+&\ \cong\ \operatorname{Ber}R\widetilde\pi_*\big(\Omega_{\widetilde X/B}(D_1+D_2)\big)\otimes
+\Psi_1^{-1}\Psi_2^{-1}\otimes\operatorname{Ber}^{-1}R\widetilde\pi_*
+\big(\Omega_{\widetilde X/B}\big)
+&&\text{(Prop.\ 6.2, Prop.\ 6.1(iii))}\\
+&\ \cong\ \Psi_1^{-1}\otimes\Psi_2^{-1}
+&&\text{(Prop.\ 7.1).}
+\end{aligned}
+$$
+In the second line, (S2) is applied to $j_*\Omega_{U/\overline{\mathcal S}}$ and
+$\Omega_{X/\overline{\mathcal S}}$, both of which are flat over $\overline{\mathcal S}$ by (I7);
+and $\Omega_{X/\overline{\mathcal S}}|_{X_B}=\Omega_{X_B/B}$ because Kähler differentials
+commute with base change. The first isomorphism of the Theorem is Prop. 9.1 below.
+
+Finally the rank: each $\Psi_i$ has rank $0|1$, so $\Psi_1^{-1}\otimes\Psi_2^{-1}$ has rank
+$1|0$ — as it must, $\mathcal O(\Delta)$ being the line bundle of an effective Cartier divisor,
+which is even. $\square$
+
+> **Remark 8.2 (signs).** Every identification used above is canonical as a map of line
+> bundles, except that the multiplicativity isomorphism (S1) for $\operatorname{Ber}$ in a short
+> exact sequence involves a choice of ordering of the factors, which can change the total
+> isomorphism by a sign. [FKP] work under the same proviso — their Theorem 9.2 checks
+> compatibility "up to a sign", and their §9.3 is stated as a conjecture "up to a sign".
+> **Claim P as an isomorphism of line bundles is unaffected**; only the identification of a
+> preferred generator would be. Nothing downstream in the supermoduli paper uses more than the
+> isomorphism class, so I do not track signs.
+
+### 8.2 The non-separating case (Claim P′)
+
+> **Theorem 8.3.** Let $g\ge0$, $m\ge0$, $n\ge0$ even with $(g;m{+}2,n)$ in the stable range,
+> and let $\iota\colon B=\mathcal S_{g;m+2,n}\to\overline{\mathcal S}_{g+1;m,n}$ be the
+> non-separating gluing map (7.9) restricted to the smooth locus. Then, with $\Psi_1,\Psi_2$
+> the psi-lines of the two glued punctures,
+> $\iota^*\mathcal O(\Delta_{\rm NS})\cong\iota^*\mathcal O(\Delta)\cong\Psi_1^{-1}\otimes
+> \Psi_2^{-1}$.
+
+*Proof.* Everything in §§3, 5, 6, 7 was written for "one of the maps (7.8) or (7.9)", exactly
+as in [FKP]'s own §9.1 setup (I16), and uses only: the node $Q$, the two divisors $D_1,D_2$,
+the finite morphism $\rho\colon\widetilde X\to X_B$, and the disjointness of
+$\{Q,D_1,D_2\}$ from $R$ and from the spectator punctures. All of these hold verbatim when
+$\widetilde X$ is connected and $P_1,P_2$ are two NS punctures of the same curve.
+
+The single point needing amendment is Lemma 4.1, which was stated for a **closed** branch
+embedding $j\colon C\hookrightarrow Z_0$. In the non-separating case the relevant morphism is
+the partial normalization $\nu\colon\widetilde C\to Z_0$ at the new node $p_0$, with
+$\nu^{-1}(p_0)=\{p,p'\}$ two distinct smooth points of $\widetilde C$; $\nu$ is finite and an
+isomorphism away from $p_0$, but not a closed immersion. Lemma 4.1 holds verbatim for $\nu$,
+with the identical proof: set $\nu^!\mathcal F:=\underline{\operatorname{Hom}}_{\mathcal
+O_{Z_0}}(\nu_*\mathcal O_{\widetilde C},\mathcal F)$; at $p_0$ one has
+$(\nu_*\mathcal O_{\widetilde C})_{p_0}=k[[x]]\times k[[y]]$ inside
+$\mathcal O_{Z_0,p_0}=k[[x,y]]/(xy)$, so
+$$\nu^!\omega_{Z_0}\big|_{p_0}=\underline{\operatorname{Hom}}(k[[x]],\omega_{Z_0})\oplus
+\underline{\operatorname{Hom}}(k[[y]],\omega_{Z_0})=(x)\eta\oplus(y)\eta
+=\omega_{\widetilde C,p}\oplus\omega_{\widetilde C,p'},$$
+i.e. $\nu^!\omega_{Z_0}=\omega_{\widetilde C}$ with the trace $\nu_*\omega_{\widetilde C}
+\hookrightarrow\omega_{Z_0}$ the canonical inclusion. (Equivalently: $\nu^!$ takes the
+dualizing complex of $Z_0$ to that of $\widetilde C$.) Prop. 4.3 then reads: $\mathcal L:=
+\nu_*L$ satisfies $\mathcal L\cong\underline{\operatorname{Hom}}(\mathcal L,\omega_{Z_0}
+(\sum r_i))$, by the same three-line computation, because the Ramond points $r_i$ are disjoint
+from $p,p'$ and $\nu^*\mathcal O_{Z_0}(\sum r_i)=\mathcal O_{\widetilde C}(\sum r_i)$. The rest
+of the proof of Theorem 8.1 applies unchanged. $\square$
+
+---
+
+## 9. $\Delta$ versus $\Delta_{\rm NS}$ on $B$
+
+> **Proposition 9.1.** In the setting of Theorem 8.1 or 8.3,
+> $\iota^*\mathcal O(\Delta_{\rm R})\cong\mathcal O_B$ canonically, hence
+> $\iota^*\mathcal O(\Delta_{\rm NS})\cong\iota^*\mathcal O(\Delta)$.
+
+*Proof.* By Prop. 7.8(ii) (I10), $\Delta_{\rm R}$ is an effective Cartier divisor **supported
+on the locus of stable supercurves with at least one Ramond node**, and
+$\Delta=\Delta_{\rm NS}+\Delta_{\rm R}$.
+
+Every geometric point of $\iota(B)$ is a stable supercurve $Z$ obtained by Prop. 4.3 from
+smooth supercurves by gluing along NS punctures; it has exactly one node, and that node is an
+**NS** node. Indeed, by the proof of Prop. 4.3 the odd structure sheaf at the node is
+$\mathcal O_Z^-=j_*L\oplus j'_*L'$ (resp. $\nu_*L$), which has rank $1$ on each of the two
+branches, since $L,L'$ are locally free near $P,P'$ (L1, p. 48: "we know that $L$ (resp. $L'$)
+is locally free near $P$ (resp. $P'$)"). In [FKP]'s étale-local classification (Lemma 7.5, I9),
+that is exactly the NS-node model — generated by $z_1,z_2,\theta_1,\theta_2$, with **two**
+independent odd coordinates — whereas the Ramond-node model is generated by $z_1,z_2,\theta$
+with a **single** odd coordinate. Hence $\iota(B)\cap\operatorname{Supp}\Delta_{\rm R}=
+\varnothing$, so the canonical section $s_{\Delta_{\rm R}}$ of $\mathcal O(\Delta_{\rm R})$ is
+nowhere vanishing along $\iota(B)$ and $\iota^*s_{\Delta_{\rm R}}$ is a canonical
+trivialisation of $\iota^*\mathcal O(\Delta_{\rm R})$. Tensoring $\Delta=\Delta_{\rm NS}+
+\Delta_{\rm R}$ gives the second assertion. $\square$
+
+> **Remark 9.2 (two independent confirmations from [FKP]).** (a) Prop. 7.8(i) (I10) states that
+> $\Delta_{\rm NS}$ *coincides with* $\Delta$ in a neighbourhood of any point corresponding to
+> a stable supercurve with only NS nodes; every point of $\iota(B)$ is such a point, so already
+> the divisors — not just the line bundles — agree near $\iota(B)$. (b) Lemma 7.10 (I12)
+> asserts that (7.8) and (7.9) "factor through the divisor $\Delta_{\rm NS}$", and its proof is
+> written for stable supercurves **with punctures** ("where we take into account all the
+> punctures on both sides", L1, p. 48). Neither is needed for Prop. 9.1, but both agree with it.
+
+> **Remark 9.3 (Ramond punctures are not Ramond nodes).** This is the point at which a reader
+> might expect trouble and finds none: $\Delta_{\rm R}$ is about Ramond **nodes** — degenerate
+> curves — whereas the $n$ Ramond **punctures** carried by the target
+> $\overline{\mathcal S}_{g;m,n}$ live in the smooth locus of every fibre and never make a
+> curve lie on $\Delta_{\rm R}$.
+
+---
+
+*(Parts §10–§11 follow.)*
