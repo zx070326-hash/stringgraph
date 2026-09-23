@@ -90,14 +90,25 @@ review_thm_4_5:
       automorphism group at every point - generically Z_2, but jumping to
       Z_2 x Z_2 at the three boundary points. A formula manifestly well behaved
       on the generic-automorphism locus can fail, or simply not have been
-      checked, at the enhanced-automorphism locus. That is exactly where
-      Witten's own text flags trouble (p.55, the "small catch" and "not
-      satisfactory at each of the divisors at infinity" remarks) and exactly
-      why he says one must "describe its orbifold structure" only AFTER giving
-      the splitting, never returning to reconcile the two. So coarse-level
-      split is necessary but not obviously sufficient, and the gap is not a
-      formality - it is the specific thing Witten marks as unresolved and
-      outsources to a non-public source.
+      checked, at the enhanced-automorphism locus.
+      !! CORRECTED BY LEAD 2026-09-23 - see lead_l1_verification below. The
+      reviewer supported this by saying Witten "flags trouble" at p.55 with the
+      "small catch" and "not satisfactory at each of the divisors at infinity"
+      remarks. Reading the actual page image, that attribution is WRONG: the
+      "small catch" is about NON-UNIQUENESS and naturality of the splitting
+      (there are three inequivalent ones, since the supersymmetric extension of
+      identity (5.11) fails, eq (5.15)), and "not satisfactory at each of the
+      divisors at infinity" is about the STRONGER "good splitting" criterion
+      pi^{-1}(p_ij) = D_ij, which Witten ties to superstring perturbation
+      theory corrections at infinity, NOT to whether the space is split at all.
+      He states splitness flatly and without hedging: "The map from hat-M_{0,4}
+      to hat-M_{0,4} = CP^1 is a splitting of hat-M_{0,4}." The extraction had
+      this right ("与 split 与否无关"); the reviewer conflated the two.
+      The residue verdict `minor` SURVIVES, but its only genuine textual
+      support is the narrower p.56 fact: Witten introduces the orbifold
+      structure only after the splitting, says the rank-0|2 normal bundle
+      "must be defined in the orbifold sense [49]" - deferring to the Deligne
+      private letter - and never returns to recheck the splitting against it.
     why_not_substantive: >-
       The ANSWER (split) was never in doubt since 1988-1992; nobody expected
       non-split. The new computational content needed to close the gap
@@ -121,9 +132,53 @@ review_thm_4_5:
     Giddings, CMP 143 (1992) 355-370 (paywalled; Project Euclid stub only)
     remain UNOBTAINED, so whether either works at supermanifold or proto-stack
     level, and compactified or not, is UNKNOWN rather than merely unconfirmed.
-    A re-fetch with a browser user-agent has been requested; if it lands, the
-    two load-bearing passages (typeset p.54-55 and p.56) get independent
-    confirmation and this caveat can be narrowed.
+    !! PARTLY LIFTED 2026-09-23 by lead_l1_verification below: the two
+    load-bearing Witten passages now HAVE independent L1 confirmation, so (a)
+    is no longer a single-source chain. The Nelson/Giddings gap stands.
+
+  # --- lead's own L1 pass, 2026-09-23, closing the caveat above -------------
+  # Done by the lead, not the reviewer, after the network failure that blocked
+  # the reviewer turned out to be defeatable (TLS interception; bypassed with
+  # `curl -sk --resolve arxiv.org:443:151.101.131.42`). Pages rendered with
+  # `pdftoppm -r 200 -f 57 -l 59 -png` and read as images - L1, not pdftotext.
+  lead_l1_verification:
+    pages_read_at_L1: >-
+      arXiv:1209.2459v3 (125-page version), PDF pp. 57/58/59 = typeset
+      pp. 54/55/56. Offset +3, same as the 106-page version the extraction
+      used, so the extraction's page citations resolve correctly.
+    extraction_transcriptions: CONFIRMED ACCURATE
+    what_was_checked_verbatim: >-
+      p.54 "The supermanifold hat-M_{0,4} has dimension 1|2. Is this
+      supermanifold split?" - the hat is present on the symbol and is
+      load-bearing (hat-M = the SUPERmoduli space, not the bosonic M_{0,4}).
+      p.55 eqs (5.13)/(5.14), the sentence "The map from hat-M_{0,4} to
+      M_{0,4} = CP^1 ... is a splitting of hat-M_{0,4}", "There is a small
+      catch", and "none of the splittings that we have described is
+      satisfactory at each of the divisors at infinity". p.56 "To understand
+      hat-M_{0,4} more deeply, one has to describe its orbifold structure",
+      the generic Z_2 enhancing to Z_2 x Z_2 at the three boundary points,
+      "this vector bundle must be defined in the orbifold sense [49]", and the
+      attribution "first described in [46] (Nelson), with more detail in [33]
+      (Giddings)".
+    net_effect_on_the_novelty_verdict: >-
+      Verdict `minor` is UNCHANGED and is now better supported, since the
+      Witten side of the collision is confirmed at L1 rather than inherited.
+      But the reviewer's REASONING for the residue was wrong and has been
+      corrected in place above (see why_coarse_does_not_imply_stack): the
+      p.55 hedges are about naturality and the "good splitting" criterion, not
+      about the orbifold/automorphism structure. The residue rests only on the
+      narrower p.56 point.
+    new_fact_neither_the_extraction_nor_the_reviewer_recorded: >-
+      Immediately after the hat-M_{0,4} discussion, p.56 says "What we have
+      said about hat-M_{0,4} extends to hat-M_{0,k} for all k >= 4" (splitness
+      of the genus-0 NS moduli, all k). So Witten's coarse-level claim covers
+      the ENTIRE g=0, r=0, n>=4 family, not just n=4. This ENLARGES the prior
+      art footprint over what prior_art_thm_4_5 records: the attempt's open
+      region "g=0 with n+r>=4 except (n,r)=(4,0)" is, in its r=0 part, already
+      claimed at coarse level by Witten. ACTION: before any g=0 NS case is
+      written up as new, check it against this sentence, not just against the
+      k=4 discussion. Ramond cases (r>=1) are NOT covered - Witten's Ramond
+      discussion is a separate subsection (5.1.4) and was not read at L1 here.
 
 # --- one-line answer -------------------------------------------------------
 answer: >-
