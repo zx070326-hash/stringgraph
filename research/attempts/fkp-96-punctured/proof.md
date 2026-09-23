@@ -1069,4 +1069,244 @@ trivialisation of $\iota^*\mathcal O(\Delta_{\rm R})$. Tensoring $\Delta=\Delta_
 
 ---
 
-*(Parts §10–§11 follow.)*
+## 10. What the supermoduli paper may assert without `[INF-NORMAL]`
+
+This section instantiates Theorem 8.1 at the indices actually used in
+`research/papers/supermoduli-punctured-nonprojected/paper.md`, states the exact replacement for
+Remark 5.8, and — this is the part that is *not* a rubber stamp — lists the two sentences of the
+paper's own justification that are **wrong as written**, even though its conclusion is right.
+
+### 10.1 The paper's indices
+
+Construction 5.3 of the paper fixes $(C,L)$ of genus $h\ge2$ with $L^{\otimes2}\cong\omega_C$,
+$H^0(L)=0$, and a tail $\xi=(F,N;q,y_1,\dots,y_n;\rho_1,\dots,\rho_{2r})$, and sets
+$$\mathcal B:=\mathfrak S^+_{h;1,0}\times\mathfrak S_{a;n+1,2r},\qquad
+\Gamma\colon\mathcal B\to\overline{\mathfrak S}_{g;n,2r}\ \ (g=h+a),$$
+declaring $\Gamma$ to be [FKP, (7.8)] with $g_1=h,\ m_1=0,\ n_1=0;\ g_2=a,\ m_2=n,\ n_2=2r$.
+
+> **Corollary 10.1 (Theorem 8.1 at the paper's indices).** Assume the paper's standing hypotheses
+> $h\ge2$ and (P2) $2a-2+(n+1)+2r>0$. Then
+> $$\Gamma^*\mathcal O(\Delta_{\rm NS})\ \cong\ \Gamma^*\mathcal O(\Delta)\ \cong\
+> \Psi_1^{-1}\otimes\Psi_2^{-1}$$
+> as line bundles of rank $1|0$ on $\mathcal B$, canonically up to the sign of Remark 8.2, where
+> $\Psi_1$ is the psi-line of the NS puncture of the first factor and $\Psi_2$ that of $q$ on the
+> second.
+
+*Proof.* The hypotheses of Theorem 8.1 are met:
+
+- $(g_1;m_1{+}1,n_1)=(h;1,0)$ is stable, since $2h-2+1>0$ for $h\ge2$;
+- $(g_2;m_2{+}1,n_2)=(a;n+1,2r)$ is stable, since $2a-2+(n+1)+2r>0$ is exactly the paper's (P2);
+- $n_1=0$ and $n_2=2r$ are both even, as Theorem 8.1 requires;
+- the target is $\overline{\mathcal S}_{h+a;\,0+n,\,0+2r}=\overline{\mathcal S}_{g;n,2r}$, which is
+  the paper's target;
+- $\mathcal B$ is a product of two *uncompactified* factors, so $\Gamma$ lands in the image of the
+  smooth locus, which is where $\iota$ of Theorem 8.1 is defined. (The paper states this itself in
+  Lemma 5.5(a).)
+
+Finally $\mathcal B$ is not quite the $B$ of Theorem 8.1: the first factor is the even-parity piece
+$\mathfrak S^+_{h;1,0}\subseteq\mathcal S_{h;1,0}$. That is irrelevant. Writing
+$\jmath\colon\mathcal B\to B$ for the inclusion, $\Gamma=\iota\circ\jmath$ by construction, so
+$\Gamma^*=\jmath^*\iota^*$ and the isomorphism of Theorem 8.1 pulls back. (No property of $\jmath$
+beyond its being a morphism is used; that spin parity is a deformation invariant, hence that
+$\jmath$ is an open and closed immersion, is true but not needed.) $\square$
+
+> **Lemma 10.2 (the psi-lines really do factor).** In the situation of Cor. 10.1, with
+> $\mathrm{pr}_i\colon\mathcal B\to\mathcal S_i$ the two projections and $\Psi_{P_i}$ the psi-line
+> of the marked NS puncture on the $i$-th factor,
+> $$\Psi_1\cong\mathrm{pr}_1^*\Psi_{P_1},\qquad\Psi_2\cong\mathrm{pr}_2^*\Psi_{P_2}.$$
+
+*Proof.* The paper asserts this in the third paragraph of Lemma 5.5(a); since it is used to route
+$\Psi_1$ to the first factor and $\Psi_2$ to the tail, I verify it. By [FKP, Remark 8.10] (I15, L1
+p. 57), $\Psi_i^{-1}\simeq P_i^*\omega_{\widetilde X/B}(D_i)$. For a separating node
+$\widetilde X=\mathrm{pr}_1^*\widetilde X_1\sqcup\mathrm{pr}_2^*\widetilde X_2$ as super schemes
+over $B=\mathcal S_1\times\mathcal S_2$, and each $\mathrm{pr}_i$ is flat (it is a projection of a
+product of smooth stacks), so relative dualising sheaves commute with the base change
+$\mathrm{pr}_i$:
+$\omega_{\widetilde X/B}\big|_{\mathrm{pr}_i^*\widetilde X_i}
+\cong\mathrm{pr}_i^*\omega_{\widetilde X_i/\mathcal S_i}$. The divisor $D_i$ and the section $P_i$
+are likewise pulled back from the $i$-th factor. Applying $P_i^*$ to a pullback gives the pullback
+of $P_{i}^*$ computed on the factor, whence the claim. $\square$
+
+> **Remark 10.3.** The paper's parenthetical caution — that the sentence on [FKP, p. 58] about
+> $\mathcal B(\mathcal O_{\widetilde X})$ being an exterior product "must not be used for the
+> factorisation above" — is correct and is honoured here: Lemma 10.2 uses only Remark 8.10 and flat
+> base change, never $\mathcal B(\mathcal O_{\widetilde X})$. I confirmed at L1 (p. 58) that the
+> sentence in question is indeed about $\mathcal B(\mathcal O_{\widetilde X})$ and not about $\Psi$.
+
+> **Remark 10.4 (the paper's $N_{\mathcal B}$ matches [FKP]'s definition verbatim).** The paper
+> defines $N_{\mathcal B}:=\mathcal O(\Delta_{\rm NS})|_{\mathcal B}$ and calls it "the normal line
+> bundle of $\Gamma$". No independent identification with a normal bundle is owed, because [FKP]
+> define the symbol the same way: L1, p. 59, "*where $N_B$ is the normal bundle defined as the
+> pull-back of $\mathcal O(\Delta_{NS})$ to $B$*". Nothing in this attempt, and nothing in the
+> paper, uses a normal-bundle property of $N_{\mathcal B}$ beyond its being this line bundle.
+
+### 10.2 The assertion the paper is now entitled to
+
+Combining Cor. 10.1, Lemma 10.2 and the paper's own parts (b) and (c) of Lemma 5.5 — neither of
+which is touched here — the paper may state Lemma 5.5 **unconditionally**, i.e. delete the words
+"an inference" and the conditionality clause of Remark 5.8. Concretely, the sentence
+
+> *"Our use of it for the punctured target $\overline{\mathfrak S}_{g;n,2r}$ is an inference …
+> and a reader who declines to make it should read every statement of this paper as conditional on
+> it."*
+
+may be replaced by a pointer to Cor. 10.1 above. The replacement carries a price, stated in §10.3
+and §10.4, and it is not the price the paper currently anticipates.
+
+I emphasise what is **not** being claimed. Cor. 10.1 concerns only Lemma 5.5(a). Parts (b) and (c)
+are untouched: (b) is [CN]'s argument on the unpunctured first factor via [FKP, Example 8.9], and
+(c) is the observation that $\mathfrak n$ is a line because the tail is constant. This attempt
+supplies **no** information about $\mathfrak n$ (see G4 in §11), and the paper's Remark 5.7 —
+which quarantines all Ramond difficulty inside $\mathfrak n$ and never computes it — remains both
+necessary and correct.
+
+### 10.3 Two sentences of the paper that are wrong as written
+
+Retracting `[INF-NORMAL]` is not simply deleting a caveat: the *reason* the paper gives for its
+inference does not survive contact with the source.
+
+**(A) "No puncture enters this derivation" (Lemma 5.5(a), Route 2 bullet) is false.** Punctures
+enter route 2 in three places, all of which had to be dealt with above:
+
+1. *The existence of $\Gamma$ itself.* $\Gamma$ is [FKP, (7.8)] with $n_2=2r$ Ramond punctures; the
+   map is well defined only because the glued object is a stable supercurve, which is [FKP,
+   Lemma 7.9], whose printed proof invokes $L\cong\underline{\operatorname{Hom}}(L,\omega_C)$ — the
+   $r=0$ case of (2.5). See §4, defect **[E2]**, repaired by Prop. 4.3 / Cor. 4.4.
+2. *The proof of Lemma 9.1(iv).* L1, p. 60: "*(iv) This follows from parts (i), (ii) and from the
+   exact sequence (7.1)…*". Sequence (7.1) as printed is the $R=\varnothing$ specialisation and is
+   **false** when $R\neq\varnothing$. See §5, defect **[E1]**, repaired by Lemma 5.1 of this note
+   (the twisted sequence (7.1-R)) and Prop. 6.2.
+3. *The final step of route 2.* L1, p. 60: "*Finally the exact sequence
+   $0\to\omega^2_{\widetilde X/B}\to\Omega_{\widetilde X/B}\to\omega_{\widetilde X/B}\to0$ near
+   $D_1,D_2$, together with Lemma 8.7…*". This is again the untwisted sequence; it is legitimate
+   only because [FKP] restrict it to a neighbourhood of $D_1,D_2$, which is disjoint from $R$ —
+   exactly Cor. 5.2. With punctures present one must also know $\mathcal O(R)|_{D_i}$ is canonically
+   trivial and that the spectator divisors miss $D_i$. See Prop. 7.1.
+
+So the correct statement is not "no puncture enters" but "**punctures enter three times and each
+contribution is canonically trivial**". The distinction is not pedantry: item 2 is a place where
+[FKP]'s printed argument is *incorrect* in the punctured setting, and an author who believed "no
+puncture enters" would have had no reason to look.
+
+**(B) The ground given in Remark 5.8 — "the locality of the node singularity" — is insufficient by
+itself.** That $\mathcal K$ and $\widetilde{\mathcal C}$ are "supported on the node" bounds where the
+*comparison* sheaves live, but the objects being compared are
+$\operatorname{Ber}R\pi_*(-)$, which is a global invariant of the whole fibre: a statement about the
+support of a kernel and cokernel does not by itself imply that the two Berezinians differ by a
+node-local factor, since one still needs the two outer terms to be flat, the sequences to exist
+globally on $X_B$, and the Berezinians of the comparison sheaves to be computed. The ground that
+does work is different and stronger:
+
+- **Lemma 3.1 (puncture-blindness of the input).** The complex $[\Omega_{X/S}\to j_*\Omega_{U/S}]$,
+  the line bundle $\mathcal B$, its canonical trivialisation $c$, and hence $\Delta$ and (7.6),
+  are constructed from $\pi\colon X\to S$ alone. The punctures enter a supercurve only through the
+  derivation $\delta$ and the divisor $R$, and neither appears anywhere in that construction. This,
+  not locality, is why (7.6) transports to a punctured target (Prop. 3.5).
+- **Lemma 3.3 + Cor. 3.4 (the hypothesis of Prop. 7.4 holds on the punctured stack)**, which is the
+  only other thing (7.6) needs. This I did verify at L1: the proof of [FKP, Prop. 7.4] (pp. 44–45)
+  works "*in an étale neighborhood of a point on $S$ corresponding to a stable supercurve with one
+  node*" and chooses a relative Cartier divisor $D$ "*disjoint from the node*"; no puncture
+  hypothesis, no use of $\delta$ or $R$, occurs in it.
+
+### 10.4 What the retraction costs: an inherited debt to [FKP]
+
+If the paper retracts `[INF-NORMAL]` by citing Cor. 10.1, it inherits §§4–5 of this attempt as part
+of the cited content, i.e. it inherits two corrections to [FKP]:
+
+- **[E1]** [FKP, (7.1)] should read $0\to\omega^2_{X/S}(R)\to j_*\Omega_{U/S}\to\omega_{X/S}(R)\to0$.
+  As printed the sequence is stated without the twist in a section whose supercurves may carry
+  Ramond divisors. Consumers: Lemma 9.1(iv) only, within the (9.6) chain.
+- **[E2]** [FKP, Lemma 7.9] is proved only for $R=\varnothing$. The statement is true in general
+  (Prop. 4.3), but the printed proof is not a proof of it.
+
+Neither is the paper's error — the paper cites statements that [FKP] do make, with the indices that
+[FKP] do allow in (7.8)/(7.9). They are defects in the source. But an unconditional Lemma 5.5 rests
+on them, so an honest paper should name them rather than let them be invisible. My recommendation is
+a short remark, e.g. `[FKP-ERRATA]`, next to Construction 5.3 and Lemma 5.5, citing this attempt.
+
+> **Remark 10.5 (was the caution in Remark 5.8 warranted?).** Yes, and more so than its author
+> thought, though for a different reason. Textually, [FKP]'s §9.1 does *not* restrict the number of
+> punctures: the setup sentence (I16) says "*one of the maps (7.8) or (7.9)*", and (7.8)/(7.9) carry
+> general $(m_i,n_i)$; Lemma 9.1 and the route-2 computation on p. 60 are likewise index-free; and
+> the proof of Theorem B immediately above, on the same page, sets
+> $\overline{\mathcal S}=\overline{\mathcal S}_{g,n_{NS},n_R}$ (L1, p. 58). So a literal reader could
+> argue (9.6) *is* stated in the punctured generality. Against that: [FKP]'s own Theorem C is stated
+> for $\overline{\mathcal S}_g$, and their route 1 visibly specialises to no NS punctures — L1,
+> p. 58: "*We can rewrite (8.11) near $B$ as an isomorphism
+> $K_{\overline{\mathcal S}}(2\Delta_{NS})\simeq\mathcal B(\mathcal O_X)^5$*", which drops the factor
+> $\bigotimes_{i=1}^m\Psi_i$ of (8.11) and can only hold for $m=0$; and p. 59 top,
+> "$K_B\simeq\mathcal B(\mathcal O_{\widetilde X})^5\otimes\Psi_1\otimes\Psi_2$", with only the two
+> glued psi-lines present. So [FKP] had the unpunctured case in view even where the prose did not say
+> so. **The decisive point, however, is neither textual: route 2's proof of Lemma 9.1(iv) really is
+> defective for $R\neq\varnothing$.** The inference was therefore not a free lunch, and declaring
+> it "solid because nothing punctured enters" would have been a mistake. It is solid because §§3–8
+> above prove it.
+
+> **Remark 10.6 (the paper's assessment of route 1 is confirmed).** The paper declines route 1 and
+> says it "*does survive the introduction of punctures, but not for free*", needing the spectator
+> psi-lines to cancel and needing $\mathcal O(\Delta_R)|_B\cong\mathcal O_B$. Both halves are
+> confirmed at L1: the missing $\bigotimes_{i=1}^m\Psi_i$ is exactly the spectator cancellation
+> (Remark 10.5), and the $\Delta_R$ term of (8.11) is likewise silently dropped on p. 58. The second
+> half is now a theorem anyway — Prop. 9.1 — but the first half remains unverified here, so route 1
+> stays unavailable; the paper is right not to use it.
+
+### 10.5 What the paper may still **not** assert on the strength of this attempt
+
+1. Anything about the value of $\mathfrak n=(\Psi_2^{-1})|_\xi$. [FKP, Example 8.9] is genuinely
+   NS-only and is not extended here. Lemma 5.5(c) and Remark 5.7 must stay as they are.
+2. Anything obtained through [FKP, (8.11)] with $m>0$ (route 1).
+3. Anything from [FKP, §9.3] (the Ramond boundary component), which [FKP] themselves state as a
+   conjecture.
+4. [FKP, Theorem C] for a punctured target — Remark 5.6 of the paper is correct and should stay.
+   Cor. 10.1 supplies the normal-line formula, which is what Theorem C would have supplied, but it
+   does not supply Theorem C's splitting statement.
+
+---
+
+## 11. Remaining gaps
+
+These are the honest residual dependencies. None is a hole in the logic of §§3–9 as such; each is a
+place where I use a statement of [FKP] whose own proof I did not read at L1, or where a hypothesis
+was verified only indirectly. I state them so that a reviewer can price them.
+
+- **[GAP-G1: [FKP] §6.2 unread at L1.]** Lemma 9.1(i) is proved by placing oneself "*in the framework
+  of Sec. 6.2*" and using a generator $e$ of $\omega^2_{X/S}$ from (6.13); Lemma 9.1(ii) uses
+  Lemma 6.4 and the relations (6.11). I use (i) and (ii) as black boxes (Prop. 6.1) and argue they
+  transport to the punctured setting because they are computations in an étale neighbourhood of the
+  node. That transport rests on a single L1 sentence, [FKP] §6.4 (I13), to the effect that adding
+  punctures does not change the local picture near the nodes. I did **not** read pp. 33–40. *Risk:
+  low — §6.2's objects are the local models of a node, and punctures are disjoint from nodes. What
+  would close it: read [FKP] pp. 33–40 at L1 and check that no step assumes $R=\varnothing$.*
+- **[GAP-G2: proofs of Lemma 8.7 / Cor. 8.8 / Remark 8.10 unread at L1.]** I verified at L1 (p. 56)
+  that the §8.4 setup declares both NS punctures $D_i$ and Ramond divisors $R_j$, so the
+  *statements* are made in the punctured generality — this is the part of `[GAP-FKP-RAMOND]` that
+  turns out not to bite. I did not read their proofs. *Risk: low — all three are computations on
+  $D_i$, which is disjoint from $R$.*
+- **[GAP-G3: signs.]** Every isomorphism above is canonical only up to the ordering ambiguity in the
+  multiplicativity of $\operatorname{Ber}$ (Remark 8.2). [FKP] work under the same proviso. The
+  isomorphism class, which is all the supermoduli paper consumes, is unaffected. *Not closable
+  without fixing a sign convention for $\operatorname{Ber}$ in short exact sequences, which [FKP] do
+  not do either.*
+- **[GAP-G4: `[GAP-FKP-RAMOND]` survives at Example 8.9.]** [FKP, Example 8.9] identifies the
+  inverse NS psi-line with the spin line over an even base, and is stated for families with NS
+  punctures only. Nothing here extends it to $R\neq\varnothing$. This is the one genuinely
+  unrepaired Ramond gap in the chain, and the supermoduli paper's Lemma 5.5(c) is built precisely to
+  avoid needing it.
+- **[GAP-G5: [FKP] Theorem A used as a black box.]** Smoothness and representability of
+  $\overline{\mathcal S}_{g;m,n}$ enter twice: in Lemma 3.3 (the hypothesis of Prop. 7.4) and in
+  Cor. 3.4 (the extension $\mathcal V\to k_*k^*\mathcal V$ across the codimension-$>1$ multi-node
+  locus, L1 p. 45). This is [FKP]'s main theorem and I do not audit it.
+- **[GAP-G6: [FKP] Lemmas 7.2(ii), 7.3 used as black boxes.]** They appear inside the proofs of
+  Lemma 9.1(iii) and of the Ramond-node case of Prop. 7.4. Both proofs are visibly local at the node
+  (L1, pp. 45, 60), hence puncture-blind, but the lemmas' own proofs are unread.
+- **[GAP-G7: Theorem 8.3 (non-separating) is thinner than Theorem 8.1.]** Its proof proceeds by
+  checking that each ingredient of §§3–7 was written so as to cover (7.9), and by extending
+  Lemma 4.1 from a closed branch embedding to the partial normalisation. I believe it, and the
+  supermoduli paper does not use it (its $\Gamma$ is (7.8)). A reviewer wanting to rely on
+  Theorem 8.3 should re-derive §§6–7 for (7.9) explicitly rather than by inspection.
+
+No `[GAP]` above is load-bearing for Cor. 10.1 in the following sense: G1, G2, G5, G6 are appeals to
+[FKP]'s published statements, which the supermoduli paper is entitled to cite anyway; G3 is a
+convention; G4 is not used; G7 concerns a case the paper does not use. The genuinely new content of
+this attempt — Lemma 3.1, Prop. 3.5, Prop. 4.3, Lemma 5.1 (the twisted (7.1-R)), Prop. 6.2,
+Prop. 7.1, Prop. 9.1 — is proved here from those statements without further appeal.
