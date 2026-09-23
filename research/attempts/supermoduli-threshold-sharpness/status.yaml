@@ -6,9 +6,64 @@ opened: 2026-09-23
 author: theorem-prover agent (branch agent/prover/supermoduli-threshold-sharpness)
 
 state: under-review
-reviewer: null
-verdict: null
+reviewer: reviewer agent "thm45rev", dispatched by lead 2026-09-23 (read-only;
+  verdict transcribed into this file by lead)
+verdict: null  # pending: novelty half of the review, see review_thm_4_5 below
 captain_confirmed: false
+
+# --- REVIEW OF THM 4.5, round 1, 2026-09-23 --------------------------------
+# First adversarial review this attempt has received (reviewer was null until
+# now). Two independent questions were asked: is Thm 4.5 correct, and what is
+# left of it after the Witten prior art recorded in prior_art_thm_4_5 below.
+review_thm_4_5:
+  correctness:
+    verdict: correct-with-gaps
+    no_error_found: >-
+      The reviewer traced the full chain at proof.md:201-425 and found NO
+      computational mistake. Checks that came back clean: rank T_- = 2g-2+n+r
+      = 2 for (0;4,0), so [K2]'s iff genuinely applies rather than only the
+      one-directional half (proof.md:410); Lemma 4.2's weight-0 descent, where
+      -1 acts on L hence on L^3 with weight 1 and Lambda^2 of a weight-1 rank-2
+      bundle is weight 0, and T_X = rho^* T_calX because mu_2 -> X -> calX is
+      etale; the rank self-check T_-^v = h^0(O(1)) = 2 (proof.md:286-287); the
+      root-stack canonical degree deg omega_calX = -2 + 3*(1/2) = -1/2, which
+      is the standard mu_2-root-stack-at-3-points formula and is independently
+      cross-checked against div(d lambda) at proof.md:375-379 - the reviewer
+      judged that cross-check a genuine non-trivial internal test, not
+      decoration; and the Serre-duality vanishing, deg omega_calX^3 = -3/2 < 0
+      => H^0 = 0 => H^1 = 0, standard for a tame proper stacky curve.
+    gaps_remaining:
+      - id: R-1
+        where: proof.md:254-260 (the attempt's own GAP-1)
+        what: >-
+          The identification of X -> calX as precisely the mu_2-root stack
+          (tau^2 = t, residual automorphism tau -> -tau) is IMPORTED from [K8],
+          not re-derived from FKP. The general shape - spin-curve moduli near a
+          node acquiring root-stack structure - is standard in the twisted-curve
+          literature (Abramovich-Jarvis, Chiodo), so it is plausible, but the
+          reviewer did not re-derive it. IMPORTANT: the attempt's own
+          robustness argument (a half-integral local order is impossible on a
+          scheme) is only PARTIAL mitigation - it establishes that the
+          ramification is divisible by 2, NOT that the stack is exactly the
+          diagonal-rigidified root stack claimed.
+      - id: R-2
+        where: proof.md:289-391 (Prop. 4.3, the explicit frame computation)
+        what: >-
+          Not redone from scratch by the reviewer. What WAS checked is internal
+          consistency: the three independently derived local orders
+          (-1/2, -1/2, +3/2) at lambda = 0, 1, infinity reproduce -div(d lambda)
+          POINTWISE, not merely in total degree, and nothing in the setup forces
+          that a priori. With Remark 4.6's margin (threshold needs deg > -1, the
+          computed value is +1/2, and even a grossly wrong fallback of -4 would
+          not break the theorem) the reviewer rates this plausible with
+          reasonably high confidence but NOT independently confirmed.
+      - id: R-3
+        where: claim.md:52
+        what: >-
+          Sourcing only, not correctness. [K2] is cited solely as [CN Prop 2.2];
+          the same fact is a numbered Donagi-Witten result (Cor. 2.3,
+          arXiv:1304.7798 p.19), which is older and arguably the primary source.
+          Add it.
 
 # --- one-line answer -------------------------------------------------------
 answer: >-
