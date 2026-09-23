@@ -145,6 +145,18 @@ So (ii) is literally "the $r=0$ instance of (2.5)", and it is asserted as if it 
 generalized spin structure — which it is only when $r=0$. This is the precise, and correct, form of
 the observation. The scope of the defect is item (ii), and it propagates to (i) and (iii).
 
+**Forensic note: where the wrong formula was copied from.** [FKP, Remark 2.3, p. 5] contains, for a
+smooth supercurve over an even base and with **no mention of $R$**, verbatim:
+
+> so the odd part of the derivation $\delta$ induces an isomorphism $L\xrightarrow{\ \sim\ }
+> \underline{\mathrm{Hom}}(L,\omega_C)$, or equivalently $L^2\xrightarrow{\ \sim\ }\omega_C$.
+
+That is character-for-character the formula the proof of Lemma 7.9 calls "generalized spin
+structure". So the proof is echoing **Remark 2.3** (the unpunctured §2.2 discussion) where it should
+be echoing **(2.5)** (the punctured Lemma 2.6, two pages later). This is a copying slip between two
+formulas in the same paper, not a conceptual error, and it is one more reason to expect — as turns
+out to be the case — that the statement survives once the right formula is substituted.
+
 ### 1.5 Standard facts imported
 
 * **[S1] (Rosenlicht / Serre).** A nodal curve $Z_0$ over an algebraically closed field is Gorenstein;
@@ -678,6 +690,40 @@ punctures and one further $-R$ for fixing the Ramond divisors — i.e. $K=\omega
 (7.1$_R$). This is numerology rather than proof, but it is consistent, whereas $K=\omega^2$ would
 require the Ramond-fixing condition to cost $-2R$ in one step.
 
+### 10.2bis Decisive confirmation: FKP already print (7.1$_R$) on p. 5
+
+After deriving Proposition 10.1 I checked [FKP, §2.2, p. 5] and found the punctured sequence
+**printed there in full generality**, verbatim:
+
+> In the above situation the map $D_1\otimes D_2\mapsto\frac12[D_1,D_2]$ induces an isomorphism
+> $$\mathcal D^{\otimes2}\xrightarrow{\ \sim\ }\mathcal T_{X/S}/\mathcal D(-R).\tag{2.2}$$
+> Thus, we have an exact sequence
+> $$0\to\mathcal D\to\mathcal T_{X/S}\to\mathcal D^{\otimes2}(R)\to0,$$
+> or dually,
+> $$0\to\mathcal D^{-2}(-R)\to\Omega_{X/S}\to\mathcal D^{-1}\to0.$$
+> From this we get an isomorphism $\omega_{X/S}:=\mathrm{Ber}(\Omega_{X/S})\simeq\mathcal D^{-1}(-R)$,
+> or equivalently,
+> $$\mathcal D\simeq\omega^{-1}_{X/S}(-R).\tag{2.3}$$
+> Hence, taking the dual of the embedding $\mathcal D\to\mathcal T_{X/S}$, we get a surjective
+> morphism
+> $$\delta:\Omega_{X/S}\to\mathcal D^{-1}\simeq\omega_{X/S}(R),$$
+> […] Equivalently, we can view $\delta$ as a derivation $\mathcal O_X\to\omega_{X/S}(R)$, trivial
+> on $\mathcal O_S$.
+
+Substituting (2.3): $\mathcal D^{-1}=\omega_{X/S}(R)$ and
+$\mathcal D^{-2}(-R)=\omega^2_{X/S}(2R)(-R)=\omega^2_{X/S}(R)$, so FKP's own dual sequence **is**
+$$0\to\omega^2_{X/S}(R)\to\Omega_{X/S}\to\omega_{X/S}(R)\to0,$$
+in exact agreement with Proposition 10.1. This makes the verdict certain and closes the question:
+
+* **The mathematics of (7.1$_R$) is FKP's own, from p. 5.** My §10.2(a)(b) is an independent
+  re-derivation of it; the two agree.
+* **(7.1) is therefore not a misprint but a specialization.** §7.1 opens with "Since $U/S$ is a
+  smooth supercurve, we have an exact sequence …", which is a back-reference to precisely the p. 5
+  sequence — taken at $R=\varnothing$, consistently with §7.1's own hypothesis line ("a family of
+  stable supercurves", no punctures) and with the NS normal form in its displayed local formulas.
+  What is missing is the sentence "and with punctures the same sequence reads (7.1$_R$)" at the point
+  where Lemma 9.1(iv) needs it.
+
 ### 10.3 Does the scope gap damage Lemma 9.1(iv), hence (9.6)?
 
 No, and for the *same reason* as in §8: the twist enters **symmetrically and cancels**.
@@ -709,3 +755,18 @@ under (7.1$_R$).
   the present write-up checks their $R$-dependence (nil) but does not re-derive [FKP]'s
   base-change/flatness bookkeeping.
 - Nothing here bears on [FKP, §7.6] (Ramond-node gluing), and §8 explains why it cannot.
+- **[GAP: the last arrow of Lemma 7.9's display is never named by FKP]** The composite defining
+  $\delta_Z$ ends in an unlabelled arrow $j_*\omega_{X/S}\oplus j'_*\omega_{X'/S}\to\omega_{Z/S}$
+  ([FKP], p. 47). FKP do not say which map this is. §4.4 and §6.1 take it to be the canonical
+  residue-free (trace) inclusion of the branch dualizing sheaves — the only natural candidate, and
+  the one under which the lemma is true. Worth noting that this inclusion is **injective but not
+  surjective**: at the node its image is $(u)\eta\oplus(v)\eta\subsetneq A\eta$, of colength one.
+  This is harmless, and in fact necessary: $\omega_Z(R^Z)^-$ is exactly
+  $\underline{\mathrm{Hom}}(\mathcal F,\omega_{Z_0}(D))$, whose stalk at $z$ is that same proper
+  submodule (§5.2, (5.4)), so $\delta^-_Z$ lands on the nose. But the identification of FKP's arrow
+  is an interpretive step, not a quoted one.
+- **[GAP: Remark 2.3 vs (2.5)]** §1.4's forensic note observes that [FKP, Remark 2.3, p. 5] prints
+  $L^2\xrightarrow{\sim}\omega_C$ untwisted for "a smooth supercurve over an even base", without
+  restricting to $R=\varnothing$ in its hypothesis line. Either Remark 2.3 is tacitly unpunctured,
+  or it carries the same omission as Lemma 7.9's proof. I have not resolved which; nothing in this
+  write-up depends on Remark 2.3 (everything uses (2.5), p. 7).
