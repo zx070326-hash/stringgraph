@@ -8,7 +8,12 @@ author: theorem-prover agent (branch agent/prover/supermoduli-threshold-sharpnes
 state: under-review
 reviewer: reviewer agent "thm45rev", dispatched by lead 2026-09-23 (read-only;
   verdict transcribed into this file by lead)
-verdict: null  # pending: novelty half of the review, see review_thm_4_5 below
+verdict: >-
+  Thm 4.5 correct-with-gaps; its novelty residue over Witten section 5.1.3 is
+  MINOR but real. See review_thm_4_5. NOT yet `verified` — the review's
+  literature half was not independently sourced (see
+  review_thm_4_5.reviewer_verification_limits, which is the part of this
+  review a reader should weigh most heavily).
 captain_confirmed: false
 
 # --- REVIEW OF THM 4.5, round 1, 2026-09-23 --------------------------------
@@ -64,6 +69,61 @@ review_thm_4_5:
           the same fact is a numbered Donagi-Witten result (Cor. 2.3,
           arXiv:1304.7798 p.19), which is older and arguably the primary source.
           Add it.
+  novelty:
+    verdict: minor
+    residue_one_sentence: >-
+      Witten (section 5.1.3, attributing priority to Nelson 1988 and Giddings
+      1992) gives an explicit holomorphic retraction of hat-M_{0,4} at the
+      coordinate/coarse level via the super cross ratio (5.13), but explicitly
+      declines to check that this retraction respects the automorphism-jumping
+      (Z_2 -> Z_2 x Z_2) orbifold structure he introduces only afterward,
+      deferring exactly that to an unpublished, non-citable private letter
+      (Deligne to Witten, his ref [49]); Thm 4.5 is the first complete,
+      citable, stack-theoretically rigorous proof of the same conclusion, via
+      mu_2-gerbe identification plus omega_2-vanishing, in a formalism (FKP's
+      DM superstack) that postdates Nelson/Giddings by decades.
+    why_coarse_does_not_imply_stack: >-
+      "Split" for a DM superstack means X_frak = Tot(Pi E) for an odd bundle E
+      on the STACK X = X_frak_bos, not on its coarse space. An explicit map
+      pi : hat-M_{0,4} -> CP^1 written in coordinates (z_i, theta_i) defines a
+      genuine stack-level retraction only if it is equivariant for the FULL
+      automorphism group at every point - generically Z_2, but jumping to
+      Z_2 x Z_2 at the three boundary points. A formula manifestly well behaved
+      on the generic-automorphism locus can fail, or simply not have been
+      checked, at the enhanced-automorphism locus. That is exactly where
+      Witten's own text flags trouble (p.55, the "small catch" and "not
+      satisfactory at each of the divisors at infinity" remarks) and exactly
+      why he says one must "describe its orbifold structure" only AFTER giving
+      the splitting, never returning to reconcile the two. So coarse-level
+      split is necessary but not obviously sufficient, and the gap is not a
+      formality - it is the specific thing Witten marks as unresolved and
+      outsources to a non-public source.
+    why_not_substantive: >-
+      The ANSWER (split) was never in doubt since 1988-1992; nobody expected
+      non-split. The new computational content needed to close the gap
+      (Lemma 4.1's root-stack identification plus Prop. 4.3's degree
+      computation) is a routine if lengthy application of standard root-stack
+      and Serre-duality technique - not a new method, not a new phenomenon. It
+      upgrades rigor and precision; it does not discover anything surprising.
+  # ---- READ THIS BEFORE USING THE NOVELTY VERDICT ABOVE -------------------
+  reviewer_verification_limits: >-
+    The reviewer verified ZERO pages at L1 this round, and said so unprompted.
+    Its arXiv fetches (arxiv.org/pdf/1209.2459 and export.arxiv.org/...) each
+    returned an HTML captcha/block page or an empty file. So the novelty half
+    of this review rests entirely on (a) the L1 verification CLAIMED by
+    literature/extractions/supermoduli-genus0-splitness-prior-art.md and (b)
+    the reviewer's own background recollection of Witten's paper, which it
+    described as consistent with, but not independent of, that extraction.
+    Consequence: the novelty verdict is NOT a second independent confirmation
+    of the Witten quotes - it is an interpretation layered on a single source
+    chain. The correctness half (proof.md is a local file) is unaffected.
+    Nelson (Superstrings '88, World Scientific, no arXiv, no public scan) and
+    Giddings, CMP 143 (1992) 355-370 (paywalled; Project Euclid stub only)
+    remain UNOBTAINED, so whether either works at supermanifold or proto-stack
+    level, and compactified or not, is UNKNOWN rather than merely unconfirmed.
+    A re-fetch with a browser user-agent has been requested; if it lands, the
+    two load-bearing passages (typeset p.54-55 and p.56) get independent
+    confirmation and this caveat can be narrowed.
 
 # --- one-line answer -------------------------------------------------------
 answer: >-
