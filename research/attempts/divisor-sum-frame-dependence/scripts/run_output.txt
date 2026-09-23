@@ -1,0 +1,247 @@
+
+====================================================================================================
+SELF-TESTS
+====================================================================================================
+  reduce_gl is an SL(2,Z)-class function and idempotent: OK
+  content is a class invariant: OK
+  chain class depends only on H (not on the lift of (x,y)): OK
+  class numbers h(D) match tables: OK
+
+====================================================================================================
+THE PAPER'S WITNESS (Remark 6.3):  L = (m,l,n) = (4,0,4), I = 2
+====================================================================================================
+  disc f = -64,  Delta = 64,  content = 4
+  |C_2(L)| = 3 admissible subgroups H
+    H = <(0,1) mod 2>   sample frame form (m,l,n) = (580, -136, 8)
+        chain N_s (s=1,2) as forms: [(580, -136, 8), (145, -68, 8)]  ->  GL-classes [(4, 0, 4), (1, 0, 4)]
+    H = <(1,0) mod 2>   sample frame form (m,l,n) = (580, 136, 8)
+        chain N_s (s=1,2) as forms: [(580, 136, 8), (145, 68, 8)]  ->  GL-classes [(4, 0, 4), (1, 0, 4)]
+    H = <(1,1) mod 2>   sample frame form (m,l,n) = (520, -456, 100)
+        chain N_s (s=1,2) as forms: [(520, -456, 100), (130, -228, 100)]  ->  GL-classes [(4, 0, 4), (2, 0, 2)]
+  distinct chains over all admissible frames: 2  -> [((4, 0, 4), (1, 0, 4)), ((4, 0, 4), (2, 0, 2))]
+  => frame dependent
+  classes of discriminant -Delta/4 = -16: [(1, 0, 4), (2, 0, 2)] (h_prim = 1, total = 2)
+
+====================================================================================================
+CLAIM B: the non-adapted frame evaluates d_* on a lattice OUTSIDE Lambda
+====================================================================================================
+  Lambda = U + U;  Q = 2(e1+f1),  P = e2+4f2
+  (m,n,l) = (4,4,0),  Delta = 64
+  torsion I = gcd(Q^P) = 2
+
+  frame 1 (adapted):   (Q, P)      -> (m,n,l) = (4,4,0)
+     N_2 = Z(Q/2)+ZP,  Q/2 = (1, 1, 0, 0)  in Lambda? True
+  frame 2 (NOT adapted): (-Q-P, -P) -> (m,n,l) = (8,4,8)
+     N_2' = Z(Q2/2)+ZP2,  Q2/2 = (-2, -2, -1, -4)/2  in Lambda? False
+
+  So the s=2 term of the second frame is d_* of a lattice that is NOT a sublattice
+  of the charge lattice Lambda.  That is the whole mechanism of Remark 6.3.
+
+  chains as forms:
+     frame 1: [(4, 0, 4), (1, 0, 4)] -> classes [(4, 0, 4), (1, 0, 4)]
+     frame 2: [(8, 8, 4), (2, 4, 4)] -> classes [(4, 0, 4), (2, 0, 2)]
+
+====================================================================================================
+SCAN: frame dependence vs. class number, all reduced forms with Delta <= 400
+====================================================================================================
+  cases (L, I) with at least one admissible frame: 541
+                                        h>1 all h=1
+  frame DEPENDENT                        42      0
+  frame INDEPENDENT                     447     52
+
+  'frame dependent AND all h = 1' must be empty  (this is the TRUE direction of the paper's claim): EMPTY - confirmed
+  'frame independent AND h > 1' is the counterexample box to 'exactly when': 447 cases
+     smallest 12 counterexamples (Delta, f, I, |C_I|, #values, h(Delta/s^2)):
+       Delta=48   f=(1, 0, 12)     I=2  |C_I|=1  #values=1  h=[2]
+       Delta=48   f=(2, 0, 6)      I=2  |C_I|=1  #values=1  h=[2]
+       Delta=48   f=(3, 0, 4)      I=2  |C_I|=1  #values=1  h=[2]
+       Delta=48   f=(4, 4, 4)      I=2  |C_I|=3  #values=1  h=[2]
+       Delta=48   f=(1, 0, 12)     I=4  |C_I|=1  #values=1  h=[2, 1]
+       Delta=48   f=(3, 0, 4)      I=4  |C_I|=1  #values=1  h=[2, 1]
+       Delta=60   f=(1, 0, 15)     I=2  |C_I|=1  #values=1  h=[2]
+       Delta=60   f=(2, 2, 8)      I=2  |C_I|=2  #values=1  h=[2]
+       Delta=60   f=(3, 0, 5)      I=2  |C_I|=1  #values=1  h=[2]
+       Delta=60   f=(4, 2, 4)      I=2  |C_I|=2  #values=1  h=[2]
+       Delta=64   f=(1, 0, 16)     I=2  |C_I|=1  #values=1  h=[2]
+       Delta=64   f=(2, 0, 8)      I=2  |C_I|=1  #values=1  h=[2]
+
+     of those, the ones with |C_I| >= 2 (genuinely several admissible frames, all giving the SAME value):
+       Delta=48   f=(4, 4, 4)      I=2  |C_I|=3  #values=1  h=[2]
+       Delta=60   f=(2, 2, 8)      I=2  |C_I|=2  #values=1  h=[2]
+       Delta=60   f=(4, 2, 4)      I=2  |C_I|=2  #values=1  h=[2]
+       Delta=92   f=(2, 2, 12)     I=2  |C_I|=2  #values=1  h=[2]
+       Delta=112  f=(2, 0, 14)     I=4  |C_I|=2  #values=1  h=[2, 1]
+       Delta=112  f=(4, 4, 8)      I=4  |C_I|=2  #values=1  h=[2, 1]
+       Delta=124  f=(2, 2, 16)     I=2  |C_I|=2  #values=1  h=[2]
+       Delta=156  f=(2, 2, 20)     I=2  |C_I|=2  #values=1  h=[3]
+       Delta=156  f=(6, 6, 8)      I=2  |C_I|=2  #values=1  h=[3]
+       Delta=180  f=(3, 0, 15)     I=3  |C_I|=2  #values=1  h=[2]
+       Delta=180  f=(6, 6, 9)      I=3  |C_I|=2  #values=1  h=[2]
+       Delta=188  f=(2, 2, 24)     I=2  |C_I|=2  #values=1  h=[3]
+     total with |C_I| >= 2: 48
+
+  --- the other reading: 'class number' = number of PRIMITIVE classes ---
+  (h(D) = |Pic(O_D)| counts primitive forms only; this is the STANDARD reading)
+  frame DEPENDENT with all primitive class numbers = 1: 3 cases
+  (under this reading even the 'if' direction of the paper's claim fails;
+   the paper's own witness is among these)
+       Delta=64   f=(4, 0, 4)      I=2  |C_I|=3  #values=2  h_prim=[1]  h_tot=[2]
+       Delta=112  f=(4, 4, 8)      I=2  |C_I|=3  #values=2  h_prim=[1]  h_tot=[2]
+       Delta=243  f=(9, 9, 9)      I=3  |C_I|=4  #values=2  h_prim=[1]  h_tot=[2]
+  frame INDEPENDENT with some primitive class number > 1: 390 cases (of which 43 have |C_I| >= 2)
+       Delta=60   f=(2, 2, 8)      I=2  |C_I|=2  #values=1  h_prim=[2]  h_tot=[2]
+       Delta=60   f=(4, 2, 4)      I=2  |C_I|=2  #values=1  h_prim=[2]  h_tot=[2]
+       Delta=92   f=(2, 2, 12)     I=2  |C_I|=2  #values=1  h_prim=[3]  h_tot=[2]
+       Delta=124  f=(2, 2, 16)     I=2  |C_I|=2  #values=1  h_prim=[3]  h_tot=[2]
+       Delta=156  f=(2, 2, 20)     I=2  |C_I|=2  #values=1  h_prim=[4]  h_tot=[3]
+       Delta=156  f=(6, 6, 8)      I=2  |C_I|=2  #values=1  h_prim=[4]  h_tot=[3]
+       Delta=180  f=(3, 0, 15)     I=3  |C_I|=2  #values=1  h_prim=[2]  h_tot=[2]
+       Delta=180  f=(6, 6, 9)      I=3  |C_I|=2  #values=1  h_prim=[2]  h_tot=[2]
+
+  --- frame DEPENDENT cases, smallest 12 ---
+       Delta=64   f=(4, 0, 4)      I=2  |C_I|=3  #values=2  h_tot=[2]
+       Delta=92   f=(4, 2, 6)      I=2  |C_I|=2  #values=2  h_tot=[2]
+       Delta=112  f=(4, 4, 8)      I=2  |C_I|=3  #values=2  h_tot=[2]
+       Delta=124  f=(4, 2, 8)      I=2  |C_I|=2  #values=2  h_tot=[2]
+       Delta=128  f=(4, 0, 8)      I=2  |C_I|=3  #values=3  h_tot=[3]
+       Delta=156  f=(4, 2, 10)     I=2  |C_I|=2  #values=2  h_tot=[3]
+       Delta=176  f=(4, 4, 12)     I=2  |C_I|=3  #values=2  h_tot=[3]
+       Delta=188  f=(4, 2, 12)     I=2  |C_I|=2  #values=2  h_tot=[3]
+       Delta=188  f=(6, 2, 8)      I=2  |C_I|=2  #values=2  h_tot=[3]
+       Delta=192  f=(4, 0, 12)     I=2  |C_I|=3  #values=3  h_tot=[4]
+       Delta=207  f=(6, 3, 9)      I=3  |C_I|=2  #values=2  h_tot=[2]
+       Delta=220  f=(4, 2, 14)     I=2  |C_I|=2  #values=2  h_tot=[3]
+  maximum number of distinct values of D_I observed: 3
+       Delta=128  f=(4, 0, 8)      I=2  |C_I|=3  #values=3
+       Delta=192  f=(4, 0, 12)     I=2  |C_I|=3  #values=3
+       Delta=256  f=(4, 0, 16)     I=2  |C_I|=3  #values=3
+
+====================================================================================================
+CRITERION TEST (v_p(content) = 1):  independent  <=>  [f1]^2=1 or [p]^2=1
+====================================================================================================
+  f = p*c'*f1 with f1 primitive of disc D1;  p splits in O_{D1};  |C_p| = 2.
+  cases tested: 1798
+  mismatches  : 0 
+
+  sample: (p, Delta, f, f1, D1, h(D1), [f1] amb?, [p] amb?, frame-dependent?)
+     (2, 28, (2, 2, 4), (1, 1, 2), -7, 1, True, True, False)
+     (2, 92, (2, 2, 12), (1, 1, 6), -23, 3, True, False, False)
+     (2, 92, (4, -2, 6), (2, -1, 3), -23, 3, False, False, True)
+     (3, 72, (3, 0, 6), (1, 0, 2), -8, 1, True, True, False)
+     (3, 207, (3, 3, 18), (1, 1, 6), -23, 3, True, False, False)
+     (3, 207, (6, -3, 9), (2, -1, 3), -23, 3, False, False, True)
+     (5, 100, (5, 0, 5), (1, 0, 1), -4, 1, True, True, False)
+     (5, 775, (5, 5, 40), (1, 1, 8), -31, 3, True, False, False)
+     (5, 775, (10, -5, 20), (2, -1, 4), -31, 3, False, False, True)
+     (7, 147, (7, 7, 7), (1, 1, 1), -3, 1, True, True, False)
+     (7, 1519, (7, 7, 56), (1, 1, 8), -31, 3, True, False, False)
+     (7, 1519, (14, -7, 28), (2, -1, 4), -31, 3, False, False, True)
+     (11, 847, (11, 11, 22), (1, 1, 2), -7, 1, True, True, False)
+     (13, 507, (13, 13, 13), (1, 1, 1), -3, 1, True, True, False)
+
+  KEY POINT: h(D1) is unbounded in the 'independent' rows -> class NUMBER is not
+  the criterion.  Largest h(D1) among frame-INDEPENDENT rows: 31
+  Largest h(D1) among frame-DEPENDENT rows:     31
+
+====================================================================================================
+CLAIM D: the size of C_p(L) from local data (odd p)
+====================================================================================================
+  alpha = v_p(content f), beta = v_p(Delta) - alpha;  p splits/inert in O_{-Delta/p^2}
+  p = 3
+     alpha,beta(0, 0)                 -> |C_p| in [0]
+     alpha,beta(0, 1)                 -> |C_p| in [0]
+     alpha,beta(0, 2)                 -> |C_p| in [1]
+     alpha,beta(1, 1, 'inert')        -> |C_p| in [0]
+     alpha,beta(1, 1, 'split')        -> |C_p| in [2]
+     alpha,beta(1, 2)                 -> |C_p| in [1]
+     alpha,beta(2, 2)                 -> |C_p| in [4]
+  p = 5
+     alpha,beta(0, 0)                 -> |C_p| in [0]
+     alpha,beta(0, 1)                 -> |C_p| in [0]
+     alpha,beta(0, 2)                 -> |C_p| in [1]
+     alpha,beta(1, 1, 'inert')        -> |C_p| in [0]
+     alpha,beta(1, 1, 'split')        -> |C_p| in [2]
+     alpha,beta(1, 2)                 -> |C_p| in [1]
+     alpha,beta(2, 2)                 -> |C_p| in [6]
+  p = 7
+     alpha,beta(0, 0)                 -> |C_p| in [0]
+     alpha,beta(0, 1)                 -> |C_p| in [0]
+     alpha,beta(0, 2)                 -> |C_p| in [1]
+     alpha,beta(1, 1, 'inert')        -> |C_p| in [0]
+     alpha,beta(1, 1, 'split')        -> |C_p| in [2]
+     alpha,beta(1, 2)                 -> |C_p| in [1]
+
+====================================================================================================
+CLAIM D3: p = 2
+====================================================================================================
+  #{v in {m,n,m+l+n} : 4|v}  (and l even) predicts |C_2(L)| : OK on 15159 forms
+
+====================================================================================================
+THEOREM E'' TEST (v_p(content) >= 2): N_p = (c/p^2) * (index-p sublattice of L_1)
+====================================================================================================
+  prediction: |C_p| = p+1 and the multiset of classes is the image of [f1] under
+  the classical p-Hecke correspondence, scaled by c/p^2.  A zero of f1 mod p gives
+  an IMPRIMITIVE sublattice, hence a class of different content => frame dependent.
+  p=2: 220 forms tested, 0 mismatches; 182 have a zero of f1 mod p, of which 0 are frame-independent (must be 0)
+  p=3: 19 forms tested, 0 mismatches; 14 have a zero of f1 mod p, of which 0 are frame-independent (must be 0)
+  p=5: 1 forms tested, 0 mismatches; 0 have a zero of f1 mod p, of which 0 are frame-independent (must be 0)
+
+====================================================================================================
+THEOREM E, INTERMEDIATE STEPS (checked independently of the conclusion)
+====================================================================================================
+  step (i) : the two zeros of f1 mod p give middle coefficients with
+             l1' = -l1  (mod 2p);
+  step (ii): hence the two attached prime forms (p, l1, *) are inverse classes.
+  cases tested: 5694
+  step (i)  violations: 0
+  step (ii) violations: 0
+
+  CLAIM D(1) IS FALSE AT p = 2 (the naive 'alpha=0: |C_p|=0 iff beta<=1' rule).
+  D(1) is stated for ODD p only; the sharp p=2 statement is D(4).
+  counterexamples to the naive rule at p = 2 (Delta <= 600): 494
+     Delta=4     f=(1, 0, 1)      beta=2  true |C_2| = 0  (naive rule says 1)
+     Delta=8     f=(1, 0, 2)      beta=3  true |C_2| = 0  (naive rule says 1)
+     Delta=20    f=(1, 0, 5)      beta=2  true |C_2| = 0  (naive rule says 1)
+     Delta=20    f=(2, 2, 3)      beta=2  true |C_2| = 0  (naive rule says 1)
+
+====================================================================================================
+NON-CYCLIC SATURATION QUOTIENT:  L = 2M,  M/L = (Z/2)^2,  I = [M:L] = 4
+====================================================================================================
+  If M is primitive in Lambda and L = 2M then I = gcd(Q^P) = 4 but M/L is NOT
+  cyclic, so NO adapted frame exists.  The divisor sum over s|4 still makes sense
+  in any 4-admissible frame; we compare its SHAPE with the frame-free sum
+  D(L in Lambda) = sum over L <= N <= M of [N:L] d_*(N).
+
+  intermediate lattices for M/L = (Z/2)^2: 5 of them, weights [N:L] = 1,2,2,2,4
+  divisor sum over s|4:                    3 terms,  weights 1,2,4
+
+  M = (1, 1, 2)    L = 2M = (4, 4, 8)      Delta(L) = 112
+     |C_4(L)| = 2, distinct divisor-sum chains = 1
+        divisor-sum terms (weights 1,2,4): [(4, 4, 8), (2, 2, 4), (1, 1, 2)]
+        TRUE sum   (weight, class): [(1, (4, 4, 8)), (2, (1, 0, 7)), (2, (2, 2, 4)), (2, (2, 2, 4)), (4, (1, 1, 2))]
+  M = (1, 0, 3)    L = 2M = (4, 0, 12)     Delta(L) = 192
+     |C_4(L)| = 2, distinct divisor-sum chains = 1
+        divisor-sum terms (weights 1,2,4): [(4, 0, 12), (4, 4, 4), (1, 0, 3)]
+        TRUE sum   (weight, class): [(1, (4, 0, 12)), (2, (1, 0, 12)), (2, (3, 0, 4)), (2, (4, 4, 4)), (4, (1, 0, 3))]
+  M = (1, 1, 4)    L = 2M = (4, 4, 16)     Delta(L) = 240
+     |C_4(L)| = 2, distinct divisor-sum chains = 1
+        divisor-sum terms (weights 1,2,4): [(4, 4, 16), (4, 2, 4), (1, 1, 4)]
+        TRUE sum   (weight, class): [(1, (4, 4, 16)), (2, (1, 0, 15)), (2, (4, 2, 4)), (2, (4, 2, 4)), (4, (1, 1, 4))]
+  M = (2, 1, 2)    L = 2M = (8, 4, 8)      Delta(L) = 240
+     |C_4(L)| = 2, distinct divisor-sum chains = 1
+        divisor-sum terms (weights 1,2,4): [(8, 4, 8), (2, 2, 8), (2, 1, 2)]
+        TRUE sum   (weight, class): [(1, (8, 4, 8)), (2, (2, 2, 8)), (2, (2, 2, 8)), (2, (3, 0, 5)), (4, (2, 1, 2))]
+  M = (1, 0, 4)    L = 2M = (4, 0, 16)     Delta(L) = 256
+     |C_4(L)| = 2, distinct divisor-sum chains = 2
+        divisor-sum terms (weights 1,2,4): [(4, 0, 16), (4, 0, 4), (1, 0, 4)]
+        divisor-sum terms (weights 1,2,4): [(4, 0, 16), (4, 0, 4), (2, 0, 2)]
+        TRUE sum   (weight, class): [(1, (4, 0, 16)), (2, (1, 0, 16)), (2, (4, 0, 4)), (2, (4, 4, 5)), (4, (1, 0, 4))]
+  M = (1, 1, 6)    L = 2M = (4, 4, 24)     Delta(L) = 368
+     |C_4(L)| = 2, distinct divisor-sum chains = 1
+        divisor-sum terms (weights 1,2,4): [(4, 4, 24), (4, 2, 6), (2, 1, 3)]
+        TRUE sum   (weight, class): [(1, (4, 4, 24)), (2, (1, 0, 23)), (2, (4, 2, 6)), (2, (4, 2, 6)), (4, (1, 1, 6))]
+
+  total M with Delta(M) <= 200 admitting a 4-admissible frame for L = 2M: 236
+  => whenever such a frame exists, the literature formula has the WRONG NUMBER
+     of terms (3 instead of 5) and the wrong total weight (1+2+4=7 instead of
+     1+2+2+2+4=11).  This is a failure of shape, not just of frame choice.
