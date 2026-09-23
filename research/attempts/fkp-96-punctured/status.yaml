@@ -1,4 +1,4 @@
-state: draft
+state: under-review
 reviewer: null
 verdict: null
 captain_confirmed: false
@@ -8,5 +8,35 @@ notes: |
   目标：攻掉 research/papers/supermoduli-punctured-nonprojected/paper.md 的唯一推断标注
   [INF-NORMAL]（Remark 5.8）——即 FKP (9.6) 在带穿孔靶上是否成立。
 
-  当前状态：claim.md 已写定（命题 P / P′、可用砖块 A1–A9、攻击计划五步、证据纪律）。
-  proof.md 尚未开始。尚无结论。
+  结论（结局 (a)：成立，且给出直接推导；但理由与 [INF-NORMAL] 自己给的理由不同）。
+
+  proof.md §0–§11 完成。主要产出：
+  - Thm 8.1（命题 P，分离型）与 Thm 8.3（命题 P′，不分离型）：对任意 NS 穿孔数 m 与
+    任意偶数 Ramond 穿孔数 n，ι*O(Δ_NS) ≅ ι*O(Δ) ≅ Ψ₁⁻¹⊗Ψ₂⁻¹。
+  - Cor 10.1：在论文的具体指标 (g₁=h,m₁=0,n₁=0; g₂=a,m₂=n,n₂=2r) 上实例化，
+    论文的 Lemma 5.5(a) 可以无条件化，[INF-NORMAL] 可撤。
+  - Lemma 3.1（穿孔盲性）：(7.6) 的全部输入只依赖 π，δ 与 R 从不出现——这才是 (9.6)
+    能搬到带穿孔靶上的真正理由；[INF-NORMAL] 给的理由（"节点奇点的局部性"）单独不够，
+    因为 Ber Rπ_* 是整体对象。
+  - 两条 FKP 勘误（副产品，非本项目论文的错）：
+    [E1] FKP (7.1) 印作 0→ω²→j_*Ω_U→ω→0，带 Ramond 除子时应为
+         0→ω²(R)→j_*Ω_U→ω(R)→0；唯一消费者是 Lemma 9.1(iv)（L1, p.60 明写用 (7.1)）。
+    [E2] FKP Lemma 7.9 的印刷证明只覆盖 R=∅（用了 (2.5) 的 r=0 情形）；命题本身在一般
+         情形成立，见 Prop 4.3 / Cor 4.4。
+  - 论文自身有两句话按字面是错的（但结论不受影响），见 §10.3：Lemma 5.5(a) 的
+    "No puncture enters this derivation" 假（穿孔进入三次，每次贡献都被典范抵消）；
+    Remark 5.8 给的依据不足。撤销 [INF-NORMAL] 时应连带修这两处并注明继承 [E1]/[E2]。
+
+  证据纪律：全部判据公式均以 170 dpi 渲染页图核对（L1）。已读页图：1,2,5,6,7,41,42,
+  44,45,46,47,48,56,57,58,59,60,61。pdftotext 仅用于定位页码。
+  来源 = arXiv:2006.13271v3（任务书里写的 2408.11136 是笔误，那是 [FKP2]）。
+
+  残留 [GAP]：§11 列了 G1–G7，均为「引用 FKP 已发表陈述但未在 L1 读其证明」或约定性
+  问题，没有一条对 Cor 10.1 构成承重缺口；唯一真正未修的 Ramond 缺口是 G4
+  （Example 8.9 仍只对 NS 成立），而论文的 Lemma 5.5(c) 正是为绕开它而写的。
+
+  请 lead 派 graph-reviewer 做对抗性审查。重点建议核：
+  (1) Prop 6.2 的 Berezinian-first 推导是否真的绕开了 3×3 图的交换性问题；
+  (2) Prop 4.3 中 Hom(ℒ, ω_{Z₀}(D)) ≅ ℒ 的对偶计算；
+  (3) Prop 9.1（ι(B) 上无 Ramond 节点）是否遗漏了边界情形；
+  (4) §10.3 对论文两句话的指控是否成立。
