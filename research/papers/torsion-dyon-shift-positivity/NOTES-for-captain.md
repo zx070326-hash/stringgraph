@@ -140,6 +140,52 @@ this as the single most valuable next test, and a `theorem-prover` round on it w
 2026-09-23 and is still running. **Recommendation: wait for it before submitting.** It is cheap
 insurance against a referee asking the question first.
 
+⏳ **That round (`prescale`) landed 2026-09-23 and the news is mixed.** Merged to `main` at
+`research/attempts/p-rescaling-frame-dependence/`, `state: under-review`, reviewer `prescalerev`
+dispatched the same day. What it establishes:
+
+- **Problem 9.2 is answered, and the answer does not demote the paper.** The P-rescaling sum
+  $D'_I(m,n,\ell) = D_I(n,m,\ell)$ (its Theorem A, two lines), so the P-family is the Q-family with
+  the electric and magnetic invariants exchanged, and is frame-dependent in exactly the same way —
+  $\Gamma_0(I)$-invariant where ours is $\Gamma^0(I)$ (its Theorem C). Neither family is the
+  covariant general formula the other specialises to. The demotion scenario in the paragraph above
+  does not occur.
+- **A sharper witness than anything in the paper.** Its Theorem D: under DGM plus S-duality the
+  index is not a function of $(m,n,\ell,I)$ at all — at $(4,8,8)$ with $I=2$ both a $Q$-adapted and
+  a $P$-adapted lattice exist, giving $7\,999\,235\,715\,072$ against $7\,999\,541\,469\,408$, a gap
+  of $305\,754\,336$. This needs no trust in either AN or BCP separately, which the paper's own
+  witnesses do.
+- **Its Theorem E orthogonalises two of our questions**: the signed BSS sum is *also*
+  $\Gamma^0(I)$-invariant, so the eq(51)/eq(52) sign question and the frame question are independent
+  — neither resolves the other. The paper should not be read as implying otherwise.
+- **An honest deflation it volunteered.** Its Theorem C is DGM's own §4.1, which states and proves
+  the $\Gamma^0(I)$ restriction and says outright that a different function must be used on each
+  other coset. On that reading the frame dependence in our Remark 6.3 is *DGM's own content*, not an
+  oversight of theirs. `prescalerev` is checking this self-deflation, and whether it is complete.
+  If it holds, §1 and §10's framing of the contribution needs revisiting — the finding would be that
+  six of eight papers writing a torsion divisor sum already state the restriction, and only two (AN
+  2009.01172 eq. (2.13), CNR 2007.10302 §3.7) need one sentence's hypothesis tightened, **with no
+  computed number wrong in either**.
+
+**Three corrections it reports to files outside its own write scope, all touching this paper.** None
+is applied yet; `prescalerev` was asked to confirm each independently, because they will drive edits
+to a manuscript we intend to submit and the finder should not also be the confirmer:
+
+1. Our §9 (now around `paper.md:477`, Problem 9.2) attributes the P-rescaling family to BSS
+   (0802.0544). **BSS is Q-rescaling**; the P-family is AN 2009.01172 and BCP 1806.03330. If
+   confirmed this is a straight misattribution in a sentence that names a specific paper.
+2. Our §4 $(\rho,\sigma,v)$ dictionary picks the right *slots* but silently identifies the electric
+   with the magnetic invariant (our $\rho$ carries $Q^2/2$ where AN's $\sigma$ carries $P^2/2$).
+   Theorem 4.1 survives as a $\Phi_{10}$ identity either way, but **"AN corrects DGM" would not
+   follow from AN alone** — and that inference is in the abstract, item (B).
+3. `literature/extractions/dgm-eq51-eq52-third-party-crosscheck.md` §E1/E2 reads the
+   "$\check v + 1/2$" in BSS eq. (4) as independent support for a half-integer shift. It is a
+   periodisation term that BSS undo in their eq. (7); no shift survives. That extraction is one of
+   the supports under abstract item (B).
+
+**Recommendation: do not submit before `prescalerev` returns.** Items 2 and 3 both sit under abstract
+item (B); if they are confirmed, the abstract changes.
+
 ### 4.4 The benchmark degeneracies are stated as computed, not quoted
 
 The five values 50064 / 32861184 / 632078672 / 9337042944 / 113477152800 circulate in the 1/4-BPS
@@ -208,6 +254,22 @@ cost of learning the answer from a referee is much higher than the cost of waiti
    open problem and becomes a theorem — which would be a materially stronger paper and is worth
    waiting for. It also carries an unresolved `[GAP-INJ]` affecting only the frame-*dependence*
    direction, not the frame-independence results the paper currently states.
+
+   ✅ **`framedeprev` returned 2026-09-23. Verdict: the mathematics stands** — no error in Theorems
+   A, B, C1, C3 (sufficiency), D, E, E″ or Prop 7.1. `state: verified`. But it also found **four
+   false claims the attempt made about *this paper***, all now struck by the lead (commit
+   `96d8569`): that we assert "invisible exactly when $h=1$" (we state sufficiency and decline
+   necessity, at `paper.md:352`, Cor. 6.10, Problem 9.1 and `paper.md:509`); that we "silently
+   restrict" to cyclic $M/L$ (we hypothesise it, at `paper.md:87`, Cor. 8.1, `paper.md:475`); that
+   $\mathcal D(L\subseteq\Lambda)$ is the attempt's answer (it is our own $\mathfrak D(L)$,
+   `paper.md:470–475`); and the word "vacuous". **Nothing in the paper needs changing on account of
+   those four** — they were errors in the attempt's description of us, not in us. What remains
+   genuinely weldable: Theorem A (the $(L,H)$ structure theorem), Theorem B (the four-way
+   characterisation of adaptedness), the class-*group* criterion, and Prop 7.1(2)(3) on non-cyclic
+   $M/L$ — which is a statement about the complement of our hypothesis, not a correction to it.
+   **Still not welded**, deliberately: awaiting `framedeprev`'s per-item welding list (line numbers,
+   target section, prerequisite propositions, `[GAP-INJ]` exposure). Welding is an irreversible
+   outward action; better to weld late than to weld wrong.
 
 
 ---

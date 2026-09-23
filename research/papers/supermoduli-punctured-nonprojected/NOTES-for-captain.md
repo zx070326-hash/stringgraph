@@ -326,7 +326,10 @@ independently re-verified against the primary text, and anything beyond F6 was n
 | `fkp96` | Close `[INF-NORMAL]` (§3.3) by deriving [FKP] (9.6) for punctured targets | `research/attempts/fkp-96-punctured/**` | ◐ **half landed.** Its §3 proves the strong form — the complex $[\Omega_{X/S}\to j_*\Omega_{U/S}]$, its Berezinian and the canonical trivialization depend on $\pi$ alone, because the punctures enter a supercurve only through the target twist of $\delta$ and $\delta$ never appears in the complex — so (7.6) holds verbatim on $\overline{\mathcal S}_{g;m,n}$. The round then died to an API fault; its work is committed (6cfec89) and it has been resumed. It also reports two errors in [FKP] that the remaining half must repair: (7.1) needs an $(R)$ twist, and the proof of Lemma 7.9 uses the $r=0$ case of (2.5) |
 | `gapcomp` | Close `[GAP-COMP]` (§10.3 of the paper): component refinement when $r>0$ | `research/attempts/supermoduli-ramond-components/**` | in flight |
 | `measurerev` | The §5.2 review above | read-only | ✅ **landed** — cleared M, refuted §9.5 as written; see §5.2 |
-| `sharpness` | Is the threshold **sharp**? The paper leaves $(g,n,r)=(2,1,0)$, the $g=2$ odd-parity punctured components, and all of $g\le1$ untouched, and §9.2 only says the *method* cannot reach them. Whether they are genuinely split or merely out of reach is unknown | `research/attempts/supermoduli-threshold-sharpness/**` | in flight |
+| `sharpness` | Is the threshold **sharp**? The paper leaves $(g,n,r)=(2,1,0)$, the $g=2$ odd-parity punctured components, and all of $g\le1$ untouched, and §9.2 only says the *method* cannot reach them. Whether they are genuinely split or merely out of reach is unknown | `research/attempts/supermoduli-threshold-sharpness/**` | ✅ **landed, under review.** Merged to `main`. Headline: $\overline{\mathfrak S}_{0;4,0}$, of dimension $(1|2)$, is **split** — and since its odd rank is $2$, [CN, Prop. 2.2] makes that *equivalent* to $\omega_2=0$, so the cell is settled outright, not merely unreached. Also: odd rank $\le1$ forces canonical splitness, hence everything with $2g-2+n+r\le1$ is split; and $(0;4,0)$ is the unique remaining cell with bosonic dimension $1$ and odd rank $2$, so the degree method is exhausted rather than open-ended. **Do not act on this before `sharprev` returns** |
+| `sharprev` | Adversarial review of the above. The stacky-order arithmetic $(-1,-1,+3)$, the $\mu_2$-gerbe/root-stack identification, the stacky Serre-duality vanishing, and whether [CN, Prop. 2.2] says what it is used to say — dispatched 2026-09-23 | read-only | in flight |
+| `lowcorner` | The two cells `sharpness` named as the next targets: $\overline{\mathfrak S}_{1;2,0}$ and $\overline{\mathfrak S}_{0;3,2}$ — the smallest where odd rank is still exactly $2$ but the bosonic base is a *surface*, i.e. where the degree argument stops. Dispatched 2026-09-23 without waiting for `sharprev`, deliberately: it was told to find its own route and to re-verify the shared [CN, Prop. 2.2] step itself rather than inherit it | `research/attempts/supermoduli-low-corner/**` | in flight |
+| `genus0priorart` | Whether $\overline{\mathfrak S}_{0;4,0}$ splitness is already published. `sharpness` deliberately did not search (project rule defers prior art to graph entry / publication) and flagged that the object is small and natural enough that it may well be known. **This is a submission gate, not a nicety** | `literature/extractions/supermoduli-genus0-splitness-prior-art.md` only | in flight |
 | `fkp79` | Close `[GAP-FKP-RAMOND]` (§3.4, paper §10.1) by rewriting [FKP] Lemma 7.9's proof under $\omega_C\rightsquigarrow\omega_C(R)$. Dispatched 2026-09-23 because this is the only unverified external dependency sitting under a **title-level** claim | `research/attempts/fkp-79-ramond-twist/**` | in flight |
 
 **Cross-round fact relayed to `fkp79` (2026-09-23):** `fkp96` independently reported, from the same
@@ -342,6 +345,25 @@ the one caveat attached to Theorem B's statement. The fourth is upside rather th
 sharpness theorem — in either direction — would turn "here is a threshold" into "here is *the*
 threshold", which is a different class of result. None of the four is a prerequisite for submitting
 what exists today; all four change what is worth submitting.
+
+**What `sharpness` actually changes, stated plainly (2026-09-23, lead).** The paper's §1.5 item 2
+says verbatim that it asserts *"Nothing in the positive direction"*. If `sharprev` clears
+Theorem 4.5, that sentence is false and must go, and §9.2's apologetic "the method cannot reach
+$\overline{\mathfrak M}^-_2$" becomes a sharpness section: the low corner is **provably split**, not
+merely unreached. That is a change of kind, not of degree, and it is the largest single upgrade
+available to this paper right now.
+
+**Two things it does not change, and one new gate.** It does not touch the $g\ge2$ region — its
+Theorem 3.3 there is assembly of [CN] and [DW] plus a restriction lemma, explicitly claimed as zero
+novelty, and `sharprev` is checking the assembly drops no cell. And the prover corrected itself
+mid-round: it first wrote that `paper.md` had failed to apply the restriction lemma at $(2;1,0)$,
+then found the current manuscript already states the transfer in §1.4 caveat (i), §1.5(3), §9.3 and
+§10.6 — the erratum is in its own `status.yaml`, and `sharprev` was asked to confirm the withdrawn
+claim leaves no trace in the attempt's text. **New gate: `genus0priorart`.** $\overline{\mathfrak
+S}_{0;4,0}$ is a small, natural object; if its splitness is already in Donagi–Witten, Codogni–Viviani
+or the physics folklore, then what we have is an exercise, not a result, and it must be cited rather
+than claimed. **Recommendation: do not submit, and do not insert Theorem 4.5 into `paper.md`, before
+both `sharprev` and `genus0priorart` return.**
 
 ### 5.4 Addendum (2026-09-23): structural elevation of the Ramond case to title level
 
