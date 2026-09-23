@@ -18,12 +18,13 @@ prose below it.
 
 | Claim | Status after this session | Where |
 |---|---|---|
-| 1 (rank-2 machinery) | **Proved**, two independent verifications | §1 |
-| 2 (uncompactified cells split) | Open | §2 |
-| 3 (bosonic truncation structure) | Open | §3 |
-| 4 (inertia criterion fails) | Open | §4 |
-| 5 (boundary support reduction) | Open, contingent on Claim 2 | §5 |
-| 6 (the dichotomy) | **Open** | §6 |
+| 1 (rank-2 machinery) | **Proved**, two independent verifications | Part 1 |
+| — (new: known nonzero-$\omega_2$ mechanism unavailable) | **Proved** (Lemma 2 + Cor. 2.1), scope stated precisely | Part 2 |
+| 2 (uncompactified cells split) | Open | — |
+| 3 (bosonic truncation structure) | Open | — |
+| 4 (inertia criterion fails) | Open | — |
+| 5 (boundary support reduction) | Open, contingent on Claim 2 | — |
+| 6 (the dichotomy) | **Open** | — |
 
 ---
 
@@ -141,6 +142,99 @@ and the pre-existing repo cache `D:\physics\string\graph\build\dw-1304.7798v2.pd
 
 ---
 
-## Part 2 — [in progress]
+## Part 2 — Lemma 2: the only known non-vanishing mechanism cannot reach either cell
+
+Everything published that produces a *nonzero* $\omega_2$ for a punctured supermoduli
+stack — Donagi–Witten's $\mathfrak M_{g,1}$ theorem (arXiv:1304.7798, §4, read this
+session, Appendix A), Corrêa–Noja's genus-2 even component (arXiv:2606.06733), and
+`research/papers/supermoduli-punctured-nonprojected/paper.md`'s Theorem M/Corollary A —
+is, at its core, one single mechanism: the **Donagi–Witten one-point obstruction
+family**. It needs, as raw material, a *smooth* curve $C$ of some genus $h$ together
+with a theta characteristic $L$ ($L^{\otimes2}\cong\omega_C$) that is **ineffective**
+($H^0(C,L)=0$), and it produces a nonzero obstruction datum from a nonzero class
+$\eta\in H^1(C,L^{-1})$. (In paper.md's Construction 5.3, reviewed this session, this
+smooth curve $C$ is glued to a separate *fixed* tail purely to reach the target genus
+$g=h+a$ and target puncture/Ramond-point count; the fixed tail itself contributes no
+cohomology to the construction, only bookkeeping. The nonzero class always comes from
+the single smooth genus-$h$ factor.)
+
+**Lemma 2.** *Let $C$ be a smooth curve of genus $h$ and $L$ a theta characteristic on
+$C$ with $H^0(C,L)=0$ (ineffective). Then*
+$$h^1(C,L^{-1}) \;=\; \max(2h-2,\ 0),$$
+*except at the single genus-$1$ point where $L\cong\mathcal O_C$ is trivial — but that
+point is always **effective** ($h^0=1$) and hence excluded by the ineffectiveness
+hypothesis. In particular $H^1(C,L^{-1})=0$ identically for every ineffective theta
+characteristic when $h\le 1$, and no non-zero $\eta$ can be extracted at $h \le 1$.*
+
+*Proof.* Since $L^{\otimes2}\cong\omega_C$, $\deg L = h-1$, so $\deg L^{-1}=1-h$.
+
+- If $h\ge 1$: $\deg L^{-1}=1-h\le0$. A line bundle of negative degree on a smooth
+  projective curve has no non-zero global sections (a non-zero section would exhibit it
+  as $\mathcal O_C(D)$ for an effective divisor $D\ge0$, forcing $\deg\ge0$); at degree
+  exactly $0$ ($h=1$) the only line bundle with a section is the trivial one. So for
+  $h\ge2$, $h^0(L^{-1})=0$ unconditionally (strictly negative degree); for $h=1$,
+  $h^0(L^{-1})=0$ **unless** $L^{-1}\cong\mathcal O_C$, i.e. unless $L\cong\mathcal O_C$
+  (self-dual since $L^{\otimes2}\cong\omega_C=\mathcal O_C$ makes $L$ $2$-torsion, hence
+  $L^{-1}\cong L$), which is exactly the excluded effective case ($h^0(\mathcal O_C)=1$).
+  So under the ineffectiveness hypothesis, $h^0(C,L^{-1})=0$ for every $h\ge1$.
+  By Riemann–Roch, $\chi(L^{-1}) = \deg L^{-1} + 1 - h = (1-h)+1-h = 2-2h$, so
+  $$h^1(C,L^{-1}) = h^0(C,L^{-1}) - \chi(L^{-1}) = 0-(2-2h) = 2h-2.$$
+  This is $\ge0$ for $h\ge1$, positive iff $h\ge2$, and exactly $0$ at $h=1$.
+- If $h=0$: the unique theta characteristic on $\mathbb P^1$ is $L=\mathcal O(-1)$
+  (ineffective automatically, $h^0(\mathcal O(-1))=0$), so $L^{-1}=\mathcal O(1)$, which
+  is a positive-degree bundle on $\mathbb P^1$ with $h^0=2$, $h^1=0$ (standard). This
+  matches the formula $\max(2\cdot0-2,0)=0$.
+
+So $h^1(C,L^{-1})=\max(2h-2,0)$ in every case, vanishing exactly for $h\le1$. $\blacksquare$
+
+*(This is an independent Riemann–Roch/Serre-duality re-derivation, not a restatement,
+of the fact recorded as Lemma 8.2(i) in `paper.md`, which is quoted there only for the
+elliptic and $\mathbb P^1$ cases needed there; the computation above gives the general
+formula $h^1=\max(2h-2,0)$ for all $h$, which is what is actually needed to make the
+"no genus-$\ge2$ smooth piece available" argument below fully general and self-contained,
+rather than resting on paper.md's narrower quoted statement.)*
+
+**Corollary 2.1 (the known mechanism is structurally unavailable for cells A and B).**
+*Let $\mathfrak X\in\{\overline{\mathfrak S}_{1;2,0},\ \overline{\mathfrak S}_{0;3,2}\}$.
+Every stable curve underlying a $\mathbb C$-point of $X=\mathfrak X_{\mathrm{bos}}$
+(interior or boundary) has total arithmetic genus $g\le1$ (namely $g=1$ for cell A,
+$g=0$ for cell B), and every one of its irreducible components has geometric genus
+$\le g\le1$. By Lemma 2, no irreducible component of any such curve — smooth or
+appearing as a piece of a nodal degeneration — can supply a non-zero class
+$\eta\in H^1(C,L^{-1})$ for an ineffective theta characteristic $L$, because every
+available component has genus $h\le1$, and $h^1=0$ at $h\le1$ regardless of which
+ineffective theta characteristic is chosen. Consequently the Donagi–Witten one-point
+obstruction family, in the form used by DW/CN/`paper.md` to prove every currently
+published non-projectedness result, cannot be instantiated anywhere on $X$ — there is
+no raw material (no genus-$\ge2$ component) anywhere in the moduli problem to build the
+family from.*
+
+**Scope of this negative result — stated precisely, not oversold.** Corollary 2.1 rules
+out only the *specific, published* construction (built from a single smooth curve of
+genus $\ge2$ carrying an ineffective theta characteristic, exactly as in DW §4 and
+paper.md's Construction 5.3). It does **not** by itself show $\omega_2=0$ for either
+cell — it shows only that the one technique currently in the literature capable of
+proving $\omega_2\ne0$ cannot be run here. It leaves open:
+- whether some other, currently unpublished, construction could produce a non-zero
+  $\omega_2$ using genuinely *nodal* (not smooth-component) input — e.g. cohomology
+  supported at a node rather than on a smooth genus-$\ge2$ piece — which Lemma 2 does
+  not address (Lemma 2 only concerns $H^1$ of a line bundle on a *smooth* curve);
+- whether $\omega_2=0$ can be proved directly (a positive/splitting result), which is a
+  completely different computation (an explicit vanishing of $H^1(X,\mathcal V_{\mathfrak X})$
+  on the 2-dimensional bosonic base $X$, or of a suitable boundary-supported subgroup of
+  it per Claim 5) and is not addressed by Lemma 2 either.
+
+**This settles the negative half of the picture: the threshold-sharpness attempt's
+curve-base method is exhausted (already established, `supermoduli-threshold-sharpness`
+Remark 5.2), and now Lemma 2 shows the *other* known method (one-point obstruction
+family) is exhausted too, independently and for a different reason (total genus, not
+base dimension). Both of the two currently-existing techniques for this class of
+problem are unavailable for cells (A) and (B). Any resolution of Claim 6 needs either a
+genuinely new non-vanishing mechanism, or a direct vanishing computation on the
+surface base — see §6 for what such a computation would require.**
+
+---
+
+## Part 3 — [in progress]
 
 *To be continued in the next commit.*
