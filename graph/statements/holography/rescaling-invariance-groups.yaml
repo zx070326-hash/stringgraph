@@ -1,0 +1,44 @@
+id: holography.rescaling-invariance-groups
+kind: proposition
+title: 重标除子和的精确不变群（Thm C）：D_I 关于 Γ⁰(I) 不变，D'_I 关于 Γ₀(I) 不变
+statement: |
+  沿用 T(m,n,ℓ)=[[m,ℓ/2],[ℓ/2,n]]，U=[[a,b],[c,d]]∈SL(2,ℤ) 作用 T↦UTUᵀ 给出
+  (m,n,ℓ)↦(m′,n′,ℓ′)（holography.rescaling-reflection-transfer 的记号），以及
+  holography.torsion-index-divisor-operator 的 D_I（Q-重标）、
+  holography.rescaling-p-operator-definition 的 D'_I（P-重标）。定义同余子群
+  Γ⁰(I) := {U=[[a,b],[c,d]]∈SL(2,ℤ) : I|b}，Γ₀(I) := {U : I|c}。则：
+    对一切 U∈Γ⁰(I)：D_I(m′,n′,ℓ′) = D_I(m,n,ℓ)。
+    对一切 U∈Γ₀(I)：D'_I(m′,n′,ℓ′) = D'_I(m,n,ℓ)。
+  该结论对任意 GL(2,ℤ)-类函数 f 替代 d_* 同样成立（记 D_I[f]、D'_I[f]）。
+
+  **精确性（非平凡，Γ⁰(I) 不只是不变群的下界）**：在 I=2、(m,n,ℓ)=(4,8,0) 处，SL(2,ℤ) 关于
+  Γ⁰(2) 的三个陪集给出三个互不相同的 D_2 取值
+  （479643211429797888 / 479644528841797440 / 479643201102715656），
+  故该点的稳定子恰为 Γ⁰(2)。（在其他点如 (4,4,0) 两个陪集可能数值偶合相等，proof.md
+  指出这是 d_* 具体取值的偶然现象，不构成更大不变群的证据。）
+uses: []
+uses_conventions: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/p-rescaling-frame-dependence/proof.md §4（Theorem C 证明、精确性表格 PART 5）"
+    note: "本项目原创证明，非已发表文献。机检：entries∈[−4,4] 的 180 个 SL(2,ℤ) 矩阵样本，I=2 时 b≡0 mod 2 的 15686 例保持、0 违例，b≢0 mod 2 时 4776 例改变/3036 例偶合相等；I=3 时保持 3100/违例 0，改变 280/偶合 540（scripts/run_output.txt PART 5）。status.yaml review_2026_09_24：reviewer rev-prescale 独立手推重证 V_s=W_sUW_s^{-1} 整性 iff s|b 及不变群识别，并独立重跑脚本核对精确性表格与全部关键整数。captain_confirmed: false。"
+  - ref: dabholkar-gomes-murthy-2008
+    loc: "arXiv 官方 PDF eq (4.5)–(4.7)（p.18-19，§4.1）：'The partition function 𝒵_I is however not invariant under the full SL(2,ℤ) but only under a congruence subgroup Γ⁰(I) defined by matrices h=(a b; c d)∈SL(2,ℤ), b≡0 mod I.'，矩阵恒等式 (4.6)，及用 b≡0 mod I 证 (4.7) 的推导"
+    note: "**先例已有**：本卡的 D_I 部分是 DGM (4.5)-(4.7) 从周期矩阵侧搬到电荷侧的重新表述，proof.md §4 自陈非新数学；reviewer rev-prescale 2026-09-24 独立对照 arXiv PDF 页面图像逐字核对该段"
+notes: |
+  **不是新数学，是已知结果的电荷侧重新表述 + 精确性数值验证**（proof.md §4 自陈）。
+  D_I 的 Γ⁰(I)-不变性即 DGM 0803.2692 eq(4.5)-(4.7)（本卡 sources 已逐字核对）；proof.md
+  另指出 Cardoso–Nampuri–Rosselló arXiv:2007.10302 附录 A (A.9)-(A.11) 有同一计算的独立版本
+  ("Demanding m_γ∈ℤ, n_γ∈t²ℤ, ℓ_γ∈tℤ implies that q is a multiple of t, and hence γ lies in
+  the subgroup Γ⁰(t)")——**CNR 未登记 literature/sources.bib**（本卡写入范围不含
+  literature/），故本卡不直接引用其 key，只在此转述 proof.md 的核对结果，建议 lead 转派
+  researcher 登记后补入本卡 sources。
+  D'_I 的 Γ₀(I)-不变性由 Thm A（holography.rescaling-reflection-transfer）代换
+  (m,n,ℓ)↦(n,m,ℓ) 得到——该代换把 U 的 b,c 位置互换，把 Γ⁰(I) 条件变成 Γ₀(I) 条件。
+
+  **精确性发现是本卡的新增内容**：(4,8,0), I=2 处三个陪集给出三个不同取值，证明 Γ⁰(2) 恰为
+  稳定子而非只是不变群的下界；这一精确性验证proof.md 认为是本 attempt 的贡献，DGM/CNR
+  原文只证明了不变性（下界方向），未讨论精确性。
+tags: [bh-entropy, mock-modular, n4-string-theory, cartography, number-theory]
+author: graph-curator
+created: "2026-09-24"
