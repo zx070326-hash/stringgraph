@@ -572,15 +572,15 @@ def check_leading_term(D, c, j, N, verbose=True):
 def check_Lm_on_W(D, c, j, N, verbose=True):
     """Lemma 7':  L_m(W) in W, and R_m := L_m - m d/dK_{-m} never LOWERS the K-degree.
 
-    Also reports whether R_m actually raises kappa somewhere.
+    Also reports whether R_m ever raises kappa.  By section 5.6 it NEVER does --
+    the two Delta-kappa = +1 terms cancel term by term (same k, same i, same
+    coefficient (m+k)c_i, opposite sign) -- so the expected report is False for
+    every configuration, INCLUDING c != 0.  A True here would falsify Lemma 7'.
 
     NOTE (lead 2026-09-25, rev-no-tprime finding 4): this docstring used to claim
-    "it does iff c != 0".  That is FALSE and was contradicted by this script's own
-    output, which prints `raises somewhere: False` on every c != 0 configuration.
-    The reason (reviewer's analysis of proof-no-tprime.md 5.6): the two Delta-kappa
-    = +1 terms cancel exactly -- same k, same i, same coefficient (m+k)c_i, opposite
-    sign.  So R_m neither lowers nor raises kappa, and Lemma 7' holds verbatim in
-    the c != 0 case; the `raised` flag is kept only as a live witness of that."""
+    "it does iff c != 0", which is false and was contradicted by this script's own
+    output on every c != 0 configuration.  Keeping the flag as a falsifiable
+    monitor (reviewer's suggestion) is more useful than deleting it."""
     T = Tower(D, c)
     raised = False
     for m in range(1, N + 1):
