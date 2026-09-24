@@ -1,0 +1,38 @@
+id: holography.rescaling-frame-dependence-witness
+kind: proposition
+title: P-重标除子和的标架依赖性（Thm B）：同一格上两个满足算术前提的标架给出不同 D'_2
+statement: |
+  存在挠 I=2 的秩 2 子格 L⊆Λ 及其两个标架，两者的不变量都满足文献陈述 P-重标公式时
+  要求的算术前提 I²|n、I|ℓ，但 holography.rescaling-p-operator-definition 的 D'_2 在两者上
+  取不同值。显式地：同一格 L 的两个基给出的不变量 (m,n,ℓ)=(4,8,8) 与 (4,4,0)，均满足
+  4|n、2|ℓ，而
+    D'_2(4,8,8) = 7 999 235 715 072，
+    D'_2(4,4,0) = 7 999 541 469 408，
+  差 305 754 336（相对大小 ≈3.8×10⁻⁵）。两个标架的 s=1 项相等（因 (4,8,8)、(4,4,0) 是同一
+  GL(2,ℤ)-等价类的代表元，d_* 为类函数），s=2 项不等（因 (4,2,4)→约化 (2,2,0) 与
+  (4,1,0)→约化 (1,4,0) 是判别式 −16 的两个不等价类，类数 h(−16)=2）。
+
+  **不是 d_* 特有的现象**：对任意 GL(2,ℤ)-类函数 f 替代 d_*，只要 f 能区分某 s|I,s>1 处
+  (m/s²,ℓ/s,n) 与 (m,ℓ/s,n/s²) 的等价类，D_I[f] 与 D'_I[f] 就在同一 (m,n,ℓ,I) 处不一致；
+  标架依赖是算子本身的性质，不是免死指标 d_* 的偶然性质。
+uses: []
+uses_conventions: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/p-rescaling-frame-dependence/proof.md §6（Theorem B 证明与显式积分表、'Not an artefact of choosing d_*' 段）"
+    note: "本项目原创证明，非已发表文献。精确整数计算：scripts/run_output.txt PART 2、PART 4（总 1/4-BPS 指标重复计算得同样两个整数）。status.yaml review_2026_09_24：reviewer rev-prescale 独立从干净检出重跑 scripts/p_rescaling_witness.py 与 scripts/lattice_frames.py，输出与已提交的 run_output.txt / lattice_frames_output.txt 逐位一致（含 D'_2(4,8,8)=7999235715072、D'_2(4,4,0)=7999541469408、差 305754336 三个关键整数）。captain_confirmed: false。"
+notes: |
+  **依赖链**：格 L 与两个标架的具体构造，来自
+  holography.rescaling-adapted-frames-single-coset 机检段落所构造的同一显式格（proof.md
+  §5 与 §6 复用同一格）。d_* 的四个具体数值由本项目既有的精确 Fourier 系数机
+  （research/attempts/torsion-immortal-positivity-hecke/scripts/{coefficients.py,
+  torsion_divisor_sum.py}，该 attempt 已 state: verified）只读复用、本轮重新运行而非信任
+  缓存数值。
+
+  **反证 Claim 2 预注册假设成立的方式**：paper.md Remark 6.3 对 Q-重标 D_I 给出了标架依赖
+  的整数见证；本卡是它在 P-重标 D'_I 上的精确对偶（proof.md §6 末段：s=1 项 PART 2 也打印
+  D_2(4,4,0)=7999541469408 与 D_2(8,4,8)=7999235715072，恰为本卡两个数值的互换，与 Thm A
+  预言一致）。
+tags: [bh-entropy, mock-modular, n4-string-theory, cartography]
+author: graph-curator
+created: "2026-09-24"

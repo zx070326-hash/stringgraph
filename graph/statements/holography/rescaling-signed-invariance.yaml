@@ -1,0 +1,44 @@
+id: holography.rescaling-signed-invariance
+kind: proposition
+title: 带号重标算子的不变群（Thm E）：D̃_I 与 D_I 共享 Γ⁰(I)-不变性，符号不破坏不变性
+statement: |
+  沿用 holography.rescaling-signed-operator-definition 的 D̃_I（带号 Q-重标算子）与
+  holography.rescaling-invariance-groups（Thm C）的记号。设 U=[[a,b],[c,d]]∈SL(2,ℤ) 满足
+  I|b，(m,n,ℓ) 满足 I²|m、I|ℓ，(m′,n′,ℓ′) 为 T′=UTUᵀ（T=[[m,ℓ/2],[ℓ/2,n]]）读出的像。则对
+  一切 s|I 使 s²|m、s|ℓ（等价地即 D̃_I 第 s 项非零的项）：
+    ℓ′ − ℓ′/s ≡ ℓ − ℓ/s（mod 2）。
+  因此符号因子逐项相等：(−1)^{ℓ′−ℓ′/s} = (−1)^{ℓ−ℓ/s}，从而对任意 GL(2,ℤ)-类函数 f，
+    D̃_I[f](m′,n′,ℓ′) = D̃_I[f](m,n,ℓ)。
+  特别地 D̃_I 在 Γ⁰(I) 下不变——与 holography.rescaling-invariance-groups 给出的 D_I 的不变
+  群相同；**带符号并不破坏不变性**。
+uses: []
+uses_conventions: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/p-rescaling-frame-dependence/proof.md §8.2（Theorem E 证明及机检 PART 6）"
+    note: "本项目原创证明，非已发表文献。status.yaml review_2026_09_24：reviewer rev-prescale 独立手推重证 (8.1)(8.2) 两步同余式及 ad+bc=1+2bc 为奇的论证，并独立重跑 PART 6 机检（I=2: 24304 例 0 违例；I=3: 4700 例 0 违例；I∈{2,3,4,6}, m,n<30, |ℓ|≤20 的直接奇偶核对 0 不符），逐位一致。captain_confirmed: false。"
+notes: |
+  **证明骨架（proof.md §8.2）**：由 (0.1) 式 ℓ′=2acm+(ad+bc)ℓ+2bdn，得
+    ℓ′ ≡ (ad+bc)ℓ  (mod 2)。   ...(8.1)
+  对第 s 项重标三元组 (m/s²,n,ℓ/s) 用同一式（矩阵 V_s=[[a,b/s],[cs,d]]，即
+  holography.rescaling-invariance-groups 推导中出现的共轭矩阵）：
+    ℓ′/s = 2(acm/s) + (ad+bc)(ℓ/s) + 2(bdn/s)，
+  其中 acm/s=acs·(m/s²)∈ℤ（因 s²|m）、bdn/s=(b/s)·dn∈ℤ（因 s|I|b），故
+    ℓ′/s ≡ (ad+bc)(ℓ/s)  (mod 2)。   ...(8.2)
+  (8.1)−(8.2)：ℓ′−ℓ′/s ≡ (ad+bc)(ℓ−ℓ/s) mod 2。由 ad−bc=1 得 ad+bc=1+2bc 为奇数，故
+    ℓ′−ℓ′/s ≡ ℓ−ℓ/s  (mod 2)。
+  符号逐项相等；支持集匹配与数值匹配直接复用 holography.rescaling-invariance-groups（Thm C）
+  证明中已建立的部分（该卡的步骤(2)(3)）。
+
+  **机检踩过的坑，诚实记录（proof.md §8.2 脚注）**：本机检最初报告"数千个违例"，
+  根因是 Python 的 `(-1) ** k`（k 为负整数）返回浮点数而非精确 ±1，导致该轮机检结论被
+  反转；修复为 `(-1) ** (k % 2)`，commit `a504e31`。记在此处作为失败模式记录，供后续机检
+  脚本参考。
+
+  **与 DGM eq(51)/(52) 矛盾的关系（proof.md §8.2 末段 Reading）**：本卡证明符号约定与
+  标架依赖问题**正交**——(3.28)-型与 (3.26)+(3.27)-型两种和都是 Γ⁰(I)-不变而非
+  SL(2,ℤ)-不变，本项目另一条未决的 DGM eq(51)/(52) 符号矛盾既不能由本卡解决，也不影响
+  本卡结论。
+tags: [bh-entropy, mock-modular, n4-string-theory, cartography]
+author: graph-curator
+created: "2026-09-24"

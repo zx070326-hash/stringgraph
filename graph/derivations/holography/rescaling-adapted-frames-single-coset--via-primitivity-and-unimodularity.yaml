@@ -1,0 +1,31 @@
+id: holography.rescaling-adapted-frames-single-coset--via-primitivity-and-unimodularity
+target: holography.rescaling-adapted-frames-single-coset
+kind: proof
+status: rigorous
+depends_on: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/p-rescaling-frame-dependence/proof.md §5（Proposition 5.1 证明）及 scripts/lattice_frames_output.txt block L1"
+    note: "本项目原创证明，非已发表文献。见 proof.md §5。status.yaml state: verified（reviewer: rev-prescale, 2026-09-24），captain_confirmed: false。"
+summary: |
+  纯格论证明，不依赖图内任何其他节点作为砖块（只用到 Λ 是偶自对偶格这一固定物理设定，
+  与姐妹卡 holography.dstar-sduality-invariant / holography.torsion-index-divisor-operator
+  一样把它当作既定背景，不单独立卡）：
+  (1) Q₀∧P₀ 分解出因子 I 后，gcd(Q̃∧P₀)=1，故 P₀ 在 Λ 中本原。
+  (2) Λ 幺模 ⟹ 存在 λ∈Λ 使 P₀·λ=1（本原向量的对偶配对存在性，幺模格的标准事实）。
+  (3) Q=aQ₀+bP₀ 且 Q₀∈IΛ，故 Q∈IΛ ⟺ bP₀∈IΛ ⟺（用 λ 配对）b∈Iℤ。
+  (4) 对偶部分用 S-对偶元 S=[[0,1],[−1,0]] 把 Q-适配 ↔ P-适配、Γ⁰(I) ↔ Γ₀(I) 互换（S 是
+  电荷格自同构，把 (Q,P) 映到 (P,−Q)，保持 L 与其挠 I 不变）。
+  机检独立确认：scripts/lattice_frames_output.txt 中显式构造 U⊕U 的格 L，验证"P-适配当且
+  仅当所在陪集为 Γ₀(2)"的正反两方向都对具体数值成立。
+gaps: []
+notes: |
+  reviewer-verified: rev-prescale (sonnet), 2026-09-24——proof.md §5 全文人工重推，
+  「P₀ 本原性 + Λ 幺模性 ⟹ 存在 λ 使 P₀·λ=1」这一关键步骤独立确认无误。
+
+  **depends_on 为空，与姐妹卡
+  holography.attractor-contour-hits-phi10-zero-at-ell-zero--via-direct-substitution 的自足
+  风格一致**：本推导只用到"Λ 是偶自对偶格"这一固定物理设定与初等格论（本原向量、幺模格
+  的对偶配对），不承重于图内任何其他命题节点。
+author: graph-curator
+created: "2026-09-24"

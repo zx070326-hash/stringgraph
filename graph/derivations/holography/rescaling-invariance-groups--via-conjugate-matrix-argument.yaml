@@ -1,0 +1,51 @@
+id: holography.rescaling-invariance-groups--via-conjugate-matrix-argument
+target: holography.rescaling-invariance-groups
+kind: proof
+status: rigorous
+depends_on:
+  - id: holography.torsion-index-divisor-operator
+    inferred: false
+    note: "接口边：D_I 的定义（Q-重标）来自该卡"
+  - id: holography.rescaling-p-operator-definition
+    inferred: false
+    note: "接口边：D'_I 的定义（P-重标）来自该卡"
+  - id: holography.rescaling-reflection-transfer
+    inferred: false
+    note: "D'_I 的 Γ₀(I)-不变性由 Thm A 代换 (m,n,ℓ)↦(n,m,ℓ) 从 D_I 的 Γ⁰(I)-不变性导出
+           （该代换把矩阵 U=[[a,b],[c,d]] 变为 [[d,c],[b,a]]，交换 b,c 的角色，见 proof.md §4 末段）"
+  - id: holography.dstar-sduality-invariant
+    inferred: false
+    note: "证明步骤(3)：对 U∈Γ⁰(I)、s|I，令 V_s:=W_sUW_s^{−1}=[[a,b/s],[cs,d]]（W_s=diag(1/s,1)）。
+           s|I|b 使 V_s 整且 det V_s=ad−bc=1，故 V_s∈SL(2,ℤ)⊂GL(2,ℤ)；再用该卡的一般
+           GL(2,ℤ) 类函数性质 d_*(T′)=d_*(T)（A=V_s）得 d_*(T′_s)=d_*(T_s)，这是 Thm C
+           数值相等部分的全部数学内容"
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/p-rescaling-frame-dependence/proof.md §4（Theorem C 证明步骤(1)(2)(3)与精确性 PART 5）"
+    note: "本项目原创证明，非已发表文献。见 proof.md §4。status.yaml state: verified（reviewer: rev-prescale, 2026-09-24），captain_confirmed: false。"
+  - ref: dabholkar-gomes-murthy-2008
+    loc: "arXiv 官方 PDF eq (4.5)–(4.7)（p.18-19，§4.1）"
+    note: "先例：本推导的矩阵恒等式 (4.1)（proof.md 编号）与 DGM (4.6) 是同一恒等式的周期矩阵/电荷两侧表述；V_s^{−ᵀ} 对应 DGM 记号 (d,−sc;−b/s,a)"
+summary: |
+  三步：(1) V_s := W_sUW_s^{−1} = [[a,b/s],[cs,d]]，因 s|I|b 使 b/s∈ℤ，det V_s=ad−bc=1，
+  故 V_s∈SL(2,ℤ)。(2) 由 T′_s = W_s U T Uᵀ W_sᵀ = V_s T_s V_sᵀ（T_s := W_s T W_sᵀ 是第 s 项
+  的 Gram 矩阵），S_s(m,n,ℓ)（"s²|m 且 s|ℓ"，T_s 整性条件）与 S_s(m′,n′,ℓ′) 等价（V_s 整格
+  自同构，对 U^{−1} 同样满足 I|(上右元) 重复论证得逆向）。(3) 支持集匹配时，
+  holography.dstar-sduality-invariant 给出 d_*(T′_s)=d_*(T_s)。逐项相等后对 s|I 求和
+  （权 s 不变）得 D_I(m′,n′,ℓ′)=D_I(m,n,ℓ)。D'_I 的 Γ₀(I) 部分由
+  holography.rescaling-reflection-transfer 代换 (m,n,ℓ)↦(n,m,ℓ) 得到（该代换把 U 变为
+  [[d,c],[b,a]]，交换 b,c，从而把「I|b」条件变成「I|c」条件）。
+
+  精确性（PART 5）为独立机检结果，不改变上述证明结构，只确认 Γ⁰(2) 不是可再扩大的不变群
+  下界：显式给出 (4,8,0) 处三个陪集的三个不同 D_2 数值。
+gaps: []
+notes: |
+  reviewer-verified: rev-prescale (sonnet), 2026-09-24——proof.md §4 全文人工重推，V_s 整性
+  条件（s|b）与不变群识别确认无误；独立重跑 scripts/p_rescaling_witness.py 核对精确性
+  表格与全部关键整数，逐位一致。
+
+  **本推导为已知结果（DGM/CNR）在电荷侧的独立重新表述**（own status: rigorous 指本推导
+  自身演绎的严格度，不受"是否新颖"影响）；精确性数值验证部分是本 attempt 的新增内容。
+  **本推导不依赖任何 physical-argument 节点**，effective status 预期与 own status 相同。
+author: graph-curator
+created: "2026-09-24"

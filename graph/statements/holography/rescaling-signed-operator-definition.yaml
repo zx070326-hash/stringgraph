@@ -1,0 +1,28 @@
+id: holography.rescaling-signed-operator-definition
+kind: definition
+status: rigorous
+title: 带号挠指标除子和算子的定义：D̃_I(m,n,ℓ) := Σ_{s|I} s(−1)^{ℓ−ℓ/s} d_*(m/s²,n,ℓ/s)
+statement: |
+  沿用 holography.torsion-index-divisor-operator 的记号（Q-重标：电荷槽位 m 被 s² 除）。
+  定义**带号 Q-重标算子**：对 (m,n,ℓ)∈ℤ³ 满足 I²|m、I|ℓ、m,n≥1、Δ=4mn−ℓ²>0，
+    D̃_I(m,n,ℓ) := Σ_{s|I} s·(−1)^{ℓ−ℓ/s}·d_*(m/s², n, ℓ/s)
+  （s²∤m 或 s∤ℓ 的项记 0）；对任意 GL(2,ℤ)-类函数 f 替代 d_* 同样定义 D̃_I[f]。
+  I=1 时 D̃_1 = D_1 = d_*（符号因子 (−1)^{ℓ−ℓ}=1 平凡）。
+uses:
+  - holography.torsion-index-divisor-operator
+uses_conventions: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/p-rescaling-frame-dependence/proof.md §0（记号，D̃_I 的定义式）与 §8（Proposition 8.1 之前引入该算子的段落）"
+    note: "本项目原创证明，非已发表文献。见 research/attempts/p-rescaling-frame-dependence/proof.md。status.yaml state: verified（reviewer: rev-prescale, 2026-09-24），captain_confirmed: false。"
+notes: |
+  **本卡只立定义，不立命题**。D̃_I 在 Γ⁰(I) 下的不变性是命题，记在
+  holography.rescaling-signed-invariance；D̃_I 与 Banerjee–Sen–Srivastava arXiv:0802.1556
+  eq(7) 的等同是命题，记在 holography.rescaling-bss-is-signed-q-rescaling。
+
+  权 s·(−1)^{ℓ−ℓ/s} 的具体正负号来自 BSS 的符号约定（见后两卡的推导），本卡只把算子本身
+  抽象地定义出来，定义本身与任何特定文献脱钩——I=1 时退化为普通的 d_*，与
+  holography.torsion-index-divisor-operator 在 I=1 处的行为一致。
+tags: [bh-entropy, mock-modular, n4-string-theory, cartography]
+author: graph-curator
+created: "2026-09-24"

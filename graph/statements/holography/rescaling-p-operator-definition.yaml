@@ -1,0 +1,65 @@
+id: holography.rescaling-p-operator-definition
+kind: definition
+status: rigorous
+title: P-重标挠指标算子的定义：D'_I(m,n,ℓ) := Σ_{s|I} s·d_*(m,n/s²,ℓ/s)
+statement: |
+  沿用 holography.torsion-index-divisor-operator 的约定（T(m,n,ℓ)=[[m,ℓ/2],[ℓ/2,n]]，
+  m=Q²/2 挂在 ρ 上、n=P²/2 挂在 σ 上、ℓ=Q·P 挂在 v 上；d_* 为单位挠免死指标）。
+  定义**磁荷重标算子** 𝒱'_s F(ρ,σ,v) := F(ρ, s²σ, sv)（把 σ 方向按 s² 重标，是
+  holography.torsion-index-divisor-operator 的 𝒱_s F(ρ,σ,v)=F(s²ρ,σ,sv)（ρ 方向重标）
+  在 ρ↔σ 互换下的镜像算子），以及对应的挠指标生成函数 𝒢'_I := Σ_{s|I} s·𝒱'_s𝒢。
+  对 (m,n,ℓ)∈ℤ³ 满足 I²|n、I|ℓ、m,n≥1、Δ=4mn−ℓ²>0，定义
+    D'_I(m,n,ℓ) := Σ_{s|I} s·d_*(m, n/s², ℓ/s)  （**P-重标算子**；s²∤n 或 s∤ℓ 的项记 0）。
+  I=1 时 D'_1 = d_*。
+
+  **与文献的对齐（判据是「哪个变量乘 s²」，不是字母对齐）**：
+  Alexandrov–Nampuri arXiv:2009.01172 eq(2.13) Ω_I(n,m,ℓ)=Σ_{d|I} d·Ω₁(n,m/d²,ℓ/d)，
+  以其 eq(2.6) 固定 m=P²/2（磁荷）——被除的是磁荷槽位，与本卡的 D'_I 是同一算子
+  （AN 的字母 n 挂电荷、m 挂磁荷，与本卡 m 挂电荷、n 挂磁荷相反；逐字比对见 sources）。
+  Bossard–Cosnier-Horeau-Pioline arXiv:1806.03330 eq(5.80)（Gram 矩阵
+  (Q²,QP/d;QP/d,P²/d²)）同样把磁荷 P² 除以 d²，是 D'_I 的另一独立文献实现（该文献本卡不
+  直接引用其 bib key，因尚未登记 literature/sources.bib；转引自本项目 proof.md，见下方 notes）。
+
+  **Banerjee–Sen–Srivastava arXiv:0802.1556 不属于这一族**：其 eq(1)+(2)+(4) 把 Q²/2 放在
+  乘 s² 的 σ̌ 槽位（磁荷 P²/2 反而不被除），因此 BSS 实为
+  holography.torsion-index-divisor-operator 所定义算子的一个带号变体（见
+  holography.rescaling-bss-is-signed-q-rescaling），不是本卡定义的 D'_I。
+uses:
+  - holography.torsion-index-divisor-operator
+uses_conventions: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/p-rescaling-frame-dependence/proof.md §0（记号）与 §1 表格首行（算子定义段）；claim.md §0/§4（reconciliation：BSS 归属的推翻）"
+    note: "本项目原创证明，非已发表文献。见 research/attempts/p-rescaling-frame-dependence/proof.md。status.yaml state: verified（reviewer: rev-prescale, 2026-09-24），captain_confirmed: false。"
+  - ref: alexandrov-nampuri-2020
+    loc: "eq (2.6)：n=Q²/2, m=P²/2；eq (2.13)：Ω_I(n,m,ℓ)=Σ_{d|I} d·Ω_1(n,m/d²,ℓ/d)（磁荷槽位 m 被除以 d²）"
+    note: "reviewer rev-prescale 于 2026-09-24 独立对照 arXiv PDF 页面图像逐字确认（记录于 status.yaml review_2026_09_24）"
+  - ref: banerjee-sen-srivastava-2008b
+    loc: "eq (1) 指数 iπ(σ̌Q²+ρ̌P²+2v̌Q·P)（故 σ̌ 挂 Q²/2）；eq (2) Q²/2∈r²ℤ, P²/2∈ℤ, Q·P∈rℤ；eq (4) Φ₁₀(ρ̌,s²σ̌+k/s̄²,sv̌+l/s̄)（σ̌ 槽位乘 s²）"
+    note: "确认 BSS 把电荷 Q²/2 放在被 s² 缩放的槽位，故 BSS 是本卡所述「不属于 D'_I 族」的反例；reviewer rev-prescale 2026-09-24 独立逐字核对 arXiv PDF"
+notes: |
+  **本项目原创定义，非对已发表公式的字面转录。** 是 holography.torsion-index-divisor-operator
+  （Q-重标：ρ 方向即电荷 m=Q²/2 被重标）的镜像算子，重标方向换成 σ（磁荷 n=P²/2）。
+
+  **判据是槽位而非字母**：与 proof.md §0 的强调一致——"Which charge is divided is the only
+  safe identifier"。AN 的字母顺序 (n=Q²/2 在前, m=P²/2 在后) 容易让人以为其 eq(2.13) 与
+  DGM eq(3.28) 是同一算子（字母位置对齐），但检验「乘 s² 的是哪个物理量」后，AN 除的是
+  磁荷，是本卡定义的 D'_I，不是 DGM 的 D_I。
+
+  **BCP 1806.03330、CNR 2007.10302 未登记 literature/sources.bib**：本卡提到这两篇文献作为
+  P-重标族的文献实现，但因本卡写入范围不含 literature/，未把它们登记为 bib key，故本卡
+  sources 不直接引用其 key，只转引 proof.md 中对它们的逐字核实（reviewer L1 级页面图像核对）。
+  **建议 lead 转派 researcher 登记 arXiv:1806.03330（Bossard–Cosnier-Horeau-Pioline）与
+  arXiv:2007.10302（Cardoso–Nampuri–Rosselló）到 literature/sources.bib**，登记后可把 BCP
+  补进本卡 sources 作为 D'_I 的第二条独立文献佐证。
+
+  **BSS 曾被本项目预注册猜测为 P-重标族**（research/papers/torsion-dyon-shift-positivity/
+  paper.md §9 line 350 称文献除子和公式"rescale P rather than Q"并点名 BSS 族），经本
+  attempt 逐字核对 arXiv PDF 后**推翻**：BSS 实际把电荷 Q²/2 放进乘 s² 的槽位，是
+  Q-重标的带号变体，见 holography.rescaling-bss-is-signed-q-rescaling。这条纠正涉及
+  research/papers/**，本卡写入范围不含该目录，已作为交接事项写入本 attempt 的
+  status.yaml notes「CROSS-TASK MESSAGES FOR THE LEAD」，此处不重复处理，只作为本卡命名
+  与陈述准确性的依据引用。
+tags: [bh-entropy, mock-modular, n4-string-theory, cartography]
+author: graph-curator
+created: "2026-09-24"
