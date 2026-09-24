@@ -1,0 +1,73 @@
+id: math.supermoduli-ramond-components-genus2-parity-jump-witness
+kind: proposition
+title: "g=2, 2r=2 显式见证：h⁰(L) 在广义自旋结构轨迹 S_{2;0,2} 上不是局部常值函数（1 跳到 2）"
+statement: |
+  【记号，延续姐妹卡】g=2，n=0，2r=2（一对 Ramond 穿孔 ρ_1,ρ_2，无 NS 穿孔）。C 为亏格 2
+  的光滑射影曲线，R=ρ_1+ρ_2。广义自旋结构 (L,φ)：L^⊗2 ≅ ω_C(R)，deg L = g-1+r = 2。
+  记 h^i(L):=dim_C H^i(C,L) = l(L)、l(K-L) 等（记号与 math.riemann-roch-theorem 一致，
+  K 记典范除子/典范线丛 ω_C 二选一，此处按上下文在除子与线丛间隐同一，不影响维数计算）。
+
+  【命题】对亏格 2、deg(ω_C(R))=4（即本情形）的广义自旋结构轨迹 S_{2;0,2}：
+  1. 在 M_{2,2}（标记曲线模叠，标记点为 ρ_1,ρ_2）的一个稠密开子集
+     {(C,ρ_1,ρ_2) : ρ_2 ≠ ι(ρ_1)}（ι 为 C 的超椭圆对合）上，纤维 Θ_R(C) 中全部 16 个
+     L 都满足 h^0(L)=1（奇）。
+  2. 在余维 1 的闭轨迹 Z:={(C,ρ_1,ρ_2) : ρ_2=ι(ρ_1)} 上（dim Z = dim M_{2,2} - 1），
+     纤维 Θ_R(C) = {ω_C⊗η : η∈J[2]}（16 个点），其中恰有 1 个点（η=O，即 L≅ω_C）满足
+     h^0(L)=2（偶），其余 15 个点仍满足 h^0(L)=1（奇）。
+  3. 因此函数 h^0(L) mod 2（"宇称"）在整个 S_{2;0,2} 上**不是局部常值函数**：
+     它恰在余维 1 的轨迹 Z 上从奇跳到偶。这与 h^0 只能半连续地向上跳变的一般事实相容
+     （方向正确：从 1 跳到 2，不是从 2 跳到 1）。
+
+  **证明。** 由 Riemann–Roch（math.riemann-roch-theorem，D=L）：
+  h^0(L) - h^1(L) = deg L - g + 1 = 2 - 2 + 1 = 1，且 Serre 对偶给出 h^1(L)=h^0(ω_C⊗L^{-1})。
+  由 math.canonical-divisor-degree，deg ω_C = 2g-2 = 2，故 deg(ω_C⊗L^{-1}) = 2-2 = 0。
+  一个 0 次线丛在紧黎曼面上有非零全纯截面当且仅当它平凡（截面的零点除子是度数 0 的有效除子，
+  只能是 0 除子，故该线丛与 O 线性等价）；故 h^0(ω_C⊗L^{-1}) = 1 若 ω_C⊗L^{-1}≅O_C，
+  否则为 0。合并：h^0(L) = 1 + [L≅ω_C]（[·] 为 Iverson 括号）。
+
+  L≅ω_C 与定义关系 L^⊗2≅ω_C(R) 相容当且仅当 ω_C^⊗2 ≅ ω_C(R)，即 ω_C ≅ O_C(ρ_1+ρ_2)。
+  g=2 时典范系统 |ω_C| 是唯一的 g^1_2（超椭圆曲线的典范映射是到 P^1 的 2:1 覆叠），
+  故上式成立当且仅当 {ρ_1,ρ_2} 是该 g^1_2 的一个纤维，即 ρ_2 = ι(ρ_1)（ι 为超椭圆对合）。
+  这就是 (1)(2) 中的轨迹划分；(2) 中纤维 Θ_R(C) 在 Z 上等于 ω_C 张量 J[2]-torsor 的平移，
+  只有 η=O 一点给出 L≅ω_C，故恰 1 个偶、15 个奇。
+
+  【本卡不断言】这一具体计算并不断言（也不需要）姐妹卡
+  `math.supermoduli-ramond-components-monodromy-transitive` 的点推单值机制——
+  本卡是一条独立、自足的显式代数几何计算，只用 Riemann–Roch 与超椭圆曲线的典范系统，
+  它与姐妹卡的关系仅止于"互相印证"：姐妹卡从单值角度证明 r≥1 时不存在任何局部常值
+  不变量，本卡从最朴素的一个候选不变量（宇称）出发，具体算出它确实不是局部常值的。
+  本卡不断言这是文献中已发表的计算（见下方 sources 与 notes 的检索声明）。
+uses_conventions: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/supermoduli-ramond-components/proof.md §6.2（显式计算全文）、
+      §10.3 第 3 条（检索未见此计算的声明）"
+    note: |
+      本项目原创证明（独立显式计算，检索未发现已发表出处，见下方 notes 的检索边界声明），
+      非已发表文献。status.yaml: state: verified，2026-09-24 二审（rev-ramond）核对了
+      本计算的每一步代数（Riemann–Roch 代入、Serre 对偶、超椭圆典范系统的唯一性），
+      判定无逻辑跳步；captain_confirmed: false，不阻塞毕业。
+tags: [supermoduli, spin-curve, ramond-puncture, riemann-roch, hyperelliptic, parity, explicit-computation, math-input, original-research]
+notes: |
+  【图内依赖的落地位置】本卡对 math.riemann-roch-theorem（Riemann–Roch 恒等式代入）与
+  math.canonical-divisor-degree（deg ω_C=2g-2 代入）的依赖，按 schema 要求（statement 的
+  `sources[].ref` 只能指向 literature/sources.bib 的 bib key，不能指向图节点 id）不写在本卡
+  的 sources 里，而是在下方配对推导文件的 `depends_on` 字段正确落地为图边。
+
+  【查重，2026-09-24】uv run stringgraph search 对 "hyperelliptic"/"parity"/"Riemann-Roch"/
+  "genus 2" 未命中覆盖本命题的既有卡（既有的 riemann-roch/canonical-divisor 卡是通用工具卡，
+  不含本卡的具体计算内容）。
+
+  【检索边界，如实转录】proof.md §10.3 第 3 条：本显式计算"检索未见此计算见诸文献"，
+  但这只是 attempt 自身的检索范围（非系统性文献穷举），不构成"确证无人算过"的断言；
+  按本卡任务的框架要求，仍不得使用"首次"、"新结果"一类措辞——只如实写"检索未见"。
+
+  【与 Jarvis (2000) 的关系】Jarvis 的分量数定理（Thm 3.3.11）在 g=2、r_Jarvis=2、
+  m_i=1 的情形下断言分量数=1（即"连通"），与本卡的计算结果**一致**（若 h^0 mod2 是分量
+  不变量，则 g=2 时连通性会与"存在跳变"矛盾——本卡的跳变恰恰说明宇称在 r≥1 时不能充当
+  分量不变量，从而与连通性不矛盾，是同一现象的具体例证而非反例）。
+  ⚠ Jarvis v3 p.17 的 ℓ 定义原文按字面读作 "if g≠2"（经 200dpi 页图反复确认非 OCR 误读），
+  语义上显然应为 "if g≥2" 的排印之误；本卡的计算独立于这条修复性解读，直接对 g=2 显式算出
+  跳变现象，不依赖 Jarvis 该处文字是否正确。
+author: graph-curator
+created: "2026-09-24"

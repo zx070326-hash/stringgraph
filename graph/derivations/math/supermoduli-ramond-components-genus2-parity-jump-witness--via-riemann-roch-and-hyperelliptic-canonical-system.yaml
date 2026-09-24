@@ -1,0 +1,52 @@
+id: math.supermoduli-ramond-components-genus2-parity-jump-witness--via-riemann-roch-and-hyperelliptic-canonical-system
+target: math.supermoduli-ramond-components-genus2-parity-jump-witness
+kind: proof
+status: rigorous
+depends_on:
+  - id: math.riemann-roch-theorem
+    inferred: false
+  - id: math.canonical-divisor-degree
+    inferred: false
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/supermoduli-ramond-components/proof.md §6.2"
+    note: |
+      本项目原创证明（独立显式计算），非已发表文献；status.yaml: state: verified，
+      2026-09-24 二审（rev-ramond）核对；captain_confirmed: false，不阻塞毕业。
+summary: |
+  证明路线（proof.md §6.2）：
+  1. deg ω_C(R) = 2g-2+#R = 2·2-2+2 = 4（用 math.canonical-divisor-degree 的 deg ω_C=2g-2=2
+     加上 #R=2），deg L = 4/2 = 2。
+  2. Riemann–Roch（math.riemann-roch-theorem，D=L）给出 h^0(L)-h^1(L)=deg L-g+1=2-2+1=1；
+     Serre 对偶 h^1(L)=h^0(ω_C⊗L^{-1})；deg(ω_C⊗L^{-1})=deg ω_C-deg L=2-2=0。
+  3. 标准事实（紧黎曼面上 0 次线丛有非零截面 ⟺ 平凡，因为截面零点是 0 次有效除子，
+     只能是零除子）给出 h^0(ω_C⊗L^{-1})=[ω_C⊗L^{-1}≅O_C]=[L≅ω_C]；
+     故 h^0(L)=1+[L≅ω_C]。
+  4. L≅ω_C 与 L^⊗2≅ω_C(R) 相容 ⟺ ω_C≅O_C(ρ_1+ρ_2)；g=2 时 |ω_C| 是唯一 g^1_2
+     （超椭圆典范系统），故此式成立 ⟺ ρ_2=ι(ρ_1)（ι 超椭圆对合）。
+  5. 稠密开集 {ρ_2≠ι(ρ_1)} 上全部 16 个 L 满足 h^0=1（奇）；余维 1 闭轨迹
+     {ρ_2=ι(ρ_1)} 上纤维 {ω_C⊗η:η∈J[2]}，η=O 一点 h^0=2（偶），其余 15 点 h^0=1（奇）。
+  6. 因此 h^0(L) mod 2 在 S_{2;0,2} 上不是局部常值函数。
+gaps:
+  - |
+    步骤 3 用到的标准事实"紧黎曼面上 0 次线丛有非零截面当且仅当平凡"未落地为图节点
+    （math.riemann-roch-theorem 自身 notes 的「刻意不断言」列表里也未覆盖这条 deg=0 情形，
+    只覆盖 deg<0 情形），故本推导对它**不建 depends_on 边**，只在 summary/gaps 里如实记账；
+    该事实是黎曼面理论最基础的标准事实之一（线丛的全纯截面对应线性等价的有效除子），
+    风险极低，不视为逻辑跳步。
+  - |
+    步骤 4 用到"g=2 时典范系统是唯一的 g^1_2"（超椭圆曲线经典事实），同样未落地为图节点，
+    按标准事实直接使用。
+notes: |
+  reviewer-verified: rev-ramond (sonnet), 2026-09-24 —— 见
+  research/attempts/supermoduli-ramond-components/status.yaml review_2026_09_24 块，
+  核对了本计算每一步代数（Riemann–Roch 代入、Serre 对偶、超椭圆典范系统唯一性、
+  轨迹维数计数），判定无逻辑跳步；status.yaml: state: verified。按
+  docs/STATUS_LEVELS.md 的 rigorous 例外条款（前提完整、有限步初等计算、reviewer 独立
+  复核）本推导标 rigorous。captain_confirmed: false，不阻塞毕业。
+
+  本推导逻辑上独立于姐妹卡 `math.supermoduli-ramond-components-monodromy-transitive` 的
+  点推单值机制，不对其建 depends_on 边；两者关系是"互相印证"而非依赖（见 statement 正文
+  "本卡不断言"段）。
+author: graph-curator
+created: "2026-09-24"
