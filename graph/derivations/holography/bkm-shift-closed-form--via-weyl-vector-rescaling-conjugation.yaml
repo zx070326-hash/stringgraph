@@ -1,0 +1,46 @@
+id: holography.bkm-shift-closed-form--via-weyl-vector-rescaling-conjugation
+target: holography.bkm-shift-closed-form
+kind: proof
+status: rigorous
+depends_on:
+  - id: holography.bkm-torsion-generating-function-eq211
+    inferred: false
+    note: "eq(2.11)：Z_I 生成函数定义（用于定义'裸'生成函数 Z̃_I，即去掉 (−1)^ℓ 因子的版本），proof.md §9.1"
+  - id: holography.dgm-torsion-divisor-sum
+    inferred: false
+    note: "eq(2.13)：Ω_I 递推（裸生成函数的除子和公式，proof.md §9 Lemma 9.4 的输入）"
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/bkm-shift-explanation/proof.md :: §9（命题 B 的第二条独立证明，Lemma 9.1–9.4、定理 9）"
+    note: |
+      本项目原创证明，非已发表文献。2026-09-18 由另一 theorem-prover 任务
+      （weyl-shift-diagnostic）独立完成后并入本文件。经 graph-reviewer 对抗审查
+      （2026-09-18，六个攻击面）：核心 Lemma 9.1–9.4 与定理 9 未被攻破（攻击面 1–3、6 未攻破；
+      攻击面 4、5 只导致 §9.7「一致性检验」措辞从"交叉验证"降格、§9.9 补充说明，不触及
+      9.1–9.6 的证明本身）。captain_confirmed 是否覆盖本条第二证明，status.yaml 明确记为
+      "留给 lead/船长决定"、尚未正式确认扩展；本条 derivation 的 rigorous 状态是按其自身论证
+      严格度（已过对抗审查、核心步骤有独立脚本三重复核）独立评定，不依赖该确认范围的扩展。
+summary: |
+  独立于第一条证明的第二条路径：(1) 定义"裸"生成函数 Z̃_I（去掉 A-N 的 (−1)^ℓ 符号因子），
+  由 eq(2.13) 证明裸生成函数的除子和公式是纯伸缩、不含任何加性平移（Lemma 9.4）；
+  (2) 证明 A-N 的符号约定 (−1)^ℓ = e^{iπℓ} 本身等价于把裸生成函数在椭圆方向平移了固定量
+  1/2（Lemma 9.3，纯初等恒等式，不依赖任何模形式结构）；(3) 用"平移经伸缩共轭"的一般规律
+  （先平移 a 再伸缩 d，等于先伸缩 d 再平移 da）组合两步，直接推出 z_new=dz+(d−1)/2
+  （定理 9），不需要像第一条证明那样先猜出答案再验证指数恒等式。两条证明共享的唯一初等前提
+  是换元 m=d²m′,ℓ=dℓ′ 的双射性（任何正确路径都无法绕开的算术事实），除此之外不共享任何
+  中间结论（proof.md §9.1 明确声明的诚实边界）。另有独立脚本三重复核：
+  scripts/verify_theorem9_merge.py（符号计算）、scripts/weyl_shift_check.py 及
+  scripts/robustness_sweep.py（27 组随机种子，Laurent 级数逐项精确核对，diff=0）。
+gaps:
+  - "本证明中把常数 1/2 称作'Weyl 向量分量'只是给 (−1)^ℓ=e^{iπℓ} 中出现的常数一个有意义的
+     名字（proof.md §9.4 要点段明言），证明本身不依赖'1/2 恰好是某 BKM 超代数 Weyl 向量分量'
+     这一事实；这是否有更深的代数化解释，proof.md §9.9 记为 [GAP-代数化]，与正文 §7 的
+     GAP-BKM 同级开放，不影响本证明的完整性，也不在本次毕业范围内。"
+notes: |
+  reviewer-verified: graph-reviewer (theorem9-review), 2026-09-18（六个攻击面，核心 Lemma
+  9.1–9.4/定理 9 未被攻破）。
+
+  本推导与 --via-fourier-coefficient-matching 是同一目标陈述的两条独立推导（一个陈述可挂多条
+  独立推导），二者共同支持命题 B 的 rigorous 状态；即使其中一条被推翻，另一条仍独立成立。
+author: curator
+created: "2026-09-24"

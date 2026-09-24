@@ -1,0 +1,53 @@
+id: holography.bkm-shift-closed-form
+kind: proposition
+title: 命题 B——挠除子和生成函数的半整平移闭式 Z_I = Σ d/Φ₁₀(τ, dz+(d−1)/2, d²σ)
+statement: |
+  沿用 holography.bkm-torsion-generating-function-eq211 的生成函数定义与
+  holography.dgm-torsion-divisor-sum 给出的除子和递推 Ω_I(m,n,ℓ) = Σ_{d|I} d·Ω_1(m/d²,n,ℓ/d)，
+  对任意正整数 I，在使两侧生成函数（形式 q-展开）收敛的域内的一切 (τ,z,σ)：
+    Z_I^{(4|4)}(τ,z,σ) = Σ_{d|I} d · Z_1^{(4|4)}(τ, dz+(d−1)/2, d²σ)
+                        = Σ_{d|I} d / Φ₁₀(τ, dz+(d−1)/2, d²σ)。
+  即：把挠除子和递推代入生成函数定义、逐项换元 (m,ℓ)=(d²m′,dℓ′)（对固定 d 是格点间的双射）后
+  配对 Fourier 系数得到的唯一自洽解，在椭圆变量 z 方向带一个依赖除子 d 的半整平移 (d−1)/2
+  （d 为偶数时该平移是非整数、模 1 等于 1/2；d 为奇数时该平移本身就是整数）。
+uses: []
+uses_conventions: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/bkm-shift-explanation/proof.md :: §2–§5（Lemma B.1、Lemma B.2、Lemma B.3(a)、命题 B 完整证明第 1–5 步），另见 §9（第二条独立证明，Weyl 向量重标-共轭路线）"
+    note: |
+      本项目原创证明，非已发表文献。见 research/attempts/bkm-shift-explanation/proof.md。
+      status.yaml: state: verified（graph-reviewer 对抗审查总裁定 VERIFIED，2026-09-15）；
+      captain_confirmed: true，但确认范围严格限定为「给定 A-N eq(2.11)+(2.13) ⇒ 本半整平移闭式」
+      这一纯代数步（见 status.yaml 2026-09-15 确认记录原文），不含 §9 第二条证明、不含 GAP-BKM
+      一侧的探索性内容。
+  - ref: alexandrov-nampuri-2020
+    loc: "eq(2.11)+eq(2.13)（前提，非本卡所证；本卡是从这两式纯代数推出的闭式，A-N 原文未直接给出这一合并结果）"
+    note: "literature/extractions/dabholkar-gomes-murthy-2008.md §X4 已有同一闭式的非正式推导（标注'本抽取者推导，非文献逐字'，2026-09-15 researcher 抽取），本卡的贡献是补上完整证明（换元双射性、指数恒等式、两条独立证明路径）并经 graph-reviewer 对抗审查"
+notes: |
+  **诚实边界（不得越界，抄自 research/attempts/bkm-shift-explanation/status.yaml 2026-09-15 确认记录）**：
+  captain_confirmed 确认的范围严格限定为「给定 A-N eq(2.11)+(2.13) ⇒ 本半整平移闭式」这一纯代数
+  步；物理前提本身（A-N eq(2.11)+(2.13)，即 holography.bkm-torsion-generating-function-eq211 与
+  holography.dgm-torsion-divisor-sum）是文献陈述，非本尝试所证，其自身严格度为
+  physical-argument，会按状态传播规则压低本卡的 effective status
+  （`tools/stringgraph/propagate.py` 自动处理，符合预期，不需人工干预）。
+
+  **GAP-BKM（半整平移是否对应某 Borcherds–Kac–Moody 超代数的 ℤ/2ℤ 自同构）仍是开放问题，
+  未被本卡触及。** proof.md §7/§9.9 对此有精确的猜测式表述（S1/S2 关于 Cartan 元素存在性的
+  探索、S3 权重不匹配分析、明确未证的"猜想 9.5"），均属未证的探索性内容。本次毕业刻意不为
+  这部分建节点——它们是通向一个仍开放问题的脚手架，不是已验证结论的一部分，勉强建卡只会
+  制造"看似有进展"的错觉。
+
+  **两条独立证明**：proof.md §2–§5（Lemma B.1 换元双射 + Lemma B.2 指数恒等式 + 命题 B 第
+  1–5 步）与 §9（"裸生成函数的除子和是纯伸缩、A-N 的 (−1)^ℓ 符号约定本身等价于一次固定的
+  1/2 平移、经伸缩共轭复合得到 (d−1)/2"）是两条独立推导路径，见本卡的两条 derivation。
+  §9 已经 graph-reviewer 对抗审查（2026-09-18，六个攻击面，核心引理 9.1–9.4/定理 9 未被攻破，
+  两处措辞已按审查意见降格，不影响定理本身的正确性）。
+
+  **命题 B 核心恒等式不依赖 Φ₁₀ 周期性**：proof.md 明确指出 z_new=dz+(d−1)/2 这一换元关系
+  本身对一切 d 无条件成立，不需要用到 holography.phi10-periodic-in-v；周期性只在推论 B1
+  （见 holography.bkm-shift-explains-dgm-shift-gap）判断"奇 d 时半整平移是否被 Φ₁₀ 吸收"时
+  才被用到。故本卡两条 derivation 均不把周期性列为依赖。
+tags: [bh-entropy, mock-modular, n4-string-theory, cartography]
+author: curator
+created: "2026-09-24"
