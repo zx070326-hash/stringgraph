@@ -1,0 +1,34 @@
+id: holography.bkm-phi10-odd-elliptic-coefficient-nonzero
+kind: proposition
+title: Φ₁₀ 的 Borcherds 乘积在判别式 −1 处系数非零（椭圆变量方向奇数次幂非平凡）
+statement: |
+  Igusa 尖点形式 Φ₁₀（holography.igusa-cusp-form-phi10）的 Borcherds 乘积展开
+    Φ₁₀(Ω) = e^{2πi(ρ+σ+v)} ∏_{(m,n,l)>0} (1 − e^{2πi(mρ+nσ+lv)})^{c(4mn−l²)}
+  中，三元组 (m,n,l)=(0,1,1)（判别式 4mn−l²=−1，l=1 为奇数）处的系数 c(−1) 非零。
+  故乘积含非平凡因子 (1 − e^{2πi(nσ+lv)})^{c(−1)} = (1 − e^{2πi(σ+v)})^{c(−1)}（l=1 为奇）；
+  即 Φ₁₀ 的 Fourier–Laurent 展开在椭圆变量 v 方向含奇数次幂的非零贡献，该贡献不会因
+  v ↦ v+1/2 引入的相位因子 e^{iπl}（奇 l 时为 −1，偶 l 时为 +1）而与其余部分抵消掉。
+uses: []
+uses_conventions: []
+sources:
+  - ref: kawai-1997
+    loc: "eq.(4.32)：c(0)=20, c(−1)=2, c(N)=0 (N<−1)（K3 椭圆亏格 Fourier 系数，代入乘积公式 eq.(5.13) 的指数）"
+    note: "三元组 (k,l,r)=(0,1,1)（kawai 记号，对应本卡 (m,n,l)=(0,1,1)）判别式 4·0·1−1²=−1，c(−1)=2≠0"
+  - ref: dabholkar-murthy-zagier-2012
+    loc: "§4.3, eq.(85)：φ_{−2,1}(τ,z)=(y−2+y⁻¹)+O(q)；Table 1：C_{−2}(−1)=1≠0"
+    note: "二重独立佐证；两套系数约定相差整体归一化因子，但判别式 −1 处非零这一结论一致"
+notes: |
+  本项目原创证明 research/attempts/bkm-shift-explanation/proof.md §4「支撑 Lemma B.3(b) 的前提」
+  逐字引用这两条独立文献坐实此事实，用于 Lemma B.3(b)（半整平移非平凡性的反证）与推论 B1
+  （见 holography.bkm-shift-explains-dgm-shift-gap）。
+
+  本卡是从这两条文献引用中抽出的、可独立复用的数学事实节点，不是文献本身的定理编号
+  （两文献给出的是具体的傅里叶系数数值表，本卡陈述的是由这些数值直接读出的"判别式 −1 处
+  非零"这一推论，纯代数事实，无需额外论证）。
+
+  【GAP-前提 的关闭记录】status.yaml（bkm-shift-explanation attempt）记录：此前 proof.md 草稿
+  曾把这一非零性当作未经文献坐实的假设（[GAP-前提]），2026-09-15 由 researcher agent 用
+  kawai-1997 eq(4.32) 逐字坐实并交叉核对 dabholkar-murthy-zagier-2012 后关闭该 GAP。
+tags: [bh-entropy, mock-modular, number-theory]
+author: curator
+created: "2026-09-24"
