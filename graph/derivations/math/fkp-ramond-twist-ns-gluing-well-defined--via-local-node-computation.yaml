@@ -1,0 +1,68 @@
+id: math.fkp-ramond-twist-ns-gluing-well-defined--via-local-node-computation
+target: math.fkp-ramond-twist-ns-gluing-well-defined
+kind: proof
+status: rigorous
+depends_on: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/fkp-79-ramond-twist/proof.md §2 (setup)、§3 (what has to be proved)、
+      §4 (identifications: Lemma 4.1 O_Z 的奇偶分裂、Lemma 4.2 有限态射 Hom 伴随、Lemma 4.3
+      ω_Z 的奇部计算、§4.4 Φ_Z 的块对角性与 = δ_Z^-)、§5 (Main Proposition 的证明：§5.1 节点外
+      = 假设 (2.5)、§5.2 节点邻域局部模型 k[[u,v]]/(uv) 上的显式计算)、§6 (Definition 2.4 其余
+      条件)、§7 (Theorem 7.1 的陈述与组装)；commit 232b554"
+    note: 本项目原创证明，非已发表文献。见 research/attempts/fkp-79-ramond-twist/status.yaml。
+  - ref: felder-kazhdan-polishchuk-2020
+    loc: "Definition 2.4 (p.6)；Lemma 2.6 与 (2.5) (p.7)；§7.5 的粘接构造与 Lemma 7.9 陈述 (p.47)；
+      Lemma 7.9 的证明 (p.48)"
+    note: |
+      proof.md §1 对这四页的逐字转录，已由本推导下方 notes 记录的独立审查用 220dpi 页图核对，
+      character-for-character 无误，包括 Lemma 7.9 证明里被误引的 Remark 2.3 (p.5) 一句。
+summary: |
+  证明分两步。(1) 恒同化（proof.md §4）：在偶底 S 上把粘接超概形 Z 的结构层拆成
+  O_Z = O_{Z_0} ⊕ (j_*L ⊕ j'_*L')（Lemma 4.1，来自 FKP-A 自己的粘接构造，§7.5），并用有限态射的
+  Hom 伴随（Lemma 4.2，自证）把条件 (2.4) 对 Z 翻译成一条具体的层同构问题——"主命题"：
+  Φ_Z: F → Hom(F, ω_{Z_0}(D)) 是同构，其中 F=j_*L⊕j'_*L'，D 为粘接后的 Ramond 除子（Lemma 4.3
+  给出 ω_Z(R^Z)^- 的显式形式；§4.4 证明 Φ_Z 就是 δ_Z^- 本身，块对角，无交叉项）。
+  (2) 局部性论证（proof.md §5）：是否为同构是 Z_0 上局部问题，取开覆盖 {V, Z_0∖{z}}，V 是不含
+  Ramond 除子支集的节点邻域（由 Definition 2.4 的"不相交"要求保证存在）。节点之外，Φ_Z 限制为
+  两支上各自的 (2.5)，逐字就是假设本身。V 上，扭转层 O_{Z_0}(D) 被重言截面典范平凡化，问题退化
+  为 FKP-A 自己未给出证明的"It is well known that…"，proof.md 在局部模型
+  A=k[[u,v]]/(uv)=k[[u]]×_k k[[v]] 上显式算完：Ann_A(v)=(u)、对偶化层 A·η（[S1]，Rosenlicht/Serre
+  标准事实）、分支包含 du↦uη，把 Hom_A(A_1,Aη) 经"取值于 1"识别为 (u)η，映射 1↦αuη 在 α 为单位
+  （(2.5) 在 P 处的完备性=同构 的直接推论）时是自由秩一模间的同构。§6 核对 Definition 2.4 的其余
+  条件（光滑轨迹与穿孔存在性、CM 条件、稳定性），逐条确认与 R 无关，唯一用到"不相交"的第二处是
+  §6.2 的 R_i⊂U∖P。§7 把两步组装为 Theorem 7.1，其"特别地"给出 (7.8)/(7.9) 良定义。
+gaps:
+  - |
+    [GAP: S1 未重证] 节点处 ω_{Z_0} 的经典描述（Rosenlicht/Serre：η=du/u、分支包含 du↦uη）作为
+    标准事实引用（Serre GACC Ch.IV；ACGH GAC II Ch.X §2；Hartshorne III.7），未在 proof.md 内重证。
+    经典、与超几何无关、与 R 无关；reviewer 复核认定低风险、非承重缺口，但本人未逐行核对这三本
+    教科书原文。
+  - |
+    [GAP: 一般基] 条件 (2.4) 按 Definition 2.4 定义是逐纤维条件，故 proof.md §5 的主证明在代数
+    闭域上完成即够；δ_Z 的构造与 §6.1/§6.3 的结构性条件陈述在一般 S 上，跟随 FKP-A 自己的处理，
+    proof.md 只核对了它们对 R 的依赖（为零），未重做 FKP-A 自己的基变换/平坦性记账。
+  - |
+    [GAP: 最后一个箭头的命名] Lemma 7.9 显示式里 j_*ω⊕j'_*ω'→ω_Z 这个箭头 FKP-A 未命名。本证明
+    取它为典范的无留数（trace）包含——proof.md §11 论证这是唯一自然候选，且与 §5.2 的局部茎计算
+    自洽（该包含单但不满，余长一，且这个"不满"恰是 ω_Z(R^Z)^- 的茎结构所要求的）。是一个有充分
+    理由但仍属**解释性**的选择，不是 FKP-A 逐字给出的。
+notes: |
+  reviewer-verified: rev-fkp79 (sonnet), 2026-09-24.
+  独立审查下载 arXiv:2006.13271v3（curl 一次成功），用 pdftoppm 在 220dpi 渲染 pp.5,6,7,47,48，
+  逐字比对 proof.md §1 的全部转录（Definition 2.4 的 disjoint 从句、δ 的靶、(2.4)；Lemma 2.6 与
+  (2.5) 及其扭转；Lemma 7.9 的陈述与证明全文，含"It is well known that…"一句；§2.2 的 (2.2)/(2.3)
+  与 Remark 2.3），字符级无误；并独立重算了 §5.2 的节点局部模型全部步骤（Ann_A(v)=(u)、分支包含、
+  经"取值于 1"的 Hom_A(A_1,Aη)≅(u)η 识别、"α 为单位 ⇒ 同构"判据），未发现错误；核对了 Lemma
+  2.5(iii) 的四条 CM 条件与 proof.md §6.3 引用一致。审查明确记录**未**独立核查的部分：proof.md
+  §9/§10（Footprint I/II，来源页 pp.41,56–60，只信了作者转录）、[S1] 的 Rosenlicht/Serre 原始文献
+  溯源、一般基上的基变换记账——这三项与本卡断言的 Theorem 7.1（claim.md 的 Main Claim）无关，
+  已被排除在本推导的 sources/summary 之外，不构成本卡的隐藏依赖。完整记录见
+  research/attempts/fkp-79-ramond-twist/status.yaml 的 `review_2026_09_24` 块。
+
+  本推导刻意不涵盖 proof.md §8–§11（Footprint I/II 与后续 [GAP] 清单）：那些是对本项目其他文件
+  （paper.md §10.1、supermoduli-elliptic-tail-punctured 的 [GAP-LIT]）表述的独立纠错，其证据链
+  依赖未被独立核对的页图转录（p.41, pp.56–60），按本轮任务书的档位纪律不建卡，已写入 curator
+  最终报告转交 lead。
+author: graph-curator
+created: "2026-09-24"
