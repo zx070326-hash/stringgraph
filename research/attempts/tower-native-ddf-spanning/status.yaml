@@ -160,21 +160,40 @@ review_2026_09_24:
         正确的差额清单是：
           · **(S) 不是差额** —— `no-ghost-theorem-v4--via-goddard-thorn` 的 summary
             逐字把 `2α' k_0·k = 1` 钉死了；
+            ⭐ **2026-09-25 必读限定（`rev-no-tprime`）：这句只对「相对消费端」成立。**
+            **相对 v2 卡面，(S) 是差额**——v2 第 20–24 行**有意**不含 (S)。两句同时为真，
+            合起来正好是新立窄卡的理由：**(S) 相对消费端不是差额，相对 v2 卡面是差额；
+            故出路是新立窄卡对齐消费端，不是升 v2。** 不要从本行读出「(S) 无需处理」。
           · **(C) 不是差额** —— 它是 (F1)(N)(S)(T)(O) 的推论（Gram 阵沿第二行展开
             `det G = −1`，配 (F1) 给出 `det η` 是单位 ⟹ `det B` 是单位；任意交换环，
             不需 (T′)、不需域、不经过 (F4)/(F8)）。`[GAP-C]` 据此已关闭。
           · **(T′) `η(ε_i,a) = 0` 是唯一真差额。**
-    (a′) 🔴 **(T′) 这条坑要正面处理，不能用"存在一组好标架"绕过去。** 目标卡
-        `ddf-spanning-hypothesis-v2` 是**对一切**满足 (T)(O) 的标架量化的，而满足
+    (a′) 🔴 ~~**(T′) 这条坑要正面处理，不能用"存在一组好标架"绕过去。**~~
+        ✅ **2026-09-25 已解决，且两条出路都成立**（见本文件 `no_tprime_result_2026_09_25`
+        与 `rev-no-tprime` 裁定）：(1) **证了 (T′) 可省**——引理 A/B；
+        (2) **也证了结论与标架选取无关**——Lean 的 `structure TransverseFrame`
+        （`LightCone.lean:296`）只有 `vec/transverse/orthonormal` 三个字段、**没有 (T′)**，
+        即消费端早已对一切 (T)(O) 标架取全称量词；再加 `det G = −1` 使 (C) 对每个
+        (F1)(N)(S)(T)(O) 标架免费，这些标架（固定 `(a,b)`）全部落在
+        `proof-no-tprime.md` 推论 4.2 的**同一条轨道**上。标架轴由此**两头封住**。
+        以下是原文，保留以记录当时的困境：
+        目标卡 `ddf-spanning-hypothesis-v2` 是**对一切**满足 (T)(O) 的标架量化的，而满足
         (T)(O) 却违反 (T′) 的合法构形确实存在（显式例：`D=6`、`η=diag(−1,+1,…)`、
         `b=(1,1,0,…)`、`a=(0,1,1,0,…)`、`ε_1=e_2`，(N)(S)(A)(T)(O) 与 `η(v,v)=0`
         全满足而 `η(ε_1,a)=1`；lead 已逐项复算）。故一张"标架存在性"卡**救不了**
         "对一切标架"的断言——出路只有两条：证 (T′) 可省，或证结论与标架选取无关。
         又：`--via-goddard-thorn` 的 `gaps` 自己写明 "(T′) 不是本推导第 (1b) 步的
         未写出前提……本推导比文献那个标架宽"，即该推导是**刻意**取宽标架的。
-    (b) 毕业**不会移动** `worldsheet.no-ghost-theorem-v4` 的 effective。建卡前必须先跑
-        `uv run stringgraph why worldsheet.no-ghost-theorem-v4` 复核，不得在 ROADMAP
-        写成"做成 X 就能让 Y 升档"。
+    (b) 🔴 ~~毕业**不会移动** `worldsheet.no-ghost-theorem-v4` 的 effective。~~
+        **本行 2026-09-25 起是错的，已作废**（`rev-no-tprime` 指出；保留原文以免留下
+        与事实相反的记录）。`why` 复核的结论是：`--via-goddard-thorn` 自身 status 已是
+        `rigorous`，**被且仅被 `ddf-spanning-hypothesis-v2` 一条依赖压低**
+        （`limited by 1 dep(s)`）。故把该边改指窄卡（`rigorous`）后，瓶颈换成窄卡，
+        **`no-ghost-theorem-v4` 的 effective 会真实升到 `rigorous`**。
+        这是真实移动、不是虚高——前提是窄卡前件覆盖消费端需要的量词范围，审查员已逐条核过。
+        原行要求的纪律**本身仍然有效并已执行**：建卡前先跑
+        `uv run stringgraph why worldsheet.no-ghost-theorem-v4`，不得在 ROADMAP
+        写成"做成 X 就能让 Y 升档"而不机检。
     (c) 逐条对应核查的结论是**部分供得上**：结论、对象、量词三项全部对得上，多处
         Theorem 3 还**更强**（给出直和而非仅包含、逐 `(j,N)` 分解、`D(Ε) ∩ H_null = 0`
         对任意交换 ℚ-代数而非仅有序域）。差的只有 (T′) 这一条前件。
@@ -211,7 +230,12 @@ tprime_removal_analysis_2026_09_25:
       原样成立，塔内原生骨架不动**。
     · 引理 6 / 领项：(Z) 块**逐字不变**，c 的贡献恒等抵消，领项系数仍是单位 `K_0 = 1`；
       新增四类项的 `Δw ∈ {−1,−M}` 全 `< M`，落进 (2.3) 余项 ⟹ §2–§3 三角性论证不动。
-    · 引理 7(b)–引理 8：需把 `R_m` 从"保 κ"弱化为"**不降** κ"；引理 8 证明逐字存活。
+    · 引理 7(b)–引理 8：~~需把 `R_m` 从"保 κ"弱化为"**不降** κ"~~；引理 8 证明逐字存活。
+      ⭐ **2026-09-25 订正（`rev-no-tprime`，lead 已复核脚本输出）：这条弱化是多余的，
+      `R_m` 实际仍然**保持** κ。** 两个 `Δκ=+1` 的项逐项精确相消（同 `k`、同 `i`、
+      同系数 `(m+k)c_i`、反号），见 `proof-no-tprime.md` §5.6；机检 `[LonW]` 每个
+      `c ≠ 0` 构形都输出 `raises somewhere: False`。故引理 7(b) **逐字**成立。
+      原分析过度悲观。**被订正的是本栏（`status.yaml` 的分析记录），不是 `proof.md`。**
     · 引理 10(b)：`E_0 = c_i` 是标量、保 κ，(b) 仍真；(a) 用的是 (T) 不是 (T′)。
     · 佐证：整条借用的 (4.4) 在 Lean 侧是 `StringFormal.NoGhost.lie_towerLop_ddfOp_of_pos`，
       其假设 hη/hbb/hba/hεb = (F1)(N)(S)(T)，**本来就不含 (T′)**。
@@ -265,3 +289,103 @@ review_findings_fixed_2026_09_25:
   still_open: |
     等 rev-no-tprime 补发被截断的尾部，尤其是 **(S) 接线裁决**、finding 6 的余下部分、
     以及是否有第 6 条之后的 finding。**在它裁决前不动 `graph/`。**
+
+# ---------------------------------------------------------------------------
+no_tprime_verdict_2026_09_25:
+  scope: |
+    本栏只裁定 `claim-no-tprime.md` / `proof-no-tprime.md`（删去 (T′) 的 Theorem 1′/2′/3′）。
+    顶层 `state: verified` / `reviewer: rev-tower-ddf` 说的是 `proof.md` 的 Theorem 1/2/3，
+    未被本轮触碰，也未被推翻。
+  reviewer: rev-no-tprime（graph-reviewer，只读；裁定由 lead 代写）
+  verdict: verified
+  recommended_status: rigorous
+  not_formalized_because: |
+    `[GAP-LEAN]`（Theorem 1/2/3 与 1′/2′/3′ 全未形式化）与 `[GAP-B-LEAN]`（引理 B 未形式化）
+    都未做。**不得写 `formalized`，也不得对外说「机器验证」。**
+  overturns_nothing: |
+    审查员明确回答：**没有推翻已判 `verified` 的 `proof.md` 的任何部分**。三处看似推翻的
+    （注 5.1.1「(1.3) 在 c≠0 时为假」、§5.6「引理 7(b) 需弱化」、§5.8 中心荷简化）
+    全部指向 `status.yaml` 的**分析记录**或属"简化非纠错"，不指向 `proof.md`：
+    (1.3) 是在 (T′) 之下陈述的，在自己的前件下正确。
+  adversarial_effort: |
+    审查员报告试过而**构造不出反例**的方向：破 (S)、`Â = 0`、非整数/大 `c`（7/3、3）、
+    `j > 0`、`|n| ≤ 5` 且 `N = 3`、`D = 2`（无横向方向，单独跑了 `[DUAL][AB0][T1][T2]`）。
+    并逐条核实了「无隐藏新前件」（无「c 小」「Â 可逆」「R 是域」）与「`n=0` 边界」
+    （三条定理的证明没有任何一步用到 `A^ε_0`；引理 10(b) 的 `E_0` 是模算子零模标量 `c_i`，
+    不是 DDF 的 `n=0`）。
+  gap_ratings: |
+    `[GAP-B-DEF]` 不是缺口，**关闭**（`ddf-operators-v6` 只要求 (T)，卡面 notes (3) 逐字写着
+      Lean 的 ε「也不要求 ε·p = 0」；「意图是横向极化」是未写下的意图，不是前件）。
+    `[GAP-B-LEAN]` 轻微（组装工作量；改挂 (CW) 路线后更短）。
+    `[GAP-N]` 轻微、措辞诚实（机检没有任何一处被当成证明步骤，`∀N` 全靠归纳/单位三角）。
+    `[GAP-COMM]` 轻微（`lie_towerLop_ddfOp_of_pos` 的前件确实不含 (T′)，已逐条核）。
+    `[GAP-CONV]` 轻微（(3.1)–(3.4) 与 `VertexOperator.lean` 的 `E_∓` 拆分约定一致）。
+    `[GAP-LEAN]` 中等（决定了不能写 `formalized`、对外不能说「机器验证」）。
+    `[GAP-S]` **中等、真实**——唯一与目标卡有实质距离的一条，但接线方案已定，见下。
+  captain_confirmed: false
+
+s_wiring_ruling_2026_09_25:
+  ruling: |
+    **诚实接线，不是偷换；审查员声明找不到更诚实的接法。**
+    判据（审查员自采，非从先例搬）：把边从卡 X 改指卡 Y，是偷换 ⟺ 消费者从这条边**实际需要**
+    的东西 Y 给不全。**不是**「Y 的前件比 X 多」——前件多而消费者自己已断言了那些前件，
+    等于对齐，不等于削弱。
+  evidence: |
+    (1) `no-ghost-theorem-v4.yaml` 卡面【设定】(1b)(ii) 逐字：「`k_0·k ≠ 0`，且 `k_0` 的标度
+        已按 `2α' k_0·k = 1` 取定」；(1b)(i)「`α' k² = a = 1`」。(S) 不是为接线新加的假设。
+    (2) `--via-goddard-thorn` 的 `summary` 里是 `2α' k_0·p = 1`；它从未在「`η(a,b)` 任意」
+        的一般性上用过 v2。
+    (3) Lean 侧 `Assembly.lean:273` 的 section 变量含 `hba : dotVec η b a = 1`，
+        `no_ghost_of_spans` 的所有消费点都在这个上下文里。
+    (4) **与 (T′) 轴方向相反，两轴不可混用**：(T′) 轴上消费端标架只来自 `ddf-operators-v*`，
+        那里只要求 `ε·k_0 = 0`、**不**要求 `ε·k = 0`，所以把 (T′) 写进窄卡是**真收窄**、
+        真需要「消费者用不到更宽量词」的论证——这正是本轮要把 (T′) 消掉的理由。
+        (S) 轴反过来：消费端已把 (S) 钉死，窄卡写 (S) 是**对齐**。
+        故 2026-09-22 那条「`a₀` 轴收窄无害」的论证在这里**既不需要也不适用**。
+  effective_move: |
+    改边后 v2（`physical-argument`）不再在这条边上，瓶颈换成窄卡（`rigorous`），
+    **`worldsheet.no-ghost-theorem-v4` 的 effective 真实升到 `rigorous`**。
+    这将是本项目第一次移动无鬼定理的档位。
+  three_necessary_conditions: |
+    缺一条就从「对齐」变成「偷换」：
+    (i)  **v2 留在原地，不标 `superseded_by`、不就地改卡面。** 它是真正更宽（不含 (S)）
+         且真正未证的命题，本 attempt 没有证它；标成被取代 = 假装证了更宽的东西。
+         （且 v2 已被 `--via-goddard-thorn` 依赖，按原则 1 本来也不能就地改；
+         其 20–24 行避开 (S) 是**有意**的设计决定，就地改会抹掉它。）
+    (ii) **窄卡前件写全 (R)(F1)(N)(S)(A)(T)(O)(D26)，不含 (T′)**，并显式声明
+         `c_i := η(ε_i,a)` 任意。
+    (iii) **依赖边 note 按轴记来源**：(T′) 轴 = 本 attempt 引理 A/B 消除；
+         (S) 轴 = 消费端卡面 (1b)(ii) 自带，属对齐不属收窄；
+         并注明「**窄卡不蕴含 v2**」，防后人以为 v2 已获证。
+  rejected_alternatives: |
+    (a) 直接升 v2 的档 —— 等于声称证了不含 (S) 的版本。
+    (b) 在 v2 上挂一条带 (S) 的推导而不新建卡 —— 推导结论必须是卡面陈述；卡面不含 (S)
+        而推导前件多出 (S)，就是无来源的额外假设，工具也无法表达「这条推导只证了卡面的
+        一个特例」。
+    (c) v2 与窄卡两条边并存 —— `_combine_deps` 取最弱砖，v2 会把 effective 压回
+        `physical-argument`，白做；且 `--via-goddard-thorn` 实际用的一直是带 (S) 的版本，
+        挂 v2 本来就是一条比实际需要更宽的边，改指窄卡顺带修正了这个历史误配。
+  outward_claim_risks: |
+    🔴 **两条都属对外声称，船长确认前不得公开宣称。**
+    (a) **不能说「1972 年 Goddard–Thorn 定理已严格 / 已机器验证」。** 两个独立原因：
+        · `[GAP-LEAN]` 未做、窄卡不是 `formalized` ⟹「机器验证」一词不可用；
+        · `worldsheet.ddf-contour-equals-mode-sum`（`physical-argument`）仍是本项目**模和式**
+          `A^ε_n` 与文献**留数式** `A^i_n` 之间的**唯一的桥**。它不在这条推导的证明链上
+          （它承担的是 `ms.no-ghost-theorem` R7-2 的回译义务，故不压 `effective`），
+          但这意味着升档后准确的话是「**本项目模和表述**的无鬼定理已 `rigorous`」。
+    (b) 由此：ROADMAP 第 1 项（`ddf-contour-equals-mode-sum`）**不因本轮而作废**——
+        它仍是「本项目的表述 = 文献的表述」这句话的唯一承重点。
+  sharpened_S_necessity: |
+    审查员给出并机检了锐化形式（已写进 `proof-no-tprime.md` 注 B.4′ 的 (3.13)）：
+      A^b_n = (η(a,b) − 1) · S_n · V^{(n)}_{−n}      （n ≠ 0）
+    2500+ 精确有理测例零不符；且与 `lorentzian-lightcone-frame-existence` §7.1 的 (CW) 路线
+    逐字吻合。后果：(S) 是**充要**的、不能弱化成 `η(a,b) ∈ R^×`（`s=2` 一样坏）、
+    不能靠重标度绕开（塔会变）。
+    **同一性**：让 (S) 成为唯一差额的那个 `η(a,b) = 1`，与让 (T′) 消除机制成立的那个，
+    是同一位置的同一个方程 `K_0 = 1`。
+  lead_note: |
+    lead 独立确认的两条旁证（不构成接线依据，只是不矛盾）：
+    · `worldsheet.ddf-light-cone-frame`（**已 `formalized`** 的定义卡）的 (F3) 就是
+      `η(b,a) = 1`；它比窄卡**更强**（还带 (T′)=(F6)、共轭方向 (F4)、完备性 (F8)）。
+    · `uv run stringgraph search "spanning"` 确认图上没有任何卡陈述「带显式标架前件的
+      塔上张成定理」，窄卡不重复。
