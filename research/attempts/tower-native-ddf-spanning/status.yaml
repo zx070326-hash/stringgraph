@@ -1,0 +1,15 @@
+slug: tower-native-ddf-spanning
+title: "DDF 张成定理的塔内原生证明：用 W = ker K_{>0} 替换 Borcherds 的未知横向空间 T"
+state: draft
+author: prover
+created: "2026-09-24"
+reviewer: null
+verdict: null
+captain_confirmed: false
+target_cards:
+  - worldsheet.ddf-spanning-hypothesis-v2
+notes: |
+  2026-09-24 开工。claim.md 已写（Theorem 1/2/3）。proof.md 逐步填充中。
+  本 attempt 与 borcherds-rank-one-noghost 的关系：替代，不是续作。
+  那里的 P1（"唯一真困难的一条"）在这里变成 Theorem 1，走的是
+  (Λ-次数, −K-次数) 字典序滤过的领项三角性，不需要事先知道 T_j。
