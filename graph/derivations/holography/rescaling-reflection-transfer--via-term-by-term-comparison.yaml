@@ -1,0 +1,37 @@
+id: holography.rescaling-reflection-transfer--via-term-by-term-comparison
+target: holography.rescaling-reflection-transfer
+kind: proof
+status: rigorous
+depends_on:
+  - id: holography.torsion-index-divisor-operator
+    inferred: false
+    note: "接口边：D_I（Q-重标算子）的定义与「ρ 挂电荷 m」的记号来自该卡"
+  - id: holography.rescaling-p-operator-definition
+    inferred: false
+    note: "接口边：D'_I（P-重标算子）的定义来自该卡"
+  - id: holography.dstar-sduality-invariant
+    inferred: false
+    note: "证明核心引理：d_*(n/s²,m,ℓ/s) = d_*(m,n/s²,ℓ/s) 是该卡陈述的一般 GL(2,ℤ) 类函数性质
+           d_*(m′,n′,ℓ′)=d_*(m,n,ℓ)（T′=A^{−T}TA^{−1}）取对换矩阵 A=[[0,1],[1,0]]（det=−1，
+           属该卡明确覆盖的 GL(2,ℤ) 而非只 SL(2,ℤ)）的特例；proof.md Lemma 2.1 把这一步
+           单独列出但其数学内容与该卡完全相同，故不在图上重复立卡，直接依赖既有节点"
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/p-rescaling-frame-dependence/proof.md §3（Theorem A 的证明段）"
+    note: "本项目原创证明，非已发表文献。见 proof.md §3。status.yaml state: verified（reviewer: rev-prescale, 2026-09-24），captain_confirmed: false。"
+summary: |
+  逐项比较 D'_I(m,n,ℓ) 与 D_I(n,m,ℓ) 的 Dirichlet 级数展开：两者的第 s 项存在条件相同
+  （s²|n 且 s|ℓ），且两个求和号内的值 s·d_*(m,n/s²,ℓ/s) 与 s·d_*(n/s²,m,ℓ/s) 由
+  holography.dstar-sduality-invariant 的 m↔n 对称特例（对换矩阵）逐项相等。因此两个有限和
+  在同一指标集上逐项相等，级数本身相等。证明只用到接口边给出的定义与 d_* 的类函数性质，
+  不需要任何 mock 模形式的分解结构。
+gaps: []
+notes: |
+  reviewer-verified: rev-prescale (sonnet), 2026-09-24——proof.md 全文人工重推，Theorem A
+  的代数步骤确认无误；独立重跑 scripts/p_rescaling_witness.py 得到与 run_output.txt 逐位
+  一致的 8750/0 机检计数。
+
+  **本推导 status: rigorous 指其自身推断的严格度**：从三条依赖出发的演绎是纯代数比较，
+  不涉及任何物理前提，故 effective status 预期与 own status 相同（rigorous）。
+author: graph-curator
+created: "2026-09-24"

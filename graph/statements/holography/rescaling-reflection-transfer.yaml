@@ -1,0 +1,31 @@
+id: holography.rescaling-reflection-transfer
+kind: proposition
+title: 重标算子的反射转换（Thm A）：D'_I(m,n,ℓ) = D_I(n,m,ℓ)
+statement: |
+  沿用 holography.torsion-index-divisor-operator 的 D_I（Q-重标）与
+  holography.rescaling-p-operator-definition 的 D'_I（P-重标）。对一切整数 I≥1 及满足
+  m,n≥1、Δ=4mn−ℓ²>0 的 (m,n,ℓ)：
+    D'_I(m,n,ℓ) = D_I(n,m,ℓ)。
+  即：P-重标算子在 (m,n,ℓ) 处的取值，等于把电荷/磁荷互换后 Q-重标算子在 (n,m,ℓ) 处的取值。
+  这是 Bossard–Cosnier-Horeau-Pioline arXiv:1806.03330 "in agreement with the prescription
+  in [41, 72]"（[41,72] 即 BSS/DGM 一系）一句的精确数学形式：P-重标公式在 P-适配标架上的
+  取值，与 Q-重标公式在对应的（电荷、磁荷互换的）Q-适配标架上的取值，是同一件事，
+  由 S-对偶元 S=[[0,1],[−1,0]]：(Q,P)↦(P,−Q) 联系。
+uses: []
+uses_conventions: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/p-rescaling-frame-dependence/proof.md §3（Theorem A 证明与 Corollary 3.1）"
+    note: "本项目原创证明，非已发表文献。机检：I∈{1,2,3,4,6}, 1≤m,n≤12, 0≤ℓ≤2(m+n), Δ>0 的 8750 个实例，0 违例（scripts/run_output.txt PART 1）。status.yaml review_2026_09_24：reviewer rev-prescale 独立手推重证，并独立重跑脚本，输出逐位一致。captain_confirmed: false。"
+notes: |
+  **证明骨架（proof.md §3）**：逐项比较。D'_I 第 s 项存在当且仅当 s²|n 且 s|ℓ，值为
+  s·d_*(m,n/s²,ℓ/s)；D_I(n,m,ℓ) 的第 s 项由代换 (m,n,ℓ)→(n,m,ℓ) 得到，存在条件同为 s²|n
+  且 s|ℓ，值为 s·d_*(n/s²,m,ℓ/s)。由 d_* 的 GL(2,ℤ) 类函数性质（取对换矩阵的特例）
+  d_*(n/s²,m,ℓ/s) = d_*(m,n/s²,ℓ/s)，两和逐项相等，无剩余项。
+
+  唯一用到的外部数学事实是 d_* 关于 (m,n) 互换的对称性，这是
+  holography.dstar-sduality-invariant（一般 GL(2,ℤ) 类函数性质）在对换矩阵
+  A=[[0,1],[1,0]]（det=−1，属 GL(2,ℤ)）处的特例，见对应推导节点。
+tags: [bh-entropy, mock-modular, n4-string-theory, cartography]
+author: graph-curator
+created: "2026-09-24"
