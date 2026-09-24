@@ -15,13 +15,16 @@ depends_on:
     note: |
       同 g≥3 姐妹卡：proof.md §1 逐字回顾 Donagi–Witten 一点障碍族构造与障碍类函子性，本证明的
       测试族与障碍值追踪机制直接复用。
-  - id: math.fkp-ns-boundary-gluing-normal-bundle-formula
-    inferred: true
+  - id: math.fkp-punctured-normal-line-formula-separating
+    inferred: false
     note: |
-      ⚠ 诚实标注（同 g≥3 姐妹卡）：proof.md §4 引理 4.4 把该卡逐字陈述的无穿孔靶法丛公式用于
-      带穿孔靶 \overline{\mathfrak S}_{2;n,2r}（n+2r≥2）。这是依据节点奇点局部性
-      （Lemma 9.1 证明的局部陈述性质）的推断，不是 FKP-A 论文逐字陈述的一般性结论。
-      graph-reviewer 第二轮审查（2026-09-20）亲自核实合法，裁定不降低天花板。
+      【lead 2026-09-24 改指，原为 `math.fkp-ns-boundary-gluing-normal-bundle-formula` +
+      `inferred: true`；同 g≥3 姐妹卡，理由详见该卡】proof.md §4 引理 4.4 需要法丛公式用于带穿孔
+      靶 \overline{\mathfrak S}_{2;n,2r}（n+2r≥2）；此前只能记为依据节点奇点局部性的推断
+      （graph-reviewer 2026-09-20 核实合法、不降天花板）。该推断现已被被依赖卡正面证明（本项目
+      attempt `fkp-96-punctured`，对分离型 (7.8) 粘接、任意 m 与任意偶数 n 直接建立该公式，且
+      刻意不引用 Theorem C 以避免循环）。本证明的粘接态射正是分离型 (7.8)、Ramond 穿孔数 2r 为偶，
+      落在被依赖卡的假设范围内。不移动本卡 effective（此前此后均为 rigorous）。
 sources:
   - ref: stringgraph-research-2026
     loc: "research/attempts/supermoduli-elliptic-tail-punctured/proof.md §4.1-§4.7（a=0 分支，
@@ -44,8 +47,9 @@ summary: |
   \overline{\mathfrak S}{}^+_{2;n,0} 分量（命题 4.8）。
 gaps:
   - |
-    同 g≥3 姐妹卡：[GAP-FKP-RAMOND]（低，保留，只影响 r≥1）、[GAP-COMP]（低，已写入本卡 statement
-    的量词范围限制，r≥1 时不指认分量）。
+    同 g≥3 姐妹卡：[GAP-FKP-RAMOND]（**已于 2026-09-24 解除**，由
+    `math.fkp-punctured-ns-gluing-exists-with-ramond` 的两条独立推导证明该省略确为无害；保留为
+    历史记录）、[GAP-COMP]（低，已写入本卡 statement 的量词范围限制，r≥1 时不指认分量）。
   - |
     (g,n,r)=(2,1,0) 与 g=2 奇宇称带穿孔分量被本卡 statement 显式排除，不是本推导的缺口而是命题
     本身的精确边界——见 statement 的"本节点明确不断言"段落逐条对应的理由。

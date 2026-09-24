@@ -16,21 +16,21 @@ depends_on:
       proof.md §1 逐字回顾 Donagi–Witten 一点障碍族构造 X_η（该卡 I3，经 CN §5 转述）与障碍类沿
       态射函子性 j_f(ω₂)=ι_f(ω₂)（该卡的核心工具，经 CN Lemma 2.6 转述）；本证明的测试族 X_η 与
       障碍值追踪机制直接复用这两条构造/引理，未独立重新证明。
-  - id: math.fkp-ns-boundary-gluing-normal-bundle-formula
-    inferred: true
+  - id: math.fkp-punctured-normal-line-formula-separating
+    inferred: false
     note: |
-      ⚠ **诚实标注（任务硬约束）**：该卡逐字陈述的法丛公式 N_B≅Ψ₁^{-1}⊗Ψ₂^{-1} 是 FKP-A Theorem C
-      的内容，其靶逐字是**无穿孔**的 \overline{\mathcal S}_g。proof.md §4 引理 4.4（法丛计算，
-      本证明构造的关键一步）需要把这条公式用于**带穿孔的靶** \overline{\mathfrak S}_{g;n,2r}
-      （n+2r>0）。这一推广**不是** FKP-A 论文逐字陈述的一般性结论——FKP-A 全文未在任何地方明确
-      声明该公式对带穿孔靶成立（也未声明不成立）。本证明采用该推广的依据是：该公式的证明路径
-      （eq.(9.6) 经由 Lemma 9.1）是关于粘接节点**形式邻域**的局部陈述（Lemma 9.1 证明三次自称
-      "it is enough to study these line bundles in an étale neighborhood of the node"等，见
-      被依赖卡 sources note），这是节点奇点形变理论天然局部这一真实几何事实，不是"作者没写限制"
-      式的消极论证。graph-reviewer 第二轮审查（2026-09-20）亲自核实此步骤"有坚实理由，但仍是
-      推断"，裁定天花板仍为 rigorous（不因此降级为更低状态）。此边如实标 `inferred: true`：
-      去掉该标记，被依赖节点（无穿孔靶的字面陈述）并不完整承载本证明实际需要的那句话
-      （带穿孔靶版本）。
+      【lead 2026-09-24 改指，原为 `math.fkp-ns-boundary-gluing-normal-bundle-formula` +
+      `inferred: true`】proof.md §4 引理 4.4（法丛计算）需要法丛公式 N_B≅Ψ₁^{-1}⊗Ψ₂^{-1} 用于
+      **带穿孔的靶** \overline{\mathfrak S}_{g;n,2r}（n+2r>0），而 FKP-A Theorem C 逐字只对无穿孔
+      的 \overline{\mathcal S}_g 陈述。此前这条边只能标 `inferred: true`，理由是"证明路径是节点
+      形式邻域的局部陈述，故推广有坚实理由但仍是推断"（graph-reviewer 2026-09-20 裁定天花板仍
+      rigorous）。该推断现已被**正面证明**：被依赖卡是本项目原创证明（attempt `fkp-96-punctured`
+      已 verified 并毕业），对**分离型** (7.8) 粘接、任意 NS 穿孔数 m 与任意偶数 Ramond 穿孔数 n
+      直接建立 ι^*O(Δ_NS)≅ι^*O(Δ)≅Ψ₁^{-1}⊗Ψ₂^{-1}，且刻意不引用 Theorem C 本身以避免循环论证。
+      适用性已核：本证明的 Γ 正是 (7.8)（g₁=h, m₁=0, n₁=0；g₂=a, m₂=n, n₂=2r），分离型、Ramond
+      穿孔数为偶，落在被依赖卡的假设范围内。故本边改为 `inferred: false`。
+      注：这**不移动**本卡的 effective（此前此后均为 rigorous）；改动的目的是让依赖链如实反映
+      "该步骤现已有证明"，而不是继续记为推断。
 sources:
   - ref: stringgraph-research-2026
     loc: "research/attempts/supermoduli-elliptic-tail-punctured/proof.md §4.1-§4.7（完整构造：
@@ -61,9 +61,13 @@ gaps:
     2026-09-18 对抗审查（graph-reviewer）三点全部 CLEAR，且给出了比原稿更强的理由（详见
     status.yaml"2026-09-18 对抗审查结果"）。本卡的 rigorous 档位依据该轮独立复核，非仅自评。
   - |
-    [GAP-FKP-RAMOND]（低，保留）：FKP-A Lemma 7.9 证明正文把广义自旋结构写成 L≅Hom(L,ω_C)，漏
-    Ramond 扭转 ω_C(R)；判断为无害省略（粘接是 NS 节点处的局部操作），未独立重写该局部计算。
-    只影响 r≥1 的情形（间接依赖）。
+    [GAP-FKP-RAMOND]（**已于 2026-09-24 解除**）：原记为——FKP-A Lemma 7.9 证明正文把广义自旋结构
+    写成 L≅Hom(L,ω_C)，漏 Ramond 扭转 ω_C(R)；判断为无害省略（粘接是 NS 节点处的局部操作），未
+    独立重写该局部计算；只影响 r≥1 的情形（间接依赖）。该判断现已被独立证明坐实：
+    `math.fkp-punctured-ns-gluing-exists-with-ramond` 带两条独立推导（本项目 attempt
+    `fkp-79-ramond-twist` 的节点局部计算路线、`fkp-96-punctured` 的分支对偶引理路线），两者都
+    在带 R 扭转的一般情形下重做了该局部计算，结论为粘接态射 (7.8)/(7.9) 确实良定义。省略确为无害。
+    保留本条为历史记录；不再是本卡的开放缺口。
   - |
     [GAP-COMP]（低，已写入本卡 statement 的量词范围限制）：r>0 时 \overline{\mathfrak S}_{g;n,2r}
     的连通分量分类未知，故 r≥1 时本卡只断言整个叠非投影，不指认分量——这不是证明的缺陷，是诚实
