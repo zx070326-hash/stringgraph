@@ -69,6 +69,29 @@ no_tprime_result_2026_09_25:
     已作为裁决项交给 `rev-no-tprime`。在它裁决前不动 graph/。
   captain_confirmed: false
 
+  independent_convergence_2026_09_25: |
+    ⭐ **两个 agent 在隔离 worktree 里独立收敛到同一机制，且证法不同。**
+    `research/attempts/lorentzian-lightcone-frame-existence/proof.md` §7（agent `frame-exist`，
+    任务是完全另一件事——标架存在性）独立给出：
+      · 引理 7.1 = 本文件引理 B（`A^b_n = 0`，`n ≠ 0`）；
+      · 定理 7 = 推论 B.1（`A^{ε+λb}_n = A^ε_n`，`n ≠ 0`）；
+      · 推论 7.2 取 `λ_i := −η(ε_i,a)` = 引理 A 的标架平移。
+    **两份任务书都不含这个机制**（转给 drop-tprime 的是"换掉 (1.3) 带 c_i 重跑三张记权表"
+    这条完全不同的路线），两个 agent 不通信、写入路径不相交。
+    **证法也不同**：frame-exist 走塔指标 ↔ 洛朗指标位移 + (CW) 电流权恒等式砖块；
+    drop-tprime 走 `(b·∂X)e^{inb·X} = (1/in)∂_z[e^{inb·X}]` 全导数围道积分。
+    ⚠ 这是**佐证不是判决**：两者都还没过对抗性审查，收敛也可能是同一个错误的两种写法
+    （虽然证法不同使这个可能性变小）。`rev-no-tprime` 的审查独立进行，**未被告知本条**，
+    以免把独立审查变成回声（判例：`docs/reviews/reviewer-contamination-borcherds-2026-09-20.md`）。
+  boundary_from_frame_exist: |
+    frame-exist 的**注 7.3** 给出这条转移的精确边界，对本文件直接适用：
+      · 适用：结论只谈 `ddfSpan` / `A^ε_n`（`n ≠ 0`）——**Theorem 1′/2′/3′ 正是这一类**；
+      · 不适用：结论涉及 `A^ε_0` 或标架向量本身的线性代数命题，典型是 (F8)。
+      · 它给的锐利例子：D=3 整数见证的 `ε_1 = (0,0,1)` 与其平移 `ε′_1 = (−1,−1,1)`
+        给出**完全相同的 DDF 算子**，但只有后者满足 (F8)。故"(F8) 对一切 (T)(O) 标架成立"是假的，
+        而"DDF 张成对一切 (T)(O) 标架成立"与"对一切 (T′) 标架成立"**等价**——两句不矛盾，
+        它们量化的是不同类型的结论。
+
 review_2026_09_24:
   reviewer: rev-tower-ddf
   verdict: verified
