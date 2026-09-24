@@ -1,0 +1,33 @@
+id: math.fkp-punctured-ns-gluing-exists-with-ramond--via-branch-duality-lemma
+target: math.fkp-punctured-ns-gluing-exists-with-ramond
+kind: proof
+status: rigorous
+depends_on: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/fkp-96-punctured/proof.md §4（Lemma 4.1 分支对偶引理、Remark 4.2、
+      Prop. 4.3 主修复、Cor. 4.4、Remark 4.5 宇称核验）"
+    note: |
+      本项目原创证明，非已发表文献。status.yaml review_2026_09_24 块："proof.md §4（Lemma 4.1
+      分支对偶引理、Prop 4.3 [E2] 修复、Cor 4.4）——独立重新推算局部环 k[[x,y]]/(xy) 上 Ann(y)
+      计算，与 Lemma 4.1(1) 一致；Prop 4.3 的 Hom(L,ω_C(Σr_i))≅L 步骤正确"，sections_checked_in_full
+      列表项之一。captain_confirmed: false（不代填）。
+summary: |
+  核心是 Lemma 4.1（分支对偶引理）：对节点曲线 Z_0 的一个分支 C（闭浸入 j: C↪Z_0），
+  j^!ω_{Z_0}≅ω_C 且此同构下迹映射即分支的典范含入——这是"两个相反扭转的抵消"
+  （j^*ω_{Z_0}=ω_C(p_0) 与 Hom(O_C,O_{Z_0})=O_C(-p_0) 相消），在 k[[x,y]]/(xy) 上直接验证
+  Ann(y)=(x)η 得到。Prop. 4.3 把此引理应用于 Z_0=C∪_{p~p'}C'，通过 Hom-伴随把粘接条件
+  δ_Z^- 是同构的问题化为两个分支上独立的问题，每个分支上恰是 [FKP-A] (2.5) 本身（对 L 与 L'），
+  与穿孔数 R,R' 无关——因为 Ramond 点 r_i,r'_j 与节点 p_0 不交，j^*O_{Z_0}(D)=O_C(Σr_i) 只见到
+  自己分支上的 Ramond 点。Cor. 4.4 用 S̄_{g;m,n} 表出所陈述族的泛性质（[FKP-A] Theorem A）把
+  构造的族对应到唯一态射，得到 (7.8)/(7.9) 的存在性。
+gaps:
+  - |
+    Cor. 4.4 的最后一步引用 [FKP-A] Theorem A（S̄_{g;m,n} 表出稳定超曲线族的泛函子）作为黑箱，
+    未独立审计该定理本身的证明；这是 [FKP-A] 的主定理，作为已发表严格结果引用是合理实践。
+notes: |
+  curator 亲自 Read proof.md §4 全文（Lemma 4.1 三条性质的证明、Remark 4.2、Prop. 4.3 的还原到
+  几何点与逐步计算、Cor. 4.4、Remark 4.5），核对本卡 statement 与证明正文逐字一致；核对
+  status.yaml review_2026_09_24 块中 §4 被列入 sections_checked_in_full。
+author: graph-curator
+created: "2026-09-24"

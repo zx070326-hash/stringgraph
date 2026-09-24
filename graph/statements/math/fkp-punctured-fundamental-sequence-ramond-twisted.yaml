@@ -1,0 +1,46 @@
+id: math.fkp-punctured-fundamental-sequence-ramond-twisted
+kind: proposition
+title: "带 Ramond 穿孔稳定超曲线族的基本正合列（R 扭转形式；FKP 印刷版 (7.1) 是其 R=∅ 特殊情形）"
+statement: |
+  【记号】设 π: X→S 是一族带穿孔的稳定超曲线（Felder–Kazhdan–Polishchuk [FKP-A] Def. 2.4 意义下），
+  设 j: U↪X 是纤维中节点的补集的开嵌入（U 含全部 NS 穿孔与 Ramond 除子），R⊂U 是（与全部节点及全部
+  NS 穿孔不交的）相对 Cartier 型 Ramond 除子。
+
+  【命题】在 X 上有正合列
+    0 → ω²_{X/S}(R) --κ--> j_*Ω_{U/S} --j_*δ--> ω_{X/S}(R) → 0，   (7.1-R)
+  其中 κ,δ 是 [FKP-A] 原有的两个态射符号。在开集 V:=X∖R 上（V 包含每一个节点与每一个 NS 穿孔及其
+  除子），O_X(R)|_V 的典范平凡化截面 s_R 把 (7.1-R)|_V 等同于 [FKP-A] 印刷版正合列
+    0 → ω²_{X/S} --κ--> j_*Ω_{U/S} --j_*δ--> ω_{X/S} → 0。   (7.1)
+
+  【与 FKP-A 原文的关系——措辞精确】[FKP-A] 的 Lemma 7.1（p.41）把 (7.1) 不带 O(R) 扭转地印刷出来，
+  其证明设定（"Let π:X→S be a family of stable supercurves such that the map from S to the
+  deformation space of each node is smooth"）未显式排除 R≠∅ 的情形。但按字面读，(7.1) 在 R≠∅ 时并
+  不正合：比较 [FKP-A] 自己 §2.2 (2.2)–(2.3)（p.5）对带 Ramond 穿孔的光滑超曲线给出的
+  𝒟≃ω^{-1}_{X/S}(-R)，可算出 δ 的正确余核是 ω_{X/S}(R) 而非 ω_{X/S}，κ 的正确核是 ω²_{X/S}(R)
+  而非 ω²_{X/S}。因此 (7.1) 应读作一般形式 (7.1-R) 在 R=∅ 时的特殊情形——这是一处印刷/陈述缺陷
+  （漏写扭转），**不是** "Lemma 7.1 的命题为假"：R=∅ 时 (7.1) 完全正确，且 [FKP-A] 全文在 §9.1
+  之前从未在允许 R≠∅ 的语境里使用过 (7.1)。缺陷第一次产生后果，是 [FKP-A] Lemma 9.1(iv) 的证明
+  （p.60）按名引用 (7.1) 计算一个一般允许 Ramond 穿孔的族上的 Berezinian，此处若不加修补，论证在
+  R≠∅ 时不成立。
+uses: []
+uses_conventions: []
+sources:
+  - ref: felder-kazhdan-polishchuk-2020
+    loc: "Lemma 7.1 / eq. (7.1)，p.41（印刷版，无 (R) 扭转）；对照 §2.2 eq.(2.2)-(2.3)，p.5
+      （带 Ramond 穿孔的光滑超曲线的 𝒟, ω 关系）；§7.4 p.47（δ: Ω_{X/S̄}→ω_{X/S̄}(R) 的带扭转
+      形式，确认扭转并非新记号，而是 §7.1 遗漏）；Lemma 9.1(iv) 证明，p.60（(7.1) 的唯一消费点）"
+tags: [supermoduli, boundary-divisor, node-locality, fkp-errata, math-input]
+notes: |
+  【查重】`uv run stringgraph search "fundamental sequence"` / `"psi-line"` / `"normal-line"` /
+  `"boundary divisor"` 均无同内容命中（2026-09-24）。唯一相关既有节点是
+  math.fkp-ns-boundary-gluing-normal-bundle-formula（无穿孔靶的 Theorem C 逐字陈述），本节点不
+  与之重复：那张卡记账"FKP 逐字证明了什么（无穿孔靶）"，本节点是对带 Ramond 扭转的基本正合列本身
+  的独立证明与勘误记录，属于证明链更上游、更细粒度的一步。
+
+  【立卡理由】这是 research/attempts/fkp-96-punctured 判 verified 后按 research/CLAUDE.md 生命
+  周期第 4 步的毕业内容之一：它既是该 attempt 用来证明主定理（见姐妹卡
+  math.fkp-punctured-normal-line-formula-separating）的关键引理，也单独构成一条已发表文献的勘误
+  记录，值得独立成卡以便被未来任何需要"带 Ramond 穿孔的基本正合列"的证明直接引用，而不必每次重新
+  从 §2.2 推导。
+author: graph-curator
+created: "2026-09-24"
