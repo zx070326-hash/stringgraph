@@ -251,3 +251,42 @@ review_2026_09_24:
     its AN dictionary) are unresolved corrections to a SIBLING document
     (research/papers/torsion-dyon-shift-positivity/paper.md) that this attempt is not
     permitted to edit; they remain open action items for whoever owns that paper.
+
+graduated:
+  date: "2026-09-24"
+  by: lead   # 卡由 graph-curator（cur-prescale）在授权写入范围 graph/ 内建立；本块由 lead 补记
+  graph_nodes:
+    - holography.rescaling-p-operator-definition
+    - holography.rescaling-signed-operator-definition
+    - holography.rescaling-invariance-groups
+    - holography.rescaling-signed-invariance
+    - holography.rescaling-reflection-transfer
+    - holography.rescaling-adapted-frames-single-coset
+    - holography.rescaling-frame-dependence-witness
+    - holography.rescaling-immortal-index-not-frame-function
+    - holography.rescaling-bss-is-signed-q-rescaling
+  cross_task_findings_disposition: |
+    本 attempt 的 curator 在最终报告里提了三条跨任务发现，lead 逐条处置如下：
+
+    1. **BSS 误读（已由 lead 亲自做 L1 核实并落地）**：
+       `literature/extractions/dgm-eq51-eq52-third-party-crosscheck.md` §E1/E2/E3 把 BSS
+       eq(4) 里的 "v̌+1/2" 误读为半整平移的独立佐证。lead 未采信转述，重下 arXiv:0802.1556
+       官方 PDF、200dpi 渲染 pp.2–4 逐字读图确认：(a) BSS 在 eq(4) 之后自己写明该 k,l 求和
+       的用途是周期化；(b) p.4 明言"用 k,l 求和延拓 σ̌、v̌ 的积分区间"后，eq(7) 的
+       Φ₁₀(ρ̌, s²σ̌, sv̌) **不含任何平移**。订正已写入该抽取记录的新增 §C1，E1/E2/E3 裁定
+       全部撤回，第三方佐证数由 2 降为 0。**理由：这条牵动对外声明的证据链。**
+
+    2. **BCP arXiv:1806.03330 与 CNR arXiv:2007.10302 未登记 `literature/sources.bib`**：
+       核实属实（两者在 sources.bib 中均无条目）。**未处理**，留作 researcher 任务——
+       正确登记需要核对出版元数据，不宜由 lead 凭印象补。目前无任何图节点引用它们，不阻塞。
+
+    3. **`research/papers/torsion-dyon-shift-positivity/paper.md` 是否把 P-重标族误挂给 BSS**：
+       lead 已核，**不成立，无需订正**。该论文引的 [banerjee-sen-2008] 是
+       Banerjee–Sen arXiv:0801.0149（双作者，"S-duality Action on Discrete T-duality
+       Invariants"），且只用于 Γ⁰(I) 那一句，不是 BSS 三作者的重标公式；Problem 9.2 讨论
+       "rescale P rather than Q" 的公式族时没有署任何作者。
+       ⚠ 但本 attempt 的 Prop 8.1（已入图为 `holography.rescaling-bss-is-signed-q-rescaling`）
+       对 Problem 9.2 有新信息：它确定 **BSS eq(7) 是 Q-重标**，落在带号 (3.26)+(3.27) 一侧，
+       因此 BSS **不属于** Problem 9.2 所问的那个 P-重标族。这缩小了该问题的范围但没有回答它。
+       是否写进论文属对外产出决定，lead 未擅自改，留待船长。
+  closed: true

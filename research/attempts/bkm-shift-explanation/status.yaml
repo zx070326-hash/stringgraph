@@ -280,3 +280,30 @@ notes: |
   **本轮未改动命题 B 的 state / verdict / captain_confirmed**：两处订正都只涉及 §9
   自身的表述（一处降格自我评价、一处把断言改成猜测），不触及命题 B 的任何一步，
   也不触及 §1–§8。§9 现在的审查状态是"已过 graph-reviewer 对抗审查，未经船长确认"。
+
+graduated:
+  date: "2026-09-24"
+  by: lead   # 卡由 graph-curator（cur-bkm）在授权写入范围 graph/ 内建立；本块由 lead 补记
+  graph_nodes:
+    - holography.bkm-shift-closed-form
+    - holography.bkm-shift-explains-dgm-shift-gap
+    - holography.bkm-phi10-odd-elliptic-coefficient-nonzero
+    - holography.bkm-torsion-generating-function-eq211
+  effective_status: |
+    四张卡 own_status 均为 rigorous，但 effective 全部为 **physical-argument**——被
+    Alexandrov–Nampuri eq(2.11) 这条物理前提压低。这是 propagate.py 如实计算的结果，
+    不是降级处理：从 physical-argument 节点出发推东西是正当研究，结论诚实地停在该档。
+  why_it_matters: |
+    `holography.bkm-shift-explains-dgm-shift-gap`（推论 B1）把 DGM eq(51)/(3.27) 与
+    A-N 纯代数闭式之间的差别**精确定位**为半整平移 (d−1)/2，并证明这是唯一差别：
+    奇除子上两式因 Φ₁₀ 的整周期性等价，偶除子上一般不等（理由另立卡
+    `bkm-phi10-odd-elliptic-coefficient-nonzero`：Φ₁₀ 的 Borcherds 乘积在判别式 −1 处
+    系数非零）。与 `torsion-immortal-positivity-hecke` 的 101412 显式整数见证构成
+    **两条独立互证路径**：前者说差别"来自何处"，后者说差别"确实存在"。
+  outward_claim_boundary: |
+    ⚠ 判定 DGM eq(51)/(52) 不相容仍是**对外声明**，船长确认前不得公开宣称；图内记录不受此限。
+    ⚠ 2026-09-24 订正：本声明的**第三方**佐证数已由 2 降为 0（见
+    `literature/extractions/dgm-eq51-eq52-third-party-crosscheck.md` §C1，lead 的 L1 复核
+    推翻了 BSS 两篇作为独立佐证的裁定）。本 attempt 与 hecke attempt 这两条主证据不受影响，
+    但它们**都是本项目内部推导链**。船长裁断时请按订正后的证据面判断。
+  closed: true
