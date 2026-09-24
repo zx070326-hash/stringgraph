@@ -1,10 +1,15 @@
 slug: lorentzian-lightcone-frame-existence
 title: "DDF 光锥标架的存在性：(F5)–(F8) 的结构定理、域上的充要判据、与一般交换 ℚ-代数上的反例"
-state: under-review
+state: verified
 author: prover
 created: "2026-09-23"
-reviewer: null
-verdict: null
+reviewer: rev-frame-exist
+verdict: |
+  verified（2026-09-25，graph-reviewer 独立对抗性审查）。
+  定理 1–7 与推论 1.1/1.2/5.1/6.0/7.2 的**数学内容全部成立**，逐步核验无跳步；
+  scripts/verify.py 的机检与正文一致。建议档位 rigorous（=本文的严格程度），
+  **不是** formalized。发现 1 条必改（A1，见下）+ 4 条轻微（A2–A5）
+  + 3 条图卡 notes 的忠实性问题（E），reviewer 明示这些修改**不需要复审**。
 recommended_status: rigorous
 captain_confirmed: false
 target_cards:
@@ -28,8 +33,22 @@ notes: |
   · coordinator 要求正面处理的坑（目标卡对「一切 (T)(O) 标架」量化，
     而存在违反 (T′) 的合法标架）由定理 7 填掉：A^{ε+λb}_n = A^ε_n（n ≠ 0），
     坏标架与好标架给出**同一组** DDF 算子，故「对一切标架」可由「对 (T′) 标架」逐字推出。
-  ⇒ **本 attempt 最终证的不是原始命题**：原始命题的裁决是「一般交换 ℚ-代数上为假，
-    域（char ≠ 2）上为真且有充要判据」，并附 (F5)–(F8) 之间的完整蕴含关系。
+  ⇒ **本 attempt 最终证的不是原始命题**：~~原始命题的裁决是「一般交换 ℚ-代数上为假，
+    域（char ≠ 2）上为真且有充要判据」~~，并附 (F5)–(F8) 之间的完整蕴含关系。
+
+  🔴 **2026-09-25 更正（`rev-frame-exist` finding A1，上面划掉的那句是假的）**：
+    字面的原始命题「(F1)–(F4) ⟹ ∃ε 使 (F5)–(F8)」在**任何**环上都为假，包括 ℚ 和 ℝ，
+    而且理由平凡：(F1)–(F4) 不蕴含快子壳 η(a,a) = 2，而定理 3 说 (F8) ⟹ η(a,a) = 2。
+    反例（域上）：K = ℚ，D = 3，η = diag(−1,1,1)，b = (1,1,0)，a = (0,1,0)，
+    b̃ = −a + (t/2)b 取 t = 1 得 (½,−½,0)，(F1)–(F4) 全成立而 η(a,a) = 1 ≠ 2。
+    这与本 attempt 自己的推论 5.1(ii) 一致（那里「域上为真」的前提里就有 η(a,a) = 2）。
+    **正确的裁决分三条**：
+      (i) 字面原始命题：一切环上为假（缺快子壳；定理 3）。
+      (ii) 补上 (A)（即 η(a,a) = 2）后：域 char ≠ 2 上为真，且有充要判据（定理 5 + 推论 5.1）。
+      (iii) 补上 (A) 后在一般交换 ℚ-代数上**仍为假**（定理 6 的球面环反例满足 (A)）——
+           这才是定理 6 的真正内容，也是它不平凡的原因。
+    毕业影响：定理 6 的卡面必须写成「反驳的是 **(A)-加强后**的存在性断言」，
+    不能写成「反驳了标架卡【不断言】(b) 的字面命题」（后者不需要定理 6 就假）。
 
   【进度】
   2026-09-25：claim.md 落盘（定理 1–7 的精确表述 + 量词/代价表）。
@@ -75,3 +94,44 @@ notes: |
      ——只要结论只谈 `ddfSpan` / `A^ε_n (n ≠ 0)`（定理 7 + 推论 7.2）；
      若结论里出现 `A^ε_0` 或标架向量本身（如 (F8)），则**会**损失一般性，必须保留 (T′)
      （proof.md 注 7.3 给了精确分界）。
+
+review_2026_09_25:
+  reviewer: rev-frame-exist
+  verdict: verified
+  scope: "claim.md + proof.md §0–§8 + scripts/verify.py 全文，逐定理独立复算"
+  needs_recheck: false        # reviewer 明示：下列修改均不需要复审
+  findings: |
+    A1. 必改（CONFIRMED，假陈述）——「原始命题在域 char ≠ 2 上为真」是错的。
+        字面原始命题在一切环上为假（缺快子壳），定理 6 反驳的是 **(A)-加强后**的版本。
+        详见上面 notes 里的 🔴 更正框。
+        已改：claim.md §0（划掉 + 🔴 框）、proof.md §6 头部（⚠ 框 (1)）、
+              proof.md §8.3（🔴 框）、本文件 notes（🔴 框）。
+    A2. 轻微（proof.md 定理 6 第四步）——「反设 w⃗_1, w⃗_2 是 T 的 R-基」里"2 个"
+        没有来路。补：由 T ⊕ R ≅ R³ 与交换环的 IBN（不变基数）得基恰有 2 元。
+        一行补丁，不是洞。已改（proof.md 第四步）。
+    A3. 轻微（措辞越界）——定理 6 头部「与 ½ ∈ R 全都无关」过强：第二步由
+        2 u·w⃗ = 0 推 u·w⃗ = 0 用了 2 可逆。意思（障碍不是分母是投影模）对，字面不对。
+        已改：claim.md 第 166–171 行、proof.md §6 头部 ⚠ 框 (2)。
+        （正文总表第 890 行本来就写「需要 ½：是（ℚ-代数）」，与更正一致。）
+    A4. 轻微（注 7.3 分界少列一类）——除 A^ε_0 与标架向量本身外，第三类不可转移的是
+        **裸振子** α^ε_p（`transOp`/`towerModeVec`）：α^{ε+λb}_p = α^ε_p + λK_p 且 K_p ≠ 0。
+        `LightCone.lean` 的 `ddfOp_neg_one_apply_towerVacuum` 是活的实例。
+        收紧后的判据：**结论只经由 A^ε_n（n ≠ 0）与 ddfSpan 依赖 ε**。
+        已改：claim.md 定理 7 条目、proof.md 注 7.3。
+    A5. 轻微（多余的理由）——「两者 Hasse–Witt 不变量不同」不必要且未算：判别式
+        已经不同（+1 vs −1 mod 平方）。已改：proof.md 约第 434 行。
+    E.  图卡 `graph/statements/worldsheet/ddf-light-cone-frame.yaml` notes 的三处忠实性问题
+        （lead 待处理，单独提交）：
+        (i) 「在一切 char ≠ 2 的域上存在性为真」缺 η = diag(−1,+1,…) 限定，且按 A1 要加 (A)；
+        (ii) 「η|_W 非退化」说得比 proof.md 多；
+        (iii) 「不可 Lean 化」应为「目前不可（本仓库 pin 的 Mathlib 无毛球定理）」。
+    F.  reviewer 主动给出的 [GAP-RANK] 解法（见下）。
+  gap_rank_resolution: |
+    reviewer 顺手解掉了 [GAP-RANK] 的 r ≥ 1 部分：球面环例子在 D = 4 + r（r ≥ 1）时
+    **确实有标架**，所以它不能用来把定理 6 推广到高维。理由：T ⊕ Ru = R³ 是**正交**
+    分解且 u·u = 1，故 W ≅ R^{r+2}_std（标准正交自由模）。
+    D = 5 的显式构造：E_i = (0, e_i − u_i u, u_i)，i = 1,2,3，已核为多项式恒等式。
+    ⇒ 定理 6 的反例**只在 D = 4 上有效**；D ≥ 5 的一般环上是否有反例仍未知，
+      D = 3（m = 1）也仍未知。[GAP-RANK] 因此从「未检查」收窄为「r ≥ 1 时此例不成立，
+      需要别的环」——这是**收窄**，不是解决，毕业时按后者措辞。
+    ⚠ 本条是 reviewer 的主动产出，lead 未独立复算 E_i 的恒等式。
