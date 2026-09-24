@@ -1,0 +1,33 @@
+id: math.fkp-punctured-fundamental-sequence-ramond-twisted--via-section-2-2-restriction
+target: math.fkp-punctured-fundamental-sequence-ramond-twisted
+kind: proof
+status: rigorous
+depends_on: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/fkp-96-punctured/proof.md §5（Lemma 5.1 'the R-twisted fundamental
+      sequence', Cor. 5.2, Remark 5.3/5.4）; §2.2 (I2), §2.2 (I6), §2.2 (I10) 收录的逐字页面转录"
+    note: |
+      本项目原创证明，非已发表文献。research/attempts/fkp-96-punctured/status.yaml：
+      state: verified；2026-09-24 review_2026_09_24 块逐条核对："proof.md §5（Lemma 5.1 [E1]
+      修复、Cor 5.2、Remark 5.3/5.4）——与 L1 p.5, p.41 核对一致"，sections_checked_in_full 列表
+      项之一，非 skim。captain_confirmed: false（留船长确认，不代填；按根 CLAUDE.md「图是仪器」
+      一节，verified 的 attempt 无需等 captain_confirmed 即可毕业进图）。
+summary: |
+  证明分三步：(1) 把 [FKP-A] §2.2 (2.2)-(2.3)（对带 Ramond 穿孔的光滑超曲线成立，逐字 L1 核对）
+  改写为 U 上的正合列 0→ω²_{U/S}(R)→Ω_{U/S}→ω_{U/S}(R)→0，用 𝒟≃ω^{-1}_{X/S}(-R) 代入；
+  (2) 应用 j_* 并用射影公式（R 与节点不交，故 O_X(R) 是 X 上的线丛且 j^*O_X(R)=O_U(R)）把外项
+  转成 ω²_{X/S}(R)、ω_{X/S}(R)；满射性归约到 [FKP-A] Lemma 7.1 证明本身在节点处的局部论证（该
+  局部论证不涉及扭转，故对 (7.1-R) 同样成立）；(3) 用 R 与全部节点、全部 NS 穿孔不交，构造典范
+  平凡化截面 s_R，证明 (7.1-R) 在 V=X∖R 上等同于印刷版 (7.1)。
+gaps:
+  - |
+    正合列在节点处的满射性论证直接引用 [FKP-A] Lemma 7.1 证明本身的局部计算（L1, p.42），未独立
+    重新展开该局部计算的每一步代数细节；风险低——该计算与扭转无关（扭转只在节点之外的开集起作用），
+    reviewer 已确认此论证结构成立。
+notes: |
+  curator 亲自 Read proof.md §1、§2.2（(I2)/(I6)/(I10)）、§5 全文，核对本卡 statement 与证明正文
+  逐字一致；核对 status.yaml review_2026_09_24 块中 §5 被列入 sections_checked_in_full（非
+  sections_only_skimmed）。
+author: graph-curator
+created: "2026-09-24"

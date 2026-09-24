@@ -1,0 +1,42 @@
+id: math.fkp-punctured-ns-gluing-exists-with-ramond
+kind: proposition
+title: "沿 NS 穿孔粘接两族带 Ramond 穿孔的稳定超曲线仍是稳定超曲线族（FKP Lemma 7.9 的一般情形；FKP 印刷证明只覆盖 R=R'=∅ 子情形）"
+statement: |
+  【记号】设 S 是偶超概形，(X,P_•,R_•)/S 与 (X',P'_•,R'_•)/S 是两族带穿孔的稳定超曲线
+  （Felder–Kazhdan–Polishchuk [FKP-A] Def. 2.4 意义下），P⊂X、P'⊂X' 各是一个 NS 穿孔。设
+    Z := X ⊔_{P≃S≃P'} X'
+  是沿 P≃S≃P' 粘接得到的超概形，δ_Z 定义为复合
+    O_Z → j_*O_X ⊕ j'_*O_{X'} --(j_*δ_X)⊕(j'_*δ_{X'})--> j_*ω_{X/S}(R) ⊕ j'_*ω_{X'/S}(R')
+      → ω_{Z/S}(R_tot)，
+  其中 R_tot 是 R_• 与 R'_• 的像的（不交）并，最后一个箭头是典范映射。
+
+  【命题】(Z, 剩余 NS 穿孔, R_tot)/S 是一族带穿孔的稳定超曲线——**不需要假设 R=R'=∅**。特别地，
+  对任意 m_1,m_2≥0 与任意偶数 n_1,n_2≥0，[FKP-A] 的粘接态射
+    S̄_{g1;m1+1,n1} × S̄_{g2;m2+1,n2} → S̄_{g1+g2;m1+m2,n1+n2}，   (7.8)
+    S̄_{g;m+2,n} → S̄_{g+1;m,n}   (7.9)
+  作为超叠之间的态射存在。
+
+  【与 FKP-A 原文的关系——措辞精确】命题本身——(7.8)/(7.9) 对任意 (m_i,n_i) 存在——正是 [FKP-A]
+  逐字陈述的 Lemma 7.9（p.47）与 (7.8)/(7.9)（p.48）：[FKP-A] 从未把粘接态射的定义域限制在
+  R=∅。但 [FKP-A] 印刷的 Lemma 7.9 证明（p.48）把 Z 上的广义自旋结构写成
+  L ≅ Hom(L,ω_C)（不带穿孔扭转），这恰是 [FKP-A] 自己 Lemma 2.6 eq.(2.5)（p.7）
+  L ≅ Hom(L,ω_C(Σr_i)) 在 r=0 时的特殊情形。因此**印刷证明只对 R=R'=∅ 建立了这条命题**；一般
+  R,R' 情形在 [FKP-A] 原文中缺证明——这是一处"证明只覆盖子情形"的缺陷，**不是**命题本身有误（命题
+  在一般情形下确实成立，见下方推导）。
+uses: []
+uses_conventions: []
+sources:
+  - ref: felder-kazhdan-polishchuk-2020
+    loc: "Lemma 7.9 陈述与 (7.8)/(7.9)，p.47-48；印刷证明，p.48（'we have an isomorphism
+      L≅Hom(L,ω_C)'，即 (2.5) 的 r=0 情形）；Lemma 2.6 / eq.(2.5)，p.7（广义自旋结构的一般
+      定义，带 Σr_i 扭转）"
+tags: [supermoduli, boundary-divisor, node-locality, fkp-errata, math-input]
+notes: |
+  【查重】`uv run stringgraph search "gluing"` / `"generalized spin structure"` 均无同内容命中
+  （2026-09-24）；唯一相关既有节点 math.fkp-ns-boundary-gluing-normal-bundle-formula 记账的是
+  下游的法丛公式（Theorem C），不涉及粘接态射本身是否存在这一更上游的问题，故不重复。
+
+  【立卡理由】同姐妹卡 math.fkp-punctured-fundamental-sequence-ramond-twisted：这是 [FKP-A]
+  (7.8)/(7.9) 赖以存在的基础引理，一般 Ramond 穿孔情形下 [FKP-A] 印刷证明有缺口，本节点独立补证。
+author: graph-curator
+created: "2026-09-24"
