@@ -1,0 +1,46 @@
+id: holography.rescaling-frame-dependence-witness--via-exact-integer-computation
+target: holography.rescaling-frame-dependence-witness
+kind: proof
+status: rigorous
+depends_on:
+  - id: holography.rescaling-p-operator-definition
+    inferred: false
+    note: "接口边：D'_I 的定义来自该卡，本推导计算的正是这个算子在两个具体标架处的取值"
+  - id: holography.rescaling-adapted-frames-single-coset
+    inferred: false
+    note: "本推导复用该卡机检段落显式构造的格 L 与标架 (Q,P)、(Q,P−Q)（proof.md §5/§6 同一构造），
+           并依赖 Prop 5.1 保证两个标架都满足 4|n、2|ℓ 但落在不同陪集，故不被 Thm C 的
+           不变性覆盖，这正是差异得以出现的前提"
+  - id: holography.dstar-sduality-invariant
+    inferred: false
+    note: "s=1 项相等的论证：(4,8,8) 与 (4,4,0) 是同一 GL(2,ℤ)-等价类的代表元（都约化到
+           (4,4,0)），由该卡给出的类函数性质 d_* 相等"
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/p-rescaling-frame-dependence/proof.md §6"
+    note: "本项目原创证明，非已发表文献。见 proof.md §6。status.yaml state: verified（reviewer: rev-prescale, 2026-09-24），captain_confirmed: false。"
+summary: |
+  取 holography.rescaling-adapted-frames-single-coset 机检段落中的格 L 与标架 (Q,P)、
+  (Q,P−Q)，不变量分别为 (4,8,8)、(4,4,0)。计算 D'_2 的两项：
+    s=1 项：d_*(4,8,8) 与 d_*(4,4,0)，两者约化到同一判别式 −16 类 (4,4,0)，由
+    holography.dstar-sduality-invariant 相等，均为 7 999 169 992 704。
+    s=2 项：d_*(4,2,4) 与 d_*(4,1,0)，分别约化到 (2,2,0)、(1,4,0)——判别式 −16 的两个
+    不等价类（h(−16)=2），数值不同：32 861 184 与 185 738 352。
+  求和：D'_2(4,8,8) = 7999169992704 + 2·32861184 = 7999235715072；
+  D'_2(4,4,0) = 7999169992704 + 2·185738352 = 7999541469408。四个 d_* 值均由本项目既有的
+  精确 Fourier 系数机（torsion-immortal-positivity-hecke/scripts）重新计算得到，非信任
+  缓存数字；差值 305754336 与 paper.md Remark 6.3 的 Q-重标见证互为转置（PART 2 同时打印
+  D_2(4,4,0)=7999541469408、D_2(8,4,8)=7999235715072）。
+  PART 4 额外用总 1/4-BPS 指标（而非单独 d_*）重复计算得到同样两个整数，确认标架依赖不是
+  d_* 定义方式的特有产物。
+gaps: []
+notes: |
+  reviewer-verified: rev-prescale (sonnet), 2026-09-24——从干净检出独立重跑
+  scripts/p_rescaling_witness.py 与 scripts/lattice_frames.py，全部关键整数（含
+  D'_2(4,8,8)=7999235715072、D'_2(4,4,0)=7999541469408、差 305754336）与已提交输出文件
+  逐位一致。
+
+  **本推导为精确整数计算，无物理前提**：三条依赖均为 rigorous 节点，effective status
+  预期与 own status 相同（rigorous）。
+author: graph-curator
+created: "2026-09-24"
