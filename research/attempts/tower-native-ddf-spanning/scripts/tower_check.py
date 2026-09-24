@@ -342,6 +342,133 @@ def to_dense(v, index):
 # ----------------------------------------------------------------- the checks
 
 
+def lam_kap(mon):
+    """(Lambda-degree, K-degree) of a monomial: type 0 = a, type 1 = b."""
+    lam = sum(e for (A, n), e in mon if A == 0)
+    kap = sum(e for (A, n), e in mon if A == 1)
+    return lam, kap
+
+
+def weight(mon, M):
+    lam, kap = lam_kap(mon)
+    return M * lam - kap
+
+
+def check_leading_term(D, j, N, verbose=True):
+    """Lemma 6 / (2.3), checked directly:
+
+    for every monomial x of level N-m and every 1 <= m <= N,
+        L_{-m} x  -  Lambda_{-m} * x
+    consists only of monomials of weight <= w(x) + M - 1, where M = N+1.
+
+    This is the statement that multiplication by Lambda_{-m} is the *unique*
+    top-weight part of L_{-m}, with coefficient exactly 1.
+    """
+    T = Tower(D)
+    M = N + 1
+    worst = None
+    for m in range(1, N + 1):
+        for x in monomials_of_level(D, N - m):
+            v = {x: Q(1)}
+            lhs = T.Lop(-m, j, v)
+            lead = {mono_mul_var(x, (0, m)): Q(1)}
+            rest = dict(lhs)
+            vadd(rest, lead, Q(-1))
+            wx = weight(x, M)
+            for mon in rest:
+                dw = weight(mon, M) - wx
+                worst = dw if worst is None else max(worst, dw)
+                if dw > M - 1:
+                    if verbose:
+                        print("  [LEAD] FAIL D=%d j=%d N=%d m=%d x=%s dw=%d" % (D, j, N, m, x, dw))
+                    return False
+    if verbose:
+        print("  [LEAD] D=%d j=%d N=%d: max excess weight of (L_{-m} - mult Lambda_{-m}) = %s"
+              " (bound M-1 = %d) -> OK" % (D, j, N, worst, M - 1))
+    return True
+
+
+def check_Lm_on_W(D, j, N, verbose=True):
+    """Lemma 7, checked directly: for w in W (no Lambda variables) and m >= 1,
+        (i)  L_m w  lies in W  (no Lambda variables appear);
+        (ii) L_m w - m * d/dK_{-m} w  is homogeneous of the *same* K-degree as w.
+    """
+    T = Tower(D)
+    for m in range(1, N + 1):
+        for x in monomials_of_level(D, N, types=list(range(1, D))):
+            v = {x: Q(1)}
+            lhs = T.Lop(m, j, v)
+            # (i)
+            for mon in lhs:
+                if any(A == 0 for (A, n), e in mon):
+                    if verbose:
+                        print("  [LonW] FAIL (leaves W) D=%d j=%d N=%d m=%d x=%s" % (D, j, N, m, x))
+                    return False
+            # (ii) subtract m * d/dK_{-m}
+            rest = dict(lhs)
+            var = (1, m)
+            if dict(x).get(var, 0) > 0:
+                m2, e = mono_del_var(x, var)
+                vadd(rest, {m2: Q(1)}, Q(-m) * Q(e))
+            kx = lam_kap(x)[1]
+            for mon in rest:
+                if lam_kap(mon)[1] != kx:
+                    if verbose:
+                        print("  [LonW] FAIL (K-degree moved) D=%d j=%d N=%d m=%d x=%s -> %s"
+                              % (D, j, N, m, x, mon))
+                    return False
+    if verbose:
+        print("  [LonW] D=%d j=%d N=%d: L_m(W) in W and L_m - m d/dK_{-m} is K-degree "
+              "preserving, all 1<=m<=N -> OK" % (D, j, N))
+    return True
+
+
+def check_ddf_on_W(D, j, N, nmax=3, verbose=True):
+    """Lemma 9 / (4.3), checked directly: for w in W,
+        A^eps_n w  ==  sum_{r>=0} eps(n+r) . Phi^{(n)}_r . w ,
+    i.e. the annihilating half E_+ of the vertex operator acts as the identity on W.
+    Also checks the congruence A^eps_n w = eps(n) w mod I (Lemma 10c).
+    """
+    if D < 3:
+        return True
+    T = Tower(D)
+    for x in monomials_of_level(D, N, types=list(range(1, D))):
+        v = {x: Q(1)}
+        for n in range(-nmax, nmax + 1):
+            jj, lhs = T.ddf(0, n, j, v)
+            # right-hand side of (4.3)
+            Rmax = N + abs(n) + 2
+            Phi = T.creaExp(n, Rmax)
+            rhs = {}
+            for r in range(0, Rmax + 1):
+                t = vmul(Phi[r], v)
+                if not t:
+                    continue
+                t = T.mode(2, n + r, jj, t)
+                if t:
+                    vadd(rhs, t)
+            rhs = {k: c for k, c in rhs.items() if c != 0}
+            if lhs != rhs:
+                if verbose:
+                    print("  [DDFonW] FAIL D=%d j=%d N=%d n=%d x=%s" % (D, j, N, n, x))
+                return False
+            # congruence mod I: A^eps_n w - eps(n) w has K-degree > kappa(x)
+            kx = lam_kap(x)[1]
+            r0 = T.mode(2, n, jj, v)
+            rest = dict(lhs)
+            vadd(rest, r0, Q(-1))
+            for mon in rest:
+                if lam_kap(mon)[1] <= kx:
+                    if verbose:
+                        print("  [DDFonW] FAIL congruence D=%d j=%d N=%d n=%d x=%s -> %s"
+                              % (D, j, N, n, x, mon))
+                    return False
+    if verbose:
+        print("  [DDFonW] D=%d j=%d N=%d: A^eps_n|_W = sum_r E_{n+r} Phi_r and "
+              "A^eps_n = E_n mod I, |n|<=%d -> OK" % (D, j, N, nmax))
+    return True
+
+
 def check_freeness(D, j, N, verbose=True):
     """Theorem 1: {L_{-m_1}...L_{-m_r} w} is a basis of F(p_j)_N."""
     T = Tower(D)
@@ -552,6 +679,21 @@ def row_basis(rows, ncols):
 
 def main():
     heavy = "--heavy" in sys.argv
+    print("== Lemma 6 / (2.3): mult by Lambda_{-m} is the unique top-weight part of L_{-m}")
+    for D in (2, 3, 4, 5):
+        for j in (0, -1, -2, 1):
+            for N in range(1, 5 if D <= 4 else 4):
+                assert check_leading_term(D, j, N)
+    print("== Lemma 7: L_m(W) subset W, and L_m - m d/dK_{-m} preserves the K-degree")
+    for D in (2, 3, 4, 5, 6):
+        for j in (0, -1, -3):
+            for N in range(1, 5):
+                assert check_Lm_on_W(D, j, N)
+    print("== Lemma 9/10c: A^eps_n|_W = sum_r E_{n+r} Phi_r, and = E_n mod I")
+    for D in (3, 4, 5):
+        for j in (0, -1, -2):
+            for N in range(0, 4):
+                assert check_ddf_on_W(D, j, N)
     print("== Theorem 1 (freeness of F(p_j) over U(Vir_{<0}) with generators W_j)")
     for D in (2, 3, 4, 5):
         for j in (0, -1, -2, 1):
