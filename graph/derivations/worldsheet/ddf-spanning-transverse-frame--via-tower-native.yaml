@@ -1,0 +1,120 @@
+id: worldsheet.ddf-spanning-transverse-frame--via-tower-native
+target: worldsheet.ddf-spanning-transverse-frame
+kind: proof
+status: rigorous
+depends_on:
+  - id: worldsheet.momentum-tower-fock-space
+    inferred: false
+    note: |
+      提供本证明的**对象**：动量塔 T(k;k_0) = ⊕_j F(k + j k_0)、移位算子、层间正交的
+      R-双线性型 ⟨·,·⟩_T、逐层作用的 α^μ_n 与 Sugawara L_m。
+      本证明通篇在塔上做，H_phys / D(Ε) / H_null 三个空间都是塔的子空间。
+      **非 inferred**：这是被断言命题的量词定义域本身，不是"某处文献的论证依赖它"。
+  - id: worldsheet.ddf-operators-v6
+    inferred: false
+    note: |
+      提供 **A^ε_n 的定义**（模态和 A^ε_n = Σ_m (ε·α_m) V^{(n)}_m），D(Ε) 由 n_k ≥ 1 的
+      A^{ε_{i_k}}_{−n_k} 单项式作用在基态上张成。
+      ⭐ **本边是本卡与 (T′) 的关系能被机检的地方**：该定义卡对偏振**只要求** (T) `ε·k_0 = 0`
+      （卡面第 13 行逐字），**不要求** `ε·p = 0`（卡面 notes 第 (3) 条逐字写明 Lean 的 `ε`
+      「也不要求 `ε·p = 0`」）。故本卡"c 任意"的量化与该定义卡的量化**逐字一致**，
+      不是本卡自行放宽。
+  - id: worldsheet.ddf-operators-preserve-physical-states
+    inferred: false
+    note: |
+      提供 ⊇ 方向：D(Ε) ⊆ H_phys（A^ε_n 把塔上物理态映为物理态、截距不变）。
+      本证明的难点全在 ⊆ 方向，但等号需要两边，本边承担平凡的那半。
+      **该卡同样只要求 (T)**，与上一条同理，不引入 (T′)。
+  - id: worldsheet.tower-physical-quotient-form
+    inferred: false
+    note: |
+      提供 H_null := H_phys ∩ H_phys^⊥ 的定义与"伪态 ⊆ H_phys^⊥"、商型良定义。
+      本卡断言里的 **⊕（直和，即 D(Ε) ∩ H_null = 0）** 用到该卡的零态刻画：
+      若 x ∈ D(Ε) ∩ H_null 则 x 与全部 DDF 态正交，配 Theorem 2 给出的 D(Ε) 上
+      Gram 矩阵非退化即得 x = 0。
+  - id: worldsheet.virasoro-algebra-v2
+    inferred: false
+    note: |
+      提供 Vir 的李代数结构本身。本证明的承重构造是
+      μ : U(Vir_{<0}) ⊗_R W_j → F(p_j)（Theorem 1），其定义域是 Vir_{<0} 的包络代数；
+      PBW 序（L_{−1} 的幂在最右，按下标降序）是领项三角性论证的排序依据。
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/tower-native-ddf-spanning/proof.md :: Theorem 1（§3）、Theorem 2（§4）、Theorem 3（§5）"
+    note: |
+      **本项目原创证明，非已发表文献。**
+      承载本卡断言在 (T′) 成立时的全部内容（Theorem 3）。
+      reviewer `rev-tower-ddf` 2026-09-24 对抗性审查，`status.yaml` 判
+      `state: verified` / `recommended_status: rigorous`，`captain_confirmed: false`。
+      提交 sha: b87389e（含机检脚本的 det=±1 加强）。
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/tower-native-ddf-spanning/proof-no-tprime.md :: §2（Theorem 1′/2′/3′ 的陈述）、§3（引理 A：标架平移）、§4（引理 B：A^b_n = 0 与推论 B.1）、§5（不用引理 A/B 的差量审计路线）"
+    note: |
+      **本项目原创证明，非已发表文献。**
+      承载把 (T′) 从前件里删掉这一步，即本卡相对 `proof.md` 的**唯一**增量。
+      reviewer `rev-no-tprime` 2026-09-25 对抗性审查，判 `verified` / `rigorous`，
+      并明确答复**未推翻 `proof.md` 的任何部分**、在所试的一切方向上未找到反例。
+      `captain_confirmed: false`。同一提交 sha: b87389e（后续记录提交 aa750ea、35b6c39）。
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/tower-native-ddf-spanning/scripts/notprime_check.py（机器检验，旁证）"
+    note: |
+      ⚠ **这一条是旁证，不是论证来源。** 10 族检查、5 组 c ≠ 0 构形、精确有理算术、exit 0；
+      `[T1]` 的 61 个测例逐个验证过渡矩阵 `det = ±1`（不只是 Q 上满秩）。
+      **但机检只到 N ≤ 3，三条定理都是 ∀N 的**；∀N 由手证的领项三角性归纳承担。
+      本条登记在 sources 里只为可复现，**不得被读成"机器验证"**。
+summary: |
+  塔内原生（tower-native）路线，不经 Borcherds 1992 Theorem 5.1。
+
+  **为什么不走 Borcherds**：那条路要先取定一个"横向空间 T"再证同构，而在本设定下 T 正是
+  待证的对象（D(Ε) 是不是就是它）；而且 Borcherds 的论证在系数环是域时最自然，
+  本卡要覆盖一般交换 Q-代数。
+
+  **第 1 步（Theorem 1，承重）**：对塔的每一层 F(p_j) 取
+      W_j := {x ∈ F(p_j) : K_m x = 0, ∀m ≥ 1}，   K_n := b·α_n（纵向算子）。
+  由 K_n = n ∂_{Λ_{−n}}（Λ_{−n} 是 b-方向的振子坐标）直接得
+      W_j = R[K_{−n}, E^i_{−n} : n ≥ 1, i = 1..D−2]，
+  这是一个**可以写下来**的空间——不需要事先知道任何"横向空间"。
+  再证
+      μ : U(Vir_{<0}) ⊗_R W_j ⟶ F(p_j),   u ⊗ w ↦ u·w
+  是 R-模同构。承重论证是 **(Λ-次数, −K-次数) 字典序滤过下的领项三角性**：
+  把两侧的单项式基按权降序排，过渡矩阵分块下三角、对角块是**系数全为 1** 的置换矩阵。
+  那个 1 来自
+      K_0 = η(b, a) + j·η(b, b) = 1 + j·0 = 1        （用 (S) 与 (N)）
+  ——**精确的单位元，不经任何除法**。故 det = ±1 在**任意交换环**上是单位，μ 可逆。
+  （这一点是本证明能脱离"域"的关键：旧路线要走"单射 ⟹ 满射"的维数论证，
+  在一般交换环上是假的。）
+
+  **第 2 步（Theorem 2）**：T¹ := {x ∈ W : L_m x = 0 ∀m ≥ 1, L_0 x = x} 恰为 D(Ε)，
+  秩 p_{D−2}(N)。用第 1 步的分解把 L_m 条件化到 W 上求解。
+
+  **第 3 步（Theorem 3）**：D = 26 时合并计数，得 H_phys = D(Ε) ⊕ H_null。
+  D = 26 只在这一步进入（第 1、2 步对一切 D ≥ 2 成立）。
+
+  **第 4 步（本卡相对 `proof.md` 的唯一增量：删去 (T′)）**。
+  记 c_i := η(ε_i, a)。`proof.md` 的三条定理都在 (T′) c = 0 下陈述。
+  · **引理 A（标架平移）**：令 ε_i′ := ε_i − c_i b。则
+        η(ε_i′, a) = c_i − c_i·η(b, a) = 0        （用 **(S)** η(a,b) = 1），
+        η(ε_i′, b) = −c_i·η(b, b) = 0             （用 **(N)**），
+        η(ε_i′, ε_j′) = δ_{ij}                    （用 (T)(N)），
+    且 a、b、η(a,a)、整个塔都不动。故 (ε′) 是满足 (T′) 的合法标架，`proof.md` 逐字适用于它。
+  · **引理 B（零极化 DDF 算子恒为零）**：**A^b_n = 0 对一切 n ≠ 0**，而 A^b_0 = id。
+    物理图像：η(b,b) = 0 使 (b·∂X)e^{inb·X} 成为全导数，非零模的围道积分为零。
+    塔内证法不用围道，直接在模态和上做（见 proof-no-tprime.md §4）。
+  · 合起来：A^ε_n 对 ε 是 R-线性的，ε_i′ − ε_i = −c_i b，而 D(Ε) 的定义**只跑 n_k ≥ 1 ≠ 0**，
+    故 A^{ε_i′}_{−n} = A^{ε_i}_{−n} − c_i A^b_{−n} = A^{ε_i}_{−n}。
+    ⇒ **D(Ε′) = D(Ε) 逐元相同**（不只是张成相同）。
+    而 H_phys、H_null 不依赖标架。于是 Theorem 3 对 (ε′) 的结论**逐字**就是对 (ε) 的结论。
+  **一句话：(T′) 不是限制，是规范选择。**
+
+  **第 4 步的独立复核（proof-no-tprime.md §5）**：不使用引理 A/B，把 c ≠ 0 一路带着重做
+  Theorem 1′/2′/3′ 的全部引理（K 算子与 κ-次数的记账、领项三角性、L_m 在 W 上的作用），
+  得到同一组结论。⚠ 两条路线的独立性**只限于"删 (T′) 是否安全"这一问**；
+  两者共用 `proof.md` §1–§3 的骨架，**不构成对 `proof.md` 本身的独立复核**。
+gaps:
+  - "**[GAP-LEAN] 三条定理（Theorem 1/2/3 与 1′/2′/3′）全部未形式化。** 本推导 status 是 `rigorous`（手证），不是 `formalized`。**不得据本卡或本推导对外说「机器验证」。** 图上另有一条完全独立的 Lean 线在攻同一目标的分片版本（worldsheet.ddf-spanning-rank-inequality 的 `B26 N`，N ≤ 4 已机检、∀N 仍开放），那条线与本推导**不共享任何步骤**，也不因本推导而关闭。"
+  - "**[GAP-B-LEAN] 引理 B（A^b_n = 0, n ≠ 0）未形式化。** reviewer `rev-no-tprime` 的建议：若做 Lean，把引理 B 的主证明改挂已 `formalized` 的 worldsheet.exponential-vertex-operator-current-weight-identity（(CW) 路线），可把手验面积从「指数递推 + 收尾抵消」缩到「一次重标号 + 一个标量代入」。该路线在另一个 attempt（research/attempts/lorentzian-lightcone-frame-existence §7）里已被独立走通并给出同一系数 η(b,a) − 1。"
+  - "**(S) η(a,b) = 1 是真前件，不是可删的技术条件。** 障碍量化为：把 (S) 换成 η(a,b) = s 后 A^b_n = (s − 1)·S_n·V^{(n)}_{−n}（n ≠ 0）。故 s ≠ 1 时引理 B 失效，**s = 2 一样坏**（不能弱化成「η(a,b) ∈ R^×」）；也不能靠重标度 b → s^{−1}b 绕开，因为那把塔 ⊕_j F(a + jb) 换成了另一个塔。⇒ **本推导对 worldsheet.ddf-spanning-hypothesis-v2（无 (S) 的更宽命题）一言未发**，v2 仍然开着。"
+  - "**本推导证的是模态和表述下的定理，与文献的围道表述之间还有一座桥。** 那座桥是 worldsheet.ddf-contour-equals-mode-sum（physical-argument，图上的独立节点），**不在本推导的依赖里**、也不在本推导的证明链上——本推导从头到尾只用 worldsheet.ddf-operators-v6 的模态和定义。后果：对外陈述本结果时必须说「本项目模和表述下的 Goddard–Thorn 张成定理」，**不能说「1972 年 Goddard–Thorn 定理已严格证明」**，因为文献那条定理的算子是围道积分。"
+  - "**机检覆盖面**：notprime_check.py 只跑到 N ≤ 3、D 取若干小值、c 取 5 组显式构形。三条定理都是 ∀N、∀D ≥ 2（第 3 步除外）、∀c 的，那些全称由手证承担。机检从未被当成证明步骤，只用来抓记号错误与反例——它确实抓到过两处（一处 overstate、一处僵尸 docstring），这是它的实际价值。"
+  - "**`captain_confirmed: false`。** 两份 proof 的 status.yaml 都未经船长确认。按根 CLAUDE.md，这不阻塞毕业进图、不阻塞被建设，但**阻塞对外发表**。"
+author: lead

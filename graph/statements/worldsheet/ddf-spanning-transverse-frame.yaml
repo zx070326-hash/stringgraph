@@ -1,0 +1,148 @@
+id: worldsheet.ddf-spanning-transverse-frame
+kind: proposition
+title: DDF 张成定理的**带标架前件**版本：在 (F1)(N)(S)(A)(T)(O) 的任意横向标架上、D = 26 时 H_phys = D(Ε) ⊕ H_null——**不要求 η(ε_i, a) = 0**，且给出直和而非仅包含；本项目原创证明
+statement: |
+  【设定】记号逐字沿用 worldsheet.momentum-tower-fock-space、worldsheet.ddf-operators-v6、
+  worldsheet.ddf-operators-preserve-physical-states 与 worldsheet.tower-physical-quotient-form，
+  与 worldsheet.ddf-spanning-hypothesis-v2 的【设定】同一套：
+  系数环 R 是交换 Q-代数；对角度规分量 η_μ（conv.metric-mostly-plus）；η(x,y) = Σ_μ η_μ x^μ y^μ；
+  基点动量 k 与类光参考向量 k_0，重标度 a^μ := (2α')^{1/2} k^μ、b^μ := (2α')^{1/2} k_0^μ
+  （conv.alpha-prime-regge）；动量塔 T(k;k_0) = ⊕_{j∈Z} F(k + j k_0)，其上有层间正交的
+  R-双线性型 ⟨·,·⟩_T；L_m 是逐层 Sugawara 生成元，不移动层指标。
+  三个子空间 H_phys、D(Ε)、H_null 的定义**逐字**取 worldsheet.ddf-spanning-hypothesis-v2
+  的【三个子空间】一节（截距 a₀ := α' k² = ½η(a,a)，**不是自由参数**）。
+
+  【前件（本卡与 worldsheet.ddf-spanning-hypothesis-v2 的差别全在这里）】
+  设 D = 26，且 (a, b, ε_1, …, ε_{D−2}) 满足下列六条：
+
+      (F1) η_μ² = 1（∀μ）                     —— 与 v2 的设定相同；
+      (N)  η(b, b) = 0                        —— 与 v2 相同（k_0 类光）；
+      (S)  **η(a, b) = 1**（即 2α' k_0·k = 1） —— **v2 卡面没有这一条**；
+      (A)  **η(a, a) = 2**（即 α' k² = 1，截距 a₀ = 1） —— 见下面第 2 点；
+      (T)  η(ε_i, b) = 0（∀i）                —— 与 v2 相同（横向性）；
+      (O)  η(ε_i, ε_j) = δ_{ij}               —— 与 v2 相同（正交归一）。
+
+  1. ⭐ **本卡对 c_i := η(ε_i, a) 不作任何要求**，`c = (c_1,…,c_{D−2}) ∈ R^{D−2}` **任意**。
+     即本卡**不含** (T′) η(ε_i,a) = 0，量化在**一切**满足 (T)(O) 的横向标架上，
+     与 v2 的量化范围在这一轴上**相同**（也与 Lean 的 `structure TransverseFrame` 相同——
+     它只有 `vec` / `transverse` / `orthonormal` 三个字段，没有 (T′)）。
+  2. (A) 与 (S) 合起来给出 v2 的前件：η(v,v) = η(a,a) − 2η(a,b) + η(b,b) = 2 − 2 + 0 = 0，
+     `v := a − b`。故在 (N)(S) 下 (A) ⟺ v2 的 η(v,v) = 0 ⟺ 截距 a₀ = 1。
+  3. **完备性 (C)**（{a, b, ε_1,…,ε_{D−2}} 是 𝔥 的 R-基）**不是本卡的前件**：它是
+     (F1)(N)(S)(T)(O) 的**推论**，对任意交换环成立、且不需要 (T′)——在有序基
+     (a, b, ε_1,…,ε_{D−2}) 下 Gram 阵的第二行是 (1,0,…,0)（用 (S)(N)(T)，`c` 不出现在该行），
+     沿该行展开得 det G = −1，配 (F1) 使 det η 是单位，故过渡矩阵行列式是单位。
+  4. 系数环只要求是交换 Q-代数：**不要求是域、不要求 R 约化、不要求 η(a,a) − |c|² 可逆**
+     （该量只作为标量系数出现，从不做分母）。`Q ⊆ R` 用在 u(n) = n∂_{u(−n)}、L_m 的 ½、
+     以及若干处除以非零整数。
+
+  【断言（本卡的全部内容）】
+
+      在上述前件下，  **H_phys  =  D(Ε)  ⊕  H_null**  （内直和）。
+
+  即塔上的每个物理态唯一地写成「一个 DDF 态加一个零态」，且 **D(Ε) ∩ H_null = 0**。
+  特别地本卡蕴含 v2 的断言 H_phys ⊆ D(Ε) + H_null（在本卡这组更强的前件下）。
+
+  【本卡明确不断言】
+  (a) ⛔ **不断言 worldsheet.ddf-spanning-hypothesis-v2。** v2 的【设定】**没有** (S)，
+      故 v2 是一条真正更宽的命题，本卡**不蕴含它**、也**不取代它**。
+      而且 (S) 是**不可删**且**不可弱化**的：把 (S) 换成 η(a,b) = s 后，零极化 DDF 算子变成
+          A^b_n = (η(a,b) − 1)·S_n·V^{(n)}_{−n}      （n ≠ 0），
+      障碍恰是标量 s − 1，**s = 2 一样坏**（所以不能弱化成「η(a,b) 可逆」）；
+      也不能靠重标度 b → s^{−1}b 绕开，因为那会把动量塔 ⊕_j F(a + jb) 换成另一个塔，
+      命题的对象就变了。故 v2 仍然开着，且本卡对它一言未发。
+  (b) **不断言 D ≠ 26 时的等号。** D ≠ 26 时只有 ⊇ 方向成立（⊆ 失效）。
+      与 v2 的边界 (c) 不同：v2 刻意不为任何 D 断言，本卡**只在 D = 26 上**断言。
+  (c) **不断言任何 Lean 内容。** 本卡未形式化（见 notes 的两条 [GAP-LEAN]），
+      **不得据本卡说「机器验证」**。
+  (d) **不断言本项目的模态和 A^ε_n 与文献的留数式 A^i_n 是同一算子。**
+      那条识别是 worldsheet.ddf-contour-equals-mode-sum（physical-argument），
+      **不在本卡的证明链上**，但它是本项目表述与文献表述之间的唯一的桥。
+      故本卡断言的是**本项目模态和表述下**的张成定理。
+  (e) **不断言 (F8)（worldsheet.ddf-light-cone-frame 的完备性条件）。** (C) ≠ (F8)：
+      本卡第 3 点的 (C) 是「构成基」，(F8) 是「v^⊥ 里的向量可分解」，两者不同；
+      且「(F8) 对一切 (T)(O) 标架成立」是**假的**（见 notes）。
+uses:
+  - worldsheet.momentum-tower-fock-space
+  - worldsheet.ddf-operators-v6
+  - worldsheet.ddf-operators-preserve-physical-states
+  - worldsheet.tower-physical-quotient-form
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.virasoro-standard
+  - conv.intercept-sign-a
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/tower-native-ddf-spanning/proof.md :: Theorem 3（§5）；research/attempts/tower-native-ddf-spanning/proof-no-tprime.md :: Theorem 3′（§2）、引理 A/B、推论 B.1（§3–§4）"
+    note: |
+      **本项目原创证明，非已发表文献。**
+      两份文件、两轮独立对抗性审查：
+      · `proof.md`（Theorem 1/2/3，带 (T′)）—— reviewer `rev-tower-ddf`，2026-09-24 判
+        `state: verified` / `recommended_status: rigorous`。
+      · `proof-no-tprime.md`（Theorem 1′/2′/3′，删去 (T′)）—— reviewer `rev-no-tprime`，
+        2026-09-25 判 `verified` / `rigorous`，并明确答复**未推翻 `proof.md` 的任何部分**。
+      两者 `captain_confirmed: false`（按根 CLAUDE.md，`captain_confirmed` 只在里程碑签字与
+      对外发表两处是真门，不阻塞毕业）。
+tags: [bosonic-string, no-ghost, ddf-spans, spectrum-generating-algebra, original-proof, frame]
+notes: |
+  【本卡是什么、为什么不是 v2 的换代】
+  本卡是 research/attempts/tower-native-ddf-spanning 的毕业产物。它与
+  worldsheet.ddf-spanning-hypothesis-v2 **不是换代关系**：v2 的卡面没有 (S)，是一条
+  真正更宽、且**至今未证**的命题；本卡只证了带 (S) 的版本。
+  **故 v2 不标 `superseded_by`、不就地改卡面、继续留在图上。** 把 v2 标成被取代等于
+  假装证了更宽的东西（reviewer `rev-no-tprime` 2026-09-25 裁定的第一条必要条件）。
+
+  【证明梗概（细节在 sources 指向的两份文件）】
+  不走 Borcherds 1992 Thm 5.1 的路线（那条路要先知道未知的横向空间 T），而是**塔内原生**：
+  · 取 W_j := ker(K_m)_{m≥1}（K_n := b·α_n 是纵向算子），由 K_n = n∂_{Λ_{−n}} 得
+    W_j = R[K_{−n}, E^i_{−n}]，这是**可写下来的**空间，不需要事先知道 T。
+  · Theorem 1：μ : U(Vir_{<0}) ⊗_R W_j → F(p_j) 是同构。承重论证是
+    **(Λ-次数, −K-次数) 字典序滤过下的领项三角性**：按权降序排两组基，矩阵分块下三角、
+    对角块是系数全为 1 的置换矩阵，那个 1 来自 K_0 = η(b,a) + j·η(b,b) = 1 + 0 = 1，
+    **精确的单位元、不经任何除法**，故 det = ±1 在**任意交换环**上是单位。
+    （这一点是本证明能脱离「域」的关键：旧路线要走「单射 ⟹ 满射」，那在一般交换环上是假的。）
+  · Theorem 2：T¹ = D(Ε)，秩 p_{D−2}(N)。Theorem 3：D = 26 时 H_phys = D(Ε) ⊕ H_null。
+  · **(T′) 的消除（本轮新内容）**：
+      引理 A（标架平移）ε_i′ := ε_i − c_i b 恢复 (T′)——η(ε_i′,a) = c_i − c_i·η(b,a) = 0 用 (S)，
+        η(ε_i′,b) = −c_i η(b,b) = 0 用 (N)，(O) 与 (C) 保住，a、b、η(a,a) 不动；
+      引理 B（零极化 DDF 算子恒为零）**A^b_n = 0 对一切 n ≠ 0**，而 A^b_0 = id。
+        物理上 (b·∂X)e^{inb·X} 是全导数（η(b,b) = 0 使顶点算子权为零），非零模积分为零。
+      A^ε_n 对 ε 线性 + ε_i′ − ε_i ∈ Rb + D(Ε) 的定义只用 n_k ≥ 1 ≠ 0
+        ⟹ **D(Ε′) = D(Ε) 逐元相同**（不只是张成相同）⟹ 原三条定理逐字适用。
+    **一句话：(T′) 不是限制，是规范选择。**
+    ⚠ **关键边界**：n = 0 时 A^b_0 = id ≠ 0，推论 B.1 在 n = 0 上**是假的**；
+      D(Ε) 的定义只跑 n_k ≥ 1 才使这一点无害。
+
+  【两条独立路线 + 一次跨 agent 独立收敛】
+  · `proof-no-tprime.md` §4 走引理 A/B（把问题化归到已判 verified 的结论）；
+    §5 走「差量审计」：不用引理 A/B，把 c ≠ 0 一路带着走重做全部引理，得同一组结论。
+    ⚠ 两者的独立性**只限于「删 (T′) 是否安全」这一问**；两条路线都以 `proof.md` §1–§3 的
+    骨架为共同基础，**不构成对 `proof.md` 本身的独立复核**。
+  · 另一个 agent 在隔离 worktree 里、任务完全是别的事（标架存在性）、不通信、写入路径不相交，
+    **独立收敛到同一机制且证法不同**（走塔指标↔洛朗指标位移 + 电流权恒等式砖块，
+    不走全导数围道积分）：research/attempts/lorentzian-lightcone-frame-existence §7。
+    两条路线定量吻合到同一个系数 η(b,a) − 1。**这是佐证不是判决。**
+
+  【机器检验（旁证，不是证明）】
+  `research/attempts/tower-native-ddf-spanning/scripts/notprime_check.py`：10 族检查
+  （[AB0][DUAL][FRAME][SHIFT][LEAD][T1][T2][LonW][DDFonW][MAIN]）、5 组 c ≠ 0 构形，
+  精确有理算术，exit 0 零失败；`[T1]` 的 61 个测例**逐个验证 det = ±1**（不只是 Q 上满秩——
+  后者对「在 Z 上是否可逆」完全盲，是 2026-09-25 审查抓出并修掉的一处 overstate）。
+  ⚠ **机检只到 N ≤ 3，而三条定理都是 ∀N 的**；∀N 完全由手证承担（领项三角性的归纳），
+  机检从未被当成证明步骤。
+
+  【为什么 status 是 rigorous 而不是 formalized】
+  两条形式化缺口都开着：Theorem 1/2/3 与 1′/2′/3′ 全未形式化（[GAP-LEAN]）；
+  引理 B 未形式化（[GAP-B-LEAN]）。**不得据本卡对外说「机器验证」。**
+  reviewer 建议：毕业后若做 Lean，把引理 B 的主证明改挂已 formalized 的
+  worldsheet.exponential-vertex-operator-current-weight-identity（(CW)）路线，
+  可把手验面积从「指数递推 + 收尾抵消」缩到「一次重标号 + 一个标量代入」。
+
+  【(e) 提到的「(F8) 对一切 (T)(O) 标架成立是假的」】
+  见 worldsheet.ddf-light-cone-frame 的【本卡明确不断言】(a)：D = 3 的整数见证里
+  ε_1 = (0,0,1) 与其平移 ε′_1 = (−1,−1,1) 给出**完全相同的 DDF 算子**，但只有后者满足 (F8)。
+  这与本卡不矛盾：本卡断言的是 DDF 张成（只涉及 A^ε_n、n ≠ 0），而 (F8) 是标架向量本身的
+  线性代数命题——前者在标架平移下不变，后者不是。
+author: lead
+created: "2026-09-25"
