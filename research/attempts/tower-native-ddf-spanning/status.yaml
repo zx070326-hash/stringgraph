@@ -82,14 +82,31 @@ review_2026_09_24:
       订正为"含 ℚ 的交换环"，与 b6fba30 后的 proof.md 注 3.0 / 注 4.1b 一致；
       claim.md 前件表 (C) 行由"由 frame 卡…得到"订正为"本 attempt 的前件，不是导出的"。
   graduation_warning: |
-    ⚠ **F2 仍然有效，是毕业时最容易出错的地方。**
-    (a) 本文证明的是目标卡在**更强前件** (S)(T′)(C) 之下的版本。**不得**直接把本文
-        挂成 `ddf-spanning-hypothesis-v2` 的推导——那会悄悄加强前件。
-        `worldsheet.ddf-light-cone-frame` 的 D=3 整数见证（formal/ 的 WitnessInt.lean）
-        显示 (T)(O) ⇏ (T′)(C)，所以"桥"不是免费的。
-    (b) 毕业**不会移动** `worldsheet.no-ghost-theorem-v4` 的 effective。原因不在本 attempt：
-        该卡的瓶颈是 `ddf-spanning-hypothesis-v2` 一个节点，而它下面分叉成两条路，
-        本 attempt 所在的那条不是唯一的。建卡前必须先跑
+    ⚠ **F2 的核心警告仍然有效，但差额已在 2026-09-24 收窄到一条。**
+    (a) ⭐ **订正（`consume-check` 只读核查 + lead 独立复算）**：本栏原写"多出
+        (S)(T′)(C) 三条前件"并援引 `WitnessInt.lean` 的 D=3 整数见证称
+        "(T)(O) ⇏ (T′)(C)"。**后半句对 (C) 是错的**——该见证里
+        `{a,b,ε} = {(0,1,1),(1,1,0),(0,0,1)}`，`det = −1`，**(C) 成立**。
+        见证否掉的是 `ddf-light-cone-frame` 的 **(F8)**（完备性），而 (C) ≠ (F8)。
+        正确的差额清单是：
+          · **(S) 不是差额** —— `no-ghost-theorem-v4--via-goddard-thorn` 的 summary
+            逐字把 `2α' k_0·k = 1` 钉死了；
+          · **(C) 不是差额** —— 它是 (F1)(N)(S)(T)(O) 的推论（Gram 阵沿第二行展开
+            `det G = −1`，配 (F1) 给出 `det η` 是单位 ⟹ `det B` 是单位；任意交换环，
+            不需 (T′)、不需域、不经过 (F4)/(F8)）。`[GAP-C]` 据此已关闭。
+          · **(T′) `η(ε_i,a) = 0` 是唯一真差额。**
+    (a′) 🔴 **(T′) 这条坑要正面处理，不能用"存在一组好标架"绕过去。** 目标卡
+        `ddf-spanning-hypothesis-v2` 是**对一切**满足 (T)(O) 的标架量化的，而满足
+        (T)(O) 却违反 (T′) 的合法构形确实存在（显式例：`D=6`、`η=diag(−1,+1,…)`、
+        `b=(1,1,0,…)`、`a=(0,1,1,0,…)`、`ε_1=e_2`，(N)(S)(A)(T)(O) 与 `η(v,v)=0`
+        全满足而 `η(ε_1,a)=1`；lead 已逐项复算）。故一张"标架存在性"卡**救不了**
+        "对一切标架"的断言——出路只有两条：证 (T′) 可省，或证结论与标架选取无关。
+        又：`--via-goddard-thorn` 的 `gaps` 自己写明 "(T′) 不是本推导第 (1b) 步的
+        未写出前提……本推导比文献那个标架宽"，即该推导是**刻意**取宽标架的。
+    (b) 毕业**不会移动** `worldsheet.no-ghost-theorem-v4` 的 effective。建卡前必须先跑
         `uv run stringgraph why worldsheet.no-ghost-theorem-v4` 复核，不得在 ROADMAP
         写成"做成 X 就能让 Y 升档"。
-    (c) `captain_confirmed` 留空，不代填。
+    (c) 逐条对应核查的结论是**部分供得上**：结论、对象、量词三项全部对得上，多处
+        Theorem 3 还**更强**（给出直和而非仅包含、逐 `(j,N)` 分解、`D(Ε) ∩ H_null = 0`
+        对任意交换 ℚ-代数而非仅有序域）。差的只有 (T′) 这一条前件。
+    (d) `captain_confirmed` 留空，不代填。
