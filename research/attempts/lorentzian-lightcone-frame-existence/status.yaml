@@ -1,0 +1,35 @@
+slug: lorentzian-lightcone-frame-existence
+title: "DDF 光锥标架的存在性：(F5)–(F8) 的结构定理、域上的充要判据、与一般交换 ℚ-代数上的反例"
+state: draft
+author: prover
+created: "2026-09-23"
+reviewer: null
+verdict: null
+recommended_status: rigorous
+captain_confirmed: false
+target_cards:
+  - worldsheet.ddf-light-cone-frame
+  - worldsheet.transverse-frame-spans-orthogonal-complement
+  - worldsheet.ddf-hypotheses-satisfiable
+notes: |
+  【靶子变更（如实记录，claim.md §0 是正文）】
+  原始派工：把标架卡【不断言】(b) 拒绝断言的存在性一般形式
+  「(F1)–(F4) ⟹ ∃ε 使 (F5)–(F8)」变成精确命题并裁决。
+  派工中途收到只读裁定（同伴核查 + coordinator 独立复算，明示可推翻），要点：
+  (S) 不是差额；(C)「{a,b,ε_i} 是基」是推论不是前件（det G = −1，任意交换环）；
+  于是只剩 (T′) 是真缺口；并自我更正「(F8) 与 (C) 不是一回事」。
+  本轮裁决（判断权在 prover）：
+  · 裁定关于 (C) 的部分**正确**，已独立复算，写成定理 1，并顺带证出
+    「{b,b̃,ε_i} 也是基」——那是标架卡 2026-09-12 追记点名的「剩下唯一没有的」那条。
+  · 裁定关于「只剩 (T′)」的部分**只对一半**：(T′) 由一行零向平移
+    ε_i ↦ ε_i − η(ε_i,a)b 免费得到（定理 2），真正的缺口是
+    **(T)(O) 横向标架本身的存在性**（Lean `TransverseFrame η b` 是否非空），
+    裁定未提及它。该问题在域上恒真（定理 5），在一般交换 ℚ-代数上**为假**（定理 6）。
+  · coordinator 要求正面处理的坑（目标卡对「一切 (T)(O) 标架」量化，
+    而存在违反 (T′) 的合法标架）由定理 7 填掉：A^{ε+λb}_n = A^ε_n（n ≠ 0），
+    坏标架与好标架给出**同一组** DDF 算子，故「对一切标架」可由「对 (T′) 标架」逐字推出。
+  ⇒ **本 attempt 最终证的不是原始命题**：原始命题的裁决是「一般交换 ℚ-代数上为假，
+    域（char ≠ 2）上为真且有充要判据」，并附 (F5)–(F8) 之间的完整蕴含关系。
+
+  【进度】
+  2026-09-25：claim.md 落盘（定理 1–7 的精确表述 + 量词/代价表）。proof.md 逐节填充中。
