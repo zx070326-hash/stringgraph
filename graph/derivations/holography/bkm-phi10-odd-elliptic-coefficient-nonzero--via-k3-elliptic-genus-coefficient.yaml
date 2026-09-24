@@ -1,0 +1,23 @@
+id: holography.bkm-phi10-odd-elliptic-coefficient-nonzero--via-k3-elliptic-genus-coefficient
+target: holography.bkm-phi10-odd-elliptic-coefficient-nonzero
+kind: proof
+status: rigorous
+depends_on:
+  - id: holography.igusa-cusp-form-phi10
+    inferred: false
+    note: "Φ₁₀ 的 Borcherds 乘积公式与系数 c(k) 的定义（K3 椭圆亏格 Fourier 系数），本卡直接代入 (m,n,l)=(0,1,1)"
+sources:
+  - ref: kawai-1997
+    loc: "eq.(4.32)"
+    note: "c(0)=20, c(−1)=2, c(N)=0 (N<−1)"
+  - ref: dabholkar-murthy-zagier-2012
+    loc: "§4.3, eq.(85), Table 1"
+    note: "C_{−2}(−1)=1≠0，独立佐证"
+summary: |
+  直接代入判别式 4mn−l²=−1 的三元组 (m,n,l)=(0,1,1) 到 Borcherds 乘积公式的指数 c(4mn−l²)，
+  读出两套独立文献给出的非零系数数值（kawai-1997 的 c(−1)=2 与 DMZ 的 C_{−2}(−1)=1，两者
+  在各自的归一化下都非零）。这是纯粹的代入与读数，不需要额外的数学论证，故取 rigorous。
+notes: |
+  两条文献独立给出同一结论（判别式 −1 处系数非零），互相交叉验证，无冲突。
+author: curator
+created: "2026-09-24"

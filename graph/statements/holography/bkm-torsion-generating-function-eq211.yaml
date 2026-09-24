@@ -1,0 +1,45 @@
+id: holography.bkm-torsion-generating-function-eq211
+kind: proposition
+title: A-N eq(2.11)：挠 I 生成函数定义与单位挠基准 Z_1 = 1/Φ₁₀
+statement: |
+  在 N=4 弦论（type II on K3×T²，等价地杂化弦论 on T⁶）中，沿用 Alexandrov–Nampuri (A-N) 2020
+  的记号：q=e^{2πiτ}, y=e^{2πiz}, p=e^{2πiσ}；Ω_I^{(4|4)}(n,m,ℓ) 为挠 I 的单心 dyon 指标
+  （与 holography.dgm-torsion-divisor-sum 的电荷不变量 (Q²/2,P²/2,Q·P) 是同一物理量，
+  这里仅按 A-N 原文写法把三元组记成 (n,m,ℓ)）。定义生成函数
+    Z_I^{(4|4)}(τ,z,σ) := Σ_{n,m,ℓ∈ℤ} (−1)^ℓ Ω_I^{(4|4)}(n,m,ℓ) q^n y^ℓ p^m。
+  则对单位挠 I=1：
+    Z_1^{(4|4)}(τ,z,σ) = 1/Φ₁₀(τ,z,σ)，
+  其中 Φ₁₀(τ,z,σ) 是 holography.igusa-cusp-form-phi10 定义的 Igusa 尖点形式，按上式的
+  Fourier 系数配对（q^n y^ℓ p^m ↔ n,ℓ,m 三个指数分别与 τ,z,σ 三个槽位配对）确定其变量身份：
+  τ 与 n 配对、z 与 ℓ 配对、σ 与 m 配对（详见 notes 的槽位对照表，避免 ρ/σ/v 错位）。
+uses: []
+uses_conventions: []
+sources:
+  - ref: alexandrov-nampuri-2020
+    loc: "eq(2.11)：Z^{(4|4)}_I(τ,z,σ)=Σ_{n,m,ℓ}(−1)^ℓ Ω^{(4|4)}_I(n,m,ℓ) q^n y^ℓ p^m，y=e^{2πiz}, p=e^{2πiσ}；Z^{(4|4)}_1(τ,z,σ)=1/Φ₁₀(τ,z,σ)"
+    note: "逐字见 literature/extractions/dabholkar-gomes-murthy-2008.md §X1（researcher 2026-09-15 抽取）"
+notes: |
+  本项目原创证明 research/attempts/bkm-shift-explanation/ 的物理前提之一（proof.md §1 逐字引用
+  A-N 原文式子，本尝试不对此式本身负责，只以其为出发点）。
+
+  **变量槽位对应（避免 ρ/σ/v 错位，见 graph/CLAUDE.md「inferred 不是降级开关」条附近的常设陷阱提醒）**：
+  本卡 Φ₁₀(τ,z,σ) 的三个槽位按 Fourier 配对确定角色——τ 与 n 配对（在 canonical 记号
+  Φ₁₀^{canonical}(ρ,σ,v)=e^{2πi(ρ+σ+v)}∏(1−e^{2πi(mρ+nσ+lv)})^{c(...)} 中，n 与"σ"槽位配对）、
+  z 与 ℓ 配对（canonical "v" 槽位）、σ 与 m 配对（canonical "ρ" 槽位）。即
+    Φ₁₀(τ,z,σ)_{本卡} ≡ Φ₁₀^{canonical}(ρ=σ_{本卡}, σ=τ_{本卡}, v=z_{本卡})。
+  这与既有卡 holography.dgm-torsion-divisor-sum、holography.torsion-index-divisor-operator
+  "ρ 挂 m 索引"的约定一致，本卡只是直接照抄 A-N 论文自己的书写顺序 (τ,z,σ)，未重排成 (ρ,σ,v)。
+  判据是**谁与 m 索引配对**（对应 canonical 的 ρ 槽位），不是书写时的左右位置。
+
+  **本卡与 holography.dvv-dyon-index-generating-function 的关系**：DVV 卡陈述 1/Φ₁₀ 的 Fourier
+  系数 d(m,n,l)（无 (−1)^ℓ 因子，Ω=[[ρ,v],[v,σ]] 记号）等于螺旋超迹；本卡是 A-N 论文自己的
+  记号（带 (−1)^ℓ 符号约定、变量记 (τ,z,σ)，并把断言写成对**任意挠 I** 的生成函数定义，不只
+  I=1）。二者在物理内容上是同一个"1/Φ₁₀ 系数 = dyon 指标"识别在不同文献里的记法，但本项目
+  未核实二者符号/变量互译后逐项相等，故未建立 depends_on 边（避免未经核实的换算断言）；
+  留给 lead/未来 curator 判断是否值得建一条互译边。
+
+  **本卡状态取 physical-argument**：Z_1=1/Φ₁₀ 是 DVV 型物理识别（并非从更基本原理证明），
+  A-N 论文对此不做进一步证明，直接作为已确立的背景结果采用（脚注引用其来源）。
+tags: [bh-entropy, mock-modular, n4-string-theory, cartography]
+author: curator
+created: "2026-09-24"

@@ -1,0 +1,34 @@
+id: holography.bkm-shift-closed-form--via-fourier-coefficient-matching
+target: holography.bkm-shift-closed-form
+kind: proof
+status: rigorous
+depends_on:
+  - id: holography.bkm-torsion-generating-function-eq211
+    inferred: false
+    note: "eq(2.11)：Z_I 的生成函数定义与 Z_1=1/Φ₁₀ 基准，proof.md §1"
+  - id: holography.dgm-torsion-divisor-sum
+    inferred: false
+    note: "eq(2.13)：Ω_I(m,n,ℓ)=Σ_{d|I} d·Ω_1(m/d²,n,ℓ/d)，proof.md §1/§5 第 1 步代入"
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/bkm-shift-explanation/proof.md :: §2（Lemma B.1）、§3（Lemma B.2）、§5（命题 B 完整证明，第 1–5 步）"
+    note: "本项目原创证明，非已发表文献。graph-reviewer 对抗审查（2026-09-15）逐引理裁定：Lemma B.1 VERIFIED、Lemma B.2 VERIFIED、命题 B 第 1–5 步 VERIFIED，无致命 finding。captain_confirmed: true（范围见目标卡 notes）。"
+summary: |
+  证明分五步：(1) 把 eq(2.13) 代入 eq(2.11) 的生成函数定义并交换求和序（有限除子和，
+  形式幂级数层面合法）；(2) 对固定 d 换元 m=d²m′, ℓ=dℓ′——Lemma B.1 证明此换元在 Ω_1 的
+  支撑格点上是双射，不引入重复或遗漏；(3) 用 Lemma B.2 的初等指数恒等式
+  (−1)^{dℓ′} y^{dℓ′} = (−1)^{ℓ′} e^{2πi z_new ℓ′}（z_new := dz+(d−1)/2）改写符号因子；
+  (4) 识别改写后的和式恰为 Z_1(τ,z_new,d²σ) = 1/Φ₁₀(τ,z_new,d²σ)；(5) 代回并对 d|I 求和
+  即得命题 B 的闭式。核心恒等式 z_new=dz+(d−1)/2 对一切 d 无条件成立，不依赖 Φ₁₀ 的周期性
+  （proof.md §1 末段明确说明：Lemma B.3 只用于奇 d 情形下"平移可被 Φ₁₀ 整周期性吸收"这一
+  简化陈述，不影响命题 B 本身的证明）。
+notes: |
+  reviewer-verified: graph-reviewer, 2026-09-15（对抗审查 proof.md §2/§3/§5 逐引理，总裁定 VERIFIED）。
+
+  Lemma B.3(b)（奇 ℓ 系数非零，用于反证半整平移非平凡）依赖
+  holography.bkm-phi10-odd-elliptic-coefficient-nonzero，但该依赖只在
+  holography.bkm-shift-explains-dgm-shift-gap（推论 B1）中被消费，不影响本卡（命题 B 核心
+  闭式）本身的证明——本卡的闭式对一切 d 都成立，是否"非平凡"（即是否等于无平移版本）是
+  推论 B1 的内容，故本推导不把该依赖列入。
+author: curator
+created: "2026-09-24"

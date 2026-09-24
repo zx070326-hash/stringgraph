@@ -1,0 +1,59 @@
+id: holography.bkm-shift-explains-dgm-shift-gap
+kind: proposition
+title: 推论 B1——半整平移是 DGM eq(51) 与 A-N eq(2.11)+(2.13) 闭式之间唯一的差别
+statement: |
+  沿用 holography.bkm-shift-closed-form 给出的闭式
+    Z_I^{(4|4)}(τ,z,σ) = Σ_{d|I} d/Φ₁₀(τ, dz+(d−1)/2, d²σ)，
+  与 DGM（Dabholkar–Gomes–Murthy 2008）原文给出的无平移除子和公式
+    𝒵_I(ρ,σ,v) = Σ_{s|I} s/Φ₁₀(s²ρ,σ,sv)（DGM 官方 arXiv PDF eq(3.27)，ar5iv 自动编号 eq(51)）
+  逐项比较：
+  (a) **奇除子 d 上两式相等**：由 holography.phi10-periodic-in-v 的整周期性，
+      (d−1)/2 ∈ ℤ 时 Φ₁₀(τ,dz+(d−1)/2,d²σ) = Φ₁₀(τ,dz,d²σ)，故半整平移闭式与 DGM 无平移式
+      在奇除子项上给出同一值；
+  (b) **偶除子 d 上两式一般不相等**：(d−1)/2 是半整数（非整数），不能被 Φ₁₀ 的整周期性吸收；
+      由 holography.bkm-phi10-odd-elliptic-coefficient-nonzero（Φ₁₀ 的 Borcherds 乘积在判别式
+      −1 处系数非零，故 Fourier–Laurent 展开在椭圆变量方向含非零奇数次幂项），半整平移一般
+      改变 Φ₁₀ 的取值，故偶除子项上半整平移闭式与 DGM 无平移式一般不相等。
+  结论：DGM eq(51)（无平移）与本项目从 A-N eq(2.11)+(2.13) 纯代数推出的半整平移闭式，
+  两者之间唯一的差别恰是偶除子项上缺少的半整平移 (d−1)/2；奇除子项上两式因 Φ₁₀ 整周期性
+  而等价。
+uses: []
+uses_conventions: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/bkm-shift-explanation/proof.md :: §4（Lemma B.3(a)(b)）、§6（推论 B1 完整论证）"
+    note: |
+      本项目原创证明，非已发表文献。graph-reviewer 对抗审查（2026-09-15）逐引理裁定：
+      Lemma B.3(a)(b) VERIFIED（原为 PLAUSIBLE-with-gap，GAP-前提由 kawai-1997 坐实后已闭合）；
+      推论 B1 的奇/偶 d 两段论证同样 VERIFIED。captain_confirmed: true（范围同
+      holography.bkm-shift-closed-form，2026-09-15 确认记录）。
+  - ref: dabholkar-gomes-murthy-2008
+    loc: "arXiv 官方 PDF eq(3.27)（p.16, §3.4；ar5iv HTML 自动编号 eq(51)，二者数学内容一致，
+      仅编号来源不同，见 holography.dgm-torsion-divisor-sum notes 的完整对照表）"
+    note: "本卡陈述的是该式与 holography.bkm-shift-closed-form 闭式的精确差别，不是对
+      eq(3.27) 本身的背书——本项目判断 eq(3.27) 缺半整平移"
+notes: |
+  **与 holography.dgm-torsion-divisor-sum 的关系**：该既有卡陈述 DGM eq(52)/(3.28)（Ω_I 的
+  除子和，本项目认为是物理正确的版本）,其 notes 中已非正式记录"疑似 eq(51)/(3.27) 漏了偶除子
+  的半整平移"。本卡把这个"疑似"精确化为定理：半整平移 (d−1)/2 恰好是 DGM eq(51)/(3.27) 与
+  从 eq(2.11)+(2.13) 纯代数推出的闭式之间**唯一的差别**，并给出了偶除子确实不同（而非碰巧
+  相等）的严格理由（Borcherds 乘积在判别式 −1 处系数非零，见
+  holography.bkm-phi10-odd-elliptic-coefficient-nonzero）。
+
+  **不是对该差别存在性的唯一佐证**：另一 research attempt
+  （torsion-immortal-positivity-hecke）已用显式整数见证（I=2，(m,n,ℓ)=(4,1,2)，差值
+  101412 = 4·d_*(1,1,1)）独立确认了这一差别的存在性；本卡给出的是代数层面"差别来自何处"的
+  解释，两者是独立互证的不同论证路径，互不依赖。
+
+  **对外声明边界**：判定 DGM eq(51)/(52) 不相容是本项目原创发现，若要对外声明需船长确认
+  （见 holography.dgm-torsion-divisor-sum notes 与
+  research/attempts/bkm-shift-explanation/status.yaml）；本卡陈述的数学内容（半整平移的
+  代数来源）本身不因此受限，但引用时应连带说明这一边界。
+
+  **提醒（不在本卡范围内，供 lead 参考）**：holography.torsion-index-divisor-operator 定义的
+  𝒢_I（重标 v↦sv 之后再整体平移 1/2，即 −Σ_s s/Φ₁₀(s²ρ,σ,sv+1/2)）与本卡的 Z_I（平移量
+  (d−1)/2 依赖除子、d=1 时平移为 0）是两个不同的对象，不应混淆——该既有卡自己的 notes
+  末段已提醒"𝒢_I ≠ [𝒯_I(1/Φ₁₀)]|_{v↦v+1/2}"，与本卡的区分一致，无冲突。
+tags: [bh-entropy, mock-modular, n4-string-theory, cartography]
+author: curator
+created: "2026-09-24"
