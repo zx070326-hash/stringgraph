@@ -883,9 +883,21 @@ python research/attempts/tower-native-ddf-spanning/scripts/tower_check.py --heav
 
 > **本文证明的是目标卡在标架条件 (S)(T′)(C) 之下的版本。**
 
-这三条**恰是** `worldsheet.ddf-light-cone-frame`（`effective: formalized`）的 (F3)(F6)(F8)，
+这三条与 `worldsheet.ddf-light-cone-frame`（`effective: formalized`）的 (F3)(F6)(F8) 相对应，
 即"文献取的那个光锥标架"，而目标卡的 Lean 侧消费者全部通过 `DDFLightConeFrame` 携带它们
-（该卡 sources 第三条 (ii) 逐字如此说）。但**在图上这仍然是一个更强的前件**：
+（该卡 sources 第三条 (ii) 逐字如此说）。
+
+⚠ **"相对应"不是"相等"（rev-tower-ddf 的 F3，2026-09-24 订正；本段原写作"这三条**恰是**
+(F3)(F6)(F8)"）**。逐条的真实关系是：
+- **(S) = (F3)**、**(T′) = (F6)**：逐字相同，这两条确实是"恰是"。
+- **(C) ≠ (F8)**：(F8) 是标架的**张成完备性**，(C) 是"`{a,b,ε_i}` 构成基"。两者之间隔着
+  `b̃ = b − a` 的换基推演（见 `claim.md` §1.1）。本文**没有**把这段推演写全，
+  这正是 §7.1 `[GAP-C]` 登记的内容——若 (C) 真的"恰是" (F8)，`[GAP-C]` 就不该存在。
+  原措辞与本文自己的缺口清单直接矛盾。
+- 后果（这才是要紧的）：读到上面那张差异表的人会以为 (C) 是免费的，于是在毕业建卡时
+  **漏掉 (C) 这条前件**——而漏掉前件正是下一段所警告的"悄悄加强前件"的实现方式。
+
+但**在图上这（(S)(T′)(C) 整体）仍然是一个更强的前件**：
 若将来要把本结果毕业成推导，正确做法是
 (i) 立一张"带光锥标架前件的 DDF 张成"新卡（前件 = (F1)–(F8) + (D26)），由本文给推导；
 (ii) 再由它 + 一条"frame ⟹ `η(v,v)=0`"的桥（Lean `dotVec_self_eq_two` 已有）
@@ -909,6 +921,15 @@ python research/attempts/tower-native-ddf-spanning/scripts/tower_check.py --heav
 - `[GAP-CONV]` §5.4 (3) 用到"层间正交"。这是 `worldsheet.momentum-tower-fock-space` 的
   **约定**（该卡第 (2) 条），不是定理。若换一套把层间配对定义成非零的约定，
   `H_null` 的刻画要重做；Theorem 1、2 与 (5.6)（逐层版本）**不受影响**。
+
+  ⚠ **本条是多余登记，且偏保守方向（rev-tower-ddf 的 F4，lead 2026-09-24 补注）。**
+  目标卡 `worldsheet.ddf-spanning-hypothesis-v2` 的【设定】第 10 行逐字已含
+  "其上有层间正交的 `R`-双线性型 `⟨·,·⟩_T`"——层间正交本来就在目标卡的设定里，
+  不是本文额外加的前件。保留本条只作为"此处用到了一条约定而非定理"的可追溯记录。
+  **毕业建卡时的具体后果**：不得把层间正交写成新前件，也不得为它新开一个
+  `graph/conventions/` 节点；在推导的 notes 里注明它来自目标卡【设定】即可。
+  又：它只用在 Theorem 3 的 (3) 一处——整条抽掉，Theorem 1、Theorem 2、
+  Theorem 3 的 (1)(2)(4) 与逐层形式 (5.6) 全部存活。
 - `[GAP-C]` (C)（`{a,b,ε_i}` 是基）被写成前件。`claim.md` §1.1 说明了它与
   `worldsheet.ddf-light-cone-frame`（formalized）的 (F4)(F8) + Lean
   `frame_decomp_coeff` / `span_range_frameVec_eq_top` 相容，但本文没有从 (F1)–(F8)

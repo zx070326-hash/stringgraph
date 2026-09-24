@@ -1,10 +1,11 @@
 slug: tower-native-ddf-spanning
 title: "DDF 张成定理的塔内原生证明：用 W = ker K_{>0} 替换 Borcherds 的未知横向空间 T"
-state: draft
+state: verified
 author: prover
 created: "2026-09-24"
-reviewer: null
-verdict: null
+reviewer: rev-tower-ddf
+verdict: verified
+recommended_status: rigorous
 captain_confirmed: false
 target_cards:
   - worldsheet.ddf-spanning-hypothesis-v2
@@ -13,3 +14,82 @@ notes: |
   本 attempt 与 borcherds-rank-one-noghost 的关系：替代，不是续作。
   那里的 P1（"唯一真困难的一条"）在这里变成 Theorem 1，走的是
   (Λ-次数, −K-次数) 字典序滤过的领项三角性，不需要事先知道 T_j。
+
+  ---
+  【中断与代为提交，lead 记录，2026-09-24】起草 agent 被 API 400 错误中途杀死
+  （本项目第三次）。lead 按根 CLAUDE.md 的 API 故障韧性条款检查 worktree
+  `.claude/worktrees/agent-a09cee7021ee29619`：存活、已有 7 个提交、另有一笔
+  104 行未提交的 proof.md 改动。lead 核对该 diff 连贯（非句中截断）后代为提交为
+  b6fba30，提交信息注明内容是 agent 的、lead 提交时未审。随后合并分支
+  `agent/prover/tower-native-ddf-spanning` 到 main。
+
+review_2026_09_24:
+  reviewer: rev-tower-ddf
+  verdict: verified
+  status_ruling: rigorous
+  ruling_basis: |
+    - **不是 `formalized`**：`[GAP-LEAN]` 开着，三条定理无 Lean 实现。无讨论余地。
+    - **不是 `physical-argument`**：reviewer 逐步核了引理 1–13、推论 1.1/1.2/6.1、
+      Thm 1 (1)–(5)、Thm 2 (0)–(5)、Thm 3 (1)–(4)，无断言级跳步；唯一整条借用的
+      (4.4) `effective: formalized` 且已证不循环；`E_+|_W = id` 是精确恒等式而非
+      领项近似。四条 `[GAP]` 无一构成"论证本身不严格"。
+    - F1、F3 不触及 proof.md 三定理的严格性（一个在 claim.md 前件表、一个是措辞），
+      按根 CLAUDE.md 原则 2 不压档。
+  attacked_and_cleared: |
+    【Q1 领项系数】`K_0 = η(b,p_j) = η(b,a) + jη(b,b) = 1 + j·0 = 1`。(N) 杀掉唯一的
+    j-依赖项，对一切 j ∈ ℤ 恒为 1，与 |j| 和符号无关；且拿到的是精确的**单位元 1**
+    而非"≠ 0"——在一般交换环上后者不够、前者够。滤过从不作用在无穷维对象上
+    （先按能级切成 μ = ⊕_N μ_N），`M = N+1` 是层内常数，且该取法是**紧的**
+    （M = N 会失效）。
+
+    【Q2 b6fba30 的系数环放宽】行列式始终作用在有限的 p_D(N) × p_D(N) 方阵上；
+    无穷维只出现在最后一步 ⊕_N，而那步不用行列式。对角块确为置换矩阵。
+    结论与 lead 事前的担心相反：**改写前的版本才是有洞的**——旧路线要走
+    "单射 ⟹ 满射"，这在一般交换环上是假的（ℤ --×2--> ℤ），而目标卡的系数环设定
+    是"交换 ℚ-代数"而非域。b6fba30 是**必要的修复**。
+
+    【Q3 注 3.2 的 S^⊥⊥ = S】成立。三条件逐条核过：逐层有限自由（秩 p_D(N)）、
+    配对完美（引理 5(d)，Gram 的 (a,b) 块 det = −1，与 η(a,a) 取值无关）、
+    S 是直和项（推论 1.1）。有了直和项，`F = A ⊕ B ⟹ Ann(B) ≅ A*,
+    Ann(Ann(B)) = B` 是纯直和项引理，对任意交换环成立，不需 Noether、不需局部环。
+    注 3.2 "必须先有推论 1.1"的诊断准确——reviewer 试过绕开直和项的替代路线，
+    没找到，该依赖顺序是本质的。
+
+    【Q6 [GAP-COMM] 是否循环】**不循环**（机检）。对 graph/ 全部 YAML 建图
+    （depends_on + uses，statement 展开其全部 derivation），算
+    `worldsheet.ddf-commute-with-virasoro` 的传递祖先闭包 = **83 个节点**；
+    `ddf-spanning-hypothesis-v2`、`no-ghost-theorem-v4`、`ddf-contour-equals-mode-sum`、
+    `no-ghost-theorem-v3` **全部不在闭包内**。闭包内含相关字样的只有两个
+    OPE/围道基础设施节点。另确认：本证明只在 m ≥ 1 用 (4.4)，Lean 侧
+    `lie_towerLop_ddfOp_of_pos` 正是 m≥1 版（借得够用且不多借）；其假设
+    hη/hbb/hba/hεb 逐字对应 (F1)(N)(S)(T)，对象是塔上的 towerLop/ddfOp。
+  findings_fixed_by_lead: |
+    F1（claim.md 前件表）：Theorem 1 的前件由 (R)(D)(F1)(N)(S)(C) 订正为
+      (R)(D)(F1)(N)(S)(T)(T′)(O)(C)，与 proof.md §3 逐字一致；原"不需要
+      (A)(T)(T′)(O)(D26)"一行按 reviewer 要求把三种地位分开写：
+      **(T) 真必需**（反例：R = ℝ、D = 3、基 (a,b,ε) 下 Gram [[2,1,0],[1,0,1],[0,1,1]]，
+      det = −3、符号差 (2,1) 与 conv.metric-mostly-plus 相容、(A)(S)(N)(T′)(O) 全成立
+      而只有 (T) 失效，此时 (G⁻¹)^aa = 1/3 ≠ 0）；**(T′)(O) 只是未证可省**；
+      **(A)(D26) 确实不需要**。
+    F3（proof.md:886）："这三条恰是 (F3)(F6)(F8)" 订正为"相对应"，并逐条写明
+      (S) = (F3)、(T′) = (F6) 确为恰是，而 **(C) ≠ (F8)**（(F8) 是张成完备性，
+      (C) 是基，中间隔着 b̃ = b − a 的换基推演）——原措辞与本文自己的 [GAP-C]
+      直接矛盾。后果已写明：读差异表者会误以为 (C) 免费，于是建卡时漏掉该前件。
+    F4（proof.md [GAP-CONV]）：补注为多余登记。目标卡【设定】第 10 行逐字已含
+      "层间正交的 R-双线性型"，故不得在建卡时写成新前件、不得新开 conventions 节点。
+      又：它只用在 Theorem 3 的 (3) 一处。
+    附带（reviewer 未点名，lead 一并订正）：claim.md 的 (R) 由"特征 0 的域"
+      订正为"含 ℚ 的交换环"，与 b6fba30 后的 proof.md 注 3.0 / 注 4.1b 一致；
+      claim.md 前件表 (C) 行由"由 frame 卡…得到"订正为"本 attempt 的前件，不是导出的"。
+  graduation_warning: |
+    ⚠ **F2 仍然有效，是毕业时最容易出错的地方。**
+    (a) 本文证明的是目标卡在**更强前件** (S)(T′)(C) 之下的版本。**不得**直接把本文
+        挂成 `ddf-spanning-hypothesis-v2` 的推导——那会悄悄加强前件。
+        `worldsheet.ddf-light-cone-frame` 的 D=3 整数见证（formal/ 的 WitnessInt.lean）
+        显示 (T)(O) ⇏ (T′)(C)，所以"桥"不是免费的。
+    (b) 毕业**不会移动** `worldsheet.no-ghost-theorem-v4` 的 effective。原因不在本 attempt：
+        该卡的瓶颈是 `ddf-spanning-hypothesis-v2` 一个节点，而它下面分叉成两条路，
+        本 attempt 所在的那条不是唯一的。建卡前必须先跑
+        `uv run stringgraph why worldsheet.no-ghost-theorem-v4` 复核，不得在 ROADMAP
+        写成"做成 X 就能让 Y 升档"。
+    (c) `captain_confirmed` 留空，不代填。
