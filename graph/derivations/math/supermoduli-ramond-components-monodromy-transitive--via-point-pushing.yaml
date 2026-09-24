@@ -1,0 +1,65 @@
+id: math.supermoduli-ramond-components-monodromy-transitive--via-point-pushing
+target: math.supermoduli-ramond-components-monodromy-transitive
+kind: proof
+status: rigorous
+depends_on: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/supermoduli-ramond-components/proof.md §1.1-1.2 (记号、X1、X5a,b,e)、
+      §2 (引理2.1: π 是 M_{g,m} 上次数 2^{2g} 有限平展覆叠, 前提 m≥1；注2.2: μ2-gerbe 论证；
+      引理2.3: π_0(𝒮)=Θ/Γ_{g,m})、§3 (引理3.1: 复环面上乘2映射单值=mod2平移；引理3.2:
+      Abel-Jacobi 诱导 Hurewicz 同态, 单值满射到 J[2]；定理3.3: 单个 Ramond 穿孔点推子群已在
+      Θ_R(C) 上传递；推论3.4 = 命题(C1)；注3.5: 反向自洽性检验，确认 r=0 时机制消失)"
+    note: |
+      本项目原创证明（已知结论的独立重证），非已发表文献；原始出处 Jarvis 2000（见
+      statement 卡 sources 的 jarvis-2000 条目及 §10.1 对照表）。
+  - ref: felder-kazhdan-polishchuk-2020
+    loc: "arXiv:2006.13271v3, p.13, §2.6（广义自旋结构定义，X1 的出处）"
+    note: 本项目未独立读取该 PDF 页；170dpi 页图核对记录见 status.yaml review_2026_09_24。
+  - ref: jarvis-2000
+    loc: "Thm 3.3.1 (p.17), Thm 3.3.11 (p.23)"
+    note: 本卡命题的原始出处，本推导路线独立于该文证明（proof.md §10.1 对照表核实结论一致）。
+summary: |
+  推导路线（proof.md §2-§3）：
+  1. 引理2.1：广义自旋曲线模叠 S_{g;n,2r} = 平方映射 sq: Pic^{g-1+r}→Pic^{2g-2+2r} 沿
+     [ω_C(R)] 的纤维积，是 M_{g,m} 上次数 2^{2g} 的有限平展覆叠（m=n+2r≥1 时相对 Picard
+     函子由截面可表）。
+  2. 注2.2：对象自同构群里 ±1∈Aut(L) 不可见于粗化叠，故 S_{g;n,2r}→𝒮 是 μ2-gerbe，
+     不改变底层拓扑空间；π_0(S_{g;n,2r})=π_0(𝒮)。
+  3. 引理2.3：Teichmüller 空间 Θ_{g,m} 可缩、M_{g,m} 连通 ⇒ π_0(𝒮) = Θ_R(C)/Γ_{g,m}
+     （映射类群在纤维 J[2]-torsor 上的单值轨道集）。
+  4. 引理3.1：复环面上"乘2"映射沿一个同调类为 [α] 的闭路的单值是平移 [α] mod 2。
+  5. 引理3.2：Abel-Jacobi 映射把 π_1(C∖punctures) 上的 Hurewicz 同态送到 H_1(C;ℤ)，满。
+  6. 定理3.3：把单个 Ramond 穿孔 ρ_1 沿闭路 α 点推一圈，因为靶除子 ω_C(R) 随 ρ_1 移动，
+     该点推元素在 sq 覆叠上的单值恰是步骤4的平移 [α] mod2；由步骤5，α 取遍 π_1 生成元时
+     [α] mod2 取遍 J[2] 全部，故仅这一个 Ramond 穿孔的点推子群已经在 Θ_R(C) 上传递。
+  7. 推论3.4：单值传递 ⇒ 步骤3的商集是单点 ⇒ π_0(S_{g;n,2r}) 单点，即 S_{g;n,2r} 连通。
+  8. 注3.5（反向自洽性检验）：把机制套到 r=0（无 Ramond 穿孔）时，靶除子 ω_C(P) 不随任何
+     NS 穿孔移动，点推单值恒为平凡元，机制不产生额外单值——与经典 r=0 两分量结果不矛盾，
+     确认本推导没有"过度证明"带出错误的 r=0 连通性。
+gaps:
+  - |
+    [GAP-REP]（低，据 status.yaml review_2026_09_24.gap_triage）：引理2.1 依赖的相对 Picard
+    函子可表性、以及"gerbe 不改变底空间"用作标准代数几何/拓扑 stack 事实，reviewer 未独立
+    定位到具体教科书出处，接受为标准事实。不影响本卡 status（标准事实缺定位不算逻辑跳步）。
+  - |
+    本卡不断言 r=0 情形、紧化情形、Ramond 节点粘接（见 statement 正文"本卡不断言"段）。
+  - |
+    Jarvis 2000 原文（原始出处）本身的证明未被本推导采用也未被独立核验；本推导与 Jarvis
+    的关系仅止于"分量数公式代入特殊情形后结果吻合"的交叉验证（proof.md §10.1）。
+notes: |
+  reviewer-verified: rev-ramond (sonnet), 2026-09-24 —— 见
+  research/attempts/supermoduli-ramond-components/status.yaml 的 review_2026_09_24 块（该次
+  复审覆盖整个 attempt，含本卡之外的紧化部分）；就本卡覆盖的范围而言，逐步核对了
+  (X1)+(X5a,b,f)+引理2.1+2.3+3.1+3.2+定理3.3+推论3.4 全链，独立渲染验证了 FKP p.13 与
+  Jarvis p.17/p.23 的页图引文，判定无逻辑跳步；status.yaml: state: verified。
+  按 docs/STATUS_LEVELS.md 的 rigorous 例外条款（前提完整、有限步初等推理、reviewer 独立
+  复核）本推导标 rigorous。captain_confirmed: false，不阻塞毕业（见根 CLAUDE.md 判据）。
+
+  **精确记账**：proof.md §9.1「承重清单」给出的 (X1)+(X2)+(X5a,b)+(X6)+引理2.1+2.3+3.1+3.2
+  +定理3.3+引理5.1 是**定理5.2（紧化版本）**的完整依赖，不是本卡（未紧化的推论3.4）的依赖。
+  本卡的推导路径不使用 (X2)（FKP Prop 7.8(ii) 边界局部结构）与 (X6)（玻色截断同胚）——
+  这两项只在证明紧化稠密性/连通性的姐妹卡
+  `math.supermoduli-ramond-components-compactified-connected` 中用到。
+author: graph-curator
+created: "2026-09-24"

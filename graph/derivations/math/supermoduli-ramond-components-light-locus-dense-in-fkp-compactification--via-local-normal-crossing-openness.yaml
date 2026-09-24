@@ -1,0 +1,55 @@
+id: math.supermoduli-ramond-components-light-locus-dense-in-fkp-compactification--via-local-normal-crossing-openness
+target: math.supermoduli-ramond-components-light-locus-dense-in-fkp-compactification
+kind: proof
+status: rigorous
+depends_on: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/supermoduli-ramond-components/proof.md §5 引理5.1 及证明、附注
+      （替代论证及其未满足前提的诚实说明）"
+    note: |
+      本项目原创证明（已知结论的独立重证/新推导路径），非已发表文献；原始动机与承重定位见
+      proof.md §10.3 第 1 条。status.yaml: state: verified，2026-09-24 二审（rev-ramond）核对。
+  - ref: felder-kazhdan-polishchuk-2020
+    loc: "arXiv:2006.13271v3, p.47, Prop 7.8(ii) 及证明正文"
+    note: 本项目未独立读取该 PDF 页；核对记录见 status.yaml review_2026_09_24。
+summary: |
+  证明路线（proof.md §5 引理5.1）：
+  1. 取任一边界点 [X_0]∈S̄_{g;n,2r}，设其有 k 个节点（k=0 时平凡）。
+  2. 由 FKP Prop 7.8(ii)，存在 [X_0] 的平展邻域 u:B→S̄ 与光滑态射 t=(t_1,...,t_k):B→𝔸^k，
+     使边界轨迹的拉回恰为 {t_1⋯t_k=0}。
+  3. 光滑态射平坦、有限表示 ⇒ 开映射；故 B 中任一开集 U 的像 t(U) 是含 0 的开集，
+     必含全部坐标非零的点，即 U 与"光滑轨迹"相交。
+  4. u 本身平展 ⇒ 开；复合两步开映射性质 ⇒ [X_0] 的任意开邻域都与光滑轨迹相交。
+  5. [X_0] 任意 ⇒ 光滑轨迹在 S̄ 中稠密。
+  6. 步骤1-5 中 Prop 7.8(ii) 原文陈述的对象是超叠 𝔖̄，故直接得到的是稠密性陈述对
+     𝔖⊂𝔖̄ 成立；超叠与其玻色截断底层拓扑空间相同（奇向幂零元不改变拓扑），
+     再用 (X6)（论文引理 5.1：(𝔖̄_{g;n,2r})_bos ≅ S̄_{g;n,2r} 的具体同构，而不只是
+     "拓扑不变于幂零元"这条通用弱事实）把该陈述转移到玻色截断层面 S⊂S̄。
+gaps:
+  - |
+    本引理只给出"稠密"这一拓扑性质，不给出 S̄ 纯维数或不可约性——proof.md §5 附注明确指出
+    另一条可能的替代论证（用维数计数 dim ∂M̄=3g-4+m）需要额外的纯维数前提，本引理未走那条路。
+  - |
+    [GAP-REP]（低）：本引理隐含使用"光滑态射是平坦、开映射"、"平展态射是开映射"两条标准
+    代数几何事实，未独立定位教科书出处。
+  - |
+    proof.md §9.1 承重清单第 3 条自评：本引理把 FKP Prop 7.8 的"超叠上的平展邻域"论证
+    用在了底层拓扑空间上，reviewer 认为该步骤成立（t_i 是偶函数，故下降到玻色截断），
+    但列为"自认为最脆弱三处"之一，供后续复核参考。
+notes: |
+  reviewer-verified: rev-ramond (sonnet), 2026-09-24 —— 见
+  research/attempts/supermoduli-ramond-components/status.yaml 的 review_2026_09_24 块
+  （what_i_checked 第 3、4 项：核对了本引理的光滑态射开映射论证，以及本卡与
+  `[GAP-JARVIS-COMPACT]` 关系表述的准确性）；判定无逻辑跳步；status.yaml: state: verified。
+  按 docs/STATUS_LEVELS.md 的 rigorous 例外条款（前提完整、有限步初等点集拓扑论证、
+  reviewer 独立复核）本推导标 rigorous。captain_confirmed: false，不阻塞毕业。
+
+  本推导使用 (X1)（对象定义，隐含）、(X2)（FKP Prop 7.8(ii)）、以及 (X6)
+  （论文自身引理5.1：(𝔖̄_{g;n,2r})_bos ≅ S̄_{g;n,2r}，用于把 §5 的直接论证——它作用于超叠
+  𝔖̄，因为 Prop 7.8(ii) 原文陈述的对象就是超叠——转移到玻色截断层面 S⊂S̄）；
+  不使用 (X3)-(X5)、§2-§4 的点推单值机制。姐妹卡
+  `math.supermoduli-ramond-components-compactified-connected` 额外用到本卡结论本身以及
+  推论3.4，但不重复使用 (X2)/(X6)（它直接引用本卡与姐妹卡一即可）。
+author: graph-curator
+created: "2026-09-24"

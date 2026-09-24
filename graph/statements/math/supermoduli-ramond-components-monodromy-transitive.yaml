@@ -1,0 +1,106 @@
+id: math.supermoduli-ramond-components-monodromy-transitive
+kind: proposition
+title: "带 Ramond 穿孔的广义自旋曲线模叠 S_{g;n,2r}（r≥1）连通：单穿孔点推单值已在纤维 Θ_R(C) 上传递"
+statement: |
+  【对象，记号固定在本卡内，与 research/attempts/supermoduli-ramond-components/claim.md §1 一致】
+  设 k=ℂ。g≥0，n≥0（NS 穿孔数），r≥1（Ramond 穿孔对数，Ramond 穿孔个数为 2r），m:=n+2r，
+  恒设稳定性 2g-2+m>0。C 为亏格 g 的光滑射影曲线；p_1,...,p_n 为编号 NS 穿孔，
+  ρ_1,...,ρ_{2r} 为编号 Ramond 穿孔，全部互异。记 R:=ρ_1+...+ρ_{2r}。
+
+  【广义自旋结构，FKP §2.6 (p.13) 定义，逐字："A generalized spin structure L over a smooth
+  curve C with punctures is a line bundle L equipped with an isomorphism L^2 ≃ ω_C(r_1+...+r_n)"，
+  其中 (r_•) 是 Ramond 穿孔】：一个广义自旋结构是线丛 L 配一个同构 φ: L^⊗2 ≅ ω_C(R)。
+  **只有 Ramond 穿孔扭转 ω_C；NS 穿孔不扭转。** S_{g;n,2r} 记光滑广义自旋曲线
+  (C;p_•;ρ_•;L,φ)（穿孔有编号）的模叠；等价地它是万有曲线上相对平方映射
+  sq: Pic^{g-1+r}_{C/M} → Pic^{2g-2+2r}_{C/M} 沿截面 [ω_C(R)] 的纤维积，
+  是 M_{g,m} 上次数 2^{2g} 的有限平展覆叠，纤维 Θ_R(C):={L∈Pic^{g-1+r}(C): L^⊗2≅ω_C(R)}
+  是 J[2]-torsor（J=Jac(C)）。
+
+  【命题】对一切满足稳定性的 (g,n,r)（r≥1）：S_{g;n,2r} 的底层拓扑空间连通，即 π_0(S_{g;n,2r})
+  是单点。
+
+  机制：把单个 Ramond 穿孔 ρ_1 沿 C 中一条闭路"点推"一圈生成的映射类群子群（Birman 点推同态的像）
+  在纤维 Θ_R(C) 上的单值作用**已经单纯传递**。原因是靶除子 ω_C(R) 会随 ρ_1 一起动：
+  沿闭路 α 推 ρ_1 一圈，靶在 Pic 中绕出一个同调类为 [α] 的圈，而平方覆叠 sq 沿该圈的单值
+  是平移 [α] mod 2 ∈ J[2]（复环面上乘 2 映射的标准单值公式）；又 Abel–Jacobi 映射在 π_1 上
+  诱导 Hurewicz 同态 π_1(C∖{其余标记点}) ↠ H_1(C;ℤ)，故仅点推一项就已把单值取遍全部
+  J[2] ≅ H_1(C;ℤ/2)。而 M_{g,m} 连通、Teichmüller 空间可缩，故 π_0(S_{g;n,2r}) 等于该单值
+  在 Θ_R(C) 上的轨道集（一个点）。
+
+  【拓扑空间层面的声明，必须显式】上述连通性是**底层拓扑空间 / π_0** 层面的陈述。
+  S_{g;n,2r} 的对象 (C;p;ρ;L,φ) 的自同构群含 φ 看不见的 ±1∈Aut(L)，故 S_{g;n,2r}→𝒮
+  （忘掉该 ±1 的粗化叠，即上一段平方覆叠纤维积本身）是一个 μ_2-gerbe；gerbe 不改变
+  底层拓扑空间，故 |S_{g;n,2r}|=|𝒮|、π_0(S_{g;n,2r})=π_0(𝒮)，本卡的构造直接作用于 𝒮，
+  结论对二者一致成立。同理，把穿孔的编号忘掉只是再模掉一个有限群，只可能减少分量数，
+  故"有编号连通"蕴含"无编号连通"。
+
+  【与已发表结果的关系——本卡不是新数学，如实标注】上述命题的数学内容**不是本项目的新结果**。
+  Jarvis, *Geometry of the moduli of higher spin curves*, Internat. J. Math. 11 (2000) 637–663
+  （预印本 arXiv:math/9809138v3；正是 FKP §2.6 所引 [22]，FKP 用它说明
+  S̄_{g,n_NS,n_R} 是光滑固有 DM 叠，未引用其中的不可约性/分量数定理）Theorem 3.3.1 与
+  Theorem 3.3.11 在一般的 "r-spin curve of type m" 框架下给出模叠 S^{1/r,m}_{g,n}
+  及其紧化的分量个数公式：分量数 = ℓ_{g,r}(m) 的正因子个数，g≥2 时 ℓ_{g,r}(m)=gcd(2,r,m_•)。
+  取 r_Jarvis=2、每个 Ramond 点 m_i=1、每个 NS 点 m_i=0，g≥2/g=1/g=0 三种"有 Ramond 穿孔"
+  的情形下 ℓ_{g,2}(m)=1，分量数=1，与本卡命题逐格相符（对照表见来源 proof.md §10.1）。
+  **本卡记录的是一条独立于 Jarvis 证明的重新证明**（走点推单值路线，proof.md 作者未阅读
+  Jarvis 的证明），供交叉验证，不构成新数学。
+
+  【本卡不断言】r=0 情形（此时靶除子不随任何 NS 穿孔移动，点推单值恒为零——这正是经典
+  Mumford 宇称不变性成立的原因；r=0 时 S_{g;n,0} 的两分量结构是另一条已知结果，本卡不涉及）；
+  任何"可投影/可分裂"方向的结论；紧化后的连通性（见姐妹卡
+  `math.supermoduli-ramond-components-compactified-connected`）；Ramond 节点处的粘接。
+
+  【r≥1 对引理 2.1 前提 m≥1 的覆盖】本卡量词范围恒有 m=n+2r≥2r≥2≥1，满足 proof.md 引理 2.1
+  "m≥1"（万有曲线有截面，用以证相对 Picard 函子可表）的前提，不落入该引理字面未覆盖的 m=0 角点
+  （该角点只出现在 r=0、n=0 的对照定理，与本卡无关）。
+uses_conventions: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/supermoduli-ramond-components/proof.md §1.1-1.2 (记号、X1、X5a,b)、
+      §2 (引理2.1、注2.2、引理2.3)、§3 (引理3.1、引理3.2、定理3.3、推论3.4)、§10.1 (与 Jarvis 对照表)"
+    note: |
+      本项目原创证明（已知结论的独立重证），非已发表文献；原始出处是 Jarvis 2000（见下方
+      jarvis-2000 条目）。status.yaml: state: verified，2026-09-24 二审（rev-ramond）逐步核对
+      (X1)+(X2)+(X5a,b)+(X6)+引理2.1+2.3+3.1+3.2+定理3.3+引理5.1(+定理5.2) 全链，未发现跳步；
+      captain_confirmed: false（不阻塞毕业，见根 CLAUDE.md「captain_confirmed 只在两处是真门」）。
+  - ref: felder-kazhdan-polishchuk-2020
+    loc: "arXiv:2006.13271v3, p.13, §2.6（广义自旋结构定义逐字见本卡 statement 引文；同页
+      'n_R necessarily even'、引 [22][23] 证光滑固有 DM 叠）"
+    note: |
+      本项目未独立读取该 PDF 页；逐字引用取自 proof.md §1.2 (X1)，该 attempt 以 170dpi 渲染
+      页图核对（reviewer 2026-09-24 复核过一次，见 status.yaml review_2026_09_24.what_i_checked）。
+  - ref: jarvis-2000
+    loc: "Internat. J. Math. 11 (2000) 637-663（预印本 arXiv:math/9809138v3）Thm 3.3.1（p.17）、
+      Thm 3.3.11（p.23）"
+    note: |
+      本卡命题的**原始出处**。取 r_Jarvis=2、Ramond 点 m_i=1、NS 点 m_i=0 后，Jarvis 的一般
+      公式与本卡逐格相符（详见 proof.md §10.1 对照表）。本卡推导不依赖阅读该文证明，是一条
+      独立路线；本项目未取得正式发表版本，核对以 arXiv v3 为准。v3 p.17 的 ℓ 定义按字面读作
+      "if g≠2"（经 200dpi 页图反复确认非 OCR 误读），疑为 "if g≥2" 的排印之误；本卡不依赖这条
+      修复性解读——本卡覆盖的 g≥2/g=1/g=0 三种情形均由 proof.md §3/§8 独立证明得出。
+tags: [supermoduli, spin-curve, ramond-puncture, connected-components, monodromy, point-pushing, math-input, original-research, jarvis]
+notes: |
+  【查重，2026-09-24】uv run stringgraph search 对 "Ramond component"/"connected
+  component"/"monodromy"/"point-pushing"/"dense"/"Jarvis"/"spin curve" 均未命中覆盖本命题的
+  既有卡。最接近的既有卡 `math.supermoduli-compactified-punctured-genus-geq3-not-projected` 与
+  `math.supermoduli-compactified-punctured-genus-2-not-projected` 明确断言"r≥1 时不指认连通
+  分量"（[GAP-COMP]，见其各自 notes），本卡与它们互补而非重复：本卡填补的正是那两张卡故意
+  留空的信息。**建议 lead 转交**：那两张卡 notes 里的 [GAP-COMP] 段落现已过时（r≥1 时连通性
+  已知，不再是开放问题），建议后续更新其 notes（不改 statement 正文，只更新 notes 说明该缺口
+  已被本卡关闭）——本卡不动那两张既有卡（不在本 curator 授权写入范围内）。
+
+  【关于 status 的裁定依据】本卡对应推导采用 research/CLAUDE.md 生命周期第4条的毕业路线：
+  attempt 状态 verified，reviewer（rev-ramond, 2026-09-24）逐步核对了本卡覆盖的全部推理链
+  （定理3.3+推论3.4+其支撑引理），独立渲染核实了 FKP p.13 页图，判定无逻辑跳步。按
+  docs/STATUS_LEVELS.md 的 rigorous 例外条款（前提完整、reviewer 独立复核），推导标 rigorous；
+  见对应 derivation 文件 notes 的 reviewer-verified 记录。
+
+  【已知但不影响本卡的缺口，如实转录自 status.yaml review_2026_09_24.gap_triage】
+  [GAP-REP]（低）：引理2.1 依赖的相对 Picard 函子可表性、以及"gerbe 不改变底空间"，按标准
+  代数几何/拓扑 stack 事实使用，reviewer 未独立查具体教科书定位，接受为标准事实，风险低。
+
+  【张力提示，转交 lead】status.yaml 的 review_2026_09_24.recommended_next_step 写"不建议往
+  graph/ 立新卡：结论本身非本 attempt 原创（Jarvis 1999/2000）"，与本 curator 收到的显式毕业
+  任务指令相反。本卡遵循任务指令毕业，同时如实标注原始出处与独立重证性质；此张力留给 lead 裁断。
+author: graph-curator
+created: "2026-09-24"
