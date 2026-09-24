@@ -1,5 +1,5 @@
-id: math.fkp-ramond-twist-ns-gluing-well-defined--via-local-node-computation
-target: math.fkp-ramond-twist-ns-gluing-well-defined
+id: math.fkp-punctured-ns-gluing-exists-with-ramond--via-local-node-computation
+target: math.fkp-punctured-ns-gluing-exists-with-ramond
 kind: proof
 status: rigorous
 depends_on: []
@@ -48,6 +48,13 @@ gaps:
     自洽（该包含单但不满，余长一，且这个"不满"恰是 ω_Z(R^Z)^- 的茎结构所要求的）。是一个有充分
     理由但仍属**解释性**的选择，不是 FKP-A 逐字给出的。
 notes: |
+  【lead 于 2026-09-24 改指】本推导原挂在陈述卡 `math.fkp-ramond-twist-ns-gluing-well-defined`
+  上，该卡与并行 curator 建的 `math.fkp-punctured-ns-gluing-exists-with-ramond` 是同一命题，按
+  原则 1 合并为后者，本推导改指后者，成为该陈述的第二条独立推导（另一条为
+  `--via-branch-duality-lemma`，来自 `fkp-96-punctured` 尝试，走分支对偶引理，路线不同）。
+  合并后的目标卡把 Ramond 穿孔数范围改为**条件式**（凡源叠非空即成立，不断言哪些 (m_i,n_i) 使
+  源叠非空），比本推导原目标卡写的"任意 n_i≥0"更弱，故本推导依然完整证明目标。
+
   reviewer-verified: rev-fkp79 (sonnet), 2026-09-24.
   独立审查下载 arXiv:2006.13271v3（curl 一次成功），用 pdftoppm 在 220dpi 渲染 pp.5,6,7,47,48，
   逐字比对 proof.md §1 的全部转录（Definition 2.4 的 disjoint 从句、δ 的靶、(2.4)；Lemma 2.6 与
