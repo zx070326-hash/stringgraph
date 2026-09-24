@@ -1,0 +1,58 @@
+id: holography.rescaling-immortal-index-not-frame-function
+kind: proposition
+title: 免死指标不是 (m,n,ℓ,I) 的函数（Thm D）：Q-适配与 P-适配标架给出不同物理指标
+statement: |
+  记 (H1) := holography.dgm-torsion-divisor-sum 的物理前提（挠 I 的单心/免死 dyon 指标，对
+  拥有 Q-适配标架、不变量 (m,n,ℓ) 的 dyon，等于 D_I(m,n,ℓ)，D_I 见
+  holography.torsion-index-divisor-operator）；(H2) := 指标沿吸引子围道在电荷基变换
+  (Q,P)↦(aQ+bP,cQ+dP)（U∈SL(2,ℤ)）下不变，对 d_* 即 holography.dstar-sduality-invariant
+  的 SL(2,ℤ) 特例。
+
+  **引理**：在 (H1)+(H2) 之下，拥有 P-适配标架、不变量为 (m,n,ℓ) 的挠 I dyon，其指标等于
+  holography.rescaling-p-operator-definition 的 D'_I(m,n,ℓ)。（对 (Q,P) 施加 S-对偶元
+  S=[[0,1],[−1,0]]：(Q,P)↦(P,−Q) 化为 Q-适配情形，不变量变为 (n,m,−ℓ)，用 (H1) 得指标
+  = D_I(n,m,−ℓ)，再用 holography.rescaling-reflection-transfer（Thm A）与 D_I 关于 ℓ 的
+  偶性化简为 D'_I(m,n,ℓ)。）
+
+  **定理**：在 (H1)+(H2) 之下，1/4-BPS 免死 dyon 指标**不是**不变量组 (m,n,ℓ,I) 的良定义
+  函数：同一组 (m,n,ℓ,I) 上，是否为 Q-适配还是 P-适配会给出不同数值。显式地，在
+  (m,n,ℓ,I)=(4,8,8,2) 处，电荷格 Λ 中同时存在挠 2 的 Q-适配子格与挠 2 的 P-适配子格（两个
+  不同的秩 2 子格），二者的不变量都是 (4,8,8)，而指标分别为
+    Q-适配：D_2(4,8,8) = d_*(4,8,8) + 2·d_*(1,8,4) = 7 999 541 469 408，
+    P-适配：D'_2(4,8,8) = d_*(4,8,8) + 2·d_*(4,2,4) = 7 999 235 715 072，
+  差 305 754 336。s=2 项对应的两个约化型 (1,4,0) 与 (2,2,0) 是判别式 −16 的两个不等价类
+  （类数 h(−16)=2），这正是差异的来源。
+uses: []
+uses_conventions: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/p-rescaling-frame-dependence/proof.md §7（Lemma 7.1、Theorem D 及证明）及 scripts/lattice_frames_output.txt block L2"
+    note: "本项目原创证明，非已发表文献。status.yaml review_2026_09_24：reviewer rev-prescale 独立手推重证 Lemma 7.1 与 Theorem D 的论证链，并独立重跑 scripts/lattice_frames.py 核对 block L2 两个显式格的构造与不变量，逐位一致。captain_confirmed: false。"
+  - ref: banerjee-sen-srivastava-2008a
+    loc: "§6.3（L1 p.35）：挠 2 处存在三条 T-对偶轨道（Q∈2Λ、P∈2Λ、Q,P 本原且 Q±P∈2Λ），并为每条轨道给出独立的配分函数（eq 1.23 等）"
+    note: "背景佐证，非本卡证明的前提：proof.md §7 末段指出本定理与 BSS 2008 的「三条轨道给不同指标」定性一致，并对前两条轨道给出了精确数值差；第三条轨道的指标本 attempt 未计算（proof.md §7 [GAP] 段），D_I/D'_I 两个算子都不覆盖它。此边不构成 depends_on（见推导节点，未把这条 source 列为依赖，只在此处作背景交叉核实）。"
+notes: |
+  **这是本 attempt 物理意义最直接的定理**：它不需要相信 P-重标文献（AN/BCP）本身正确，
+  只需要 DGM 的 Q-重标物理前提 (H1) 加 S-对偶不变性 (H2)，就已经推出「标架依赖」——
+  P-重标公式的存在与否，甚至不是必要的。
+
+  **与 Thm B（holography.rescaling-frame-dependence-witness）的关系**：Thm B 是纯数学
+  命题（D'_I 作为算子在同一格 L 的两个标架上取不同值，不涉及任何物理识别）；本卡 Thm D
+  是它的物理读法——但物理读法额外需要 (H1)+(H2) 两条前提，且 Thm D 用的是**两个不同的
+  格**（各自恰好是 Q-适配、P-适配）而非同一格 L 的两个标架，故不能从 Thm B 直接文本替换
+  得到，需要引理（S-对偶把 P-适配化为 Q-适配）单独论证。
+
+  **effective status 预期被压到 physical-argument**：本卡自身的逻辑推导（引理 + 定理）是
+  纯数学演绎，rigorous；但它依赖 (H1)=holography.dgm-torsion-divisor-sum，该卡是
+  physical-argument（DGM 依赖 4d-5d 提升、S-对偶等物理论证，非纯数学证明）。按
+  propagate.py 的下界传播，本卡 effective 预期自动压到 physical-argument，这是诚实的、
+  预期内的结果，与 holography.torsion-immortal-positivity 采用的「数学结论与物理前提
+  分开陈列」模式一致——不需要额外自律，工具自动处理。
+
+  **不把 banerjee-sen-srivastava-2008a 列为 depends_on**：BSS 0802.0544 §6.3 的三轨道
+  论述是本定理的历史背景与定性佐证（proof.md 明确称其为 "consistent with, and
+  quantifies, a result of 2008"），但 Theorem D 自身的证明只用到 (H1)+(H2)+Thm A+两个
+  显式格的存在性，不引用 BSS 的论证步骤；因此该文献只作为 source 记录背景，不构成推导边。
+tags: [bh-entropy, mock-modular, n4-string-theory, cartography]
+author: graph-curator
+created: "2026-09-24"
