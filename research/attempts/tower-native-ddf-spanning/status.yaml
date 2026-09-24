@@ -23,6 +23,52 @@ notes: |
   b6fba30，提交信息注明内容是 agent 的、lead 提交时未审。随后合并分支
   `agent/prover/tower-native-ddf-spanning` 到 main。
 
+no_tprime_result_2026_09_25:
+  files: ["claim-no-tprime.md", "proof-no-tprime.md", "scripts/notprime_check.py"]
+  author: "agent drop-tprime（theorem-prover, opus）"
+  state: under-review
+  reviewer: rev-no-tprime
+  verdict: null
+  note_on_the_agent: |
+    该 agent 被 API 错误杀死（本项目第四次），但**守住了提交纪律**：6 个单元全部已提交，
+    worktree 零未提交残留，死在汇报那一步而非工作途中。lead 未代为提交任何内容，
+    只做了合并（分支 `agent/prover/ddf-no-tprime`）。
+  claim: |
+    **(T′) 可以整条删掉，且不需要任何替代前件。** 于是 `claim.md` / `proof.md` 的
+    Theorem 1/2/3 在前件 (R)(D)(F1)(N)(S)(A)(T)(O)(C)(D26) 下成立，(T′) 出局。
+  mechanism: |
+    它**没有**走 `tprime_removal_analysis_2026_09_25` 里建议的路线（换掉 (1.3) 带 c_i 重跑三张
+    记权表）。它找到一条更干净的：
+      · **引理 A（标架平移）** `ε_i′ := ε_i − c_i b`。则 `η(ε_i′,a) = c_i − c_i·η(b,a) = 0`
+        恢复 (T′)（用 (S)）；`η(ε_i′,b) = −c_iη(b,b) = 0` 保住 (T)（用 (N)）；
+        `η(ε_i′,ε_j′) = δ_ij` 保住 (O)；过渡矩阵幂幺、det 1 ⟹ (C) 保住、`a,b` 与 `η(a,a)` 不动。
+      · **引理 B（零极化 DDF 算子恒为零）** `A^b_n = 0`（`n ≠ 0`），`A^b_0 = id`。
+        因 `η(b,b) = 0`，`(b·∂X)e^{inb·X} = (1/in)∂_z[e^{inb·X}]` 是全导数，围道积分为零。
+        要 `ℚ ⊆ R`（除以 n）；横向性由 (N) 自供，故极化取 `b` 本身合法。
+      · `A^ε_n` 对 `ε` 线性 + `ε_i′ − ε_i ∈ Rb` + `D(Ε)` 的定义只用 `n_k ≥ 1 ≠ 0`
+        ⟹ `D(Ε′) = D(Ε)` **逐元相同**（不只是张成相同）⟹ 已判 `verified` 的三条定理逐字适用。
+    **一句话：(T′) 不是限制，是规范选择。**
+    lead 已独立复算引理 A 的四条与引理 B 的全导数论证，均对；但**独立复算不替代审查**。
+  cross_check: |
+    §5 另给"路线 B"：不用引理 A/B，把 `c ≠ 0` 一路带着走重做全部引理，得同一组结论。
+    机检 `notprime_check.py`：lead 实跑，exit 0、零失败、10 族检查
+    （[AB0][DUAL][FRAME][SHIFT][LEAD][T1][T2][LonW][DDFonW][MAIN]）、5 组构形，
+    含刻意取的退化行 `D=4, c=(1,−2), η(a,a)=5` 使 `Â = 5 − 5 = 0`。
+    ⚠ 机检只到 `N ≤ 3`，而三条定理都是 `∀N` 的（作者自标 `[GAP-N]`）。
+  open_gaps: "[GAP-B-DEF]（极化取 b 是否在 ddf-operators-v6 定义域内）、[GAP-B-LEAN]、[GAP-N]、[GAP-S]、[GAP-LEAN]；[GAP-C] 已关闭，[GAP-COMM] 状态改善"
+  stakes: |
+    ⭐ `uv run stringgraph why worldsheet.no-ghost-theorem-v4`（2026-09-25 实跑）显示
+    `ddf-spanning-hypothesis-v2` 是**唯一**压住 `--via-goddard-thorn` 的依赖，而该推导
+    `own status: rigorous`。塔内路线不走 Borcherds，绕开下面两个 physical-argument 节点。
+    故若本结论成立且能诚实接线，**无鬼定理的 effective 会第一次移动**。
+    **正因如此本轮必须审**（根 CLAUDE.md 原则 8：会移动 effective + 要进 graph/）。
+  blocking_question: |
+    删 (T′) 后与目标卡只剩 **(S) `η(a,b) = 1`** 一条差异。目标卡第 20–24 行**刻意**不含 (S)
+    （选 `η(v,v) = 0` 正是为了不依赖 (S)），而消费端 `--via-goddard-thorn` 的 summary
+    把 `2α'k_0·k = 1` 钉死。**是否可以新立带 (S) 的窄卡、把该推导的依赖边改指窄卡**，
+    已作为裁决项交给 `rev-no-tprime`。在它裁决前不动 graph/。
+  captain_confirmed: false
+
 review_2026_09_24:
   reviewer: rev-tower-ddf
   verdict: verified
