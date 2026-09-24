@@ -77,7 +77,7 @@
 
 - **研究轨道优先。** 每一轮的默认问题是「**这一轮要推进哪个前沿**」，不是「哪里还能再审一遍」。审计是为了让前沿有地面可站，不是目的本身。
 - **不得在高杠杆前沿项无人认领时，开新的审计线程。** 当前三项（随进展更新，位置在 `docs/ROADMAP.md` 顶部）：
-  1. `worldsheet.ddf-contour-equals-mode-sum` —— **整条 Goddard–Thorn 无鬼定理的全部缺口收敛到的唯一节点**，且其依赖已全部 `formalized`。攻下它 = 一条 1972 年的定理完全机器验证，是可对外发表的成果。
+  1. `worldsheet.ddf-contour-equals-mode-sum` —— ~~**整条 Goddard–Thorn 无鬼定理的全部缺口收敛到的唯一节点**，且其依赖已全部 `formalized`。攻下它 = 一条 1972 年的定理完全机器验证，是可对外发表的成果。~~ **2026-09-25 更正（划掉那句自本日起为假）**：(B-26) 依赖边已改指本项目原创证明的新卡 `worldsheet.ddf-spanning-transverse-frame`（`rigorous`），`worldsheet.no-ghost-theorem-v4` 的 `effective` 已由 `physical-argument` 升为 `rigorous`，本项在 `effective` 意义上**不再压任何东西**。它**换了身份、没有变得不重要**：现在是「**本项目模和表述与文献围道表述之间唯一的桥**」——桥不通，对外就只能说「本项目模和表述下的链已全程 rigorous」。其依赖仍全 `formalized`，仍未认领。**本项是否还该排第 1 需要船长重估**（lead 未擅自重排）。完整记账见 `docs/ROADMAP.md` 第 1 项。
   2. ~~DGM 0803.2692 的 eq(51)/(52) 矛盾~~ —— **已于 2026-09-20 结项（负面），此槽位空缺**。当初写的「解决它 = `holography.torsion-immortal-positivity` 升 `rigorous`」立项前提本身不成立：跑 `why` 才发现瓶颈树的地板是 **DVV dyon 计数猜想**，在 eq(52) **下面一层**，eq(52) 怎么解目标卡 `effective` 都不动。文献裁决（eq(52) 对、eq(51) 需半整平移）本身成立且已 `verified`，但它不升任何档。⚠ 仍是对外声明，船长确认前不得公开宣称。详见 `docs/ROADMAP.md` 第 2 项。
   3. `d10-anomaly-full-classification` 写成论文投出去 —— 已完整、已 `captain_confirmed`、有明确的先例错误（antonelli-2015 迹系数算错）可对照。**目前对外产出为零。**
 - **`verified` 之后默认结项。** 一个 attempt 判 `verified` 后，除非上面四种"必须审"的情形出现，否则**不再回头复审**。想继续投入就去开新命题，不要在已判定的结论上加轮次。现状是 10 个 `verified` 里 7 个既没结项也没被建设，这是要修的对象。
