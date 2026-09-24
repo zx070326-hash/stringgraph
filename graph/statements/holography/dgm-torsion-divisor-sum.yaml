@@ -41,6 +41,16 @@ notes: |
   与 Alexandrov-Nampuri 2020 的 eq(2.11)+(2.13) 联立结果也与 eq(51) 不符而与 eq(52) 一致。
   因此本节点陈述 eq(52)，把 eq(51) 的笔误状态单独记录在 proof.md §5。
 
+  **上面这句「疑似」已于 2026-09-24 精确化为图内节点**（lead 补注）：
+  `holography.bkm-shift-explains-dgm-shift-gap`（推论 B1，own rigorous / effective
+  physical-argument）证明半整平移 (d−1)/2 恰是 eq(51)/(3.27) 与从 Alexandrov–Nampuri
+  eq(2.11)+(2.13) 纯代数推出的闭式之间**唯一**的差别：奇除子上两式因 Φ₁₀ 的整周期性而等价，
+  偶除子上一般不等（理由是 Φ₁₀ 的 Borcherds 乘积在判别式 −1 处系数非零，另立节点
+  `holography.bkm-phi10-odd-elliptic-coefficient-nonzero`）。这与本卡上面引的
+  torsion-immortal-positivity-hecke 显式整数见证是**两条独立互证的路径**：前者说差别
+  「来自何处」，后者说差别「确实存在」。
+  ⚠ 判定 eq(51)/(52) 不相容仍是**对外声明**，船长确认前不得公开宣称；图内记录不受此限。
+
   **与 holography.dvv-dyon-index-generating-function 的关系**：DVV 那张卡陈述的是
   I=1 时的生成函数识别（1/Φ₁₀ 系数 = 单位挠 dyon 指标），本卡陈述 I>1 的推广。
 
