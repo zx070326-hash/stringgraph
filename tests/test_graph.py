@@ -173,6 +173,11 @@ def test_seed_graph_validates() -> None:
     assert not errors, "\n".join(str(e) for e in errors)
 
 
+# ⚠ 函数名是历史遗留：2026-09-25 起本用例断言的是 **rigorous**，不再是 physical-argument
+#   （见函数体内 2026-09-25 一段）。名字不改，因为
+#   graph/derivations/worldsheet/transverse-ddf-fock-gram-matrix--via-lean.yaml 与
+#   graph/derivations/worldsheet/ddf-spans-physical-states-level-one--via-lean.yaml
+#   的 notes 逐字引用了这个名字。
 def test_seed_no_ghost_v4_drops_to_physical_argument_after_ddf_split() -> None:
     """无鬼定理 v4 的有效状态是 physical-argument，不是 rigorous。
 
@@ -259,11 +264,25 @@ def test_seed_no_ghost_v4_drops_to_physical_argument_after_ddf_split() -> None:
     g = load_graph(ROOT)
     effs = compute_all(g)
     # 2026-09-15：(B-26) 接线后，effective 由虚高的 rigorous 诚实落回 physical-argument。
-    assert effs["worldsheet.no-ghost-theorem-v4"].name == "physical-argument"
+    #
+    # ⭐ 2026-09-25（lead）：**本断言值已变，且这一次是真实上移，不是记账修正。**
+    # --via-goddard-thorn 的 (B-26) 依赖边由 worldsheet.ddf-spanning-hypothesis-v2
+    # 改指 worldsheet.ddf-spanning-transverse-frame（本项目原创证明，rigorous：
+    # research/attempts/tower-native-ddf-spanning 的 proof.md + proof-no-tprime.md，
+    # 两轮独立对抗性审查 rev-tower-ddf / rev-no-tprime 均判 verified）。
+    # 该推导自身 status 早已是 rigorous 且被且仅被这一条依赖压低，故边一换瓶颈即消失。
+    # ⚠ 新卡**不蕴含也不取代 v2**：v2 卡面没有 (S) η(a,b) = 1，是真正更宽且仍未证的命题，
+    #   (S) 不可删也不可弱化（A^b_n = (η(a,b) − 1)·S_n·V^{(n)}_{−n}，s = 2 一样坏）。
+    #   下面两条关于 v2 与旧卡的断言因此**一字不动**，它们仍然成立。
+    # ⚠ 新卡未形式化，本次上移**不**使 v4 成为 formalized；且模态和 ↔ 围道的桥
+    #   （worldsheet.ddf-contour-equals-mode-sum，physical-argument）不在这条链上。
+    assert effs["worldsheet.no-ghost-theorem-v4"].name == "rigorous"
     assert effs["worldsheet.no-ghost-theorem-v4"].conjectures == set()
-    # 承接猜想负担的节点其 effective 也是 physical-argument（最强推导被围道字典封顶）
+    # 上一版承接猜想负担的节点仍在图上，effective 不变（本次改指没有碰它）
     # 2026-09-22：该节点换代为 -v2（旧卡缺截距前件、逐字为假）；effective 不变。
     assert effs["worldsheet.ddf-spanning-hypothesis-v2"].name == "physical-argument"
+    # 2026-09-25 新增：承接本次上移的新卡，effective = rigorous（own rigorous、依赖全 formalized）
+    assert effs["worldsheet.ddf-spanning-transverse-frame"].name == "rigorous"
     # 换代后旧卡无推导，诚实落到 open；它已 superseded 且无任何节点依赖，故对下游零影响。
     assert effs["worldsheet.ddf-spanning-hypothesis"].name == "open"
     # 2026-09-11 第八轮：K_n 代数卡经 Longitudinal.lean 为 formalized，不压低 v4（见 docstring 末段）
@@ -1873,12 +1892,26 @@ def test_status_report_lists_each_derivation_with_own_and_effective(tmp_path):
     # (non-inferred, source goddard-2008 §6 (6.4), already listed) throttles --via-goddard-thorn
     # to physical-argument again. no-ghost v4 is now a *second* own>effective example here
     # (own=rigorous, effective=physical-argument), alongside the Mobius case below.
+    # 2026-09-25 (lead, main): that throttle is gone again, and this time by a real proof,
+    # not by re-classifying an edge. The (B-26) edge was retargeted from
+    # worldsheet.ddf-spanning-hypothesis-v2 (physical-argument) to
+    # worldsheet.ddf-spanning-transverse-frame (rigorous) — this project's own tower-native
+    # proof, graduated from research/attempts/tower-native-ddf-spanning after two independent
+    # adversarial reviews. --via-goddard-thorn was limited by exactly that one dep, so
+    # no-ghost v4 is rigorous end to end again and is **no longer** an own>effective example
+    # here. The Mobius case below remains the throttled example this assertion block needs.
+    # NB the new card does NOT subsume v2 (v2's face lacks (S) η(a,b)=1 and is still open),
+    # and it is NOT formalized — v4 is rigorous, not formalized.
     rep2 = status_report(g, "worldsheet.no-ghost-theorem-v4")
     ders2 = {d["id"]: d for d in rep2["derivations"]}
     d2 = ders2["worldsheet.no-ghost-theorem-v4--via-goddard-thorn"]
     assert d2["own"] == "rigorous"
-    assert d2["effective"] == "physical-argument"
-    assert rep2["effective"] == "physical-argument"
+    assert d2["effective"] == "rigorous"
+    assert rep2["effective"] == "rigorous"
+    # the card that supplies the (B-26) step now, and the one it replaced on that edge
+    rep_sp = status_report(g, "worldsheet.ddf-spanning-transverse-frame")
+    assert rep_sp["effective"] == "rigorous"
+    assert status_report(g, "worldsheet.ddf-spanning-hypothesis-v2")["effective"] == "physical-argument"
     rep_k = status_report(g, "worldsheet.gt-longitudinal-k-algebra")
     ders_k = {d["id"]: d for d in rep_k["derivations"]}
     assert ders_k["worldsheet.gt-longitudinal-k-algebra--via-lean"]["effective"] == "formalized"

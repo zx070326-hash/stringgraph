@@ -144,9 +144,65 @@ depends_on:
       **2026-09-11：本边由 worldsheet.kac-determinant 改指其接替者
       worldsheet.kac-determinant-v2**（后者只把 α_N 的「正常数」改为「非零常数」，
       其余陈述与 sources 逐字相同）。本推导不使用 α_N 的符号，故换代对本边**无实质影响**。
-  - id: worldsheet.ddf-spanning-hypothesis-v2
+  - id: worldsheet.ddf-spanning-transverse-frame
     inferred: false
     note: |
+      ⭐⭐ **2026-09-25 改指，lead：本边由 worldsheet.ddf-spanning-hypothesis-v2 改指
+      worldsheet.ddf-spanning-transverse-frame（本项目原创证明，effective = rigorous）。**
+      下面保留改指前的全部历史注记（从【2026-09-15 新增】起），一字未删。
+      **本次改指是本推导历史上第一次移动目标的 effective**：
+      `no-ghost-theorem-v4` 的 effective 由 `physical-argument` 升为 **`rigorous`**
+      ——本推导自身 status 早已是 `rigorous`，且**被且仅被**这一条依赖压低
+      （`status` 命令逐字报 `limited by 1 dep(s)`）。故这条边一换，瓶颈就没了。
+
+      **供给方是谁**：research/attempts/tower-native-ddf-spanning 的毕业产物，
+      两份 proof、两轮独立对抗性审查（`rev-tower-ddf` 2026-09-24 判 `proof.md` verified；
+      `rev-no-tprime` 2026-09-25 判 `proof-no-tprime.md` verified 且未推翻前者）。
+      它证的**不是** v2，而是带 (S) η(a,b) = 1 前件的窄版本，且断言比 v2 强
+      （直和 ⊕ 而非仅包含 ⊆）。
+
+      **两根轴要分开记账，不要混为一谈：**
+
+      (i) **(T′) 轴 η(ε_i, a) = 0 —— 本 attempt 主动消除，量化范围不缩。**
+          `proof.md` 的三条定理原本假设 (T′)。引理 A（ε_i′ := ε_i − c_i b 恢复 (T′)，
+          用 (S) 与 (N)）加引理 B（A^b_n = 0 对 n ≠ 0，A^b_0 = id）给出
+          **D(Ε′) = D(Ε) 逐元相同**，故 (T′) **是规范选择不是限制**，新卡前件里已删掉。
+          这一轴上新卡与 v2 量化范围**相同**，与 worldsheet.ddf-operators-v6 的卡面
+          （只要求 (T) `ε·k_0 = 0`，notes 第 (3) 条逐字说不要求 `ε·p = 0`）也相同。
+          ⇒ 本条边不受上一段【2026-09-25 补注】警告的那种"沿 (T′) 收窄"问题影响
+          ——**方向正好相反，是放宽**。
+
+      (ii) **(S) 轴 η(a, b) = 1 —— 新卡比 v2 多一条前件，但这是"对齐消费端"，不是"收窄"。**
+          判据是「本推导**实际需要**边供给什么，新卡能不能供给」，
+          **不是**「新卡的前件是不是比 v2 多」。三条独立证据表明本推导的消费处**本来就**断言 (S)：
+            · 目标卡 worldsheet.no-ghost-theorem-v4 卡面 (1b)(ii) 的归一化逐字 `2α' k_0·k = 1`
+              ——这就是 (S)；
+            · 本推导 summary 第 (1) 条同样逐字写 `2α' k_0·p = 1 逐塔取定`；
+            · Lean 侧 `StringFormal.NoGhost` 的相应定理带假设 `hba : η(b,a) = 1`。
+          同理 (A) η(a,a) = 2 就是目标卡逐字钉死的 `a = 1`（α'k² = 1）。
+          ⇒ 新卡的前件在本推导的消费点上**全部已被断言**，供给完整。
+
+      ⚠⚠ **新卡不蕴含 v2，v2 也没有被证。**
+      v2 的卡面**没有** (S)，是一条真正更宽、且至今未证的命题。(S) **不可删也不可弱化**：
+      把 (S) 换成 η(a,b) = s 后 `A^b_n = (s − 1)·S_n·V^{(n)}_{−n}`（n ≠ 0），
+      障碍恰是 s − 1，**s = 2 一样坏**（故不能弱化成「η(a,b) ∈ R^×」）；
+      也不能靠重标度 b → s^{−1}b 绕开，因为那把塔 ⊕_j F(a + jb) 换成了另一个塔。
+      故 **v2 留在原地：不标 `superseded_by`、不就地改卡面、不从本次改指读出"v2 已获证"。**
+      v2 自己的两条推导（--via-borcherds-1992、--via-rank-inequalities）与它们的开放缺口
+      （(B-26)、`∀N, B26 N`）**一条都没有关闭**，下面从【2026-09-11 新增，small-backlog-12】
+      起的整段 (B-26) 记账**原样成立**。
+
+      ⚠ **新卡未形式化**（[GAP-LEAN]、[GAP-B-LEAN] 两条都开着），
+      故本次改指**不使**本推导或目标卡成为 `formalized`，
+      **不得据此对外说「Goddard–Thorn 无鬼定理已机器验证」**。
+      另外，本项目的模态和表述与文献的围道表述之间那座桥仍是
+      worldsheet.ddf-contour-equals-mode-sum（physical-argument，不在本推导依赖里），
+      故准确的对外说法是**「本项目模和表述下的无鬼定理链已严格」**，
+      而不是「1972 年 Goddard–Thorn 那条定理已严格证明」。
+      新卡的 `captain_confirmed: false`，对外发表仍需船长签字。
+
+      ——以下为改指前的原注，保留不动——
+
       【2026-09-15 新增，curator，分支 agent/curator/noghost-ddf-wiring】
       本推导 summary 第 (1) 条「再证塔上任意物理态可写成 DDF 态加零模态」即本节点的断言
       H_phys ⊆ D(Ε) + H_null；推导 gaps 的 (B-26) 一条逐字写明「这是 D = 26 唯一进入之处」
