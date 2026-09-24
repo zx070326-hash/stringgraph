@@ -1,0 +1,77 @@
+slug: lorentzian-lightcone-frame-existence
+title: "DDF 光锥标架的存在性：(F5)–(F8) 的结构定理、域上的充要判据、与一般交换 ℚ-代数上的反例"
+state: under-review
+author: prover
+created: "2026-09-23"
+reviewer: null
+verdict: null
+recommended_status: rigorous
+captain_confirmed: false
+target_cards:
+  - worldsheet.ddf-light-cone-frame
+  - worldsheet.transverse-frame-spans-orthogonal-complement
+  - worldsheet.ddf-hypotheses-satisfiable
+notes: |
+  【靶子变更（如实记录，claim.md §0 是正文）】
+  原始派工：把标架卡【不断言】(b) 拒绝断言的存在性一般形式
+  「(F1)–(F4) ⟹ ∃ε 使 (F5)–(F8)」变成精确命题并裁决。
+  派工中途收到只读裁定（同伴核查 + coordinator 独立复算，明示可推翻），要点：
+  (S) 不是差额；(C)「{a,b,ε_i} 是基」是推论不是前件（det G = −1，任意交换环）；
+  于是只剩 (T′) 是真缺口；并自我更正「(F8) 与 (C) 不是一回事」。
+  本轮裁决（判断权在 prover）：
+  · 裁定关于 (C) 的部分**正确**，已独立复算，写成定理 1，并顺带证出
+    「{b,b̃,ε_i} 也是基」——那是标架卡 2026-09-12 追记点名的「剩下唯一没有的」那条。
+  · 裁定关于「只剩 (T′)」的部分**只对一半**：(T′) 由一行零向平移
+    ε_i ↦ ε_i − η(ε_i,a)b 免费得到（定理 2），真正的缺口是
+    **(T)(O) 横向标架本身的存在性**（Lean `TransverseFrame η b` 是否非空），
+    裁定未提及它。该问题在域上恒真（定理 5），在一般交换 ℚ-代数上**为假**（定理 6）。
+  · coordinator 要求正面处理的坑（目标卡对「一切 (T)(O) 标架」量化，
+    而存在违反 (T′) 的合法标架）由定理 7 填掉：A^{ε+λb}_n = A^ε_n（n ≠ 0），
+    坏标架与好标架给出**同一组** DDF 算子，故「对一切标架」可由「对 (T′) 标架」逐字推出。
+  ⇒ **本 attempt 最终证的不是原始命题**：原始命题的裁决是「一般交换 ℚ-代数上为假，
+    域（char ≠ 2）上为真且有充要判据」，并附 (F5)–(F8) 之间的完整蕴含关系。
+
+  【进度】
+  2026-09-25：claim.md 落盘（定理 1–7 的精确表述 + 量词/代价表）。
+  proof.md §0–§8 全部落盘：§1 定理 1（det G = −1 ⟹ 基，任意交换环）+ 推论 1.1/1.2；
+  §2 定理 2（零向平移给 (T′)）；§3 定理 3（(F8) ⟺ 快子壳 ∧ (T′)，严格强于 Lean 的
+  `dotVec_self_eq_two`）；§4 定理 4（存在性 ⟺ 「η(a,a)=2 且 (W,η|_W) ≅ 标准」）；
+  §5 定理 5（域 char ≠ 2 上的充要判据，反射 + Eichler 构造，不用 Witt 消去、不用实数）；
+  §6 定理 6（球面环反例：原始命题在图与 Lean 的实际量词下**为假**）+ 推论 6.0
+  （`WitnessInt` 的 D=3 整数见证经平移成为 ℤ 上完整标架）；
+  §7 引理 7.1 + 定理 7（A^b_n = 0、A^ε_n 只看 ε mod b）+ 推论 7.2（量词转移）；
+  §8 核验目标卡自带草图与三条 curator 手算、量词代价总表、[GAP] 清单、档位建议。
+  scripts/verify.py 全绿（引理 5.3 三支分别命中 37/3/1）。
+  ⇒ state 改 under-review，请 graph-reviewer 对抗性审查。**verdict 与 state=verified 不由 prover 填。**
+
+  【开放的 GAP（详见 proof.md §8.5）】
+  · [GAP-HAIRY]  定理 6 第四步引用毛球定理（教科书结果，本文不证）；已查本仓库 pin 的
+                 Mathlib v4.33.1：无毛球/Poincaré–Hopf，有 `Module.IsStablyFree` 但无
+                 「稳定自由非自由」实例 ⇒ 定理 6 目前不可 Lean 化。
+  · [GAP-RANK]   D = 4+r（r ≥ 1）时 W ≅ T ⊕ R^r 自由，但未检查自由基能否取成 η|_W-正交归一；
+                 D = 3（m = 1，Picard 群层面）是否有反例**未知**。
+  · [GAP-LEAN-5] 定理 5 未 Lean 化（Mathlib 无 Witt 消去；本文特意写成显式等距复合以绕开）。
+  · [GAP-LEAN-7] 引理 7.1/定理 7 的 Lean 组装（三步簿记，砖已全在仓库里且无 sorry）。
+  · [TODO-PRIOR-ART] 按项目规则「先做后查」，到期点是毕业进图或对外；毕业前需检索
+                 (1) 洛伦兹格上 DDF 标架存在性是否已有文献命题（G–N 1995 §3.2 只有一句
+                 "we can always find"，无证明——这正是本 attempt 的起因）；
+                 (2) 「光锥标架在一般交换环上不存在」这类反例是否已被形式化文献提出。
+                 **本文不声称任何一条数学是新的**（见 claim.md §4(a)）。
+
+  【给 lead 的跨任务发现（本 attempt 不动 graph/，只报告）】
+  1. 标架卡【不断言】(b) 括号里「这在一般环上为假」是一条实质断言，卡上**无凭据**，
+     且它前面列的两个反例支持不了它（那两个说「某一组 ε 不好」，而 §6.0 证明同一个
+     (η,a,b,b̃) 上**存在**好的 ε，全在 ℤ 内）。定理 6 是本图内第一个凭据。
+  2. 标架卡 2026-09-12 追记点名的「剩下唯一没有的」= 「{b,b̃,ε_i} 线性无关」
+     **现在是定理**（推论 1.2），任意 `[CommRing R]`，不需要 Field/ℚ-代数/hD。可直接 Lean 化。
+  3. `worldsheet.transverse-frame-spans-orthogonal-complement` 卡 notes 里
+     「ε ⊥ v 是完备性的必要条件（否则 ε ∉ v^⊥ 而右端落在 v^⊥ 内）」的**括号理由不成立**
+     （span 比 v^⊥ 大不矛盾），但结论对（定理 3）。建议该卡换代时订正（proof.md 注 3.3）。
+  4. 同卡【一般情形该怎么补】把障碍归给「缺实二次型工具」——**误诊**：域上恒真（定理 5，
+     不用实性），环上的真障碍是投射模非自由（定理 6）。两卡给的补法（把 span{k_0,p}^⊥
+     写进定义）仍然正确，但理由要换（proof.md 注 6.1、§8.1 L7）。
+  5. 对下游有直接用处的一条：`worldsheet.ddf-spans-physical-states-level-one` 与
+     `research/attempts/tower-native-ddf-spanning` 把 (T′) 写进前件**不损失一般性**
+     ——只要结论只谈 `ddfSpan` / `A^ε_n (n ≠ 0)`（定理 7 + 推论 7.2）；
+     若结论里出现 `A^ε_0` 或标架向量本身（如 (F8)），则**会**损失一般性，必须保留 (T′)
+     （proof.md 注 7.3 给了精确分界）。
