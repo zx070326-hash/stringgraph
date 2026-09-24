@@ -81,6 +81,46 @@ def is_identity(M):
 # ----------------------------------------------------------------- linear algebra
 
 
+def det_exact(rows, n):
+    """Exact rational determinant by fraction-free-ish Gaussian elimination.
+
+    Added by lead 2026-09-25 after rev-no-tprime's finding 2: check_freeness
+    computes the rank over Q, which is strictly weaker than what the proof
+    needs.  The general-commutative-ring argument in proof.md section 3 step
+    (4) rests on the transition matrix being UNIT-triangular, i.e. det = +-1;
+    rank over Q says nothing about invertibility over Z.  This computes the
+    determinant so the machine check tests the load-bearing claim.
+    """
+    if n == 0:
+        return Q(1)
+    m = [list(r) for r in rows]
+    if len(m) != n:
+        return None
+    sign = Q(1)
+    for col in range(n):
+        p = None
+        for r in range(col, n):
+            if m[r][col] != 0:
+                p = r
+                break
+        if p is None:
+            return Q(0)
+        if p != col:
+            m[col], m[p] = m[p], m[col]
+            sign = -sign
+        pv = m[col][col]
+        for r in range(col + 1, n):
+            if m[r][col] != 0:
+                f = m[r][col] / pv
+                for k in range(col, n):
+                    if m[col][k] != 0:
+                        m[r][k] -= f * m[col][k]
+    d = sign
+    for i in range(n):
+        d *= m[i][i]
+    return d
+
+
 def rank(rows, ncols):
     rows = [list(r) for r in rows]
     piv_row = 0
@@ -532,8 +572,15 @@ def check_leading_term(D, c, j, N, verbose=True):
 def check_Lm_on_W(D, c, j, N, verbose=True):
     """Lemma 7':  L_m(W) in W, and R_m := L_m - m d/dK_{-m} never LOWERS the K-degree.
 
-    Also reports whether R_m actually raises kappa somewhere (it does iff c != 0),
-    which is exactly the difference from the (T') version."""
+    Also reports whether R_m actually raises kappa somewhere.
+
+    NOTE (lead 2026-09-25, rev-no-tprime finding 4): this docstring used to claim
+    "it does iff c != 0".  That is FALSE and was contradicted by this script's own
+    output, which prints `raises somewhere: False` on every c != 0 configuration.
+    The reason (reviewer's analysis of proof-no-tprime.md 5.6): the two Delta-kappa
+    = +1 terms cancel exactly -- same k, same i, same coefficient (m+k)c_i, opposite
+    sign.  So R_m neither lowers nor raises kappa, and Lemma 7' holds verbatim in
+    the c != 0 case; the `raised` flag is kept only as a live witness of that."""
     T = Tower(D, c)
     raised = False
     for m in range(1, N + 1):
@@ -619,10 +666,14 @@ def check_freeness(D, c, j, N, verbose=True):
             rows.append(to_dense(v, index))
             count += 1
     r = rank(rows, len(basisF))
-    ok = (r == len(basisF)) and (count == len(basisF))
+    # lead 2026-09-25 (rev-no-tprime finding 2): rank over Q is NOT what the
+    # proof needs.  The general-ring argument needs det = +-1 (a unit).
+    d = det_exact(rows, len(basisF)) if count == len(basisF) else None
+    ok_det = (d is not None) and (abs(d) == 1)
+    ok = (r == len(basisF)) and (count == len(basisF)) and ok_det
     if verbose:
         print(f"  [T1] D={D} c={c} j={j} N={N}: dim F={len(basisF)} #gen={count} rank={r} "
-              f"-> {'OK' if ok else 'FAIL'}")
+              f"det={d} unit={ok_det} -> {'OK' if ok else 'FAIL'}")
     return ok
 
 
