@@ -1,0 +1,73 @@
+id: math.supermoduli-ramond-components-light-locus-dense-in-fkp-compactification
+kind: proposition
+title: "光滑（无节点）广义自旋曲线轨迹 S_{g;n,2r} 在 FKP 自身的紧化 S̄_{g;n,2r} 中稠密"
+statement: |
+  【紧化的身份——本卡专指哪一个紧化，必须先声明】本卡断言的是 **FKP (Felder–Kazhdan–Polishchuk)
+  自己构造的紧化对象**：FKP 通过容许节点（NS 节点、Ramond 节点）的稳定超曲线给出的紧化超叠
+  𝔖̄_{g;n,2r}，及其玻色截断（粗化到普通概形/叠层面的）紧化 S̄_{g;n,2r}。**本卡完全不涉及、
+  也不需要 Jarvis (2000) 用无挠层（torsion-free sheaf）构造的另一个紧化**
+  S̄^{1/2,m}_{g,n}（Jarvis 自己的紧化对象）。这两个紧化对象是否同构，是一个已知存在但
+  **本卡刻意不使用、也未核实**的命题（proof.md 登记为 `[GAP-JARVIS-COMPACT]`，中等强度、
+  非承重）——本卡的论证完全在 FKP 自己的紧化内部完成，不需要这条未核实的同构。
+
+  【记号，延续姐妹卡 `math.supermoduli-ramond-components-monodromy-transitive`】g≥0，n≥0，r≥1，
+  m=n+2r，2g-2+m>0。S_{g;n,2r} 是光滑（无节点）广义自旋曲线的模叠（同前定义：线丛 L 配同构
+  L^⊗2≅ω_C(R)，R 为 2r 个 Ramond 穿孔之和）。S̄_{g;n,2r} 记 FKP 允许曲线退化出 NS 节点与
+  Ramond 节点后得到的紧化（玻色截断层面），𝔖̄_{g;n,2r} 记其超叠本身。
+
+  【命题】设 r≥1（本卡的论证对 r=0 同样成立，因为它不依赖 §3 的点推机制，只依赖边界的
+  局部几何；但本卡只在 r≥1 的姐妹卡体系中被引用，故量词范围写作 r≥1 以保持与其他卡一致）。
+  则 S_{g;n,2r} 是 S̄_{g;n,2r} 的稠密开子集；等价地 𝔖_{g;n,2r} 在 𝔖̄_{g;n,2r} 中稠密。
+
+  证明依据 FKP Prop 7.8(ii)（p.47）给出的边界局部正规交叉结构：设 [X_0]∈S̄_{g;n,2r} 有 k 个
+  节点（NS 与 Ramond 节点合计，与本卡的"n,2r"记号中的穿孔计数无关——节点是曲线退化产生的，
+  穿孔是曲线上原有的标记点，二者是不同的几何对象，此为 FKP 记号中另一处需要小心分辨之处）。
+  则存在 [X_0] 的一个平展邻域 B 与光滑态射 t=(t_1,...,t_k):B→𝔸^k，使得（在底空间上）
+  边界轨迹 u^{-1}(S̄∖S) 恰为 {t_1⋯t_k=0}。光滑态射平坦、开，故 B 中任一含 [X_0] 原像的
+  开集 U 之像 t(U) 是含 0 的开集，从而含有坐标全非零的点，即 U 与 u^{-1}(S) 相交；u 本身
+  平展故开，于是 [X_0] 的任意开邻域都与 S 相交。因 [X_0] 任意，S 在 S̄ 中稠密。
+  最后，超叠与其玻色截断有相同的底层拓扑空间（幂零元不改变拓扑），
+  故同一稠密性陈述从 S⊂S̄ 提升到 𝔖⊂𝔖̄。
+
+  【本卡不断言】紧化后的连通性本身（那是姐妹卡
+  `math.supermoduli-ramond-components-compactified-connected` 的内容，本卡只提供其证明用到
+  的稠密性这一步）；紧化空间是不可约的、或纯维数的（proof.md §5 附注明确指出：若想走
+  "边界余维数太高、不可能整个分量落在边界里"这条替代论证，需要 S̄ 纯维数这一额外事实，
+  而本卡**不使用**这条替代论证，只用上面基于局部平展开映射的直接论证）。
+uses_conventions: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/supermoduli-ramond-components/proof.md §5 引理5.1（含证明与附注）、
+      §1.2 (X2) 的核对记录、§9.1 承重清单第 3 条自评"
+    note: |
+      本项目原创证明（已知结论的独立重证/新推导路径），非已发表文献；proof.md §10.3 第 1 条
+      明确把本引理列为"确实承重的交付物"之一（它绕开了 [GAP-JARVIS-COMPACT]）。
+      status.yaml: state: verified，2026-09-24 二审（rev-ramond）核对过此引理的证明步骤
+      （见 review_2026_09_24.what_i_checked 第 3、4 项：确认光滑态射开映射论证成立，
+      且确认本引理与 [GAP-JARVIS-COMPACT] 的关系表述准确）；captain_confirmed: false，
+      不阻塞毕业。
+  - ref: felder-kazhdan-polishchuk-2020
+    loc: "arXiv:2006.13271v3, p.47, Prop 7.8(ii) 及其证明（逐字见姐妹卡与 proof.md §1.2 (X2)）"
+    note: |
+      本项目未独立读取该 PDF 页；逐字引用取自 proof.md §1.2 (X2)，该 attempt 以 170dpi 渲染
+      页图核对（reviewer 2026-09-24 复核过一次）。⚠ 该陈述原文的记号里 "r" 指 NS 节点个数，
+      与本卡记号中的 Ramond 穿孔对数 r 无关（proof.md §1.2 (X2) 已注明此记号冲突）；本卡
+      statement 正文已改用"节点数 k"避免与穿孔数混淆。
+tags: [supermoduli, spin-curve, ramond-puncture, compactification, density, fkp-compactification, math-input, original-research]
+notes: |
+  【查重，2026-09-24】uv run stringgraph search 对 "dense"/"compactification"/"light locus"/
+  "normal crossing" 未命中覆盖本命题的既有卡。
+
+  【与既有卡 `math.fkp-ns-boundary-gluing-normal-bundle-formula` 的关系】该既有卡也是从
+  FKP Prop 附近的边界几何抽出的节点，但断言的是法丛粘接公式（不同命题、不同 Prop），未见
+  重叠；本卡未挂靠它为 depends_on（两者论证内容独立，不构成依赖关系）。
+
+  【"永久陷阱"#1 的处理】本卡是本次毕业的 4 张卡中唯一直接涉及"紧化"概念的卡之一，
+  已在 statement 开篇专段声明所指紧化是 FKP 自己的对象，并明确排除与 Jarvis 紧化的混淆——
+  这是 review_2026_09_24.compactification_and_stack_level_check 专门核实过的一条真实陷阱、
+  且本 attempt 正确避开。
+
+  【关于 status 的裁定依据】同姐妹卡：reviewer 逐步核对本引理的证明（局部平展邻域 + 光滑态射
+  开映射 + 稠密性的标准点集拓扑论证），判定无逻辑跳步，按 rigorous 例外条款标 rigorous。
+author: graph-curator
+created: "2026-09-24"
