@@ -1,0 +1,50 @@
+id: math.supermoduli-ramond-components-compactified-connected--via-density-plus-monodromy
+target: math.supermoduli-ramond-components-compactified-connected
+kind: proof
+status: rigorous
+depends_on:
+  - id: math.supermoduli-ramond-components-monodromy-transitive
+    inferred: false
+  - id: math.supermoduli-ramond-components-light-locus-dense-in-fkp-compactification
+    inferred: false
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/supermoduli-ramond-components/proof.md §5 定理5.2 及证明"
+    note: |
+      本项目原创证明（已知结论的独立重证），非已发表文献；status.yaml: state: verified，
+      2026-09-24 二审（rev-ramond）核对；captain_confirmed: false，不阻塞毕业。
+  - ref: jarvis-2000
+    loc: "Thm 3.3.11 (p.23)"
+    note: 本卡命题的原始出处（proof.md §10.1 对照表核实结论一致），本推导独立于该文证明。
+summary: |
+  证明路线（proof.md §5 定理5.2）：
+  1. S̄_{g;n,2r} 作为光滑固有 DM 叠的底空间是局部连通的，故每个连通分量都是开集。
+  2. 每个开的连通分量必与稠密子集 S_{g;n,2r} 相交
+     （依据 `math.supermoduli-ramond-components-light-locus-dense-in-fkp-compactification`）。
+  3. 因此自然映射 π_0(S_{g;n,2r}) → π_0(S̄_{g;n,2r}) 是满射。
+  4. 由 `math.supermoduli-ramond-components-monodromy-transitive`，π_0(S_{g;n,2r}) 是单点，
+     故 π_0(S̄_{g;n,2r}) 也是单点，即 S̄_{g;n,2r} 连通。
+  5. 超叠与其玻色截断底层拓扑空间相同 ⇒ 𝔖̄_{g;n,2r} 同样连通。
+  6. 对照 `research/papers/supermoduli-punctured-nonprojected/paper.md` §10.3 的
+     `[GAP-COMP]` 原文，本结论直接回答其第一问（连通与否），使第二问（分量的离散不变量）
+     失去内容，从而在 r≥1 情形关闭该缺口。
+gaps:
+  - |
+    本推导只证明"分量只会合并不会分裂"方向对 r≥1 足够（稠密子集连通 ⇒ 紧化连通）；
+    r=0 时需要额外的"分量不合并"方向（宇称延拓到边界），proof.md 明确不重证，直接引用
+    Cornalba 1989 / 该论文命题 8.1，本卡不涉及 r=0，不受此影响。
+  - |
+    本推导依赖的两张姐妹卡各自的 [GAP-REP]（相对 Picard 函子可表性、gerbe 论证的教科书
+    定位）仍未补全，按 rigorous 例外条款不影响两卡自身 status，因此也不影响本卡。
+notes: |
+  reviewer-verified: rev-ramond (sonnet), 2026-09-24 —— 见
+  research/attempts/supermoduli-ramond-components/status.yaml review_2026_09_24 块，
+  核对了定理5.2 的证明步骤（局部连通性 + 满射论证 + 引用推论3.4），判定无逻辑跳步；
+  status.yaml: state: verified。按 docs/STATUS_LEVELS.md 的 rigorous 例外条款
+  （前提完整、有限步初等点集拓扑论证、reviewer 独立复核）本推导标 rigorous。
+  captain_confirmed: false，不阻塞毕业（见根 CLAUDE.md「captain_confirmed 只在两处是真门」）。
+
+  本推导是三卡体系（monodromy-transitive / light-locus-dense / compactified-connected）里
+  唯一挂了 depends_on 到本项目其他图节点的一张——另两张是数学输入叶子（无既有图节点可挂）。
+author: graph-curator
+created: "2026-09-24"

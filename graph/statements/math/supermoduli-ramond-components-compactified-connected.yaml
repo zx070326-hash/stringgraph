@@ -1,0 +1,83 @@
+id: math.supermoduli-ramond-components-compactified-connected
+kind: proposition
+title: "紧化广义自旋曲线模叠 S̄_{g;n,2r}（FKP 自身紧化，r≥1）连通，[GAP-COMP] 在此情形关闭"
+statement: |
+  【紧化的身份，与姐妹卡一致】本卡断言的紧化对象仍是 **FKP 自己构造的紧化**
+  S̄_{g;n,2r}（玻色截断层面）及其超叠 𝔖̄_{g;n,2r}（允许 NS 节点与 Ramond 节点的稳定
+  退化）。本卡**不涉及** Jarvis (2000) 的无挠层紧化，也**不需要**二者同构这一未核实命题
+  （`[GAP-JARVIS-COMPACT]`）——本卡的证明完全建立在姐妹卡
+  `math.supermoduli-ramond-components-light-locus-dense-in-fkp-compactification`
+  （FKP 紧化内部的稠密性）与
+  `math.supermoduli-ramond-components-monodromy-transitive`（未紧化轨迹的连通性）之上。
+
+  【记号】与两张姐妹卡相同：g≥0，n≥0，r≥1，m=n+2r，2g-2+m>0。
+
+  【命题】设 r≥1，2g-2+n+2r>0。则 S̄_{g;n,2r} 与 𝔖̄_{g;n,2r} 都是连通的（底层拓扑空间
+  / π_0 层面）。
+
+  证明：拓扑空间的连通分量在局部连通空间中是开集；S̄_{g;n,2r} 作为光滑固有 Deligne–Mumford
+  叠的底空间是局部连通的。故 S̄_{g;n,2r} 的每个连通分量都是开集，因而必与稠密子集 S_{g;n,2r}
+  相交（依据姐妹卡的稠密性）。于是自然映射 π_0(S_{g;n,2r})→π_0(S̄_{g;n,2r}) 是满射。
+  而由另一姐妹卡，π_0(S_{g;n,2r}) 是单点，故 π_0(S̄_{g;n,2r}) 也是单点，即 S̄_{g;n,2r}
+  连通。再由玻色截断与超叠底层拓扑空间相同这一事实，𝔖̄_{g;n,2r} 同样连通。
+
+  【与已发表文献 `[GAP-COMP]` 的关系，逐字对照】
+  `research/papers/supermoduli-punctured-nonprojected/paper.md` §10.3 逐字写道：
+  "*we do not know whether S̄_{g;n,2r} is connected, nor which discrete invariants label its
+  components. … Refining to the component level requires a classification of the connected
+  components of S̄_{g;n,2r}.*"（此即该论文登记的开放问题 `[GAP-COMP]`）。
+  **本卡直接回答了这个问题的第一问：r≥1 时 S̄_{g;n,2r} 连通。** 第二问（"哪些离散不变量
+  标记分量"）因此没有内容——唯一的分量就是整个叠，不存在可以加细的对象。故对 r≥1 而言，
+  `[GAP-COMP]` 关闭；关闭的理由是"命题为真且平凡地为真"，不是绕开了该问题。
+
+  【与已发表结果的关系——本卡不是新数学，如实标注】本卡命题的数学内容不是本项目的新结果：
+  取 Jarvis (2000) Theorem 3.3.11（连同 Note 2.1.5 所允许的模 2 平移）在 r_Jarvis=2、
+  Ramond 点 m_i=1、NS 点 m_i=0 的特殊情形，分量数公式 ℓ_{g,2}(m) 的正因子个数在本卡覆盖的
+  全部 (g,n,r) 情形下都等于 1，与本卡的"连通"逐格相符（对照表见来源 proof.md §10.1）。
+  但 Jarvis 该定理陈述于**他自己的紧化对象**上，是否与 FKP 的紧化一致本卡未核实；
+  本卡记录的是一条**完全在 FKP 紧化内部完成、不依赖那条未核实同构**的独立证明路线。
+
+  【本卡不断言】r=0 情形的紧化方向（那需要 Cornalba 1989 的宇称延拓定理，本 attempt 明确
+  不重证，直接引用既有文献）；紧化叠的不可约性或纯维数（本卡的证明只用拓扑局部连通性，
+  不需要这些代数几何性质）；对应超模叠是否投影（那是另一族既有卡
+  `math.supermoduli-compactified-punctured-genus-geq3-not-projected` /
+  `math.supermoduli-compactified-punctured-genus-2-not-projected` 的内容，
+  本卡与它们的关系见下方 notes）。
+uses_conventions: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/supermoduli-ramond-components/proof.md §5 定理5.2 及证明、
+      §7.1 (C4) 对 [GAP-COMP] 的处置、§10.2 该缺口的重新分类"
+    note: |
+      本项目原创证明（已知结论的独立重证），非已发表文献；原始出处 Jarvis 2000。
+      status.yaml: state: verified，2026-09-24 二审（rev-ramond）核对了定理5.2 的证明步骤
+      （局部连通性 + 满射论证 + 引用推论3.4），判定无逻辑跳步；captain_confirmed: false，
+      不阻塞毕业。
+  - ref: jarvis-2000
+    loc: "Thm 3.3.11（p.23），连同 Note 2.1.5（p.7，模2平移的合法性；本项目未独立核实该页）"
+    note: |
+      本卡命题的原始出处，特殊情形代入后与本卡结论逐格相符（proof.md §10.1 对照表）。
+      本卡推导不依赖阅读该文证明。
+tags: [supermoduli, spin-curve, ramond-puncture, connected-components, compactification, fkp-compactification, gap-comp, math-input, original-research, jarvis]
+notes: |
+  【查重，2026-09-24】uv run stringgraph search 对 "GAP-COMP"/"compactification"/"connected"/
+  "spin curve"/"Jarvis" 均未命中覆盖本命题的既有卡。
+
+  【建议 lead 转交，更新既有卡的过时 notes】既有卡
+  `math.supermoduli-compactified-punctured-genus-geq3-not-projected` 与
+  `math.supermoduli-compactified-punctured-genus-2-not-projected` 的 notes 中各自登记了
+  `[GAP-COMP]`（"只断言整个叠非投影，不指认分量"），这两条 notes 现已过时——本卡（连同姐妹卡）
+  已经对 r≥1 关闭该缺口。本 curator 无权修改那两个既有文件（写入范围限定为
+  `math.supermoduli-ramond-components-*` 前缀），故只在此建议 lead 后续更新其 notes
+  （只更新 notes 字段说明缺口已关闭，不改 statement 正文，也不需要新建 depends_on 边——
+  那两张卡断言"非投影"与本卡断言"连通"是两个独立命题，不构成依赖关系）。
+
+  【关于 status 的裁定依据】同两张姐妹卡：reviewer 逐步核对了定理5.2 的证明（局部连通性、
+  稠密子集与开分量必相交的标准点集拓扑论证、以及对推论3.4 的引用），判定无逻辑跳步，
+  按 docs/STATUS_LEVELS.md 的 rigorous 例外条款标 rigorous。
+
+  【张力提示，转交 lead】同姐妹卡：status.yaml 的 review_2026_09_24.recommended_next_step
+  写"不建议往 graph/ 立新卡"，与本 curator 收到的显式毕业任务指令相反；本卡遵循任务指令
+  毕业，同时如实标注原始出处与独立重证性质，张力留给 lead 裁断。
+author: graph-curator
+created: "2026-09-24"
