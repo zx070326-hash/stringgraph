@@ -1,0 +1,62 @@
+id: holography.rescaling-bss-is-signed-q-rescaling
+kind: proposition
+title: BSS 0802.1556 eq(7) 恰为带号 Q-重标算子 D̃_r[f]（Prop 8.1）
+statement: |
+  Banerjee–Sen–Srivastava arXiv:0802.1556 (BSS) 把他们的黑洞简并度提议约化为
+    d(Q,P) = (−1)^{Q·P+1} Σ_{s|r} g(s) s³ ∫dρ̌ ∫_{1/s²}dσ̌ ∫_{1/s}dv̌
+             e^{−iπ(σ̌Q²+ρ̌P²+2v̌Q·P)} Φ₁₀(ρ̌, s²σ̌, sv̌)^{−1}，          （BSS eq 7）
+  其中 g(s)=s（BSS eq 5），且 BSS 的 Fourier 展开约定（BSS eq 1）为
+    1/Φ₁₀(ρ̌,σ̌,v̌) = Σ (−1)^{Q·P+1} f(Q²,P²,Q·P) e^{iπ(σ̌Q²+ρ̌P²+2v̌Q·P)}，
+  即 σ̌ 与 Q² 配对、ρ̌ 与 P² 配对、v̌ 与 Q·P 配对：σ̌↔m=Q²/2，ρ̌↔n=P²/2，v̌↔ℓ=Q·P。
+  **这是 Q-重标**：与 Q² 配对的槽位 σ̌ 携带 s²。
+
+  记 f 为 BSS 的正号约定系数（即 1/Φ₁₀ 按 BSS 约定展开时的系数，f(m,n,ℓ) 与本图 d_* 的关系
+  由展开式中的整体符号 (−1)^{ℓ+1} 给出：d_*(m,n,ℓ) = (−1)^{ℓ+1}·f(m,n,ℓ)，见
+  holography.torsion-index-divisor-operator 的 R6′ 符号约定）。**命题**：
+    (BSS eq 7) = Σ_{s|r} s·(−1)^{ℓ−ℓ/s}·f(m/s², n, ℓ/s) = D̃_r[f](m,n,ℓ)，
+  即 holography.rescaling-signed-operator-definition 定义的带号 Q-重标算子在 f 上的取值。
+  因此 **BSS 落在 DGM (3.26)+(3.27)（ar5iv 旧编号 eq50+eq51）一侧的符号约定上，而非裸的
+  (3.28)（ar5iv 旧编号 eq52）一侧**——BSS 的配分函数天生带 holography.rescaling-signed-invariance
+  （Thm E）所刻画的那个符号因子 (−1)^{ℓ−ℓ/s}，不是不带符号的 D_I。
+uses:
+  - holography.rescaling-signed-operator-definition
+uses_conventions: []
+sources:
+  - ref: banerjee-sen-srivastava-2008b
+    loc: "eq (1)（Fourier 展开约定与整体符号 (−1)^{Q·P+1}）、eq (2)（σ̌↔Q²/2 等槽位配对）、
+          eq (4)（周期化的 k,l 求和，展开为 (7) 的中间步骤）、eq (5)（g(s)=s）、
+          eq (7)（最终提议公式）"
+    note: "直接引用，逐条对应本卡陈述中标注 BSS eq 号的每一处"
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/p-rescaling-frame-dependence/proof.md §8.1（Proposition 8.1 及其证明：
+          代换 σ̃=s²σ̌、ṽ=sv̌，Jacobian s^{−3} 抵消显式 s³，积分区间归一为整周期）"
+    note: "本项目原创证明，非已发表文献。status.yaml review_2026_09_24：reviewer rev-prescale
+          独立手推重证代换与符号核算全过程（含 (−1)^{ℓ+1}(−1)^{ℓ/s+1}=(−1)^{ℓ+ℓ/s}=(−1)^{ℓ−ℓ/s}
+          这一步），确认无误。captain_confirmed: false。"
+notes: |
+  **记号对照（BSS (ρ̌,σ̌,v̌) ↔ 本图 (ρ,σ,v)）**：本图沿用 Rosselló 的「指标挂在 ρ 上」约定
+  （见 holography.torsion-index-divisor-operator notes：1/Φ₁₀=Σψ_m(σ,v)p^m, p=e^{2πiρ}，
+  即 ρ↔m=Q²/2）；BSS 把与 Q² 配对的槽位记作 σ̌（BSS eq 1-2），即 σ̌↔m。两套记号在"哪个
+  希腊字母对应哪个不变量"上相反，但**物理内容一致**：两者都把 s² 打在与 Q² 配对的那个槽位
+  上（本图记法下是 ρ 被 s² 重标，BSS 记法下是 σ̌ 被 s² 重标），这正是"Q-重标"这个判据的
+  实质——**判据是哪个变量携带 s²，不是字母本身**。proof.md §8.1 已用 BSS 自己的记号完整
+  推演，本卡直接沿用其记号陈述命题，避免额外一次记号转换引入错误；未新建
+  `graph/conventions/` 节点是因为这只是两篇文献各自选择的希腊字母指派，不是可复用的
+  物理归一化约定（如 α' 或规范场归一化）。
+
+  **纠正本项目文献抽取中的一处误读（不在本卡写入范围，留给 lead 转派）**：
+  `literature/extractions/dgm-eq51-eq52-third-party-crosscheck.md` §E1/E2 把 BSS (4) 中
+  l=1, s̄=2 项的 "v̌+1/2" 读作半整平移的独立佐证；proof.md §8.1 指出这是误读——BSS (4) 的
+  k,l 求和只是**周期化**（BSS 原文明言 "makes Φ̌ periodic under σ̌→σ̌+1/r², v̌→v̌+1/r"），
+  BSS 自己在导出 (7) 时把这个周期化**完全消掉**，(7) 中不含任何残留半整平移。本卡 Prop 8.1
+  的证明正是这一步的精确版本（Jacobian 抵消 + 积分区间归一）。该誊清需要改
+  `literature/extractions/`，超出本 curator 的写入范围（`literature/**` 不在授权路径内），
+  已记入最终报告供 lead 转派 researcher。
+
+  **与 holography.rescaling-signed-invariance（Thm E）的关系**：本卡确立 BSS 落在带号侧，
+  Thm E 确立带号算子仍保持 Γ⁰(I)-不变性——两卡合起来说明"BSS 公式本身是良定义的、且在其
+  应有的不变群下自洽"，标架依赖问题（Thm B/D）与符号约定问题（本卡/Thm E）是两条独立的
+  轴，proof.md §8.2 "Reading" 段明确指出两者正交。
+tags: [bh-entropy, mock-modular, n4-string-theory, cartography]
+author: graph-curator
+created: "2026-09-24"

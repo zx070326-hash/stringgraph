@@ -1,0 +1,38 @@
+id: holography.rescaling-bss-is-signed-q-rescaling--via-substitution-and-jacobian
+target: holography.rescaling-bss-is-signed-q-rescaling
+kind: proof
+status: rigorous
+depends_on:
+  - id: holography.rescaling-signed-operator-definition
+    inferred: false
+    note: "接口边：D̃_r[f] 的定义来自该卡，本推导证明的正是 BSS (7) 恰等于这个算子在 f 上
+           的取值"
+sources:
+  - ref: banerjee-sen-srivastava-2008b
+    loc: "eq (1)(2)(4)(5)(7)"
+    note: "直接引用 BSS 的公式，逐条见本卡 statement"
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/p-rescaling-frame-dependence/proof.md §8.1"
+    note: "本项目原创证明，非已发表文献。status.yaml state: verified（reviewer: rev-prescale, 2026-09-24），captain_confirmed: false。"
+summary: |
+  在 BSS (7) 的第 s 项中代换 σ̃ = s²σ̌、ṽ = s v̌。Jacobian dσ̌ dv̌ = s^{−3} dσ̃ dṽ，恰好抵消
+  显式因子 s³，积分区间 1/s²、1/s 变为整周期 [0,1)。指数项变为
+    −iπ(σ̃·Q²/s² + ρ̌P² + 2ṽ·(Q·P)/s)，
+  即第 s 项此时正在从 1/Φ₁₀ 中提取 (Q²/(2s²), P²/2, (Q·P)/s) = (m/s², n, ℓ/s) 处的 Fourier
+  系数。由 BSS eq (1) 该系数携带符号 (−1)^{ℓ/s+1}。乘上外层整体前因子 (−1)^{ℓ+1} 与
+  g(s)=s，第 s 项的总权重为
+    s·(−1)^{ℓ+1}(−1)^{ℓ/s+1} = s·(−1)^{ℓ+ℓ/s} = s·(−1)^{ℓ−ℓ/s}
+  （最后一步用 ℓ+ℓ/s 与 ℓ−ℓ/s 同奇偶，因两者相差 2ℓ/s 为偶数）。对 s|r 求和得
+    (BSS 7) = Σ_{s|r} s·(−1)^{ℓ−ℓ/s}·f(m/s²,n,ℓ/s) = D̃_r[f](m,n,ℓ)。
+gaps: []
+notes: |
+  reviewer-verified: rev-prescale (sonnet), 2026-09-24——proof.md §8.1 全文人工重推代换、
+  Jacobian 抵消与符号核算，确认 (−1)^{ℓ+1}(−1)^{ℓ/s+1}=(−1)^{ℓ−ℓ/s} 一步无误；独立 L1
+  逐字核对 BSS 0802.1556 PDF 的 eq (1)(2)(4)(5)(7)。
+
+  **本推导为纯代数代换与符号核算，无物理前提**：唯一依赖是接口边（D̃_r[f] 的定义），
+  effective status 预期与 own status 相同（rigorous）。BSS 公式本身作为「文献提议」未被
+  当作需要额外验证的物理前提——本推导只证明两个表达式（BSS 已发表的 (7) 与本图新定义的
+  D̃_r[f]）代数相等，不对 BSS 提议的物理正确性做任何论断。
+author: graph-curator
+created: "2026-09-24"
