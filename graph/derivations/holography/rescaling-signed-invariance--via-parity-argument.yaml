@@ -1,0 +1,43 @@
+id: holography.rescaling-signed-invariance--via-parity-argument
+target: holography.rescaling-signed-invariance
+kind: proof
+status: rigorous
+depends_on:
+  - id: holography.rescaling-signed-operator-definition
+    inferred: false
+    note: "接口边：D̃_I 的定义来自该卡，本推导证明的正是它在 Γ⁰(I) 下不变"
+  - id: holography.rescaling-invariance-groups
+    inferred: false
+    note: "复用该卡（Thm C）证明中已建立的两步：(2) 支持集匹配（s|I 使 s²|m′、s|ℓ′ 当且仅当
+           s²|m、s|ℓ，同一 V_s=[[a,b/s],[cs,d]] 整性论证）与 (3) 数值匹配
+           d_*(T′_s)=d_*(T_s)（经 holography.dstar-sduality-invariant）。本推导只新增
+           符号因子逐项相等这一步，其余两步是 Thm C 证明的逐字复用"
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/p-rescaling-frame-dependence/proof.md §8.2"
+    note: "本项目原创证明，非已发表文献。status.yaml state: verified（reviewer: rev-prescale, 2026-09-24），captain_confirmed: false。"
+summary: |
+  两步同余式：由半整 Gram 矩阵变换公式 (0.1) ℓ′=2acm+(ad+bc)ℓ+2bdn 直接得
+  ℓ′≡(ad+bc)ℓ (mod 2)（式 8.1）；对第 s 项重标三元组 (m/s²,n,ℓ/s) 应用同一式（矩阵
+  V_s=[[a,b/s],[cs,d]]，s|I|b 使 b/s∈ℤ）得 ℓ′/s≡(ad+bc)(ℓ/s) (mod 2)（式 8.2，用到
+  acm/s=acs·(m/s²)∈ℤ 与 bdn/s=(b/s)dn∈ℤ 两个整性事实）。两式相减，
+  ℓ′−ℓ′/s≡(ad+bc)(ℓ−ℓ/s) mod 2；由 U∈SL(2,ℤ) 即 ad−bc=1，得 ad+bc=1+2bc 为奇数，
+  故 ℓ′−ℓ′/s≡ℓ−ℓ/s (mod 2)。符号因子 (−1)^{ℓ−ℓ/s} 逐项相等；支持集与数值的匹配直接
+  引用 holography.rescaling-invariance-groups 证明中的步骤 (2)(3)（对 D_I 已建立，本推导
+  不重复证明，只额外核实符号）。综合得 D̃_I[f] 在 Γ⁰(I) 下逐项不变。
+
+  机检（PART 6）：I=2 时 24304 个满足 I|b 的实例、I=3 时 4700 个实例，符号匹配 0 违例；
+  直接对 I∈{2,3,4,6}, m,n<30, |ℓ|≤20 核对同余式本身，0 不符。
+gaps: []
+notes: |
+  reviewer-verified: rev-prescale (sonnet), 2026-09-24——proof.md §8.2 全文人工重推两步
+  同余式与 ad+bc=1+2bc 奇性论证；独立重跑机检脚本，PART 6 全部计数与已提交输出逐位一致。
+
+  **本推导为纯数论演绎，无物理前提**：两条依赖均为 rigorous 节点，effective status 预期
+  与 own status 相同（rigorous）。
+
+  **诚实记录一次机检失败模式**：本机检最初因 Python `(-1) ** k`（k 为负整数）返回浮点数
+  而报告数千个虚假违例，导致该轮结论被反转；修复为 `(-1) ** (k % 2)`，commit `a504e31`。
+  见 statement 卡 notes 的完整记录。
+author: graph-curator
+created: "2026-09-24"
