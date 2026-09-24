@@ -78,6 +78,85 @@ audit:
       不断言的内容：D ≤ 25（任何 a）；D = 26 且 a ≠ 1；D > 26 且 a ≠ 1。
     verdict: faithful
     diff_notes: |
+      【第十一轮记账（2026-09-25）】physics-auditor，分支 agent/auditor/noghost-r11。kind: bookkeeping；verdict 不变 faithful；
+      audit.status 不变 back-translated；canonical_text、canonical_source、statement_id、back_translation.text 均未动，
+      **不重做回译**。本轮不置 approved（该动作属人类船长）。条目记在顶部，同 R6–R10。
+
+      R11-1. 〔有效状态：R10-1 的降级已被撤销，v4 首次回到 rigorous 且瓶颈树全 rigorous〕
+            commit 4bd8b20 / 0013226（记录提交 6c85316）把推导 `worldsheet.no-ghost-theorem-v4--via-goddard-thorn` 的
+            (B-26) 依赖边从 `worldsheet.ddf-spanning-hypothesis-v2` 改指新卡 `worldsheet.ddf-spanning-transverse-frame`。
+            本轮实测（全部为审计员自测，不引用 lead 给的数字）：
+            · 改指后 `status worldsheet.no-ghost-theorem-v4`：own **rigorous**，effective **rigorous**，
+              best_derivation --via-goddard-thorn；`why` 两支，kac-determinant-v2 → verma-module-free-over-negative-part
+              → pbw-theorem（全 rigorous）与 ddf-spanning-transverse-frame（rigorous，无压低依赖）。
+            · 改指前（审计员在 `0013226~1` 上临时检出该推导文件实测，测完已还原，工作树干净）：own rigorous，
+              effective **physical-argument**，limited by 1 dep = ddf-spanning-hypothesis-v2，后者又 limited by 2 dep =
+              `momentum-tower-is-borcherds-no-ghost-instance`（physical-argument）与 `ddf-contour-equals-mode-sum`（physical-argument）。
+            · `ddf-spanning-transverse-frame`：own rigorous / effective rigorous（唯一推导 --via-tower-native）。
+              该推导 5 条非 inferred 依赖（momentum-tower-fock-space、ddf-operators-v6、ddf-operators-preserve-physical-states、
+              tower-physical-quotient-form、virasoro-algebra-v2）**实测全部 formalized**，故此处的 rigorous 不是被更弱的东西
+              虚撑起来的（不是 R10-1 那类「负担对工具不可见」的重演）；唯一非机检成分是手写证明本身。
+            · `ddf-spanning-hypothesis-v2` 现状：own_status formalized（其 lean_decl 是 `def … : Prop`，非定理）、
+              effective **physical-argument**；--via-borcherds-1992 own rigorous / effective physical-argument，
+              --via-rank-inequalities own formalized / effective open。
+            · 连带：`worldsheet.critical-dimension-old-covariant-v3` effective 由 physical-argument 升 **rigorous**（同一条 --via-no-ghost）。
+            · `validate`：739 statements / 610 derivations / 5 milestones / 24 conventions，0 errors，123 warnings（11 history）。
+            R10-1 末句所述的「effective 降为 physical-argument、瓶颈为 ddf-spanning-hypothesis → ddf-contour-equals-mode-sum」
+            自本轮起过时，仅此一点；R10-1 其余内容与 R9-3/R8-3 对 (B-26) 承重性的登记仍然成立（承重点未消失，只是换了张卡承载）。
+
+      R11-2. 〔忠实性：改指边是否成立——审计员独立核对，不复述 lead 的理由〕**裁定：成立，(S) 与 (A) 在消费点上已被逐字断言。**
+            新卡前件为 (R 交换 ℚ-代数)(D=26)(F1 η(b,b)... 即 η_μ²=1)(N η(b,b)=0)(S η(a,b)=1)(A η(a,a)=2)(T η(ε_i,b)=0)
+            (O η(ε_i,ε_j)=δ_ij)，**不含** (T′) η(ε_i,a)=0；旧卡 v2 卡面**不含** (S)。故改指只动两条轴：(T′) 被**放松**
+            （少一个前件，对消费端无害），(S) 被**加入**（多一个前件，必须在消费端已有才不是偷换）。审计员自己去卡面与 Lean 里找到的逐字句子：
+            · v4 卡 (1)：「其标度按 worldsheet.ddf-operators-v4 的归一化条件 **2α' k_0·p = 1** 逐塔确定」；
+            · v4 卡 (1b)(i)：「k 在快子壳（N = 0 的质量壳）上：**α' k^2 = a = 1**」；
+              (1b)(ii)：「k_0·k ≠ 0，且 k_0 的标度已按 **2α' k_0·k = 1** 取定」；
+            · canonical_text 本身：「k_0 的标度按 DDF 归一化 **2α' k_0·p = 1** 逐塔取定」，以及
+              「对每个在快子壳上（**α' k^2 = a = 1**）且 k_0·k ≠ 0 的动量 k」。
+            按 conv.alpha-prime-regge 下 a^μ := (2α')^{1/2} k^μ、b^μ := (2α')^{1/2} k_0^μ 的重标度，
+            2α' k_0·k = 1 逐字即 (S) η(a,b) = 1，α' k^2 = 1 逐字即 (A) η(a,a) = 2。(T)(O) 与 v2 卡面相同，未变。
+            Lean 侧旁证：`formal/StringFormal/NoGhost/Assembly.lean` 的 `variable (hbb : dotVec η b b = 0) (hba : dotVec η b a = 1)`
+            同样把 (S) 写成前件。**但须注明**：这三处（v4 卡面、本推导 summary、Lean）都是本项目内对同一条归一化的复述，
+            是同一约定的三个投影，**不构成三条独立证据**；真正承载裁定的是 canonical_text 与 v4 卡面本身逐字写死了 (S)(A)。
+            另附审计员自查的三点边界：(1) v4 (1a) 对整个扇区取全称量词，落到 (S)(A) 塔要经 v4 notes 里那段
+            【扇区覆盖（初等观察，不属断言）】的约化（取 k := p + N k_0）——该段自标「不属断言」，故这一步在图内**无承重节点**，
+            是记账上的一个小口子，本轮如实登记，不改 verdict（N = 1 − α'p² ∉ Z_{≥0} 时该全称句空真）；
+            (2) 新卡按 j ∈ Z 全塔陈述，与 canonical_text 的 ⊕_{N ≥ 0} 相容（j ≥ 1 层需负能级，层间正交）；
+            (3) 新卡的 a₀ := ½η(a,a) 与 v4 的整体截距 a = 1 相等，恰恰是因为 (A) 成立——两者是不同条件，只在塔底重合，
+            不可互相代替（见 R11-5(ii)）。
+
+      R11-3. 〔**船长须知**：本轮升档的四条限定，逐条都要读进去〕
+            (a) v4 现在是 **rigorous，不是 formalized**。新卡 `ddf-spanning-transverse-frame` **未形式化**，其推导 gaps 里
+                [GAP-LEAN] 与 [GAP-B-LEAN] 两条均**未关闭**，机检覆盖只到 N ≤ 3。
+            (b) 新卡**既不蕴含也不取代** `ddf-spanning-hypothesis-v2`：v2 仍以 open 命题留在图上，它的 (B-26) / `∀N, B26 N`
+                缺口**一条都没关**（新卡自己的卡面就写着「⛔ 不断言 worldsheet.ddf-spanning-hypothesis-v2」）。
+            (c) 该边的供给方是**本项目的原创证明**（`research/attempts/tower-native-ddf-spanning`，proof.md 与 proof-no-tprime.md，
+                两轮独立对抗性复审判 verified），**不是已发表文献**；新卡与其推导的 `captain_confirmed` 均为 **false**。
+            (d) 本项目的 DDF 算子是**模态和**，文献的是**围道积分**；桥 `worldsheet.ddf-contour-equals-mode-sum` 仍为
+                own rigorous / effective physical-argument，且已不在本链上（见 R11-5(iii)）。故准确的说法是
+                「**本项目模和表述下**的无鬼定理依赖链现已全程 rigorous」，**不得**说成「Goddard–Thorn 1972 定理已严格证明」
+                或「已机器验证」。R7-2 登记的写法风险原样有效。
+
+      R11-4. 〔换代指针状态，按 graph/CLAUDE.md 末段「不就地改正文内嵌 id」〕canonical_text 中**不含任何节点 id**
+            （与 R5-1 / R6-2 的核查一致），`ddf-spanning-hypothesis-v2` 在 canonical_text 中**不出现**；
+            `ddf-operators-v4` 等旧 id 字面只出现在本 audit 块内，属历史记录，按 R5-1 同一理由原样保留。本轮**未做任何就地改字**。
+
+      R11-5. 〔审计员认为 lead 记录不准或说过头之处，供 lead 处置，本轮不由审计员改动其文件〕
+            (i) 改指边 note 里称 (S) 有「三条独立证据」——见 R11-2，那是同一条归一化在三处的复述，不是独立证据。
+            (ii) 同一 note 里「(A) η(a,a)=2 就是目标卡逐字钉死的 a = 1」把**截距 a = 1** 与**快子壳 α'k² = 1** 混为一谈；
+                 两者在卡面上都被断言，但是两个不同条件，仅在塔底重合。裁定不受影响，措辞需改。
+            (iii) 「围道桥按 R7-2 已不在链上」不完整：R7-2 只撤了**直接边**；实测表明 2026-09-15 的 a2f1f0d 之后，
+                 `ddf-contour-equals-mode-sum` 经 `ddf-spanning-hypothesis-v2--via-borcherds-1992` **间接回到了链上**，
+                 是本轮这次改指才把它移出。
+            (iv) 因此 `docs/ROADMAP.md` 顶部第 1 项「`worldsheet.ddf-contour-equals-mode-sum` —— 整条 Goddard–Thorn 无鬼定理的
+                 全部缺口收敛到的唯一节点」**自本轮起为假**（根 CLAUDE.md「当前阶段」同句亦然）。docs/ 不在审计员写入范围，请 lead 修。
+            (v) 不对称：**条件版** `worldsheet.no-ghost-theorem-conditional-on-ddf-spanning`（own formalized）仍停在
+                 effective physical-argument，因为它指向 v2 的边没有一并改指；而**无条件版** v4 反而是 rigorous。
+                 这是记账事实，不是错误，但读起来会误导，建议 lead 处理。
+            (vi) 继承性缺口：tower-native 证明工作在 **R-双线性型**上，而 canonical_text 断言的是 Hermite 型下的 ⟨ψ|ψ⟩ ≥ 0
+                 （`ddf-operators-adjoint-v2--via-lean` gaps 第 2 条「R-双线性、无 sesquilinear 结构」已登记）。
+                 该缺口非本轮新增，但它现在位于一条**全程 rigorous** 的链之下，船长签字前应知。
+
       【第十轮记账（2026-09-15）】physics-auditor，分支 agent/auditor/no-ghost-r10。kind: bookkeeping；verdict 不变 faithful；
       audit.status 不变 back-translated；canonical_text、statement_id、back_translation 均未动，**不重做回译**。条目记在顶部，同 R6–R9。
 
