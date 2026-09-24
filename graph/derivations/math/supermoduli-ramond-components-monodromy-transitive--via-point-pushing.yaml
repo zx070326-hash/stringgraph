@@ -9,8 +9,7 @@ sources:
       §2 (引理2.1: π 是 M_{g,m} 上次数 2^{2g} 有限平展覆叠, 前提 m≥1；注2.2: μ2-gerbe 论证；
       引理2.3: π_0(𝒮)=Θ/Γ_{g,m})、§3 (引理3.1: 复环面上乘2映射单值=mod2平移；引理3.2:
       Abel-Jacobi 诱导 Hurewicz 同态, 单值满射到 J[2]；定理3.3: 单个 Ramond 穿孔点推子群已在
-      Θ_R(C) 上传递；推论3.4 = 命题(C1)；注3.5: 反向自洽性检验，确认 r=0 时机制消失)、
-      §9.1 (承重清单，列出本推导实际用到的全部构件：(X1)+(X2)+(X5a,b)+引理2.1+2.3+3.1+3.2+定理3.3)"
+      Θ_R(C) 上传递；推论3.4 = 命题(C1)；注3.5: 反向自洽性检验，确认 r=0 时机制消失)"
     note: |
       本项目原创证明（已知结论的独立重证），非已发表文献；原始出处 Jarvis 2000（见
       statement 卡 sources 的 jarvis-2000 条目及 §10.1 对照表）。
@@ -50,13 +49,17 @@ gaps:
     的关系仅止于"分量数公式代入特殊情形后结果吻合"的交叉验证（proof.md §10.1）。
 notes: |
   reviewer-verified: rev-ramond (sonnet), 2026-09-24 —— 见
-  research/attempts/supermoduli-ramond-components/status.yaml 的 review_2026_09_24 块，
-  逐步核对了 (X1)+(X2)+(X5a,b)+引理2.1+2.3+3.1+3.2+定理3.3+推论3.4 全链，独立渲染验证了
-  FKP p.13 与 Jarvis p.17/p.23 的页图引文，判定无逻辑跳步；status.yaml: state: verified。
+  research/attempts/supermoduli-ramond-components/status.yaml 的 review_2026_09_24 块（该次
+  复审覆盖整个 attempt，含本卡之外的紧化部分）；就本卡覆盖的范围而言，逐步核对了
+  (X1)+(X5a,b,f)+引理2.1+2.3+3.1+3.2+定理3.3+推论3.4 全链，独立渲染验证了 FKP p.13 与
+  Jarvis p.17/p.23 的页图引文，判定无逻辑跳步；status.yaml: state: verified。
   按 docs/STATUS_LEVELS.md 的 rigorous 例外条款（前提完整、有限步初等推理、reviewer 独立
   复核）本推导标 rigorous。captain_confirmed: false，不阻塞毕业（见根 CLAUDE.md 判据）。
 
-  推导路径未使用 (X2)/(X6)（这两项只在紧化相关的姐妹卡
-  `math.supermoduli-ramond-components-compactified-connected` 中用到）。
+  **精确记账**：proof.md §9.1「承重清单」给出的 (X1)+(X2)+(X5a,b)+(X6)+引理2.1+2.3+3.1+3.2
+  +定理3.3+引理5.1 是**定理5.2（紧化版本）**的完整依赖，不是本卡（未紧化的推论3.4）的依赖。
+  本卡的推导路径不使用 (X2)（FKP Prop 7.8(ii) 边界局部结构）与 (X6)（玻色截断同胚）——
+  这两项只在证明紧化稠密性/连通性的姐妹卡
+  `math.supermoduli-ramond-components-compactified-connected` 中用到。
 author: graph-curator
 created: "2026-09-24"
