@@ -286,3 +286,22 @@ review_2026_09_24:
     wanted, the two genuinely open threads are (1) re-deriving Lemma 9.1(iv) under (7.1_R) in full
     (a new attempt, not a defect of this one), and (2) an independent fetch of pp.41/56-60 for
     Footprint I/II (lower priority, outside the claim).
+
+graduated:
+  date: "2026-09-24"
+  by: lead
+  graph_nodes:
+    - math.fkp-punctured-ns-gluing-exists-with-ramond
+      # 陈述卡（合并后）
+    - math.fkp-punctured-ns-gluing-exists-with-ramond--via-local-node-computation
+      # 本 attempt 贡献的推导
+  note: |
+    curator 原建的陈述卡 `math.fkp-ramond-twist-ns-gluing-well-defined` 与并行毕业的
+    `fkp-96-punctured` 所建卡是同一命题（两个 curator 并行，互相查不到对方）。lead 按根 CLAUDE.md
+    原则 1（一条陈述一张卡，可挂多个独立推导）合并为上列陈述卡，本 attempt 的推导改指该卡，与
+    fkp-96 的 `--via-branch-duality-lemma` 并列为两条独立证明路径。
+    合并时解决了两卡的一处实质分歧：Ramond 穿孔数的宇称范围。本 attempt 的卡原写"任意 n_i>=0"，
+    隐含断言奇 n_R 的源对象非空——而抽取记录 E4 已登记该问题在 FKP 原文中未判定。合并后的卡改为
+    条件式陈述（凡源叠非空即成立），并显式标出该未决问题。
+    未毕业的部分：proof.md §8-§11（Footprint I/II），依赖 reviewer 未独立核对的页图 pp.41/56-60。
+    本 attempt 至此结项，state 保持 verified（生命周期无独立的 graduated 状态）。

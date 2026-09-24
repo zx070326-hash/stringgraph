@@ -117,3 +117,25 @@ review_2026_09_24:
     附近加一条 [FKP-ERRATA] 式的按语，注明继承 [E1]/[E2] 两条对 [FKP] 的勘误。按本项目
     "verified 后默认结项"的纪律，本 attempt 到此为止，不建议再派复审；下一步动作应落在
     引用方（supermoduli-punctured-nonprojected paper.md）而非本 attempt。
+
+graduated:
+  date: "2026-09-24"
+  by: lead
+  graph_nodes:
+    - math.fkp-punctured-fundamental-sequence-ramond-twisted
+    - math.fkp-punctured-fundamental-sequence-ramond-twisted--via-section-2-2-restriction
+    - math.fkp-punctured-ns-gluing-exists-with-ramond
+    - math.fkp-punctured-ns-gluing-exists-with-ramond--via-branch-duality-lemma
+    - math.fkp-punctured-normal-line-formula-separating
+    - math.fkp-punctured-normal-line-formula-separating--via-berezinian-first-bypass
+  note: |
+    三张陈述卡 + 三条推导，均 status: rigorous。`...ns-gluing-exists-with-ramond` 一卡后被 lead
+    与并行毕业的 `fkp-79-ramond-twist` 所建同内容卡合并（原则 1），现挂两条独立推导；合并时把本
+    attempt 原写的"n_1,n_2 为偶数"假设改为条件式陈述——FKP 正文那句 "n_R necessarily even" 逐字
+    只附着于 [22]/[23] 的经典对象，对 FKP 自己构造的对象是未判定的（抽取记录 E4）。
+    下游收益（lead 同日落实）：`supermoduli-compactified-punctured-genus-{2,geq3}-not-projected--via-elliptic-tail-punctured-gluing`
+    两卡指向 Theorem C 的 `inferred: true` 边已改指 `math.fkp-punctured-normal-line-formula-separating`
+    并去掉 inferred 标记，两卡的 [GAP-FKP-RAMOND] 同时解除（effective 未移动，此前此后均 rigorous）。
+    未毕业的部分：Theorem 8.3（非分离型，proof.md 自认 [GAP-G7] 论证单薄）、Cor 10.1（Theorem 8.1
+    的平凡实例化，下游论文尚未进图）。
+    本 attempt 至此结项，state 保持 verified（生命周期无独立的 graduated 状态）。
