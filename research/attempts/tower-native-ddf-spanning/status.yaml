@@ -8,7 +8,40 @@ verdict: verified
 recommended_status: rigorous
 captain_confirmed: false
 target_cards:
-  - worldsheet.ddf-spanning-hypothesis-v2
+  - worldsheet.ddf-spanning-transverse-frame   # 2026-09-25 毕业后实际落成的卡（见 graduated_2026_09_25）
+  - worldsheet.ddf-spanning-hypothesis-v2      # ⛔ **本 attempt 没有证它**，只是当初立项时的瞄准点；保留以记录意图，不要读成"已证"
+graduated_2026_09_25:
+  state: graduated
+  by: lead
+  commits:
+    - "4bd8b20 — graph: graduate the tower-native DDF spanning theorem as a narrow frame-premised card"
+    - "0013226 — graph: retarget the no-ghost (B-26) edge to the proved narrow card, lifting v4 to rigorous"
+  new_nodes:
+    - "worldsheet.ddf-spanning-transverse-frame（statement, proposition）—— effective = rigorous"
+    - "worldsheet.ddf-spanning-transverse-frame--via-tower-native（derivation, proof, status rigorous）"
+  effective_move: |
+    ⭐ **本项目第一次移动无鬼定理的档位。**
+    `worldsheet.no-ghost-theorem-v4--via-goddard-thorn` 的 (B-26) 依赖由
+    `worldsheet.ddf-spanning-hypothesis-v2`（physical-argument）改指新卡（rigorous）。
+    该推导自身 status 早已是 `rigorous` 且**被且仅被**这一条依赖压低（`limited by 1 dep(s)`），
+    故 **`worldsheet.no-ghost-theorem-v4` 的 effective: physical-argument → rigorous**。
+    `why` 瓶颈树现只剩 `kac-determinant-v2 → verma-module-free-over-negative-part → pbw-theorem`
+    一支，全程 rigorous。
+    全图：739 statements, 610 derivations, 0 errors, 123 warnings (11 history)；`uv run pytest` 101 passed
+    （两条钉住旧值的用例按实更新并在注释里写清移动原因）。
+  what_was_NOT_done: |
+    · **v2 没有被取代也没有被证**：不标 `superseded_by`、不就地改卡面。它没有 (S)，是真正更宽的开放命题。
+    · **没有形式化**：新卡与新推导都不是 `formalized`；[GAP-LEAN]、[GAP-B-LEAN] 两条都开着。
+    · **没有碰里程碑签字**：`graph/milestones/no-ghost-theorem.yaml` 的 `audit.status` 仍是
+      `back-translated`，**不是** `approved`。签字是船长的动作。
+    · **没有对外声称任何东西。** `captain_confirmed` 仍是 false。
+  outward_wording_if_it_ever_happens: |
+    ✅ 可说：「本项目模和表述下的无鬼定理依赖链现已全程 rigorous，其中最后一块
+       （(B-26) DDF 张成）由本项目的原创塔内原生证明供给。」
+    ⛔ 不可说：「Goddard–Thorn 1972 定理已严格证明」——文献那条定理的算子是围道积分，
+       本项目与它之间的桥 `worldsheet.ddf-contour-equals-mode-sum` 仍是 physical-argument，
+       且不在本链上。
+    ⛔ 不可说：「机器验证」/「形式化」——见上一条 what_was_NOT_done。
 notes: |
   2026-09-24 开工。claim.md 已写（Theorem 1/2/3）。proof.md 逐步填充中。
   本 attempt 与 borcherds-rank-one-noghost 的关系：替代，不是续作。
