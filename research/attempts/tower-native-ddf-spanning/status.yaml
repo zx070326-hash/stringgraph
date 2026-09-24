@@ -231,3 +231,37 @@ tprime_removal_analysis_2026_09_25:
     （Witt 延拓；`span{k₀,k}` 的 Gram `[[0,1],[1,2]]` 判别式 −1，是洛伦兹二维平面，便宜）。
     **但这救不了目标卡**——目标卡量化在一切 (T)(O) 标架上。已把同一条防误用记号补进
     `graph/derivations/worldsheet/no-ghost-theorem-v4--via-goddard-thorn.yaml` 的 notes。
+
+# ---------------------------------------------------------------------------
+review_findings_fixed_2026_09_25:
+  by: lead（未派 agent；这些是措辞/凭据问题，不动任何定理陈述）
+  commit: b87389e
+  reviewer: rev-no-tprime（裁定 verified / rigorous，findings 1–4 已确证）
+  items: |
+    1. §4.0 表里「κ 分次与标架选取无关」是假的（`E′^i_{−n} = E^i_{−n} − c_iK_{−n}`
+       不是 κ-齐次）。真正标架无关的是**子空间** `I_j = (K_{−1},K_{−2},…)·W_j`——
+       I-adic 滤过，不是分次。**不承重**：κ 与 `I_j` 都不出现在 Theorem 1′/2′/3′ 的
+       任何陈述里。已改表格行 + 加 ⚠ 订正块。
+    2. ⚠ **这一条是真的重要，不只是措辞。** `check_freeness` 算的是 `ℚ` 上的秩，
+       而一般交换环论证的命门是 **`det` 是单位**。「`ℚ` 上满秩」严格更弱，对
+       「在 `ℤ` 上是否可逆」完全盲。lead 已独立复核代码确认，并**补上
+       `det_exact()`**（精确有理 Gauss 消元）接进 `check_freeness`，现在要求
+       `|det| = 1`。跑全套：**61 个 `[T1]` 测例，`det ∈ {+1,−1}` 全程，零失败，
+       exit 0**。§5.5 的 ⟨机检⟩ 行已改成如实描述 + 记录原偏差。
+       附带诚实说明：`check_main` 的 `ok_cor11` 只测推论 1.1 的一个**必要**条件。
+    3. §7.3「`Â = 0` 不影响」引的凭据不对：`η(a,a)=5` 只进到 `[DUAL]` 的一条
+       assert，其余检查都走 `Tower(D,c)` 默认 `η(a,a)=2`（那里 `Â = −3 ≠ 0`）。
+       reviewer 已代补**同时满足 (A) 与 `Â=0`** 的构形 `D=4 c=(1,1)`、
+       `D=4 c=(1,−1)`、`D=5 c=(1,1,0)`、`D=6 c=(1,1,0,0)`，全套通过。
+       **结论成立，原证据不成立**，已替换。
+    4. `check_Lm_on_W` 的 docstring 说「`R_m` 抬高 κ 当且仅当 `c ≠ 0`」，被脚本
+       自己的输出 `raises somewhere: False` 直接否证（每个 `c ≠ 0` 构形都是 False）。
+       原因即 reviewer 对 §5.6 的分析：两个 `Δκ=+1` 项逐项精确相消（同 `k`、同 `i`、
+       同系数 `(m+k)c_i`、反号），故引理 7(b) **逐字**成立、不需削弱成「不降 κ」。
+       docstring 已订正（`.md` 侧本来就写对了，是脚本注释落后）。
+  effective_impact: |
+    **零移动。** 这四条全在膜之内（`research/`），不碰 `graph/`。
+    validate 前后一致：738 statements / 609 derivations / 0 errors / 123 warnings。
+  still_open: |
+    等 rev-no-tprime 补发被截断的尾部，尤其是 **(S) 接线裁决**、finding 6 的余下部分、
+    以及是否有第 6 条之后的 finding。**在它裁决前不动 `graph/`。**
