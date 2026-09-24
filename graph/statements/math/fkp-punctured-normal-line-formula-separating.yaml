@@ -1,0 +1,83 @@
+id: math.fkp-punctured-normal-line-formula-separating
+kind: proposition
+title: "带穿孔靶上分离型 NS 粘接的法丛公式：ι*O(Δ_NS) ≅ ι*O(Δ) ≅ Ψ1^{-1}⊗Ψ2^{-1}（FKP eq.(9.6)/Theorem C 对任意 NS/Ramond 穿孔数的推广）"
+statement: |
+  【记号】S̄_{g;m,n} 是 Felder–Kazhdan–Polishchuk（[FKP-A]）紧化的、亏格 g、m 个 NS 穿孔、n 个
+  （偶数个）Ramond 穿孔的稳定超曲线模叠；S_{g;m,n}⊂S̄_{g;m,n} 是光滑超曲线的开子叠；
+  Δ=Δ_NS+Δ_R 是 S̄_{g;m,n} 上的完整边界除子（[FKP-A] §7.3/§7.4 意义下，典范截面 c 的零点轨迹）。
+
+  【命题（分离型，对任意穿孔数）】设 g1,g2≥0，m1,m2≥0，n1,n2≥0 为偶数，使得 (g1;m1+1,n1) 与
+  (g2;m2+1,n2) 都在稳定范围内（即 S_{g1;m1+1,n1}、S_{g2;m2+1,n2} 非空）。令 g:=g1+g2，
+  m:=m1+m2，n:=n1+n2，S̄:=S̄_{g;m,n}，并令
+    ι: B := S_{g1;m1+1,n1} × S_{g2;m2+1,n2} → S̄_{g;m,n}
+  是 [FKP-A] 分离型 NS 粘接态射 (7.8) 限制在光滑轨迹上的态射（把两个因子各自最后一个 NS 穿孔粘接成
+  一个分离 NS 节点）；Ψ1,Ψ2 表示 B 上被粘接的两个 NS 穿孔的 ψ-线（Ψ_i:=P_i^*ω_{X/S}，秩 0|1）。
+  则在 B 上有秩 1|0 线丛的同构（典范，直到 Berezinian 短正合列乘法性中因子排序带来的符号不确定性，
+  不影响同构类）：
+    ι^*O(Δ_NS) ≅ ι^*O(Δ) ≅ Ψ1^{-1}⊗Ψ2^{-1}。
+  **特别地，公式对任意 m,n 成立，不限于 m=n=0 的无穿孔情形。**
+
+  【与 FKP-A 原文的关系——措辞精确】[FKP-A] 的 (9.6)（p.61）与 Theorem C（p.2–3）逐字只把靶写成
+  不带穿孔下标的 S̄_g（见姐妹卡 math.fkp-ns-boundary-gluing-normal-bundle-formula 对此逐字范围
+  的核实）；[FKP-A] 全文未在任何地方明确声明该公式对带穿孔的靶成立，也未声明不成立——这一情形原文
+  未置一词，不是印刷缺陷也不是证明缺口，而是**未覆盖的推广方向**。本节点是对该推广方向的独立证明：
+  不引用 Theorem C 本身（那样会构成循环论证——Theorem C 就是待推广的对象），而是从
+  [FKP-A] 逐字陈述、且论证过程本身不带隐藏穿孔假设的输入（Prop. 7.4 的证明是节点处的étale局部陈述；
+  Lemma 7.5 的边界除子刻画不含穿孔；Lemma 7.10 的证明逐字声明"take into account all the punctures
+  on both sides"；Lemma 8.7/Cor. 8.8 的 §8.4 设定逐字包含"m NS punctures and Ramond divisors
+  R_1,...,R_n"）出发，结合两条独立修补的姐妹卡
+  （math.fkp-punctured-fundamental-sequence-ramond-twisted 给出的 R 扭转基本正合列，
+  math.fkp-punctured-ns-gluing-exists-with-ramond 给出的一般穿孔数下粘接态射的存在性），
+  重新搭建 [FKP-A] eq.(9.6) 的完整证明链得到，核心新计算是把 [FKP-A] 压缩成一行的"(iv) 由 (i)(ii)
+  与正合列 (7.1) 得出"这一步改写为不依赖未修补 (7.1) 的 Berezinian 直接比较论证。
+
+  【第一个同构 ι^*O(Δ_NS)≅ι^*O(Δ) 的独立来源】ι(B) 上每条曲线只有一个节点且该节点是 NS 型
+  （由粘接构造：两支在节点处的奇部分层局部自由，秩均为 1，对应 [FKP-A] 节点分类中的 NS 模型），
+  故 Δ_R（支撑于至少一个 Ramond 节点的轨迹）与 ι(B) 不交，Δ=Δ_NS+Δ_R 拉回后 Δ_R 项典范平凡。
+uses: []
+uses_conventions: []
+sources:
+  - ref: felder-kazhdan-polishchuk-2020
+    loc: "对照对象：eq.(9.6)，p.60-61；Theorem C，p.2-3（无穿孔靶逐字陈述，见姐妹卡）。本节点所用
+      的、[FKP-A] 逐字不带隐藏穿孔假设的输入：Prop. 7.4，pp.44-45；Lemma 7.5，p.45；Prop. 7.8，
+      p.47；Lemma 7.10 及其证明，p.48；Theorem A，p.1；§8.4 Lemma 8.7/Cor. 8.8/Remark 8.10，
+      pp.56-57；Lemma 9.1(i)-(iii) 及其证明，pp.59-60；§6.4，p.41（局部图像不因穿孔改变的声明）"
+    note: |
+      这些是本节点证明中作为黑箱引用的已发表输入，未被本节点独立复核其自身证明正文（例如 [FKP-A]
+      pp.33-40 的节点局部模型计算未读；见下方 gaps）；但这些输入陈述本身的量词范围（是否隐藏穿孔
+      假设）已被 research/attempts/fkp-96-punctured/proof.md §2.2 逐条 L1（170dpi 页面渲染）核实。
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/fkp-96-punctured/proof.md §3（Lemma 3.1 穿孔盲性、Lemma 3.3、
+      Cor. 3.4、Prop. 3.5：Δ 与 eq.(7.6) 对带穿孔靶成立）、§6（Prop. 6.1 puncture-blindness of
+      Lemma 9.1(i)-(iii)、Prop. 6.2 the Berezinian-first bypass of [E1]）、§7（Prop. 7.1，
+      D1+D2 抵消）、§8.1（Theorem 8.1，主定理陈述与五步等式链证明）、§9（Prop. 9.1，Δ_R 与 ι(B)
+      不交）"
+    note: |
+      本项目原创证明，非已发表文献。research/attempts/fkp-96-punctured/status.yaml：state:
+      verified；2026-09-24 review_2026_09_24 块 verdict："Claim P（proof.md Thm 8.1）与其在论文
+      指标上的实例化 Cor 10.1 成立"；sections_checked_in_full 逐条列出 §3/§6.3/§7/§8/§9 均"独立
+      重新推导/重算，成立/核对通过"，§6.3 Prop 6.2 明确标注"这是本证明最技术性的新计算"。
+      captain_confirmed: false（不代填；按根 CLAUDE.md「图是仪器」一节，verified 的 attempt 无需
+      等 captain_confirmed 即可毕业进图）。
+tags: [supermoduli, boundary-divisor, psi-line, node-locality, math-input]
+notes: |
+  【查重】`uv run stringgraph search "normal-line"` / `"psi-line"` / `"punctured normal"` /
+  `"boundary divisor"` 均无同内容命中（2026-09-24）；唯一相关既有节点
+  math.fkp-ns-boundary-gluing-normal-bundle-formula 逐字只覆盖无穿孔靶（本节点 statement 中已
+  明确区分）。
+
+  【给 lead 的建议——不由本 curator 执行】现有两条既有推导
+  graph/derivations/math/supermoduli-compactified-punctured-genus-geq3-not-projected--via-elliptic-tail-punctured-gluing.yaml
+  与
+  graph/derivations/math/supermoduli-compactified-punctured-genus-2-not-projected--via-elliptic-tail-punctured-gluing.yaml
+  各有一条 `depends_on: math.fkp-ns-boundary-gluing-normal-bundle-formula, inferred: true` 边，
+  理由written为"该公式对带穿孔靶的推广是依据节点局部性的推断，不是 FKP-A 逐字陈述"。本节点
+  （连同两张姐妹卡）恰好是对这条推断的正面证明，覆盖两条既有推导实际引用的量词范围（分离型粘接，
+  Cor. 10.1 与两姐妹卡使用的都是分离型 (7.8)）。**建议 lead 派 curator 或自行把这两条边的
+  target 改指向本节点（math.fkp-punctured-normal-line-formula-separating）并去掉
+  `inferred: true`**——去掉后这两条推导的 own status 仍是 rigorous（无变化），但 `effective`
+  状态传播链条会更诚实（不再经过一条标了 inferred 但本可去除的边）。本 curator 未直接改动这两个
+  已存在文件，因任务书明确禁止修改已有文件；此建议按 graph/CLAUDE.md「curator 发现需要改动时只提
+  建议，不动手」的规则记录于此。
+author: graph-curator
+created: "2026-09-24"

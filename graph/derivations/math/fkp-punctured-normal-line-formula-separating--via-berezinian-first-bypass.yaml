@@ -1,0 +1,71 @@
+id: math.fkp-punctured-normal-line-formula-separating--via-berezinian-first-bypass
+target: math.fkp-punctured-normal-line-formula-separating
+kind: proof
+status: rigorous
+depends_on:
+  - id: math.fkp-punctured-fundamental-sequence-ramond-twisted
+    inferred: false
+    note: |
+      proof.md §6.3 Prop. 6.2（本证明最技术性的新计算，Berezinian-first bypass）与 §7 Prop. 7.1
+      （D1+D2 抵消）都直接以 (7.1-R)（本依赖卡的结论）为起点分别在 X_B 与 X̃ 上展开两行
+      Berezinian 乘法性计算；没有 (7.1-R) 就无法绕开未修补的印刷版 (7.1) 在 R≠∅ 时不正合的问题。
+  - id: math.fkp-punctured-ns-gluing-exists-with-ramond
+    inferred: false
+    note: |
+      proof.md §8.1 定理证明第一句"The map ι exists by Cor. 4.4"直接引用本依赖卡的推论形式
+      （Cor. 4.4）以取得粘接态射 ι 本身的存在性；没有它，本节点陈述中的 ι 无从谈起。
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/fkp-96-punctured/proof.md §3（Lemma 3.1、Lemma 3.3、Cor. 3.4、
+      Prop. 3.5）、§6.1-6.3（Lemma 6.0、Prop. 6.1、Prop. 6.2）、§7（Prop. 7.1）、§8.1
+      （Theorem 8.1 陈述与证明）、§9（Prop. 9.1）"
+    note: |
+      本项目原创证明，非已发表文献。见姐妹卡对 status.yaml 的引用；本节点额外记录：reviewer
+      review_2026_09_24 明确把 §6.1-6.2（Prop. 6.1）列入 sections_only_skimmed——"通读并核对了
+      引用的 [FKP-A] 陈述位置是否与原文一致，但未独立重算 §6.2 的局部坐标计算本身（该计算发生在
+      [FKP-A] pp.33-40）"。Prop. 6.1(iii) 被 Theorem 8.1 的证明链直接使用（五步等式链的第二步），
+      故这是本节点证明链中唯一一处"reviewer 只核对了引用位置、未独立重算"的环节，如实记入下方
+      gaps，不因此改变整体 rigorous 判定（reviewer 顶层 verdict 明确"No load-bearing [GAP] blocks
+      Cor 10.1"，并把对应的 proof.md [GAP-G1] 定性为"风险低"）。
+summary: |
+  五步等式链（proof.md §8.1）：(1) Prop. 3.5 把 O(Δ) 在 S̄_{g;m,n} 上写成
+  Ber Rπ_*(j_*Ω_U)⊗Ber^{-1}Rπ_*(Ω_X)；(2) 用 Ber Rπ_* 与 base change 的相容性（(S2)）限制到
+  X_B=X×_{S̄}B；(3) 用 Prop. 6.2（本证明的核心新计算：把 (7.1-R) 分别限制到 X_B 与 X̃，各自算出
+  两行 Berezinian 乘法性等式，用 Cor. 5.2 处理 Q∩R=∅ 与 D_i∩R=∅ 两次典范平凡化，比较两行得到
+  Ber Rπ_*(j_*Ω_U|_{X_B})≅Ber Rπ̃_*(Ω_X̃(D1+D2))⊗Ψ1^{-1}Ψ2^{-1}）与 Prop. 6.1(iii)（
+  Ber Rπ_*Ω_{X_B/B}≅Ber Rπ̃_*Ω_X̃，K 的四个 Jordan-Hölder 因子的 Berezinian 乘积典范平凡）代入；
+  (4) 用 Prop. 7.1（D_1+D_2 的贡献典范平凡，靠 Lemma 8.7 给出的 Ψ_i^{-1}⊗Ψ_i≅O_B 抵消，对旁观
+  穿孔与 R 不敏感因为 D_i 与它们不交）消去 Ω_X̃(D1+D2) 项，得到 ι^*O(Δ)≅Ψ1^{-1}⊗Ψ2^{-1}。第一
+  个同构 ι^*O(Δ_NS)≅ι^*O(Δ) 是独立的 Prop. 9.1：ι(B) 上每条曲线只有一个节点、且该节点是 NS 型
+  （粘接构造使奇部分层在两支上各秩 1），故 Δ_R 与 ι(B) 不交，典范截面给出平凡化。
+gaps:
+  - |
+    [来自 proof.md §11 G1] Prop. 6.1(i)(ii)(iii)（[FKP-A] Lemma 9.1(i)-(iii) 的带穿孔推广，
+    Theorem 8.1 五步链的第(3)(4)步都用到其结论）的证明依赖 [FKP-A] §6.2（pp.33-40，节点局部模型
+    的显式坐标计算）转移到带穿孔设定，转移论证只依赖单句 L1 核实的 [FKP-A] §6.4 声明（"添加穿孔
+    不改变节点附近的局部图像"），未独立重算 §6.2 本身。reviewer 评级：风险低（节点局部模型与穿孔
+    不交），不阻塞本节点结论。
+  - |
+    [来自 proof.md §11 G2] [FKP-A] Lemma 8.7 / Cor. 8.8 / Remark 8.10 的证明正文未读（只核实了
+    §8.4 陈述本身的量词范围含 Ramond 除子）。这三条被 Prop. 6.1、Prop. 7.1 多次作为黑箱引用。
+    reviewer 评级：风险低（均为 D_i 上的局部计算，与 R 不交）。
+  - |
+    [来自 proof.md §11 G3] Berezinian 在短正合列中乘法性同构本身带有因子排序引起的符号不确定性
+    （Remark 8.2）；本节点 statement 已声明"典范，直到符号不确定性"，只claim同构类，不追踪符号。
+    [FKP-A] 自身也在同样的免责声明下工作（Theorem 9.2 "up to a sign"）。
+  - |
+    [来自 proof.md §11 G5/G6] [FKP-A] Theorem A（主定理，S̄_{g;m,n} 的光滑真 DM 栈表示性）与
+    Lemma 7.2(ii)/7.3 均作为黑箱引用，未独立审计其证明正文——这是引用已发表严格结果的合理实践，
+    不是本节点自身证明的缺口。
+  - |
+    本节点只覆盖分离型粘接（Claim P / Theorem 8.1）。proof.md §8.2 另证明了非分离型版本
+    （Theorem 8.3 / Claim P′），但 reviewer 与 prover 一致认为该证明比分离型单薄（"仅凭检查每个
+    ingredient 都适用于 (7.9) 的检视式论证"，proof.md [GAP-G7]），且未被本 attempt 的目标下游
+    （supermoduli-punctured-nonprojected 论文的 Cor. 10.1）使用。本 curator 因此未为非分离型建
+    立独立的图节点，见提交报告"刻意未建"一节。
+notes: |
+  curator 亲自 Read proof.md §3、§6、§7、§8.1、§9 全文与 status.yaml review_2026_09_24 块全文，
+  核对本卡 statement 的五步等式链与 proof.md §8.1 逐字一致，核对 depends_on 的两条边（Cor. 4.4、
+  Lemma 5.1/(7.1-R)）在 proof.md §8.1 首句与 Prop. 6.2 证明中的确被直接引用。
+author: graph-curator
+created: "2026-09-24"
