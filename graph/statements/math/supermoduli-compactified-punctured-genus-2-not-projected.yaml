@@ -66,7 +66,19 @@ notes: |
   `math.fkp-ns-boundary-gluing-normal-bundle-formula`（靶逐字无穿孔）于带穿孔靶，依据同一条
   节点局部性论证；见 derivation 文件的 inferred:true 边与说明。
 
+  【上段已于 2026-09-24 过时，lead 补注】同 g≥3 姐妹卡：该推断已被
+  `math.fkp-punctured-normal-line-formula-separating` 正面证明，对应 derivation 的边已改指该卡
+  且 `inferred` 改为 `false`。上段保留为历史。
+
   【r≥1 时不断言连通分量的原因】同 g≥3 姐妹卡的 `[GAP-COMP]`。
+
+  【`[GAP-COMP]` 已于 2026-09-24 对 r≥1 关闭，lead 补注】同 g≥3 姐妹卡：关闭者是本项目论文
+  paper.md §10.3 的 **Cor 10.2**（r≥1 时不可约，经 FKP Remark 2.17 + Jarvis 2000 Thm 3.3.1）；
+  图内另有前提更少的独立路线 `math.supermoduli-ramond-components-compactified-connected`
+  （完全在 FKP 紧化内部，只得连通）。故"不指认分量"在 r≥1 时是空话而非开放问题。
+  该结论**不是本项目新数学**，原始出处 Jarvis (2000)。本卡 `statement` 第 18 行的括注按原则 1
+  不动，留待下次实质换代；不加 `depends_on` 边（"非投影"与"连通"是独立命题）；
+  不移动本卡 effective（此前此后均为 rigorous）。
 
   【为何单独立卡而不与 g≥3 分支合并】(1) 量词范围本质不同：g≥3 分支对一切 n,r 两种宇称皆可断言
   （r=0 时），g=2 分支的 r=0 情形只能断言偶宇称，且额外要求 n≥2（而非任意 n≥0）；(2) (g,n,r)=

@@ -72,8 +72,31 @@ notes: |
   对任意穿孔数成立的一般性结论。这是一条**依据节点奇点局部性的推断，不是 FKP 论文逐字陈述的
   一般性结论**，已在对应 derivation 的 depends_on 边上诚实标 `inferred: true` 并附此说明。
 
+  【上段已于 2026-09-24 过时，lead 补注】该推断现已被**正面证明**：对应 derivation 的这条边已
+  改指 `math.fkp-punctured-normal-line-formula-separating`（本项目 attempt `fkp-96-punctured`
+  的原创证明，对分离型 (7.8) 粘接、任意 NS 穿孔数与任意偶数 Ramond 穿孔数直接建立该法丛公式，
+  且刻意不引用 FKP Theorem C 以避免循环），边上的 `inferred` 已改为 `false`。上段保留为历史。
+
   【r≥1 时不断言连通分量的原因】`[GAP-COMP]`：r>0 时 \overline{\mathfrak S}_{g;n,2r} 的连通分量
   分类本身是开放问题（本证明未涉及，也未见公开文献给出），故只能断言"整个叠非投影"而非"某个
   具体分量非投影"。这与 r=0 时可以用 Mumford 意义下宇称局部常值这一标准事实指认分量形成对比。
+
+  【`[GAP-COMP]` 已于 2026-09-24 对 r≥1 关闭，lead 补注】关闭者是本项目论文
+  `research/papers/supermoduli-punctured-nonprojected/paper.md` §10.3 的 **Corollary 10.2**：
+  r≥1 时 \overline S_{g;n,2r} **不可约**（故连通）。其路线是先用 FKP Remark 2.17 认定该紧化
+  即 Jarvis/JKV 型无挠层紧化（并明确排除 Abramovich–Jarvis 的 twisted-curve 叠），再经
+  Lemma 10.1 的直接扭转把分量计数还原为 **Jarvis (2000) Thm 3.3.1**，得分量数 d=1。
+  图内另有一条**前提更少的独立路线**记在 `math.supermoduli-ramond-components-compactified-connected`
+  （own rigorous / effective rigorous）：完全在 FKP 紧化内部走"稠密性 + 点推单值"，
+  刻意不使用上述紧化认定，结论较弱（只得连通）但不受该认定风险影响。
+  后果：本卡断言的"整个叠非投影"在 r≥1 时**本来就是分量级陈述**——唯一的分量就是整个叠，
+  "不指认分量"这句限制变成空话而非开放问题。上段"连通分量分类是开放问题"的说法不再成立，
+  保留为历史记录。
+  ⚠ 该结论**不是本项目的新数学**，原始出处是 Jarvis (2000)。
+  三点说明：(1) 本卡 `statement` 正文第 18 行同样含 `[GAP-COMP]` 的括注，按原则 1（本卡已被
+  derivation 依赖，正文不可就地改）**不动**，留待本卡下次实质换代时同步；读本卡正文者以本段
+  为准。(2) **不加 `depends_on` 边**：本卡断言"非投影"、上述两处断言"连通/不可约"，是独立命题，
+  本卡的证明不使用连通性。(3) 本次改动**不移动**任何节点的 effective（本卡此前此后均为
+  rigorous），按原则 8 属顺手补注，未为此派 agent、未写 `docs/reviews/` 文档。
 author: graph-curator
 created: "2026-09-20"

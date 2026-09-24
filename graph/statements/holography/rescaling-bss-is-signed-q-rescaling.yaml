@@ -44,6 +44,18 @@ notes: |
   `graph/conventions/` 节点是因为这只是两篇文献各自选择的希腊字母指派，不是可复用的
   物理归一化约定（如 α' 或规范场归一化）。
 
+  **【lead 2026-09-24：下面这条转派已完成，且由 lead 亲自做了 L1 核实】**
+  誊清已落地在 `literature/extractions/dgm-eq51-eq52-third-party-crosscheck.md` 的新增
+  §C1 订正条目（E1/E2/E3 的「独立佐证」裁定全部撤回）。lead 未采信转述，而是重下
+  arXiv:0802.1556 官方 PDF、200dpi 渲染 pp.2–4 逐字读图确认了两条关键证据：
+  (a) BSS 在 eq(4) 之后自己写明 "The sum over k and l in (4) makes Φ̌ periodic under
+  σ̌→σ̌+(1/r²) and v̌→v̌+(1/r) as required"；(b) p.4 "extending the ranges of σ̌ and v̌
+  integral with the help of the sums over k and l" 一句之后的 eq(7) 中，Φ₁₀ 的自变量
+  就是 (ρ̌, s²σ̌, sv̌)，**无任何平移**——与本卡 statement 所引 eq(7) 逐字一致。
+  后果（超出本卡范围，记于此供追溯）：DGM eq(51)/(52) 这一对外声明的**第三方**独立佐证
+  数由 2 降为 0；其主证据（本项目 101412 整数见证、Alexandrov–Nampuri eq(2.11)+(2.13)
+  闭式）不受影响。本卡自身的 effective 不受此事影响。
+
   **纠正本项目文献抽取中的一处误读（不在本卡写入范围，留给 lead 转派）**：
   `literature/extractions/dgm-eq51-eq52-third-party-crosscheck.md` §E1/E2 把 BSS (4) 中
   l=1, s̄=2 项的 "v̌+1/2" 读作半整平移的独立佐证；proof.md §8.1 指出这是误读——BSS (4) 的

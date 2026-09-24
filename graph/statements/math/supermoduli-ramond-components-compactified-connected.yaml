@@ -1,6 +1,6 @@
 id: math.supermoduli-ramond-components-compactified-connected
 kind: proposition
-title: "紧化广义自旋曲线模叠 S̄_{g;n,2r}（FKP 自身紧化，r≥1）连通，[GAP-COMP] 在此情形关闭"
+title: "紧化广义自旋曲线模叠 S̄_{g;n,2r}（FKP 自身紧化，r≥1）连通：一条不依赖紧化认定的独立路线"
 statement: |
   【紧化的身份，与姐妹卡一致】本卡断言的紧化对象仍是 **FKP 自己构造的紧化**
   S̄_{g;n,2r}（玻色截断层面）及其超叠 𝔖̄_{g;n,2r}（允许 NS 节点与 Ramond 节点的稳定
@@ -21,14 +21,30 @@ statement: |
   而由另一姐妹卡，π_0(S_{g;n,2r}) 是单点，故 π_0(S̄_{g;n,2r}) 也是单点，即 S̄_{g;n,2r}
   连通。再由玻色截断与超叠底层拓扑空间相同这一事实，𝔖̄_{g;n,2r} 同样连通。
 
-  【与已发表文献 `[GAP-COMP]` 的关系，逐字对照】
-  `research/papers/supermoduli-punctured-nonprojected/paper.md` §10.3 逐字写道：
-  "*we do not know whether S̄_{g;n,2r} is connected, nor which discrete invariants label its
-  components. … Refining to the component level requires a classification of the connected
-  components of S̄_{g;n,2r}.*"（此即该论文登记的开放问题 `[GAP-COMP]`）。
-  **本卡直接回答了这个问题的第一问：r≥1 时 S̄_{g;n,2r} 连通。** 第二问（"哪些离散不变量
-  标记分量"）因此没有内容——唯一的分量就是整个叠，不存在可以加细的对象。故对 r≥1 而言，
-  `[GAP-COMP]` 关闭；关闭的理由是"命题为真且平凡地为真"，不是绕开了该问题。
+  【与 `[GAP-COMP]` 的关系——本卡不是关闭者，是第二条独立路线】
+  ⚠ **本段由 lead 于 2026-09-24 就地订正**（原文把 `research/papers/supermoduli-punctured-nonprojected/paper.md`
+  §10.3 的一句**过去式自述**当成该论文现行的开放问题引用，并据此声称"本卡直接回答了这个问题"。
+  该引用失准，订正如下。本卡今日新建、无任何节点 `depends_on` 它、不在里程碑、未 formalized，
+  按根 CLAUDE.md 原则 1 就地改，不换代。）
+
+  事实是：paper.md §10.3 的**标题即为** "[GAP-COMP] is closed for $r\ge1$: $\overline S_{g;n,2r}$
+  is irreducible"，该节已经关闭了这个缺口，且结论**比本卡更强**（不可约 ⇒ 连通）。原文被误引的
+  那句 "we did not know whether … is connected" 是该节开篇对**旧版本**的追述（"An earlier version
+  of this section recorded as an open gap that …"），紧接着写 "All three clauses are resolved,
+  and by citation rather than by new work."
+
+  两条路线的真实分工（这才是本卡的价值所在）：
+  - **paper.md Cor 10.2（主路线，更强）**：先用 FKP Remark 2.17 认定
+    \overline{\mathcal S}_{g,n_NS,n_R} 就是 [J],[JKV] 型（无挠层）紧化、明确排除
+    Abramovich–Jarvis 的 twisted-curve 叠，再经 Lemma 10.1 的直接扭转把分量计数还原为
+    Jarvis Thm 3.3.1，得 d=1，即**不可约**。
+  - **本卡（第二条路线，较弱但前提更少）**：完全在 FKP 紧化内部完成（稠密性 + 未紧化连通性），
+    **刻意不使用**上述紧化认定（本 attempt 登记为 `[GAP-JARVIS-COMPACT]`），只得到**连通**。
+
+  为什么这条较弱的路线仍值得进图：paper.md 自己在同一节里写道 "(Earlier drafts of this paper
+  carried a gap here on the opposite reading; it is withdrawn.)"——即"FKP 紧化是否就是 Jarvis 型
+  紧化"这条认定本身，在本项目内部曾被按相反读法处理过。一条**不依赖该认定**的独立论证因此是对
+  该处风险的保险：即使那条认定日后出问题，r≥1 的连通性仍然成立（只是拿不到不可约）。
 
   【与已发表结果的关系——本卡不是新数学，如实标注】本卡命题的数学内容不是本项目的新结果：
   取 Jarvis (2000) Theorem 3.3.11（连同 Note 2.1.5 所允许的模 2 平移）在 r_Jarvis=2、
@@ -66,11 +82,11 @@ notes: |
   【建议 lead 转交，更新既有卡的过时 notes】既有卡
   `math.supermoduli-compactified-punctured-genus-geq3-not-projected` 与
   `math.supermoduli-compactified-punctured-genus-2-not-projected` 的 notes 中各自登记了
-  `[GAP-COMP]`（"只断言整个叠非投影，不指认分量"），这两条 notes 现已过时——本卡（连同姐妹卡）
-  已经对 r≥1 关闭该缺口。本 curator 无权修改那两个既有文件（写入范围限定为
-  `math.supermoduli-ramond-components-*` 前缀），故只在此建议 lead 后续更新其 notes
-  （只更新 notes 字段说明缺口已关闭，不改 statement 正文，也不需要新建 depends_on 边——
-  那两张卡断言"非投影"与本卡断言"连通"是两个独立命题，不构成依赖关系）。
+  `[GAP-COMP]`（"只断言整个叠非投影，不指认分量"），这两条 notes 现已过时。
+  ⚠ **lead 2026-09-24 订正**：过时的原因**不是本卡**，而是 paper.md §10.3 的 Cor 10.2
+  （不可约，更强，经 FKP Remark 2.17 + Jarvis Thm 3.3.1）；本卡是同一结论的第二条、
+  前提更少的独立路线。lead 已据此更新那两张卡的 notes（只改 notes，不动 statement 正文，
+  不建 depends_on 边——"非投影"与"连通"是两个独立命题）。
 
   【关于 status 的裁定依据】同两张姐妹卡：reviewer 逐步核对了定理5.2 的证明（局部连通性、
   稠密子集与开分量必相交的标准点集拓扑论证、以及对推论3.4 的引用），判定无逻辑跳步，
