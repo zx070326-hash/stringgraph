@@ -110,3 +110,55 @@ review_2026_09_24:
         Theorem 3 还**更强**（给出直和而非仅包含、逐 `(j,N)` 分解、`D(Ε) ∩ H_null = 0`
         对任意交换 ℚ-代数而非仅有序域）。差的只有 (T′) 这一条前件。
     (d) `captain_confirmed` 留空，不代填。
+
+tprime_removal_analysis_2026_09_25:
+  source: "只读核查 agent `consume-check`；lead 转录。判定强度：PLAUSIBLE（核查者自评偏强）"
+  status: "已按此派 prover `drop-tprime`（worktree 分支），产出写 proof-no-tprime.md"
+  why_it_matters: |
+    (T′) 是本 attempt 与目标卡 `ddf-spanning-hypothesis-v2` 之间**唯一剩下的前件差额**
+    （见上方 graduation_warning (a)）。目标卡对**一切** (T)(O) 标架量化，而违反 (T′) 的
+    合法 (T)(O) 构形确实存在，故"存在好标架"救不了它。出路只有两条：证 (T′) 可省，
+    或给目标卡换代收窄量词。本栏记录第一条路的可行性分析。
+  notation: "c_i := η(ε_i, a)。(T′) 即 c = 0。"
+  occurrences: |
+    (T′) 在 proof.md 正文显式出现仅四处：行 81/93/94、117、244、456；外加 §4 注 4.3 的
+    清单与各定理前件行。**§3（Theorem 1 全部）与 §5（引理 11–13、Theorem 3）不含任何
+    标架分量计算**，只经 (1.3) 间接依赖。
+  corrected_formulas: |
+    去 (T′) 后正确的对偶基与展开（核查者给出，未经 lead 独立复算，待 prover 核实）：
+      a^*   = b
+      ε_i^* = ε_i − c_i b
+      b^*   = a − (η(a,a) − |c|²) b − Σ_i c_i ε_i
+      α_p·α_q = Λ_pK_q + K_pΛ_q − (η(a,a)−|c|²)K_pK_q + Σ_i E^i_pE^i_q
+                − Σ_i c_i (K_pE^i_q + E^i_pK_q)
+  per_lemma_verdict: |
+    · **引理 1 是唯一"不加 (T′) 就写错"的地方**：`ε_i^* = ε_i` 与 `b^* = a − η(a,a)b`
+      在 c ≠ 0 时是**假命题**，(1.3) 按原样写也假。这不是"更弱"而是"错"。
+      ⟹ 去 (T′) 不是删一条前件，而是**换掉 (1.3)**。
+    · **三角性来源与 (T′) 无关（核查者判 CONFIRMED）**：`(G⁻¹)^aa = η(a^*,a^*) = η(b,b) = 0`
+      只依赖 `a^* = b`，而 `a^* = b` 只用 (S)(N)(T)。故 `Λ_pΛ_q` 项仍缺席。
+    · 引理 2：`E^i_0 = c_i ≠ 0`，导子公式多出支项；但 `K_n = n∂_{Λ_{−n}}` **逐字不变**
+      （只用 η(b,a)=1, η(b,b)=0, η(b,ε_i)=0）⟹ **引理 3 `W_j = ker K_{m≥1} = R[K_{−n},E^i_{−n}]`
+      原样成立，塔内原生骨架不动**。
+    · 引理 6 / 领项：(Z) 块**逐字不变**，c 的贡献恒等抵消，领项系数仍是单位 `K_0 = 1`；
+      新增四类项的 `Δw ∈ {−1,−M}` 全 `< M`，落进 (2.3) 余项 ⟹ §2–§3 三角性论证不动。
+    · 引理 7(b)–引理 8：需把 `R_m` 从"保 κ"弱化为"**不降** κ"；引理 8 证明逐字存活。
+    · 引理 10(b)：`E_0 = c_i` 是标量、保 κ，(b) 仍真；(a) 用的是 (T) 不是 (T′)。
+    · 佐证：整条借用的 (4.4) 在 Lean 侧是 `StringFormal.NoGhost.lie_towerLop_ddfOp_of_pos`，
+      其假设 hη/hbb/hba/hεb = (F1)(N)(S)(T)，**本来就不含 (T′)**。
+  not_covered_by_the_analysis: |
+    核查者自述**未覆盖**两处，已列为 prover 的必查项：
+      (1) §3 Theorem 1 步骤 (1)–(5) 的逐行核对；
+      (2) 引理 12(b) 的中心荷计算（核查者倾向无风险，因为 proof.md:564–565 把 c = D
+          归到与基无关的迹 `Σ_A η(u_A,u^A) = dim 𝔥`）。
+  counterexample_configuration: |
+    供机检用的 c ≠ 0 构形（lead 已逐项复算）：D=6、η=diag(−1,+1,…,+1)、
+    b=(1,1,0,0,0,0)、a=(0,1,1,0,0,0)、ε_1=e_2、ε_2..ε_4=e_3,e_4,e_5。
+    满足 (N)(S)(A)(T)(O) 与 η(v,v)=0（v := a−b），而 η(ε_1,a)=1。
+  frame_quantifier_note: |
+    另问另答：`no-ghost-theorem-v4` 的【设定】是**指名**一个与 `k₀` 绑定的标架，既非"对一切"
+    也非"存在"，且未对 `k` 附加 (T′)。故 (T′) 在 v4 自己的设定里**也不自动成立**。
+    若走"收窄目标卡"那条路，v4 侧需补一条 WLOG 子句"可取坐标系使 k ∈ span{e_0,e_1}"
+    （Witt 延拓；`span{k₀,k}` 的 Gram `[[0,1],[1,2]]` 判别式 −1，是洛伦兹二维平面，便宜）。
+    **但这救不了目标卡**——目标卡量化在一切 (T)(O) 标架上。已把同一条防误用记号补进
+    `graph/derivations/worldsheet/no-ghost-theorem-v4--via-goddard-thorn.yaml` 的 notes。
