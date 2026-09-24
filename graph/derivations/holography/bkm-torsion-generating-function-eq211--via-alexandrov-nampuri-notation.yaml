@@ -1,0 +1,22 @@
+id: holography.bkm-torsion-generating-function-eq211--via-alexandrov-nampuri-notation
+target: holography.bkm-torsion-generating-function-eq211
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: holography.igusa-cusp-form-phi10
+    inferred: false
+    convention_map: "本卡 Φ₁₀(τ,z,σ) 的槽位对应 canonical Φ₁₀(ρ,σ,v) 的 ρ=σ_本卡、σ=τ_本卡、v=z_本卡（见目标陈述 notes 的槽位对照表）"
+sources:
+  - ref: alexandrov-nampuri-2020
+    loc: "eq(2.11)"
+    note: "逐字见 literature/extractions/dabholkar-gomes-murthy-2008.md §X1"
+summary: |
+  生成函数 Z_I 的定义本身是纯粹的记号约定（任意系数族 Ω_I 都可以这样打包成 q,y,p 的形式幂级数，
+  不含物理内容）。真正带物理内容的是 I=1 时 Z_1 = 1/Φ₁₀ 这一等同：这是已知的 DVV 型识别
+  （dyon 指标的生成函数 = Igusa 尖点形式的倒数），A-N 论文直接采用、未独立证明（脚注引用其
+  来源文献）。故本推导的严格度取物理论证一级：定义部分平凡成立，物理等同部分是文献既定输入。
+notes: |
+  本项目原创证明 research/attempts/bkm-shift-explanation/claim.md「已知设定」节逐字引用了这条式子
+  （非本尝试所证，本尝试只以其为出发前提）。
+author: curator
+created: "2026-09-24"
