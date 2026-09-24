@@ -1,0 +1,43 @@
+id: holography.rescaling-adapted-frames-single-coset
+kind: proposition
+title: 标架的适配集合恰为一个陪集（Prop 5.1）：adapted frame ⟺ Γ⁰(I)/Γ₀(I) 陪集
+statement: |
+  设 Λ 为 II 型 K3×T² 电荷格（偶、自对偶、号差 (6,22)），L=ℤQ+ℤP⊆Λ 为秩 2 本原子格，
+  挠 I:=gcd(Q∧P)（L 的不变量，与标架选取无关，Q∧P 是 L 不依赖于基取法的量）。称标架
+  (Q,P) **Q-适配**若 Q∈IΛ，**P-适配**若 P∈IΛ。设 L 至少有一个 Q-适配标架 (Q₀,P₀)。则
+  标架 (Q,P)=(aQ₀+bP₀, cQ₀+dP₀)（U=[[a,b],[c,d]]∈SL(2,ℤ)）是 Q-适配的**当且仅当** I|b；
+  因此 L 的全体 Q-适配标架恰为陪集 Γ⁰(I)·(Q₀,P₀)。对偶地，若 L 至少有一个 P-适配标架，
+  其全体 P-适配标架恰为一个 Γ₀(I)-陪集。
+
+  **推论（两个已发表公式都是良定义的，只是丢了适配性标注）**：结合
+  holography.rescaling-invariance-groups（Thm C），D_I 在 L 的一切 Q-适配标架上取同一值，
+  D'_I 在 L 的一切 P-适配标架上取同一值；两个已发表公式都是良定义的函数
+  (格 L, 适配类型)，唯一失败的一步是把适配性从记号中丢掉。
+uses: []
+uses_conventions: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/p-rescaling-frame-dependence/proof.md §5（Proposition 5.1 证明、Corollary 5.2）及机检 scripts/lattice_frames_output.txt block L1"
+    note: "本项目原创证明，非已发表文献。proof.md 明确记录未在公开文献找到逐字陈述，判断为 Banerjee–Sen arXiv:0801.0149 的隐含内容，但未指出具体章节/公式号，故本卡不引用该文献。status.yaml state: verified（reviewer: rev-prescale, 2026-09-24：独立手推重证 P₀ 本原性 + Λ 幺模性 ⟹ 存在 λ 使 P₀·λ=1 的论证），captain_confirmed: false。"
+notes: |
+  **未被判定为已发表**：proof.md 明确写"I have not found it stated; it is implicit in
+  Banerjee–Sen 0801.0149"。arXiv:0801.0149 已登记 literature/sources.bib（bib key
+  banerjee-sen-2008-tduality），但 proof.md 本身未给出具体章节/公式号支持这一猜测，只是
+  一句未经核实的推测；因此本卡**不**把它列为 sources.ref——按图/CLAUDE.md「每条边都要有
+  来源」的门槛，"能在 sources.loc 指向的位置找到对应论证"要求具体定位，猜测性的"隐含"
+  不满足这一门槛。本卡 status 定为 rigorous 是因为这是本 attempt 内部自足的原创证明，不
+  依赖 0801.0149 的正确性，只是承认该结论可能已隐含在其中而未独立核实过。
+
+  **证明核心（proof.md §5）**：Q₀=I·Q̃（Q̃∈Λ），Q₀∧P₀=I·(Q̃∧P₀)，故 I=gcd(Q₀∧P₀)=
+  I·gcd(Q̃∧P₀)，得 gcd(Q̃∧P₀)=1，即 P₀ 在 Λ 中本原。Λ 幺模 ⟹ 存在 λ∈Λ 使 P₀·λ=1。
+  Q=aQ₀+bP₀，Q₀∈IΛ，故 Q∈IΛ ⟺ bP₀∈IΛ；若 bP₀∈IΛ 则 b=b(P₀·λ)=(bP₀)·λ∈Iℤ；反之
+  I|b ⟹ bP₀∈IΛ 显然。对偶陈述用 S-对偶元 S=[[0,1],[−1,0]]：(Q,P)↦(P,−Q) 把
+  "Q-适配"↔"P-适配"、Γ⁰(I)↔Γ₀(I) 互换。
+
+  **机检（scripts/lattice_frames_output.txt block L1）**：U⊕U⊂Λ 中显式格 L=ℤQ+ℤP，
+  Q=4f₁+e₂+4f₂, P=2e₁+4f₁，torsion 2，P∈2Λ（P-适配）、Q∉2Λ（非 Q-适配）；标架
+  (Q,P−Q)（对应 U=[[1,0],[−1,1]]，c=−1≢0 mod 2，故落在 Γ₀(2) 之外）既非 Q-适配也非
+  P-适配，与 Prop 5.1 预言一致（只有 Γ₀(2) 陪集内的标架才 P-适配）。
+tags: [bh-entropy, mock-modular, n4-string-theory, cartography, number-theory]
+author: graph-curator
+created: "2026-09-24"
