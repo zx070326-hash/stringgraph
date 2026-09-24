@@ -1,0 +1,76 @@
+id: math.fkp-ramond-twist-ns-gluing-well-defined
+kind: proposition
+title: "FKP Lemma 7.9 对任意 Ramond 穿孔数成立：NS 粘接态射 (7.8)/(7.9) 良定义（本项目原创证明，带 Ramond 扭转 ω_C(R)）"
+statement: |
+  【对象，取自 Felder–Kazhdan–Polishchuk arXiv:2006.13271v3（记 FKP-A）Definition 2.4 (p.6)、
+  Lemma 2.6 (p.7) 与 §7.5 (p.47)。本节点全程只用 FKP-A §7.5 起的**分号记号**
+  \overline{\mathcal S}_{g;m,n}（m = NS 穿孔数，n = Ramond 穿孔数——与同文 §8.4/(8.11) 的 "m"
+  用法一致；FKP-A 从未声明此记号与 §1/§5 的逗号记号 \overline{\mathcal S}_{g,n_{NS},n_R} 相等，
+  本节点也不作此等同）。所有出现的模叠均为**紧化**（compactified，即 FKP-A Theorem A 意义下表示
+  "稳定超曲线"函子的光滑固有 DM 叠，记号带上划线）；本节点不涉及未紧化叠的任何断言，也不涉及
+  个别超曲线本身的"紧化 vs 未紧化"（FKP-A 里 Definition 2.4 的对象本来就要求 properness，
+  已经是"稳定"意义下的）。】
+
+  设 S 为纯偶概形。设
+    (X/S; P, P_1,…,P_{m_1}; R_1,…,R_{n_1})，(X'/S; P', P'_1,…,P'_{m_2}; R'_1,…,R'_{n_2})
+  为 FKP-A Definition 2.4 意义下的稳定超曲线（连同穿孔），P、P' 为待粘接的 NS 穿孔，
+  m_1,m_2≥0、n_1,n_2≥0 **任意**。设 Z/S 为按 FKP-A §7.5 的构造沿 P≃S≃P' 把 X、X' 粘接得到的
+  超概形，赋予穿孔 P^Z_• := j(P_•)⊔j'(P'_•)，R^Z_• := j(R_•)⊔j'(R'_•)，R^Z := Σ_i R^Z_i。
+
+  则 Z/S 自然带有 Definition 2.4 意义下的稳定超曲线（连同穿孔）结构，其上的导子
+    δ_Z: O_Z → j_*O_X ⊕ j'_*O_{X'} --(j_*δ, j'_*δ')--> j_*(ω_{X/S}(R)) ⊕ j'_*(ω_{X'/S}(R'))
+          --ι--> ω_{Z/S}(R^Z)
+  （ι 为分支对偶化层的典范无留数包含，被可逆层 O_Z(R^Z) 扭转）满足 Definition 2.4 的判据 (2.4)：
+  δ_Z^- 在每个几何纤维上诱导 O_Z^- ≅ ω_{Z/S}(R^Z)^-。特别地，粘接态射
+    \overline{\mathcal S}_{g_1;m_1+1,n_1} × \overline{\mathcal S}_{g_2;m_2+1,n_2}
+      ⟶ \overline{\mathcal S}_{g_1+g_2;\,m_1+m_2,\,n_1+n_2}                       …(7.8)
+  对**任意** m_i≥0、n_i≥0 良定义（不仅 n_1=n_2=0 情形）；不可分粘接的类似态射
+    \overline{\mathcal S}_{g;m+2,n} ⟶ \overline{\mathcal S}_{g+1;m,n}             …(7.9)
+  同样对任意 m,n≥0 良定义（取 C=C'、z 取为不可分节点，同一证明）。
+
+  【与 FKP-A 原文的关系——本节点存在的理由】FKP-A 印刷的 Lemma 7.9（p.47 陈述、p.48 证明）字面上
+  只把 δ_Z 的靶写成 ω_{Z/S}（**不带** R^Z 扭转），证明正文引用的"广义自旋结构"公式
+  L≅Hom(L,ω_C)（**不带** R 扭转的形式，逐字抄自 FKP-A Remark 2.3 p.5，而非本应引用的 (2.5) p.7——
+  同一篇论文两条公式之间的抄错，非概念错误）。故 FKP-A 印刷证明**字面上只覆盖 n_1=n_2=0 情形**。
+  本节点是这一缺口（本项目记录为 [GAP-FKP-RAMOND]）的独立原创证明：把 Lemma 7.9 的论证重做一遍，
+  全程带 R 扭转，见 sources。判定的决定性事实：Definition 2.4 的第一个条件要求 NS 穿孔与
+  Ramond 穿孔**不相交**（disjoint），这使被粘接的节点 z 自动不落在 Ramond 除子的支集里，从而
+  Ramond 扭转在节点邻域被重言截面**典范平凡化**、退化为 FKP-A 自己那句无出处的
+  "It is well known that…"（本节点的证明顺带独立证明了这句话，见来源）；在节点之外，带扭转的
+  结论逐字就是假设 (2.5) 本身。不需要 Definition 2.4 之外的任何额外条件。
+
+  【范围红线——本节点明确不断言】
+  (a) 不涉及沿 **Ramond** 穿孔的粘接（FKP-A §7.6，态射 (7.11)/(7.12)——那里节点邻域与 Ramond
+      除子相交，局部平凡化机制整体失效，此路不通，见来源 proof.md §8）；
+  (b) 不涉及 FKP-A Lemma 7.10（另一条独立陈述，FKP-A 原文已在带穿孔一般性下证明，本节点不重复）；
+  (c) 不断言本图既有节点 `math.fkp-ns-boundary-gluing-normal-bundle-formula`（FKP-A Theorem C
+      的法丛公式）对带穿孔靶成立——那是不同的命题，与本节点互不蕴含。
+uses_conventions: []
+sources:
+  - ref: felder-kazhdan-polishchuk-2020
+    loc: "Definition 2.4 (p.6)；Lemma 2.6 与 (2.5) (p.7)；§7.5 的粘接构造与 Lemma 7.9 陈述 (p.47)；
+      Lemma 7.9 的证明 (p.48)"
+    note: |
+      本节点陈述的是这些页面**逐字内容之外**的推广（带 Ramond 扭转）；FKP-A 本身印刷的 Lemma 7.9
+      证明只字面覆盖 n_1=n_2=0 的情形（详见本卡"与 FKP-A 原文的关系"一段）。这几页的逐字转录见
+      research/attempts/fkp-79-ramond-twist/proof.md §1，已由 graph-reviewer 用 220dpi 页图独立
+      核对，逐字无误（见推导节点 notes）。
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/fkp-79-ramond-twist/proof.md（全篇，§2–§7 为核心证明）；
+      commit 232b554"
+    note: 本项目原创证明，非已发表文献。状态判定与审查记录见对应推导节点。
+tags: [supermoduli, super-riemann-surface, gluing, node-locality, ramond-puncture, math-input, felder-kazhdan-polishchuk, original-research]
+notes: |
+  【查重】`uv run stringgraph search "gluing"` / `"Ramond puncture"` / `"generalized spin structure"`
+  / `"supercurve"` / `"FKP"` / `"canonical line bundle"`（2026-09-24）均无覆盖本命题的既有节点；
+  `math.fkp-ns-boundary-gluing-normal-bundle-formula` 是 FKP-A Theorem C（不同命题，无穿孔靶的
+  法丛公式），与本节点各自独立。
+
+  【与既有卡的关系，供 lead 处理】`graph/derivations/math/
+  supermoduli-compactified-punctured-genus-geq3-not-projected--via-elliptic-tail-punctured-gluing.yaml`
+  与其姐妹卡（genus-2 版本）的 `gaps` 字段各记有一条 [GAP-FKP-RAMOND]，原文写"未独立重写该局部
+  计算"——本节点与其推导节点正是该缺口的独立重写与证明。这两个已有推导节点未修改（越权），
+  建议 lead 后续把这两条 gaps 更新为"已由 math.fkp-ramond-twist-ns-gluing-well-defined 解决"，
+  或视需要加一条 `depends_on` 边。
+author: graph-curator
+created: "2026-09-24"
