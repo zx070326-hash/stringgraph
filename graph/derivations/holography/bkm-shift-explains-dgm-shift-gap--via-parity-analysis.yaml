@@ -1,0 +1,32 @@
+id: holography.bkm-shift-explains-dgm-shift-gap--via-parity-analysis
+target: holography.bkm-shift-explains-dgm-shift-gap
+kind: proof
+status: rigorous
+depends_on:
+  - id: holography.bkm-shift-closed-form
+    inferred: false
+    note: "半整平移闭式本身，proof.md §5/§9"
+  - id: holography.phi10-periodic-in-v
+    inferred: false
+    note: "Φ₁₀ 整周期性，proof.md §1/§4 用于奇 d 情形（吸收整数平移）"
+  - id: holography.bkm-phi10-odd-elliptic-coefficient-nonzero
+    inferred: false
+    note: "Borcherds 乘积判别式 −1 系数非零，proof.md §4 Lemma B.3(b) 反证的关键前提"
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/bkm-shift-explanation/proof.md :: §4（Lemma B.3），§6（推论 B1）"
+    note: "本项目原创证明，非已发表文献。graph-reviewer 对抗审查 VERIFIED（2026-09-15）。"
+summary: |
+  奇 d 情形（Lemma B.3(a)）：(d−1)/2 ∈ ℤ，直接用 Φ₁₀ 的整周期性逐次叠加整数周期即得
+  Φ₁₀(τ,dz+(d−1)/2,d²σ) = Φ₁₀(τ,dz,d²σ)，故该项与 DGM 无平移式相等。
+  偶 d 情形（Lemma B.3(b)，反证）：假设半整平移在 Φ₁₀ 上无效果（即 Φ₁₀ 关于 v 有额外的
+  1/2-周期），则由 Borcherds 乘积展开，Φ₁₀ 在判别式 −1 处的 Fourier–Laurent 系数应当在
+  v ↦ v+1/2 下不变；但该系数对应的乘积因子在 v ↦ v+1/2 下取相位 e^{iπ}=−1（奇数次幂），
+  与"不变"矛盾，故半整平移在偶 d 情形一般非平凡，该项与 DGM 无平移式一般不相等。
+  两种情形合并即为推论 B1 的完整陈述。
+notes: |
+  reviewer-verified: graph-reviewer, 2026-09-15（Lemma B.3(a)(b) 与推论 B1 逐引理裁定
+  VERIFIED，原 GAP-前提已由 researcher 用 kawai-1997 eq(4.32)/dabholkar-murthy-zagier-2012
+  eq(85) 坐实后关闭）。
+author: curator
+created: "2026-09-24"
